@@ -5,6 +5,9 @@ import com.carmel.guesture.lazaroservice.response.PersonResponse;
 import com.carmel.guesture.lazaroservice.response.PhonedResponse;
 import com.carmel.guesture.lazaroservice.response.WebsiteResponse;
 import com.carmel.guesture.lazaroservice.services.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/person")
 public class PersonController {
+
+    Logger logger = LoggerFactory.getLogger(PersonController.class);
 
     @Autowired
     AgentService agentService;
@@ -35,8 +40,11 @@ public class PersonController {
 
     @RequestMapping(value = "/added", method = RequestMethod.POST)
     public PersonResponse added(@RequestBody Person person) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
         PersonResponse personResponse = new PersonResponse();
         try {
+            logger.trace("Data:{}", objectMapper.writeValueAsString(person));
             Person tempPerson = person;
             Person duplicatePerson = person;
             if (person.getAgents() != null) {
@@ -61,17 +69,24 @@ public class PersonController {
             personResponse.setPerson(personService.save(tempPerson));
             personResponse.setSuccess(true);
             personResponse.setError("");
+            logger.trace("Completed Successfully");
         } catch (Exception ex) {
+            logger.error(ex.getMessage(),ex);
             personResponse.setSuccess(false);
             personResponse.setError(ex.getMessage());
         }
+        logger.trace("Exiting");
+
         return personResponse;
     }
 
     @RequestMapping(value = "/phoned", method = RequestMethod.POST)
     public PhonedResponse phoned(@RequestBody Phoned phoned) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
         PhonedResponse phonedResponse = new PhonedResponse();
         try {
+            logger.trace("Data:{}", objectMapper.writeValueAsString(phoned));
             Phoned tempPhoned = phoned;
             if (phoned.getAgents() != null) {
                 List<Agent> agentList = new ArrayList<>();
@@ -86,26 +101,35 @@ public class PersonController {
             phonedResponse.setPhoned(phonedService.save(tempPhoned));
             phonedResponse.setSuccess(true);
             phonedResponse.setError("");
+            logger.trace("Completed Successfully");
         } catch (Exception ex) {
+            logger.error(ex.getMessage(),ex);
             phonedResponse.setSuccess(false);
             phonedResponse.setError(ex.getMessage());
         }
+        logger.trace("Exiting");
         return phonedResponse;
     }
 
     @RequestMapping(value = "/on/website", method = RequestMethod.POST)
     public WebsiteResponse onWebsite(@RequestBody Website website) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
         WebsiteResponse websiteResponse = new WebsiteResponse();
         try {
+            logger.trace("Data:{}", objectMapper.writeValueAsString(website));
             Website tempWebsite = website;
             tempWebsite.setCupidId(website.getCupidId());
             websiteResponse.setWebsite(websiteService.save(tempWebsite));
             websiteResponse.setSuccess(true);
             websiteResponse.setError("");
+            logger.trace("Completed Successfully");
         } catch (Exception ex) {
+            logger.error(ex.getMessage(),ex);
             websiteResponse.setSuccess(false);
             websiteResponse.setError(ex.getMessage());
         }
+        logger.trace("Exiting");
         return websiteResponse;
     }
 
@@ -119,7 +143,6 @@ public class PersonController {
         }
         return returnAgent;
     }
-
 
     private Source getSource(Source source) {
         Source returnSource;

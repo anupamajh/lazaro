@@ -16,3 +16,17 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       ddl-auto: update
+logging:
+  level:
+    root: info
+    com:
+      carmel:
+        guesture:
+          lazaroservice: trace
+  pattern:
+    console: '%d{"yyyy/MM/dd HH:mm:ss,SSS"} [%p] [%t] %M\(%F:%L\) - %msg%n'
+  file:
+    path: 'logs/'
+    max-size: 5MB
+    clean-history-on-start: false
+    name: 'logs/lazaro-service.log'

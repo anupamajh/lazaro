@@ -1,12 +1,14 @@
 package com.carmel.guesture.lazaroservice.model;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "g_cupid_person_on_website")
+@Audited
 public class Website {
 
     @Id

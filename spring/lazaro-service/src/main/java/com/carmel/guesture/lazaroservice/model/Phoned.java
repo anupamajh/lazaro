@@ -2,6 +2,7 @@ package com.carmel.guesture.lazaroservice.model;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.ManyToAny;
+import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "g_cupid_person_phoned")
+@Audited
 public class Phoned {
     @Id
     @Column(name = "id")
