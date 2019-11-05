@@ -1,12 +1,10 @@
-package com.carmel.common.dbservice;
-
-
+package com.carmel.common.gateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class OrgDbServiceApplicationTests {
+class GatewayApplicationTests {
 
 	@Test
 	void contextLoads() {

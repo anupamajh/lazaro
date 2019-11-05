@@ -1,0 +1,20 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: carmel-gateway
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:8001/eureka/
+zuul:
+  sensitiveHeaders: Cookie,Set-Cookie
+  routes:
+    common-db-service:
+      path: /common/**
+      url: http://localhost:8002
+    lazaro-service:
+      path: /lazaro/**
+      url: http://localhost:8003

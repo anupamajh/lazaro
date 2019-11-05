@@ -1,0 +1,34 @@
+server:
+  port: 8001
+spring:
+  application:
+    name: service-registry
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+
+
+#eureka:
+#  client:
+#    register-with-eureka: false
+#    fetch-registry: false
+#    serviceUrl:
+#      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+#  instance:
+#    hostname: localhost
+#    port: ${server.port}
+#  server:
+#      waitTimeInMsWhenSyncEmpty: 0
+#server:
+#  port: 8001
+#zuul:
+#  routes:
+#    common-db-service:
+#      path: /common/**
+#      url: http://localhost:8002
+#  sensitiveHeaders:
+#  add-proxy-headers: true
+

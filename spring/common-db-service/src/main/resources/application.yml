@@ -1,13 +1,9 @@
 server:
   port: 8002
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
+
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/rbcl_spring?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/rbcl_spring?createDatabaseIfNotExist=true&useSSL=false
     username: root
     password: P@ssw0rd
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -19,8 +15,8 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5Dialect
     generate-ddl: true
     database: mysql
-  main:
-    allow-bean-definition-overriding: true
+  application:
+    name: common-db-service
 logging:
   level:
     root: info
@@ -38,3 +34,10 @@ logging:
     max-size: 5MB
     clean-history-on-start: false
     name: 'logs/common-db-service.log'
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:8001/eureka/

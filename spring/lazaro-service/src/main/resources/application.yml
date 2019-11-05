@@ -16,6 +16,8 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       ddl-auto: update
+  application:
+    name: lazaro-service
 logging:
   level:
     root: info
@@ -30,3 +32,9 @@ logging:
     max-size: 5MB
     clean-history-on-start: false
     name: 'logs/lazaro-service.log'
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:8001/eureka/
