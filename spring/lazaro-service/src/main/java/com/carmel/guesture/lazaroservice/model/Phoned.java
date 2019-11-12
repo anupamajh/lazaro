@@ -1,11 +1,13 @@
 package com.carmel.guesture.lazaroservice.model;
 
+import com.carmel.guesture.lazaroservice.request.PhonedData;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.ManyToAny;
 import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -65,6 +67,25 @@ public class Phoned {
             }
     )
     private List<Agent> agents;
+
+    public Phoned() {
+    }
+
+    public Phoned(PhonedData data) {
+        this.cupidId = data.getId();
+        this.when = data.getWhen();
+        this.client = data.getClient();
+        this.phoneNumber = data.getPhoneNumber();
+        this.verified = data.isVerified();
+        this.missed = data.isMissed();
+        this.agents = new ArrayList<>();
+        if (data.getAgent() != null)
+            this.agents.add(new Agent(data.getAgent()));
+        this.startTime = data.getStartTime();
+        this.endTime = data.getEndTime();
+        this.duration = data.getDuration();
+        this.recordingURL = data.getRecordingURL();
+    }
 
 
     public String getId() {

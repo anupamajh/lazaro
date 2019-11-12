@@ -1,5 +1,6 @@
 package com.carmel.guesture.lazaroservice.model;
 
+import com.carmel.guesture.lazaroservice.request.AgentData;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Length;
@@ -25,6 +26,12 @@ public class Agent {
     @Column(name = "phone_number")
     @Length(max = 250)
     private String phoneNumber;
+    public Agent(){}
+
+    public Agent(AgentData agent) {
+        this.name = agent.getName();
+        this.phoneNumber = agent.getPhoneNumber();
+    }
 
     public String getId() {
         return id;

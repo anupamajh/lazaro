@@ -1,5 +1,6 @@
 package com.carmel.guesture.lazaroservice.model;
 
+import com.carmel.guesture.lazaroservice.request.PersonData;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
@@ -8,6 +9,7 @@ import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -79,7 +81,7 @@ public class Person {
     )
     private List<Agent> agents;
 
-    @ManyToMany( fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(name = "g_cupid_person_source",
             joinColumns = {
@@ -90,6 +92,32 @@ public class Person {
             }
     )
     private List<Source> sources;
+
+    public Person(PersonData personData) {
+        this.cupidId = personData.getId();
+        this.when = personData.getWhen();
+        this.client = personData.getClient();
+        this.phoneNumber = personData.getPhoneNumber();
+        this.verified = personData.isVerified();
+        this.sources = new ArrayList<>();
+        if (personData.getSource() != null)
+            this.sources.add(new Source(personData.getSource()));
+        this.interests = personData.getInterests();
+        this.emailAddresses = personData.getEmailAddresses();
+        this.missed = personData.isMissed();
+        this.agents = new ArrayList<>();
+        if (personData.getAgent() != null)
+            this.agents.add(new Agent(personData.getAgent()));
+        this.startTime = personData.getStartTime();
+        this.endTime = personData.getEndTime();
+        this.duration = personData.getDuration();
+        this.recordingURL = personData.getRecordingURL();
+        this.name = personData.getName();
+    }
+
+    public Person() {
+
+    }
 
     public String getId() {
         return id;

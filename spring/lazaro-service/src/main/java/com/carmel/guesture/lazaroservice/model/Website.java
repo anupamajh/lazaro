@@ -1,5 +1,6 @@
 package com.carmel.guesture.lazaroservice.model;
 
+import com.carmel.guesture.lazaroservice.request.WebsiteData;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Length;
@@ -42,6 +43,15 @@ public class Website {
 
     @Column(name = "interests", columnDefinition = "TEXT")
     private String[] interests;
+    public Website(){}
+    public Website(WebsiteData data) {
+        this.cupidId = data.getId();
+        this.client = data.getClient();
+        this.phoneNumber = data.getPhoneNumber();
+        this.verified = data.getVerified();
+        this.where = data.getWhere();
+        this.interests = data.getInterests();
+    }
 
     public String getId() {
         return id;

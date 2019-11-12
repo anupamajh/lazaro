@@ -1,5 +1,6 @@
 package com.carmel.guesture.lazaroservice.model;
 
+import com.carmel.guesture.lazaroservice.request.SourceData;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Length;
@@ -25,6 +26,13 @@ public class Source {
     @Column(name = "point")
     @Length(max = 250)
     private String point;
+
+    public Source(){}
+
+    public Source(SourceData source) {
+        this.medium = source.getMedium();
+        this.point = source.getPoint();
+    }
 
     public String getId() {
         return id;

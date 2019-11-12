@@ -1,6 +1,10 @@
 package com.carmel.guesture.lazaroservice.controller;
 
 import com.carmel.guesture.lazaroservice.model.*;
+import com.carmel.guesture.lazaroservice.request.PersonData;
+import com.carmel.guesture.lazaroservice.request.PersonRequest;
+import com.carmel.guesture.lazaroservice.request.PhonedRequest;
+import com.carmel.guesture.lazaroservice.request.WebsiteRequest;
 import com.carmel.guesture.lazaroservice.response.PersonResponse;
 import com.carmel.guesture.lazaroservice.response.PhonedResponse;
 import com.carmel.guesture.lazaroservice.response.WebsiteResponse;
@@ -39,12 +43,13 @@ public class PersonController {
     WebsiteService websiteService;
 
     @RequestMapping(value = "/added", method = RequestMethod.POST)
-    public PersonResponse added(@RequestBody Person person) {
+    public PersonResponse added(@RequestBody PersonRequest personRequest) {
+        Person person = new Person(personRequest.getData());
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         PersonResponse personResponse = new PersonResponse();
         try {
-            logger.trace("Data:{}", objectMapper.writeValueAsString(person));
+            logger.trace("Data:{}", objectMapper.writeValueAsString(personRequest));
             Person tempPerson = person;
             Person duplicatePerson = person;
             if (person.getAgents() != null) {
@@ -63,7 +68,7 @@ public class PersonController {
                 });
                 tempPerson.setSources(sourceList);
             }
-            tempPerson.setCupidId(tempPerson.getId());
+            //tempPerson.setCupidId(tempPerson.getId());
             duplicatePerson = getPerson(tempPerson);
             tempPerson.setId(duplicatePerson.getId());
             personResponse.setPerson(personService.save(tempPerson));
@@ -81,12 +86,13 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/phoned", method = RequestMethod.POST)
-    public PhonedResponse phoned(@RequestBody Phoned phoned) {
+    public PhonedResponse phoned(@RequestBody PhonedRequest phonedRequest) {
+        Phoned phoned = new Phoned(phonedRequest.getData());
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         PhonedResponse phonedResponse = new PhonedResponse();
         try {
-            logger.trace("Data:{}", objectMapper.writeValueAsString(phoned));
+            logger.trace("Data:{}", objectMapper.writeValueAsString(phonedRequest));
             Phoned tempPhoned = phoned;
             if (phoned.getAgents() != null) {
                 List<Agent> agentList = new ArrayList<>();
@@ -96,7 +102,6 @@ public class PersonController {
                 });
                 tempPhoned.setAgents(agentList);
             }
-            tempPhoned.setCupidId(tempPhoned.getId());
             tempPhoned.setId(null);
             phonedResponse.setPhoned(phonedService.save(tempPhoned));
             phonedResponse.setSuccess(true);
@@ -112,12 +117,13 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/on/website", method = RequestMethod.POST)
-    public WebsiteResponse onWebsite(@RequestBody Website website) {
+    public WebsiteResponse onWebsite(@RequestBody WebsiteRequest websiteRequest) {
+        Website website = new Website(websiteRequest.getData());
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         WebsiteResponse websiteResponse = new WebsiteResponse();
         try {
-            logger.trace("Data:{}", objectMapper.writeValueAsString(website));
+            logger.trace("Data:{}", objectMapper.writeValueAsString(websiteRequest));
             Website tempWebsite = website;
             tempWebsite.setCupidId(website.getCupidId());
             websiteResponse.setWebsite(websiteService.save(tempWebsite));
