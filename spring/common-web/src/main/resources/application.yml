@@ -1,0 +1,28 @@
+server:
+  port: 8007
+  servlet:
+    session:
+      cookie:
+        name: CARMELSESSION
+
+security:
+  oauth2:
+    client:
+      client-id: pete
+      client-secret: P@ssw0rd
+      user-authorization-uri: http://172.16.1.36:8005/oauth/authorize
+      access-token-uri: http://172.16.1.36:8005/oauth/token
+    resource:
+      token-info-uri: http://172.16.1.36:8005/oauth/check_token
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://172.16.1.36:8001/eureka/
+
+
+spring:
+  application:
+    name: common-web-summane

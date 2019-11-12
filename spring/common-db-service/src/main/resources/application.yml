@@ -1,5 +1,5 @@
 server:
-  port: 8002
+  port: 8006
 
 spring:
   datasource:
@@ -35,9 +35,17 @@ logging:
     clean-history-on-start: false
     name: 'logs/common-db-service.log'
 
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    serviceUrl:
-      defaultZone: http://localhost:8001/eureka/
+  eureka:
+    client:
+      register-with-eureka: true
+      fetch-registry: true
+      serviceUrl:
+        defaultZone: http://localhost:8001/eureka/
+
+  security:
+    oauth2:
+      resource:
+        token-info-uri: http://localhost:8005/oauth/check_token
+      client:
+        client-id: carmel
+        client-secret: P@ssw0rd

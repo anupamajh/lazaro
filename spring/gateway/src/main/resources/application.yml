@@ -12,9 +12,18 @@ eureka:
 zuul:
   sensitiveHeaders: Cookie,Set-Cookie
   routes:
+    auth-service:
+      path: /auth/**
+      url: http://localhost:8005
     common-db-service:
       path: /common/**
-      url: http://localhost:8002
-    lazaro-service:
-      path: /lazaro/**
-      url: http://localhost:8003
+      url: http://localhost:8006
+    common-web:
+      path: /web/**
+      url: http://localhost:8007
+#    lazaro-service:
+#      path: /lazaro/**
+#      url: http://localhost:8003
+#    common-web:
+#      path: /web/**
+#      url: http://localhost:8004
