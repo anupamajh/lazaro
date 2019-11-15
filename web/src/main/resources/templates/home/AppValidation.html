@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th ="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>App-Validation</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/AppValidation.css}">
+
+</head>
+<body>
+<div class="main">
+    <div class="login">
+        <img class="image" th:src="@{/images/GuestureLogo.png}" alt="" width="153px" height="45px">
+
+        <p class="start">Lorem ipsum dolor sit amet, consectetur</br>
+            adipiscing elit. Etiam erat sapien, ultricies.</p>
+        <div class="align">
+            <div>
+                <span class="ab"><b>APP ACCESS REQUEST</b></span>
+                <p class="a">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </br>Donec dignissim felis et magna mattis finibus. </p>
+            </div>
+            <div class="h">
+                <p class="i">Invalid credentials</p>
+            </div>
+            <div class="move">
+                <span class="above">REGISTERED EMAIL</span>
+                <input class="box" type="text" name="un" placeholder="example@address.com" size="48">
+
+            </div>
+            <div class="pass">
+                <span class="above">REGISTERED PHONE NUMBER</span>
+                <input class="box" type="password" name="un" placeholder="98445 54783" size="48" border-radius="5px;">
+
+            </div>
+        </div>
+        <div class="butn"><button type="submit" class="button"  onclick="loginFunction1()">SUBMIT</button>
+            <script>
+                    function loginFunction1()
+                    {
+                    window.location=src="/AppSuccess";
+                    }
+                </script>
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

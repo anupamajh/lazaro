@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th ="http://www.thymeleaf.org">
+
+<head>
+    <title>Login-Validation</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/OTPverification.css}">
+
+</head>
+
+<body>
+<div class="main">
+    <div class="login">
+        <img class="image" th:src="@{/images/GuestureLogo.png}" alt="" width="153px" height="45px">
+
+        <p class="start">Lorem ipsum dolor sit amet, consectetur</br>
+            adipiscing elit. Etiam erat sapien, ultricies.</p>
+        <div class="align">
+            <div class="verify">
+                <span class="ab"><b>Verification Code</b></span>
+                <p class="a">Please type the verification code sent to </br>your mobile number.</p>
+            </div>
+            <div class="h">
+                <p class="i">You have entered wrong OTP.</p>
+            </div>
+            <span class="time">0:59</span>
+            <div>
+                <input class="box" type="text" name="un" placeholder="" size="48">&nbsp;
+                <input class="box" type="text" name="un" placeholder="" size="48">&nbsp;
+                <input class="box" type="text" name="un" placeholder="" size="48">&nbsp;
+                <input class="box" type="text" name="un" placeholder="" size="48">
+            </div>
+
+            <div class="fp">
+                <a style="color: #32BDD2" href="#">Resend OTP?</a>
+            </div>
+            <div class="butn"><button type="submit" class="button" onclick="loginFunction1()"> SUBMIT</button>
+                <script>
+                    function loginFunction1()
+                    {
+                    window.location=src="/OTPsuccess";
+                    }
+                </script>
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>

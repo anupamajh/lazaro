@@ -1,0 +1,119 @@
+ body {
+            background-color: #FFFFFF;
+        }
+        .main {
+            position: absolute;
+            margin-left: 15%;
+            width: 1024px;
+            height: 768px;
+            margin-top: 4%;
+            background-color: white;
+            border: 2px solid #e6e5e5;
+
+        }
+        .login {
+            margin: auto;
+            border: 0px;
+            background-color: white;
+            width: 400px;
+            margin-top: 100px;
+        }
+
+        .start {
+            color: #5A5A5A;
+            font-size: 14px;
+            padding-top: 5%;
+            padding: 7%;
+            letter-spacing: 0.35px;
+        }
+
+        .align {
+            margin: auto;
+            border: 95px;
+            width: 93%;
+            padding-right: 30px;
+        }
+
+        .a {
+            text-align: left;
+            font-size: 18px;
+            font: Bold 16px Roboto;
+            letter-spacing: 0.9px;
+            color: #747474;
+
+        }
+        .butn {
+            margin-top: 7%;
+            padding: 4%;
+            margin-left: 30%;
+        }
+
+        button {
+            background-color: #32BDD2;
+            color: white;
+            padding: 8px 20px;
+            box-shadow: 0 8px 6px -6px #5E646980;
+            margin: 5px 0;
+            border: none;
+            border-radius: 18px;
+            position: relative;
+            left: 20px;
+            width: 100px;
+
+        }
+
+        .box {
+            padding-left: 20px;
+            margin-top: 4%;
+            box-shadow: 0 8px 6px -6px #0000001A;
+            border: 1px solid #BF574A;
+            height: 50.5px;
+            font: Regular 12px Roboto;
+            width: 439px;
+            color: #909090;
+            border-radius: 12px;
+        }
+
+        .fp {
+            padding-top: 4%;
+            color: #32BDD2;
+            font-size: 12px;
+            letter-spacing: 0.3px;
+            margin-left: 75%;
+            text-decoration-line: underline;
+        }
+
+        .pass {
+            padding-top: 10%;
+        }
+
+
+        .last {
+            padding-left: 65px;
+        }
+        .field{
+        color:#BF574A;
+        font-size:14px;
+        letter-spacing:0.7px;
+         margin-left: 5%;
+        }
+
+         .m{
+            margin-top: 2%;
+        }
+.b{
+    margin-bottom: 20px;
+     display: flex;
+     align-items: flex-end;
+     justify-content: space-between;
+}
+        .image {
+            margin-left: 21%;
+        }
+        .image1 {
+                     display: inline;
+                     position: absolute;
+                     margin-left: 40%;
+                     bottom: 36%;
+                     margin-bottom: 0%;
+                 }

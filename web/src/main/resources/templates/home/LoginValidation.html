@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Login-Validation</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/LoginValidation.css}">
+
+</head>
+
+<body>
+<div class="main">
+    <div class="login">
+        <img class="image" th:src="@{/images/GuestureLogo.png}" alt="" width="153px" height="45px">
+
+        <p class="start">Lorem ipsum dolor sit amet, consectetur</br>
+            adipiscing elit. Etiam erat sapien, ultricies.</p>
+        <div class="align">
+            <div>
+                <span class="a"><b>Login</b></span>
+            </div>
+            <div class="h">
+                <p class="i">Invalid login credentials</p>
+            </div>
+            <div>
+                <input class="box" type="text" name="un" placeholder="Email or Mobile Number" size="48">
+            </div>
+            <div class="pass">
+                <input class="box" type="password" name="un" placeholder="Password" size="48" border-radius="5px;">
+                <img class="image1" th:src="@{/images/EyeIcon.png}" alt="" width="24px" height="24px" onclick="loginFunction1()">
+                <script>
+                    function loginFunction1()
+                    {
+                    window.location=src="/PasswordUnmask";
+                    }
+                </script>
+
+            </div>
+            <div class="fp">
+                <a style="color: #32BDD2" href="#" onclick="loginFunction2()">Forgot password?</a>
+                <script>
+                    function loginFunction2()
+                    {
+                    window.location=src="/ForgotPassword";
+                    }
+                </script>
+            </div>
+            <div class="butn"><button type="submit" class="button"  onclick="loginFunction3()"> LOGIN</button>
+                <script>
+                    function loginFunction3()
+                    {
+                    window.location=src="/LoginMandatory";
+                    }
+                </script>
+            </div>
+            <div class="last">
+                <p style="color: #747474;">Don’t have an account yet?
+                    <a style="color: #32BDD2" href="#" onclick="loginFunction4()">Get one now.</a></p>
+                <script>
+                    function loginFunction4()
+                    {
+                    window.location=src="/AccountLanding";
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
