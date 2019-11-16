@@ -54,7 +54,8 @@ public class HomeController {
     @RequestMapping(value = "/AppSuccess")
     public String AppSuccess(){ return "home/AppSuccess";}
 
-
+    @RequestMapping(value = "community/community-profle")
+    public String communityProfile(){ return "community/community-profile";}
 
 
 }

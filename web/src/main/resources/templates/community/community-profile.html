@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Community-profile</title>
+    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto&display=swap}" rel="stylesheet">
+    <link th:href="@{/css/community.css}" rel="stylesheet">
+</head>
+
+<body>
+<header style="min-height: 6vh;">
+    <div th:replace="shared/dashboard :: dashboard">
+    </div>
+</header>
+
+<div class="content">
+    <div class="community-desc">
+        <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">COMMUNITY</span>
+        <p style="color:#707070; font-family:roboto; font-size:12px; width:50%; margin-top: 15px; letter-spacing: 0.6px;  line-height: 2;">Lorem ipsum dolor
+            sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo
+            vestibulum.</p>
+    </div>
+
+    <div class="profile-container">
+        <div class="left-content">
+            <div class="my-profile" style="width:91%;">
+                    <span
+                            style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                <span
+                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">MY
+                        PROFILE</span>
+                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Based on
+                    your profile, you will be able to connect with the best matches who share your interests. Go
+                    ahead and setup your profile.</p>
+            </div>
+            <div class="people" style="border-bottom: solid 1px #CCCCCC;">
+                    <span
+                            style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                <span
+                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px; letter-spacing: 1.4px;">PEOPLE</span>
+                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Meet the
+                    community members and make new friends.</p>
+            </div>
+            <div class="people">
+                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                <span
+                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px;letter-spacing: 1.4px;">GROUPS</span>
+                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Meet the
+                    community members and make new friends.</p>
+            </div>
+        </div>
+
+        <div class="right-content">
+            <div class="my-profile-options" style="padding:2%;">
+                <p
+                        style="display:block; color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-bottom: 20px; letter-spacing: 1.4px;">
+                    MY PROFILE<br><br></p>
+                <div
+                        style="display:flex; justify-content: center; width:100%; align-items: center; flex-direction: column;">
+                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 40@16x.png}" height="130" width="130"
+                         id="uplaod-profile-pic">
+                    <p style="color:#464646; font-family: roboto: font-weight: 500; margin-top: 15px;letter-spacing: 1.4px;">UPLOAD YOUR
+                        PHOTO</p>
+                </div>
+                <div class="user-details">
+                    <p style="color:#747474; font-size:16px; font-family:roboto; font-weight: 400;letter-spacing: 1.05px;">
+                        NAME<br>
+                    </p>
+                    <p
+                            style="color:#505050; font-family:roboto; font-size:16px; font-weight: 500; margin-top:10px; letter-spacing: 1.2px;">
+                        John Doe
+                    </p>
+                </div>
+                <div class="user-details">
+                    <div>
+                        <p style="color:#747474; font-size:16px; font-family:roboto; font-weight: 400; letter-spacing: 1.05px;">
+                            GENDER<br>
+                        </p>
+                        <p
+                                style="color:#505050; font-family:roboto; font-size:16px; font-weight: 500; margin-top:10px; letter-spacing: 1.2px;">
+                            MALE
+                        </p>
+                    </div>
+                    <div>
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 4@16x.png}" width="60" height="60"
+                             class="hideshow">
+                    </div>
+                </div>
+                <div class="user-details">
+                    <div>
+                        <p style="color:#747474; font-size:16px; font-family:roboto; font-weight: 400; letter-spacing: 1.05px;">
+                            AGE<br>
+                        </p>
+                        <p
+                                style="color:#505050; font-family:roboto; font-size:16px; font-weight: 500; margin-top:10px; letter-spacing: 1.05px;">
+                            33 years
+                        </p>
+                    </div>
+                    <div>
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 3@16x.png}" width="60" height="60"
+                             class="hideshow">
+                    </div>
+                </div>
+                <div class="user-details">
+                    <div>
+                        <p style="color:#747474; font-size:16px; font-family:roboto; font-weight: 400; letter-spacing: 1.05px;">
+                            MOBILE NUMBER<br>
+                        </p>
+                        <p
+                                style="color:#505050; font-family:roboto; font-size:16px; font-weight: 500; margin-top:10px; letter-spacing: 1.2px;">
+                            9090909090
+                        </p>
+                    </div>
+                    <div>
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 4@16x.png}" width="60" height="60"
+                             class="hideshow">
+                    </div>
+                </div>
+                <div class="user-details">
+                    <div>
+                        <p style="color:#747474; font-size:16px; font-family:roboto; font-weight: 400; letter-spacing: 1.05px;">
+                            EMAIL<br>
+                        </p>
+                        <p
+                                style="color:#505050; font-family:roboto; font-size:16px; font-weight: 500; margin-top:10px; letter-spacing: 1.05px;">
+                            johndoe@gmail.com
+
+                        </p>
+                    </div>
+                    <div>
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 3@16x.png}" width="60" height="60"
+                             class="hideshow">
+                    </div>
+                </div>
+                <div class="user-details">
+                    <div>
+                        <p style="color:#747474; font-size:16px; font-family:roboto; font-weight: 400; margin-bottom: 10px; letter-spacing: 1.05px;">
+                            YOUR PLACE OF ORIGIN<br>
+                        </p>
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 5@16x.png}" width="20" height="20"
+                             id="place-origin">
+                    </div>
+                    <div>
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 4@16x.png}" width="60" height="60"
+                             class="hideshow">
+                    </div>
+                </div>
+                <div>
+
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:35px; padding-bottom: 20px;">
+                        <div style="display:flex;">
+                            <p style="color:#747474; font-size:16px; font-family:roboto; font-weight: 400; letter-spacing: 1.05px;">
+                                MY INTERESTS<br>
+                            </p>
+                            <span style="background-color:#E65959; padding: 5px; border-radius: 50%; margin-bottom: 15px; margin-left: 10px;"></span>
+                        </div>
+                        <div>
+                            <input type="button" value="SETUP" class="submit-btn">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="my-profile-options" style="padding:2%;">
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
