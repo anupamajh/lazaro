@@ -35,7 +35,5 @@ public class HomeController {
 
     @RequestMapping(value = "community/people-list")
     public String peopleList(){ return "community/people-list";}
-
-
 }
 
