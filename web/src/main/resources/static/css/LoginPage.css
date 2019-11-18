@@ -11,7 +11,6 @@ margin-left: 15%;
 width: 1024px;
 height: 872px;
 background-color: white;
-border: 2px solid #e6e5e5;
 }
 
 .main-layer {
@@ -38,12 +37,14 @@ padding-top: 5%;
 padding: 7%;
 letter-spacing: 0.35px;
 }
+
 .para-lorem{
 color: #5A5A5A;
 font-size: 14px;
 font-style:Roboto;
 letter-spacing: 0.35px;
 }
+
 .align {
 border: 95px;
 width: 93%;
@@ -57,12 +58,14 @@ width: 93%;
 margin-top:12%;
 padding-right: 30px;
 }
+
 .login{
 text-align: left;
 font-size: 18px;
 font: Bold 16px Roboto;
 letter-spacing: 0.9px;
 color: #747474;
+font-weight:600;
 }
 
 .login-button {
@@ -84,7 +87,8 @@ border: none;
 border-radius: 18px;
 position: relative;
 left: 20px;
-width: 191px;
+font-weight:700;
+width: 192px;
 }
 
 .submit-button {
@@ -111,6 +115,7 @@ border-radius: 12px;
 margin-bottom: 2%;
 padding-left: 20px;
 margin-top: 4%;
+/*margin-left:18%;*/
 box-shadow: 0 8px 6px -6px#0000001A;
 border: 1px solid #F7F4F4;
 height: 50.5px;
@@ -146,6 +151,7 @@ padding-top: 10%;
 .register{
 color:#32BDD2;
 font-size:14px;
+font-weight: 600;
 font-style:Roboto bold;
 letter-spacing:1.05px;
 margin-top:4%;
@@ -187,6 +193,7 @@ font-size: 14px;
 padding-left: 20px;
 font-style:Roboto medium;
 margin-top: 4%;
+font-weight:600;
 letter-spacing: 1.05px;
 }
 

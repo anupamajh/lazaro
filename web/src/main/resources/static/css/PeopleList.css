@@ -31,11 +31,11 @@ body{
 .my-profile{
     padding: 5%;
     box-shadow: 0px 0px 20px #CCCCCC;
-    border: solid 1px #FFFFFF;
-    background-color: #FFFFFF;
+    background-color: #EEEEEE;
 }
 .people{
     padding: 5%;
+    background-color: #FFFFFF
 }
 .submit-btn{
     background-color: #32BDD2;
@@ -57,4 +57,21 @@ body{
     margin-top:65px;
     padding-bottom: 20px;
     border-bottom: solid 0.5px #CCCCCC;
+}
+.burger-menu{
+margin-left:89%;}
+
+.box {
+margin-bottom: 2%;
+padding-left: 20px;
+margin-left:11%;
+border: 1px solid #CCCCCC;
+height: 32px;
+font: Regular 12px Roboto;
+width: 506px;
+color: #909090;
+display:inline;
+border-radius: 16px;
+}
+.name1{
 }
