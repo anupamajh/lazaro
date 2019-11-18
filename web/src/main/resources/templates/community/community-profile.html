@@ -6,6 +6,22 @@
     <title>Community-profile</title>
     <link th:href="@{https://fonts.googleapis.com/css?family=Roboto&display=swap}" rel="stylesheet">
     <link th:href="@{/css/community.css}" rel="stylesheet">
+
+    <script>
+        function viewInterestList(){
+            document.getElementById("view-interest-list").classList.toggle("show");
+        }
+        function viewDropDownList(){
+            console.log("entered");
+            if(document.getElementById("drop-down-list").style.display === "none"){
+                 document.getElementById("drop-down-list").style.display = "block";
+                 document.getElementById("drop-down-btn").src="/images/extra-large-256px/Artboard 1 copy 2@16x.png";
+            }else{
+                document.getElementById("drop-down-list").style.display = "none";
+                document.getElementById("drop-down-btn").src="/images/extra-large-256px/Artboard 1 copy@16x.png";
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -52,7 +68,7 @@
         </div>
 
         <div class="right-content">
-            <div class="my-profile-options" style="padding:2%;">
+            <div class="my-profile-options" style="padding:2%; display: none;">
                 <p
                         style="display:block; color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-bottom: 20px; letter-spacing: 1.4px;">
                     MY PROFILE<br><br></p>
@@ -167,9 +183,120 @@
 
 
             <div class="my-profile-options" style="padding:2%;">
-
-
+                <div style="display:flex; justify-content:space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; justify-content: center;">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 12@16x.png}" height="40" width="40" alt="back-buttona">
+                        <div style="margin-left:20px;">
+                            <p style="display:block; color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-bottom: 20px; letter-spacing: 1.4px; line-height: 5px;">
+                                MY INTERESTS<br><br></p>
+                            <p style="color: #909090; font-family: roboto; font-size: 12px; letter-spacing: 0.3px; line-height: 1;">Add interests to enhance your GuestJini experience.</p>
+                        </div>
+                        </div>
+                    <span style="color:#32BDD2; font-family:robot; font-size: 12px; letter-spacing:0.3px; line-height:1;" id="my-Interest-List" onclick="viewInterestList()"><u>View My Interests</u></span>
                 </div>
+
+                <div class="view-interest-list" id="view-interest-list">
+                    <div style="display: block; border-bottom: solid #CCCCCC 0.5px; padding-bottom: 10px;">
+                        <a style="display:block; color:#464646; font-family: roboto; font-size: 12px; letter-spacing: 1.2px; line-height: 1.4; text-decoration: none;" href="#">Fitness</a>
+                        <a style="display:block; color:#909090; font-family: roboto; font-size: 10px; letter-spacing: 0.5px; line-height: 1.1; text-decoration: none; padding: 10px 0px 10px 0px;" href="#">Gym</a>
+                        <a style="display:block; color:#909090; font-family: roboto; font-size: 10px; letter-spacing: 0.5px; line-height: 1.1; text-decoration: none; padding: 10px 0px 10px 0px;" href="#">Morning Walk</a>
+                    </div>
+                    <div style="display: block; border-bottom: solid #CCCCCC 0.5px; padding-bottom: 10px;">
+                        <a style="display:block; color:#464646; font-family: roboto; font-size: 12px; letter-spacing: 1.2px; line-height: 1.4; text-decoration: none; padding: 20px 0px 10px 0px;" href="#">Photography</a>
+                        <a style="display:block; color:#909090; font-family: roboto; font-size: 10px; letter-spacing: 0.5px; line-height: 1.1; text-decoration: none; padding: 10px 0px 10px 0px;" href="#">Adventure Photography</a>
+                        <a style="display:block; color:#909090; font-family: roboto; font-size: 10px; letter-spacing: 0.5px; line-height: 1.1; text-decoration: none; padding: 10px 0px 10px 0px;" href="#">Panaroma</a>
+                        <a style="display:block; color:#909090; font-family: roboto; font-size: 10px; letter-spacing: 0.5px; line-height: 1.1; text-decoration: none; padding: 10px 0px 10px 0px;" href="#">Cityscape Photography</a>
+                    </div>
+                    <div style="display: block; padding-bottom: 10px;">
+                        <a style="display:block; color:#464646; font-family: roboto; font-size: 12px; letter-spacing: 1.2px; line-height: 1.4; text-decoration: none; padding: 20px 0px 10px 0px;" href="#">Film</a>
+                        <a style="display:block; color:#909090; font-family: roboto; font-size: 10px; letter-spacing: 0.5px; line-height: 1.1; text-decoration: none; padding: 10px 0px 10px 0px;" href="#">Action Thriller</a>
+                        <a style="display:block; color:#909090; font-family: roboto; font-size: 10px; letter-spacing: 0.5px; line-height: 1.1; text-decoration: none; padding: 10px 0px 10px 0px;" href="#">Comedy</a>
+                        <a style="display:block; color:#909090; font-family: roboto; font-size: 10px; letter-spacing: 0.5px; line-height: 1.1; text-decoration: none; padding: 10px 0px 10px 0px;" href="#">Horror</a>
+                        <a style="display:block; color:#909090; font-family: roboto; font-size: 10px; letter-spacing: 0.5px; line-height: 1.1; text-decoration: none; padding: 10px 0px 10px 0px;" href="#">Mystery/Drama</a>
+                    </div>
+                </div>
+
+                <div class="check-list" style="margin-top:8%;">
+                    <p class="head-text">
+                        Adventure - Outdoor
+                    </p>
+                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="15" width="15" alt="list-button" style="margin-right: 15px;" class="drop-down-btn" id="drop-down-btn" onclick="viewDropDownList()">
+                </div>
+
+                <div class="drop-down-list" id="drop-down-list">
+                <form class="drop-down-form">
+                    <div class="container" style="display: flex; border-bottom: solid 0.5px #CCCCCC; justify-content: space-between; align-items: center; margin: 10px 30px 30px 30px; padding-bottom: 15px;">
+                        <span style="color: #747474; font-family: roboto; font-size: 16px;"> Hiking</span><input type="checkbox" name="adventure-outdoor-hiking" value="hiking">
+                    </div>
+                    <div class="container" style="display: flex; border-bottom: solid 0.5px #CCCCCC; justify-content: space-between; align-items: center; margin: 10px 30px 30px 30px; padding-bottom: 15px;">
+                        <span style="color: #747474; font-family: roboto; font-size: 16px;"> Biking</span><input type="checkbox" name="adventure-outdoor-hiking" value="hiking">
+                    </div>
+                    <div class="container" style="display: flex; border-bottom: solid 0.5px #CCCCCC; justify-content: space-between; align-items: center; margin: 10px 30px 30px 30px; padding-bottom: 15px;">
+                        <span style="color: #747474; font-family: roboto; font-size: 16px;"> Cycling</span><input type="checkbox" name="adventure-outdoor-hiking" value="hiking">
+                    </div>
+                    <div class="container" style="display: flex; border-bottom: solid 0.5px #CCCCCC; justify-content: space-between; align-items: center; margin: 10px 30px 30px 30px; padding-bottom: 15px;">
+                        <span style="color: #747474; font-family: roboto; font-size: 16px;"> Camping</span><input type="checkbox" name="adventure-outdoor-hiking" value="hiking">
+                    </div>
+                </form>
+                </div>
+
+                <div class="check-list">
+                    <p class="head-text">
+                        Adventure - Indoor <span style="color: #747474; font-weight: 700;"> (02)</span>
+                    </p>
+                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="15" width="15" alt="list-button" style="margin-right: 15px;">
+                </div>
+
+                <div class="check-list">
+                    <p class="head-text">
+                        Fitness  <span style="color: #747474; font-weight: 700;"> (02)</span>
+                    </p>
+                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="15" width="15" alt="list-button" style="margin-right: 15px;">
+                </div>
+
+                <div class="check-list">
+                    <p class="head-text">
+                        Photography <span style="color: #747474; font-weight: 700;"> (03)</span>
+                    </p>
+                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="15" width="15" alt="list-button" style="margin-right: 15px;">
+                </div>
+
+                <div class="check-list">
+                    <p class="head-text">
+                        Writing
+                    </p>
+                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="15" width="15" alt="list-button" style="margin-right: 15px;">
+                </div>
+
+
+                <div class="check-list">
+                    <p class="head-text">
+                        Reading
+                    </p>
+                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="15" width="15" alt="list-button" style="margin-right: 15px;">
+                </div>
+
+                <div class="check-list">
+                    <p class="head-text">
+                        Dance <span style="color: #747474; font-weight: 700;"> (03)</span>
+                    </p>
+                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="15" width="15" alt="list-button" style="margin-right: 15px;">
+                </div>
+
+                <div class="check-list">
+                    <p class="head-text">
+                        Craft
+                    </p>
+                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="15" width="15" alt="list-button" style="margin-right: 15px;">
+                </div>
+
+                <div class="check-list">
+                    <p class="head-text">
+                        Career and Business <span style="color: #747474; font-weight: 700;"> (01)</span>
+                    </p>
+                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="15" width="15" alt="list-button" style="margin-right: 15px;">
+                </div>
+
             </div>
         </div>
     </div>
