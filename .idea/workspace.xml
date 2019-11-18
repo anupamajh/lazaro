@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="288721bf-d866-40d6-b195-b4411b63f89f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/AccountLanding.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/AppError.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/AppValidation.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/ForgotPassword.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/LoginMandatory.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/LoginPage.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/LoginValidation.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/OTPforgotpassword.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/OTPverification.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/PasswordError.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/PasswordSuccess.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/PasswordValidation.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/passwordUnmask.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/images/EyeIcon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/images/EyeIconblue.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/AccountLanding.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/AppRequestError.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/AppSuccess.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/AppValidation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/ForgotPasswordError.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/NumberValidation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/OTPVerification.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/OTPforgotpassword.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/OTPsuccess.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/PasswordUnmask.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/PasswordValidation.html" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1Tdk8tvXhlIVRZxCVeRsdQ5LCLn" />
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="288721bf-d866-40d6-b195-b4411b63f89f" name="Default Changelist" comment="" />
+      <created>1573797203712</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1573797203712</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

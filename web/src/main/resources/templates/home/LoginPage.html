@@ -1,65 +1,95 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th ="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Login-Page</title>
+    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto&display=swap}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/LoginPage.css}">
 
+    <script>
+        function myFunction() {
+            document.getElementById("fieldError1").style.display = "block";
+            document.getElementById("fieldError2").style.display = "block";
+            document.getElementById("inputErr").style.border = "1px solid #BF574A";
+            document.getElementById("pswdErr").style.border = "1px solid #BF574A";
+            document.getElementById("eye-icon").style.bottom = "44%";
+        }
+        function myFunction1() {
+            document.getElementById("eye-icon").style.display = "none";
+            document.getElementById("eye-pswd").style.display = "block";
+            document.getElementById("eye-icon").style.bottom = "44%";
+        }
+        function type() {
+
+        }
+    </script>
+
 </head>
+
 <body>
 <div class="main">
-    <div class="login">
-        <img class="image" th:src="@{/images/GuestureLogo.png}" alt="" width="153px" height="45px">
+    <div class="main-layer">
+        <img class="image-logo" th:src="@{/images/GuestureLogo.png}" alt="" width="153px" height="45px">
 
         <p class="start">Lorem ipsum dolor sit amet, consectetur</br>
             adipiscing elit. Etiam erat sapien, ultricies.</p>
         <div class="align">
-            <div>
-                <span class="a"><b>Login</b></span>
+            <div class="layer">
+                <span class="login"><b>Login</b></span>
+
+                <div class="error">
+                    <p class="invalid">Invalid login credentials</p>
+                </div>
+                <div class="move">
+
+                    <input class="box" type="text" name="un" placeholder="Email or Mobile Number" size="48"
+                           id="inputErr">
+                    <span class="field1" id="fieldError1" style="display:none">This field is required</span>
+                </div>
             </div>
-            <div>
-                <input class="box" type="text" name="un" placeholder="Email or Mobile Number" size="48">
-            </div>
-            <div class="pass">
-                <input class="box" type="password" name="un" placeholder="Password" size="48" border-radius="5px;">
-                <img class="image1" th:src="@{/images/EyeIcon.png}" alt="" width="24px" height="24px" onclick="loginFunction1()">
+
+            <div class="password">
+
+                <input class="box" type="password" name="un" placeholder="Password" size="48" border-radius="5px;"
+                       id="pswdErr">
+
+                <img class="image-eye" id="eye-icon" th:src="@{/images/EyeIcon.png}" alt="" width="24px"
+                     height="24px" onclick="myFunction1()">
+                <img class="image1" th:src="@{/images/EyeIconblue.png}" alt="" width="24px" height="24px"
+                     onclick="loginFunction2()" style="display:none" id="eye-pswd">
+                <p class="field" id="fieldError2" style="display:none">This field is required</p>
                 <script>
-                    function loginFunction1()
-                    {
-                    window.location=src="/PasswordUnmask";
-                    }
-                </script>
+                        function loginFunction1() {
+                            window.location = src = "/PasswordUnmask";
+                        }
+                    </script>
             </div>
             <div class="fp">
                 <a style="color: #32BDD2" href="#" onclick="loginFunction2()">Forgot password?</a>
                 <script>
-                    function loginFunction2()
-                    {
-                    window.location=src="/ForgotPassword";
-                    }
-                </script>
+                        function loginFunction2() {
+                            window.location = src = "/ForgotPassword";
+                        }
+                    </script>
             </div>
-            <div class="butn"><button type="submit" class="button" onclick="loginFunction3()"> LOGIN</button>
-                <script>
-                    function loginFunction3()
-                    {
-                    window.location=src="/LoginMandatory";
-                    }
-                </script>
+            <div class="login-button">
+                <button type="submit" class="button" onclick="myFunction()"><b>LOGIN</b></button>
+
             </div>
-            <div class="last">
+            <div class="create-account">
                 <p style="color: #747474;">Don’t have an account yet?
                     <a style="color: #32BDD2" href="#" onclick="loginFunction4()">Get one now.</a></p>
                 <script>
-                    function loginFunction4()
-                    {
-                    window.location=src="/AccountLanding";
-                    }
-                </script>
+                        function loginFunction4() {
+                            window.location = src = "/AccountLanding";
+                        }
+                    </script>
 
             </div>
         </div>
     </div>
 
 </body>
+
 </html>
