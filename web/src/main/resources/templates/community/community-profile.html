@@ -21,6 +21,14 @@
                 document.getElementById("drop-down-btn").src="/images/extra-large-256px/Artboard 1 copy@16x.png";
             }
         }
+        function goBack(){
+            document.getElementById("profile-setup").style.display = "block";
+            document.getElementById("interests-setup").style.display = "none";
+        }
+        function interestsSetup(){
+            document.getElementById("profile-setup").style.display = "none";
+            document.getElementById("interests-setup").style.display = "block";
+        }
     </script>
 </head>
 
@@ -31,11 +39,30 @@
 </header>
 
 <div class="content">
+
     <div class="community-desc">
         <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">COMMUNITY</span>
         <p style="color:#707070; font-family:roboto; font-size:12px; width:50%; margin-top: 15px; letter-spacing: 0.6px;  line-height: 2;">Lorem ipsum dolor
             sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo
             vestibulum.</p>
+    </div>
+
+    <div class="photo-upload">
+        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" height="30" width="30" id="uplaod-profile-pic-close" style="float: right; margin: 10px;"><br><br>
+        <p style="color:#32BDD2; font-family: roboto; font-size: 16px; letter-spacing: 1.6px; line-height: 2; margin: 20px 0px 10px 0px;">UPLOAD PHOTO</p>
+        <div style="display: flex;">
+            <div class="left-part">
+                <p style="color:#747474; font-size: 14px; font-family: roboto; line-height: 1.5;">Select a file from my computer. <br><span style="font-size: 10px;">The file size should not exceed 5MB</span></p>
+                <input type="button" class="submit-btn" value="BROWSE" style=" padding-right: 10px; padding-left: 10px; padding-top: 5px; padding-bottom: 5px; letter-spacing: 0.5px; margin-top: 15px; font-size: 10px;">
+            </div>
+            <div class="right-part">
+                <div style="border: solid 2px #FFFFFF; border-style: dashed; padding: 8%; margin: 4%;">
+                    <img th:src="@{/images/extra-large-256px/upload.png}" width="45" height="45" style="display:block; margin: auto;"/>
+                    <p style="color: #FFFFFF; margin: auto; text-align: center;">Drop a file here</p>
+                </div>
+            </div>
+        </div>
+        <input type="button" class="submit-btn" value="DONE" style="padding: 1% 3% 1% 3%; margin-top: 20px;">
     </div>
 
     <div class="profile-container">
@@ -68,7 +95,7 @@
         </div>
 
         <div class="right-content">
-            <div class="my-profile-options" style="padding:2%; display: none;">
+            <div class="my-profile-options" style="padding:2%;" id="profile-setup">
                 <p
                         style="display:block; color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-bottom: 20px; letter-spacing: 1.4px;">
                     MY PROFILE<br><br></p>
@@ -79,6 +106,7 @@
                     <p style="color:#464646; font-family: roboto: font-weight: 500; margin-top: 15px;letter-spacing: 1.4px;">UPLOAD YOUR
                         PHOTO</p>
                 </div>
+
                 <div class="user-details">
                     <div>
                     <p style="color:#747474; font-size:16px; font-family:roboto; font-weight: 400;letter-spacing: 1.05px;">
@@ -174,7 +202,7 @@
                             <span style="background-color:#E65959; padding: 5px; border-radius: 50%; margin-bottom: 15px; margin-left: 10px;"></span>
                         </div>
                         <div>
-                            <input type="button" value="SETUP" class="submit-btn">
+                            <input type="button" value="SETUP" class="submit-btn" onclick="interestsSetup()">
                         </div>
                     </div>
 
@@ -182,10 +210,10 @@
             </div>
 
 
-            <div class="my-profile-options" style="padding:2%;">
+            <div class="my-profile-options" style="padding:2%;" id="interests-setup">
                 <div style="display:flex; justify-content:space-between; align-items: center;">
                     <div style="display: flex; align-items: center; justify-content: center;">
-                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 12@16x.png}" height="40" width="40" alt="back-buttona">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 12@16x.png}" height="40" width="40" alt="back-buttona" onclick="goBack()">
                         <div style="margin-left:20px;">
                             <p style="display:block; color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-bottom: 20px; letter-spacing: 1.4px; line-height: 5px;">
                                 MY INTERESTS<br><br></p>
@@ -293,6 +321,13 @@
                 <div class="check-list">
                     <p class="head-text">
                         Career and Business <span style="color: #747474; font-weight: 700;"> (01)</span>
+                    </p>
+                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="15" width="15" alt="list-button" style="margin-right: 15px;">
+                </div>
+
+                <div class="show-more">
+                    <p class="head-text" style="font-weight: 700; margin-right: 10px;">
+                        SHOW MORE
                     </p>
                     <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="15" width="15" alt="list-button" style="margin-right: 15px;">
                 </div>
