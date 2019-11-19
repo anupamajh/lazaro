@@ -6,11 +6,11 @@
     <title>Community-profile</title>
     <link th:href="@{https://fonts.googleapis.com/css?family=Roboto&display=swap}" rel="stylesheet">
     <link th:href="@{/css/community.css}" rel="stylesheet">
-
     <script>
-        function viewInterestList(){
+            function viewInterestList(){
             document.getElementById("view-interest-list").classList.toggle("show");
         }
+
         function viewDropDownList(){
             console.log("entered");
             if(document.getElementById("drop-down-list").style.display === "none"){
@@ -21,14 +21,123 @@
                 document.getElementById("drop-down-btn").src="/images/extra-large-256px/Artboard 1 copy@16x.png";
             }
         }
+
         function goBack(){
             document.getElementById("profile-setup").style.display = "block";
             document.getElementById("interests-setup").style.display = "none";
         }
+
         function interestsSetup(){
             document.getElementById("profile-setup").style.display = "none";
             document.getElementById("interests-setup").style.display = "block";
         }
+
+        function uploadPicture(){
+            document.getElementById("photo-upload").style.display = "block";
+        }
+
+        function closeFrame(){
+            document.getElementById("photo-upload").style.display = "none";
+            document.getElementById("origin-frame").style.display = "none";
+            document.getElementById("upload-failed").style.display = "none";
+            document.getElementById("upload-success").style.display = "none";
+        }
+
+        function visibilityToggle(img){
+                if(img.src === "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%203@16x.png"){
+                    console.log(img.src);
+                    img.src = "/images/extra-large-256px/Artboard 1 copy 4@16x.png";
+                }
+                else{
+                    console.log(img.src);
+                    img.src = "/images/extra-large-256px/Artboard 1 copy 3@16x.png";
+                }
+         }
+
+        function originFrame(){
+            document.getElementById("origin-frame").style.display = "block";
+        }
+
+        function chooseImg(){
+           var img = document.getElementById("fileInput").click();
+           console.log("img");
+        }
+
+        function upload(){
+            document.getElementById("upload-failed").style.display = "block";
+            document.getElementById("photo-upload").style.display = "none";
+            document.getElementById("origin-frame").style.display = "none";
+            document.getElementById("upload-success").style.display = "none";
+        }
+
+        function uploadSuccess(){
+            document.getElementById("upload-failed").style.display = "none";
+            document.getElementById("photo-upload").style.display = "none";
+            document.getElementById("origin-frame").style.display = "none";
+            document.getElementById("upload-success").style.display = "block";
+        }
+
+        function myFunction(img) {
+                            if(img.src === "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%203@16x.png"){
+                             var x = document.getElementById("snackbar1");
+                             x.className = "show";
+                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                            }
+                            else{
+                             var x = document.getElementById("snackbar");
+                             x.className = "show";
+                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                            }
+        }
+        function myFunction1(img) {
+                            if(img.src === "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%203@16x.png"){
+                             var x = document.getElementById("snackbar1-mobile");
+                             x.className = "show";
+                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                            }
+                            else{
+                             var x = document.getElementById("snackbar-mobile");
+                             x.className = "show";
+                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                            }
+        }
+         function myFunctionAge(img) {
+                            if(img.src === "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%203@16x.png"){
+                             var x = document.getElementById("snackbar1-age");
+                             x.className = "show";
+                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                            }
+                            else{
+                             var x = document.getElementById("snackbar-age");
+                             x.className = "show";
+                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                            }
+        }
+         function myFunctionEmail(img) {
+                            if(img.src === "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%203@16x.png"){
+                             var x = document.getElementById("snackbar1-email");
+                             x.className = "show";
+                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                            }
+                            else{
+                             var x = document.getElementById("snackbar-email");
+                             x.className = "show";
+                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                            }
+        }
+         function myFunctionOrigin(img) {
+                            if(img.src === "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%203@16x.png"){
+                             var x = document.getElementById("snackbar1-origin");
+                             x.className = "show";
+                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                            }
+                            else{
+                             var x = document.getElementById("snackbar-origin");
+                             x.className = "show";
+                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                            }
+        }
+
     </script>
 </head>
 
@@ -47,13 +156,16 @@
             vestibulum.</p>
     </div>
 
-    <div class="photo-upload">
-        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" height="30" width="30" id="uplaod-profile-pic-close" style="float: right; margin: 10px;"><br><br>
+    <div class="photo-upload" id="photo-upload">
+        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" height="35" width="35" id="uplaod-profile-pic-close" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame()"><br><br>
         <p style="color:#32BDD2; font-family: roboto; font-size: 16px; letter-spacing: 1.6px; line-height: 2; margin: 20px 0px 10px 0px;">UPLOAD PHOTO</p>
         <div style="display: flex;">
             <div class="left-part">
                 <p style="color:#747474; font-size: 14px; font-family: roboto; line-height: 1.5;">Select a file from my computer. <br><span style="font-size: 10px;">The file size should not exceed 5MB</span></p>
-                <input type="button" class="submit-btn" value="BROWSE" style=" padding-right: 10px; padding-left: 10px; padding-top: 5px; padding-bottom: 5px; letter-spacing: 0.5px; margin-top: 15px; font-size: 10px;">
+                <div style="height:0px;overflow:hidden">
+                    <input type="file" id="fileInput" name="fileInput" accept="image/*"/>
+                </div>
+                <input type="button" class="submit-btn" id="profile-pic" value="BROWSE" onclick="chooseImg()" style=" padding-right: 10px; padding-left: 10px; padding-top: 5px; padding-bottom: 5px; letter-spacing: 0.5px; margin-top: 15px; font-size: 10px;">
             </div>
             <div class="right-part">
                 <div style="border: solid 2px #FFFFFF; border-style: dashed; padding: 8%; margin: 4%;">
@@ -62,8 +174,23 @@
                 </div>
             </div>
         </div>
-        <input type="button" class="submit-btn" value="DONE" style="padding: 1% 3% 1% 3%; margin-top: 20px;">
+        <input type="submit" class="submit-btn" value="DONE" style="padding: 1% 3% 1% 3%; margin-top: 50px;" onclick="upload()">
     </div>
+
+    <div class="photo-upload" id="upload-failed" style="width: 30%; height: 27%; left:30%;">
+        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" height="35" width="35" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame()"><br><br>
+        <p style="color:#E65959; font-family: roboto; font-weight: 700; font-size: 16px; letter-spacing: 1.6px; line-height: 1.9; margin-bottom: 20px;">FAILED</p>
+        <p style="color:#5A5A5A; font-family: roboto; font-weight: 500; font-size: 14px; letter-spacing: 0.7px; line-height: 2.4; width: 80%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
+        <input type="button" class="submit-btn" style="display: block; background-color:#E65959; margin: 3vw auto; border: 0px;" value="Done" onclick="uploadSuccess()">
+    </div>
+
+    <div class="photo-upload" id="upload-success" style="width: 30%; height: 27%; left:30%;">
+        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" height="35" width="35" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame()"><br><br>
+        <p style="color:#32BDD2; font-family: roboto; font-weight: 700; font-size: 16px; letter-spacing: 1.6px; line-height: 1.9; margin-bottom: 20px;">SUCCESS</p>
+        <p style="color:#5A5A5A; font-family: roboto; font-weight: 500; font-size: 14px; letter-spacing: 0.7px; line-height: 2.4; width: 80%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
+        <input type="button" class="submit-btn" style="display: block; margin: 3vw auto; border: 0px;" value="Done">
+    </div>
+
 
     <div class="profile-container">
         <div class="left-content">
@@ -94,6 +221,18 @@
             </div>
         </div>
 
+
+        <div class="photo-upload" id="origin-frame" style="width: 30%; left: 30%; top: 90%;">
+            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" height="35" width="35" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame()"><br><br>
+            <p style="color:#32BDD2; font-family: roboto; font-size: 16px; letter-spacing: 1.6px; line-height: 2; margin: 20px 0px 10px 0px;">YOUR PLACE OF ORIGIN</p>
+            <p style="color:#5A5A5A; font-size:14px; line-height: 2.4; font-family: roboto; margin-top: 20px; margin-bottom: 40px;">If you have a profile picture, your chances of making more friends will be higher. However you can turn on or turn off the visibility of your photo anytime.</p>
+            <div style="border: solid 1px #F7F4F4; box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.26); padding:5px; margin-right: auto: margin-left: auto; margin-bottom:40px; border-radius: 12px;">
+                <input type="text" placeholder="Ex: Hubli" style="border: 0px; padding: 10px; width: 350px; font-family:roboto; font-size: 14px; letter-spacing: 1.4px;">
+            </div>
+            <input type="button" class="submit-btn" value="DONE" style="margin-right: auto: margin-left: auto; margin-bottom:20px;" id="originInfo">
+        </div>
+
+
         <div class="right-content">
             <div class="my-profile-options" style="padding:2%;" id="profile-setup">
                 <p
@@ -102,7 +241,7 @@
                 <div
                         style="display:flex; justify-content: center; width:100%; align-items: center; flex-direction: column;">
                     <img th:src="@{/images/extra-large-256px/Artboard 1 copy 40@16x.png}" height="130" width="130"
-                         id="uplaod-profile-pic">
+                         id="upload-profile-pic" onclick="uploadPicture()">
                     <p style="color:#464646; font-family: roboto: font-weight: 500; margin-top: 15px;letter-spacing: 1.4px;">UPLOAD YOUR
                         PHOTO</p>
                 </div>
@@ -113,7 +252,7 @@
                         NAME<br>
                     </p>
                     <p
-                            style="color:#505050; font-family:roboto; font-size:16px; font-weight: 500; margin-top:10px; letter-spacing: 1.2px;">
+                            style="color:#505050; font-family:roboto; font-size:16px; font-weight: 700; margin-top:10px; letter-spacing: 1.2px;">
                         John Doe
                     </p>
                     </div>
@@ -124,13 +263,18 @@
                             GENDER<br>
                         </p>
                         <p
-                                style="color:#505050; font-family:roboto; font-size:16px; font-weight: 500; margin-top:10px; letter-spacing: 1.2px;">
+                                style="color:#505050; font-family:roboto; font-size:16px; font-weight: 700; margin-top:10px; letter-spacing: 1.2px;">
                             MALE
                         </p>
                     </div>
+                    <div id="snackbar">
+                        HIDDEN - Others can’t see your Gender and you can’t see others Gender.
+                    </div>
+                    <div id="snackbar1">
+                        Visible - Others can see your Gender and you can see others Gender.
+                    </div>
                     <div>
-                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 4@16x.png}" width="60" height="60"
-                             class="hideshow">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 4@16x.png}" width="45" height="45"  class="hideshow" onclick="visibilityToggle(this); myFunction(this)">
                     </div>
                 </div>
                 <div class="user-details">
@@ -139,13 +283,18 @@
                             AGE<br>
                         </p>
                         <p
-                                style="color:#505050; font-family:roboto; font-size:16px; font-weight: 500; margin-top:10px; letter-spacing: 1.05px;">
+                                style="color:#505050; font-family:roboto; font-size:16px; font-weight: 700; margin-top:10px; letter-spacing: 1.05px;">
                             33 years
                         </p>
                     </div>
+                    <div id="snackbar-age">
+                        HIDDEN - Others can’t see your Age and you can’t see others Age.
+                    </div>
+                    <div id="snackbar1-age">
+                        Visible - Others can see your Age and you can see others Age.
+                    </div>
                     <div>
-                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 3@16x.png}" width="60" height="60"
-                             class="hideshow">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 3@16x.png}" width="45" height="45" class="hideshow" onclick="visibilityToggle(this); myFunctionAge(this)">
                     </div>
                 </div>
                 <div class="user-details">
@@ -154,13 +303,19 @@
                             MOBILE NUMBER<br>
                         </p>
                         <p
-                                style="color:#505050; font-family:roboto; font-size:16px; font-weight: 500; margin-top:10px; letter-spacing: 1.2px;">
+                                style="color:#505050; font-family:roboto; font-size:16px; font-weight: 700; margin-top:10px; letter-spacing: 1.2px;">
                             9090909090
                         </p>
                     </div>
+                    <div id="snackbar-mobile">
+                        HIDDEN - Others can’t see your Mobile Number and you can’t see others Mobile Number.
+                    </div>
+                    <div id="snackbar1-mobile">
+                        Visible - Others can see your Mobile Number and you can see others Mobile Number.
+                    </div>
                     <div>
-                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 4@16x.png}" width="60" height="60"
-                             class="hideshow">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 4@16x.png}" width="45" height="45"
+                             class="hideshow" onclick="visibilityToggle(this); myFunction1(this)">
                     </div>
                 </div>
                 <div class="user-details">
@@ -169,14 +324,21 @@
                             EMAIL<br>
                         </p>
                         <p
-                                style="color:#505050; font-family:roboto; font-size:16px; font-weight: 500; margin-top:10px; letter-spacing: 1.05px;">
+                                style="color:#505050; font-family:roboto; font-size:16px; font-weight: 700; margin-top:10px; letter-spacing: 1.05px;">
                             johndoe@gmail.com
 
                         </p>
                     </div>
+                    <div id="snackbar-email">
+                        HIDDEN - Others can’t see your Email and you can’t see others Email.
+                    </div>
+                    <div id="snackbar1-email">
+                        Visible - Others can see your Email and you can see others Email.
+                    </div>
+
                     <div>
-                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 3@16x.png}" width="60" height="60"
-                             class="hideshow">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 3@16x.png}" width="45" height="45"
+                             class="hideshow" onclick="visibilityToggle(this); myFunctionEmail(this)">
                     </div>
                 </div>
                 <div class="user-details">
@@ -184,12 +346,20 @@
                         <p style="color:#747474; font-size:16px; font-family:roboto; font-weight: 400; margin-bottom: 10px; letter-spacing: 1.05px;">
                             YOUR PLACE OF ORIGIN<br>
                         </p>
-                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 5@16x.png}" width="20" height="20"
-                             id="place-origin">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 5@16x.png}" width="25" height="25"
+                             id="place-origin" onclick="originFrame()" style="cursor: pointer;">
                     </div>
+
+                    <div id="snackbar-origin">
+                        HIDDEN - Others can’t see your Origin and you can’t see others Origin.
+                    </div>
+                    <div id="snackbar1-origin">
+                        Visible - Others can see your Origin and you can see others Origin.
+                    </div>
+
                     <div>
-                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 4@16x.png}" width="60" height="60"
-                             class="hideshow">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 4@16x.png}" width="45" height="45"
+                             class="hideshow" onclick="visibilityToggle(this); myFunctionOrigin(this)">
                     </div>
                 </div>
                 <div>
@@ -220,7 +390,7 @@
                             <p style="color: #909090; font-family: roboto; font-size: 12px; letter-spacing: 0.3px; line-height: 1;">Add interests to enhance your GuestJini experience.</p>
                         </div>
                         </div>
-                    <span style="color:#32BDD2; font-family:robot; font-size: 12px; letter-spacing:0.3px; line-height:1;" id="my-Interest-List" onclick="viewInterestList()"><u>View My Interests</u></span>
+                    <span style="cursor: pointer; color:#32BDD2; font-family:robot; font-size: 12px; letter-spacing:0.3px; line-height:1;" id="my-Interest-List" onclick="viewInterestList()"><u>View My Interests</u></span>
                 </div>
 
                 <div class="view-interest-list" id="view-interest-list">
@@ -337,5 +507,6 @@
     </div>
 </div>
 </body>
+<script th:href="@{/js/community-profile.js}" type="text/javascript"></script>
 
 </html>
