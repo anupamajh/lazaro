@@ -5,24 +5,29 @@
     <title>Account-Landing</title>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/LoginPage.css}">
     <link th:href="@{https://fonts.googleapis.com/css?family=Roboto&display=swap}" rel="stylesheet">
+    <script>
+        function myFunction() {
+            document.getElementById("fieldError1").style.display = "block";
+            document.getElementById("fieldError2").style.display = "block";
+            document.getElementById("inputErr").style.border = "1px solid #BF574A";
+            document.getElementById("pswdErr").style.border = "1px solid #BF574A";
+            document.getElementById("eye-icon").style.bottom = "44%";
+        }
+        function myFunction1() {
+            document.getElementById("eye-icon").style.display = "none";
+            document.getElementById("eye-pswd").style.display = "block";
+            document.getElementById("eye-icon").style.bottom = "47%";
+        }
+        function myFunction2() {
+            document.getElementById("eye-icon").style.display = "block";
+            document.getElementById("eye-pswd").style.display = "none";
+            document.getElementById("eye-icon").style.bottom = "36%";
 
-<!--    <script>-->
-<!--        function myFunction() {-->
+        }
+        function type() {
 
-<!--            document.getElementById("fieldError1").style.display="block";-->
-<!--            document.getElementById("fieldError2").style.display="block";-->
-<!--            document.getElementById("inputErr").style.border="1px solid #BF574A";-->
-<!--             document.getElementById("pswdErr").style.border="1px solid #BF574A";-->
-<!--&lt;!&ndash;            document.getElementById("eye").style.display="none";&ndash;&gt;-->
-
-
-
-<!--        function type()-->
-<!--        {-->
-
-<!--        }-->
-<!--    </script>-->
-
+        }
+    </script>
 
 
 </head>
@@ -39,7 +44,7 @@
                 <p class="para-lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </br>Donec dignissim felis et magna mattis finibus. </p>
             </div>
             <div class="error">
-                <p class="invalid">Invalid login credentials</p>
+                <p class="invalid">Invalid credentials</p>
             </div>
             <div class="move">
                 <span class="register">REGISTERED EMAIL</span>
@@ -50,6 +55,10 @@
             <div class="password">
                 <span class="register">REGISTERED PHONE NUMBER</span>
                 <input class="box" type="password" name="un" placeholder="98445 54783" size="48" border-radius="5px;" id="pswdErr">
+                <img class="image-eye-landing" id="eye-icon" th:src="@{/images/EyeIcon.png}" alt="" width="24px"
+                     height="24px" onclick="myFunction1()">
+                <img class="image1-landing" th:src="@{/images/EyeIconblue.png}" alt="" width="24px" height="24px"
+                     onclick="myFunction2()" style="display:none" id="eye-pswd">
                 <p class="field">This field is required</p>
 
             </div>
@@ -62,7 +71,6 @@
                     }
                 </script>
         </div>
-
     </div>
 </div>
 </body>

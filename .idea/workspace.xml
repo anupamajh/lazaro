@@ -2,32 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="288721bf-d866-40d6-b195-b4411b63f89f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/AccountLanding.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/AppError.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/AppValidation.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/ForgotPassword.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/LoginMandatory.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/LoginPage.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/LoginValidation.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/OTPforgotpassword.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/OTPverification.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/PasswordError.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/PasswordSuccess.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/PasswordValidation.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/passwordUnmask.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/images/EyeIcon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/images/EyeIconblue.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/AccountLanding.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/AppRequestError.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/AppSuccess.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/AppValidation.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/ForgotPasswordError.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/NumberValidation.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/OTPVerification.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/OTPforgotpassword.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/OTPsuccess.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/PasswordUnmask.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/home/PasswordValidation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/PeopleList.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/community/people-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/LoginPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/LoginPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/community.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/community.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/guest-jini.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/shared/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/shared/dashboard.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +20,7 @@
   </component>
   <component name="ProjectId" id="1Tdk8tvXhlIVRZxCVeRsdQ5LCLn" />
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/web" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -72,7 +52,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

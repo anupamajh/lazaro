@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>People-list</title>
+    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto&display=swap}" rel="stylesheet">
+    <link th:href="@{/css/PeopleList.css}" rel="stylesheet">
+</head>
+
+<body>
+<header style="min-height: 6vh;">
+    <div th:replace="shared/dashboard :: dashboard">
+    </div>
+</header>
+<div class="content">
+    <div class="community-desc">
+        <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">COMMUNITY</span>
+        <p style="color:#707070; font-family:roboto; font-size:12px; width:50%; margin-top: 15px; letter-spacing: 0.6px;  line-height: 2;">Lorem ipsum dolor
+            sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo
+            vestibulum.</p>
+    </div>
+
+    <div class="profile-container">
+        <div class="left-content">
+            <div class="my-profile" style="width:91%;">
+                    <span
+                            style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">MYPROFILE</span>
+                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Based on
+                    your profile, you will be able to connect with the best matches who share your interests. Go
+                    ahead and setup your profile.</p>
+            </div>
+            <div class="people" style="border-bottom: solid 1px #CCCCCC;">
+                    <span
+                            style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                <span
+                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px; letter-spacing: 1.4px;">PEOPLE</span>
+                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Meet the
+                    community members and make new friends.</p>
+            </div>
+            <div class="my-profile">
+                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                <span
+                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px;letter-spacing: 1.4px;">GROUPS</span>
+                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Meet the
+                    community members and make new friends.</p>
+            </div>
+        </div>
+
+        <div class="right-content">
+            <div class="my-profile-options" >
+                <p style="display:block; color:#464646; font-style:Roboto medium; font-size:16px; font-weight:700; letter-spacing: 1.4px; margin-bottom: -26px; margin-top: 8px;">PEOPLE</p>
+
+                    <img class="burger-menu" th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" height="32px" width="33px"
+                         id="uplaod-profile-pic">
+                </div>
+                <div class="user-details">
+                    <div>
+                        <input class="box" type="text" name="un" placeholder="Search" size="48">
+                        <div class="name1">
+                            <img th:src="@{/images/profile-pic.jpg}" height="35" width="35" style="border-radius: 50%; ">
+                        <span style="color:#505050; font-family:roboto; font-size:16px; font-weight: 500; margin-top:10px; letter-spacing: 1.2px;">
+                            John Doe
+                        </span>
+                            <span style="background-color:#E65959; padding: 5px; border-radius: 50%; margin-bottom: 15px; margin-left: 10px;
+height: 8px;
+  width: 8px;
+
+  display: inline-block;"></span>
+                            <p>Male</p>
+                    </div>
+                </div>
+
+            <div class="my-profile-options" style="padding:2%;">
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+
+</html>
