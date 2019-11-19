@@ -35,5 +35,14 @@ public class HomeController {
 
     @RequestMapping(value = "community/people-list")
     public String peopleList(){ return "community/people-list";}
+
+    @RequestMapping(value = "community/people-search")
+    public String peopleSearch(){ return "community/people-search";}
+
+    @RequestMapping(value = "community/people-details")
+    public String peopleDetails(){ return "community/people-details";}
+
+
+
 }
 
