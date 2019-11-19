@@ -18,6 +18,7 @@
         function myFunction1() {
             document.getElementById("eye-icon").style.display = "none";
             document.getElementById("eye-pswd").style.display = "block";
+            document.getElementById("eye-pswd").style.bottom = "44%";
             document.getElementById("eye-icon").style.bottom = "47%";
         }
         function type() {
@@ -79,7 +80,7 @@
             </div>
             <div class="create-account">
                 <p style="color: #747474;">Don’t have an account yet?
-                    <a style="color: #32BDD2" href="#" onclick="loginFunction4()">Get one now.</a></p>
+                    <a class="get-one" style="color: #32BDD2" href="#" onclick="loginFunction4()">Get one now.</a></p>
                 <script>
                         function loginFunction4() {
                             window.location = src = "/AccountLanding";
