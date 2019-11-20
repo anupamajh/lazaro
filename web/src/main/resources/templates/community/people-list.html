@@ -67,6 +67,7 @@
         </div>
 
         <div class="right-content">
+            <div class="right">
             <div class="my-profile-options" style="padding:2%;">
 
                 <p style="display:block; color:#464646; font-family:roboto; width:59px;font-size:16px; font-weight:700; margin-bottom: 20px; letter-spacing: 1.4px;">
@@ -76,50 +77,54 @@
                 <div id="myDropdown" class="dropdown-content">
                     <a class="clear" href="#home">CLEAR</a>
                     <a style="color: #B5B5B5;" href="#about">Favourites</a>
-
                 </div>
-             </p>
-
             </div>
             </div>
             <div style="display:flex; justify-content: center; width:100%; align-items: center; flex-direction: column;">
-                <div>
+                <div style="margin-left:74%; margin-top:5%;">
                     <input onclick="loginFunction1()" class="box" type="text" name="un" placeholder="Search" size="48">
                     <script>
                         function loginFunction1() {
                             window.location = src = "/community/people-search";
                         }
                     </script>
-                     <p style="color:#464646; font-size:12px; margin-left: 77%; font-weight:550;"><b>2 Matches found.</b></p>
+                     <p style="color:#464646; font-size:12px; margin-left: 88%; font-weight:550;"><b>2 Matches found.</b></p>
                 </div>
-
             </div>
+
             <div class="user-details">
                 <div class="names">
-
                     <img th:src="@{/images/profile-pic.jpg}" height="35" width="35" style="border-radius: 50%; ">
-                    <p style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px; margin-left: 3%; width:78px;">
+                    <p onclick="loginFunction2()" style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px; margin-left: 12%; width:78px;">
                         John Doe <br> Male
                     </p>
+                    <script>
+                        function loginFunction2() {
+                            window.location = src = "/community/people-details";
+                        }
+                    </script>
                     <span style="background-color:#E65959; padding: 5px; border-radius: 50%; margin-bottom: 15px; margin-left: 10px;"></span>
                 </div>
             </div>
             <div class="blue">
-                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 35@16x.png}" height="28" width="28" style="border-radius: 50%; ">
+                <img  th:src="@{/images/extra-large-256px/Artboard 1 copy 35@16x.png}" height="28" width="28" style="border-radius: 50%; ">
+
                 <span
                         style="background-color:#32BDD2; padding: 1.6px; font-size:1px; width:23%; line-height:6px;"><br></span>
-                <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">Common
+
+                <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px; ">Common
                         Interests</span>
                 <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">12/12</span>
+
+                </div>
+                <div style="width:812px; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
             </div>
-
-
 
             <div class="user-details">
                 <div class="names">
 
                     <img th:src="@{/images/profile-pic.jpg}" height="35" width="35" style="border-radius: 50%; ">
-                    <p style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px;margin-left: 3%;width:78px;">
+                    <p style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px;margin-left: 12%; width:90px;">
                         Peter Law <br> Male
                     </p>
                     <!-- <span style="background-color:#E65959; padding: 5px; border-radius: 50%; margin-bottom: 15px; margin-left: 10px;"> -->
@@ -131,6 +136,8 @@
                 <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">Common
                         Interests</span>
                 <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">8/12</span>
+            </div>
+                <div style="width:812px; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
 
             </div>
 
@@ -139,7 +146,7 @@
             <div class="user-details">
                 <div class="names">
                     <img th:src="@{/images/profile-pic.jpg}" height="35" width="35" style="border-radius: 50%; margin-left: 3%">
-                    <p style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px;width:78px;">
+                    <p style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px;margin-left: 12%; width:90px;">
                         Luke Ray<br> Male
                     </p>
                     <!-- <span style="background-color:#E65959; padding: 5px; border-radius: 50%; margin-bottom: 15px; margin-left: 10px;"> -->
@@ -152,13 +159,15 @@
                         Interests</span>
                 <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">5/12</span>
             </div>
+                <div style="width:812px; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
+            </div>
 
 
 
             <div class="user-details">
                 <div class="names">
                     <img th:src="@{/images/profile-pic.jpg}" height="35" width="35" style="border-radius: 50%; ">
-                    <p style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px;margin-left: 3%">
+                    <p style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px;margin-left: 12%; width:120px;">
                         Daisy Lake <br> Female
                     </p>
                     <!-- <span style="background-color:#E65959; padding: 5px; border-radius: 50%; margin-bottom: 15px; margin-left: 10px;"> -->
@@ -171,6 +180,8 @@
                         Interests</span>
                 <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">2/12</span>
             </div>
+                <div style="width:812px; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
+            </div>
 
 
 
@@ -178,7 +189,7 @@
             <div class="user-details">
                 <div class="names">
                     <img th:src="@{/images/profile-pic.jpg}" height="35" width="35" style="border-radius: 50%; ">
-                    <p style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px;margin-left: 3%;width:87px;">
+                    <p style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px;margin-left: 12%; width:120px;">
                         Jeret Quartz<br>Female
                     </p>
                     <!-- <span style="background-color:#E65959; padding: 5px; border-radius: 50%; margin-bottom: 15px; margin-left: 10px;"> -->
@@ -191,6 +202,8 @@
                         Interests</span>
                 <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">1/12</span>
             </div>
+                <div style="width:812px; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
+            </div>
 
 
 
@@ -198,7 +211,7 @@
             <div class="user-details">
                 <div class="names">
                     <img th:src="@{/images/profile-pic.jpg}" height="35" width="35" style="border-radius: 50%; ">
-                    <p style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px;margin-left: 3%;width:81px;">
+                    <p style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px;margin-left: 12%; width:120px;">
                         Dan Quartz <br> Male
                     </p>
                     <!-- <span style="background-color:#E65959; padding: 5px; border-radius: 50%; margin-bottom: 15px; margin-left: 10px;"> -->
@@ -212,12 +225,14 @@
                 <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">0/12</span>
             </div>
 
+            </div>
+
             <div class="show-more">
                 <p class="more">SHOW MORE
                 <img  class="drop-icon" th:src="@{/images/medium-48px/Artboard 1 copyxxhdpi.png}" height="15" width="15"/></p>
             </div>
 
-
+            </div>
         </div>
 
     </div>

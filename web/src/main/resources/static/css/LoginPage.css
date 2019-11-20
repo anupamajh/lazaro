@@ -33,6 +33,7 @@ background-color: #FFFFFF;
     font-style: Roboto;
     padding-top: 5%;
     padding: 7%;
+    margin-left:7%;
     letter-spacing: 0.35px;
 }
 .para-lorem {
@@ -219,7 +220,7 @@ button {
     margin-top: 2%;
 }
 .image-logo {
-    margin-left: 21%;
+    margin-left: 24%;
 }
 .image-eye {
     display: inline;

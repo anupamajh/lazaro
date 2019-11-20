@@ -24,17 +24,26 @@
         }
 
         .left-content {
-            background-color: #EEEEEE;
+            background-color: #FFFFFF;
             width: 45%;
-            border-right: solid 1px #CCCCCC;
+            height: 1167px
+            border-right: solid 1px #FFFFFF;
         }
 
         .right-content {
             background-color: #FFFFFF;
             padding: 2%;
-            width: 55%;
+            width: 60%;
         }
-
+        .right-content-details {
+        height: 1640px;
+                    background-color: #FFFFFF;
+                    padding: 2%;
+                    width: 60%;
+                }
+.right{
+ width: 55%;
+}
         .my-profile {
             padding: 5%;
             box-shadow: 0px 0px 20px #CCCCCC;
@@ -67,7 +76,7 @@
             align-items: center;
             margin-top: 28px;
             width: 447px;
-            margin-left: 7%;
+            margin-left: 17%;
             padding-bottom: 20px;
         }
 
@@ -75,30 +84,34 @@
             margin-bottom: 2%;
             padding-left: 20px;
             border: 1px solid #CCCCCC;
-            height: 32px;
+            height: 39px;
             font: Regular 12px Roboto;
-            width: 506px;
+            width:875px;
             color: #909090;
             display: inline;
-            border-radius: 16px;
+            border-radius:25px;
         }
 
         .blue {
             display: flex;
             align-items: flex-start;
             justify-content: space-around;
-            width: 551px;
+            width: 447px;
+            margin-left: 15%;
             padding-bottom: 5%;
-            border-bottom: solid 0.5px #CCCCCC;
+
         }
 
         .blue1 {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-around;
-            width: 551px;
-            padding-bottom: 5%;
-        }
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: space-around;
+                    width: 447px;
+                    margin-left: 15%;
+                    padding-bottom: 5%;
+
+                }
+
 
         .names {
             display: flex;
@@ -121,10 +134,10 @@
         }
 
         .show-more {
-            width: 447px;
+            width:775px;
             height: 48px;
-            margin-top: 8%;
-            margin-left: 5%;
+            margin-top: 3%;
+            margin-left: 9%;
             border: 1px solid #EEEEEE;
             background-color: #EEEEEE;
         }
@@ -139,19 +152,8 @@
             font-weight: 600;
         }
 
-        .interest {
-            background-color: #32BDD2;
-            padding: 5.6px;
-            font-size: 1px;
-            width: 15%;
-        }
-
-        .common-interests {
-            color: #747474;
-            font-family: roboto;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing 0.6px;
+        .interests {
+           margin-top:5%;
         }
 
         .dropbtn {
@@ -160,14 +162,27 @@
             font-size: 16px;
             border: none;
             margin-top: -18%;
-            margin-left: 86%;
+            margin-left: 168%;
             cursor: pointer;
         }
+         .dropbtn1 {
+                    background-color: #3498DB;
+                    color: white;
+                    font-size: 16px;
+                    border: none;
+                    margin-top: -12%;
+                    margin-left:94%;
+                    cursor: pointer;
+                }
 
         .dropbtn:hover,
         .dropbtn:focus {
             background-color: #2980B9;
         }
+        .dropbtn1:hover,
+                .dropbtn:focus {
+                    background-color: #2980B9;
+                }
 
         .dropdown {
             position: relative;
@@ -214,8 +229,8 @@ margin-left:2%;
         }
 
         .search-icon{
-        margin-top: 32%;
-            margin-left: 30%;
+        margin-top: 18%;
+            margin-left: 42%;
         }
         .result{
         color:#747474;
@@ -224,14 +239,18 @@ margin-left:2%;
         letter-spacing:0.7px;
         }
         .like{
-        width:410px;
-        height:132px;
-        display:inline;
-        background-color:#EEEEEE;
-        border:1px solid #CCCCCC;
-        }
+        width: 165%;
+            height: 170px;
+            margin-top: 6%;
+            display: flex;
+            margin-left: 12%;
+            align-items: center;
+            jus-content: space-between;
+            background-color: #EEEEEE;
+            border: 1px solid #CCCCCC;
+            }
         .like-blue{
-        width:132px;
-        height:133px;
+        width: 251px;
+            height: 170px;
         background-color:#32BDD2;
         }
