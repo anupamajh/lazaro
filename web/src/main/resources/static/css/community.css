@@ -509,6 +509,9 @@ body{
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+.groups-list{
+    display: none;
+}
 .groups{
     padding: 10% 23%;
 }
