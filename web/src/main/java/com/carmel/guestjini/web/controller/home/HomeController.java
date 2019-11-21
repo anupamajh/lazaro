@@ -36,6 +36,9 @@ public class HomeController {
     @RequestMapping(value = "community/community-profile")
     public String communityProfile(){ return "community/community-profile";}
 
+    @RequestMapping(value = "community/community-groups")
+    public String communityGroups(){ return "community/community-groups";}
+
     @RequestMapping(value = "community/people-list")
     public String peopleList(){ return "community/people-list";}
 
