@@ -22,10 +22,8 @@
             document.getElementById("eye-icon").style.bottom = "47%";
         }
         function type() {
-
         }
     </script>
-
 </head>
 
 <body>
@@ -52,13 +50,12 @@
 
             <div class="password">
 
-                <input class="box" type="password" name="un" placeholder="Password" size="48" border-radius="5px;"
-                       id="pswdErr">
+                <input class="box" type="password" name="un" placeholder="Password" size="48" border-radius="5px;" id="pswdErr">
 
-                <img class="image-eye" id="eye-icon" th:src="@{/images/EyeIcon.png}" alt="" width="24px"
-                     height="24px" onclick="myFunction1()">
-                <img class="image1" th:src="@{/images/EyeIconblue.png}" alt="" width="24px" height="24px"
-                     onclick="loginFunction2()" style="display:none" id="eye-pswd">
+                <img class="image-eye" id="eye-icon" th:src="@{/images/EyeIcon.png}" alt="" width="24px" height="24px" onclick="myFunction1()">
+                <img class="image1" th:src="@{/images/EyeIconblue.png}" alt="" width="24px" height="24px" onclick="loginFunction2()" style="display:none" id="eye-pswd">
+
+
                 <p class="field" id="fieldError2" style="display:none">This field is required</p>
                 <script>
                         function loginFunction1() {

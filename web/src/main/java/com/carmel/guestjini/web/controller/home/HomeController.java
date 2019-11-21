@@ -42,7 +42,11 @@ public class HomeController {
     @RequestMapping(value = "community/people-details")
     public String peopleDetails(){ return "community/people-details";}
 
+    @RequestMapping(value = "community/people-no-details")
+    public String peopleNoDetails(){ return "community/people-no-details";}
 
+    @RequestMapping(value = "community/people-filter")
+    public String peopleFilter(){ return "community/people-filter";}
 
 }
 

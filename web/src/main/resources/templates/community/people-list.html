@@ -7,9 +7,7 @@
     <link th:href="@{https://fonts.googleapis.com/css?family=Roboto&display=swap}" rel="stylesheet">
     <link th:href="@{/css/PeopleList.css}" rel="stylesheet">
 
-
     <script>
-
         function myFunction() {
             document.getElementById("myDropdown").classList.toggle("show");
         }
@@ -27,7 +25,19 @@
                 }
             }
         }
+         function myFunction1() {
+            document.getElementById("press-like").style.display = "none";
+            document.getElementById("press-unlike").style.display = "block";
+
+        }
+
+         function unliking() {
+            document.getElementById("press-like").style.display = "block";
+            document.getElementById("press-unlike").style.display = "none";
+
+        }
     </script>
+
 </head>
 
 <body>
@@ -37,8 +47,8 @@
 </header>
 <div class="content">
     <div class="community-desc">
-        <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">COMMUNITY</span>
-        <p style="color:#707070; font-family:roboto; font-size:12px; width:50%; margin-top: 15px; letter-spacing: 0.6px;  line-height: 2;">
+        <span style="color:#464646; font-family:roboto; font-size:18px; font-weight:700; letter-spacing: 1.4px;">COMMUNITY</span>
+        <p style="color:#707070; font-family:roboto; font-size:17px; width:50%; margin-top: 15px; letter-spacing: 0.6px;  line-height: 2;">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo vestibulum.
         </p>
     </div>
@@ -47,21 +57,21 @@
         <div class="left-content">
             <div class="people" style="width:91%;">
                 <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;"><b>MY PROFILE</b> </span>
-                <p style="color:#747474; font-family:roboto; font-size:12px; width:95%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
+                <span style="color:#464646; font-family:roboto; font-size:18px; font-weight:700; letter-spacing: 1.4px;"><b>MY PROFILE</b> </span>
+                <p style="color:#747474; font-family:roboto; font-size:17px; width:95%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
                     Based on your profile, you will be able to connect</br> with the best matches who share your interests.
                     </br> Go ahead and setup your profile.</p>
             </div>
             <div class="my-profile" style="border-bottom: solid 1px #CCCCCC;">
                 <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px; letter-spacing: 1.4px;"><b>PEOPLE</b> </span>
-                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
+                <span style="color:#464646; font-family:roboto; font-size:18px; font-weight:700; margin-top: 10px; letter-spacing: 1.4px;"><b>PEOPLE</b> </span>
+                <p style="color:#747474; font-family:roboto; font-size:17px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
                     Meet the community members and make new friends.</p>
             </div>
             <div class="people">
                 <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px;letter-spacing: 1.4px;"><b>GROUPS</b></span>
-                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
+                <span style="color:#464646; font-family:roboto; font-size:18px; font-weight:700; margin-top: 10px;letter-spacing: 1.4px;"><b>GROUPS</b></span>
+                <p style="color:#747474; font-family:roboto; font-size:17px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
                     Meet the community members and make new friends.</p>
             </div>
         </div>
@@ -69,34 +79,44 @@
         <div class="right-content">
             <div class="right">
             <div class="my-profile-options" style="padding:2%;">
-
-                <p style="display:block; color:#464646; font-family:roboto; width:59px;font-size:16px; font-weight:700; margin-bottom: 20px; letter-spacing: 1.4px;">
+                <p style="display:block; color:#464646; font-family:roboto; width:59px;font-size:18px; font-weight:700; margin-bottom: 20px; letter-spacing: 1.4px;">
                     PEOPLE<br><br>
                 <div class="burger">
                     <img  onclick="myFunction()" class="dropbtn"  th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" height="32px" width="33px" id="uplaod-profile-pic">
                 <div id="myDropdown" class="dropdown-content">
-                    <a class="clear" href="#home">CLEAR</a>
-                    <a style="color: #B5B5B5;" href="#about">Favourites</a>
-                </div>
-            </div>
-            </div>
-            <div style="display:flex; justify-content: center; width:100%; align-items: center; flex-direction: column;">
-                <div style="margin-left:74%; margin-top:5%;">
-                    <input onclick="loginFunction1()" class="box" type="text" name="un" placeholder="Search" size="48">
+                    <a style="color:#909090;" href="#home">CLEAR</a>
+                    <a  onclick="fav()" style="color:#464646;" href="#about">Favourites</a>
                     <script>
-                        function loginFunction1() {
-                            window.location = src = "/community/people-search";
-                        }
-                    </script>
-                     <p style="color:#464646; font-size:12px; margin-left: 88%; font-weight:550;"><b>2 Matches found.</b></p>
+                      function fav() {
+                        window.location = src = "/community/people-filter";                    }
+                </script>
                 </div>
             </div>
+            </div>
+
+                <div style="display:flex; justify-content:space-between; width:172%; align-items: center;border: 1px solid #CCCCCC;border-radius:25px;margin-top: 4%;">
+                    <div style="width:50%;margin-right:379px;">
+                        <input onclick="loginFunction1()" class="box1" type="text" name="un" placeholder="Search..." size="48">
+                        <script>
+                      function loginFunction1() {
+                        window.location = src = "/community/people-search";                    }
+                </script>
+                    </div>
+                    <div style="width:50%;float:left;">
+                        <img class="all-scroll" style="margin-left:64%;" th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" height="27" width="25" onclick="loginFunction1()" >
+                        <script>
+                      function loginFunction1() {
+                        window.location = src = "/community/people-search";                    }
+                </script>
+                    </div>
+                </div>
+                <p style="color:#464646; font-size:12px; margin-left: 145%; font-weight:550;width: 100px;"><b>2 Matches found.</b></p>
 
             <div class="user-details">
                 <div class="names">
                     <img th:src="@{/images/profile-pic.jpg}" height="35" width="35" style="border-radius: 50%; ">
-                    <p onclick="loginFunction2()" style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px; margin-left: 12%; width:78px;">
-                        John Doe <br> Male
+                    <p class="all-scroll" onclick="loginFunction2()" style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px; margin-left: 12%; width:78px;">
+                        John Doe <br>Male
                     </p>
                     <script>
                         function loginFunction2() {
@@ -107,15 +127,13 @@
                 </div>
             </div>
             <div class="blue">
-                <img  th:src="@{/images/extra-large-256px/Artboard 1 copy 35@16x.png}" height="28" width="28" style="border-radius: 50%; ">
-
+                <img class="all-scroll" id="press-like" th:src="@{/images/extra-large-256px/Artboard 1 copy 35@16x.png}" height="28" width="28" onclick="myFunction1()" style="border-radius: 50%; ">
+                <img class="unlikee" id="press-unlike" th:src="@{/images/extra-large-256px/Artboard 1 copy 36@16x.png}" height="28" width="28" onclick="unliking()" style="border-radius: 50%; display:none;">
                 <span
                         style="background-color:#32BDD2; padding: 1.6px; font-size:1px; width:23%; line-height:6px;"><br></span>
-
                 <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px; ">Common
                         Interests</span>
                 <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">12/12</span>
-
                 </div>
                 <div style="width:812px; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
             </div>
@@ -127,7 +145,6 @@
                     <p style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px;margin-left: 12%; width:90px;">
                         Peter Law <br> Male
                     </p>
-                    <!-- <span style="background-color:#E65959; padding: 5px; border-radius: 50%; margin-bottom: 15px; margin-left: 10px;"> -->
                 </div>
             </div>
             <div class="blue">
@@ -138,10 +155,7 @@
                 <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">8/12</span>
             </div>
                 <div style="width:812px; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
-
             </div>
-
-
 
             <div class="user-details">
                 <div class="names">
@@ -149,7 +163,6 @@
                     <p style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px;margin-left: 12%; width:90px;">
                         Luke Ray<br> Male
                     </p>
-                    <!-- <span style="background-color:#E65959; padding: 5px; border-radius: 50%; margin-bottom: 15px; margin-left: 10px;"> -->
                 </div>
             </div>
             <div class="blue">
@@ -162,15 +175,12 @@
                 <div style="width:812px; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
             </div>
 
-
-
             <div class="user-details">
                 <div class="names">
                     <img th:src="@{/images/profile-pic.jpg}" height="35" width="35" style="border-radius: 50%; ">
                     <p style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px;margin-left: 12%; width:120px;">
                         Daisy Lake <br> Female
                     </p>
-                    <!-- <span style="background-color:#E65959; padding: 5px; border-radius: 50%; margin-bottom: 15px; margin-left: 10px;"> -->
                 </div>
             </div>
             <div class="blue">
@@ -183,16 +193,12 @@
                 <div style="width:812px; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
             </div>
 
-
-
-
             <div class="user-details">
                 <div class="names">
                     <img th:src="@{/images/profile-pic.jpg}" height="35" width="35" style="border-radius: 50%; ">
                     <p style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px;margin-left: 12%; width:120px;">
                         Jeret Quartz<br>Female
                     </p>
-                    <!-- <span style="background-color:#E65959; padding: 5px; border-radius: 50%; margin-bottom: 15px; margin-left: 10px;"> -->
                 </div>
             </div>
             <div class="blue">
@@ -204,9 +210,6 @@
             </div>
                 <div style="width:812px; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
             </div>
-
-
-
 
             <div class="user-details">
                 <div class="names">
@@ -224,19 +227,15 @@
                         Interests</span>
                 <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">0/12</span>
             </div>
-
             </div>
 
             <div class="show-more">
                 <p class="more">SHOW MORE
-                <img  class="drop-icon" th:src="@{/images/medium-48px/Artboard 1 copyxxhdpi.png}" height="15" width="15"/></p>
+                <img  class="drop-icon" th:src="@{/images/medium-48px/Artboard 1 copyxxhdpi.png}" height="17" width="17"/></p>
             </div>
-
             </div>
         </div>
-
     </div>
 </div>
 </body>
-
 </html>
