@@ -66,13 +66,14 @@
             </div>
         </div>
 
-        <div class="right-content">
+        <div class="right-content-details">
+            <div class="right">
             <div class="my-profile-options" style="padding:2%;" id="profile-setup">
                 <p
                         style="display:block; color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-bottom: 20px; letter-spacing: 1.4px;">
                     MY PROFILE<br><br></p>
                 <div
-                        style="display:flex; justify-content: center; width:100%; align-items: center; flex-direction: column;">
+                        style="display:flex; justify-content: center; width:100%; align-items: center; flex-direction: column; margin-left: 40%;">
                     <img th:src="@{/images/profile-pic.jpg}" height="54" width="54" style="border-radius: 50%;">
                     <p style="color:#464646; font-family: roboto: font-weight: 500; margin-top: 15px;letter-spacing: 1.4px;">John Doe</p>
                     <p style="color:#909090;">Male</p>
@@ -80,15 +81,55 @@
                  <div class="like">
                     <div class="like-blue">
                     <img th:src="@{/images/extra-large-256px/Artboard 1 copy 35@16x.png}" height="54" width="54" style="border-radius: 50%;margin-left: 21%">
-                        <p style="color:#FFFFFF; margin-left: 21%;">Add to </br>favourites</p>
+                        <p style="color:#FFFFFF; margin-left: 21%;font-weight:600;">Add to </br>favourites</p>
                     </div>
-                    <p style="color:#747474" >MOBILE</p>
-                    <p style="color:#505050">9090909090</p>
-
-                    <p style="color:#747474">EMAIL</p>
-                    <p style="color:#505050">johndoe@gmail.com</p>
+                     <div style="margin-left:8%;">
+                    <p style="color:#747474; letter-spacing:0.6px" >MOBILE</p>
+                    <p style="color:#505050; font-weight:600;letter-spacing:0.7px;">9090909090</p>
+                           &nbsp;
+                    <p style="color:#747474;letter-spacing:0.6px">EMAIL</p>
+                    <p style="color:#505050;font-weight:600;letter-spacing:0.7px;">johndoe@gmail.com</p>
+                     </div>
                 </div>
 
+
+                <div style="color:#FFFFFF; border:0.5px solid #32BDD2; width: 165%; height: 535.6px;margin-top: 6%;margin-left: 12%;">
+                    <div style="background-color:#32BDD2; width:421px; height:37px; border:0.5px solid #32BDD2;width: 847px;height:65px">
+                        <p style="color:#FFFFFF; font-size:16px; letter-spacing:1.05px;padding: 3%;font-weight:1000;font-style:Roboto;">Common Interests</p>
+                        <div style="border-bottom:0.5px solid #CCCCCC;margin-left: 6%;">
+                            <p style="color:#32BDD2; font-size:12px; padding: 5%;letter-spacing: 1.2px;font-weight: 1000;">OUTDOOR ADVENTURES</p>
+                            <p style="color:#909090; font-size:12px; letter-spacing:0.6px;margin-left: 3%;font-weight: 600;padding: 2%;">Cycling</p>
+                        </div>
+
+                        <div style="border-bottom:0.5px solid #CCCCCC;margin-left: 6%;padding: 2%;">
+                            <p style="color:#909090; font-size:12px; letter-spacing:0.6px;font-weight: 550;padding: 3%;">Hiking</p>
+                            <p style="color:#32BDD2; font-size:12px; letter-spacing:1.2px;font-weight:1000; padding:3%;">HOBBIES</p>
+                            <p style="color:#909090; font-size:12px; letter-spacing:0.6px;font-weight: 550;padding: 3%;">Cooking</p>
+                        </div>
+                       <p style="color:#909090; font-size:12px; letter-spacing:0.6px;margin-left: 5%; font-weight: 550;padding: 5%">Gardening</p>
+
+                    <div style="color:#FFFFFF;  border:0.5px solid #CCCCCC; width: 165%; height: 535.6px;margin-top: 6%;">
+                        <div style="background-color:#EEEEEE; width:421px; ">
+                            <p style="color:#5A5A5A; font-size:14px; letter-spacing:1.05px;padding: 3%;font-weight:1000;font-style:Roboto;border:0.5px solid #CCCCCC;">Other Interests</p></div>
+                            <div style="border-bottom:0.5px solid #CCCCCC;margin-left: 6%;">
+                                <p style="color:#747474; font-size:12px; padding: 5%;letter-spacing: 1.2px;font-weight: 1000;">TECH</p>
+                                <p style="color:#909090; font-size:12px; letter-spacing:0.6px;margin-left: 3%;font-weight: 600;padding: 2%;">Artificial Intelligence</p>
+                            </div>
+                            <div style="margin-left: 6%;padding: 2%;">
+                                <p style="color:#909090; font-size:12px; letter-spacing:0.6px;font-weight: 550;padding: 3%;">Robotics</p>
+                            </div>
+
+                    </div>
+                        <div style="display:flex; align-items:center; justify-content:space-between;margin-top: 8%;">
+                            <img  class="drop-icon" th:src="@{/images/extra-large-256px/Artboard 1 copy 9@16x.png}" height="6" width="10"/>
+                            <p onclick="loginFunction2()" style="color:#32BDD2; font-size:14px;font-weight: 600;ssmargin-top: 1%;margin-right: 84%; ">BACK</p>
+                            <script>
+                        function loginFunction2() {
+                            window.location = src = "/community/people-list";
+                        }
+                    </script>
+                        </div>
+                    </div>
 
 </body>
 
