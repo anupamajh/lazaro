@@ -170,6 +170,7 @@ button {
     height: 41px;
     margin-top: 10%;
     display: flex;
+    padding:1%;
     font-style: Roboto medium;
     align-items: center;
     justify-content: space-between;
@@ -235,6 +236,20 @@ button {
     margin-left: 40%;
     bottom: 36%;
     margin-bottom: 0%;
+}
+.image-eye-landing1 {
+    display: inline;
+    position: absolute;
+    margin-left: 40%;
+    bottom: 36%;
+    margin-bottom: 19%;
+}
+.image-eye-landing2 {
+    display: inline;
+    position: absolute;
+    margin-left: 40%;
+    bottom: 36%;
+    margin-bottom: 5%;
 }
 .image1 {
     display: inline;
