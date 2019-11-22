@@ -15,7 +15,7 @@
         // Close the dropdown if the user clicks outside of it
         window.onclick = function(event) {
             if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var dropdowns = document.getElementsByClassName("dropdown-content-search");
                 var i;
                 for (i = 0; i < dropdowns.length; i++) {
                     var openDropdown = dropdowns[i];
@@ -79,20 +79,20 @@
         <div class="right-content">
             <div class="right">
                 <div class="my-profile-options" style="padding:2%;">
-                    <div style="width:921px; display:flex; align-items:center; justify-content:space-between;">
+                    <div style="width:921px; display:flex; ">
                     <p style="display:block; color:#464646; font-family:roboto; width:59px;font-size:18px; font-weight:700; margin-bottom: 20px; letter-spacing: 1.4px;">
-                        PEOPLE<br><br>
-                        <p style="color:#5A5A5A; width:">Showing your favourites.</br>
+                        PEOPLE
+                        <p style="color:#5A5A5A;display: flow-root;margin-right: 44%;">Showing your favourites.</br>
                         <span class="all-scroll" onclick="clearall()" style="color:#32BDD2; margin-left:48%;"><u>Clear Filter</u></span>
                         <script>
                       function clearall() {
                         window.location = src = "/community/people-list";                    }
                 </script>
                     </p>
-                    </div>
+
                     <div class="burger">
                         <img  onclick="myFunction()" class="dropbtn"  th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" height="32px" width="33px" id="uplaod-profile-pic">
-                        <div id="myDropdown" class="dropdown-content">
+                        <div id="myDropdown" class="dropdown-content-search">
                             <a onclick="clearall()" style="color:#32BDD2" href="#home">CLEAR</a>
                             <script>
                       function clearall() {
@@ -144,7 +144,7 @@
                         Interests</span>
                     <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">12/12</span>
                 </div>
-                <div style="width:812px; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
+                <div style="width:142%; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
                 </div>
 
                 <div class="user-details">
@@ -163,7 +163,7 @@
                         Interests</span>
                     <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">8/12</span>
                 </div>
-                <div style="width:812px; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
+                <div style="width:142%; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
                 </div>
 
                 <div class="user-details">
@@ -181,7 +181,7 @@
                         Interests</span>
                     <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">5/12</span>
                 </div>
-                <div style="width:812px; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
+                <div style="width:142%; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
                 </div>
 
                 <div class="user-details">
@@ -199,7 +199,7 @@
                         Interests</span>
                     <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">2/12</span>
                 </div>
-                <div style="width:812px; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
+                <div style="width:142%; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
                 </div>
 
                 <div class="user-details">
@@ -217,7 +217,7 @@
                         Interests</span>
                     <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">1/12</span>
                 </div>
-                <div style="width:812px; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
+                <div style="width:142%; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
                 </div>
 
                 <div class="user-details">

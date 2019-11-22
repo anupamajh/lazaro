@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Interest-groups</title>
+    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto&display=swap}" rel="stylesheet">
+    <link th:href="@{/css/interestgroups.css}" rel="stylesheet">
+</head>
+
+ <script>
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+             document.getElementById("cross-mark").style.display = "block";
+              document.getElementById("equals").style.display = "none";
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+         function crossmark() {
+           document.getElementById("cross-mark").style.display = "none";
+              document.getElementById("equals").style.display = "block";
+               document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+</script>
+
+
+<body>
+<header style="min-height: 6vh;">
+    <div th:replace="shared/dashboard :: dashboard">
+    </div>
+</header>
+
+<div class="content">
+
+    <div class="community-desc">
+        <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">COMMUNITY</span>
+        <p style="color:#707070; font-family:roboto; font-size:12px; width:40%; margin-top: 15px; letter-spacing: 0.6px;  line-height: 2;">Lorem ipsum dolor
+            sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo
+            vestibulum.</p>
+    </div>
+    <div class="profile-container">
+        <div class="left-content">
+            <div style="min-height: 5vh; background-color: #EEEEEE;"></div>
+            <div class="people">
+                    <span
+                            style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                <span
+                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">MY
+                        PROFILE</span>
+                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Based on
+                    your profile, you will be able to connect with the best matches who share your interests. Go
+                    ahead and setup your profile.</p>
+            </div>
+            <div class="people" style="border-bottom: solid 1px #CCCCCC; border-top: solid 1px #CCCCCC;">
+                    <span
+                            style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                <span
+                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px; letter-spacing: 1.4px;">PEOPLE</span>
+                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Meet the
+                    community members and make new friends.</p>
+            </div>
+            <div class="my-profile">
+                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                <span
+                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px;letter-spacing: 1.4px;">GROUPS</span>
+                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Join the groups and catch all the action. You will get suggestions based on your profile.</p>
+            </div>
+        </div>
+
+        <div class="right-content">
+            <div class="my-profile-options" style="padding: 2%; min-height: 55vw;" id="interest-groups1">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center;">
+                        <img onclick="myFunction()" id="equals" class="dropbtn" th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" style="box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.58); border-radius: 50%;" >
+                        <img onclick="crossmark()" th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" width="35" height="35" alt="icon" style="box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.58); border-radius: 50%;display:none";
+                             id="cross-mark" >
+                        <div id="myDropdown" class="dropdown-content">
+                            <a   style="color:#747474;font-size:13px;ont-family: roboto;" href="#home">INTEREST GROUPS</a>
+                            <a   style="color:#747474;font-size:13px;ont-family: roboto;" href="#about">COMMUNITY GROUPS</a>
+                            <a   style="color:#747474;font-size:13px;ont-family: roboto;" href="#about">MY GROUPS</a>
+                            <script>
+                      function fav() {
+                        window.location = src = "/community/people-filter";                    }
+                </script>
+                        </div>
+                        <span style="font-family: roboto; font-size: 14px;letter-spacing: 1.4px; margin-left: 25px; margin-top: 5px; color: #747474;">Select a group from the menu</span>
+                    </div>
+<!--                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" width="40" height="40" alt="drop-down"; id="filter-btn; ">-->
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+
+
+</html>

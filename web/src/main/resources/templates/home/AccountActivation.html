@@ -36,7 +36,8 @@
 
             <div class="move">
                 <span class="register">NEW PASSWORD</span>
-                <input class="box" type="text" name="un" placeholder="*************" size="48" id="inputErr">
+                <input class="box" type="text" name="un" placeholder="*************" size="48" id="inputErr"
+                       onfocus="this.placeholder=''" onblur="this.placeholder='*************'">
                 <img class="image-eye-landing1" th:src="@{/images/EyeIcon.png}" alt="" width="24px"
                      height="24px" onclick="myFunction1()">
                 <span class="field1">This field is required</span>
@@ -44,7 +45,8 @@
             </div>
             <div class="password">
                 <span class="register">CONFIRM PASSWORD</span>
-                <input class="box" type="password" name="un" placeholder="*************" size="48" border-radius="5px;" id="pswdErr">
+                <input class="box" type="password" name="un" placeholder="*************" size="48" border-radius="5px;" id="pswdErr"
+                       onfocus="this.placeholder=''" onblur="this.placeholder='*************'">
                 <img class="image-eye-landing2" id="eye-icon" th:src="@{/images/EyeIcon.png}" alt="" width="24px"
                      height="24px" onclick="myFunction1()">
 

@@ -57,7 +57,8 @@ public class HomeController {
     @RequestMapping(value = "community/people-filter")
     public String peopleFilter(){ return "community/people-filter";}
 
-
+    @RequestMapping(value = "InterestGroups/groups")
+    public String interestgroups(){ return "InterestGroups/groups";}
 
 }
 

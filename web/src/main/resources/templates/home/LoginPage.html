@@ -12,16 +12,18 @@
             document.getElementById("fieldError1").style.display = "block";
             document.getElementById("pswdhide").style.display = "none";
             document.getElementById("fieldError2").style.display = "block";
+            document.getElementById("eye-pswd").style.display = "none";
             document.getElementById("inputErr").style.border = "1px solid #BF574A";
             document.getElementById("pswdErr").style.border = "1px solid #BF574A";
-            document.getElementById("eye-icon").style.bottom = "43%";
+             document.getElementById("eye-pswd").style.bottom = "33%";
+            document.getElementById("eye-icon").style.bottom = "29%";
         }
         function myFunction1() {
             document.getElementById("eye-icon").style.display = "none";
             document.getElementById("eye-pswd").style.display = "block";
              document.getElementById("pswdhide").style.display = "block";
               document.getElementById("pswdErr").style.display="none";
-            document.getElementById("eye-pswd").style.bottom = "44%";
+            document.getElementById("eye-pswd").style.bottom = "31%";
             document.getElementById("eye-icon").style.bottom = "46%";
         }
       function unhide(){
@@ -29,7 +31,7 @@
           document.getElementById("pswdhide").style.display = "none";
            document.getElementById("eye-icon").style.display = "block";
             document.getElementById("eye-pswd").style.display = "none";
-             document.getElementById("eye-icon").style.bottom = "43%";
+             document.getElementById("eye-icon").style.bottom = "31%";
              document.getElementById("eye-pswd").style.bottom = "46%";
         }
 
@@ -41,10 +43,11 @@
 <body>
 <div class="main">
     <div class="main-layer">
-        <img class="image-logo" th:src="@{/images/GuestureLogo.png}" alt="" width="153px" height="45px">
+        <img style="margin-left: 32%;margin-bottom: 7%;" th:src="@{/images/GuestureLogo.png}" alt="" width="153px" height="45px">
 
-        <p class="start">Lorem ipsum dolor sit amet, consectetur</br>
-            adipiscing elit. Etiam erat sapien, ultricies.</p>
+        <p style="font-family:roboto; width:85%; color:#5A5A5A; font-size:15px;letter-spacing:0.35px;margin: auto;">Lorem ipsum dolor sit amet, consectetur
+            <span style="font-family:roboto; width:85%; color:#5A5A5A; font-size:15px;letter-spacing:0.35px;margin: auto;">adipiscing elit. Etiam erat sapien, ultricies.</span>
+        </p>
         <div class="align">
             <div class="layer">
                 <span class="login"><b>Login</b></span>
@@ -55,14 +58,16 @@
                 <div class="move">
 
                     <input class="box" type="text" name="un" placeholder="Email or Mobile Number" size="48"
-                           id="inputErr">
+                           id="inputErr" onfocus="this.placeholder=''" onblur="this.placeholder='Email or Mobile Number'">
                     <span class="field1" id="fieldError1" style="display:none">This field is required</span>
                 </div>
             </div>
 
             <div class="password">
-                <input class="box" type="password" name="un" placeholder="Password" size="48" border-radius="5px;" id="pswdErr">
-                <input class="box" type="password" name="un" placeholder="secret007" size="48" border-radius="5px;" onclick="myFunction1()" style="display:none" id="pswdhide">
+                <input class="box" type="password" name="un" placeholder="Password" size="48"
+                       border-radius="5px;" id="pswdErr"  onfocus="this.placeholder=''" onblur="this.placeholder='Password'">
+                <input class="box" type="password" name="un" placeholder="secret007" size="48" border-radius="5px;" onclick="myFunction1()" style="display:none" id="pswdhide"
+                       onfocus="this.placeholder=''" onblur="this.placeholder='secret007'">
                 <img class="image-eye" id="eye-icon" th:src="@{/images/EyeIcon.png}" alt="" width="24px" height="24px" onclick="myFunction1()">
                 <img class="image1" th:src="@{/images/EyeIconblue.png}" alt="" width="24px" height="24px" onclick="unhide()" style="display:none" id="eye-pswd">
 
@@ -74,7 +79,7 @@
                     </script>
             </div>
             <div class="fp">
-                <a style="color: #32BDD2" href="#" onclick="loginFunction2()">Forgot password?</a>
+                <a style="color: #32BDD2;font-size: 14px;" href="#" onclick="loginFunction2()"><u>Forgot password?</u></a>
                 <script>
                         function loginFunction2() {
                             window.location = src = "/ForgotPassword";
@@ -82,12 +87,12 @@
                     </script>
             </div>
             <div class="login-button">
-                <button type="submit" class="button" onclick="myFunction()"><b>LOGIN</b></button>
+                <button style="width:135px;" type="submit" class="button" onclick="myFunction()"><b>LOGIN</b></button>
 
             </div>
             <div class="create-account">
-                <p style="color: #747474;">Don’t have an account yet?
-                    <a class="get-one" style="color: #32BDD2" href="#" onclick="loginFunction4()">Get one now.</a></p>
+                <p style="color: #747474;font-size:14px;margin-top: 6%;">Don’t have an account yet?
+                    <a class="get-one" style="color: #32BDD2;font-size: 14px;" href="#" onclick="loginFunction4()">Get one now.</a></p>
                 <script>
                         function loginFunction4() {
                             window.location = src = "/AccountLanding";
