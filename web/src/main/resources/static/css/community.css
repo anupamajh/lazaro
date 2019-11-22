@@ -57,6 +57,7 @@ body{
     padding-left: 35px;
     padding-top: 10px;
     padding-bottom: 10px;
+    font-family: roboto;
     font-weight: 700;
     font-size: 16px;
     color: #FFFFFF;
@@ -135,7 +136,7 @@ body{
     padding: 10px 1.5vw 4vw 1.5vw;
     border-radius: 20px;
     margin: auto;
-    box-shadow: 0px 0px 35px 65vw rgba(0, 0, 0, 0.29);
+    box-shadow: 0px 0px 35px 120vw rgba(0, 0, 0, 0.29);
     top: 25%;
     left: 25%;
 }
@@ -514,6 +515,35 @@ body{
 }
 .groups{
     padding: 10% 23%;
+}
+.group-content{
+    padding: 05% 03%;
+}
+.group-view{
+    display:none;
+}
+.group-admin-details{
+    padding: 4% 5%;
+    display: flex;
+    align-items: center;
+    width: 42%;
+    background-color: #EEEEEE;
+    border: solid #E4E4E4 0.5px;
+    margin-top: 4vh;
+}
+.group-info{
+    padding: 4% 5%;
+    background-color: #EEEEEE;
+    width: 75%;
+    margin-top: 4vh;
+}
+.group-members{
+}
+.member{
+    display: flex;
+    align-items: center;
+    border-bottom: solid #CCCCCC 0.5px;
+    padding: 4vh 0vh 3vh 0vh;
 }
 .invited{
     padding: 1% 15% 3% 4%;
