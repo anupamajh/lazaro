@@ -30,6 +30,9 @@ public class HomeController {
     @RequestMapping(value = "/AppSuccess")
     public String AppSuccess(){ return "home/AppSuccess";}
 
+    @RequestMapping(value = "/AccountActivation")
+    public String AccountActivate(){ return "home/AccountActivation";}
+
     @RequestMapping(value = "community/community-profile")
     public String communityProfile(){ return "community/community-profile";}
 
@@ -53,6 +56,8 @@ public class HomeController {
 
     @RequestMapping(value = "community/people-filter")
     public String peopleFilter(){ return "community/people-filter";}
+
+
 
 }
 

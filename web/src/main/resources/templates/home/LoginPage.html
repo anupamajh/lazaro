@@ -10,17 +10,29 @@
     <script>
         function myFunction() {
             document.getElementById("fieldError1").style.display = "block";
+            document.getElementById("pswdhide").style.display = "none";
             document.getElementById("fieldError2").style.display = "block";
             document.getElementById("inputErr").style.border = "1px solid #BF574A";
             document.getElementById("pswdErr").style.border = "1px solid #BF574A";
-            document.getElementById("eye-icon").style.bottom = "44%";
+            document.getElementById("eye-icon").style.bottom = "43%";
         }
         function myFunction1() {
             document.getElementById("eye-icon").style.display = "none";
             document.getElementById("eye-pswd").style.display = "block";
+             document.getElementById("pswdhide").style.display = "block";
+              document.getElementById("pswdErr").style.display="none";
             document.getElementById("eye-pswd").style.bottom = "44%";
-            document.getElementById("eye-icon").style.bottom = "47%";
+            document.getElementById("eye-icon").style.bottom = "46%";
         }
+      function unhide(){
+          document.getElementById("pswdErr").style.display="block";
+          document.getElementById("pswdhide").style.display = "none";
+           document.getElementById("eye-icon").style.display = "block";
+            document.getElementById("eye-pswd").style.display = "none";
+             document.getElementById("eye-icon").style.bottom = "43%";
+             document.getElementById("eye-pswd").style.bottom = "46%";
+        }
+
         function type() {
         }
     </script>
@@ -49,12 +61,10 @@
             </div>
 
             <div class="password">
-
                 <input class="box" type="password" name="un" placeholder="Password" size="48" border-radius="5px;" id="pswdErr">
-
+                <input class="box" type="password" name="un" placeholder="secret007" size="48" border-radius="5px;" onclick="myFunction1()" style="display:none" id="pswdhide">
                 <img class="image-eye" id="eye-icon" th:src="@{/images/EyeIcon.png}" alt="" width="24px" height="24px" onclick="myFunction1()">
-                <img class="image1" th:src="@{/images/EyeIconblue.png}" alt="" width="24px" height="24px" onclick="loginFunction2()" style="display:none" id="eye-pswd">
-
+                <img class="image1" th:src="@{/images/EyeIconblue.png}" alt="" width="24px" height="24px" onclick="unhide()" style="display:none" id="eye-pswd">
 
                 <p class="field" id="fieldError2" style="display:none">This field is required</p>
                 <script>
