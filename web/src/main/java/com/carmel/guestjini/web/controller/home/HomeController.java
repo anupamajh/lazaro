@@ -42,6 +42,15 @@ public class HomeController {
     @RequestMapping(value = "community/community-group-view")
     public String communityGroupView(){ return "community/community-group-view";}
 
+    @RequestMapping(value = "community/community-existing-group-view")
+    public String communityGroupExistingView(){ return "community/community-existing-group-view";}
+
+    @RequestMapping(value = "community/community-awaiting-group")
+    public String communityGroupAwaitingView(){ return "community/community-awaiting-group";}
+
+    @RequestMapping(value = "community/community-open-group")
+    public String communityGroupOpenView(){ return "community/community-open-group";}
+
     @RequestMapping(value = "community/community-group-conversation")
     public String communityGroupConversation(){ return "community/community-group-conversation";}
 

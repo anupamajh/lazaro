@@ -34,20 +34,19 @@
             document.getElementById("upload-success").style.display = "block";
         }
      function closeFrame(){
-<!--            document.getElementById("photo-upload").style.display = "none";-->
-<!--            document.getElementById("origin-frame").style.display = "none";-->
-<!--            document.getElementById("upload-failed").style.display = "none";-->
-            document.getElementById("ignore").style.display = "none";
-            document.getElementById("upload-success").style.display = "none";
+            document.getElementById("exit-group").style.display= "none";
         }
         function ignoreInvite(){
             document.getElementById("ignore").style.display = "block";
         }
         function backToGroupView(){
-            location.replace("/community/community-groups");
+            location.replace("/community/community-group-conversation");
         }
         function joinConversation(){
             location.replace("/community/community-group-conversation");
+        }
+        function exitGroup(){
+            document.getElementById("exit-group").style.display= "block";
         }
 </script>
 
@@ -87,12 +86,12 @@
     <!--        <input type="submit" class="submit-btn" value="DONE" style="padding: 1.5% 5% 1.5% 5%; margin-top: 50px;" onclick="upload()">-->
     <!--    </div>-->
 
-    <div class="photo-upload" id="exit-group" style="width: 30%; min-height: 27%; top: 50%; left:30%; padding-bottom: 2vw;">
+    <div class="photo-upload" id="exit-group" style="width: 30%; min-height: 20%; top: 50%; left:30%; padding-bottom: 2vw;">
         <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame()"><br><br>
-        <p style="color:#E65959; font-family: roboto; font-weight: 900; font-size: 16px; letter-spacing: 1.6px; line-height: 1.9; margin-bottom: 20px;">IGNORE?</p>
+        <p style="color:#E65959; font-family: roboto; font-weight: 900; font-size: 16px; letter-spacing: 1.6px; line-height: 1.9; margin-bottom: 20px;">EXIT GROUP?</p>
         <p style="color:#5A5A5A; font-family: roboto; font-weight: 500; font-size: 14px; letter-spacing: 0.7px; line-height: 2.4; width: 80%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
-        <div style="display: flex; margin: 3vw 5vw; justify-content: space-evenly;">
-            <input type="button" class="submit-btn" style="display: block; background-color:#E65959; border: 0px;" value="IGNORE" onclick="">
+        <div style="display: flex; margin: 3vw 5vw 1vh 5vh; justify-content: space-evenly;">
+            <input type="button" class="submit-btn" style="display: block; background-color:#E65959; border: 0px; padding: 0.5vw 2.5vw;" value="EXIT" onclick="">
             <input type="button" class="submit-btn" style="display: block; padding: 0.5vw 3vw; border: 0px; margin-left: 0px" value="NO" onclick="">
         </div>
     </div>
@@ -158,25 +157,22 @@
                 </div>
 
                 <div class="group-view" id="group-view" style="display: block;">
-                    <div class="group-info">
-                        
-                        <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; color: #505050; font-weight: 600; margin-bottom: 20px;">MOVIE NIGHT - LION KING</p>
-                        <p style="font-family: roboto; font-size: 10px; letter-spacing: 0; line-height: 1.4; color: #909090; font-weight: 400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim felis et magna mattis finibus. Nulla elit ligula, placerat tincidunt ipsum eu, ornare semper felis. Duis arcu massa, venenatis eget ante sodales, posuere volutpat risus. Aenean et justo eu massa sodales posuere. Nullam sollicitudin nibh in turpis placerat venenatis.</p>
+                    <div class="group-info" style="display: flex; align-items: center; justify-content: space-between;">
+                        <div style="width: 70%;">
+                            <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; color: #505050; font-weight: 600; margin-bottom: 20px;">HAMPI TRIP</p>
+                            <p style="font-family: roboto; font-size: 10px; letter-spacing: 0; line-height: 1.4; color: #909090; font-weight: 400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim felis et magna mattis finibus. Nulla elit ligula, placerat tincidunt ipsum eu, ornare semper felis. Duis arcu massa, venenatis eget ante sodales, posuere volutpat risus. Aenean et justo eu massa sodales posuere.</p>
+                        </div>
+                        <input type="button" class="submit-btn" style="background-color: #E65959; border: 0px; border-radius: 2px; padding: 10px 30px; box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.29); font-size: 12px; letter-spacing: 1.2px;" value="EXIT" onclick="exitGroup()">
                     </div>
                     <div class="group-admin-details">
                         <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
                         <div style="margin-left: 25px;">
                             <p style="font-family: roboto; letter-spacing: 0.5px; font-size: 10px; line-height: 20px; color: #909090;">CREATED BY</p>
-                            <p style="font-family: roboto; letter-spacing: 0.35px; font-size: 14px; line-height: 15px; color: #5A5A5A;">Daisy Lake</p>
+                            <p style="font-family: roboto; letter-spacing: 0.35px; font-size: 14px; line-height: 15px; color: #5A5A5A;">Nora Bravos</p>
                             <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 15px; margin-top: 15px; color: #909090;">7th July 2019 11:38 AM (2 Hours ago)</p>
                         </div>
                     </div>
-                    <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 14px; color: #5A5A5A; margin-top: 4vh; font-weight: 600;">Yes, I want to join the group.</p>
-                    <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 14px; color: #909090; margin-top: 1vh; font-weight: 400;">You can see and participate in the conversation.</p>
-                    <input type="button" class="submit-btn" style="border-radius: 2px; padding: 10px 15px; box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.29); font-size: 12px; margin-top: 2vh;" value="JOIN THE CONVERSATION" onclick="joinGroup()">
-                    <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 14px; color: #5A5A5A; margin-top: 4vh; font-weight: 600;">No, I will decide later.</p>
-                    <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 14px; color: #909090; margin-top: 1vh; font-weight: 400;">You will not be able to see and participate in the conversation.</p>
-                    <input type="button" class="submit-btn" style="display: block; background-color: #E65959; border: 0px; border-radius: 2px; padding: 10px 20px; box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.29); font-size: 12px; margin-top: 2vh;" value="IGNORE" onclick="ignoreInvite()">
+
                     <div style="display: flex; align-items: center; margin-top: 6vh;">
                         <p style="font-family: roboto; font-size: 14px; letter-spacing: 0.7px; line-height: 25px; color: #747474; font-weight: 900;">27 Members</p>
                         <span style="height: 0.5px; background-color: #CCCCCC; padding: 0.25px 200px; font-size: 1px; width: 400px; margin-left: 15px;"></span>

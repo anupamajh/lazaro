@@ -217,11 +217,24 @@
          function joinConversation(){
             location.replace("/community/community-group-conversation");
         }
-
+         function backToGroupView(){
+            location.replace("/community/community-groups");
+        }
         function viewConversation(){
             var x = document.getElementById("snackbar-group");
             x.className = "show";
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        }
+        function requestAwaiting(){
+            location.replace("/community/community-awaiting-group");
+        }
+        function openGroup(){
+            location.replace("/community/community-open-group");
+        }
+        function searchGroups(){
+            document.getElementById("search-not-found").style.display = "flex";
+            document.getElementById("groups").style.display = "none";
+            document.getElementById("back-btn").style.display = "flex";
         }
 </script>
 
@@ -319,7 +332,7 @@
 
         <div class="right-content">
 
-            <div class="my-profile-options" style="padding: 2%; min-height: 55vw;" id="community-groups">
+            <div class="my-profile-options" style="padding: 2%; min-height: 35vw;" id="community-groups">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div style="display: flex; align-items: center;">
                         <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" style="box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.58); border-radius: 50%;" onclick="viewGroups()">
@@ -343,9 +356,17 @@
                 <div class="groups-list" id="groups-list">
                     <div class="search-bar">
                         <input type="text" placeholder="Search…" id="search-groups" style="padding: 8px 5px;; border: 0px; width: 95%; outline: none; margin-left: 10px;">
-                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" width="20" height="20" alt="search-btn" id="search-btn">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" width="20" height="20" alt="search-btn" id="search-btn" onclick="searchGroups()">
                     </div>
-                    <div class="groups">
+
+                        <div class="search-not-found" id="search-not-found">
+                                <img th:src="@{/images/extra-large-256px/search.png}" height="65" width="65" alt="search-not-found">
+                                <p style="font-family: roboto; font-size: 14px; letter-spacing: 0.7px; line-height: 16px; color: #747474; font-weight: 900; margin-top: 15px;">No Results Found</p>
+                                <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 14px; color: #909090; font-weight: 400; margin-top: 15px; width: 25%; text-align: center;">Sorry, we couldn’t find any results for search_keyword</p>
+                        </div>
+
+
+                    <div class="groups" id="groups">
                     <div class="invited" onclick="groupView()">
                         <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
                         <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">MOVIE NIGHT - LION KING</p>
@@ -432,10 +453,10 @@
                             </div>
                         </div>
 
-                        <div class="accepted">
+                        <div class="accepted" onclick="requestAwaiting()">
                             <div>
                                 <span style="display: none; background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                                <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">POT LUCK</p>
+                                <p style="margin-top: 20px; color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">POT LUCK</p>
                                 <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
                                     <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic" style="border-radius: 50%;">
                                     <div style="margin-left: 5px; margin-bottom: 5px;">
@@ -453,10 +474,10 @@
                             </div>
                         </div>
 
-                        <div class="accepted">
+                        <div class="accepted" onclick="openGroup()">
                             <div>
                                 <span style="display: none; background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                                <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">GEEKS</p>
+                                <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600; margin-top: 20px;">GEEKS</p>
                                 <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
                                     <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic" style="border-radius: 50%;">
                                     <div style="margin-left: 5px; margin-bottom: 5px;">
@@ -476,7 +497,7 @@
 
                         <div class="invited" style="background-color: #EEEEEE; border: solid 0.25 #CCCCCC; margin-top: 4vh;">
                             <span style="display:none; background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                            <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">MOVIE NIGHT - LION KING</p>
+                            <p style="margin-top: 20px; color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">MOVIE NIGHT - LION KING</p>
                             <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
                                 <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic" style="border-radius: 50%;">
                                 <div style="margin-left: 5px; margin-bottom: 5px;">
@@ -503,85 +524,10 @@
                     </div>
                     </div>
                 </div>
-
-<!--                <div class="group-view" id="group-view">-->
-<!--                    <div class="group-info">-->
-<!--                        <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; color: #505050; font-weight: 600; margin-bottom: 20px;">MOVIE NIGHT - LION KING</p>-->
-<!--                        <p style="font-family: roboto; font-size: 10px; letter-spacing: 0; line-height: 1.4; color: #909090; font-weight: 400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim felis et magna mattis finibus. Nulla elit ligula, placerat tincidunt ipsum eu, ornare semper felis. Duis arcu massa, venenatis eget ante sodales, posuere volutpat risus. Aenean et justo eu massa sodales posuere. Nullam sollicitudin nibh in turpis placerat venenatis.</p>-->
-<!--                    </div>-->
-<!--                    <div class="group-admin-details">-->
-<!--                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">-->
-<!--                        <div style="margin-left: 25px;">-->
-<!--                            <p style="font-family: roboto; letter-spacing: 0.5px; font-size: 10px; line-height: 20px; color: #909090;">CREATED BY</p>-->
-<!--                            <p style="font-family: roboto; letter-spacing: 0.35px; font-size: 14px; line-height: 15px; color: #5A5A5A;">Daisy Lake</p>-->
-<!--                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 15px; margin-top: 15px; color: #909090;">7th July 2019 11:38 AM (2 Hours ago)</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 14px; color: #5A5A5A; margin-top: 4vh; font-weight: 600;">Yes, I want to join the group.</p>-->
-<!--                    <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 14px; color: #909090; margin-top: 1vh; font-weight: 400;">You can see and participate in the conversation.</p>-->
-<!--                    <input type="button" class="submit-btn" style="border-radius: 2px; padding: 10px 15px; box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.29); font-size: 12px; margin-top: 2vh;" value="JOIN THE CONVERSATION" onclick="joinGroup()">-->
-<!--                    <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 14px; color: #5A5A5A; margin-top: 4vh; font-weight: 600;">No, I will decide later.</p>-->
-<!--                    <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 14px; color: #909090; margin-top: 1vh; font-weight: 400;">You will not be able to see and participate in the conversation.</p>-->
-<!--                    <input type="button" class="submit-btn" style="display: block; background-color: #E65959; border: 0px; border-radius: 2px; padding: 10px 20px; box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.29); font-size: 12px; margin-top: 2vh;" value="IGNORE">-->
-<!--                    <div style="display: flex; align-items: center; margin-top: 6vh;">-->
-<!--                        <p style="font-family: roboto; font-size: 14px; letter-spacing: 0.7px; line-height: 25px; color: #747474; font-weight: 900;">27 Members</p>-->
-<!--                        <span style="height: 0.5px; background-color: #CCCCCC; padding: 0.25px 200px; font-size: 1px; width: 400px; margin-left: 15px; margin-bottom: 5px;"></span>-->
-<!--                    </div>-->
-<!--                        <div class="group-members">-->
-<!--                        <div class="member">-->
-<!--                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">-->
-<!--                        <div style="margin-left: 35px;">-->
-<!--                            <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Sam Colon</p>-->
-<!--                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Since 29 July 2019</p>-->
-<!--                        </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-<!--                    <div class="group-members">-->
-<!--                        <div class="member">-->
-<!--                            <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">-->
-<!--                            <div style="margin-left: 35px;">-->
-<!--                                <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Luke Ray</p>-->
-<!--                                <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Since 29 July 2019</p>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-<!--                    <div class="group-members">-->
-<!--                        <div class="member">-->
-<!--                            <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">-->
-<!--                            <div style="margin-left: 35px;">-->
-<!--                                <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Daisy Lake</p>-->
-<!--                                <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Since 29 July 2019</p>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="group-members">-->
-<!--                        <div class="member">-->
-<!--                            <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">-->
-<!--                            <div style="margin-left: 35px;">-->
-<!--                                <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Mark Smith</p>-->
-<!--                                <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Since 29 July 2019</p>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-<!--                    <div class="group-members">-->
-<!--                        <div class="member">-->
-<!--                            <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">-->
-<!--                            <div style="margin-left: 35px;">-->
-<!--                                <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Dan Park</p>-->
-<!--                                <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Since 29 July 2019</p>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="show-more">-->
-<!--                        <p class="head-text" style="font-weight: 700; margin-right: 10px; font-size: 12px;">-->
-<!--                            SHOW MORE-->
-<!--                        </p>-->
-<!--                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="10" width="10" alt="list-button" style="margin-right: 15px; margin-bottom: 5px;">-->
-<!--                    </div>-->
-<!--                </div>-->
+                <div style="display: none; cursor: pointer; margin: 6vh 0vh 3vh 0vh;" id="back-btn">
+                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 9@16x.png}" height="15" width="15" onclick="backToGroupView()"/>
+                    <p style="color: #32BDD2; font-family: roboto; font-weight: 900; font-size: 14px; margin-left: 7px; letter-spacing: 0.7px;" onclick="backToGroupView()">BACK</p>
+                </div>
 
             </div>
         </div>
