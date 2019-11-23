@@ -510,22 +510,22 @@ body{
   transform: rotate(45deg);
 }
 .groups-list{
-    display: none;
+    display: block;
 }
 .groups{
-    padding: 10% 23%;
+    padding: 2% 23%;
 }
 .invited{
-    padding: 1% 15% 3% 4%;
-    background-color: #E2DDC2;
+    padding:5% 15% 10% 9%;
+    background-color: #EEEEEE;
     border: solid #DBD6BC 0.25px;
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.29);
+    box-shadow: 0px 0px 6px #00000029;
 }
 .accepted{
     display: flex;
     align-items: center;
     margin-top: 4vh;
-    padding: 1% 5% 3% 4%;
+    padding:5% 15% 10% 9%;
     background-color: #EEEEEE;
     border: solid #CCCCCC 0.25px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.29);
@@ -533,6 +533,32 @@ body{
 
 
 
+.group-view{
+    display:none;
+}
+.group-admin-details{
+    padding: 4% 5%;
+    display: flex;
+    align-items: center;
+    width: 42%;
+    background-color: #EEEEEE;
+    border: solid #E4E4E4 0.5px;
+    margin-top: 4vh;
+}
+.group-info{
+    padding: 4% 5%;
+    background-color: #EEEEEE;
+    width: 75%;
+    margin-top: 4vh;
+}
+.group-members{
+}
+.member{
+    display: flex;
+    align-items: center;
+    border-bottom: solid #CCCCCC 0.5px;
+    padding: 4vh 0vh 3vh 0vh;
+}
 
 
 
@@ -565,6 +591,17 @@ body{
 }
 
 .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #FFFFFF;
+    min-width: 160px;
+   margin-top:4%;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content1{
     display: none;
     position: absolute;
     background-color: #FFFFFF;

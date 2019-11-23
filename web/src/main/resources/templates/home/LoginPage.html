@@ -15,8 +15,8 @@
             document.getElementById("eye-pswd").style.display = "none";
             document.getElementById("inputErr").style.border = "1px solid #BF574A";
             document.getElementById("pswdErr").style.border = "1px solid #BF574A";
-             document.getElementById("eye-pswd").style.bottom = "33%";
-            document.getElementById("eye-icon").style.bottom = "29%";
+             document.getElementById("eye-pswd").style.display = "none";
+            document.getElementById("eye-icon").style.display = "none";
         }
         function myFunction1() {
             document.getElementById("eye-icon").style.display = "none";
@@ -66,7 +66,7 @@
             <div class="password">
                 <input class="box" type="password" name="un" placeholder="Password" size="48"
                        border-radius="5px;" id="pswdErr"  onfocus="this.placeholder=''" onblur="this.placeholder='Password'">
-                <input class="box" type="password" name="un" placeholder="secret007" size="48" border-radius="5px;" onclick="myFunction1()" style="display:none" id="pswdhide"
+                <input class="box" type="password" name="un" placeholder="secret007" size="48" border-radius="5px;"  style="display:none" id="pswdhide"
                        onfocus="this.placeholder=''" onblur="this.placeholder='secret007'">
                 <img class="image-eye" id="eye-icon" th:src="@{/images/EyeIcon.png}" alt="" width="24px" height="24px" onclick="myFunction1()">
                 <img class="image1" th:src="@{/images/EyeIconblue.png}" alt="" width="24px" height="24px" onclick="unhide()" style="display:none" id="eye-pswd">

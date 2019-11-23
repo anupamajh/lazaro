@@ -63,5 +63,11 @@ public class HomeController {
     @RequestMapping(value = "InterestGroups/groups")
     public String interestgroups(){ return "InterestGroups/groups";}
 
+    @RequestMapping(value = "InterestGroups/group-conversation")
+    public String groupConversation(){ return "InterestGroups/group-conversation";}
+
+    @RequestMapping(value = "InterestGroups/group-search")
+    public String groupsearch(){ return "InterestGroups/group-search";}
+
 }
 

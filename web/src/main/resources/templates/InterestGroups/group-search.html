@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>People-Search</title>
+    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto&display=swap}" rel="stylesheet">
+    <link th:href="@{/css/PeopleList.css}" rel="stylesheet">
+
+
+    <script>
+
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn1')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+<header style="min-height: 6vh;">
+    <div th:replace="shared/dashboard :: dashboard">
+    </div>
+</header>
+<div class="content">
+    <div class="community-desc">
+        <span style="color:#464646; font-family:roboto; font-size:18px; font-weight:700; letter-spacing: 1.4px;">COMMUNITY</span>
+        <p style="color:#707070; font-family:roboto; font-size:17px; width:50%; margin-top: 15px; letter-spacing: 0.6px;  line-height: 2;">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo vestibulum.
+        </p>
+    </div>
+
+    <div class="profile-container">
+        <div class="left-content">
+            <div class="people" style="width:91%;">
+                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                <span style="color:#464646; font-family:roboto; font-size:18px; font-weight:700; letter-spacing: 1.4px;"><b>MY PROFILE</b> </span>
+                <p style="color:#747474; font-family:roboto; font-size:17px; width:95%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
+                    Based on your profile, you will be able to connect</br> with the best matches who share your interests.
+                    </br> Go ahead and setup your profile.</p>
+            </div>
+            <div class="my-profile" style="border-bottom: solid 1px #CCCCCC;">
+                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                <span style="color:#464646; font-family:roboto; font-size:18px; font-weight:700; margin-top: 10px; letter-spacing: 1.4px;"><b>PEOPLE</b> </span>
+                <p style="color:#747474; font-family:roboto; font-size:17px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
+                    Meet the community members and make new friends.</p>
+            </div>
+            <div class="people">
+                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                <span style="color:#464646; font-family:roboto; font-size:18px; font-weight:700; margin-top: 10px;letter-spacing: 1.4px;"><b>GROUPS</b></span>
+                <p style="color:#747474; font-family:roboto; font-size:17px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
+                    Meet the community members and make new friends.</p>
+            </div>
+        </div>
+
+        <div class="right-content">
+            <div class="my-profile-options" style="padding:2%;">
+
+                <p style="display:block; color:#464646; font-family:roboto; width:59px;font-size:16px; font-weight:700; margin-bottom: 20px; letter-spacing: 1.4px;">
+                    PEOPLE<br><br>
+                <div class="burger">
+                    <img  onclick="myFunction()" class="dropbtn1"  th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" height="32px" width="33px" id="uplaod-profile-pic">
+                    <div id="myDropdown" class="dropdown-content">
+                        <a style="color: #909090;" href="#home">CLEAR</a>
+                        <a  style="color: #464646;" href="#about" onclick="loginFunction1()">Subscribed</a>
+                        <script>
+                        function loginFunction1() {
+                            window.location = src = "/community/people-list";
+                        }
+                    </script>
+                        <a  style="color: #464646;" href="#about" onclick="loginFunction1()">New</a>
+                    </div>
+
+                </div>
+                <div style="display:flex; justify-content:space-between; width:100%; align-items: center;border: 1px solid #CCCCCC;border-radius:25px;">
+                    <div style="width:50%;margin-right:379px;">
+                        <input class="box" type="text" name="un" placeholder="Cycling" size="48" onfocus="this.placeholder=''" onblur="this.placeholder='Cycling'">
+                    </div>
+                    <div style="width:50%;float:left;">
+                        <img style="margin-left:64%;" th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" height="27" width="25" >
+                    </div>
+                </div>
+
+                <div class="search-icon">
+                    <img th:src="@{/images/extra-large-256px/search.png}" height="78" width="78" >
+                    <p class="result"><b>No Results Found</b></p>
+                    <p style="color:#909090; font-size:12px;" >Sorry, we couldn’t find any results</br>
+                        for search_keyword</p>
+                </div>
+</body>
+
+</html>
