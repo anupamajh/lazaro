@@ -184,6 +184,7 @@
         document.getElementById("no-groups").style.display = "none";
         document.getElementById("drop-down-btn").style.display = "inline";
     }
+
     function viewDropdown(){
         if(document.getElementById("drop-down-menu").style.display === "none"){
         document.getElementById("drop-down-menu").style.display = "block";
@@ -191,6 +192,7 @@
             document.getElementById("drop-down-menu").style.display = "none";
         }
     }
+
     function groupView(){
         console.log("msg");
         location.replace("/community/community-group-view");
@@ -198,17 +200,28 @@
 <!--        document.getElementById("group-content").style.display = "none";-->
 <!--        document.getElementById("drop-down-btn").style.display = "none";-->
     }
+
     function joinGroup(){
 <!--            document.getElementById("upload-failed").style.display = "none";-->
 <!--            document.getElementById("photo-upload").style.display = "none";-->
 <!--            document.getElementById("origin-frame").style.display = "none";-->
             document.getElementById("upload-success").style.display = "block";
         }
+
      function closeFrame(){
 <!--            document.getElementById("photo-upload").style.display = "none";-->
 <!--            document.getElementById("origin-frame").style.display = "none";-->
 <!--            document.getElementById("upload-failed").style.display = "none";-->
             document.getElementById("upload-success").style.display = "none";
+        }
+         function joinConversation(){
+            location.replace("/community/community-group-conversation");
+        }
+
+        function viewConversation(){
+            var x = document.getElementById("snackbar-group");
+            x.className = "show";
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
         }
 </script>
 
@@ -367,12 +380,12 @@
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.
                             </p>
                             <div class="notification" style="display: flex; padding: 0px 10px 5px 25px; width: 83%; display: flex; align-items: center; margin-top: 15px;">
-                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 31@16x.png}" width="30" height="30" alt="search-btn" id="accepted-icon" style="border-radius: 50%;">
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 31@16x.png}" width="30" height="30" alt="search-btn" style="border-radius: 50%;">
                                 <span style="color: #BEBAA4; font-size: 12px; letter-spacing: 0.6px; font-family: roboto; font-weight: 600; margin-left: 10px; text-align: center; border-top: solid 0.5px #BEBAA4; padding-top: 10px;" id="accepted-msg">Your request has been accepted.</span>
                             </div>
                             </div>
                             <div>
-                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30" height="30" alt="search-btn" id="view-notification" style="border-radius: 50%;">
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30" height="30" alt="search-btn" style="border-radius: 50%;" onclick="joinConversation()">
                             </div>
                        </div>
 
@@ -411,8 +424,11 @@
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.
                                 </p>
                             </div>
+                            <div id="snackbar-group">
+                                You have been removed from the group.
+                            </div>
                             <div>
-                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30" height="30" alt="search-btn" id="view-notification" style="border-radius: 50%;">
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30" height="30" alt="search-btn" id="view-notification" style="border-radius: 50%;" onclick="viewConversation()">
                             </div>
                         </div>
 

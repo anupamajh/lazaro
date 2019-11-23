@@ -424,6 +424,31 @@ body{
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
+#snackbar-group{
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #747474;
+  color: #FFFFFF;
+  text-align: center;
+  font-family: roboto;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  border-radius: 11px;
+  padding: 30px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar-group.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
 @-webkit-keyframes fadein {
   from {bottom: 0; opacity: 0;}
   to {bottom: 30px; opacity: 1;}
@@ -536,6 +561,29 @@ body{
     background-color: #EEEEEE;
     width: 75%;
     margin-top: 4vh;
+}
+.conversation-view{
+    background-color: #DFEBF7;
+    padding: 2% 5%;
+    width: 75%;
+}
+.incoming-message{
+    background-color: #FFFFFF;
+    border: solid #FAFAFA 0.5px;
+    padding: 2% 3%;
+    width: 45%;
+    margin: 5% 0%;
+    border-radius: 5px;
+}
+.sent-message-btm{
+    text-align: right;
+    margin-left: 50%;
+    background-color: #FFFFFF;
+    border: solid #FAFAFA 0.5px;
+    padding: 2% 3%;
+    width: 45%;
+    margin: 5% 0%;
+    border-radius: 5px;
 }
 .group-members{
 }
