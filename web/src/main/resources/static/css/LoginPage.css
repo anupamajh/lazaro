@@ -4,7 +4,7 @@ background-color: #FFFFFF;
 
 }
 * {
-    font-style: Roboto;
+    font-family: Roboto;
 }
 .main {
     position: absolute;
@@ -18,7 +18,7 @@ background-color: #FFFFFF;
     border: 0px;
     background-color: white;
     width: 400px;
-    margin-top: 4%;
+    margin-top: 15%;
 }
 .sub-layer {
     margin: auto;
@@ -45,8 +45,8 @@ background-color: #FFFFFF;
 .align {
     border: 95px;
     width: 93%;
-    margin-bottom: 5%;
-    padding-right: 30px;
+    margin-top: 17%;
+    font-family:roboto;
 }
 .alignment {
     border: 95px;
@@ -129,7 +129,8 @@ button {
     color: #32BDD2;
     font-size: 12px;
     letter-spacing: 0.3px;
-    margin-left: 75%;
+    margin-left: 85%;
+    margin-top: 4%;
     font-weight: 550;
     width: 500px;
     text-decoration-line: underline;
@@ -227,14 +228,14 @@ button {
     display: inline;
     position: absolute;
     margin-left: 40%;
-    bottom: 46%;
+    bottom: 31%;
     margin-bottom: 0%;
 }
 .image-eye-landing {
     display: inline;
     position: absolute;
     margin-left: 40%;
-    bottom: 36%;
+    bottom: 25%;
     margin-bottom: 0%;
 }
 .image-eye-landing1 {
@@ -262,7 +263,7 @@ button {
     display: inline;
     position: absolute;
     margin-left: 40%;
-    bottom: 36%;
+    bottom: 25%;
     margin-bottom: 0%;
 }
 .verify {
@@ -292,9 +293,11 @@ button {
     margin-bottom: 0%;
 }
 .align-back {
-    width: 474px;
+
     height: 166px;
     margin-top: 20%;
+        width: 104%;
+
     letter-spacing:0.7px;
     border: 1px solid #E6E6E6;
     background-color: #EEEEEE;

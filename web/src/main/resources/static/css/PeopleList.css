@@ -89,7 +89,7 @@ body {
     margin-left: 4%;
     height: 39px;
     font: Regular 12px Roboto;
-    width: 640px;
+    width: 100%;
     color: #909090;
     display: inline;
 }
@@ -101,7 +101,7 @@ body {
     margin-left: 4%;
     height: 39px;
     font: Regular 12px Roboto;
-    width: 640px;
+    width: 100%;
     color: #909090;
     display: inline;
 }
@@ -145,10 +145,9 @@ body {
 }
 
 .show-more {
-    width: 775px;
+    width: 100%;
     height: 68px;
     margin-top: 3%;
-    margin-left: 9%;
     border: 1px solid #EEEEEE;
     background-color: #EEEEEE;
 }
@@ -172,7 +171,6 @@ body {
     color: white;
     font-size: 16px;
     border: none;
-    margin-top: -18%;
     margin-left: 168%;
     cursor: pointer;
 }
@@ -228,7 +226,16 @@ body {
     display: block;
     border-bottom: solid 0.5px #CCCCCC;
 }
+.dropdown-content-search {
+    display: none;
+    position: absolute;
+    background-color: #FFFFFF;
+    min-width: 160px;
 
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
 .dropdown a:hover {
     background-color: #ddd;
 }
