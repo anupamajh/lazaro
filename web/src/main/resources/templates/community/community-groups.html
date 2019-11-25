@@ -184,7 +184,6 @@
         document.getElementById("no-groups").style.display = "none";
         document.getElementById("drop-down-btn").style.display = "inline";
     }
-
     function viewDropdown(){
         if(document.getElementById("drop-down-menu").style.display === "none"){
         document.getElementById("drop-down-menu").style.display = "block";
@@ -232,9 +231,33 @@
             location.replace("/community/community-open-group");
         }
         function searchGroups(){
-            document.getElementById("search-not-found").style.display = "flex";
-            document.getElementById("groups").style.display = "none";
-            document.getElementById("back-btn").style.display = "flex";
+            var str = document.getElementById("search-groups").value.toUpperCase().trim();
+            var group_title = document.getElementsByClassName("group_info");
+            var group = document.getElementsByClassName("group");
+            var i;
+            var count = 0;
+            var groups = group_title.length;
+
+            for(i=0;i<groups;i++){
+                var res = group_title[i].textContent.toUpperCase();
+                var result = res.match(str);
+                console.log(result);
+                var empty = "";
+                if(result != null){
+                    group[i].style.display = "flex";
+                    count = count+1;
+                }else{
+                    group[i].style.display = "none";
+                }
+                if(count === 0){
+                    document.getElementById("search-not-found").style.display = "flex";
+                    document.getElementById("back-btn").style.display = "flex";
+                    document.getElementById("show-more").style.display = "none";
+                }else{
+                    document.getElementById("search-not-found").style.display = "none";
+                    document.getElementById("back-btn").style.display = "flex";
+                }
+            }
         }
 </script>
 
@@ -367,9 +390,10 @@
 
 
                     <div class="groups" id="groups">
-                    <div class="invited" onclick="groupView()">
+                    <div onclick="groupView()" class="invited group">
+                        <div>
                         <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                        <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">MOVIE NIGHT - LION KING</p>
+                        <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;" class="group_info">MOVIE NIGHT - LION KING</p>
                         <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
                             <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic" style="border-radius: 50%;">
                             <div style="margin-left: 5px; margin-bottom: 5px;">
@@ -382,14 +406,15 @@
                         </p>
                         <div class="notification" style="display: flex; padding: 5px 10px 5px 25px; width: 83%; display: flex; align-items: center; background-color: #FAFAFA; margin-top: 15px;">
                             <img th:src="@{/images/extra-large-256px/Artboard 1 copy 15@16x.png}" width="30" height="30" alt="search-btn" id="notification-icon" style="border-radius: 50%;">
-                            <span style="color: #505050; font-size: 12px; letter-spacing: 0.6px; font-family: roboto; font-weight: 600; margin-left: 35px; text-align: center;" id="notification-msg">You have been invited to join this group.</span>
+                            <span style="color: #505050; font-size: 12px; letter-spacing: 0.6px; font-family: roboto; font-weight: 600; margin-left: 15px; text-align: center;" id="notification-msg">You have been invited to join this group.</span>
+                        </div>
                         </div>
                     </div>
 
-                        <div class="accepted">
+                        <div class="accepted group">
                             <div>
                             <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                            <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">HAMPI TRIP</p>
+                            <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;" class="group_info">HAMPI TRIP</p>
                             <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
                                 <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic" style="border-radius: 50%;">
                                 <div style="margin-left: 5px; margin-bottom: 5px;">
@@ -400,7 +425,7 @@
                             <p style="color: #505050; width: 75%; font-family: roboto; font-size: 12px; letter-spacing: 0.3px; line-height: 1.8;">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.
                             </p>
-                            <div class="notification" style="display: flex; padding: 0px 10px 5px 25px; width: 83%; display: flex; align-items: center; margin-top: 15px;">
+                            <div class="notification" style="display: flex; width: 83%; display: flex; align-items: center; margin-top: 15px;">
                                 <img th:src="@{/images/extra-large-256px/Artboard 1 copy 31@16x.png}" width="30" height="30" alt="search-btn" style="border-radius: 50%;">
                                 <span style="color: #BEBAA4; font-size: 12px; letter-spacing: 0.6px; font-family: roboto; font-weight: 600; margin-left: 10px; text-align: center; border-top: solid 0.5px #BEBAA4; padding-top: 10px;" id="accepted-msg">Your request has been accepted.</span>
                             </div>
@@ -410,10 +435,10 @@
                             </div>
                        </div>
 
-                        <div class="accepted">
+                        <div class="accepted group">
                             <div>
                                 <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                                <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">HOLI CELEBRATIONS</p>
+                                <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;" class="group_info">HOLI CELEBRATIONS</p>
                                 <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
                                     <img th:src="@{/images/extra-large-256px/Artboard 1 copy 10@16x.png}" width="40" height="40" alt="admin-pic" style="border-radius: 50%;">
                                     <div style="margin-left: 5px; margin-bottom: 5px;">
@@ -430,10 +455,10 @@
                             </div>
                         </div>
 
-                        <div class="accepted">
+                        <div class="accepted group">
                             <div>
                                 <span style="display:none; background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                                <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;  margin-top: 20px;">STAND-UP COMEDY</p>
+                                <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;  margin-top: 20px;" class="group_info">STAND-UP COMEDY</p>
                                 <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
                                     <img th:src="@{/images/extra-large-256px/Artboard 1 copy 10@16x.png}" width="40" height="40" alt="search-btn" style="border-radius: 50%;">
                                     <div style="margin-left: 5px; margin-bottom: 5px;">
@@ -453,10 +478,10 @@
                             </div>
                         </div>
 
-                        <div class="accepted" onclick="requestAwaiting()">
+                        <div class="accepted group" onclick="requestAwaiting()">
                             <div>
                                 <span style="display: none; background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                                <p style="margin-top: 20px; color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">POT LUCK</p>
+                                <p style="margin-top: 20px; color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;" class="group_info">POT LUCK</p>
                                 <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
                                     <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic" style="border-radius: 50%;">
                                     <div style="margin-left: 5px; margin-bottom: 5px;">
@@ -467,17 +492,17 @@
                                 <p style="color: #505050; width: 75%; font-family: roboto; font-size: 12px; letter-spacing: 0.3px; line-height: 1.8;">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.
                                 </p>
-                                <div class="notification" style="display: flex; padding: 0px 10px 5px 25px; width: 83%; display: flex; align-items: center; margin-top: 15px;">
+                                <div class="notification" style="display: flex; width: 83%; display: flex; align-items: center; margin-top: 15px;">
                                     <img th:src="@{/images/extra-large-256px/Artboard 1 copy 32@16x.png}" width="30" height="30" alt="search-btn" id="accepted-icon" style="border-radius: 50%;">
                                     <span style="color: #BEBAA4; font-size: 12px; letter-spacing: 0.6px; font-family: roboto; font-weight: 600; margin-left: 10px; text-align: center; border-top: solid 0.5px #BEBAA4; padding-top: 10px;" alt="accepted-msg">You have requested to join this group.</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="accepted" onclick="openGroup()">
+                        <div class="accepted group" onclick="openGroup()">
                             <div>
                                 <span style="display: none; background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                                <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600; margin-top: 20px;">GEEKS</p>
+                                <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600; margin-top: 20px;" class="group_info">GEEKS</p>
                                 <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
                                     <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic" style="border-radius: 50%;">
                                     <div style="margin-left: 5px; margin-bottom: 5px;">
@@ -488,16 +513,17 @@
                                 <p style="color: #505050; width: 75%; font-family: roboto; font-size: 12px; letter-spacing: 0.3px; line-height: 1.8;">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.
                                 </p>
-                                <div class="notification" style="display: flex; padding: 0px 10px 5px 25px; width: 83%; display: flex; align-items: center; margin-top: 15px;">
+                                <div class="notification" style="display: flex; width: 83%; display: flex; align-items: center; margin-top: 15px;">
                                     <img th:src="@{/images/extra-large-256px/Artboard 1 copy 15@16x.png}" width="30" height="30" alt="accepted-icon" style="border-radius: 50%;">
                                     <span style="color: #505050; font-size: 12px; letter-spacing: 0.6px; font-family: roboto; font-weight: 600; margin-left: 10px; text-align: center; border-top: solid 0.5px #505050; padding-top: 10px;" alt="accepted-msg">Send a request to join this group.</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="invited" style="background-color: #EEEEEE; border: solid 0.25 #CCCCCC; margin-top: 4vh;">
+                        <div class="invited group" style="background-color: #EEEEEE; border: solid 0.25 #CCCCCC; margin-top: 4vh;">
+                            <div>
                             <span style="display:none; background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                            <p style="margin-top: 20px; color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">MOVIE NIGHT - LION KING</p>
+                            <p style="margin-top: 20px; color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;" class="group_info">MOVIE NIGHT - LION KING</p>
                             <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
                                 <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic" style="border-radius: 50%;">
                                 <div style="margin-left: 5px; margin-bottom: 5px;">
@@ -512,10 +538,12 @@
                                 <img th:src="@{/images/extra-large-256px/Artboard 1 copy 25@16x.png}" width="30" height="30" alt="notification-icon" style="border-radius: 50%;">
                                 <span style="color: #FFFFFF; font-size: 12px; letter-spacing: 0.6px; font-family: roboto; font-weight: 600; margin-left: 35px; text-align: center;" alt="notification-msg">You have been invited to join this group.</span>
                             </div>
+                            </div>
                         </div>
 
-                        <div class="show-more">
-                            <p class="head-text" style="font-weight: 700; margin-right: 10px; font-size: 12px;">
+                        <div class="show-more" id="show-more">
+                            <p class="head-text" style="font-weight:900; margin-right: 10px; font-size: 14px; color: #747474; letter-spacing: 0.9px;">
+                            <p class="head-text" style="font-weight:900; margin-right: 10px; font-size: 14px; color: #747474; letter-spacing: 0.9px;">
                                 SHOW MORE
                             </p>
                         <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="10" width="10" alt="list-button" style="margin-right: 15px; margin-bottom: 5px;">

@@ -92,7 +92,6 @@
             document.getElementById("upload-success").style.display = "none";
             document.getElementById("visible-pic").style.display = "block";
             document.getElementById("upload-pic").style.display = "none";
-            document.getElementById("upload-profile-pic").removeAttribute("onclick");
         }
 
         function uploadSuccess(){
@@ -162,6 +161,18 @@
                              setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
                             }
         }
+        function myFunctionProfile(img){
+                            if(img.src === "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%203@16x.png"){
+                             var x = document.getElementById("snackbar1-profile");
+                             x.className = "show";
+                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                            }
+                            else{
+                             var x = document.getElementById("snackbar-profile");
+                             x.className = "show";
+                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                            }
+        }
         function changePicture(){
             if(document.getElementById("change-delete-picture").style.visibility === "hidden"){
                 var img = document.getElementById("picture-edit-btn");
@@ -174,7 +185,13 @@
                 document.getElementById("change-delete-picture").style.visibility = "hidden";
             }
         }
+        function deletePhoto(){
+            var img = document.getElementById("upload-profile-pic").src = "/images/extra-large-256px/Artboard 1 copy 40@16x.png";
+            document.getElementById("visible-pic").style.display = "none";
+            document.getElementById("change-delete-picture").style.visibility = "visible";
+        }
         function openGroupsPage(){
+            location.replace("/community/community-groups");
         }
     </script>
 
@@ -188,24 +205,24 @@
 
     <div class="community-desc">
         <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">COMMUNITY</span>
-        <p style="color:#707070; font-family:roboto; font-size:12px; width:40%; margin-top: 15px; letter-spacing: 0.6px;  line-height: 2;">Lorem ipsum dolor
+        <p style="color:#707070; font-family:roboto; font-size:12px; width:48%; margin-top: 15px; letter-spacing: 0.6px;  line-height: 2;">Lorem ipsum dolor
             sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo
             vestibulum.</p>
     </div>
 
-    <div class="photo-upload" id="photo-upload">
+    <div class="photo-upload" id="photo-upload" style="padding: 10px 3.5vw 4vw 3.5vw;">
         <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" id="uplaod-profile-pic-close" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame()"><br><br>
         <p style="font-weight: 900; color:#32BDD2; font-family: roboto; font-size: 16px; letter-spacing: 1.6px; line-height: 2; margin: 60px 0px 20px 0px;">UPLOAD PHOTO</p>
-        <div style="display: flex; margin: 10px;">
+        <div style="display: flex;">
             <div class="left-part">
                 <p style="color:#747474; font-size: 16px; font-family: roboto; line-height: 1.5; font-weight: 900;">Select a file from my computer. <br><span style="font-size: 14px; font-weight: 500;">The file size should not exceed 5MB</span></p>
                 <div style="height:0px;overflow:hidden">
                     <input type="file" id="fileInput" name="fileInput" accept="image/*"/>
                 </div>
-                <input type="button" class="submit-btn" id="profile-pic" value="BROWSE" onclick="chooseImg()" style=" padding-right: 10px; padding-left: 10px; padding-top: 5px; padding-bottom: 5px; letter-spacing: 0.5px; margin-top: 15px; font-size: 10px;">
+                <input type="button" class="submit-btn" id="profile-pic" value="BROWSE" onclick="chooseImg()" style=" padding-right: 15px; padding-left: 15px; padding-top: 5px; padding-bottom: 5px; letter-spacing: 0.5px; margin-top: 15px; font-size: 12px;">
             </div>
             <div class="right-part">
-                <div style="border: solid 2px #FFFFFF; border-style: dashed; padding: 8%; margin: 4%;">
+                <div style="border: solid 2px #FFFFFF; border-style: dashed; padding: 8.5%; margin: 4%; border-radius: 4px;">
                     <img th:src="@{/images/extra-large-256px/upload.png}" width="45" height="45" style="display:block; margin: auto;"/>
                     <p style="color: #FFFFFF; margin: auto; text-align: center;">Drop a file here</p>
                 </div>
@@ -221,7 +238,7 @@
         <input type="button" class="submit-btn" style="display: block; background-color:#E65959; margin: 3vw auto; border: 0px;" value="Done" onclick="uploadSuccess()">
     </div>
 
-    <div class="photo-upload" id="upload-success" style="width: 30%; height: 30%; left:30%;">
+    <div class="photo-upload" id="upload-success" style="width: 30%; left:30%; padding-bottom: 1vw;">
         <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="uploaded()"><br><br>
         <p style="color:#32BDD2; font-family: roboto; font-weight: 900; font-size: 16px; letter-spacing: 1.6px; line-height: 1.9; margin-bottom: 20px;">SUCCESS</p>
         <p style="color:#5A5A5A; font-family: roboto; font-weight: 500; font-size: 14px; letter-spacing: 0.7px; line-height: 2.4; width: 80%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
@@ -231,7 +248,7 @@
 
     <div class="profile-container">
         <div class="left-content">
-            <div style="min-height: 5vh; background-color: #EEEEEE;"></div>
+            <div style="min-height: 3vh; background-color: #EEEEEE;"></div>
             <div class="my-profile" style="width:91%;">
                     <span
                             style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
@@ -250,24 +267,23 @@
                 <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Meet the
                     community members and make new friends.</p>
             </div>
-            <div class="people" onclick="openGroupsPage()">
+            <div class="people" onclick="openGroupsPage()" style="cursor: pointer;">
                 <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
                 <span
                         style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px;letter-spacing: 1.4px;">GROUPS</span>
-                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Meet the
-                    community members and make new friends.</p>
+                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Join the groups and catch all the action. You will get suggestions based on your profile.</p>
             </div>
         </div>
 
 
-        <div class="photo-upload" id="origin-frame" style="width: 30%; left: 30%; top: 98%;">
-            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame()"><br><br>
+        <div class="photo-upload" id="origin-frame" style="width: 30%; left: 30%; top: 115%;">
+            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29); cursor: pointer;" onclick="closeFrame()"><br><br>
             <p style="color:#32BDD2; font-weight: 900; font-family: roboto; font-size: 16px; letter-spacing: 1.6px; line-height: 2; margin: 60px 0px 20px 0px;">YOUR PLACE OF ORIGIN</p>
             <p style="color:#5A5A5A; font-size:14px; line-height: 2.4; font-family: roboto; margin-top: 20px; margin-bottom: 40px;">If you have a profile picture, your chances of making more friends will be higher. However you can turn on or turn off the visibility of your photo anytime.</p>
-            <div style="border: solid 1px #F7F4F4; box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.26); padding:5px; margin-right: auto: margin-left: auto; margin-bottom:40px; border-radius: 12px;">
-                <input type="text" placeholder="Hubli" style="border: 0px; padding: 10px; width: 350px; font-family:roboto; font-size: 14px; letter-spacing: 1.4px;">
+            <div style="border: solid 1px #F7F4F4; box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.26); padding:5px; margin-right: auto; margin-left: auto; margin-bottom:40px; width: 270px; border-radius: 12px;">
+                <input type="text" placeholder="Hubli" style="outline: none; border: 0px; padding: 10px; width: 250px; font-family:roboto; font-size: 14px; letter-spacing: 1.4px;">
             </div>
-            <input type="button" class="submit-btn" value="DONE" style="display:block; margin: auto;" id="originInfo">
+            <input type="button" class="submit-btn" value="DONE" style="display:block; margin: auto; cursor: pointer;" id="originInfo" onclick="closeFrame()">
         </div>
 
 
@@ -279,23 +295,29 @@
                 <div
                         style="display:flex; justify-content: center; width:100%; align-items: center; flex-direction: column;">
                     <div style="display: flex; margin-left: 175px;" id="delete-profile">
-                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 40@16x.png}" height="150" width="150" id="upload-profile-pic" onclick="uploadPicture()" style="border-radius: 50%;">
-                            <div style="display: flex; padding: 10px; visibility: hidden;" id="edit-part">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 40@16x.png}" height="150" width="150" id="upload-profile-pic" onclick="uploadPicture()" style="border-radius: 50%; cursor: pointer;">
+                            <div style="display: flex; padding: 10px; visibility: hidden; margin-bottom: 15px;" id="edit-part">
                                 <img th:src="@{/images/extra-large-256px/Artboard 1 copy 51@16x.png}" height="30" width="30" onclick="changePicture()" id="picture-edit-btn">
                                 <div id="change-delete-picture" style="visibility: hidden; display: grid; background-color: #FFFFFF; box-shadow: 0px 0px 11px #999999; border-radius: 0px 9px 9px 9px;">
                                     <div style="margin-left: 20px; padding-right: 15px; border-bottom: solid #CCCCCC 0.5px; margin-top: 25px; padding-bottom:20px;">
                                     <a style="display: block; color: #464646; font-family: roboto; letter-spacing: 0.7px; text-decoration: none; font-size: 14px; cursor: pointer;" onclick="uploadPicture()">Change Photo</a>
                                     </div>
                                     <div style="margin-left: 20px; padding-right: 15px; margin-top: 25px; padding-bottom: 20px;">
-                                        <a style="display: block; color: #464646; font-family: roboto; letter-spacing: 0.7px; text-decoration: none; font-size: 14px; cursor: pointer;">Delete Photo</a>
+                                        <a style="display: block; color: #464646; font-family: roboto; letter-spacing: 0.7px; text-decoration: none; font-size: 14px; cursor: pointer;" onclick="deletePhoto()">Delete Photo</a>
                                     </div>
                                     </div>
                             </div>
                     </div>
-                    <div id="visible-pic" style="display: none;">
-                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 4@16x.png}" width="65" height="65"  class="hideshow" onclick="visibilityToggle(this);">
+                    <div id="snackbar-profile">
+                        HIDDEN - Others can’t see your Profile Picture and you can’t see others Profile Picture.
                     </div>
-                        <p style="color:#464646; font-family: roboto: font-weight: 500; margin-top: 15px;letter-spacing: 1.4px;" id="upload-pic">UPLOAD YOUR PHOTO</p>
+                    <div id="snackbar1-profile">
+                        Visible - Others can see your Profile Picture and you can see others Profile Picture.
+                    </div>
+                    <div id="visible-pic" style="display: none; cursor: pointer;">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 4@16x.png}" width="65" height="65"  class="hideshow" onclick="visibilityToggle(this); myFunctionProfile(this)">
+                    </div>
+                        <p style="color:#464646; font-family: roboto: font-weight: 700; margin-top: 15px;letter-spacing: 1.4px;" id="upload-pic">UPLOAD YOUR PHOTO</p>
                 </div>
 
                 <div class="user-details">
@@ -442,22 +464,22 @@
                             <p style="color: #909090; font-family: roboto; font-size: 12px; letter-spacing: 0.3px; line-height: 1;">Add interests to enhance your GuestJini experience.</p>
                         </div>
                         </div>
-                    <span style="cursor: pointer; color:#32BDD2; font-family:robot; font-size: 14px; letter-spacing:0.3px; line-height:1; font-weight: 900;" id="my-Interest-List" onclick="viewInterestList()"><u>View My Interests</u></span>
+                    <span style="cursor: pointer; color:#32BDD2; font-family:robot; font-size: 14px; letter-spacing:0.3px; line-height:1; font-weight: 900;" id="my-Interest-List" onclick="viewInterestList()"><u style="cursor: pointer; color:#32BDD2; font-family:robot; font-size: 14px; letter-spacing:0.3px; line-height:1; font-weight: 900;">View My Interests</u></span>
                 </div>
 
                 <div class="view-interest-list" id="view-interest-list">
-                    <div style="display: block; border-bottom: solid #CCCCCC 0.5px; padding-bottom: 10px;">
+                    <div style="display: block; border-bottom: solid #CCCCCC 0.5px; padding-bottom: 10px; margin-top: 15px;">
                         <a style="display:block; color:#464646; font-family: roboto; font-size: 14px; font-weight: 900; letter-spacing: 1.2px; line-height: 1.4; text-decoration: none;  padding-right: 40px;" href="#">Fitness</a>
                         <a style="display:block; color:#909090; font-family: roboto; font-size: 12px; letter-spacing: 0.5px; line-height: 1.1; text-decoration: none; padding: 10px 40px 10px 0px;" href="#">Gym</a>
                         <a style="display:block; color:#909090; font-family: roboto; font-size: 12px; letter-spacing: 0.5px; line-height: 1.1; text-decoration: none; padding: 10px 40px 10px 0px;" href="#">Morning Walk</a>
                     </div>
-                    <div style="display: block; border-bottom: solid #CCCCCC 0.5px; padding-bottom: 10px;">
+                    <div style="display: block; border-bottom: solid #CCCCCC 0.5px; padding-bottom: 10px; margin-top: 15px;">
                         <a style="display:block; color:#464646; font-family: roboto; font-size: 14px; font-weight: 900; letter-spacing: 1.2px; line-height: 1.4; text-decoration: none; padding: 20px 40px 10px 0px;" href="#">Photography</a>
                         <a style="display:block; color:#909090; font-family: roboto; font-size: 12px; letter-spacing: 0.5px; line-height: 1.1; text-decoration: none; padding: 10px 40px 10px 0px;" href="#">Adventure Photography</a>
                         <a style="display:block; color:#909090; font-family: roboto; font-size: 12px; letter-spacing: 0.5px; line-height: 1.1; text-decoration: none; padding: 10px 40px 10px 0px;" href="#">Panaroma</a>
                         <a style="display:block; color:#909090; font-family: roboto; font-size: 12px; letter-spacing: 0.5px; line-height: 1.1; text-decoration: none; padding: 10px 40px 10px 0px;" href="#">Cityscape Photography</a>
                     </div>
-                    <div style="display: block; padding-bottom: 10px; padding-right: 60%;">
+                    <div style="display: block; padding-bottom: 10px; padding-right: 60%; margin-top: 15px;">
                         <a style="display:block; color:#464646; font-family: roboto; font-size: 14px; font-weight: 900; letter-spacing: 1.2px; line-height: 1.4; text-decoration: none; padding: 20px 20px 10px 0px;" href="#">Film</a>
                         <a style="display:block; color:#909090; font-family: roboto; font-size: 12px; letter-spacing: 0.5px; line-height: 1.1; text-decoration: none; padding: 10px 40px 10px 0px;" href="#">Action Thriller</a>
                         <a style="display:block; color:#909090; font-family: roboto; font-size: 12px; letter-spacing: 0.5px; line-height: 1.1; text-decoration: none; padding: 10px 40px 10px 0px;" href="#">Comedy</a>
@@ -474,30 +496,30 @@
                 </div>
 
                 <div class="drop-down-list" id="drop-down-list">
-                <form class="drop-down-form">
+                <form class="drop-down-form" style="/*border-left: solid #B5B5B5 0.25px; border-right: solid #B5B5B5 0.25px; border-bottom: solid #B5B5B5 0.25px;*/">
                     <div class="container1" style="display: flex; border-bottom: solid 0.5px #CCCCCC; justify-content: space-between; align-items: center; margin: 10px 30px 30px 30px; padding-bottom: 15px;">
-                        <span style="color: #747474; font-family: roboto; font-size: 16px;"> Hiking</span>
+                        <span style="color: #747474; font-family: roboto; font-size: 16px; padding-left: 15px;"> Hiking</span>
                         <label class="container">
                             <input type="checkbox" name="adventure-outdoor-hiking" value="hiking">
                             <span class="checkmark"></span>
                         </label>
                     </div>
                     <div class="container1" style="display: flex; border-bottom: solid 0.5px #CCCCCC; justify-content: space-between; align-items: center; margin: 10px 30px 30px 30px; padding-bottom: 15px;">
-                        <span style="color: #747474; font-family: roboto; font-size: 16px;"> Biking</span>
+                        <span style="color: #747474; font-family: roboto; font-size: 16px; padding-left: 15px;"> Biking</span>
                         <label class="container">
                             <input type="checkbox" name="adventure-outdoor-biking" value="biking">
                             <span class="checkmark"></span>
                         </label>
                     </div>
                     <div class="container1" style="display: flex; border-bottom: solid 0.5px #CCCCCC; justify-content: space-between; align-items: center; margin: 10px 30px 30px 30px; padding-bottom: 15px;">
-                        <span style="color: #747474; font-family: roboto; font-size: 16px;"> Cycling</span>
+                        <span style="color: #747474; font-family: roboto; font-size: 16px;padding-left: 15px;"> Cycling</span>
                         <label class="container">
                             <input type="checkbox" name="adventure-outdoor-cycling" value="cycling">
                             <span class="checkmark"></span>
                         </label>
                     </div>
                     <div class="container1" style="display: flex; border-bottom: solid 0.5px #CCCCCC; justify-content: space-between; align-items: center; margin: 10px 30px 30px 30px; padding-bottom: 15px;">
-                        <span style="color: #747474; font-family: roboto; font-size: 16px;"> Camping</span>
+                        <span style="color: #747474; font-family: roboto; font-size: 16px;padding-left: 15px;"> Camping</span>
                         <label class="container">
                             <input type="checkbox" name="adventure-outdoor-camping" value="camping">
                             <span class="checkmark"></span>
@@ -534,6 +556,12 @@
                     <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="15" width="15" alt="list-button" style="margin-right: 15px;">
                 </div>
 
+                <div class="check-list">
+                    <p class="head-text">
+                        Film<span style="color: #747474; font-weight: 700;">&nbsp;&nbsp;(04)</span>
+                    </p>
+                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="15" width="15" alt="list-button" style="margin-right: 15px;">
+                </div>
 
                 <div class="check-list">
                     <p class="head-text">
@@ -563,7 +591,7 @@
                     <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="15" width="15" alt="list-button" style="margin-right: 15px;">
                 </div>
 
-                <div class="show-more">
+                <div class="show-more" style=" margin-right: 10%; margin-left: 10%;">
                     <p class="head-text" style="font-weight: 700; margin-right: 10px;">
                         SHOW MORE
                     </p>
