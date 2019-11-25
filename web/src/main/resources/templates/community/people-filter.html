@@ -82,7 +82,7 @@
                     <div style="width:921px; display:flex; ">
                     <p style="display:block; color:#464646; font-family:roboto; width:59px;font-size:18px; font-weight:700; margin-bottom: 20px; letter-spacing: 1.4px;">
                         PEOPLE
-                        <p style="color:#5A5A5A;display: flow-root;margin-right: 44%;">Showing your favourites.</br>
+                        <p style="color:#5A5A5A;display: flow-root;margin-left:58%;">Showing your favourites.</br>
                         <span class="all-scroll" onclick="clearall()" style="color:#32BDD2; margin-left:48%;"><u>Clear Filter</u></span>
                         <script>
                       function clearall() {
@@ -90,16 +90,16 @@
                 </script>
                     </p>
 
-                    <div class="burger">
-                        <img  onclick="myFunction()" class="dropbtn"  th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" height="32px" width="33px" id="uplaod-profile-pic">
-                        <div id="myDropdown" class="dropdown-content-search">
-                            <a onclick="clearall()" style="color:#32BDD2" href="#home">CLEAR</a>
-                            <script>
-                      function clearall() {
+                        <div class="burger">
+                            <img  onclick="myFunction()" class="dropbtn"  th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" height="32px" width="33px" id="uplaod-profile-pic">
+                            <div id="myDropdown" class="dropdown-content-search">
+                                <a onclick="clearall()" style="color:#32BDD2;" href="#home">CLEAR</a>
+                                <a   style="color:#909090;" href="#about">Favourites</a>
+                                <script>
+                      function fav() {
                         window.location = src = "/community/people-list";                    }
                 </script>
-                            <a style="color:#464646;" href="#about">Favourites</a>
-                        </div>
+                            </div>
                     </div>
                 </div>
 
@@ -119,7 +119,7 @@
                 </script>
                     </div>
                 </div>
-                <p style="color:#464646; font-size:12px; margin-left: 145%; font-weight:550;width: 100px;"><b>2 Matches found.</b></p>
+
 
                 <div class="user-details">
                     <div class="names">

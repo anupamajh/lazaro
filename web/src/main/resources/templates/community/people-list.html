@@ -105,19 +105,19 @@
                 </script>
                     </div>
                     <div style="width:50%;float:left;">
-                        <img class="all-scroll" style="margin-left:64%;" th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" height="27" width="25" onclick="loginFunction1()" >
+                        <img style="margin-left:64%; cursor:pointer;" th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" height="27" width="25" onclick="loginFunction1()" >
                         <script>
                       function loginFunction1() {
                         window.location = src = "/community/people-search";                    }
                 </script>
                     </div>
                 </div>
-                <p style="color:#464646; font-size:12px; margin-left: 145%; font-weight:550;width: 100px;"><b>2 Matches found.</b></p>
+<!--                <p style="color:#464646; font-size:12px; margin-left: 145%; font-weight:550;width: 100px;"><b>2 Matches found.</b></p>-->
 
             <div class="user-details">
                 <div class="names">
                     <img th:src="@{/images/profile-pic.jpg}" height="35" width="35" style="border-radius: 50%; ">
-                    <p class="all-scroll" onclick="loginFunction2()" style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px; margin-left: 12%; width:78px;">
+                    <p onclick="loginFunction2()" style="color:#5A5A5A; font-size:14px; font-style:roboto; cursor:pointer;font-weight: 400;letter-spacing: 1.05px; margin-left: 12%; width:78px;">
                         John Doe <br>Male
                     </p>
                     <script>
@@ -130,7 +130,7 @@
             </div>
             <div class="blue">
                 <img class="all-scroll" id="press-like" th:src="@{/images/extra-large-256px/Artboard 1 copy 35@16x.png}" height="28" width="28" onclick="myFunction1()" style="border-radius: 50%; ">
-                <img class="unlikee" id="press-unlike" th:src="@{/images/extra-large-256px/Artboard 1 copy 36@16x.png}" height="28" width="28" onclick="unliking()" style="border-radius: 50%; display:none;">
+                <img class="unlikee" id="press-unlike" th:src="@{/images/extra-large-256px/Artboard 1 copy 36@16x.png}" height="28" width="28" onclick="unliking()" style="border-radius: 50%;cursor:pointer; display:none;">
                 <span
                         style="background-color:#32BDD2; padding: 1.6px; font-size:1px; width:23%; line-height:6px;"><br></span>
                 <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px; ">Common
