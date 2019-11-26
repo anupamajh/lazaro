@@ -194,7 +194,7 @@
 
     function groupView(){
         console.log("msg");
-        location.replace("/community/community-group-view");
+        location.replace("/community/community-groups/community-group-view");
 <!--        document.getElementById("group-view").style.display = "block";-->
 <!--        document.getElementById("group-content").style.display = "none";-->
 <!--        document.getElementById("drop-down-btn").style.display = "none";-->
@@ -214,10 +214,10 @@
             document.getElementById("upload-success").style.display = "none";
         }
          function joinConversation(){
-            location.replace("/community/community-group-conversation");
+            location.replace("/community/community-groups/community-group-conversation");
         }
          function backToGroupView(){
-            location.replace("/community/community-groups");
+            location.replace("/community/community-groups/community-groups");
         }
         function viewConversation(){
             var x = document.getElementById("snackbar-group");
@@ -225,10 +225,10 @@
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
         }
         function requestAwaiting(){
-            location.replace("/community/community-awaiting-group");
+            location.replace("/community/community-groups/community-awaiting-group");
         }
         function openGroup(){
-            location.replace("/community/community-open-group");
+            location.replace("/community/community-groups/community-open-group");
         }
         function searchGroups(){
             var str = document.getElementById("search-groups").value.toUpperCase().trim();
@@ -245,9 +245,11 @@
                 var empty = "";
                 if(result != null){
                     group[i].style.display = "flex";
+                    document.getElementById("show-more").style.display = "flex";
                     count = count+1;
                 }else{
                     group[i].style.display = "none";
+                    document.getElementById("show-more").style.display = "none";
                 }
                 if(count === 0){
                     document.getElementById("search-not-found").style.display = "flex";
@@ -359,6 +361,11 @@
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div style="display: flex; align-items: center;">
                         <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" style="box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.58); border-radius: 50%;" onclick="viewGroups()">
+                        <div style="display: none; width: 170px; height: 285px; position: absolute; box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.29); background-color: #FFFFFF; right: 0%; border-radius: 0px 5px 5px 5px;" id="drop-down-1">
+                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 1.05px; color: #747474; line-height: 1.6; padding-right: 40%; padding-bottom: 13%; margin: 23% 0% 0% 15%;">INTEREST GROUPS</a>
+                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #747474; line-height: 1.6; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%;">COMMUNITY GROUPS</a>
+                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #747474; line-height: 1.6; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%;">MY GROUPS</a>
+                        </div>
                         <span style="font-family: roboto; font-size: 14px; font-weight: 900; letter-spacing: 1.4px; margin-left: 25px; margin-top: 5px; color: #464646;">COMMUNITY GROUPS</span>
                     </div>
                     <div style="display: none; position: relative; cursor: pointer;" id="drop-down-btn">

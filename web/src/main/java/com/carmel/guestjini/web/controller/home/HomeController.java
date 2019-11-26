@@ -36,25 +36,25 @@ public class HomeController {
     @RequestMapping(value = "community/community-profile")
     public String communityProfile(){ return "community/community-profile";}
 
-    @RequestMapping(value = "community/community-groups")
-    public String communityGroups(){ return "community/community-groups";}
+    @RequestMapping(value = "community/community-groups/community-groups")
+    public String communityGroups(){ return "community/community-groups/community-groups";}
 
-    @RequestMapping(value = "community/community-group-view")
-    public String communityGroupView(){ return "community/community-group-view";}
+    @RequestMapping(value = "community/community-groups/community-group-view")
+    public String communityGroupView(){ return "community/community-groups/community-group-view";}
 
-    @RequestMapping(value = "community/community-existing-group-view")
-    public String communityGroupExistingView(){ return "community/community-existing-group-view";}
+    @RequestMapping(value = "community/community-groups/community-existing-group-view")
+    public String communityGroupExistingView(){ return "community/community-groups/community-existing-group-view";}
 
-    @RequestMapping(value = "community/community-awaiting-group")
-    public String communityGroupAwaitingView(){ return "community/community-awaiting-group";}
+    @RequestMapping(value = "community/community-groups/community-awaiting-group")
+    public String communityGroupAwaitingView(){ return "community/community-groups/community-awaiting-group";}
 
-    @RequestMapping(value = "community/community-open-group")
-    public String communityGroupOpenView(){ return "community/community-open-group";}
+    @RequestMapping(value = "community/community-groups/community-open-group")
+    public String communityGroupOpenView(){ return "community/community-groups/community-open-group";}
 
-    @RequestMapping(value = "community/community-group-conversation")
-    public String communityGroupConversation(){ return "community/community-group-conversation";}
+    @RequestMapping(value = "community/community-groups/community-group-conversation")
+    public String communityGroupConversation(){ return "community/community-groups/community-group-conversation";}
 
-    @RequestMapping(value = "community/people-list")
+    @RequestMapping(value = "community/community-groups/people-list")
     public String peopleList(){ return "community/people-list";}
 
     @RequestMapping(value = "community/people-search")
@@ -77,6 +77,9 @@ public class HomeController {
 
     @RequestMapping(value = "InterestGroups/group-search")
     public String groupsearch(){ return "InterestGroups/group-search";}
+
+    @RequestMapping(value = "my-groups/my-groups")
+    public String myGroups(){ return "my-groups/my-groups";}
 
 }
 

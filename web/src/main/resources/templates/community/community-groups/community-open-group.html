@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Community-Existing-Group-View</title>
+    <title>Community-open-groups</title>
     <link th:href="@{https://fonts.googleapis.com/css?family=Roboto&display=swap}" rel="stylesheet">
     <link th:href="@{/css/community.css}" rel="stylesheet">
 </head>
@@ -34,19 +34,32 @@
             document.getElementById("upload-success").style.display = "block";
         }
      function closeFrame(){
-            document.getElementById("exit-group").style.display= "none";
+<!--            document.getElementById("photo-upload").style.display = "none";-->
+<!--            document.getElementById("origin-frame").style.display = "none";-->
+<!--            document.getElementById("upload-failed").style.display = "none";-->
+            document.getElementById("ignore").style.display = "none";
+            document.getElementById("upload-success").style.display = "none";
         }
         function ignoreInvite(){
             document.getElementById("ignore").style.display = "block";
         }
         function backToGroupView(){
-            location.replace("/community/community-group-conversation");
+            location.replace("/community/community-groups/community-groups");
         }
         function joinConversation(){
-            location.replace("/community/community-group-conversation");
+            location.replace("/community/community-groups/community-group-conversation");
         }
-        function exitGroup(){
-            document.getElementById("exit-group").style.display= "block";
+        function sendRequest(){
+            document.getElementById("request-btn").style.display = "none";
+            document.getElementById("waiting-msg").style.display = "block";
+        }
+        function requestSent(){
+                    document.getElementById("waiting-msg").style.display = "none";
+                    document.getElementById("request-option").style.display = "none";
+                    document.getElementById("request-sent-msg").style.display = "flex";
+                    var x = document.getElementById("snackbar-request");
+                    x.className = "show";
+                    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
         }
 </script>
 
@@ -65,43 +78,22 @@
             vestibulum.</p>
     </div>
 
-    <!--    <div class="photo-upload" id="photo-upload">-->
-    <!--        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" id="uplaod-profile-pic-close" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame()"><br><br>-->
-    <!--        <p style="font-weight: 900; color:#32BDD2; font-family: roboto; font-size: 16px; letter-spacing: 1.6px; line-height: 2; margin: 60px 0px 20px 0px;">UPLOAD PHOTO</p>-->
-    <!--        <div style="display: flex; margin: 10px;">-->
-    <!--            <div class="left-part">-->
-    <!--                <p style="color:#747474; font-size: 16px; font-family: roboto; line-height: 1.5; font-weight: 900;">Select a file from my computer. <br><span style="font-size: 14px; font-weight: 500;">The file size should not exceed 5MB</span></p>-->
-    <!--                <div style="height:0px;overflow:hidden">-->
-    <!--                    <input type="file" id="fileInput" name="fileInput" accept="image/*"/>-->
-    <!--                </div>-->
-    <!--                <input type="button" class="submit-btn" id="profile-pic" value="BROWSE" onclick="chooseImg()" style=" padding-right: 10px; padding-left: 10px; padding-top: 5px; padding-bottom: 5px; letter-spacing: 0.5px; margin-top: 15px; font-size: 10px;">-->
-    <!--            </div>-->
-    <!--            <div class="right-part">-->
-    <!--                <div style="border: solid 2px #FFFFFF; border-style: dashed; padding: 8%; margin: 4%;">-->
-    <!--                    <img th:src="@{/images/extra-large-256px/upload.png}" width="45" height="45" style="display:block; margin: auto;"/>-->
-    <!--                    <p style="color: #FFFFFF; margin: auto; text-align: center;">Drop a file here</p>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--        <input type="submit" class="submit-btn" value="DONE" style="padding: 1.5% 5% 1.5% 5%; margin-top: 50px;" onclick="upload()">-->
-    <!--    </div>-->
-
-    <div class="photo-upload" id="exit-group" style="width: 30%; min-height: 20%; top: 50%; left:30%; padding-bottom: 2vw;">
+    <div class="photo-upload" id="ignore" style="width: 30%; min-height: 27%; top: 50%; left:30%; padding-bottom: 2vw;">
         <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame()"><br><br>
-        <p style="color:#E65959; font-family: roboto; font-weight: 900; font-size: 16px; letter-spacing: 1.6px; line-height: 1.9; margin-bottom: 20px;">EXIT GROUP?</p>
+        <p style="color:#E65959; font-family: roboto; font-weight: 900; font-size: 16px; letter-spacing: 1.6px; line-height: 1.9; margin-bottom: 20px;">IGNORE?</p>
         <p style="color:#5A5A5A; font-family: roboto; font-weight: 500; font-size: 14px; letter-spacing: 0.7px; line-height: 2.4; width: 80%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
-        <div style="display: flex; margin: 3vw 5vw 1vh 5vh; justify-content: space-evenly;">
-            <input type="button" class="submit-btn" style="display: block; background-color:#E65959; border: 0px; padding: 0.5vw 2.5vw;" value="EXIT" onclick="">
-            <input type="button" class="submit-btn" style="display: block; padding: 0.5vw 3vw; border: 0px; margin-left: 25px" value="NO" onclick="">
+        <div style="display: flex; margin: 3vw 5vw; justify-content: space-evenly;">
+            <input type="button" class="submit-btn" style="display: block; background-color:#E65959; border: 0px;" value="IGNORE" onclick="">
+            <input type="button" class="submit-btn" style="display: block; padding: 0.5vw 3vw; border: 0px; margin-left: 0px" value="NO" onclick="">
         </div>
     </div>
 
-<!--    <div class="photo-upload" id="upload-success" style="width: 30%; min-height: 30%; left:30%; top: 45%; padding-bottom: 2vw;">-->
-<!--        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame ()"><br><br>-->
-<!--        <p style="color:#32BDD2; font-family: roboto; font-weight: 900; font-size: 16px; letter-spacing: 1.6px; line-height: 1.9; margin-bottom: 20px;">SUCCESS</p>-->
-<!--        <p style="color:#5A5A5A; font-family: roboto; font-weight: 500; font-size: 14px; letter-spacing: 0.7px; line-height: 2.4; width: 80%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>-->
-<!--        <input type="button" class="submit-btn" style="display: block; margin: 2vw auto; border: 0px;" value="DONE" onclick="joinConversation()">-->
-<!--    </div>-->
+    <div class="photo-upload" id="upload-success" style="width: 30%; min-height: 30%; left:30%; top: 45%; padding-bottom: 2vw;">
+        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame ()"><br><br>
+        <p style="color:#32BDD2; font-family: roboto; font-weight: 900; font-size: 16px; letter-spacing: 1.6px; line-height: 1.9; margin-bottom: 20px;">SUCCESS</p>
+        <p style="color:#5A5A5A; font-family: roboto; font-weight: 500; font-size: 14px; letter-spacing: 0.7px; line-height: 2.4; width: 80%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
+        <input type="button" class="submit-btn" style="display: block; margin: 2vw auto; border: 0px;" value="DONE" onclick="joinConversation()">
+    </div>
 
 
 
@@ -109,8 +101,7 @@
         <div class="left-content">
             <div style="min-height: 5vh; background-color: #EEEEEE;"></div>
             <div class="people">
-                    <span
-                            style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
                 <span
                         style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">MY
                         PROFILE</span>
@@ -128,53 +119,55 @@
             </div>
             <div class="my-profile">
                 <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span
-                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px;letter-spacing: 1.4px;">GROUPS</span>
+                <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px;letter-spacing: 1.4px;">GROUPS</span>
                 <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Join the groups and catch all the action. You will get suggestions based on your profile.</p>
             </div>
         </div>
 
-
-        <!--        <div class="photo-upload" id="origin-frame" style="width: 30%; left: 30%; top: 98%;">-->
-        <!--            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame()"><br><br>-->
-        <!--            <p style="color:#32BDD2; font-weight: 900; font-family: roboto; font-size: 16px; letter-spacing: 1.6px; line-height: 2; margin: 60px 0px 20px 0px;">YOUR PLACE OF ORIGIN</p>-->
-        <!--            <p style="color:#5A5A5A; font-size:14px; line-height: 2.4; font-family: roboto; margin-top: 20px; margin-bottom: 40px;">If you have a profile picture, your chances of making more friends will be higher. However you can turn on or turn off the visibility of your photo anytime.</p>-->
-        <!--            <div style="border: solid 1px #F7F4F4; box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.26); padding:5px; margin-right: auto: margin-left: auto; margin-bottom:40px; border-radius: 12px;">-->
-        <!--                <input type="text" placeholder="Hubli" style="border: 0px; padding: 10px; width: 350px; font-family:roboto; font-size: 14px; letter-spacing: 1.4px;">-->
-        <!--            </div>-->
-        <!--            <input type="button" class="submit-btn" value="DONE" style="display:block; margin: auto;" id="originInfo">-->
-        <!--        </div>-->
-
-
         <div class="right-content" style="padding: 2% 2% 0% 2%;">
 
             <div class="my-profile-options" style="padding: 2% 2% 0% 2%; min-height: 55vw;" id="community-groups">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="display: flex; align-items: center;">
-                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" style="box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.58); border-radius: 50%;">
-                        <span style="font-family: roboto; font-size: 14px; font-weight: 900; letter-spacing: 1.4px; margin-left: 25px; margin-top: 5px; color: #464646;">COMMUNITY GROUPS</span>
-                    </div>
+                <div style="display: flex; align-items: center;">
+                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" style="box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.58); border-radius: 50%;">
+                    <span style="font-family: roboto; font-size: 14px; font-weight: 900; letter-spacing: 1.4px; margin-left: 25px; margin-top: 5px; color: #464646;">COMMUNITY GROUPS</span>
                 </div>
-
                 <div class="group-view" id="group-view" style="display: block;">
-                    <div class="group-info" style="display: flex; align-items: center; justify-content: space-between;">
-                        <div style="width: 70%;">
-                            <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; color: #505050; font-weight: 600; margin-bottom: 20px;">HAMPI TRIP</p>
-                            <p style="font-family: roboto; font-size: 10px; letter-spacing: 0; line-height: 1.4; color: #909090; font-weight: 400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim felis et magna mattis finibus. Nulla elit ligula, placerat tincidunt ipsum eu, ornare semper felis. Duis arcu massa, venenatis eget ante sodales, posuere volutpat risus. Aenean et justo eu massa sodales posuere.</p>
-                        </div>
-                        <input type="button" class="submit-btn" style="background-color: #E65959; border: 0px; border-radius: 2px; padding: 10px 30px; box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.29); font-size: 12px; letter-spacing: 1.2px;" value="EXIT" onclick="exitGroup()">
+                    <div class="group-info">
+                        <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; color: #505050; font-weight: 600; margin-bottom: 20px;">GEEKS</p>
+                        <p style="font-family: roboto; font-size: 10px; letter-spacing: 0; line-height: 1.4; color: #909090; font-weight: 400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim felis et magna mattis finibus. Nulla elit ligula, placerat tincidunt ipsum eu, ornare semper felis. Duis arcu massa, venenatis eget ante sodales, posuere volutpat risus. Aenean et justo eu massa sodales posuere. Nullam sollicitudin nibh in turpis placerat venenatis.</p>
                     </div>
                     <div class="group-admin-details">
                         <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
                         <div style="margin-left: 25px;">
                             <p style="font-family: roboto; letter-spacing: 0.5px; font-size: 10px; line-height: 20px; color: #909090;">CREATED BY</p>
-                            <p style="font-family: roboto; letter-spacing: 0.35px; font-size: 14px; line-height: 15px; color: #5A5A5A;font-weight: 500;">Nora Bravos</p>
+                            <p style="font-family: roboto; letter-spacing: 0.35px; font-size: 14px; line-height: 15px; color: #5A5A5A; font-weight: 500;">Markus LawlessBravos</p>
                             <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 15px; margin-top: 15px; color: #909090;">7th July 2019 11:38 AM (2 Hours ago)</p>
                         </div>
                     </div>
 
+                    <div id="snackbar-request">
+                        Your request to join this group has been sent to admin.
+                    </div>
+
+                    <div class="request" id="request-option">
+                        <p style="font-size: 14px; letter-spacing: 0.7px; font-family: roboto; line-height: 17px; font-weight: 600; color: #5A5A5A; margin-top: 2vh;">I would like to join GEEKS.</p>
+                        <p style="font-size: 12px; letter-spacing: 0.6px; font-family: roboto; line-height: 17px; font-weight: 400; color: #999999; margin-top: 10px;">Your request will be sent to Admin.</p>
+                        <input type="button" class="submit-btn" id="request-btn" value="SEND REQUEST" style="font-size: 12px; letter-spacing: 1.2px; margin-top: 2vh; padding: 8px 15px" onclick="sendRequest(), setTimeout(requestSent, 5000);">
+                        <div style="display: none; margin-top: 2vh;" id="waiting-msg">
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 34@16x.png}" width="15" height="15" style="border-radius: 50%;" id="loading-img"/>
+                            <span style="font-size: 12px; letter-spacing: 1.2px; font-family: roboto; line-height: 14px; font-weight: 600; color: #32BDD2; margin-left: 10px;">PLEASE WAIT</span>
+                        </div>
+                    </div>
+
+                    <div style="display: none; align-items: center; justify-content: center; background-color: #EDF8FA; border-top: solid #32BDD2 1px; border-bottom: solid #32BDD2 1px; padding: 2% 4%; width: 60%; margin-top: 4%;" id="request-sent-msg">
+                        <div>
+                            <p style="font-family: roboto; font-weight: 600; letter-spacing: 0.6px; font-size: 12px; line-height: 17px; color: #206771; text-align: center;">You sent a request to join this group on 8th July 2019</p>
+                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; margin-top: 15px; color: #318E9B; text-align: left;">Awaiting Nora Bravos to accept your request.</p>
+                        </div>
+                    </div>
+
                     <div style="display: flex; align-items: center; margin-top: 6vh;">
-                        <p style="font-family: roboto; font-size: 14px; letter-spacing: 0.7px; line-height: 25px; color: #747474; font-weight: 900; width: 10%;">27 Members</p>
+                        <p style="width: 10%;   font-family: roboto; font-size: 14px; letter-spacing: 0.7px; line-height: 25px; color: #747474; font-weight: 900;">27 Members</p>
                         <span style="height: 0.5px; background-color: #CCCCCC; padding: 0.25px 200px; font-size: 1px; width: 400px; margin-left: 15px;"></span>
                     </div>
                     <div class="group-members">
