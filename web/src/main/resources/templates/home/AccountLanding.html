@@ -21,7 +21,7 @@
         function myFunction2() {
             document.getElementById("eye-icon").style.display = "block";
             document.getElementById("eye-pswd").style.display = "none";
-            document.getElementById("eye-icon").style.bottom = "25%";
+            document.getElementById("eye-icon").style.bottom = "27%";
 
         }
         function type() {
@@ -32,7 +32,7 @@
 
 </head>
 <body>
-<div class="main">
+<div class="main" style="margin-left:18%;">
     <div style="margin-top: 10%;" class="main-layer">
         <img style="margin-left:29%;" class="image-logo" th:src="@{/images/GuestureLogo.png}" alt="" width="153px" height="45px">
 
@@ -50,22 +50,22 @@
                 <span class="register">REGISTERED EMAIL</span>
                 <input class="box" type="text" name="un" placeholder="example@address.com" size="48" id="inputErr"
                        onfocus="this.placeholder=''" onblur="this.placeholder='example@address.com'">
-                <span class="field1">This field is required</span>
+                <span class="field1" style="font-size:10px;">This field is required</span>
 
             </div>
-            <div class="password">
+            <div style="margin-top:4%;">
                 <span class="register">REGISTERED PHONE NUMBER</span>
                 <input class="box" type="password" name="un" placeholder="98445 54783" size="48" border-radius="5px;" id="pswdErr"
                        onfocus="this.placeholder=''" onblur="this.placeholder='98445 54783'">
-                <img class="image-eye-landing" id="eye-icon" th:src="@{/images/EyeIcon.png}" alt="" width="24px"
-                     height="24px" onclick="myFunction1()">
-                <img class="image1-landing" th:src="@{/images/EyeIconblue.png}" alt="" width="24px" height="24px"
-                     onclick="myFunction2()" style="display:none" id="eye-pswd">
-                <p class="field">This field is required</p>
+<!--                <img class="image-eye-landing" id="eye-icon" th:src="@{/images/EyeIcon.png}" alt="" width="24px"-->
+<!--                     height="24px" onclick="myFunction1()">-->
+<!--                <img class="image1-landing" th:src="@{/images/EyeIconblue.png}" alt="" width="24px" height="24px"-->
+<!--                     onclick="myFunction2()" style="display:none" id="eye-pswd">-->
+                <p class="field" style="font-size:10px;">This field is required</p>
 
             </div>
         </div>
-        <div class="submit-button"><button style="width:115px;margin-left: 25%;" type="submit" class="button"  onclick="loginFunction1()">SUBMIT</button>
+        <div class="submit-button"><button style="width:107px;height:36px;margin-left: 25%;cursor:pointer" type="submit" class="button"  onclick="loginFunction1()">SUBMIT</button>
             <script>
                     function loginFunction1()
                     {

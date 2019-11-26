@@ -70,13 +70,19 @@ public class HomeController {
     public String peopleFilter(){ return "community/people-filter";}
 
     @RequestMapping(value = "InterestGroups/groups")
-    public String interestgroups(){ return "InterestGroups/groups";}
+    public String interestGroups(){ return "InterestGroups/groups";}
 
     @RequestMapping(value = "InterestGroups/group-conversation")
     public String groupConversation(){ return "InterestGroups/group-conversation";}
 
     @RequestMapping(value = "InterestGroups/group-search")
-    public String groupsearch(){ return "InterestGroups/group-search";}
+    public String groupSearch(){ return "InterestGroups/group-search";}
+
+    @RequestMapping(value = "InterestGroups/interest-group-view")
+    public String groupView(){ return "InterestGroups/interest-group-view";}
+
+    @RequestMapping(value = "InterestGroups/group-hiking")
+    public String groupHiking(){ return "InterestGroups/group-hiking";}
 
     @RequestMapping(value = "my-groups/my-groups")
     public String myGroups(){ return "my-groups/my-groups";}

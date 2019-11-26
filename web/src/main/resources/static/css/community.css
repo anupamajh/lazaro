@@ -39,7 +39,7 @@ body{
 .search-bar{
     display: flex;
     align-items: center;
-    width: 100%;
+    width: 77%;
     border: solid 1px #CCCCCC;
     border-radius: 16px;
     margin-top: 6vh;
@@ -678,13 +678,13 @@ body{
 .group-info{
     padding: 4% 5%;
     background-color: #EEEEEE;
-    width: 75%;
+    width: 70%;
     margin-top: 4vh;
 }
 .conversation-view{
     background-color: #DFEBF7;
     padding: 2% 5%;
-    width: 75%;
+    width: 70%;
 }
 .incoming-message{
     background-color: #FFFFFF;
@@ -696,12 +696,12 @@ body{
 }
 .sent-message-btm{
     text-align: right;
-    margin-left: 50%;
+ margin-right:19%;
     background-color: #FFFFFF;
     border: solid #FAFAFA 0.5px;
     padding: 2% 3%;
     width: 45%;
-    margin: 5% 0%;
+
     border-radius: 5px;
 }
 .notification{
