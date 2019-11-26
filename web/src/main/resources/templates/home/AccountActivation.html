@@ -11,9 +11,11 @@
             document.getElementById("success").style.display = "none";
             document.getElementById("congrats").style.display = "block";
              document.getElementById("submit").style.display = "none";
-
         }
-
+function login(){
+document.getElementById("link-expire").style.display = "block";
+document.getElementById("congrats").style.display = "none";
+}
         function type() {
         }
     </script>
@@ -22,47 +24,50 @@
 <body>
 <div class="main">
     <div class="main-layer">
-        <img class="image-logo" th:src="@{/images/GuestureLogo.png}" alt="" width="153px" height="45px">
+        <img style="margin-left: 32%;margin-bottom: 7%;" class="image-logo" th:src="@{/images/GuestureLogo.png}" alt="" width="153px" height="45px">
 
-        <p class="start">Lorem ipsum dolor sit amet, consectetur</br>
-            adipiscing elit. Etiam erat sapien, ultricies.</p>
-
+        <div style="margin-left:15%;">
+            <p style="font-family:roboto; width:83%; color:#5A5A5A; font-size:14px;letter-spacing:0.35px;margin: auto;">Lorem ipsum dolor sit amet, consectetur
+                <span style="font-family:roboto; width:85%; color:#5A5A5A; font-size:14px;letter-spacing:0.35px;margin: auto;">adipiscing elit. Etiam erat sapien, ultricies.</span>
+            </p></div>
 
         <div class="align" id="success" style="margin-top:6%;">
-            <div class="layer">
+            <div class="layer" style="margin-top: 16%;">
                 <span class="login"><b>ACCOUNT ACTIVATION</b></span>
-                <p class="para-lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </br>Donec dignissim felis et magna mattis finibus. </p>
+                <p style="color: #909090;
+    font-size: 14px;
+    font-family: Roboto;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </br>Donec dignissim felis et magna mattis finibus. </p>
             </div>
 
-            <div class="move">
+            <div style="margin-top: 11%;">
                 <span class="register">NEW PASSWORD</span>
                 <input class="box" type="text" name="un" placeholder="*************" size="48" id="inputErr"
                        onfocus="this.placeholder=''" onblur="this.placeholder='*************'">
-                <img class="image-eye-landing1" th:src="@{/images/EyeIcon.png}" alt="" width="24px"
+                <img class="image-eye-landing1" style="bottom: 20%;" th:src="@{/images/EyeIcon.png}" alt="" width="24px"
                      height="24px" onclick="myFunction1()">
-                <span class="field1" style="font-size:10px;">This field is required</span>
+                <span class="field1" style="font-size:10px;" >This field is required</span>
 
             </div>
             <div class="password" style="margin-top:6%;">
                 <span class="register">CONFIRM PASSWORD</span>
                 <input class="box" type="password" name="un" placeholder="*************" size="48" border-radius="5px;" id="pswdErr"
                        onfocus="this.placeholder=''" onblur="this.placeholder='*************'">
-                <img class="image-eye-landing2" id="eye-icon" th:src="@{/images/EyeIcon.png}" alt="" width="24px"
+                <img class="image-eye-landing2" style="bottom: 20%;" id="eye-icon" th:src="@{/images/EyeIcon.png}" alt="" width="24px"
                      height="24px" onclick="myFunction1()">
 
                 <p class="field" style="font-size:10px;">This field is required or Passwords not matching.</p>
 
             </div>
         </div>
-        <div class="submit-button"><button type="submit" class="button" style="width:107px;height:36px;" id="submit" onclick="myFunction()">SUBMIT</button>
+        <div class="submit-button"><button type="submit" class="button" style="width:107px;height:36px;margin-left: 21%;cursor:pointer;" id="submit" onclick="myFunction()">SUBMIT</button>
         </div>
 
         <div style="display:none" id="congrats">
-            <p style="color:#747474; font-size:20px; letter-spacing:0.9px;font-weight:600;">CONGRATULATIONS!</p>
-            <p style="color:#909090; font-size:14px; letter-spacing:0.9px; width:440px;">Your account has been activated. You can change your password </br>
+            <p style="color:#747474; font-size:20px; letter-spacing:0.9px;font-weight:900; font-family:roboto;">CONGRATULATIONS!</p>
+            <p style="color:#909090; font-size:14px; letter-spacing:0.9px; width:440px;font-family:roboto;">Your account has been activated. You can change your password </br>
                 within the app in Settings.</p>
 
-        <span style="color:#32BDD2; font-size:18px;">LOGIN</span>
+        <span style="color:#32BDD2; font-size:18px;border-bottom:2px solid #32BDD2;cursor:pointer;" onclick="login()">LOGIN</span>
         <span style="color:#909090; font-size:18px;">to the web application.</span>
         <p style="color:#909090; font-size:18px;">or</p>
         <p style="color:#909090; font-size:18px;">Download mobile app</p>
@@ -70,7 +75,7 @@
 
 
         <div style="display:none; width:475px; height:200px; background-color:#EEEEEE; border-radius:14px; " id="link-expire">
-            <p style="color:#32BDD2; font-size:18px;">LINK EXPIRED</p>
+            <p style="color:#32BDD2; font-size:16px;font-weight:900;letter-spacing:1.6px;">LINK EXPIRED</p>
             <p style="color:#5A5A5A; font-size:">Your account has been already activated using</br>
                 this link.</p>
 

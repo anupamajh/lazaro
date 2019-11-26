@@ -123,7 +123,7 @@ outline:none;
     color: #32BDD2;
     font-size: 12px;
     letter-spacing: 0.3px;
-    margin-left: 35%;
+    margin-left: 41%;
     margin-top: 12%;
     text-decoration-line: underline;
 }
@@ -137,9 +137,7 @@ outline:none;
     width: 500px;
     text-decoration-line: underline;
 }
-.password {
 
-}
 .register {
     color: #32BDD2;
     font-size: 14px;
@@ -274,10 +272,11 @@ outline:none;
 .time {
     font-size: 14px;
     color: #909090;
-    margin-left: 75%;
+   margin-left: 81%;
+       font-weight: 550;
 }
 .box-id {
-    padding-left: 20px;
+
     margin-top: 4%;
     box-shadow: 0 8px 6px -6px #00000029;
     border: 1px solid #F7F4F4;
