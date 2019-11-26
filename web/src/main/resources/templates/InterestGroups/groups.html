@@ -67,6 +67,43 @@ function filter(){
  document.getElementById("hiking").style.display = "block";
   document.getElementById("sky").style.display = "block";
   }
+ function groupView(){
+        console.log("msg");
+        location.replace("/community/community-group-view");
+
+    }
+
+  function searchGroups(){
+            var str = document.getElementById("search-groups").value.toUpperCase().trim();
+            var group_title = document.getElementsByClassName("group_info");
+            var group = document.getElementsByClassName("group");
+            var i;
+            var count = 0;
+            var groups = group_title.length;
+
+            for(i=0;i<groups;i++){
+                var res = group_title[i].textContent.toUpperCase();
+                var result = res.match(str);
+                console.log(result);
+                var empty = "";
+                if(result != null){
+                    group[i].style.display = "flex";
+                    count = count+1;
+                }
+                else{
+                    group[i].style.display = "none";
+                }
+                if(count === 0){
+                    document.getElementById("search-not-found").style.display = "flex";
+                    document.getElementById("back-btn").style.display = "flex";
+                    document.getElementById("show-more").style.display = "none";
+                }else{
+                    document.getElementById("search-not-found").style.display = "none";
+
+                    document.getElementById("back-btn").style.display = "flex";
+                }
+            }
+        }
 </script>
 
 
@@ -118,11 +155,12 @@ function filter(){
                         <img onclick="myFunction()" id="equals" class="dropbtn" th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" style="box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.58); border-radius: 50%;" >
                         <img onclick="crossmark()" th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" width="35" height="35" alt="icon" style="box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.58); border-radius: 50%;display:none";
                              id="cross-mark" >
-                        <div id="myDropdown" class="dropdown-content">
-                            <a onclick="interestgroup()"   style="color:#747474;font-size:13px;ont-family: roboto;" href="#home">INTEREST GROUPS</a>
-                            <a   style="color:#747474;font-size:13px;ont-family: roboto;" href="#about">COMMUNITY GROUPS</a>
-                            <a   style="color:#747474;font-size:13px;ont-family: roboto;" href="#about">MY GROUPS</a>
+                        <div id="myDropdown" class="dropdown-content" style="width:187px;margin-top:117px;;margin-left: 1%;height: 207px;">
+                            <a onclick="interestgroup()"   style="color:#747474;font-size:12px;font-family: roboto;letter-spacing:1.2px;" href="#home">INTEREST GROUPS</a>
+                            <a   style="color:#747474;font-size:12px;font-family: roboto;letter-spacing:1.2px;" href="#about">COMMUNITY GROUPS</a>
+                            <a   style="color:#747474;font-size:12px;font-family: roboto;letter-spacing:1.2px;" href="#about">MY GROUPS</a>
                         </div>
+
                         <span id="select" style="font-family: roboto; font-size: 14px;letter-spacing: 1.4px; margin-left: 25px; margin-top: 5px; color: #747474;">Select a group from the menu</span>
                         <span id="ig" style="font-family: roboto;font-weight:600;display:none; font-size: 14px;letter-spacing: 1.4px; margin-left: 25px; margin-top: 5px; color: #464646;">INTEREST GROUPS</span>
                     </div>
@@ -146,25 +184,35 @@ function filter(){
                 </div>
 
 
-
-
                 <div class="groups-list" id="interest-group" style="display:none;">
                     <div class="search-bar">
-                        <input onclick="loginFunction1()" type="text" placeholder="Search…" style="padding: 8px 5px;; border: 0px; width: 95%; outline: none;cursor:pointer; margin-left: 10px;">
-                        <script>
-                      function loginFunction1() {
-                        window.location = src = "/InterestGroups/group-search";                    }
-                </script>
-                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" width="20" height="20" alt="search-btn" id="search-btn">
+                        <input id="search-groups"  type="text" placeholder="Search…" style="padding: 8px 5px;; border: 0px; width: 95%; outline: none;cursor:pointer; margin-left: 10px;">
+<!--                        <script>-->
+<!--                      function loginFunction1() {-->
+<!--                        window.location = src = "/InterestGroups/group-search";                    }-->
+<!--                </script>-->
+                        <img onclick="searchGroups()" th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" width="20" height="20" alt="search-btn" id="search-btn" >
                     </div>
-                    <div class="groups">
-                        <div class="accepted" >
+
+                    <div class="search-not-found" id="search-not-found">
+                        <img th:src="@{/images/extra-large-256px/search.png}" height="65" width="65" alt="search-not-found">
+                        <p style="font-family: roboto; font-size: 14px; letter-spacing: 0.7px; line-height: 16px; color: #747474; font-weight: 900; margin-top: 15px;">No Results Found</p>
+                        <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 14px;
+                        color: #909090; font-weight: 400; margin-top: 15px; width: 25%; text-align: center;">Sorry, we couldn’t find any results for search_keyword</p>
+                    </div>
+
+                    <div class="groups" id="groups">
+<!--                        <div onclick="groupView()" class="invited group">-->
+                    <div class="accepted group" style="display:flex;" onclick="cycling()">
+
+<!--                        <div class="accepted" >-->
                             <div>
                             <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
                             <p style="color: #909090; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">Outdoor Adventure</p>
                             <div class="group-admin" style="display: flex; align-items: center;">
 <!--                                <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic" style="border-radius: 50%;">-->
-                                    <p onclick="cycling()" style="color: #5A5A5A; font-family: roboto; font-size: 12px; cursor: pointer; letter-spacing: 0.6px; line-height: 2.5;font-weight:600">CYCLING</p>
+                                    <p class="group_info"  style="color: #5A5A5A; font-family: roboto; font-size: 12px; cursor: pointer;
+                                    letter-spacing: 0.6px; line-height: 2.5;font-weight:600">CYCLING</p>
                                 <script>
                         function cycling() {
                             window.location = src = "/InterestGroups/group-conversation";
@@ -181,12 +229,12 @@ function filter(){
                         </div>
 
 
-                        <div class="accepted">
+                        <div class="accepted group" id="robot">
                             <div>
-                                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+
                                 <p style="color: #909090; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">Tech</p>
                                 <div class="group-admin" style="display: flex; align-items: center;">
-                                    <p  style="color: #5A5A5A; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;font-weight:600">ROBOTICS</p>
+                                    <p class="group_info"  style="color: #5A5A5A; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;font-weight:600">ROBOTICS</p>
                                 </div>
                                 <p style="color: #747474; width: 84%; font-family: roboto; font-size: 11px; letter-spacing: 0.3px; line-height: 1.8;">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien.
@@ -198,12 +246,12 @@ function filter(){
                         </div>
 
 
-                        <div class="accepted" id="hiking">
+                        <div class="accepted group" id="hiking" onclick="hiking()" style="display:flex;">
                             <div>
-                                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+
                                 <p style="color: #909090; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">Outdoor Adventure</p>
                                 <div class="group-admin" style="display: flex; align-items: center;">
-                                    <p onclick="hiking()" style="color: #5A5A5A; cursor: pointer; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;font-weight:600">HIKING</p>
+                                    <p class="group_info"  style="color: #5A5A5A; cursor: pointer; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;font-weight:600">HIKING</p>
                                 </div>
                                 <p style="color: #747474; width: 84%; font-family: roboto; font-size: 11px; letter-spacing: 0.3px; line-height: 1.8;">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien.
@@ -220,10 +268,10 @@ function filter(){
 
                         <div class="accepted"id="sky">
                             <div>
-                                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+
                                 <p style="color: #909090; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">Outdoor Adventure</p>
                                 <div class="group-admin" style="display: flex; align-items: center;">
-                                    <p  style="color: #5A5A5A; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;font-weight:600">SKY DIVING</p>
+                                    <p class="group_info"  style="color: #5A5A5A; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;font-weight:600">SKY DIVING</p>
                                 </div>
                                 <p style="color: #747474; width: 84%; font-family: roboto; font-size: 11px; letter-spacing: 0.3px; line-height: 1.8;">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien.
@@ -234,7 +282,7 @@ function filter(){
                             </div>
                         </div>
 
-                        <div class="show-more">
+                        <div class="show-more" style="cursor:pointer;">
                             <p class="head-text" style="font-weight: 700; margin-right: 10px; font-size: 12px;">
                                 SHOW MORE
                             </p>

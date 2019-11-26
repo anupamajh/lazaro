@@ -230,6 +230,7 @@
         function openGroup(){
             location.replace("/community/community-open-group");
         }
+
         function searchGroups(){
             var str = document.getElementById("search-groups").value.toUpperCase().trim();
             var group_title = document.getElementsByClassName("group_info");
@@ -378,7 +379,7 @@
                 </div>
                 <div class="groups-list" id="groups-list">
                     <div class="search-bar">
-                        <input type="text" placeholder="Search…" id="search-groups" style="padding: 8px 5px;; border: 0px; width: 95%; outline: none; margin-left: 10px;">
+                        <input type="text" placeholder="Search…" id="search-groups" style="padding: 8px 5px; border: 0px; width: 95%; outline: none; margin-left: 10px;">
                         <img th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" width="20" height="20" alt="search-btn" id="search-btn" onclick="searchGroups()">
                     </div>
 
