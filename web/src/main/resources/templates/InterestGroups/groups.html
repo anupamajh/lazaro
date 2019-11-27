@@ -8,104 +8,104 @@
     <link th:href="@{/css/interestgroups.css}" rel="stylesheet">
 </head>
 
- <script>
-        function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-             document.getElementById("cross-mark").style.display = "block";
-              document.getElementById("equals").style.display = "none";
-        }
+<script>
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+        document.getElementById("cross-mark").style.display = "block";
+        document.getElementById("equals").style.display = "none";
+    }
 
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
                 }
             }
         }
+    }
 
-         function crossmark() {
-           document.getElementById("cross-mark").style.display = "none";
-              document.getElementById("equals").style.display = "block";
-               document.getElementById("myDropdown").classList.toggle("show");
-        }
+    function crossmark() {
+        document.getElementById("cross-mark").style.display = "none";
+        document.getElementById("equals").style.display = "block";
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
 
-function interestgroup(){
-              document.getElementById("interest-group").style.display = "block";
-              document.getElementById("ig").style.display = "block";
-                        document.getElementById("filter-icon").style.display = "block";
-                          document.getElementById("equals").style.display = "block";
-                           document.getElementById("cross-mark").style.display = "none";
-                           document.getElementById("select").style.display = "none";
-}
+    function interestgroup() {
+        document.getElementById("interest-group").style.display = "block";
+        document.getElementById("ig").style.display = "block";
+        document.getElementById("filter-icon").style.display = "block";
+        document.getElementById("equals").style.display = "block";
+        document.getElementById("cross-mark").style.display = "none";
+        document.getElementById("select").style.display = "none";
+    }
 
-function hiking(){
- document.getElementById("group-view").style.display = "block";
- document.getElementById("interest-group").style.display = "none";
-}
-function filter(){
-   if(document.getElementById("drop-down-menu").style.display === "none"){
-        document.getElementById("drop-down-menu").style.display = "block";
-        }else{
+    function hiking() {
+        document.getElementById("group-view").style.display = "block";
+        document.getElementById("interest-group").style.display = "none";
+    }
+    function filter() {
+        if (document.getElementById("drop-down-menu").style.display === "none") {
+            document.getElementById("drop-down-menu").style.display = "block";
+        } else {
             document.getElementById("drop-down-menu").style.display = "none";
         }
-}
+    }
 
-  function subscribe(){
-  document.getElementById("clear-filter").style.display = "block";
-  document.getElementById("drop-down-menu").style.display = "none";
-  document.getElementById("hiking").style.display = "none";
-  document.getElementById("sky").style.display = "none";
-  }
+    function subscribe() {
+        document.getElementById("clear-filter").style.display = "block";
+        document.getElementById("drop-down-menu").style.display = "none";
+        document.getElementById("hiking").style.display = "none";
+        document.getElementById("sky").style.display = "none";
+    }
 
-  function clear(){
- document.getElementById("hiking").style.display = "block";
-  document.getElementById("sky").style.display = "block";
-  }
- function groupView(){
+    function clear() {
+        document.getElementById("hiking").style.display = "block";
+        document.getElementById("sky").style.display = "block";
+    }
+    function groupView() {
         console.log("msg");
         location.replace("/community/community-group-view");
 
     }
 
-  function searchGroups(){
-            var str = document.getElementById("search-groups").value.toUpperCase().trim();
-            var group_title = document.getElementsByClassName("group_info");
-            var group = document.getElementsByClassName("group");
-            var i;
-            var count = 0;
-            var groups = group_title.length;
+    function searchGroups() {
+        var str = document.getElementById("search-groups").value.toUpperCase().trim();
+        var group_title = document.getElementsByClassName("group_head");
+        var group = document.getElementsByClassName("group");
+        var i;
+        var count = 0;
+        var groups = group_title.length;
 
-            for(i=0;i<groups;i++){
-                var res = group_title[i].textContent.toUpperCase();
-                var result = res.match(str);
-                console.log(result);
-                var empty = "";
-                if(result != null){
-                    group[i].style.display = "flex";
-                    count = count+1;
-                }
-                else{
-                    group[i].style.display = "none";
-                }
-                if(count === 0){
-                    document.getElementById("search-not-found").style.display = "flex";
-                    document.getElementById("back-btn").style.display = "flex";
-                    document.getElementById("show-more").style.display = "none";
-                }else{
-                    document.getElementById("search-not-found").style.display = "none";
-
-                    document.getElementById("back-btn").style.display = "flex";
-                }
+        for (i = 0; i < groups; i++) {
+            var res = group_title[i].textContent.toUpperCase();
+            var result = res.match(str);
+            console.log(result);
+            var empty = "";
+            if (result != null) {
+                group[i].style.display = "flex";
+                count = count + 1;
+            }
+            else {
+                group[i].style.display = "none";
+            }
+            if (count === 0) {
+                document.getElementById("search-not-found").style.display = "flex";
+                document.getElementById("groups").style.display = "none";
+                document.getElementById("back-btn").style.display = "flex";
+                document.getElementById("show-more").style.display = "none";
+            } else {
+                document.getElementById("search-not-found").style.display = "none";
+                document.getElementById("groups").style.display = "block";
+                document.getElementById("back-btn").style.display = "flex";
             }
         }
+    }
 </script>
-
 
 <body>
 <header style="min-height: 6vh;">
@@ -114,10 +114,10 @@ function filter(){
 </header>
 
 <div class="content">
-
     <div class="community-desc">
-        <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">COMMUNITY</span>
-        <p style="color:#707070; font-family:roboto; font-size:12px; width:40%; margin-top: 15px; letter-spacing: 0.6px;  line-height: 2;">Lorem ipsum dolor
+            <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">COMMUNITY</span>
+        <p style="color:#707070; font-family:roboto; font-size:12px; width:40%; margin-top: 15px; letter-spacing: 0.6px;  line-height: 2;">
+            Lorem ipsum dolor
             sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo
             vestibulum.</p>
     </div>
@@ -128,23 +128,23 @@ function filter(){
                     <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
                 <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">MY
                         PROFILE</span>
-                <p style="color:#747474; font-family:roboto; font-size:14px; width:80%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Based on
+                <p style="color:#747474; font-family:roboto; font-size:14px; width:80%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
+                    Based on
                     your profile, you will be able to connect with the best matches who share your interests. Go
                     ahead and setup your profile.</p>
             </div>
             <div class="people" style="border-bottom: solid 1px #CCCCCC; border-top: solid 1px #CCCCCC;">
-                    <span
-                            style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span
-                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px; letter-spacing: 1.4px;">PEOPLE</span>
-                <p style="color:#747474; font-family:roboto; font-size:14px; width:80%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Meet the
+                    <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px; letter-spacing: 1.4px;">PEOPLE</span>
+                <p style="color:#747474; font-family:roboto; font-size:14px; width:80%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
+                    Meet the
                     community members and make new friends.</p>
             </div>
             <div class="my-profile">
-                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span
-                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px;letter-spacing: 1.4px;">GROUPS</span>
-                <p style="color:#747474; font-family:roboto; font-size:14px; width:80%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Join the groups and catch all the action. You will get suggestions based on your profile.</p>
+                    <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px;letter-spacing: 1.4px;">GROUPS</span>
+                <p style="color:#747474; font-family:roboto; font-size:14px; width:80%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
+                    Join the groups and catch all the action. You will get suggestions based on your profile.</p>
             </div>
         </div>
 
@@ -152,32 +152,48 @@ function filter(){
             <div class="my-profile-options" style="padding: 2%;" id="interest-groups1">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div style="display: flex; align-items: center;">
-                        <img onclick="myFunction()" id="equals" class="dropbtn" th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" style="box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.58); border-radius: 50%;" >
-                        <img onclick="crossmark()" th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" width="35" height="35" alt="icon" style="box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.58); border-radius: 50%;display:none";
-                             id="cross-mark" >
-                        <div id="myDropdown" class="dropdown-content" style="width:187px;margin-top:117px;;margin-left: 1%;height: 207px;">
-                            <a onclick="interestgroup()"   style="color:#747474;font-size:12px;font-family: roboto;letter-spacing:1.2px;" href="#home">INTEREST GROUPS</a>
-                            <a   style="color:#747474;font-size:12px;font-family: roboto;letter-spacing:1.2px;" href="#about">COMMUNITY GROUPS</a>
-                            <a   style="color:#747474;font-size:12px;font-family: roboto;letter-spacing:1.2px;" href="#about">MY GROUPS</a>
+                        <img onclick="myFunction()" id="equals" class="dropbtn"
+                             th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35"
+                             alt="icon" style="box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.58); border-radius: 50%;">
+                        <img onclick="crossmark()" th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" width="35" height="35" alt="icon" style="box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.58); border-radius: 50%;display:none" ; id="cross-mark">
+                        <div id="myDropdown" class="dropdown-content"
+                             style="width:187px;margin-top:117px;;margin-left: 1%;height: 207px;">
+                            <a onclick="interestgroup()"
+                               style="color:#747474;font-size:12px;font-family: roboto;letter-spacing:1.2px;"
+                               href="#home">INTEREST GROUPS</a>
+                            <a style="color:#747474;font-size:12px;font-family: roboto;letter-spacing:1.2px;"
+                               href="#about">COMMUNITY GROUPS</a>
+                            <a style="color:#747474;font-size:12px;font-family: roboto;letter-spacing:1.2px;"
+                               href="#about">MY GROUPS</a>
                         </div>
 
-                        <span id="select" style="font-family: roboto; font-size: 14px;letter-spacing: 1.4px; margin-left: 25px; margin-top: 5px; color: #747474;">Select a group from the menu</span>
-                        <span id="ig" style="font-family: roboto;font-weight:600;display:none; font-size: 14px;letter-spacing: 1.4px; margin-left: 25px; margin-top: 5px; color: #464646;">INTEREST GROUPS</span>
+                        <span id="select" style="font-family: roboto; font-size: 14px;letter-spacing: 1.4px; margin-left: 25px; margin-top: 5px; color: #747474;">Select
+                                a group from the menu</span>
+                        <span id="ig" style="font-family: roboto;font-weight:600;display:none; font-size: 14px;letter-spacing: 1.4px; margin-left: 25px; margin-top: 5px; color: #464646;">INTEREST
+                                GROUPS</span>
                     </div>
                     <div id="clear-filter" style="display:none;">
-                        <p style=" width: 142px;margin-left: 47%;color:#5A5A5A; font-family:roboto;font-size:12px;">Showing new groups.
-                            <span onclick="clear()" class="all-scroll" style="color:#32BDD2; font-family:roboto;"><u>Clear Filter</u></span></p>
+                        <p style=" width: 142px;margin-left: 47%;color:#5A5A5A; font-family:roboto;font-size:12px;">
+                            Showing new groups.
+                            <span style="color:#32BDD2; font-family:roboto;cursor:pointer;"
+                                  onclick="clearfilter()"><u>Clear Filter</u></span></p>
                         <script>
-                        function clear(){
-                            window.location = src = "/InterestGroups/interest-group-view";
-                        }
-                    </script>
+                               function clearfilter() {
+                                    window.location = src = "/InterestGroups/interest-group-view";
+                                }
+                            </script>
                     </div>
+
+
                     <div style="position: relative; cursor: pointer;" id="drop-down-btn">
-                    <img id="filter-icon"  onclick="filter()"  style="display:none;"  th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" width="40" height="40" alt="drop-down" >
-                        <div style="display: none; width: 170px; height: 217px; position: absolute; border: solid 0.5px #CCCCCC; box-shadow: 0px 3px 17px rgba(0, 0, 0, 0.29); background-color: #FFFFFF; border-radius: 0px 0px 10px 10px; right: 0%;" id="drop-down-menu">
+                        <img id="filter-icon" onclick="filter()" style="display:none;"
+                             th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" width="40" height="40"
+                             alt="drop-down">
+                        <div style="display: none; width: 170px; height: 217px; position: absolute; border: solid 0.5px #CCCCCC; box-shadow: 0px 3px 17px rgba(0, 0, 0, 0.29); background-color: #FFFFFF; border-radius: 0px 0px 10px 10px; right: 0%;"
+                             id="drop-down-menu">
                             <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 1.05px; color: #909090; line-height: 1.6; border-bottom: solid 0.5px #CCCCCC; padding-right: 40%; padding-bottom: 13%; margin: 23% 0% 0% 15%;">CLEAR</a>
-                            <a onclick="subscribe()" style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #464646; line-height: 1.6; border-bottom: solid 0.5px #CCCCCC; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%;">Subscribed</a>
+                            <a onclick="subscribe()"
+                               style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #464646; line-height: 1.6; border-bottom: solid 0.5px #CCCCCC; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%;">Subscribed</a>
                             <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #464646; line-height: 1.6; border-bottom: solid 0.5px #CCCCCC; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%;">New</a>
                         </div>
                     </div>
@@ -186,99 +202,118 @@ function filter(){
 
                 <div class="groups-list" id="interest-group" style="display:none;">
                     <div class="search-bar">
-                        <input id="search-groups"  type="text" placeholder="Search…" style="padding: 8px 5px;; border: 0px; width: 95%; outline: none;cursor:pointer; margin-left: 10px;">
-<!--                        <script>-->
-<!--                      function loginFunction1() {-->
-<!--                        window.location = src = "/InterestGroups/group-search";                    }-->
-<!--                </script>-->
-                        <img onclick="searchGroups()" th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" width="20" height="20" alt="search-btn" id="search-btn" >
+                        <input id="search-groups" type="text" placeholder="Search…"
+                               style="padding: 8px 5px;; border: 0px; width: 95%; outline: none;cursor:pointer; margin-left: 10px;">
+                        <!--                        <script>-->
+                        <!--                      function loginFunction1() {-->
+                        <!--                        window.location = src = "/InterestGroups/group-search";                    }-->
+                        <!--                </script>-->
+                        <img onclick="searchGroups()"
+                             th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" width="20" height="20"
+                             alt="search-btn" id="search-btn">
                     </div>
 
                     <div class="search-not-found" id="search-not-found">
-                        <img th:src="@{/images/extra-large-256px/search.png}" height="65" width="65" alt="search-not-found">
-                        <p style="font-family: roboto; font-size: 14px; letter-spacing: 0.7px; line-height: 16px; color: #747474; font-weight: 900; margin-top: 15px;">No Results Found</p>
+                        <img th:src="@{/images/extra-large-256px/search.png}" height="65" width="65"
+                             alt="search-not-found">
+                        <p style="font-family: roboto; font-size: 14px; letter-spacing: 0.7px; line-height: 16px; color: #747474; font-weight: 900; margin-top: 15px;">
+                            No Results Found</p>
                         <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 14px;
-                        color: #909090; font-weight: 400; margin-top: 15px; width: 25%; text-align: center;">Sorry, we couldn’t find any results for search_keyword</p>
+                        color: #909090; font-weight: 400; margin-top: 15px; width: 25%; text-align: center;">Sorry, we
+                            couldn’t find any results for search_keyword</p>
                     </div>
 
+
                     <div class="groups" id="groups">
-<!--                        <div onclick="groupView()" class="invited group">-->
-                    <div class="accepted group" style="display:flex;" onclick="cycling()">
-
-<!--                        <div class="accepted" >-->
+                        <!--                        <div onclick="groupView()" class="invited group">-->
+                        <div class="accepted group" style="display:flex;" onclick="cycling()">
                             <div>
-                            <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                            <p style="color: #909090; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">Outdoor Adventure</p>
-                            <div class="group-admin" style="display: flex; align-items: center;">
-<!--                                <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic" style="border-radius: 50%;">-->
-                                    <p class="group_info"  style="color: #5A5A5A; font-family: roboto; font-size: 12px; cursor: pointer;
-                                    letter-spacing: 0.6px; line-height: 2.5;font-weight:600">CYCLING</p>
-                                <script>
-                        function cycling() {
-                            window.location = src = "/InterestGroups/group-conversation";
-                        }
-                    </script>
-                            </div>
-                            <p style="color: #747474; width: 84%; font-family: roboto; font-size: 11px; letter-spacing: 0.3px; line-height: 1.8;">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien.
-                            </p>
-                            </div>
-                         <div>
-                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30" height="30" alt="search-btn" style="border-radius: 50%;">
-                        </div>
-                        </div>
-
-
-                        <div class="accepted group" id="robot">
-                            <div>
-
-                                <p style="color: #909090; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">Tech</p>
+                                    <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                                <p style="color: #909090; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">
+                                    Outdoor Adventure</p>
                                 <div class="group-admin" style="display: flex; align-items: center;">
-                                    <p class="group_info"  style="color: #5A5A5A; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;font-weight:600">ROBOTICS</p>
+                                    <!--                                <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic" style="border-radius: 50%;">-->
+                                    <p class="group_head" style="color: #5A5A5A; font-family: roboto; font-size: 12px; cursor: pointer;
+                                    letter-spacing: 0.6px; line-height: 2.5;font-weight:600">CYCLING</p>
+                                    <script>
+                                            function cycling() {
+                                                window.location = src = "/InterestGroups/group-conversation";
+                                            }
+                                        </script>
                                 </div>
                                 <p style="color: #747474; width: 84%; font-family: roboto; font-size: 11px; letter-spacing: 0.3px; line-height: 1.8;">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien.
                                 </p>
                             </div>
                             <div>
-                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30" height="30" alt="search-btn" style="border-radius: 50%;">
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30"
+                                     height="30" alt="search-btn" style="border-radius: 50%;">
+                            </div>
+                        </div>
+
+
+                        <div class="accepted group" id="robot">
+                            <div>
+                                <p style="color: #909090; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">
+                                    Tech</p>
+                                <div class="group-admin" style="display: flex; align-items: center;">
+                                    <p class="group_head"
+                                       style="color: #5A5A5A; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;font-weight:600">
+                                        ROBOTICS</p>
+                                </div>
+                                <p style="color: #747474; width: 84%; font-family: roboto; font-size: 11px; letter-spacing: 0.3px; line-height: 1.8;">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien.
+                                </p>
+                            </div>
+                            <div>
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30"
+                                     height="30" alt="search-btn" style="border-radius: 50%;">
                             </div>
                         </div>
 
 
                         <div class="accepted group" id="hiking" onclick="hiking()" style="display:flex;">
                             <div>
-
-                                <p style="color: #909090; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">Outdoor Adventure</p>
+                                <p style="color: #909090; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">
+                                    Outdoor Adventure</p>
                                 <div class="group-admin" style="display: flex; align-items: center;">
-                                    <p class="group_info"  style="color: #5A5A5A; cursor: pointer; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;font-weight:600">HIKING</p>
+                                    <p class="group_head"
+                                       style="color: #5A5A5A; cursor: pointer; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;font-weight:600">
+                                        HIKING</p>
                                 </div>
                                 <p style="color: #747474; width: 84%; font-family: roboto; font-size: 11px; letter-spacing: 0.3px; line-height: 1.8;">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien.
                                 </p>
-                                <div class="notification" style="display: flex; padding: 0px 10px 5px 0px; width: 83%; display: flex; align-items: center; margin-top: 15px;">
-                                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 28@16x.png}" width="30" height="30" alt="search-btn" style="border-radius: 50%;">
-                                    <p style="color: #BEBAA4; font-size: 12px; letter-spacing: 0.6px; font-family: roboto; font-weight: 600; margin-left: 10px; text-align: center; border-top: solid 0.5px #BEBAA4; padding-top: 10px;">This group matches your interest.</p>
+                                <div class="notification"
+                                     style="display: flex; padding: 0px 10px 5px 0px; width: 83%; display: flex; align-items: center; margin-top: 15px;">
+                                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 28@16x.png}" width="30"
+                                         height="30" alt="search-btn" style="border-radius: 50%;background-color: white;">
+                                    <p style="color: #BEBAA4; font-size: 12px; letter-spacing: 0.6px; font-family: roboto; font-weight: 600; margin-left: 10px; text-align: center; border-top: solid 0.5px #BEBAA4; padding-top: 10px;">
+                                        This group matches your interest.</p>
                                 </div>
                             </div>
                             <div>
-                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 15@16x.png}" width="30" height="30" alt="accepted-icon" style="border-radius: 50%;">
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 15@16x.png}" width="30"
+                                     height="30" alt="accepted-icon" style="border-radius: 50%;">
                             </div>
                         </div>
 
-                        <div class="accepted"id="sky">
+                        <div class="accepted" id="sky">
                             <div>
-
-                                <p style="color: #909090; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">Outdoor Adventure</p>
+                                <p style="color: #909090; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;">
+                                    Outdoor Adventure</p>
                                 <div class="group-admin" style="display: flex; align-items: center;">
-                                    <p class="group_info"  style="color: #5A5A5A; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;font-weight:600">SKY DIVING</p>
+                                    <p class="group_head"
+                                       style="color: #5A5A5A; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;font-weight:600">
+                                        SKY DIVING</p>
                                 </div>
                                 <p style="color: #747474; width: 84%; font-family: roboto; font-size: 11px; letter-spacing: 0.3px; line-height: 1.8;">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien.
                                 </p>
                             </div>
                             <div>
-                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 15@16x.png}" width="30" height="30" alt="accepted-icon" style="border-radius: 50%;">
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 15@16x.png}" width="30"
+                                     height="30" alt="accepted-icon" style="border-radius: 50%;background-color: white;">
                             </div>
                         </div>
 
@@ -286,7 +321,8 @@ function filter(){
                             <p class="head-text" style="font-weight: 700; margin-right: 10px; font-size: 12px;">
                                 SHOW MORE
                             </p>
-                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="10" width="10" alt="list-button" style="margin-right: 15px; margin-bottom: 5px;">
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="10"
+                                 width="10" alt="list-button" style="margin-right: 15px; margin-bottom: 5px;">
                         </div>
 
                     </div>
@@ -296,91 +332,119 @@ function filter(){
 
 
             <div class="group-view" id="group-view" style="display:none;">
-                                    <div class="group-info">
-                                        <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; color: #909090;">Outdoor Adventure</p>
-                                            <p  style="color: #5A5A5A; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;font-weight:600;margin-bottom: 2%;">CYCLING</p>
-                                        <p style="font-family: roboto; font-size: 12px; letter-spacing: 0; line-height: 1.4;display: -webkit-inline-box;width: 58%; color: #909090; font-weight: 400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim felis et magna mattis finibus. Nulla elit ligula, placerat tincidunt ipsum eu, ornare semper felis. Duis arcu massa, venenatis eget ante sodales, posuere volutpat risus. Aenean et justo eu massa sodales posuere. Nullam sollicitudin nibh in turpis placerat venenatis.</p>
-                                     <div style="float:right;">   <input type="button" class="submit-btn" style="background-color: #E65959; border: 0px; border-radius: 2px; padding: 10px 20px; box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.29); font-size: 12px; margin-top: 2vh;" value="EXIT">
+                <div class="group-info">
+                    <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; color: #909090;">
+                        Outdoor Adventure</p>
+                    <p style="color: #5A5A5A; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;font-weight:600;margin-bottom: 2%;">
+                        CYCLING</p>
+                    <p style="font-family: roboto; font-size: 12px; letter-spacing: 0; line-height: 1.4;display: -webkit-inline-box;width: 58%; color: #909090; font-weight: 400;">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim felis et magna
+                        mattis finibus. Nulla elit ligula, placerat tincidunt ipsum eu, ornare semper felis. Duis
+                        arcu massa, venenatis eget ante sodales, posuere volutpat risus. Aenean et justo eu massa
+                        sodales posuere. Nullam sollicitudin nibh in turpis placerat venenatis.</p>
+                    <div style="float:right;"> <input type="button" class="submit-btn"
+                                                      style="background-color: #E65959; border: 0px; border-radius: 2px; padding: 10px 20px; box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.29); font-size: 12px; margin-top: 2vh;"
+                                                      value="EXIT">
 
-                                     </div>
-                                    </div>
-                                    <div class="group-admin-details">
-                                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 11@16x.png}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                        <div style="margin-left: 25px;">
-                                            <p style="font-family: roboto; letter-spacing: 0.5px; font-size: 10px; line-height: 20px; color: #909090;">CREATED BY</p>
-                                            <p style="font-family: roboto; letter-spacing: 0.35px; font-size: 14px; line-height: 15px; color: #5A5A5A;">System</p>
-                                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 15px; margin-top: 15px; color: #909090;">26 Jul 2018 03:48 PM</p>
-                                        </div>
-                                    </div>
-
-                                    <div style="display: flex; align-items: center; margin-top: 6vh;">
-                                        <p style="font-family: roboto; font-size: 14px; letter-spacing: 0.7px; line-height: 25px; color: #747474; font-weight: 900;">27 Members</p>
-                                        <span style="height: 0.5px; background-color: #CCCCCC; padding: 0.25px 200px; font-size: 1px; width: 400px; margin-left: 15px; margin-bottom: 5px;"></span>
-                                    </div>
-                                        <div class="group-members">
-                                        <div class="member">
-                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                        <div style="margin-left: 35px;">
-                                            <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Sam Colon</p>
-                                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Since 29 July 2019</p>
-                                        </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="group-members">
-                                        <div class="member">
-                                            <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                            <div style="margin-left: 35px;">
-                                                <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Luke Ray</p>
-                                                <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Since 29 July 2019</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="group-members">
-                                        <div class="member">
-                                            <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                            <div style="margin-left: 35px;">
-                                                <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Daisy Lake</p>
-                                                <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Since 29 July 2019</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="group-members">
-                                        <div class="member">
-                                            <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                            <div style="margin-left: 35px;">
-                                                <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Mark Smith</p>
-                                                <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Since 29 July 2019</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="group-members">
-                                        <div class="member">
-                                            <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                            <div style="margin-left: 35px;">
-                                                <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Dan Park</p>
-                                                <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Since 29 July 2019</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="show-more">
-                                        <p class="head-text" style="font-weight: 700; margin-right: 10px; font-size: 12px;">
-                                            SHOW MORE
-                                        </p>
-                                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="10" width="10" alt="list-button" style="margin-right: 15px; margin-bottom: 5px;">
-                                    </div>
-                <div style="display: flex; cursor: pointer; margin-top: 6vh;">
-                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 9@16x.png}" height="15" width="15" onclick="backToGroupView()"/>
-                    <p style="color: #32BDD2; font-family: roboto; font-weight: 900; font-size: 14px; margin-left: 7px; letter-spacing: 0.7px;" onclick="backToGroupView()">BACK</p>
+                    </div>
                 </div>
-                                </div>
+                <div class="group-admin-details">
+                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 11@16x.png}" height="40" width="40"
+                         alt="admin-pic" style="border-radius: 50%;">
+                    <div style="margin-left: 25px;">
+                        <p style="font-family: roboto; letter-spacing: 0.5px; font-size: 10px; line-height: 20px; color: #909090;">
+                            CREATED BY</p>
+                        <p style="font-family: roboto; letter-spacing: 0.35px; font-size: 14px; line-height: 15px; color: #5A5A5A;">
+                            System</p>
+                        <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 15px; margin-top: 15px; color: #909090;">
+                            26 Jul 2018 03:48 PM</p>
+                    </div>
+                </div>
 
+                <div style="display: flex; align-items: center; margin-top: 6vh;">
+                    <p style="font-family: roboto; font-size: 14px; letter-spacing: 0.7px; line-height: 25px; color: #747474; font-weight: 900;">
+                        27 Members</p>
+                    <span style="height: 0.5px; background-color: #CCCCCC; padding: 0.25px 200px; font-size: 1px; width: 400px; margin-left: 15px; margin-bottom: 5px;"></span>
+                </div>
+                <div class="group-members">
+                    <div class="member">
+                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic"
+                             style="border-radius: 50%;">
+                        <div style="margin-left: 35px;">
+                            <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">
+                                Sam Colon</p>
+                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">
+                                Since 29 July 2019</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group-members">
+                    <div class="member">
+                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic"
+                             style="border-radius: 50%;">
+                        <div style="margin-left: 35px;">
+                            <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">
+                                Luke Ray</p>
+                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">
+                                Since 29 July 2019</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group-members">
+                    <div class="member">
+                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic"
+                             style="border-radius: 50%;">
+                        <div style="margin-left: 35px;">
+                            <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">
+                                Daisy Lake</p>
+                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">
+                                Since 29 July 2019</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="group-members">
+                    <div class="member">
+                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic"
+                             style="border-radius: 50%;">
+                        <div style="margin-left: 35px;">
+                            <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">
+                                Mark Smith</p>
+                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">
+                                Since 29 July 2019</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group-members">
+                    <div class="member">
+                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic"
+                             style="border-radius: 50%;">
+                        <div style="margin-left: 35px;">
+                            <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">
+                                Dan Park</p>
+                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">
+                                Since 29 July 2019</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="show-more">
+                    <p class="head-text" style="font-weight: 700; margin-right: 10px; font-size: 12px;">
+                        SHOW MORE
+                    </p>
+                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="10" width="10"
+                         alt="list-button" style="margin-right: 15px; margin-bottom: 5px;">
+                </div>
+                <div style="display: flex; cursor: pointer; margin-top: 6vh;" id="back-btn">
+                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 9@16x.png}" height="15" width="15"
+                         onclick="backToGroupView()" />
+                    <p style="color: #32BDD2; font-family: roboto; font-weight: 900; font-size: 14px; margin-left: 7px; letter-spacing: 0.7px;"
+                       onclick="backToGroupView()">BACK</p>
+                </div>
             </div>
-            </div>
+
         </div>
-
     </div>
 </div>
 

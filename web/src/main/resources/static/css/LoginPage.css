@@ -1,4 +1,4 @@
-body {}
+body {
 
 background-color: #FFFFFF;
 
@@ -60,7 +60,8 @@ background-color: #FFFFFF;
     font: Bold 16px Roboto;
     letter-spacing: 0.9px;
     color: #747474;
-    font-weight: 600;
+    font-weight: 700;
+
 }
 .login-button {
     margin-top: 11%;
@@ -127,7 +128,7 @@ outline:none;
     margin-top: 12%;
     text-decoration-line: underline;
 }
-.fp {
+.forgot-password {
     color: #32BDD2;
     font-size: 12px;
     letter-spacing: 0.3px;
@@ -135,6 +136,7 @@ outline:none;
     margin-top: 4%;
     font-weight: 550;
     width: 500px;
+    cursor:pointer;
     text-decoration-line: underline;
 }
 
@@ -320,7 +322,16 @@ outline:none;
     letter-spacing: 0.7px;
     margin-top: 6%;
 }
-.get-one {
+.get-new {
     font-weight: 550;
-    font-style: Roboto medium;
+    color: #32BDD2;
+    font-size: 14px;
+    cursor:pointer;
+    font-family:roboto;
+}
+.no-account{
+color: #747474;
+font-size:14px;
+margin-top: 6%;
+margin-left: 14%;"
 }

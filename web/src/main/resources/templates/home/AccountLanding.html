@@ -27,12 +27,16 @@
         function type() {
 
         }
+        function submit(){
+        document.getElementById("appsuccess").style.display = "block";
+            document.getElementById("landingPage").style.display = "none";
+        }
     </script>
 
 
 </head>
 <body>
-<div class="main" style="margin-left:18%;">
+<div class="main" style="margin-left:18%;" id="landingPage">
     <div style="margin-top: 10%;" class="main-layer">
         <img style="margin-left:29%;" class="image-logo" th:src="@{/images/GuestureLogo.png}" alt="" width="153px" height="45px">
 
@@ -65,15 +69,44 @@
 
             </div>
         </div>
-        <div class="submit-button"><button style="width:107px;height:36px;margin-left: 25%;cursor:pointer" type="submit" class="button"  onclick="loginFunction1()">SUBMIT</button>
-            <script>
-                    function loginFunction1()
-                    {
-                        window.location=src="/AppSuccess";
-                    }
-                </script>
+        <div class="submit-button"><button style="width:107px;height:36px;margin-left: 25%;cursor:pointer" type="submit" class="button"  onclick="submit()">SUBMIT</button>
+<!--            <script>-->
+<!--                    function loginFunction1()-->
+<!--                    {-->
+<!--                        window.location=src="/AppSuccess";-->
+<!--                    }-->
+<!--                </script>-->
         </div>
     </div>
 </div>
+
+
+
+
+<div class="main" style="margin-left: 18%;display:none;" id="appsuccess">
+    <div class="main-layer" style="margin-right: 40%;"  onclick="whole()">
+        <script>
+                        function whole() {
+                            window.location = src = "/AccountActivation";
+                        }
+                    </script>
+        <img style="margin-left:34%;" class="image-logo" th:src="@{/images/GuestureLogo.png}" alt="" width="153px" height="45px">
+
+        <div style="margin-left: 16%;
+    margin-top: 6%;">
+            <p style="font-family:roboto; width:83%; color:#5A5A5A; font-size:14px;letter-spacing:0.35px;margin: auto;font-weight: 400;">Lorem ipsum dolor sit amet, consectetur
+                <span style="font-family:roboto; width:85%; color:#5A5A5A; font-size:14px;letter-spacing:0.35px;margin: auto;font-weight: 400;">adipiscing elit. Etiam erat sapien, ultricies.</span>
+            </p></div>
+        <div class="align-back" style="width:474px; height:166px;outline:none;">
+
+            <p class="forgot-p" style="font-family:roboto; font-weight:900; letter-spacing:1.6px"><b>APP ACCESS REQUEST</b></p>
+            <p class="link"  style="font-family:roboto; font-weight:400; letter-spacing:0.7px;line-height: 1.6;">Lorem ipsum dolor sit amet, consectetur</br>
+                adipiscing elit. Mauris mattis, tortor sit.</p>
+
+
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

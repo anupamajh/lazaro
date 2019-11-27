@@ -18,8 +18,8 @@ public class HomeController {
     @RequestMapping(value = "/ForgotPasswordError")
     public String ForgotPasswordError(){ return "home/ForgotPasswordError";}
 
-    @RequestMapping(value = "/OTPforgotpassword")
-    public String OTPforgotpassword(){ return "home/OTPforgotpassword";}
+    @RequestMapping(value = "/forgotpassword-otp")
+    public String forgotpasswordotp(){ return "home/forgotpassword-otp";}
 
     @RequestMapping(value = "/AccountLanding")
     public String AccountLanding(){ return "home/AccountLanding";}
@@ -57,16 +57,16 @@ public class HomeController {
     @RequestMapping(value = "community/community-groups/people-list")
     public String peopleList(){ return "community/people-list";}
 
-    @RequestMapping(value = "community/people-search")
+    @RequestMapping(value = "community/community-groups/people-search")
     public String peopleSearch(){ return "community/people-search";}
 
-    @RequestMapping(value = "community/people-details")
+    @RequestMapping(value = "community/community-groups/people-details")
     public String peopleDetails(){ return "community/people-details";}
 
-    @RequestMapping(value = "community/people-no-details")
+    @RequestMapping(value = "community/community-groups/people-no-details")
     public String peopleNoDetails(){ return "community/people-no-details";}
 
-    @RequestMapping(value = "community/people-filter")
+    @RequestMapping(value = "community/community-groups/people-filter")
     public String peopleFilter(){ return "community/people-filter";}
 
     @RequestMapping(value = "InterestGroups/groups")

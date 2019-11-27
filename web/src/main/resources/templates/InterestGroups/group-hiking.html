@@ -90,7 +90,7 @@ function filter(){
 
 
     <div class="photo-upload" id="exit-group" style="width: 30%; min-height: 20%; top: 50%; left:30%; padding-bottom: 2vw;">
-        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="done()"><br><br>
+        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px;cursor:pointer; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="done()"><br><br>
         <p style="color:#32BDD2; font-family: roboto; font-weight: 900; font-size: 16px; letter-spacing: 1.6px; line-height: 1.9; margin-bottom: 20px;">SUCCESS</p>
         <p style="color:#5A5A5A; font-family: roboto; font-weight: 500; font-size: 14px; letter-spacing: 0.7px; line-height: 2.4; width: 80%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
         <div style="display: flex; margin: 3vw 5vw 1vh 5vh; justify-content: space-evenly;">
@@ -158,12 +158,12 @@ function filter(){
                     </div>
 
             <div class="group-view-hike" >
-                <div class="group-info">
+                <div class="group-info" style="cursor:pointer;" onclick="SubscibeGroup()">
                     <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; color: #909090;">Outdoor Adventure</p>
                     <p  style="color: #5A5A5A; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;font-weight:600;margin-bottom: 2%;">HIKING</p>
                     <p style="font-family: roboto; font-size: 12px; letter-spacing: 0; line-height: 1.4;display: -webkit-inline-box;width: 72%; color: #909090; font-weight: 400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim felis et magna mattis finibus. Nulla elit ligula, placerat tincidunt ipsum eu, ornare semper felis. Duis arcu massa, venenatis eget ante sodales, posuere volutpat risus. Aenean et justo eu massa sodales posuere. Nullam sollicitudin nibh in turpis placerat venenatis.</p>
                     <div style="float:right;cursor: pointer;">
-                        <input type="button" class="submit-btn" style="background-color: #32BDD2; border: 0px; border-radius: 2px; padding: 10px 12px; box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.29); font-size: 12px; margin-top: 2vh;" value="SUBSCRIBE" onclick="SubscibeGroup()">
+                        <input type="button" class="submit-btn" style="background-color: #32BDD2; border: 0px; border-radius: 2px;cursor:pointer; padding: 10px 12px; box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.29); font-size: 12px;outline:none; margin-top: 2vh;" value="SUBSCRIBE" onclick="SubscibeGroup()">
 
                     </div>
                 </div>
@@ -219,8 +219,8 @@ function filter(){
                     </div>
                 </div>
 
-                <div class="group-members">
-                    <div class="member">
+                <div class="group-members" >
+                    <div class="member" style="border-bottom:none;">
                         <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
                         <div style="margin-left: 35px;">
                             <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Dan Park</p>
@@ -229,14 +229,14 @@ function filter(){
                     </div>
                 </div>
                 <div class="show-more">
-                    <p class="head-text" style="font-weight: 700; margin-right: 10px; font-size: 12px;">
+                    <p class="head-text" style="font-weight: 700; margin-right: 10px;cursor:pointer; font-size: 12px;">
                         SHOW MORE
                     </p>
                     <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="10" width="10" alt="list-button" style="margin-right: 15px; margin-bottom: 5px;">
                 </div>
                 <div style="display: flex; cursor: pointer; margin-top: 6vh;">
                     <img th:src="@{/images/extra-large-256px/Artboard 1 copy 9@16x.png}" height="15" width="15" onclick="backToGroupView()"/>
-                    <p style="color: #32BDD2; font-family: roboto; font-weight: 900; font-size: 14px; margin-left: 7px; letter-spacing: 0.7px;" onclick="interestgroup()">BACK</p>
+                    <p style="color: #32BDD2; font-family: roboto;cursor:pointer; font-weight: 900; font-size: 14px; margin-left: 7px; letter-spacing: 0.7px;" onclick="interestgroup()">BACK</p>
 
                     <script>
                         function interestgroup() {

@@ -83,10 +83,10 @@
                     <p style="display:block; color:#464646; font-family:roboto; width:59px;font-size:18px; font-weight:700; margin-bottom: 20px; letter-spacing: 1.4px;">
                         PEOPLE
                         <p style="color:#5A5A5A;display: flow-root;margin-left:58%;">Showing your favourites.</br>
-                        <span class="all-scroll" onclick="clearall()" style="color:#32BDD2; margin-left:48%;"><u>Clear Filter</u></span>
+                        <span onclick="clearall()" style="color:#32BDD2; margin-left:48%;cursor:pointer;"><u>Clear Filter</u></span>
                         <script>
                       function clearall() {
-                        window.location = src = "/community/people-list";                    }
+                        window.location = src = "/community/community-groups/people-list";                    }
                 </script>
                     </p>
 
@@ -97,7 +97,7 @@
                                 <a   style="color:#909090;" href="#about">Favourites</a>
                                 <script>
                       function fav() {
-                        window.location = src = "/community/people-list";                    }
+                        window.location = src = "/community/community-groups/people-list";                    }
                 </script>
                             </div>
                     </div>
@@ -108,14 +108,14 @@
                         <input onclick="loginFunction1()" class="box1" type="text" name="un" placeholder="Search..." size="48">
                         <script>
                       function loginFunction1() {
-                        window.location = src = "/community/people-search";                    }
+                        window.location = src = "/community/community-groups/people-search";                    }
                 </script>
                     </div>
                     <div style="width:50%;float:left;">
                         <img class="all-scroll" style="margin-left:64%;" th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" height="27" width="25" onclick="loginFunction1()" >
                         <script>
                       function loginFunction1() {
-                        window.location = src = "/community/people-search";                    }
+                        window.location = src = "/community/community-groups/people-search";                    }
                 </script>
                     </div>
                 </div>
@@ -129,7 +129,7 @@
                         </p>
                         <script>
                         function loginFunction2() {
-                            window.location = src = "/community/people-details";
+                            window.location = src = "/community/community-groups/people-details";
                         }
                     </script>
 

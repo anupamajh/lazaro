@@ -36,6 +36,10 @@
             document.getElementById("press-unlike").style.display = "none";
 
         }
+function fav(){
+             document.getElementById("showfilter").style.display = "block";
+
+}
     </script>
 
 </head>
@@ -48,7 +52,7 @@
 <div class="content">
     <div class="community-desc">
         <span style="color:#464646; font-family:roboto; font-size:18px; font-weight:700; letter-spacing: 1.4px;">COMMUNITY</span>
-        <p style="color:#707070; font-family:roboto; font-size:17px; width:50%; margin-top: 15px; letter-spacing: 0.6px;  line-height: 2;">
+        <p style="color:#707070; font-family:roboto; font-size:12px; width:50%; margin-top: 15px; letter-spacing: 0.6px;  line-height: 2;">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo vestibulum.
         </p>
     </div>
@@ -58,21 +62,21 @@
             <div class="people" style="width:91%;">
                 <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
                 <span style="color:#464646; font-family:roboto; font-size:18px; font-weight:700; letter-spacing: 1.4px;"><b>MY PROFILE</b> </span>
-                <p style="color:#747474; font-family:roboto; font-size:17px; width:95%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
+                <p style="color:#747474; font-family:roboto; font-size:12px; width:95%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
                     Based on your profile, you will be able to connect</br> with the best matches who share your interests.
                     </br> Go ahead and setup your profile.</p>
             </div>
             <div class="my-profile" style="border-bottom: solid 1px #CCCCCC;">
                 <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
                 <span style="color:#464646; font-family:roboto; font-size:18px; font-weight:700; margin-top: 10px; letter-spacing: 1.4px;"><b>PEOPLE</b> </span>
-                <p style="color:#747474; font-family:roboto; font-size:17px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
+                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
                     Meet the community members and make new friends.</p>
             </div>
             <div class="people">
                 <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
                 <span style="color:#464646; font-family:roboto; font-size:18px; font-weight:700; margin-top: 10px;letter-spacing: 1.4px;"><b>GROUPS</b></span>
-                <p style="color:#747474; font-family:roboto; font-size:17px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
-                    Meet the community members and make new friends.</p>
+                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
+                    Join the groups and catch all the action. You will</br> get suggestions based on your profile.</p>
             </div>
         </div>
 
@@ -81,16 +85,23 @@
             <div class="my-profile-options" style="padding:2%;">
                 <p style="display:block; color:#464646; font-family:roboto; width:59px;font-size:18px; font-weight:700;letter-spacing: 1.4px;">
                     PEOPLE</p>
+                <p id="showfilter" style="color:#5A5A5A;display: flow-root;margin-left:58%;display:none;">Showing your favourites.</br>
+                    <span onclick="clearall()" style="color:#32BDD2; margin-left:48%;cursor:pointer;"><u>Clear Filter</u></span>
+                    <script>
+                      function clearall() {
+                        window.location = src = "/community/community-groups/people-list";                    }
+                </script></p>
+
 
                 <div class="burger">
                     <img  onclick="myFunction()" class="dropbtn"  th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" height="32px" width="33px" id="uplaod-profile-pic">
-                <div id="myDropdown" class="dropdown-content">
+                <div id="myDropdown" class="dropdown-content" style="width: 168px;">
                     <a style="color:#909090;" href="#home">CLEAR</a>
                     <a  onclick="fav()" style="color:#464646;" href="#about">Favourites</a>
-                    <script>
-                      function fav() {
-                        window.location = src = "/community/people-filter";                    }
-                </script>
+<!--                    <script>-->
+<!--                      function fav() {-->
+<!--                        window.location = src = "/community/community-groups/people-filter";                    }-->
+<!--                </script>-->
                 </div>
             </div>
             </div>
@@ -101,35 +112,35 @@
                                onfocus="this.placeholder=''" onblur="this.placeholder='Search...'">
                         <script>
                       function loginFunction1() {
-                        window.location = src = "/community/people-search";                    }
+                        window.location = src = "/community/community-groups/people-search";                    }
                 </script>
                     </div>
                     <div style="width:50%;float:left;">
-                        <img style="margin-left:64%; cursor:pointer;" th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" height="27" width="25" onclick="loginFunction1()" >
+                        <img style="margin-left:64%; cursor:pointer;" th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" height="25" width="25" onclick="loginFunction1()" >
                         <script>
                       function loginFunction1() {
-                        window.location = src = "/community/people-search";                    }
+                        window.location = src = "/community/community-groups/people-search";                    }
                 </script>
                     </div>
                 </div>
 <!--                <p style="color:#464646; font-size:12px; margin-left: 145%; font-weight:550;width: 100px;"><b>2 Matches found.</b></p>-->
 
-            <div class="user-details">
+            <div class="user-details" style="cursor:pointer;" onclick="loginFunction2()">
                 <div class="names">
                     <img th:src="@{/images/profile-pic.jpg}" height="35" width="35" style="border-radius: 50%; ">
-                    <p onclick="loginFunction2()" style="color:#5A5A5A; font-size:14px; font-style:roboto; cursor:pointer;font-weight: 400;letter-spacing: 1.05px; margin-left: 12%; width:78px;">
+                    <p  style="color:#5A5A5A; font-size:14px; font-style:roboto; cursor:pointer;font-weight: 400;letter-spacing: 1.05px; margin-left: 12%; width:78px;">
                         John Doe <br>Male
                     </p>
                     <script>
                         function loginFunction2() {
-                            window.location = src = "/community/people-details";
+                            window.location = src = "/community/community-groups/people-details";
                         }
                     </script>
                     <span style="background-color:#E65959; padding: 5px; border-radius: 50%; margin-bottom: 15px; margin-left: 10px;"></span>
                 </div>
             </div>
             <div class="blue">
-                <img class="all-scroll" id="press-like" th:src="@{/images/extra-large-256px/Artboard 1 copy 35@16x.png}" height="28" width="28" onclick="myFunction1()" style="border-radius: 50%; ">
+                <img id="press-like" th:src="@{/images/extra-large-256px/Artboard 1 copy 35@16x.png}" height="28" width="28" onclick="myFunction1()" style="border-radius: 50%;cursor:pointer; ">
                 <img class="unlikee" id="press-unlike" th:src="@{/images/extra-large-256px/Artboard 1 copy 36@16x.png}" height="28" width="28" onclick="unliking()" style="border-radius: 50%;cursor:pointer; display:none;">
                 <span
                         style="background-color:#32BDD2; padding: 1.6px; font-size:1px; width:23%; line-height:6px;"><br></span>
@@ -231,9 +242,9 @@
             </div>
             </div>
 
-            <div class="show-more">
-                <p class="more">SHOW MORE
-                <img  class="drop-icon" th:src="@{/images/medium-48px/Artboard 1 copyxxhdpi.png}" height="17" width="17"/></p>
+            <div class="show-more" style="cursor:pointer;height: 47px;width: 81%;margin-left: 7%;">
+                <p class="more" style="margin-top:2%;">SHOW MORE
+                <img style="margin-left:1%;"  class="drop-icon" th:src="@{/images/medium-48px/Artboard 1 copyxxhdpi.png}" height="17" width="17"/></p>
             </div>
             </div>
         </div>
