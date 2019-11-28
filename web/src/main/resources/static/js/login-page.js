@@ -1,22 +1,22 @@
  function Login() {
-            document.getElementById("fieldError1").style.display = "block";
+            document.getElementById("FieldEmailError").style.display = "block";
             document.getElementById("hidePassword").style.display = "none";
              document.getElementById("hideEmail").style.display = "none";
-            document.getElementById("fieldError2").style.display = "block";
-            document.getElementById("eyeMask").style.display = "none";
-            document.getElementById("inputErr").style.border = "1px solid #BF574A";
+            document.getElementById("FieldPasswordError").style.display = "block";
+            document.getElementById("passwordMask").style.display = "none";
+            document.getElementById("inputError").style.border = "1px solid #BF574A";
             document.getElementById("passwordError").style.border = "1px solid #BF574A";
-            document.getElementById("eyeUnmask").style.display = "none";
+            document.getElementById("passwordUnmask").style.display = "none";
         }
         function unmask() {
-             document.getElementById("eyeUnmask").style.display = "none";
-            document.getElementById("eyeMask").style.display = "block";
+             document.getElementById("passwordUnmask").style.display = "none";
+            document.getElementById("passwordMask").style.display = "block";
              document.getElementById("hidePassword").style.display = "block";
               document.getElementById("hideEmail").style.display = "block";
               document.getElementById("passwordError").style.display="none";
-               document.getElementById("inputErr").style.display="none";
-            document.getElementById("eyeMask").style.bottom = "39%";
-            document.getElementById("eyeUnmask").style.bottom = "46%";
+               document.getElementById("inputError").style.display="none";
+            document.getElementById("passwordMask").style.bottom = "40%";
+            document.getElementById("passwordUnmask").style.bottom = "46%";
 
         }
          function forgotPassword() {
@@ -25,24 +25,63 @@
 
          function mask(){
           document.getElementById("passwordError").style.display="block";
-          document.getElementById("inputErr").style.display="block";
+          document.getElementById("inputError").style.display="block";
           document.getElementById("hidePassword").style.display = "none";
            document.getElementById("hideEmail").style.display = "none";
-           document.getElementById("eyeUnmask").style.display = "block";
-            document.getElementById("eyeMask").style.display = "none";
-             document.getElementById("eyeUnmask").style.bottom = "39%";
-             document.getElementById("eyeMask").style.bottom = "46%";
+           document.getElementById("passwordUnmask").style.display = "block";
+            document.getElementById("passwordMask").style.display = "none";
+             document.getElementById("passwordUnmask").style.bottom = "40%";
+             document.getElementById("passwordMask").style.bottom = "46%";
         }
      function getNewAccount() {
                             window.location = src = "/AccountLanding";
                         }
         function type() {
         }
-        function popupPassword() {
+        function PasswordSuccess() {
                                     window.location = src = "/forgotpassword-otp";
                                 }
 
-               function resetPassword() {
+               function ResetPassword() {
                        document.getElementById("passwordSuccess").style.display = "block";
                         document.getElementById("forgotPassword").style.display = "none";
                    }
+
+                    function landingPageSubmit(){
+                           document.getElementById("appsuccess").style.display = "block";
+                               document.getElementById("landingPage").style.display = "none";
+                           }
+
+                             function successMessage() {
+                                               window.location = src = "/AccountActivation";
+
+                                          }
+
+                  function AccountActivationSubmit() {
+                             document.getElementById("Activation").style.display = "none";
+                             document.getElementById("congrats").style.display = "block";
+                              document.getElementById("SubmitActivation").style.display = "none";
+                         }
+                 function LoginWeb(){
+                 document.getElementById("link-expire").style.display = "block";
+                 document.getElementById("congrats").style.display = "none";
+                 }
+
+                 function submitOtp(){
+                         document.getElementById("otpSuccessMessage").style.display = "block";
+                           document.getElementById("otp").style.display = "none";
+                                    }
+
+//function submitOtp() {
+// document.getElementById("inputErr1").style.border="1px solid #BF574A";
+// document.getElementById("inputErr2").style.border="1px solid #BF574A";
+// document.getElementById("inputErr3").style.border="1px solid #BF574A";
+// document.getElementById("inputErr4").style.border="1px solid #BF574A";
+// document.getElementById("success").style.display="none";
+// document.getElementById("wrong-otp").style.display="block";
+//
+//        }
+
+function LoginActivate(){
+               window.location.href= "/LoginPage";
+            }

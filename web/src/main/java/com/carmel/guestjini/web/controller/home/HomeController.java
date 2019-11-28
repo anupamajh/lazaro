@@ -24,12 +24,6 @@ public class HomeController {
     @RequestMapping(value = "/AccountLanding")
     public String AccountLanding(){ return "home/AccountLanding";}
 
-    @RequestMapping(value = "/OTPsuccess")
-    public String OTPsuccess(){ return "home/OTPsuccess";}
-
-    @RequestMapping(value = "/AppSuccess")
-    public String AppSuccess(){ return "home/AppSuccess";}
-
     @RequestMapping(value = "/AccountActivation")
     public String AccountActivate(){ return "home/AccountActivation";}
 
