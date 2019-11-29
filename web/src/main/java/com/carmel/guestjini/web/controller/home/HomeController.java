@@ -84,6 +84,9 @@ public class HomeController {
     @RequestMapping(value = "my-groups/invite-people")
     public String invitePeople(){ return "my-groups/invite-people";}
 
+    @RequestMapping(value = "/my-groups/my-groups-list")
+    public String myGroupList(){ return "/my-groups/my-groups-list";}
+
     @RequestMapping(value = "/my-groups/my-group-view1")
     public String myGroupView1(){ return "/my-groups/my-group-view1";}
 
