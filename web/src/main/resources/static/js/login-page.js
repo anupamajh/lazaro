@@ -82,6 +82,6 @@
 //
 //        }
 
-function LoginActivate(){
-               window.location.href= "/LoginPage";
+     function LoginActivate(){
+               location.replace("/");
             }

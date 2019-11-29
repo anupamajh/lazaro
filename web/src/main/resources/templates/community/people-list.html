@@ -8,23 +8,7 @@
     <link th:href="@{/css/PeopleList.css}" rel="stylesheet">
 
     <script>
-        function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-        }
 
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
          function myFunction1() {
             document.getElementById("press-like").style.display = "none";
             document.getElementById("press-unlike").style.display = "block";
@@ -36,211 +20,242 @@
             document.getElementById("press-unlike").style.display = "none";
 
         }
-function fav(){
-             document.getElementById("showfilter").style.display = "block";
+      function favourites(){
+            document.getElementById("filter-clear-link").style.display = "inline-block";
+            document.getElementById("drop-down-menu").style.display = "none";
+            var i, j;
+            for(i=0; i<all.length; i++){
+                all[i].style.display = "none";
+            }
+            for(j=0; j<fav.length; j++){
+                fav[j].style.display = "flex";
+            }
+       }
+             document.getElementById("people-filter-clear").style.display = "block";
+                document.getElementById("drop-down-menu").style.display = "none";
 
-}
+   function viewDropdown(){
+        if(document.getElementById("drop-down-menu").style.display === "none"){
+        document.getElementById("drop-down-menu").style.display = "block";
+        }else{
+            document.getElementById("drop-down-menu").style.display = "none";
+        }
+    }
+     window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+ function clearFilter(){
+            var all = document.getElementsByClassName("group-members");
+            document.getElementById("drop-down-menu").style.display = "none";
+            document.getElementById("filter-clear-link").style.display = "none";
+            var i, j;
+            for(i=0; i<all.length; i++){
+                all[i].style.display = "flex";
+            }
+       }
+
     </script>
 
 </head>
 
 <body>
-<header style="min-height: 6vh;">
+<header>
     <div th:replace="shared/dashboard :: dashboard">
     </div>
 </header>
-<div class="content">
-    <div class="community-desc">
-        <span style="color:#464646; font-family:roboto; font-size:18px; font-weight:700; letter-spacing: 1.4px;">COMMUNITY</span>
-        <p style="color:#707070; font-family:roboto; font-size:12px; width:50%; margin-top: 15px; letter-spacing: 0.6px;  line-height: 2;">
+<div class="people-content">
+    <div class="people-community-desc">
+        <span class="people-community">COMMUNITY</span>
+        <p class="people-lorem-paragraph">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo vestibulum.
         </p>
     </div>
 
-    <div class="profile-container">
-        <div class="left-content">
-            <div class="people" style="width:91%;">
-                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span style="color:#464646; font-family:roboto; font-size:18px; font-weight:700; letter-spacing: 1.4px;"><b>MY PROFILE</b> </span>
-                <p style="color:#747474; font-family:roboto; font-size:12px; width:95%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
+    <div class="people-profile-container">
+        <div class="people-left-content">
+            <div class="people">
+                <span class="people-borderTopRed"><br></span>
+                <span class="people-community"><b>MY PROFILE</b> </span>
+                <p class="people-my-profile-details">
                     Based on your profile, you will be able to connect</br> with the best matches who share your interests.
                     </br> Go ahead and setup your profile.</p>
             </div>
-            <div class="my-profile" style="border-bottom: solid 1px #CCCCCC;">
-                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span style="color:#464646; font-family:roboto; font-size:18px; font-weight:700; margin-top: 10px; letter-spacing: 1.4px;"><b>PEOPLE</b> </span>
-                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
-                    Meet the community members and make new friends.</p>
+            <div class="people-my-profile">
+                <span class="people-borderTopRed"><br></span>
+                <span class="people-community"><b>PEOPLE</b> </span>
+                <p class="people-my-profile-details">Meet the community members and make new friends.</p>
             </div>
             <div class="people">
-                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span style="color:#464646; font-family:roboto; font-size:18px; font-weight:700; margin-top: 10px;letter-spacing: 1.4px;"><b>GROUPS</b></span>
-                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
-                    Join the groups and catch all the action. You will</br> get suggestions based on your profile.</p>
+                <span class="people-borderTopRed"><br></span>
+                <span class="people-community"><b>GROUPS</b></span>
+                <p class="people-my-profile-details">Join the groups and catch all the action. You will</br> get suggestions based on your profile.</p>
             </div>
         </div>
 
-        <div class="right-content">
-            <div class="right">
-            <div class="my-profile-options" style="padding:2%;">
-                <p style="display:block; color:#464646; font-family:roboto; width:59px;font-size:18px; font-weight:700;letter-spacing: 1.4px;">
+        <div class="people-right-content">
+            <div>
+            <div class="people-my-profile-options">
+                <p class="people-community">
                     PEOPLE</p>
-                <p id="showfilter" style="color:#5A5A5A;display: flow-root;margin-left:58%;display:none;">Showing your favourites.</br>
-                    <span onclick="clearall()" style="color:#32BDD2; margin-left:48%;cursor:pointer;"><u>Clear Filter</u></span>
-                    <script>
-                      function clearall() {
-                        window.location = src = "/community/community-groups/people-list";                    }
-                </script></p>
 
-
-                <div class="burger">
-                    <img  onclick="myFunction()" class="dropbtn"  th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" height="32px" width="33px" id="uplaod-profile-pic">
-                <div id="myDropdown" class="dropdown-content" style="width: 168px;">
-                    <a style="color:#909090;" href="#home">CLEAR</a>
-                    <a  onclick="fav()" style="color:#464646;" href="#about">Favourites</a>
+                <div class="people-filter-part">
+                    <div class="people-filter" >
+                        <div class="people-load-favourites" id="filter-clear-link">
+                            <p class="people-show-favourites" style="">Showing your favourites.</p>
+                            <p class="people-clear-filter" onclick="clearFilter()">Clear Filter</p>
+                        </div>
+                        <img class="people-filter-icon" th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" width="40" height="40" alt="drop-down" onclick="viewDropdown()">
+                        <div class="people-filter-dropdown" id="drop-down-menu">
+                            <a class="people-clear" id="clear-link" onclick="clearFilter()">CLEAR</a>
+                            <a class="people-favourites" onclick="favourites()">Favourites</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            </div>
 
-                <div style="display:flex; justify-content:space-between; width:172%; align-items: center;border: 1px solid #CCCCCC;border-radius:25px;margin-top: 4%;">
-                    <div style="width:50%;margin-right:379px;">
-                        <input onclick="loginFunction1()" class="box1" type="text" name="un" placeholder="Search..." size="48"
+<!--                <div class="people-filter-icon" id="showfavourites">-->
+<!--                    <div style="position: relative; cursor: pointer;" >-->
+<!--                        <div id="people-filter-clear" style="margin-right: 15px; display: none; margin-top: 5px;">-->
+<!--                            <p style="color: #5A5A5A; text-align: right; font-size: 12px; font-weight: 900; letter-spacing: 0.9px; line=height: 14px;">Showing your favourites.</p>-->
+<!--                            <p style="color: #32BDD2; text-align: right; font-size: 11px; font-weight: 600; letter-spacing: 0.82px; line=height: 13px; margin-top: 10px; text-decoration: underline;" onclick="clearFilter()">Clear Filter</p>-->
+<!--                        </div>-->
+<!--                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" width="40" height="40" alt="drop-down" onclick="viewDropdown()">-->
+<!--                        <div class="people-filter-dropdown" id="drop-down-menu">-->
+<!--                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 1.05px; color: #909090; line-height: 1.6; border-bottom: solid 0.5px #CCCCCC; padding-right: 40%; padding-bottom: 13%; margin: 23% 0% 0% 15%;"  >CLEAR</a>-->
+<!--                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #464646; line-height: 1.6; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%;"  onclick="favourites()">Favourites</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+                <div class="people-search-box-main">
+                    <div class="people-search-box">
+                        <input onclick="peopleSearch()" class="box1" type="text" name="un" placeholder="Search..." size="48"
                                onfocus="this.placeholder=''" onblur="this.placeholder='Search...'">
                         <script>
-                      function loginFunction1() {
+                      function peopleSearch() {
                         window.location = src = "/community/community-groups/people-search";                    }
-                </script>
+                       </script>
                     </div>
-                    <div style="width:50%;float:left;">
-                        <img style="margin-left:64%; cursor:pointer;" th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" height="25" width="25" onclick="loginFunction1()" >
+                    <div class="people-search-icon">
+                        <img  th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" height="25" width="25" onclick="loginFunction1()" >
                         <script>
                       function loginFunction1() {
                         window.location = src = "/community/community-groups/people-search";                    }
                 </script>
                     </div>
                 </div>
-<!--                <p style="color:#464646; font-size:12px; margin-left: 145%; font-weight:550;width: 100px;"><b>2 Matches found.</b></p>-->
 
-            <div class="user-details" style="cursor:pointer;" onclick="loginFunction2()">
-                <div class="names">
-                    <img th:src="@{/images/profile-pic.jpg}" height="35" width="35" style="border-radius: 50%; ">
-                    <p  style="color:#5A5A5A; font-size:14px; font-style:roboto; cursor:pointer;font-weight: 400;letter-spacing: 1.05px; margin-left: 12%; width:78px;">
-                        John Doe <br>Male
+            <div class="people-user-details" onclick="loginFunction2()">
+                <div class="people-name-list">
+                    <img th:src="@{/images/profile-pic.jpg}" height="35" width="35">
+                    <p class="people-names">John Doe <br>Male
                     </p>
                     <script>
                         function loginFunction2() {
                             window.location = src = "/community/community-groups/people-details";
                         }
                     </script>
-                    <span style="background-color:#E65959; padding: 5px; border-radius: 50%; margin-bottom: 15px; margin-left: 10px;"></span>
+                    <span class="people-dot"></span>
                 </div>
             </div>
-            <div class="blue">
-                <img id="press-like" th:src="@{/images/extra-large-256px/Artboard 1 copy 35@16x.png}" height="28" width="28" onclick="myFunction1()" style="border-radius: 50%;cursor:pointer; ">
-                <img class="unlikee" id="press-unlike" th:src="@{/images/extra-large-256px/Artboard 1 copy 36@16x.png}" height="28" width="28" onclick="unliking()" style="border-radius: 50%;cursor:pointer; display:none;">
-                <span
-                        style="background-color:#32BDD2; padding: 1.6px; font-size:1px; width:23%; line-height:6px;"><br></span>
-                <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px; ">Common
-                        Interests</span>
-                <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">12/12</span>
+            <div class="people-ratings">
+                <img id="press-like" th:src="@{/images/extra-large-256px/Artboard 1 copy 35@16x.png}" height="28" width="28" onclick="myFunction1()" >
+                <img class="people-unlike" id="press-unlike" th:src="@{/images/extra-large-256px/Artboard 1 copy 36@16x.png}" height="28" width="28" onclick="unliking()">
+                <span class="people-ratings-ratio"><br></span>
+                <span class="people-common-interest">CommonInterests</span>
+                <span class="people-common-interest">12/12</span>
                 </div>
-                <div style="width:142%; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
+                <div class="people-border-bottom">
             </div>
 
-            <div class="user-details">
-                <div class="names">
 
-                    <img th:src="@{/images/profile-pic.jpg}" height="35" width="35" style="border-radius: 50%; ">
-                    <p style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px;margin-left: 12%; width:90px;">
-                        Peter Law <br> Male
+            <div class="people-user-details">
+                <div class="people-name-list">
+                    <img th:src="@{/images/profile-pic.jpg}" height="35" width="35">
+                    <p class="people-names">Peter Law <br> Male
                     </p>
                 </div>
             </div>
-            <div class="blue">
+            <div class="people-ratings">
                 <img th:src="@{/images/extra-large-256px/Artboard 1 copy 35@16x.png}" height="28" width="28" style="border-radius: 50%; ">
-                <span style="background-color:#32BDD2; padding: 1.6px; padding-left:30px; font-size:1px; line-width:395px; line-height:6px;"><br></span>
-                <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">Common
-                        Interests</span>
-                <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">8/12</span>
+                <span class="people-ratings-ratio"><br></span>
+                <span class="people-common-interest">CommonInterests</span>
+                <span class="people-common-interest">8/12</span>
             </div>
-                <div style="width:142%; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
+                <div class="people-border-bottom">
             </div>
 
-            <div class="user-details">
-                <div class="names">
+            <div class="people-user-details">
+                <div class="people-name-list">
                     <img th:src="@{/images/profile-pic.jpg}" height="35" width="35" style="border-radius: 50%; margin-left: 3%">
-                    <p style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px;margin-left: 12%; width:90px;">
-                        Luke Ray<br> Male
-                    </p>
+                    <p class="people-names">Luke Ray<br> Male</p>
                 </div>
             </div>
-            <div class="blue">
-                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 35@16x.png}" height="28" width="28" style="border-radius: 50%; ">
-                <span style="background-color:#32BDD2; padding: 1.6px; padding-left:30px; font-size:1px; line-width:395px; line-height:6px;"><br></span>
-                <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">Common
-                        Interests</span>
-                <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">5/12</span>
+            <div class="people-ratings">
+                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 35@16x.png}" height="28" width="28">
+                <span class="people-ratings-ratio"><br></span>
+                <span class="people-common-interest">CommonInterests</span>
+                <span class="people-common-interest">5/12</span>
             </div>
-                <div style="width:142%; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
+                <div class="people-border-bottom">
             </div>
 
-            <div class="user-details">
-                <div class="names">
+            <div class="people-user-details">
+                <div class="people-name-list">
+                    <img th:src="@{/images/profile-pic.jpg}" height="35" width="35">
+                    <p class="people-names">Daisy Lake <br> Female</p>
+                </div>
+            </div>
+            <div class="people-ratings">
+                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 36@16x.png}" height="28" width="28" >
+                <span class="people-ratings-ratio"><br></span>
+                <span class="people-common-interest">CommonInterests</span>
+                <span class="people-common-interest">2/12</span>
+            </div>
+                <div class="people-border-bottom">
+            </div>
+
+            <div class="people-user-details">
+                <div class="people-name-list">
                     <img th:src="@{/images/profile-pic.jpg}" height="35" width="35" style="border-radius: 50%; ">
-                    <p style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px;margin-left: 12%; width:120px;">
-                        Daisy Lake <br> Female
-                    </p>
+                    <p class="people-names">Jeret Quartz<br>Female</p>
                 </div>
             </div>
-            <div class="blue">
-                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 36@16x.png}" height="28" width="28" style="border-radius: 50%; ">
-                <span style="background-color:#32BDD2; padding: 1.6px; padding-left:30px; font-size:1px; line-width:395px; line-height:6px;"><br></span>
-                <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">Common
-                        Interests</span>
-                <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">2/12</span>
+            <div class="people-ratings">
+                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 35@16x.png}" height="28" width="28" >
+                <span class="people-ratings-ratio"><br></span>
+                <span class="people-common-interest">CommonInterests</span>
+                <span class="people-common-interest">1/12</span>
             </div>
-                <div style="width:142%; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
+                <div class="people-border-bottom">
             </div>
 
-            <div class="user-details">
-                <div class="names">
-                    <img th:src="@{/images/profile-pic.jpg}" height="35" width="35" style="border-radius: 50%; ">
-                    <p style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px;margin-left: 12%; width:120px;">
-                        Jeret Quartz<br>Female
-                    </p>
+            <div class="people-user-details">
+                <div class="people-name-list">
+                    <img th:src="@{/images/profile-pic.jpg}" height="35" width="35">
+                    <p class="people-names">Dan Quartz <br> Male</p>
                 </div>
             </div>
-            <div class="blue">
-                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 35@16x.png}" height="28" width="28" style="border-radius: 50%; ">
-                <span style="background-color:#32BDD2; padding: 1.6px; padding-left:30px; font-size:1px; line-width:395px; line-height:6px;"><br></span>
-                <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">Common
-                        Interests</span>
-                <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">1/12</span>
-            </div>
-                <div style="width:142%; height:1px; border:0.5px #CCCCCC;background-color:#CCCCCC;margin-left: 15%;">
-            </div>
-
-            <div class="user-details">
-                <div class="names">
-                    <img th:src="@{/images/profile-pic.jpg}" height="35" width="35" style="border-radius: 50%; ">
-                    <p style="color:#5A5A5A; font-size:14px; font-style:roboto; font-weight: 400;letter-spacing: 1.05px;margin-left: 12%; width:120px;">
-                        Dan Quartz <br> Male
-                    </p>
-                    <!-- <span style="background-color:#E65959; padding: 5px; border-radius: 50%; margin-bottom: 15px; margin-left: 10px;"> -->
-                </div>
-            </div>
-            <div class="blue1">
-                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 35@16x.png}" height="28" width="28" style="border-radius: 50%; ">
-                <span style="background-color:#32BDD2; padding: 1.6px; padding-left:30px; font-size:1px; line-width:395px; line-height:6px;"><br></span>
-                <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">Common
-                        Interests</span>
-                <span style="color:#747474; font-family:roboto; font-size:12px; font-weight:700; letter-spacing: 0.6px;">0/12</span>
+            <div class="people-ratings">
+                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 35@16x.png}" height="28" width="28" >
+                <span class="people-ratings-ratio"><br></span>
+                <span class="people-common-interest">CommonInterests</span>
+                <span class="people-common-interest">0/12</span>
             </div>
             </div>
 
-            <div class="show-more" style="cursor:pointer;height: 47px;width: 81%;margin-left: 7%;">
-                <p class="more" style="margin-top:2%;">SHOW MORE
-                <img style="margin-left:1%;"  class="drop-icon" th:src="@{/images/medium-48px/Artboard 1 copyxxhdpi.png}" height="17" width="17"/></p>
+            <div class="people-show-more-details">
+                <p class="people-show-more">SHOW MORE
+                <img class="drop-icon" th:src="@{/images/medium-48px/Artboard 1 copyxxhdpi.png}" height="17" width="17"/></p>
             </div>
             </div>
         </div>
