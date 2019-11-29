@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My-groups</title>
+    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto&display=swap}" rel="stylesheet">
+    <link th:href="@{/css/community.css}" rel="stylesheet">
+</head>
+<script>
+    function viewGroups(){
+        document.getElementById("groups-list").style.display = "block";
+        document.getElementById("no-groups").style.display = "none";
+        document.getElementById("drop-down-btn").style.display = "inline";
+    }
+    function viewDropdown(){
+        if(document.getElementById("drop-down-menu").style.display === "none"){
+        document.getElementById("drop-down-menu").style.display = "block";
+        }else{
+            document.getElementById("drop-down-menu").style.display = "none";
+        }
+    }
+
+    function groupView(){
+        console.log("msg");
+        location.replace("/community/community-groups/community-group-view");
+<!--        document.getElementById("group-view").style.display = "block";-->
+<!--        document.getElementById("group-content").style.display = "none";-->
+<!--        document.getElementById("drop-down-btn").style.display = "none";-->
+    }
+
+    function joinGroup(){
+<!--            document.getElementById("upload-failed").style.display = "none";-->
+<!--            document.getElementById("photo-upload").style.display = "none";-->
+<!--            document.getElementById("origin-frame").style.display = "none";-->
+            document.getElementById("upload-success").style.display = "block";
+        }
+
+     function closeFrame(){
+<!--            document.getElementById("photo-upload").style.display = "none";-->
+<!--            document.getElementById("origin-frame").style.display = "none";-->
+<!--            document.getElementById("upload-failed").style.display = "none";-->
+            document.getElementById("upload-success").style.display = "none";
+        }
+         function joinConversation(){
+            location.replace("/community/community-groups/community-group-conversation");
+        }
+         function backToGroupView(){
+            location.replace("/community/community-groups/community-groups");
+        }
+        function viewConversation(){
+            var x = document.getElementById("snackbar-group");
+            x.className = "show";
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        }
+        function requestAwaiting(){
+            location.replace("/community/community-groups/community-awaiting-group");
+        }
+        function openGroup(){
+            location.replace("/community/community-groups/community-open-group");
+        }
+
+        function searchGroups(){
+            var str = document.getElementById("search-groups").value.toUpperCase().trim();
+            var group_title = document.getElementsByClassName("group_info");
+            var group = document.getElementsByClassName("group");
+            var i;
+            var count = 0;
+            var groups = group_title.length;
+
+            for(i=0;i<groups;i++){
+                var res = group_title[i].textContent.toUpperCase().trim();
+                var result = res.match(str);
+                console.log(result);
+                var empty = "";
+                if(result != null){
+                    group[i].style.display = "flex";
+                    document.getElementById("show-more").style.display = "flex";
+                    count = count+1;
+                }else{
+                    group[i].style.display = "none";
+                    document.getElementById("show-more").style.display = "none";
+                }
+                if(count === 0){
+                    document.getElementById("search-not-found").style.display = "flex";
+                    document.getElementById("back-btn").style.display = "flex";
+                    document.getElementById("show-more").style.display = "none";
+                }else{
+                    document.getElementById("search-not-found").style.display = "none";
+                    document.getElementById("back-btn").style.display = "flex";
+                }
+            }
+        }
+</script>
+
+<body>
+<header style="min-height: 6vh;">
+    <div th:replace="shared/dashboard :: dashboard">
+    </div>
+</header>
+
+<div class="content">
+
+    <div class="community-desc">
+        <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">COMMUNITY</span>
+        <p style="color:#707070; font-family:roboto; font-size:12px; width:40%; margin-top: 15px; letter-spacing: 0.6px;  line-height: 2;">Lorem ipsum dolor
+            sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo
+            vestibulum.</p>
+    </div>
+
+    <div class="photo-upload" id="upload-success" style="width: 30%; height: 30%; left:30%; top: 45%;">
+        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame ()"><br><br>
+        <p style="color:#32BDD2; font-family: roboto; font-weight: 900; font-size: 16px; letter-spacing: 1.6px; line-height: 1.9; margin-bottom: 20px;">SUCCESS</p>
+        <p style="color:#5A5A5A; font-family: roboto; font-weight: 500; font-size: 14px; letter-spacing: 0.7px; line-height: 2.4; width: 80%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
+        <input type="button" class="submit-btn" style="display: block; margin: 4vw auto; border: 0px;" value="DONE" onclick="uploaded()">
+    </div>
+
+
+    <div class="profile-container">
+        <div class="left-content">
+            <div style="min-height: 5vh; background-color: #EEEEEE;"></div>
+            <div class="people">
+                    <span
+                            style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                <span
+                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">MY
+                        PROFILE</span>
+                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Based on
+                    your profile, you will be able to connect with the best matches who share your interests. Go
+                    ahead and setup your profile.</p>
+            </div>
+            <div class="people" style="border-bottom: solid 1px #CCCCCC; border-top: solid 1px #CCCCCC;">
+                    <span
+                            style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                <span
+                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px; letter-spacing: 1.4px;">PEOPLE</span>
+                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Meet the
+                    community members and make new friends.</p>
+            </div>
+            <div class="my-profile">
+                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                <span
+                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px;letter-spacing: 1.4px;">GROUPS</span>
+                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Join the groups and catch all the action. You will get suggestions based on your profile.</p>
+            </div>
+        </div>
+
+        <div class="right-content">
+
+            <div class="my-profile-options" style="padding: 2%; min-height: 35vw;" id="community-groups">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center;">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" style="box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.58); border-radius: 50%;" onclick="viewGroups()">
+                        <div style="display: none; width: 170px; height: 285px; position: absolute; box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.29); background-color: #FFFFFF; right: 0%; border-radius: 0px 5px 5px 5px;" id="drop-down-1">
+                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 1.05px; color: #747474; line-height: 1.6; padding-right: 40%; padding-bottom: 13%; margin: 23% 0% 0% 15%;">INTEREST GROUPS</a>
+                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #747474; line-height: 1.6; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%;">COMMUNITY GROUPS</a>
+                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #747474; line-height: 1.6; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%;">MY GROUPS</a>
+                        </div>
+                        <span style="font-family: roboto; font-size: 14px; font-weight: 900; letter-spacing: 1.4px; margin-left: 25px; margin-top: 5px; color: #464646;">COMMUNITY GROUPS</span>
+                    </div>
+                    <div style="display: none; position: relative; cursor: pointer;" id="drop-down-btn">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" width="40" height="40" alt="drop-down" onclick="viewDropdown()">
+                        <div style="display: none; width: 170px; height: 285px; position: absolute; border: solid 0.5px #CCCCCC; box-shadow: 0px 3px 17px rgba(0, 0, 0, 0.29); background-color: #FFFFFF; border-radius: 0px 0px 10px 10px; right: 0%;" id="drop-down-menu">
+                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 1.05px; color: #909090; line-height: 1.6; border-bottom: solid 0.5px #CCCCCC; padding-right: 40%; padding-bottom: 13%; margin: 23% 0% 0% 15%;">CLEAR</a>
+                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #464646; line-height: 1.6; border-bottom: solid 0.5px #CCCCCC; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%;">JOINED</a>
+                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #464646; line-height: 1.6; border-bottom: solid 0.5px #CCCCCC; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%;">REQUESTED</a>
+                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #464646; line-height: 1.6; padding-right: 40%; padding-bottom: 13%; margin: 13% 0px 0% 15%;">INVITED</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group-content" id="group-content">
+                    <div style="margin-top: 8vh;" id="no-groups">
+                        <p style="background-color: #EEEEEE; width: 357px; padding: 15px 25px; text-align:center; display: inline; font-family:roboto; font-size: 12px; font-weight: 600; color: #505050; letter-spacing: 0.6px;">EMPTY! No community groups have been created yet.</p>
+                    </div>
+                    <div class="groups-list" id="groups-list" style="display: block;">
+                        <div class="search-bar">
+                            <input type="text" placeholder="Search…" id="search-groups" style="padding: 8px 5px; border: 0px; width: 95%; outline: none; margin-left: 10px;">
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" width="20" height="20" alt="search-btn" id="search-btn" onclick="searchGroups()">
+                        </div>
+
+                        <div class="search-not-found" id="search-not-found">
+                            <img th:src="@{/images/extra-large-256px/search.png}" height="65" width="65" alt="search-not-found">
+                            <p style="font-family: roboto; font-size: 14px; letter-spacing: 0.7px; line-height: 16px; color: #747474; font-weight: 900; margin-top: 15px;">No Results Found</p>
+                            <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 14px; color: #909090; font-weight: 400; margin-top: 15px; width: 25%; text-align: center;">Sorry, we couldn’t find any results for search_keyword</p>
+                        </div>
+
+                        <div class="groups" id="groups">
+
+                            <div class="accepted group">
+                                <div>
+                                    <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                                    <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;" class="group_info">APACHE RIDERS</p>
+                                    <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
+                                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 10@16x.png}" width="40" height="40" alt="admin-pic" style="border-radius: 50%;">
+                                        <div style="margin-left: 5px; margin-bottom: 5px;">
+                                            <p class="group-admin-username" style="color: #747474; font-family: robot; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;">YOU</p>
+                                            <p class="notification-details" style="color: #272727; font-family: roboto; font-size: 11px; letter-spacing: 0.55px; line-height: 1.3;">2nd July 2019 06:21 PM (4 Days ago)</p>
+                                        </div>
+                                    </div>
+                                    <p style="color: #747474; width: 75%; font-family: roboto; font-size: 12px; letter-spacing: 0.3px; line-height: 1.8;">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.
+                                    </p>
+                                </div>
+                                <div>
+                                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30" height="30" alt="search-btn" style="border-radius: 50%;">
+                                </div>
+                            </div>
+
+                            <div class="accepted group">
+                                <div>
+                                    <span style="display:none; background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                                    <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;  margin-top: 20px;" class="group_info">STAND-UP COMEDY</p>
+                                    <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
+                                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 10@16x.png}" width="40" height="40" alt="search-btn" style="border-radius: 50%;">
+                                        <div style="margin-left: 5px; margin-bottom: 5px;">
+                                            <p class="group-admin-username" style="color: #505050; font-family: robot; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;">YOU</p>
+                                            <p class="notification-details" style="color: #272727; font-family: roboto; font-size: 11px; letter-spacing: 0.55px; line-height: 1.3;">2nd July 2019 06:21 PM (4 Days ago)</p>
+                                        </div>
+                                    </div>
+                                    <p style="color: #505050; width: 75%; font-family: roboto; font-size: 12px; letter-spacing: 0.3px; line-height: 1.8;">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.
+                                    </p>
+                                </div>
+                                <div>
+                                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30" height="30" alt="search-btn" id="view-notification" style="border-radius: 50%;" onclick="viewConversation()">
+                                </div>
+                            </div>
+
+                            <div class="invited group" style="background-color: #EEEEEE; border: solid 0.25 #CCCCCC; margin-top: 4vh;">
+                                <div>
+                                    <span style="display:none; background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                                    <p style="margin-top: 20px; color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;" class="group_info">MOVIE NIGHT - LION KING</p>
+                                    <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
+                                        <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic" style="border-radius: 50%;">
+                                        <div style="margin-left: 5px; margin-bottom: 5px;">
+                                            <p class="group-admin-username" style="color: #505050; font-family: robot; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;">Daisy Lake</p>
+                                            <p class="notification-details" style="color: #505050; font-family: roboto; font-size: 11px; letter-spacing: 0.55px; line-height: 1.3;">Today 11:38 AM (2 Hours ago)</p>
+                                        </div>
+                                    </div>
+                                    <p style="color: #505050; width: 75%; font-family: roboto; font-size: 12px; letter-spacing: 0.3px; line-height: 1.8;">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.
+                                    </p>
+                                    <div class="notification" style="display: flex; padding: 5px 10px 5px 25px; width: 83%; display: flex; align-items: center; background-color: #BEBAA4; margin-top: 15px;">
+                                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 25@16x.png}" width="30" height="30" alt="notification-icon" style="border-radius: 50%;">
+                                        <span style="color: #FFFFFF; font-size: 12px; letter-spacing: 0.6px; font-family: roboto; font-weight: 600; margin-left: 35px; text-align: center;" alt="notification-msg">You have been invited to join this group.</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="show-more" id="show-more">
+                                <p class="head-text" style="font-weight:900; margin-right: 10px; font-size: 14px; color: #747474; letter-spacing: 0.9px;">
+                                <p class="head-text" style="font-weight:900; margin-right: 10px; font-size: 14px; color: #747474; letter-spacing: 0.9px;">
+                                    SHOW MORE
+                                </p>
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="10" width="10" alt="list-button" style="margin-right: 15px; margin-bottom: 5px;">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div style="display: none; cursor: pointer; margin: 6vh 0vh 3vh 0vh;" id="back-btn">
+                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 9@16x.png}" height="15" width="15" onclick="backToGroupView()"/>
+                    <p style="color: #32BDD2; font-family: roboto; font-weight: 900; font-size: 14px; margin-left: 7px; letter-spacing: 0.7px;" onclick="backToGroupView()">BACK</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script th:href="@{/js/community-profile.js}" type="text/javascript"></script>
+
+</html>0

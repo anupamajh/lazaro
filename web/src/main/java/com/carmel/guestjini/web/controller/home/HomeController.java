@@ -81,5 +81,21 @@ public class HomeController {
     @RequestMapping(value = "my-groups/my-groups")
     public String myGroups(){ return "my-groups/my-groups";}
 
+    @RequestMapping(value = "my-groups/invite-people")
+    public String invitePeople(){ return "my-groups/invite-people";}
+
+    @RequestMapping(value = "/my-groups/my-group-view1")
+    public String myGroupView1(){ return "/my-groups/my-group-view1";}
+
+    @RequestMapping(value = "/my-groups/my-group-view")
+    public String myGroupView(){ return "/my-groups/my-group-view";}
+
+    @RequestMapping(value = "/my-groups/my-group-conversation")
+    public String myGroupConversation(){ return "/my-groups/my-group-conversation";}
+
+    @RequestMapping(value = "/my-groups/my-group-requests")
+    public String myGroupRequests(){ return "/my-groups/my-group-requests";}
+
+
 }
 

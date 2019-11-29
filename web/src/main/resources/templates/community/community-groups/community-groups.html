@@ -240,7 +240,7 @@
             var groups = group_title.length;
 
             for(i=0;i<groups;i++){
-                var res = group_title[i].textContent.toUpperCase();
+                var res = group_title[i].textContent.toUpperCase().trim();
                 var result = res.match(str);
                 console.log(result);
                 var empty = "";

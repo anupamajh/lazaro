@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Group-View</title>
+    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto&display=swap}" rel="stylesheet">
+    <link th:href="@{/css/community.css}" rel="stylesheet">
+</head>
+<script>
+    function createGroup(){
+        document.getElementById("groups-list").style.display = "block";
+        document.getElementById("no-groups").style.display = "none";
+        document.getElementById("create-group-btn").style.display = "none";
+    }
+    function viewDropdown(img){
+        if(document.getElementById("drop-down-1").style.display === "none"){
+        document.getElementById("drop-down-1").style.display = "block";
+        img.src = "http://localhost:8000/images/extra-large-256px/Artboard 1 copy 53@16x.png";
+        document.getElementById("drop-down-btn1").style.borderRadius = "0%";
+        }else{
+            document.getElementById("drop-down-1").style.display = "none";
+            img.src = "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%2047@16x.png";
+            document.getElementById("drop-down-btn1").style.borderRadius = "50%";
+        }
+    }
+    function viewDropdown1(){
+        if(document.getElementById("drop-down-menu").style.display === "none"){
+            document.getElementById("drop-down-menu").style.display = "block";
+        }else{
+            document.getElementById("drop-down-menu").style.display = "none";
+        }
+    }
+    function groupCreated(){
+        document.getElementById("groups-list").style.display = "none";
+        document.getElementById("no-groups").style.display = "block";
+        document.getElementById("invite-part").style.display = "block";
+        document.getElementById("create-group-btn").style.display = "none";
+        document.getElementById("upload-success").style.display = "none";
+    }
+    function invitePeople1(position){
+        var list = document.getElementsByClassName("invite-btn");
+        var sentlist = document.getElementsByClassName("msg-sent");
+        list = [].slice.call(list);
+        var n = list.indexOf(position);
+        list[n].style.display = "none";
+        sentlist[n].style.display = "block";
+        var x = document.getElementById("snackbar-invite");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+    function invitePeople(){
+            location.assign("/my-groups/invite-people");
+       }
+    function createGroupDone(){
+<!--            document.getElementById("upload-failed").style.display = "none";-->
+<!--            document.getElementById("photo-upload").style.display = "none";-->
+<!--            document.getElementById("origin-frame").style.display = "none";-->
+                document.getElementById("upload-success").style.display = "block";
+        }
+
+        function exitGroup(){
+                document.getElementById("delete").style.display = "block";
+        }
+
+     function closeFrame(){
+<!--            document.getElementById("photo-upload").style.display = "none";-->
+<!--            document.getElementById("origin-frame").style.display = "none";-->
+<!--            document.getElementById("upload-failed").style.display = "none";-->
+                document.getElementById("upload-success").style.display = "none";
+                document.getElementById("delete").style.display = "none";
+        }
+
+       function filterFav(){
+            var all = document.getElementsByClassName("group-members");
+            var fav = document.getElementsByClassName("favourites");
+            document.getElementById("filter-clear-link").style.display = "inline-block";
+            document.getElementById("drop-down-menu").style.display = "none";
+            document.getElementById("count-msg").style.display = "none";
+            var i, j;
+            for(i=0; i<all.length; i++){
+                all[i].style.display = "none";
+            }
+            for(j=0; j<fav.length; j++){
+                fav[j].style.display = "flex";
+            }
+       }
+       function clearFilter(){
+            var all = document.getElementsByClassName("group-members");
+            document.getElementById("drop-down-menu").style.display = "none";
+            document.getElementById("filter-clear-link").style.display = "none";
+            var i, j;
+            for(i=0; i<all.length; i++){
+                all[i].style.display = "flex";
+            }
+       }
+        function viewJoined(){
+                console.log("entered");
+            if(document.getElementById("joined-members").style.display === "none"){
+                 document.getElementById("joined-members").style.display = "block";
+                 document.getElementById("view-joined-btn").src="/images/extra-large-256px/Artboard 1 copy 2@16x.png";
+            }else{
+                document.getElementById("joined-members").style.display = "none";
+                document.getElementById("view-joined-btn").src="/images/extra-large-256px/Artboard 1 copy@16x.png";
+            }
+        }
+        function viewRequestList(){
+            location.assign("/my-groups/my-group-requests");
+       }
+         function viewPending(){
+                console.log("entered");
+            if(document.getElementById("pending-members").style.display === "none"){
+                 document.getElementById("pending-members").style.display = "block";
+                 document.getElementById("view-pending-btn").src="/images/extra-large-256px/Artboard 1 copy 2@16x.png";
+            }else{
+                document.getElementById("pending-members").style.display = "none";
+                document.getElementById("view-pending-btn").src="/images/extra-large-256px/Artboard 1 copy@16x.png";
+            }
+        }
+
+        function openConversation(){
+            location.replace("/my-groups/my-group-conversation");
+        }
+
+         function joinConversation(){
+            location.replace("/community/community-groups/community-group-conversation");
+        }
+         function backToGroupView(){
+            location.replace("/my-groups/my-groups");
+        }
+        function viewConversation(){
+            var x = document.getElementById("snackbar-group");
+            x.className = "show";
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        }
+        function requestAwaiting(){
+            location.replace("/community/community-groups/community-awaiting-group");
+        }
+        function openGroup(){
+            location.replace("/community/community-groups/community-open-group");
+        }
+        function searchPeople(){
+            var str = document.getElementById("search-people").value.toUpperCase().trim();
+            var person_name = document.getElementsByClassName("uname");
+            var people = document.getElementsByClassName("group-members");
+            var i;
+            var count = 0;
+            var people_list = person_name.length;
+
+            for(i=0;i<people_list;i++){
+                var res = person_name[i].textContent.toUpperCase().trim();
+                var result = res.match(str);
+                console.log(result);
+                if(result != null){
+                    people[i].style.display = "flex";
+                    count = count+1;
+                }else{
+                    people[i].style.display = "none";
+                }
+                if(count === 0){
+                    document.getElementById("search-not-found").style.display = "flex";
+                    document.getElementById("back-btn").style.display = "flex";
+                    document.getElementById("count-msg").style.display = "none";
+                    document.getElementById("show-more").style.display = "none";
+                }else{
+                    document.getElementById("search-not-found").style.display = "none";
+                    document.getElementById("back-btn").style.display = "flex";
+                }
+                    document.getElementById("count").innerHTML = count;
+                    document.getElementById("count-msg").style.display = "block";
+            }
+        }
+</script>
+
+<body>
+<header style="min-height: 6vh;">
+    <div th:replace="shared/dashboard :: dashboard">
+    </div>
+</header>
+
+<div class="content">
+
+    <div class="community-desc">
+        <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">COMMUNITY</span>
+        <p style="color:#707070; font-family:roboto; font-size:12px; width:40%; margin-top: 15px; letter-spacing: 0.6px;  line-height: 2;">Lorem ipsum dolor
+            sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo
+            vestibulum.</p>
+    </div>
+
+    <div class="photo-upload" id="upload-success" style="width: 30%; left:30%; top: 45%;">
+        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29); cursor: pointer;" onclick="closeFrame ()"><br><br>
+        <p style="color:#32BDD2; font-family: roboto; font-weight: 900; font-size: 16px; letter-spacing: 1.6px; line-height: 1.9; margin-bottom: 20px;">SUCCESS</p>
+        <p style="color:#5A5A5A; font-family: roboto; font-weight: 500; font-size: 14px; letter-spacing: 0.7px; line-height: 2.4; width: 80%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
+        <input type="button" class="submit-btn" style="display: block; margin: 4vw auto; border: 0px; cursor: pointer;" value="DONE" onclick="groupCreated()">
+    </div>
+
+    <div class="photo-upload" id="delete" style="width: 30%; min-height: 27%; top: 50%; left:30%; padding-bottom: 2vw;">
+        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29); cursor: pointer;" onclick="closeFrame()"><br><br>
+        <p style="color:#E65959; font-family: roboto; font-weight: 900; font-size: 16px; letter-spacing: 1.6px; line-height: 1.9; margin-bottom: 20px;">DELETE GROUP?</p>
+        <p style="color:#5A5A5A; font-family: roboto; font-weight: 500; font-size: 14px; letter-spacing: 0.7px; line-height: 2.4; width: 80%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
+        <div style="display: flex; margin: 3vw 5vw; justify-content: space-evenly;">
+            <input type="button" class="submit-btn" style="display: block; background-color:#E65959; border: 0px; margin-right: 25px; cursor: pointer;" value="DELETE" onclick="">
+            <input type="button" class="submit-btn" style="display: block; padding: 0.5vw 3vw; border: 0px; margin-left: 0px; cursor: pointer;" value="NO" onclick="">
+        </div>
+    </div>
+
+
+    <div class="profile-container">
+        <div class="left-content">
+            <div style="min-height: 5vh; background-color: #EEEEEE;"></div>
+            <div class="people">
+                    <span
+                            style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                <span
+                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">MY
+                        PROFILE</span>
+                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Based on
+                    your profile, you will be able to connect with the best matches who share your interests. Go
+                    ahead and setup your profile.</p>
+            </div>
+            <div class="people" style="border-bottom: solid 1px #CCCCCC; border-top: solid 1px #CCCCCC;">
+                    <span
+                            style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                <span
+                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px; letter-spacing: 1.4px;">PEOPLE</span>
+                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Meet the
+                    community members and make new friends.</p>
+            </div>
+            <div class="my-profile">
+                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                <span
+                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px;letter-spacing: 1.4px;">GROUPS</span>
+                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Join the groups and catch all the action. You will get suggestions based on your profile.</p>
+            </div>
+        </div>
+
+        <div class="right-content">
+
+            <div class="my-profile-options" style="padding: 2%; min-height: 35vw;" id="community-groups">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center;">
+                        <div>
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" style="border-radius: 50%; cursor: pointer;" onclick="viewDropdown(this)" id="drop-down-btn1">
+                            <div style="display: none; width: 188px; height: 208px; position: absolute; box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.29); background-color: #FFFFFF; right: 46.8%; border-radius: 0px 5px 5px 5px;" id="drop-down-1">
+                                <a style="display: block; cursor: pointer; font-family: roboto; font-size: 12px; font-weight: 600; letter-spacing: 1.2px; color: #747474; line-height: 17px; padding-bottom: 13%; margin: 20% 0% 0% 10%;">INTEREST GROUPS</a>
+                                <a style="display: block; cursor: pointer; font-family: roboto; font-size: 12px; font-weight: 600; letter-spacing: 1.2px; color: #747474; line-height: 17px; padding-bottom: 13%; margin: 13% 0% 0% 10%;">COMMUNITY GROUPS</a>
+                                <a style="display: block; cursor: pointer; font-family: roboto; font-size: 12px; font-weight: 600; letter-spacing: 1.2px; color: #747474; line-height: 17px; padding-bottom: 13%; margin: 13% 0% 0% 10%;">MY GROUPS</a>
+                            </div>
+                        </div>
+                        <span style="font-family: roboto; font-size: 14px; font-weight: 900; letter-spacing: 1.4px; margin-left: 25px; margin-top: 5px; color: #464646;">MY GROUPS</span>
+                    </div>
+                    <div style="display: none;" id="drop-down-btn">
+                        <div style="position: relative; cursor: pointer;" >
+                            <div id="filter-clear-link" style="margin-right: 15px; display: none; margin-top: 5px;">
+                                <p style="color: #5A5A5A; text-align: right; font-size: 12px; font-weight: 900; letter-spacing: 0.9px; line=height: 14px;">Showing your favourites.</p>
+                                <p style="color: #32BDD2; text-align: right; font-size: 11px; font-weight: 600; letter-spacing: 0.82px; line=height: 13px; margin-top: 10px; text-decoration: underline; cursor: pointer;" onclick="clearFilter()">Clear Filter</p>
+                            </div>
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" width="40" height="40" alt="drop-down" style="cursor: pointer;" onclick="viewDropdown1()">
+                            <div style="display: none; width: 170px; height: 164px; position: absolute; border: solid 0.5px #CCCCCC; box-shadow: 0px 3px 17px rgba(0, 0, 0, 0.29); background-color: #FFFFFF; border-radius: 0px 0px 10px 10px; right: 0%;" id="drop-down-menu">
+                                <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 1.05px; color: #909090; line-height: 1.6; border-bottom: solid 0.5px #CCCCCC; padding-right: 40%; padding-bottom: 13%; margin: 23% 0% 0% 15%; cursor: pointer;" onclick="clearFilter()">CLEAR</a>
+                                <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #464646; line-height: 1.6; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%; cursor: pointer;" onclick="filterFav()">Favourites</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group-content" id="group-content">
+                    <div class="groups-list" id="groups-list" style="display: block;">
+                        <div class="group-view" id="group-view" style="display: block;">
+                            <div class="group-info" style="display: flex; align-items: center; justify-content: space-between;">
+                                <div style="width: 70%;">
+                                    <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; color: #505050; font-weight: 600; margin-bottom: 20px;">Apache Riders</p>
+                                    <p style="font-family: roboto; font-size: 10px; letter-spacing: 0.6px; line-height: 1.4; color: #505050; font-weight: 600; margin-bottom: 20px;">2nd July 2019 06:21 PM (4 Days ago)</p>
+                                    <p style="font-family: roboto; font-size: 10px; letter-spacing: 0; line-height: 1.4; color: #909090; font-weight: 400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim felis et magna mattis finibus. Nulla elit ligula, placerat tincidunt ipsum eu, ornare semper felis. Duis arcu massa, venenatis eget ante sodales, posuere volutpat risus</p>
+                                </div>
+                                <input type="button" class="submit-btn" style="background-color: #E65959; border: 0px; border-radius: 2px; padding: 10px 30px; box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.29); font-size: 12px; letter-spacing: 1.2px; cursor: pointer;" value="DELETE" onclick="exitGroup()">
+                            </div>
+                            <div style="display: flex; flex-direction: column; cursor: pointer;">
+                                <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                                    <div style="margin-top: 4vh; border-radius: 0px 0px 0px 27px; width: 215px; height: 55px; background-color: #DFEBF7; box-shadow: 0px 2px 5px rgba( 0, 0, 0, 0.29); float: right; display: flex; align-items: center; justify-content: center; cursor: pointer;"  onclick="openConversation()">
+                                        <p style="color: #505050; font-size: 14px; letter-spacing: 0.7px; line-height: 16px;">CONVERSATION <div style="visibility: hidden" id="conversation-notification"><span id="conversation-notification-count" style=" color: #FFFFFF;  font-size: 8px; letter-spacing: 0.4px;">23</span></div></p>
+                                    </div>
+
+                                    <div class="request" style="border: solid 0.25px #CCCCCC; cursor: pointer;" onclick="viewRequestList();">
+                                        <span style="display: none; background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
+                                        <span style="color:#505050; font-family:roboto; font-size:14px; font-weight:700; margin-top: 10px; letter-spacing: 0.7px;">REQUESTS</span>
+                                        <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">You have requests to join the group from people whom you have not invited.</p>
+                                    </div>
+                                </div>
+                                </div>
+
+                                <div style="display: flex; align-items: center; margin-top: 6vh;">
+                                    <p style="font-family: roboto; font-size: 10px; letter-spacing: 0.5px; line-height: 25px; color: #747474; font-weight: 700; width: 8%;">0 Members</p>
+                                    <span style="height: 0.5px; background-color: #CCCCCC; padding: 0.25px 200px; font-size: 1px; width: 400px; margin-left: 15px;"></span>
+                                </div>
+
+                                <div style="margin-top: 8vh;" id="no-members">
+                                    <p style="background-color: #EEEEEE; width: 357px; padding: 15px 20px; text-align:center; display: inline; font-family:roboto; font-size: 10px; font-weight: 600; color: #505050; letter-spacing: 0.5px;">EMPTY! You have not invited any members yet.</p>
+                                </div>
+
+                                <div style="margin-top: 4vh;">
+                                    <p style="color: #505050; font-size: 12px; letter-spacing: 0.9px; line-height: 13px; font-weight: 600;">Invite member(s) to your group.</p>
+                                    <p style="color: #999999; font-size: 12px; letter-spacing: 0.9px; line-height: 13px; margin-top: 10px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    <input type="button" class="submit-btn" value="INVITE" style="font-weight: 900; font-size: 10px; letter-spacing: 1px; padding: 13px 35px; margin-top: 2vh; cursor: pointer;" onclick="invitePeople()">
+                                </div>
+
+
+                    <div style="display: flex; cursor: pointer; margin: 6vh 0vh 3vh 0vh;" id="back-btn">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 9@16x.png}" height="15" width="15" style="cursor: pointer;" onclick="backToGroupView()"/>
+                        <p style="color: #32BDD2; font-family: roboto; font-weight: 900; font-size: 14px; margin-left: 7px; letter-spacing: 0.7px; cursor: pointer;" onclick="backToGroupView()">BACK</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</body>
+<script th:href="@{/js/community-profile.js}" type="text/javascript"></script>
+</html>

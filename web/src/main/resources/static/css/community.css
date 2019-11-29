@@ -6,6 +6,9 @@ body{
     background-color:#E5E5E5;
     font-family: roboto;
 }
+[onClick] {
+    cursor: pointer;
+}
 .community-desc{
     padding: 3%;
     background-color: #FFFFFF;
@@ -39,7 +42,6 @@ body{
 .search-bar{
     display: flex;
     align-items: center;
-    width: 77%;
     border: solid 1px #CCCCCC;
     border-radius: 16px;
     margin-top: 6vh;
@@ -51,6 +53,14 @@ body{
 .people{
     padding: 5% 13%;
     background-color: #EEEEEE;
+}
+.request{
+        display: block;
+        padding: 2% 4%;
+        background-color: #EEEEEE;
+        float: right;
+        width: 333px;
+        margin-top: 4vh;
 }
 .submit-btn{
     background-color: #32BDD2;
@@ -109,6 +119,32 @@ body{
         box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.29);
         margin-top: 6%;
         margin-bottom: 3%;
+}
+.joined-members-head{
+        display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 10px;
+            background-color: #EEEEEE;
+            box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.29);
+            margin-top: 6%;
+           }
+.pending-members-head{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px 10px;
+          background-color: #EEEEEE;
+          box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.29);
+          margin-top: 6%;
+}
+.joined-members{
+    display: block;
+    border: solid 0.5px #CCCCCC;
+}
+.pending-members{
+    display: none;
+    border: solid 0.5px #CCCCCC;
 }
 .head-text{
     display:block;
@@ -678,13 +714,23 @@ body{
 .group-info{
     padding: 4% 5%;
     background-color: #EEEEEE;
-    width: 70%;
     margin-top: 4vh;
 }
 .conversation-view{
     background-color: #DFEBF7;
     padding: 2% 5%;
     width: 70%;
+}
+#conversation-notification{
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    margin-left: 5px;
+    margin-bottom: 15px;
+    background-color: #E65959;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .incoming-message{
     background-color: #FFFFFF;
@@ -696,7 +742,6 @@ body{
 }
 .sent-message-btm{
     text-align: right;
- margin-right:19%;
     background-color: #FFFFFF;
     border: solid #FAFAFA 0.5px;
     padding: 2% 3%;
@@ -712,12 +757,13 @@ body{
     justify-content: space-between;
     border-bottom: solid #CCCCCC 0.5px;
     align-items: center;
+    padding: 0px 20px;
 }
 .msg-sent{
     display: none;
 }
 .invite-people{
-    display: none;
+    display: block;
 }
 .member{
     display: flex;
