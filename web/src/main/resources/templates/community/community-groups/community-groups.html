@@ -8,177 +8,6 @@
     <link th:href="@{/css/community.css}" rel="stylesheet">
 </head>
 <script>
-<!--            function viewInterestList(){-->
-<!--            document.getElementById("view-interest-list").classList.toggle("show");-->
-<!--            document.getElementById("drop-down-list").style.display = "none";-->
-<!--            document.getElementById("drop-down-btn").src="/images/extra-large-256px/Artboard 1 copy@16x.png";-->
-<!--        }-->
-
-<!--        function viewDropDownList(){-->
-<!--            console.log("entered");-->
-<!--            if(document.getElementById("drop-down-list").style.display === "none"){-->
-<!--                 document.getElementById("drop-down-list").style.display = "block";-->
-<!--                 document.getElementById("drop-down-btn").src="/images/extra-large-256px/Artboard 1 copy 2@16x.png";-->
-<!--            }else{-->
-<!--                document.getElementById("drop-down-list").style.display = "none";-->
-<!--                document.getElementById("drop-down-btn").src="/images/extra-large-256px/Artboard 1 copy@16x.png";-->
-<!--            }-->
-<!--        }-->
-
-<!--        function goBack(){-->
-<!--            document.getElementById("profile-setup").style.display = "block";-->
-<!--            document.getElementById("interests-setup").style.display = "none";-->
-<!--        }-->
-
-<!--        function interestsSetup(){-->
-<!--            document.getElementById("profile-setup").style.display = "none";-->
-<!--            document.getElementById("interests-setup").style.display = "block";-->
-<!--        }-->
-
-<!--        function uploadPicture(){-->
-<!--            document.getElementById("photo-upload").style.display = "block";-->
-<!--        }-->
-<!--        window.addEventListener('load', function() {-->
-<!--            document.querySelector('input[type="file"]').addEventListener('change', function() {-->
-<!--                if (this.files && this.files[0]) {-->
-<!--                    var img = document.getElementById("upload-profile-pic");  // $('img')[0]-->
-<!--                    img.src = URL.createObjectURL(this.files[0]); // set src to blob url-->
-<!--                    img.onload = imageIsLoaded;-->
-<!--                    var txt = document.getElementById("Upload-pic");-->
-<!--                    txt.style.display = "none";-->
-<!--                }-->
-<!--        });-->
-<!--    });-->
-
-
-<!--        function closeFrame(){-->
-<!--            document.getElementById("photo-upload").style.display = "none";-->
-<!--            document.getElementById("origin-frame").style.display = "none";-->
-<!--            document.getElementById("upload-failed").style.display = "none";-->
-<!--            document.getElementById("upload-success").style.display = "none";-->
-<!--        }-->
-
-<!--        function visibilityToggle(img){-->
-<!--                if(img.src === "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%203@16x.png"){-->
-<!--                    console.log(img.src);-->
-<!--                    img.src = "/images/extra-large-256px/Artboard 1 copy 4@16x.png";-->
-<!--                }-->
-<!--                else{-->
-<!--                    console.log(img.src);-->
-<!--                    img.src = "/images/extra-large-256px/Artboard 1 copy 3@16x.png";-->
-<!--                }-->
-<!--         }-->
-
-<!--        function originFrame(){-->
-<!--            document.getElementById("origin-frame").style.display = "block";-->
-<!--        }-->
-
-<!--        function chooseImg(){-->
-<!--           var img = document.getElementById("fileInput").click();-->
-<!--           console.log("img");-->
-<!--        }-->
-
-<!--        function joinGroup(){-->
-<!--            document.getElementById("upload-failed").style.display = "none";-->
-<!--            document.getElementById("photo-upload").style.display = "none";-->
-<!--            document.getElementById("origin-frame").style.display = "none";-->
-<!--            document.getElementById("upload-success").style.display = "block";-->
-<!--        }-->
-<!--        -->
-<!--        function uploaded(){-->
-<!--            document.getElementById("edit-part").style.visibility = "visible";-->
-<!--            document.getElementById("upload-failed").style.display = "none";-->
-<!--            document.getElementById("photo-upload").style.display = "none";-->
-<!--            document.getElementById("origin-frame").style.display = "none";-->
-<!--            document.getElementById("upload-success").style.display = "none";-->
-<!--            document.getElementById("visible-pic").style.display = "block";-->
-<!--            document.getElementById("upload-pic").style.display = "none";-->
-<!--            document.getElementById("upload-profile-pic").removeAttribute("onclick");-->
-<!--        }-->
-
-<!--        function uploadSuccess(){-->
-<!--            document.getElementById("upload-failed").style.display = "none";-->
-<!--            document.getElementById("photo-upload").style.display = "none";-->
-<!--            document.getElementById("origin-frame").style.display = "none";-->
-<!--            document.getElementById("upload-success").style.display = "block";-->
-<!--        }-->
-
-<!--        function myFunction(img) {-->
-<!--                            if(img.src === "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%203@16x.png"){-->
-<!--                             var x = document.getElementById("snackbar1");-->
-<!--                             x.className = "show";-->
-<!--                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);-->
-<!--                            }-->
-<!--                            else{-->
-<!--                             var x = document.getElementById("snackbar");-->
-<!--                             x.className = "show";-->
-<!--                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);-->
-<!--                            }-->
-<!--        }-->
-<!--        function myFunction1(img) {-->
-<!--                            if(img.src === "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%203@16x.png"){-->
-<!--                             var x = document.getElementById("snackbar1-mobile");-->
-<!--                             x.className = "show";-->
-<!--                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);-->
-<!--                            }-->
-<!--                            else{-->
-<!--                             var x = document.getElementById("snackbar-mobile");-->
-<!--                             x.className = "show";-->
-<!--                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);-->
-<!--                            }-->
-<!--        }-->
-<!--         function myFunctionAge(img) {-->
-<!--                            if(img.src === "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%203@16x.png"){-->
-<!--                             var x = document.getElementById("snackbar1-age");-->
-<!--                             x.className = "show";-->
-<!--                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);-->
-<!--                            }-->
-<!--                            else{-->
-<!--                             var x = document.getElementById("snackbar-age");-->
-<!--                             x.className = "show";-->
-<!--                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);-->
-<!--                            }-->
-<!--        }-->
-<!--         function myFunctionEmail(img) {-->
-<!--                            if(img.src === "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%203@16x.png"){-->
-<!--                             var x = document.getElementById("snackbar1-email");-->
-<!--                             x.className = "show";-->
-<!--                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);-->
-<!--                            }-->
-<!--                            else{-->
-<!--                             var x = document.getElementById("snackbar-email");-->
-<!--                             x.className = "show";-->
-<!--                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);-->
-<!--                            }-->
-<!--        }-->
-<!--         function myFunctionOrigin(img) {-->
-<!--                            if(img.src === "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%203@16x.png"){-->
-<!--                             var x = document.getElementById("snackbar1-origin");-->
-<!--                             x.className = "show";-->
-<!--                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);-->
-<!--                            }-->
-<!--                            else{-->
-<!--                             var x = document.getElementById("snackbar-origin");-->
-<!--                             x.className = "show";-->
-<!--                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);-->
-<!--                            }-->
-<!--        }-->
-<!--        function changePicture(){-->
-<!--            if(document.getElementById("change-delete-picture").style.visibility === "hidden"){-->
-<!--                var img = document.getElementById("picture-edit-btn");-->
-<!--                img.src = "/images/extra-large-256px/Artboard 1 copy 53@16x.png";-->
-<!--                document.getElementById("change-delete-picture").style.visibility = "visible";-->
-<!--            }-->
-<!--            else{-->
-<!--                var img = document.getElementById("picture-edit-btn");-->
-<!--                img.src = "/images/extra-large-256px/Artboard 1 copy 51@16x.png";-->
-<!--                document.getElementById("change-delete-picture").style.visibility = "hidden";-->
-<!--            }-->
-<!--        }-->
-
-    </script>
-
-<script>
     function viewGroups(){
         document.getElementById("groups-list").style.display = "block";
         document.getElementById("no-groups").style.display = "none";
@@ -264,8 +93,12 @@
         }
 </script>
 
+<style>
+
+</style>
+
 <body>
-<header style="min-height: 6vh;">
+<header class="community-header">
     <div th:replace="shared/dashboard :: dashboard">
     </div>
 </header>
@@ -273,205 +106,156 @@
 <div class="content">
 
     <div class="community-desc">
-        <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">COMMUNITY</span>
-        <p style="color:#707070; font-family:roboto; font-size:12px; width:40%; margin-top: 15px; letter-spacing: 0.6px;  line-height: 2;">Lorem ipsum dolor
+        <span class="community-title">COMMUNITY</span>
+        <p class="community-text">Lorem ipsum dolor
             sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo
             vestibulum.</p>
     </div>
 
-<!--    <div class="photo-upload" id="photo-upload">-->
-<!--        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" id="uplaod-profile-pic-close" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame()"><br><br>-->
-<!--        <p style="font-weight: 900; color:#32BDD2; font-family: roboto; font-size: 16px; letter-spacing: 1.6px; line-height: 2; margin: 60px 0px 20px 0px;">UPLOAD PHOTO</p>-->
-<!--        <div style="display: flex; margin: 10px;">-->
-<!--            <div class="left-part">-->
-<!--                <p style="color:#747474; font-size: 16px; font-family: roboto; line-height: 1.5; font-weight: 900;">Select a file from my computer. <br><span style="font-size: 14px; font-weight: 500;">The file size should not exceed 5MB</span></p>-->
-<!--                <div style="height:0px;overflow:hidden">-->
-<!--                    <input type="file" id="fileInput" name="fileInput" accept="image/*"/>-->
-<!--                </div>-->
-<!--                <input type="button" class="submit-btn" id="profile-pic" value="BROWSE" onclick="chooseImg()" style=" padding-right: 10px; padding-left: 10px; padding-top: 5px; padding-bottom: 5px; letter-spacing: 0.5px; margin-top: 15px; font-size: 10px;">-->
-<!--            </div>-->
-<!--            <div class="right-part">-->
-<!--                <div style="border: solid 2px #FFFFFF; border-style: dashed; padding: 8%; margin: 4%;">-->
-<!--                    <img th:src="@{/images/extra-large-256px/upload.png}" width="45" height="45" style="display:block; margin: auto;"/>-->
-<!--                    <p style="color: #FFFFFF; margin: auto; text-align: center;">Drop a file here</p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <input type="submit" class="submit-btn" value="DONE" style="padding: 1.5% 5% 1.5% 5%; margin-top: 50px;" onclick="upload()">-->
-<!--    </div>-->
-
-<!--    <div class="photo-upload" id="upload-failed" style="width: 30%; height: 27%; left:30%;">-->
-<!--        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame()"><br><br>-->
-<!--        <p style="color:#E65959; font-family: roboto; font-weight: 900; font-size: 16px; letter-spacing: 1.6px; line-height: 1.9; margin-bottom: 20px;">FAILED</p>-->
-<!--        <p style="color:#5A5A5A; font-family: roboto; font-weight: 500; font-size: 14px; letter-spacing: 0.7px; line-height: 2.4; width: 80%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>-->
-<!--        <input type="button" class="submit-btn" style="display: block; background-color:#E65959; margin: 3vw auto; border: 0px;" value="Done" onclick="uploadSuccess()">-->
-<!--    </div>-->
-
-    <div class="photo-upload" id="upload-success" style="width: 30%; height: 30%; left:30%; top: 45%;">
-        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame ()"><br><br>
-        <p style="color:#32BDD2; font-family: roboto; font-weight: 900; font-size: 16px; letter-spacing: 1.6px; line-height: 1.9; margin-bottom: 20px;">SUCCESS</p>
-        <p style="color:#5A5A5A; font-family: roboto; font-weight: 500; font-size: 14px; letter-spacing: 0.7px; line-height: 2.4; width: 80%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
-        <input type="button" class="submit-btn" style="display: block; margin: 4vw auto; border: 0px;" value="DONE" onclick="uploaded()">
-    </div>
-
-
     <div class="profile-container">
         <div class="left-content">
-            <div style="min-height: 5vh; background-color: #EEEEEE;"></div>
+            <div class="empty-box"></div>
             <div class="people">
-                    <span
-                            style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span
-                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">MY
-                        PROFILE</span>
-                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Based on
-                    your profile, you will be able to connect with the best matches who share your interests. Go
-                    ahead and setup your profile.</p>
+                <span class="red-notification-box"><br></span>
+                <span class="my-profile-head">MY PROFILE</span>
+                <p class="my-profile-txt">Based on your profile, you will be able to connect with the best matches who share your interests. Go ahead and setup your profile.</p>
             </div>
-            <div class="people" style="border-bottom: solid 1px #CCCCCC; border-top: solid 1px #CCCCCC;">
-                    <span
-                            style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span
-                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px; letter-spacing: 1.4px;">PEOPLE</span>
-                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Meet the
-                    community members and make new friends.</p>
+            <div class="people">
+                <span class="red-notification-box"><br></span>
+                <span class="my-profile-head">PEOPLE</span>
+                <p class="my-profile-txt">Meet the community members and make new friends.</p>
             </div>
-            <div class="my-profile">
-                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span
-                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px;letter-spacing: 1.4px;">GROUPS</span>
-                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Join the groups and catch all the action. You will get suggestions based on your profile.</p>
+            <div class="my-profile" onclick="openGroupsPage()">
+                <span class="red-notification-box"><br></span>
+                <span class="my-profile-head">GROUPS</span>
+                <p class="my-profile-txt">Join the groups and catch all the action. You will get suggestions based on your profile.</p>
             </div>
         </div>
 
 
-<!--        <div class="photo-upload" id="origin-frame" style="width: 30%; left: 30%; top: 98%;">-->
-<!--            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame()"><br><br>-->
-<!--            <p style="color:#32BDD2; font-weight: 900; font-family: roboto; font-size: 16px; letter-spacing: 1.6px; line-height: 2; margin: 60px 0px 20px 0px;">YOUR PLACE OF ORIGIN</p>-->
-<!--            <p style="color:#5A5A5A; font-size:14px; line-height: 2.4; font-family: roboto; margin-top: 20px; margin-bottom: 40px;">If you have a profile picture, your chances of making more friends will be higher. However you can turn on or turn off the visibility of your photo anytime.</p>-->
-<!--            <div style="border: solid 1px #F7F4F4; box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.26); padding:5px; margin-right: auto: margin-left: auto; margin-bottom:40px; border-radius: 12px;">-->
-<!--                <input type="text" placeholder="Hubli" style="border: 0px; padding: 10px; width: 350px; font-family:roboto; font-size: 14px; letter-spacing: 1.4px;">-->
-<!--            </div>-->
-<!--            <input type="button" class="submit-btn" value="DONE" style="display:block; margin: auto;" id="originInfo">-->
-<!--        </div>-->
-
+        <div class="photo-upload" id="upload-success">
+            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" onclick="closeFrame()"><br><br>
+            <p class="success">SUCCESS</p>
+            <p class="success-txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
+            <input type="button" class="submit-btn" value="DONE" onclick="closeFrame()">
+        </div>
 
         <div class="right-content">
 
-            <div class="my-profile-options" style="padding: 2%; min-height: 35vw;" id="community-groups">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="display: flex; align-items: center;">
+            <div class="my-profile-options" id="community-groups">
+                <div class="groups-flex">
+                    <div class="groups-flex2">
                         <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" style="box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.58); border-radius: 50%;" onclick="viewGroups()">
-                        <div style="display: none; width: 170px; height: 285px; position: absolute; box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.29); background-color: #FFFFFF; right: 0%; border-radius: 0px 5px 5px 5px;" id="drop-down-1">
-                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 1.05px; color: #747474; line-height: 1.6; padding-right: 40%; padding-bottom: 13%; margin: 23% 0% 0% 15%;">INTEREST GROUPS</a>
-                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #747474; line-height: 1.6; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%;">COMMUNITY GROUPS</a>
-                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #747474; line-height: 1.6; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%;">MY GROUPS</a>
+                        <div id="drop-down-1">
+                            <a>INTEREST GROUPS</a>
+                            <a>COMMUNITY GROUPS</a>
+                            <a>MY GROUPS</a>
                         </div>
-                        <span style="font-family: roboto; font-size: 14px; font-weight: 900; letter-spacing: 1.4px; margin-left: 25px; margin-top: 5px; color: #464646;">COMMUNITY GROUPS</span>
+                        <span class="community-head">COMMUNITY GROUPS</span>
                     </div>
-                    <div style="display: none; position: relative; cursor: pointer;" id="drop-down-btn">
+                    <div id="drop-down-btn">
                     <img th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" width="40" height="40" alt="drop-down" onclick="viewDropdown()">
-                    <div style="display: none; width: 170px; height: 285px; position: absolute; border: solid 0.5px #CCCCCC; box-shadow: 0px 3px 17px rgba(0, 0, 0, 0.29); background-color: #FFFFFF; border-radius: 0px 0px 10px 10px; right: 0%;" id="drop-down-menu">
-                        <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 1.05px; color: #909090; line-height: 1.6; border-bottom: solid 0.5px #CCCCCC; padding-right: 40%; padding-bottom: 13%; margin: 23% 0% 0% 15%;">CLEAR</a>
-                        <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #464646; line-height: 1.6; border-bottom: solid 0.5px #CCCCCC; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%;">JOINED</a>
-                        <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #464646; line-height: 1.6; border-bottom: solid 0.5px #CCCCCC; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%;">REQUESTED</a>
-                        <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #464646; line-height: 1.6; padding-right: 40%; padding-bottom: 13%; margin: 13% 0px 0% 15%;">INVITED</a>
+                    <div id="drop-down-menu">
+                        <a class="active-link">CLEAR</a>
+                        <a class="inactive-link">JOINED</a>
+                        <a class="inactive-link">REQUESTED</a>
+                        <a class="inactive-link">INVITED</a>
                     </div>
                     </div>
                 </div>
 
                 <div class="group-content" id="group-content">
-                <div style="margin-top: 8vh;" id="no-groups">
-                <p style="background-color: #EEEEEE; width: 357px; padding: 15px 25px; text-align:center; display: inline; font-family:roboto; font-size: 12px; font-weight: 600; color: #505050; letter-spacing: 0.6px;">EMPTY! No community groups have been created yet.</p>
+                <div id="no-groups">
+                <p>EMPTY! No community groups have been created yet.</p>
                 </div>
                 <div class="groups-list" id="groups-list">
                     <div class="search-bar">
-                        <input type="text" placeholder="Search…" id="search-groups" style="padding: 8px 5px; border: 0px; width: 95%; outline: none; margin-left: 10px;">
+                        <input type="text" placeholder="Search…" id="search-groups">
                         <img th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" width="20" height="20" alt="search-btn" id="search-btn" onclick="searchGroups()">
                     </div>
 
                         <div class="search-not-found" id="search-not-found">
                                 <img th:src="@{/images/extra-large-256px/search.png}" height="65" width="65" alt="search-not-found">
-                                <p style="font-family: roboto; font-size: 14px; letter-spacing: 0.7px; line-height: 16px; color: #747474; font-weight: 900; margin-top: 15px;">No Results Found</p>
-                                <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 14px; color: #909090; font-weight: 400; margin-top: 15px; width: 25%; text-align: center;">Sorry, we couldn’t find any results for search_keyword</p>
+                                <p class="not-found1">No Results Found</p>
+                                <p class="not-found2">Sorry, we couldn’t find any results for search_keyword</p>
                         </div>
 
                     <div class="groups" id="groups">
                     <div onclick="groupView()" class="invited group">
                         <div>
-                        <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                        <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;" class="group_info">MOVIE NIGHT - LION KING</p>
-                        <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
-                            <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic" style="border-radius: 50%;">
+                        <span class="red-notification-box"><br></span>
+                        <p class="group_info">MOVIE NIGHT - LION KING</p>
+                        <div class="group-admin">
+                            <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic">
                             <div style="margin-left: 5px; margin-bottom: 5px;">
-                                <p class="group-admin-username" style="color: #505050; font-family: robot; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;">Daisy Lake</p>
-                                <p class="notification-details" style="color: #505050; font-family: roboto; font-size: 11px; letter-spacing: 0.55px; line-height: 1.3;">Today 11:38 AM (2 Hours ago)</p>
+                                <p class="group-admin-username">Daisy Lake</p>
+                                <p class="notification-details">Today 11:38 AM (2 Hours ago)</p>
                             </div>
                         </div>
-                        <p style="color: #505050; width: 75%; font-family: roboto; font-size: 12px; letter-spacing: 0.3px; line-height: 1.8;">
+                        <p class="group-description">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.
                         </p>
-                        <div class="notification" style="display: flex; padding: 5px 10px 5px 25px; width: 83%; display: flex; align-items: center; background-color: #FAFAFA; margin-top: 15px;">
-                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 15@16x.png}" width="30" height="30" alt="search-btn" id="notification-icon" style="border-radius: 50%;">
-                            <span style="color: #505050; font-size: 12px; letter-spacing: 0.6px; font-family: roboto; font-weight: 600; margin-left: 15px; text-align: center;" id="notification-msg">You have been invited to join this group.</span>
+                        <div class="group-notification">
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 15@16x.png}" width="30" height="30" alt="search-btn" id="notification-icon" class="round-img">
+                            <span id="notification-msg">You have been invited to join this group.</span>
                         </div>
                         </div>
                     </div>
 
                         <div class="accepted group">
                             <div>
-                            <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                            <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;" class="group_info">HAMPI TRIP</p>
-                            <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
-                                <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic" style="border-radius: 50%;">
-                                <div style="margin-left: 5px; margin-bottom: 5px;">
-                                    <p class="group-admin-username" style="color: #505050; font-family: robot; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;">Nora Bravos</p>
-                                    <p class="notification-details" style="color: #272727; font-family: roboto; font-size: 11px; letter-spacing: 0.55px; line-height: 1.3;">2nd July 2019 06:21 PM (4 Days ago)</p>
+                            <span class="red-notification-box"><br></span>
+                            <p class="group_info">HAMPI TRIP</p>
+                            <div class="group-admin">
+                                <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic" class="round-img">
+                                <div class="group-admin-details1">
+                                    <p class="group-admin-username">Nora Bravos</p>
+                                    <p class="notification-details">2nd July 2019 06:21 PM (4 Days ago)</p>
                                 </div>
                             </div>
-                            <p style="color: #505050; width: 75%; font-family: roboto; font-size: 12px; letter-spacing: 0.3px; line-height: 1.8;">
+                            <p class="group-description">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.</p>
-                            <div class="notification" style="display: flex; width: 83%; display: flex; align-items: center; margin-top: 15px;">
-                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 31@16x.png}" width="30" height="30" alt="search-btn" style="border-radius: 50%;">
-                                <span style="color: #BEBAA4; font-size: 12px; letter-spacing: 0.6px; font-family: roboto; font-weight: 600; margin-left: 10px; text-align: center; border-top: solid 0.5px #BEBAA4; padding-top: 10px;" id="accepted-msg">Your request has been accepted.</span>
+                            <div class="group-notification-accepted">
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 31@16x.png}" width="30" height="30" alt="search-btn" class="round-img">
+                                <span class="accepted-msg">Your request has been accepted.</span>
                             </div></div>
                             <div>
-                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30" height="30" alt="search-btn" style="border-radius: 50%;" onclick="joinConversation()">
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30" height="30" alt="search-btn" class="round-img" onclick="joinConversation()">
                             </div>
                        </div>
 
                         <div class="accepted group">
                             <div>
-                                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                                <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;" class="group_info">HOLI CELEBRATIONS</p>
-                                <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
-                                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 10@16x.png}" width="40" height="40" alt="admin-pic" style="border-radius: 50%;">
-                                    <div style="margin-left: 5px; margin-bottom: 5px;">
-                                        <p class="group-admin-username" style="color: #505050; font-family: robot; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;">Eddie Murphy</p>
-                                        <p class="notification-details" style="color: #272727; font-family: roboto; font-size: 11px; letter-spacing: 0.55px; line-height: 1.3;">2nd July 2019 06:21 PM (4 Days ago)</p>
+                                <span class="red-notification-box"><br></span>
+                                <p class="group_info">HOLI CELEBRATIONS</p>
+                                <div class="group-admin">
+                                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 10@16x.png}" width="40" height="40" alt="admin-pic" class="round-img">
+                                    <div class="group-admin-details1">
+                                        <p class="group-admin-username">Eddie Murphy</p>
+                                        <p class="notification-details">2nd July 2019 06:21 PM (4 Days ago)</p>
                                     </div>
                                 </div>
-                                <p style="color: #505050; width: 75%; font-family: roboto; font-size: 12px; letter-spacing: 0.3px; line-height: 1.8;">
+                                <p class="group-description">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.
                                 </p>
                             </div>
                             <div>
-                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30" height="30" alt="search-btn" style="border-radius: 50%;">
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30" height="30" alt="search-btn" class="round-img">
                             </div>
                         </div>
 
                         <div class="accepted group">
                             <div>
-                                <span style="display:none; background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                                <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;  margin-top: 20px;" class="group_info">STAND-UP COMEDY</p>
-                                <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
-                                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 10@16x.png}" width="40" height="40" alt="search-btn" style="border-radius: 50%;">
-                                    <div style="margin-left: 5px; margin-bottom: 5px;">
-                                        <p class="group-admin-username" style="color: #505050; font-family: robot; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;">YOU</p>
-                                        <p class="notification-details" style="color: #272727; font-family: roboto; font-size: 11px; letter-spacing: 0.55px; line-height: 1.3;">2nd July 2019 06:21 PM (4 Days ago)</p>
+<!--                                <span style="display:none; background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>-->
+                                <p class="group_info">STAND-UP COMEDY</p>
+                                <div class="group-admin">
+                                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 10@16x.png}" width="40" height="40" alt="search-btn" class="round-img">
+                                    <div class="group-admin-details1">
+                                        <p class="group-admin-username">YOU</p>
+                                        <p class="notification-details">2nd July 2019 06:21 PM (4 Days ago)</p>
                                     </div>
                                 </div>
-                                <p style="color: #505050; width: 75%; font-family: roboto; font-size: 12px; letter-spacing: 0.3px; line-height: 1.8;">
+                                <p class="group-description">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.
                                 </p>
                             </div>
@@ -479,87 +263,86 @@
                                 You have been removed from the group.
                             </div>
                             <div>
-                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30" height="30" alt="search-btn" id="view-notification" style="border-radius: 50%;" onclick="viewConversation()">
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30" height="30" alt="search-btn" id="view-notification" class="round-img" onclick="viewConversation()">
                             </div>
                         </div>
 
                         <div class="accepted group" onclick="requestAwaiting()">
                             <div>
-                                <span style="display: none; background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                                <p style="margin-top: 20px; color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;" class="group_info">POT LUCK</p>
-                                <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
-                                    <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic" style="border-radius: 50%;">
-                                    <div style="margin-left: 5px; margin-bottom: 5px;">
-                                        <p class="group-admin-username" style="color: #505050; font-family: robot; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;">Nora Bravos</p>
-                                        <p class="notification-details" style="color: #272727; font-family: roboto; font-size: 11px; letter-spacing: 0.55px; line-height: 1.3;">2nd July 2019 06:21 PM (4 Days ago)</p>
+<!--                                <span style="display: none; background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>-->
+                                <p class="group_info">POT LUCK</p>
+                                <div class="group-admin">
+                                    <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic" class="round-img">
+                                    <div class="group-admin-details1">
+                                        <p class="group-admin-username">Nora Bravos</p>
+                                        <p class="notification-details">2nd July 2019 06:21 PM (4 Days ago)</p>
                                     </div>
                                 </div>
-                                <p style="color: #505050; width: 75%; font-family: roboto; font-size: 12px; letter-spacing: 0.3px; line-height: 1.8;">
+                                <p class="group-description">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.
                                 </p>
-                                <div class="notification" style="display: flex; width: 83%; display: flex; align-items: center; margin-top: 15px;">
-                                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 32@16x.png}" width="30" height="30" alt="search-btn" id="accepted-icon" style="border-radius: 50%;">
-                                    <span style="color: #BEBAA4; font-size: 12px; letter-spacing: 0.6px; font-family: roboto; font-weight: 600; margin-left: 10px; text-align: center; border-top: solid 0.5px #BEBAA4; padding-top: 10px;" alt="accepted-msg">You have requested to join this group.</span>
+                                <div class="group-notification-accepted">
+                                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 32@16x.png}" width="30" height="30" alt="search-btn" id="accepted-icon" class="round-img">
+                                    <span class="accepted-msg">You have requested to join this group.</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="accepted group" onclick="openGroup()">
                             <div>
-                                <span style="display: none; background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                                <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600; margin-top: 20px;" class="group_info">GEEKS</p>
-                                <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
-                                    <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic" style="border-radius: 50%;">
-                                    <div style="margin-left: 5px; margin-bottom: 5px;">
-                                        <p class="group-admin-username" style="color: #505050; font-family: robot; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;">Markus Lawless</p>
-                                        <p class="notification-details" style="color: #272727; font-family: roboto; font-size: 11px; letter-spacing: 0.55px; line-height: 1.3;">2nd July 2019 06:21 PM (4 Days ago)</p>
+<!--                                <span style="display: none; background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>-->
+                                <p class="group_info">GEEKS</p>
+                                <div class="group-admin">
+                                    <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic" class="round-img">
+                                    <div class="group-admin-details1">
+                                        <p class="group-admin-username">Markus Lawless</p>
+                                        <p class="notification-details">2nd July 2019 06:21 PM (4 Days ago)</p>
                                     </div>
                                 </div>
-                                <p style="color: #505050; width: 75%; font-family: roboto; font-size: 12px; letter-spacing: 0.3px; line-height: 1.8;">
+                                <p class="group-description">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.
                                 </p>
-                                <div class="notification" style="display: flex; width: 83%; display: flex; align-items: center; margin-top: 15px;">
-                                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 15@16x.png}" width="30" height="30" alt="accepted-icon" style="border-radius: 50%;">
-                                    <span style="color: #505050; font-size: 12px; letter-spacing: 0.6px; font-family: roboto; font-weight: 600; margin-left: 10px; text-align: center; border-top: solid 0.5px #505050; padding-top: 10px;" alt="accepted-msg">Send a request to join this group.</span>
+                                <div class="group-notification-accepted">
+                                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 15@16x.png}" width="30" height="30" alt="accepted-icon" class="round-img">
+                                    <span class="send-req-msg">Send a request to join this group.</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="invited group" style="background-color: #EEEEEE; border: solid 0.25 #CCCCCC; margin-top: 4vh;">
+                        <div class="invited group old-notification">
                             <div>
-                            <span style="display:none; background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                            <p style="margin-top: 20px; color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;" class="group_info">MOVIE NIGHT - LION KING</p>
-                            <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
-                                <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic" style="border-radius: 50%;">
-                                <div style="margin-left: 5px; margin-bottom: 5px;">
-                                    <p class="group-admin-username" style="color: #505050; font-family: robot; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;">Daisy Lake</p>
-                                    <p class="notification-details" style="color: #505050; font-family: roboto; font-size: 11px; letter-spacing: 0.55px; line-height: 1.3;">Today 11:38 AM (2 Hours ago)</p>
+<!--                            <span style="display:none; background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>-->
+                            <p class="group_info">MOVIE NIGHT - LION KING</p>
+                            <div class="group-admin">
+                                <img th:src="@{/images/profile-pic.jpg}" width="40" height="40" alt="admin-pic" class="round-img">
+                                <div class="group-admin-details1">
+                                    <p class="group-admin-username">Daisy Lake</p>
+                                    <p class="notification-details">Today 11:38 AM (2 Hours ago)</p>
                                 </div>
                             </div>
-                            <p style="color: #505050; width: 75%; font-family: roboto; font-size: 12px; letter-spacing: 0.3px; line-height: 1.8;">
+                            <p class="group-description">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.
                             </p>
-                            <div class="notification" style="display: flex; padding: 5px 10px 5px 25px; width: 83%; display: flex; align-items: center; background-color: #BEBAA4; margin-top: 15px;">
-                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 25@16x.png}" width="30" height="30" alt="notification-icon" style="border-radius: 50%;">
-                                <span style="color: #FFFFFF; font-size: 12px; letter-spacing: 0.6px; font-family: roboto; font-weight: 600; margin-left: 35px; text-align: center;" alt="notification-msg">You have been invited to join this group.</span>
+                            <div class="group-notification-old">
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 25@16x.png}" width="30" height="30" alt="notification-icon" class="round-img">
+                                <span class="notification-msg1">You have been invited to join this group.</span>
                             </div>
                             </div>
                         </div>
 
                         <div class="show-more" id="show-more">
-                            <p class="head-text" style="font-weight:900; margin-right: 10px; font-size: 14px; color: #747474; letter-spacing: 0.9px;">
-                            <p class="head-text" style="font-weight:900; margin-right: 10px; font-size: 14px; color: #747474; letter-spacing: 0.9px;">
+                            <p class="head-text show-more-txt">
                                 SHOW MORE
                             </p>
-                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="10" width="10" alt="list-button" style="margin-right: 15px; margin-bottom: 5px;">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="10" width="10" alt="list-button" class="view-btn">
                         </div>
 
                     </div>
                     </div>
                 </div>
-                <div style="display: none; cursor: pointer; margin: 6vh 0vh 3vh 0vh;" id="back-btn">
+                <div id="back-btn">
                     <img th:src="@{/images/extra-large-256px/Artboard 1 copy 9@16x.png}" height="15" width="15" onclick="backToGroupView()"/>
-                    <p style="color: #32BDD2; font-family: roboto; font-weight: 900; font-size: 14px; margin-left: 7px; letter-spacing: 0.7px;" onclick="backToGroupView()">BACK</p>
+                    <p onclick="backToGroupView()">BACK</p>
                 </div>
 
             </div>
@@ -569,4 +352,4 @@
 </body>
 <script th:href="@{/js/community-profile.js}" type="text/javascript"></script>
 
-</html>0
+</html>
