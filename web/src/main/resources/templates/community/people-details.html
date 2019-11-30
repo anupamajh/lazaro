@@ -5,48 +5,8 @@
     <meta charset="UTF-8">
     <title>People-Details</title>
     <link th:href="@{https://fonts.googleapis.com/css?family=Roboto&display=swap}" rel="stylesheet">
-    <link th:href="@{/css/PeopleList.css}" rel="stylesheet">
+    <link th:href="@{/css/GuestJini.css}" rel="stylesheet">
 
-
-    <script>
-
-        function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-        }
-
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-
-          function myFunction1() {
-            document.getElementById("press-like").style.display = "none";
-            document.getElementById("removefav").style.display = "block";
-            document.getElementById("removefavv").style.display = "block";
-            document.getElementById("press-unlike").style.display = "block";
-             document.getElementById("addfav").style.display = "none";
-            document.getElementById("addfavv").style.display = "none";
-
-        }
-
-         function unliking() {
-            document.getElementById("press-like").style.display = "block";
-            document.getElementById("removefav").style.display = "none";
-            document.getElementById("removefavv").style.display = "none";
-            document.getElementById("press-unlike").style.display = "none";
-             document.getElementById("addfav").style.display = "block";
-            document.getElementById("addfavv").style.display = "block";
-        }
-    </script>
 </head>
 
 <body>
@@ -55,156 +15,147 @@
     </div>
 </header>
 
-<div class="content" >
-    <div class="community-desc">
-        <span class="community">COMMUNITY</span>
-        <p style="color:#707070; font-family:roboto; font-size:17px; width:50%; margin-top: 15px; letter-spacing: 0.6px;  line-height: 2;">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo vestibulum.
+<div class="people-content">
+    <div class="people-community-desc">
+        <span class="people-community">COMMUNITY</span>
+        <p class="people-description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet
+            sollicitudin leo vestibulum.
         </p>
     </div>
 
-    <div class="profile-container">
-        <div class="left-content">
-            <div class="people" style="width:91%;">
-                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span style="color:#464646; font-family:roboto; font-size:18px; font-weight:700; letter-spacing: 1.4px;"><b>MY PROFILE</b> </span>
-                <p style="color:#747474; font-family:roboto; font-size:17px; width:95%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
-                    Based on your profile, you will be able to connect</br> with the best matches who share your interests.
+    <div class="people-profile-container">
+        <div class="people-left-content">
+            <div class="people">
+                <span class="people-borderTopRed"><br></span>
+                <span class="people-community"><b>MY PROFILE</b> </span>
+                <p class="people-my-profile-details">
+                    Based on your profile, you will be able to connect</br> with the best matches who share your
+                    interests.
                     </br> Go ahead and setup your profile.</p>
             </div>
-            <div class="my-profile" style="border-bottom: solid 1px #CCCCCC;">
-                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span style="color:#464646; font-family:roboto; font-size:18px; font-weight:700; margin-top: 10px; letter-spacing: 1.4px;"><b>PEOPLE</b> </span>
-                <p style="color:#747474; font-family:roboto; font-size:17px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
-                    Meet the community members and make new friends.</p>
+            <div class="people-my-profile">
+                <span class="people-borderTopRed"><br></span>
+                <span class="people-community"><b>PEOPLE</b> </span>
+                <p class="people-my-profile-details">Meet the community members and make new friends.</p>
             </div>
             <div class="people">
-                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span style="color:#464646; font-family:roboto; font-size:18px; font-weight:700; margin-top: 10px;letter-spacing: 1.4px;"><b>GROUPS</b></span>
-                <p style="color:#747474; font-family:roboto; font-size:17px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">
-                    Meet the community members and make new friends.</p>
+                <span class="people-borderTopRed"><br></span>
+                <span class="people-community"><b>GROUPS</b></span>
+                <p class="people-my-profile-details">Join the groups and catch all the action. You will</br> get
+                    suggestions based on your profile.</p>
             </div>
         </div>
 
-        <div class="right-content-details">
-            <div id="people-details">
-            <div class="my-profile-options" style="padding:2%;" id="profile-setup">
-                <p style="display:block; color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-bottom: 20px; letter-spacing: 1.4px;">
-                    MY PROFILE<br><br></p>
-                </div>
-                <div style="display:flex; justify-content: center; width:100%; align-items: center; flex-direction: column; margin:auto;">
-                    <img th:src="@{/images/profile-pic.jpg}" height="54" width="54" style="border-radius: 50%;">
-                    <p onclick="noDetails()" class="all-scroll "  style="color:#464646; font-family: roboto: font-weight: 500; margin-top: 15px;letter-spacing: 1.4px;">John Doe</p>
-                    <script>
-                        function noDetails() {
-                            document.getElementById("people-no-details").style.display = "block";
-                            document.getElementById("people-details").style.display = "none";
-                        }
-                    </script>
-                    <p style="color:#909090;">Male</p>
-                </div>
-                 <div class="like">
-                    <div class="like-blue">
-                    <img class="all-scroll" id="press-like" th:src="@{/images/extra-large-256px/Artboard 1 copy 35@16x.png}"onclick="myFunction1()" height="97" width="97"
-                         style="border-radius: 50%;margin-left: 28%;cursor:pointer;">
-                        <img class="unlike-detail" id="press-unlike" th:src="@{/images/extra-large-256px/Artboard 1 copy 36@16x.png}" height="97" width="97"
-                             onclick="unliking()" style="border-radius: 50%; display:none; cursor:pointer;">
-                        <p id="removefav" onclick="unliking()" style="color:#FFFFFF; margin-left: 36%;font-weight:600;font-size: 20px;display:none;">Remove</p>
-                        <p id="removefavv" onclick="unliking()" style="color:#FFFFFF; margin-left: 26%;font-weight:600;font-size: 20px;display:none;">from favourites</p>
-
-                        <p id="addfav" onclick="myFunction1()" style="color:#FFFFFF; margin-left: 36%;font-weight:600;font-size: 20px;;">Add to</p>
-                        <p id="addfavv" onclick="myFunction1()" style="color:#FFFFFF; margin-left: 30%;font-weight:600;font-size: 20px;">favourites</p>
-                    </div>
-                     <div style="margin-left:8%;">
-                    <p style="color:#747474; letter-spacing:0.6px; font-size:17px;" >MOBILE</p>
-                    <p style="color:#505050; font-weight:600;letter-spacing:0.7px;font-size:17px;">9090909090</p>
-                           &nbsp;
-                    <p style="color:#747474;letter-spacing:0.6px;font-size:17px;">EMAIL</p>
-                    <p style="color:#505050;font-weight:600;letter-spacing:0.7px;font-size:17px;">johndoe@gmail.com</p>
-                     </div>
-                </div>
-
-
-                <div style="color:#FFFFFF; border:0.5px solid #32BDD2; width: 86%; padding-bottom:52%;margin-top:5%;margin-left: 12%;">
-                    <div style="background-color:#32BDD2; width:100%; height:12%; border:0.5px solid #32BDD2;height:65px">
-                        <p style="color:#FFFFFF; font-size:20px; letter-spacing:1.05px;padding: 3%;font-weight:1000;font-style:Roboto;">Common Interests</p>
-                        <div >
-                            <p style="color:#32BDD2; font-size:20px; padding: 5%;letter-spacing: 1.2px;font-weight: 1000;">OUTDOOR ADVENTURES</p>
-                            <p style="color:#909090;border-bottom:0.5px solid #CCCCCC; font-size:20px; letter-spacing:0.6px;margin-left: 3%;font-weight: 600;padding: 2%;">Cycling</p>
+        <div class="people-right-content">
+            <div>
+                <div id="people-details">
+                    <div class="people-my-profile-options">
+                        <p class="people-community">
+                            PEOPLE</p>
+                        <div class="john-details">
+                            <img th:src="@{/images/profile-pic.jpg}" height="54" width="54">
+                            <p class="name-JohnDoe" onclick="Nodetails()">John Doe</p>
+                            <p class="apply-color">Male</p>
                         </div>
+                        <div class="people-favourite-part">
+                            <div class="people-like-blue">
+                                <img id="like-favourite"
+                                     th:src="@{/images/extra-large-256px/Artboard 1 copy 35@16x.png}"
+                                     onclick="AddFavourite()" height="97" width="97">
+                                <img class="unlike-image" id="unlike-favourite"
+                                     th:src="@{/images/extra-large-256px/Artboard 1 copy 36@16x.png}" height="97"
+                                     width="97" onclick="RemoveFavourite()">
+                                <p id="remove-favourite" onclick="RemoveFavourite()" class="remove-favourite">Remove
+                                </p>
+                                <p id="remove-favourites" onclick="RemoveFavourite()"
+                                   class="remove-favourite-favourite"> from favourites</p>
 
-                        <div>
-                            <p style="color:#909090;font-size:20px; letter-spacing:0.6px;margin-left: 3%;font-weight: 600;padding: 2%;">Hiking</p>
-                            <p style="color:#32BDD2; font-size:20px; padding: 5%;letter-spacing: 1.2px;font-weight: 1000;">HOBBIES</p>
-                            <p style="color:#909090;border-bottom:0.5px solid #CCCCCC; font-size:20px; letter-spacing:0.6px;margin-left: 3%;font-weight: 600;padding: 2%;">Cooking</p>
+                                <p id="add-favourite" onclick="AddFavourite()" class="add-favourite">Add to</p>
+                                <p id="add-favourites" onclick="AddFavourite()" class="add-favourite-favourite">
+                                    favourites</p>
+                            </div>
+                            <div class="left-content-favourite">
+                                <p class="favourite-detail">MOBILE</p>
+                                <p class="favourite-details">9090909090</p>
+                                &nbsp;
+                                <p class="favourite-detail">EMAIL</p>
+                                <p class="favourite-details">johndoe@gmail.com</p>
+                            </div>
                         </div>
-                       <p style="color:#909090;font-size:20px;margin-top:2%; letter-spacing:0.6px;margin-left: 3%;font-weight: 600;padding: 2%;">Gardening</p>
-                    </div>
-                </div>
-                    <div style="color:#FFFFFF;  border:0.5px solid #CCCCCC; width:86%;padding-bottom:3%;margin-top:4%;margin-left: 12%;">
-                        <div style="background-color:#EEEEEE; width:100%; ">
-                            <p style="color:#5A5A5A; font-size:20px;width:94%; letter-spacing:1.05px;padding: 3%;font-weight:1000;font-style:Roboto;">Other Interests</p></div>
-                            <div>
-                                <p style="color:#747474; font-size:20px; padding: 5%;letter-spacing: 1.2px;font-weight: 1000;">TECH</p>
-                                <p style="color:#909090;border-bottom:0.5px solid #CCCCCC; font-size:20px; letter-spacing:0.6px;margin-left: 3%;font-weight: 600;padding: 2%;">Artificial Intelligence</p>
+                        <div class="common-interest-description">
+                            <div class="detailed-common-interest">
+                                <p class="common-interest-text">Common Interests</p>
+                                <div>
+                                    <p class="outdoor-adventure">OUTDOOR ADVENTURES</p>
+                                    <p class="common-interest-option">Cycling</p>
+                                </div>
+                                <div>
+                                    <p class="common-interest-option borderbottom">Hiking</p>
+                                    <p class="outdoor-adventure">HOBBIES</p>
+                                    <p class="common-interest-option">Cooking</p>
+                                </div>
+                                <p class="common-interest-option borderbottom">Gardening</p>
+                            </div>
+                        </div>
+                        <div class="other-interest-description">
+                            <div class="detailed-other-interest">
+                                <p class="other-interest-text">Other Interests</p>
                             </div>
                             <div>
-                                <p style="color:#909090;font-size:20px; letter-spacing:0.6px;margin-left: 3%;font-weight: 600;padding: 2%;">Robotics</p>
+                                <p class="outdoor-adventure tech">TECH</p>
+                                <p class="common-interest-option">Artificial Intelligence</p>
                             </div>
-
-                    </div>
-                        <div style="display:flex; align-items:center; justify-content:space-between;margin-top: 8%;">
-                            <img  class="drop-icon" th:src="@{/images/extra-large-256px/Artboard 1 copy 9@16x.png}" height="17" width="17"/>
-                            <p onclick="loginFunction2()" style="color:#32BDD2; font-size:24px;font-weight: 600;margin-right:86%;cursor:pointer;">BACK</p>
-                            <script>
-                        function loginFunction2() {
-                            window.location = src = "/community/community-groups/people-list";
-                        }
-                    </script>
+                            <div>
+                                <p class="common-interest-option borderbottom">Robotics</p>
+                            </div>
                         </div>
-                    </div>
-
-
-
-            <div id="people-no-details" style="display:none;">
-                <div class="my-profile-options" style="padding:2%;">
-                    <p style="display:block; color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-bottom: 20px; letter-spacing: 1.4px;">
-                        MY PROFILE<br><br></p>
-                    <div style="display:flex; justify-content: center; width:100%; align-items: center; flex-direction: column; margin-left: 40%;margin-top: 20%;">
-                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 10@16x.png}" height="71" width="71" style="border-radius: 50%;">
-                        <p style="color:#464646; font-family: roboto: font-weight: 500; margin-top: 15px;letter-spacing: 1.4px;">John Doe</p>
-                        <p style="color:#909090;">Male</p>
-                    </div>
-                    <div class="like">
-                        <div class="like-blue">
-                            <img  th:src="@{/images/extra-large-256px/Artboard 1 copy 35@16x.png}"onclick="myFunction1()" height="97" width="97"
-                                  style="border-radius: 50%;margin-left: 28%;">
-                            <p  style="color:#FFFFFF; margin-left: 36%;font-weight:600;font-size: 20px;;">Add to</p>
-                            <p  style="color:#FFFFFF; margin-left: 30%;font-weight:600;font-size: 20px;">favourites</p>
+                        <div class="return-back-page">
+                            <img class="dropdown-icon"
+                                 th:src="@{/images/extra-large-256px/Artboard 1 copy 9@16x.png}" height="17"
+                                 width="17" />
+                            <p class="button-back" onclick="backPeopleList()">BACK</p>
                         </div>
-                        <div style="margin-left:8%;">
-                            <p style="color:#505050; letter-spacing:0.6px; font-size:20px;" >You do not have access</br>
-                                to view user details.</p>
-
-                        </div>
-                    </div>
-
-                    <div style="background-color:#EEEEEE; width:165%; height:71px; border:0.25px solid #CCCCCC;margin-top: 24%;margin-left: 12%;">
-                        <p style="color:#747474; font-size:23px;letter-spacing:0.5px;display: flex;align-items: center; justify-content: space-around; margin-top: 4%;">No interests found</p>
-
-                    </div>
-
-                    <div style="display:flex; align-items:center; justify-content:space-between;margin-top: 19%;">
-                        <img  class="drop-icon2" th:src="@{/images/extra-large-256px/Artboard 1 copy 9@16x.png}" height="17" width="17"/>
-                        <p class="all-scroll" onclick="loginFunction2()" style="color:#32BDD2; font-size:24px;font-weight: 600;margin-right:69%;">BACK</p>
-                        <script>
-                        function loginFunction2() {
-                            window.location = src = "/community/community-groups/people-list";
-                        }
-                    </script>
                     </div>
                 </div>
 
+
+
+
+                <div class="people-my-profile-options apply-none" id="noJohnDetails">
+                    <p class="people-community">
+                        PEOPLE</p>
+                    <div class="no-details-john">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 10@16x.png}" height="71"
+                             width="71">
+                        <p class="name-JohnDoe">John Doe</p>
+                        <p class="apply-color">Male</p>
+                    </div>
+                    <div class="people-favourite-part">
+                        <div class="people-like-blue">
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 35@16x.png}" height="97"
+                                 width="97">
+                            <p class="add-favourite">Add to</p>
+                            <p class="add-favourite-favourite">favourites</p>
+                        </div>
+                        <div class="left-content-favourite">
+                            <p class="favourite-detail">You do not have access</br> to view user details.</p>
+                        </div>
+                    </div>
+                    <div class="people-not-interest">
+                        <p class="no-interest-found">No interests found</p>
+                    </div>
+                    <div class="return-back-page no-detail-back">
+                        <img class="dropdown-icon" th:src="@{/images/extra-large-256px/Artboard 1 copy 9@16x.png}"
+                             height="17" width="17" />
+                        <p class="button-back" onclick="backPeopleList()">BACK</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+<script th:src="@{/js/community-people.js}" type="text/javascript"></script>
 
 </html>
