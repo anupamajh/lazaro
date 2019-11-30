@@ -52,7 +52,7 @@
 </script>
 
 <body>
-<header style="min-height: 6vh;">
+<header class="community-header">
     <div th:replace="shared/dashboard :: dashboard">
     </div>
 </header>
@@ -60,58 +60,48 @@
 <div class="content">
 
     <div class="community-desc">
-        <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">COMMUNITY</span>
-        <p style="color:#707070; font-family:roboto; font-size:12px; width:40%; margin-top: 15px; letter-spacing: 0.6px;  line-height: 2;">Lorem ipsum dolor
+        <span class="community-title">COMMUNITY</span>
+        <p class="community-text">Lorem ipsum dolor
             sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo
             vestibulum.</p>
     </div>
 
-        <div class="photo-upload" id="ignore" style="width: 30%; min-height: 27%; top: 50%; left:30%; padding-bottom: 2vw;">
-            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame()"><br><br>
-            <p style="color:#E65959; font-family: roboto; font-weight: 900; font-size: 16px; letter-spacing: 1.6px; line-height: 1.9; margin-bottom: 20px;">IGNORE?</p>
-            <p style="color:#5A5A5A; font-family: roboto; font-weight: 500; font-size: 14px; letter-spacing: 0.7px; line-height: 2.4; width: 80%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
-            <div style="display: flex; margin: 3vw 5vw; justify-content: space-evenly;">
-                <input type="button" class="submit-btn" style="display: block; background-color:#E65959; border: 0px; margin-right: 25px;" value="IGNORE" onclick="">
-                <input type="button" class="submit-btn" style="display: block; padding: 0.5vw 3vw; border: 0px; margin-left: 0px" value="NO" onclick="">
+    <div class="profile-container">
+        <div class="left-content">
+            <div class="empty-box"></div>
+            <div class="people">
+                <span class="red-notification-box"><br></span>
+                <span class="my-profile-head">MY PROFILE</span>
+                <p class="my-profile-txt">Based on your profile, you will be able to connect with the best matches who share your interests. Go ahead and setup your profile.</p>
+            </div>
+            <div class="people">
+                <span class="red-notification-box"><br></span>
+                <span class="my-profile-head">PEOPLE</span>
+                <p class="my-profile-txt">Meet the community members and make new friends.</p>
+            </div>
+            <div class="my-profile">
+                <span class="red-notification-box"><br></span>
+                <span class="my-profile-head">GROUPS</span>
+                <p class="my-profile-txt">Join the groups and catch all the action. You will get suggestions based on your profile.</p>
             </div>
         </div>
 
-    <div class="photo-upload" id="upload-success" style="width: 30%; min-height: 30%; left:30%; top: 45%; padding-bottom: 2vw;">
-        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame ()"><br><br>
-        <p style="color:#32BDD2; font-family: roboto; font-weight: 900; font-size: 16px; letter-spacing: 1.6px; line-height: 1.9; margin-bottom: 20px;">SUCCESS</p>
-        <p style="color:#5A5A5A; font-family: roboto; font-weight: 500; font-size: 14px; letter-spacing: 0.7px; line-height: 2.4; width: 80%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
-        <input type="button" class="submit-btn" style="display: block; margin: 2vw auto; border: 0px;" value="DONE" onclick="joinConversation()">
-    </div>
+        <div class="photo-upload" id="ignore">
+            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" onclick="closeFrame()"><br><br>
+            <p class="ignore-text1">IGNORE?</p>
+            <p class="ignore-text2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
+            <div class="ignore-flex">
+                <input type="button" class="submit-btn ignore-btn" value="IGNORE" onclick="">
+                <input type="button" class="submit-btn no-btn" value="NO" onclick="">
+            </div>
+        </div>
 
 
-
-    <div class="profile-container">
-        <div class="left-content">
-            <div style="min-height: 5vh; background-color: #EEEEEE;"></div>
-            <div class="people">
-                    <span
-                            style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span
-                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">MY
-                        PROFILE</span>
-                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Based on
-                    your profile, you will be able to connect with the best matches who share your interests. Go
-                    ahead and setup your profile.</p>
-            </div>
-            <div class="people" style="border-bottom: solid 1px #CCCCCC; border-top: solid 1px #CCCCCC;">
-                    <span
-                            style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span
-                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px; letter-spacing: 1.4px;">PEOPLE</span>
-                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Meet the
-                    community members and make new friends.</p>
-            </div>
-            <div class="my-profile">
-                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span
-                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px;letter-spacing: 1.4px;">GROUPS</span>
-                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Join the groups and catch all the action. You will get suggestions based on your profile.</p>
-            </div>
+        <div class="photo-upload" id="upload-success">
+            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" onclick="closeFrame()"><br><br>
+            <p class="success">SUCCESS</p>
+            <p class="success-txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
+            <input type="button" class="submit-btn" value="DONE" onclick="closeFrame()">
         </div>
 
         <div class="right-content" style="padding: 2% 2% 0% 2%;">

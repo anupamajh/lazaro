@@ -8,177 +8,6 @@
     <link th:href="@{/css/community.css}" rel="stylesheet">
 </head>
 <script>
-<!--            function viewInterestList(){-->
-<!--            document.getElementById("view-interest-list").classList.toggle("show");-->
-<!--            document.getElementById("drop-down-list").style.display = "none";-->
-<!--            document.getElementById("drop-down-btn").src="/images/extra-large-256px/Artboard 1 copy@16x.png";-->
-<!--        }-->
-
-<!--        function viewDropDownList(){-->
-<!--            console.log("entered");-->
-<!--            if(document.getElementById("drop-down-list").style.display === "none"){-->
-<!--                 document.getElementById("drop-down-list").style.display = "block";-->
-<!--                 document.getElementById("drop-down-btn").src="/images/extra-large-256px/Artboard 1 copy 2@16x.png";-->
-<!--            }else{-->
-<!--                document.getElementById("drop-down-list").style.display = "none";-->
-<!--                document.getElementById("drop-down-btn").src="/images/extra-large-256px/Artboard 1 copy@16x.png";-->
-<!--            }-->
-<!--        }-->
-
-<!--        function goBack(){-->
-<!--            document.getElementById("profile-setup").style.display = "block";-->
-<!--            document.getElementById("interests-setup").style.display = "none";-->
-<!--        }-->
-
-<!--        function interestsSetup(){-->
-<!--            document.getElementById("profile-setup").style.display = "none";-->
-<!--            document.getElementById("interests-setup").style.display = "block";-->
-<!--        }-->
-
-<!--        function uploadPicture(){-->
-<!--            document.getElementById("photo-upload").style.display = "block";-->
-<!--        }-->
-<!--        window.addEventListener('load', function() {-->
-<!--            document.querySelector('input[type="file"]').addEventListener('change', function() {-->
-<!--                if (this.files && this.files[0]) {-->
-<!--                    var img = document.getElementById("upload-profile-pic");  // $('img')[0]-->
-<!--                    img.src = URL.createObjectURL(this.files[0]); // set src to blob url-->
-<!--                    img.onload = imageIsLoaded;-->
-<!--                    var txt = document.getElementById("Upload-pic");-->
-<!--                    txt.style.display = "none";-->
-<!--                }-->
-<!--        });-->
-<!--    });-->
-
-
-<!--        function closeFrame(){-->
-<!--            document.getElementById("photo-upload").style.display = "none";-->
-<!--            document.getElementById("origin-frame").style.display = "none";-->
-<!--            document.getElementById("upload-failed").style.display = "none";-->
-<!--            document.getElementById("upload-success").style.display = "none";-->
-<!--        }-->
-
-<!--        function visibilityToggle(img){-->
-<!--                if(img.src === "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%203@16x.png"){-->
-<!--                    console.log(img.src);-->
-<!--                    img.src = "/images/extra-large-256px/Artboard 1 copy 4@16x.png";-->
-<!--                }-->
-<!--                else{-->
-<!--                    console.log(img.src);-->
-<!--                    img.src = "/images/extra-large-256px/Artboard 1 copy 3@16x.png";-->
-<!--                }-->
-<!--         }-->
-
-<!--        function originFrame(){-->
-<!--            document.getElementById("origin-frame").style.display = "block";-->
-<!--        }-->
-
-<!--        function chooseImg(){-->
-<!--           var img = document.getElementById("fileInput").click();-->
-<!--           console.log("img");-->
-<!--        }-->
-
-<!--        function joinGroup(){-->
-<!--            document.getElementById("upload-failed").style.display = "none";-->
-<!--            document.getElementById("photo-upload").style.display = "none";-->
-<!--            document.getElementById("origin-frame").style.display = "none";-->
-<!--            document.getElementById("upload-success").style.display = "block";-->
-<!--        }-->
-<!--        -->
-<!--        function uploaded(){-->
-<!--            document.getElementById("edit-part").style.visibility = "visible";-->
-<!--            document.getElementById("upload-failed").style.display = "none";-->
-<!--            document.getElementById("photo-upload").style.display = "none";-->
-<!--            document.getElementById("origin-frame").style.display = "none";-->
-<!--            document.getElementById("upload-success").style.display = "none";-->
-<!--            document.getElementById("visible-pic").style.display = "block";-->
-<!--            document.getElementById("upload-pic").style.display = "none";-->
-<!--            document.getElementById("upload-profile-pic").removeAttribute("onclick");-->
-<!--        }-->
-
-<!--        function uploadSuccess(){-->
-<!--            document.getElementById("upload-failed").style.display = "none";-->
-<!--            document.getElementById("photo-upload").style.display = "none";-->
-<!--            document.getElementById("origin-frame").style.display = "none";-->
-<!--            document.getElementById("upload-success").style.display = "block";-->
-<!--        }-->
-
-<!--        function myFunction(img) {-->
-<!--                            if(img.src === "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%203@16x.png"){-->
-<!--                             var x = document.getElementById("snackbar1");-->
-<!--                             x.className = "show";-->
-<!--                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);-->
-<!--                            }-->
-<!--                            else{-->
-<!--                             var x = document.getElementById("snackbar");-->
-<!--                             x.className = "show";-->
-<!--                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);-->
-<!--                            }-->
-<!--        }-->
-<!--        function myFunction1(img) {-->
-<!--                            if(img.src === "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%203@16x.png"){-->
-<!--                             var x = document.getElementById("snackbar1-mobile");-->
-<!--                             x.className = "show";-->
-<!--                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);-->
-<!--                            }-->
-<!--                            else{-->
-<!--                             var x = document.getElementById("snackbar-mobile");-->
-<!--                             x.className = "show";-->
-<!--                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);-->
-<!--                            }-->
-<!--        }-->
-<!--         function myFunctionAge(img) {-->
-<!--                            if(img.src === "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%203@16x.png"){-->
-<!--                             var x = document.getElementById("snackbar1-age");-->
-<!--                             x.className = "show";-->
-<!--                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);-->
-<!--                            }-->
-<!--                            else{-->
-<!--                             var x = document.getElementById("snackbar-age");-->
-<!--                             x.className = "show";-->
-<!--                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);-->
-<!--                            }-->
-<!--        }-->
-<!--         function myFunctionEmail(img) {-->
-<!--                            if(img.src === "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%203@16x.png"){-->
-<!--                             var x = document.getElementById("snackbar1-email");-->
-<!--                             x.className = "show";-->
-<!--                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);-->
-<!--                            }-->
-<!--                            else{-->
-<!--                             var x = document.getElementById("snackbar-email");-->
-<!--                             x.className = "show";-->
-<!--                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);-->
-<!--                            }-->
-<!--        }-->
-<!--         function myFunctionOrigin(img) {-->
-<!--                            if(img.src === "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%203@16x.png"){-->
-<!--                             var x = document.getElementById("snackbar1-origin");-->
-<!--                             x.className = "show";-->
-<!--                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);-->
-<!--                            }-->
-<!--                            else{-->
-<!--                             var x = document.getElementById("snackbar-origin");-->
-<!--                             x.className = "show";-->
-<!--                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);-->
-<!--                            }-->
-<!--        }-->
-<!--        function changePicture(){-->
-<!--            if(document.getElementById("change-delete-picture").style.visibility === "hidden"){-->
-<!--                var img = document.getElementById("picture-edit-btn");-->
-<!--                img.src = "/images/extra-large-256px/Artboard 1 copy 53@16x.png";-->
-<!--                document.getElementById("change-delete-picture").style.visibility = "visible";-->
-<!--            }-->
-<!--            else{-->
-<!--                var img = document.getElementById("picture-edit-btn");-->
-<!--                img.src = "/images/extra-large-256px/Artboard 1 copy 51@16x.png";-->
-<!--                document.getElementById("change-delete-picture").style.visibility = "hidden";-->
-<!--            }-->
-<!--        }-->
-
-    </script>
-
-<script>
     function viewGroups(){
         document.getElementById("groups-list").style.display = "block";
         document.getElementById("no-groups").style.display = "none";
@@ -264,8 +93,12 @@
         }
 </script>
 
+<style>
+
+</style>
+
 <body>
-<header style="min-height: 6vh;">
+<header class="community-header">
     <div th:replace="shared/dashboard :: dashboard">
     </div>
 </header>
@@ -273,88 +106,39 @@
 <div class="content">
 
     <div class="community-desc">
-        <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">COMMUNITY</span>
-        <p style="color:#707070; font-family:roboto; font-size:12px; width:40%; margin-top: 15px; letter-spacing: 0.6px;  line-height: 2;">Lorem ipsum dolor
+        <span class="community-title">COMMUNITY</span>
+        <p class="community-text">Lorem ipsum dolor
             sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo
             vestibulum.</p>
     </div>
 
-<!--    <div class="photo-upload" id="photo-upload">-->
-<!--        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" id="uplaod-profile-pic-close" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame()"><br><br>-->
-<!--        <p style="font-weight: 900; color:#32BDD2; font-family: roboto; font-size: 16px; letter-spacing: 1.6px; line-height: 2; margin: 60px 0px 20px 0px;">UPLOAD PHOTO</p>-->
-<!--        <div style="display: flex; margin: 10px;">-->
-<!--            <div class="left-part">-->
-<!--                <p style="color:#747474; font-size: 16px; font-family: roboto; line-height: 1.5; font-weight: 900;">Select a file from my computer. <br><span style="font-size: 14px; font-weight: 500;">The file size should not exceed 5MB</span></p>-->
-<!--                <div style="height:0px;overflow:hidden">-->
-<!--                    <input type="file" id="fileInput" name="fileInput" accept="image/*"/>-->
-<!--                </div>-->
-<!--                <input type="button" class="submit-btn" id="profile-pic" value="BROWSE" onclick="chooseImg()" style=" padding-right: 10px; padding-left: 10px; padding-top: 5px; padding-bottom: 5px; letter-spacing: 0.5px; margin-top: 15px; font-size: 10px;">-->
-<!--            </div>-->
-<!--            <div class="right-part">-->
-<!--                <div style="border: solid 2px #FFFFFF; border-style: dashed; padding: 8%; margin: 4%;">-->
-<!--                    <img th:src="@{/images/extra-large-256px/upload.png}" width="45" height="45" style="display:block; margin: auto;"/>-->
-<!--                    <p style="color: #FFFFFF; margin: auto; text-align: center;">Drop a file here</p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <input type="submit" class="submit-btn" value="DONE" style="padding: 1.5% 5% 1.5% 5%; margin-top: 50px;" onclick="upload()">-->
-<!--    </div>-->
-
-<!--    <div class="photo-upload" id="upload-failed" style="width: 30%; height: 27%; left:30%;">-->
-<!--        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame()"><br><br>-->
-<!--        <p style="color:#E65959; font-family: roboto; font-weight: 900; font-size: 16px; letter-spacing: 1.6px; line-height: 1.9; margin-bottom: 20px;">FAILED</p>-->
-<!--        <p style="color:#5A5A5A; font-family: roboto; font-weight: 500; font-size: 14px; letter-spacing: 0.7px; line-height: 2.4; width: 80%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>-->
-<!--        <input type="button" class="submit-btn" style="display: block; background-color:#E65959; margin: 3vw auto; border: 0px;" value="Done" onclick="uploadSuccess()">-->
-<!--    </div>-->
-
-    <div class="photo-upload" id="upload-success" style="width: 30%; height: 30%; left:30%; top: 45%;">
-        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame ()"><br><br>
-        <p style="color:#32BDD2; font-family: roboto; font-weight: 900; font-size: 16px; letter-spacing: 1.6px; line-height: 1.9; margin-bottom: 20px;">SUCCESS</p>
-        <p style="color:#5A5A5A; font-family: roboto; font-weight: 500; font-size: 14px; letter-spacing: 0.7px; line-height: 2.4; width: 80%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
-        <input type="button" class="submit-btn" style="display: block; margin: 4vw auto; border: 0px;" value="DONE" onclick="uploaded()">
-    </div>
-
-
     <div class="profile-container">
         <div class="left-content">
-            <div style="min-height: 5vh; background-color: #EEEEEE;"></div>
+            <div class="empty-box"></div>
             <div class="people">
-                    <span
-                            style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span
-                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">MY
-                        PROFILE</span>
-                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Based on
-                    your profile, you will be able to connect with the best matches who share your interests. Go
-                    ahead and setup your profile.</p>
+                <span class="red-notification-box"><br></span>
+                <span class="my-profile-head">MY PROFILE</span>
+                <p class="my-profile-txt">Based on your profile, you will be able to connect with the best matches who share your interests. Go ahead and setup your profile.</p>
             </div>
-            <div class="people" style="border-bottom: solid 1px #CCCCCC; border-top: solid 1px #CCCCCC;">
-                    <span
-                            style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span
-                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px; letter-spacing: 1.4px;">PEOPLE</span>
-                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Meet the
-                    community members and make new friends.</p>
+            <div class="people">
+                <span class="red-notification-box"><br></span>
+                <span class="my-profile-head">PEOPLE</span>
+                <p class="my-profile-txt">Meet the community members and make new friends.</p>
             </div>
-            <div class="my-profile">
-                <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span
-                        style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-top: 10px;letter-spacing: 1.4px;">GROUPS</span>
-                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Join the groups and catch all the action. You will get suggestions based on your profile.</p>
+            <div class="my-profile" onclick="openGroupsPage()">
+                <span class="red-notification-box"><br></span>
+                <span class="my-profile-head">GROUPS</span>
+                <p class="my-profile-txt">Join the groups and catch all the action. You will get suggestions based on your profile.</p>
             </div>
         </div>
 
 
-<!--        <div class="photo-upload" id="origin-frame" style="width: 30%; left: 30%; top: 98%;">-->
-<!--            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame()"><br><br>-->
-<!--            <p style="color:#32BDD2; font-weight: 900; font-family: roboto; font-size: 16px; letter-spacing: 1.6px; line-height: 2; margin: 60px 0px 20px 0px;">YOUR PLACE OF ORIGIN</p>-->
-<!--            <p style="color:#5A5A5A; font-size:14px; line-height: 2.4; font-family: roboto; margin-top: 20px; margin-bottom: 40px;">If you have a profile picture, your chances of making more friends will be higher. However you can turn on or turn off the visibility of your photo anytime.</p>-->
-<!--            <div style="border: solid 1px #F7F4F4; box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.26); padding:5px; margin-right: auto: margin-left: auto; margin-bottom:40px; border-radius: 12px;">-->
-<!--                <input type="text" placeholder="Hubli" style="border: 0px; padding: 10px; width: 350px; font-family:roboto; font-size: 14px; letter-spacing: 1.4px;">-->
-<!--            </div>-->
-<!--            <input type="button" class="submit-btn" value="DONE" style="display:block; margin: auto;" id="originInfo">-->
-<!--        </div>-->
-
+        <div class="photo-upload" id="upload-success">
+            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" onclick="closeFrame()"><br><br>
+            <p class="success">SUCCESS</p>
+            <p class="success-txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
+            <input type="button" class="submit-btn" value="DONE" onclick="closeFrame()">
+        </div>
 
         <div class="right-content">
 

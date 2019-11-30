@@ -278,13 +278,20 @@
             </div>
             <input type="button" class="submit-btn" value="DONE" id="originInfo" onclick="closeFrame()">
         </div>
-
+<style>
+.column-flex{
+    display:flex; justify-content: center; width:100%; align-items: center; flex-direction: column;
+}
+#delete-profile{
+    display: flex; margin-left: 175px;
+}
+</style>
 
         <div class="right-content">
             <div class="my-profile-options" id="profile-setup">
-                <p style="display:block; color:#464646; font-family:roboto; font-size:16px; font-weight:700; margin-bottom: 20px; letter-spacing: 1.4px;"> MY PROFILE<br><br></p>
-                <div style="display:flex; justify-content: center; width:100%; align-items: center; flex-direction: column;">
-                    <div style="display: flex; margin-left: 175px;" id="delete-profile">
+                <p class="my-profile-head"> MY PROFILE<br><br></p>
+                <div class="column-flex">
+                    <div id="delete-profile">
                         <img th:src="@{/images/extra-large-256px/Artboard 1 copy 40@16x.png}" height="150" width="150" id="upload-profile-pic" onclick="uploadPicture()" style="border-radius: 50%; cursor: pointer;">
                             <div style="display: flex; padding: 10px; visibility: hidden; margin-bottom: 15px;" id="edit-part">
                                 <img th:src="@{/images/extra-large-256px/Artboard 1 copy 51@16x.png}" height="30" width="30" onclick="changePicture()" id="picture-edit-btn">
