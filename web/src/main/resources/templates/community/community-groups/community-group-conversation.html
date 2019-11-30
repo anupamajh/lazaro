@@ -86,67 +86,67 @@
             </div>
         </div>
 
-        <div class="right-content" style="padding: 2% 2% 0% 2%;">
+        <div class="right-content1">
 
-            <div class="my-profile-options" style="padding: 2% 2% 0% 2%; min-height: 55vw;" id="community-groups">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="display: flex; align-items: center;">
-                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" style="box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.58); border-radius: 50%;" onclick="viewGroups()">
-                        <span style="font-family: roboto; font-size: 14px; font-weight: 900; letter-spacing: 1.4px; margin-left: 25px; margin-top: 5px; color: #464646;">COMMUNITY GROUPS</span>
+            <div class="my-profile-options" id="community-groups">
+                <div class="groups-flex">
+                    <div class="groups-flex2">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" class="round-img-shadow" onclick="viewGroups()">
+                        <span class="community-head">COMMUNITY GROUPS</span>
                     </div>
-                    <div style="display: none; position: relative; cursor: pointer;" id="drop-down-btn">
+                    <div id="drop-down-btn">
                         <img th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" width="40" height="40" alt="drop-down" onclick="viewDropdown()">
-                        <div style="display: none; width: 170px; height: 285px; position: absolute; border: solid 0.5px #CCCCCC; box-shadow: 0px 3px 17px rgba(0, 0, 0, 0.29); background-color: #FFFFFF; border-radius: 0px 0px 10px 10px; right: 0%;" id="drop-down-menu">
-                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 1.05px; color: #909090; line-height: 1.6; border-bottom: solid 0.5px #CCCCCC; padding-right: 40%; padding-bottom: 13%; margin: 23% 0% 0% 15%;">CLEAR</a>
-                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #464646; line-height: 1.6; border-bottom: solid 0.5px #CCCCCC; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%;">JOINED</a>
-                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #464646; line-height: 1.6; border-bottom: solid 0.5px #CCCCCC; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%;">REQUESTED</a>
-                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #464646; line-height: 1.6; padding-right: 40%; padding-bottom: 13%; margin: 13% 0px 0% 15%;">INVITED</a>
+                        <div id="drop-down-menu">
+                            <a class="active-link">CLEAR</a>
+                            <a class="inactive-link">JOINED</a>
+                            <a class="inactive-link">REQUESTED</a>
+                            <a class="inactive-link">INVITED</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="group-view" id="group-conversation" style="display: flex; flex-direction: column;">
-                    <div class="group-info" style="display: flex; justify-content: space-between; align-items: center; width: 70%">
-                        <div style="width: 50%;">
-                        <p style="font-family: roboto; color: #505050; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 2vh;">HAMPI TRIP</p>
-                        <p style="font-family: roboto; color: #909090; font-size: 10px; font-weight: 400; letter-spacing: 0px; line-height: 14px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo vestibulum.</p>
+                <div class="group-view" id="group-conversation">
+                    <div class="group_info1">
+                        <div class="half-container">
+                        <p class="conversation-group-name">HAMPI TRIP</p>
+                        <p class="conversation-group-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo vestibulum.</p>
                         </div>
                         <img th:src="@{/images/extra-large-256px/Artboard 1 copy 26@16x.png}" height="40" width="40" onclick="viewExistingGroup()">
                     </div>
                     <div class="conversation-view">
                         <div class="incoming-message">
-                            <p style="color: #909090; font-family: roboto; font-size: 8px; letter-spacing: 0.4px; line-height: 9px;">26 Jul 2019, 02:25 pm</p>
-                            <p style="color: #5A5A5A; font-family: roboto; margin: 10px 0px; font-size: 10px; letter-spacing: 0.5px; line-height: 11px; font-weight: 600;">Peter Law</p>
-                            <p style="color: #747474; font-family: roboto; font-size: 10px; letter-spacing: 0.25px; line-height: 13px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.</p>
+                            <p class="msg-time">26 Jul 2019, 02:25 pm</p>
+                            <p class="msg-by">Peter Law</p>
+                            <p class="msg-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.</p>
                         </div>
                         <div class="incoming-message">
-                            <p style="color: #909090; font-family: roboto; font-size: 8px; letter-spacing: 0.4px; line-height: 9px;">26 Jul 2019, 04:25 pm</p>
-                            <p style="color: #5A5A5A; font-family: roboto; margin: 10px 0px; font-size: 10px; letter-spacing: 0.5px; line-height: 11px; font-weight: 600;">Luke Ray</p>
-                            <p style="color: #747474; font-family: roboto; font-size: 10px; letter-spacing: 0.25px; line-height: 13px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.</p>
+                            <p class="msg-time">26 Jul 2019, 04:25 pm</p>
+                            <p class="msg-by">Luke Ray</p>
+                            <p class="msg-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.</p>
                         </div>
                         <div class="incoming-message">
-                            <p style="color: #909090; font-family: roboto; font-size: 8px; letter-spacing: 0.4px; line-height: 9px;">26 Jul 2019, 05:25 pm</p>
-                            <p style="color: #5A5A5A; font-family: roboto; margin: 10px 0px; font-size: 10px; letter-spacing: 0.5px; line-height: 11px; font-weight: 600;">Andrew Paul</p>
-                            <p style="color: #747474; font-family: roboto; font-size: 10px; letter-spacing: 0.25px; line-height: 13px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.</p>
+                            <p class="msg-time">26 Jul 2019, 05:25 pm</p>
+                            <p class="msg-by">Andrew Paul</p>
+                            <p class="msg-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.</p>
                         </div>
-                        <div class="sent-message" style="width: 100%; display: flex; justify-content: flex-end;">
+                        <div class="sent-message">
                         <div class="sent-message-btm">
-                            <span style="background-color:#32BDD2; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                            <p style="color: #909090; font-family: roboto; font-size: 8px; letter-spacing: 0.4px; line-height: 9px;">26 Jul 2019, 06:25 pm</p>
-                            <p style="color: #5A5A5A; font-family: roboto; margin: 10px 0px; font-size: 10px; letter-spacing: 0.5px; line-height: 11px; font-weight: 600;">You</p>
-                            <p style="color: #747474; font-family: roboto; font-size: 10px; letter-spacing: 0.25px; line-height: 13px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.</p>
+                            <span class="blue-notification-box"><br></span>
+                            <p class="msg-time">26 Jul 2019, 06:25 pm</p>
+                            <p class="msg-by">You</p>
+                            <p class="msg-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.</p>
                         </div>
                         </div>
                     </div>
-                    <div style="display: flex; width: 80%;">
-                    <div style="display: block; border: solid #CCCCCC 1px; border-radius: 0px; margin-top: 0vh; width: -webkit-fill-available;">
-                        <input type="text" placeholder="Write here…" id="search-groups" style="padding: 15px 10px; border: 0px; outline: none; margin-left: 10px; border-radius: 0px;">
+                    <div class="conversation-flex">
+                    <div class="msg-box">
+                        <input type="text" placeholder="Write here…" class="msg-text-box">
                     </div>
-                    <input type="button" class="submit-btn" value="SEND" style="font-size: 14px; border-radius: 0px;">
+                    <input type="button" class="submit-btn send-btn" value="SEND">
                     </div>
-                <div style="display: flex; cursor: pointer; margin-top: 6vh; margin-bottom: 2vh;">
+                <div class="conversation-flex-2">
                     <img th:src="@{/images/extra-large-256px/Artboard 1 copy 9@16x.png}" height="15" width="15" onclick="backToGroupView()"/>
-                    <p style="color: #32BDD2; font-family: roboto; font-weight: 900; font-size: 14px; margin-left: 7px; letter-spacing: 0.7px;" onclick="backToGroupView()">BACK</p>
+                    <p class="conversation-back" onclick="backToGroupView()">BACK</p>
                 </div>
             </div>
         </div>
