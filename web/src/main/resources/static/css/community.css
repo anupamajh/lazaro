@@ -71,15 +71,8 @@ body {
 .search-bar input[type=text]:focus {
     border: 0px solid #555;
 }
-<<<<<<< Updated upstream
 
 .people {
-=======
-input[type=text]:focus {
-  outline: none;
-}
-.people{
->>>>>>> Stashed changes
     padding: 5% 13%;
     background-color: #EEEEEE;
     margin-top: 0px;
@@ -94,15 +87,8 @@ input[type=text]:focus {
     width: 333px;
     margin-top: 4vh;
 }
-<<<<<<< HEAD
 
 .submit-btn {
-=======
-.request-box{
-    border: solid 0.25px #CCCCCC;
-}
-.submit-btn{
->>>>>>> web-app
     background-color: #32BDD2;
     padding-right: 35px;
     padding-left: 35px;
@@ -865,25 +851,8 @@ input[type=text]:focus {
     padding: 3% 5%;
     margin-top: 4vh;
 }
-<<<<<<< HEAD
 
 .group_info1 {
-=======
-.group-info-flex{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.group-info-flex1{
-     background-color: #EEEEEE;
-     padding: 3% 5%;
-     margin-top: 4vh;
-     display: flex;
-     align-items: center;
-     justify-content: space-between;
- }
-.group_info1{
->>>>>>> web-app
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -949,15 +918,8 @@ input[type=text]:focus {
 .msg-sent {
     display: none;
 }
-<<<<<<< HEAD
 
 .invite-people {
-=======
-.msg-sent1{
-    display: block;
-}
-.invite-people{
->>>>>>> web-app
     display: block;
 }
 
@@ -1558,13 +1520,9 @@ input[type=text]:focus {
     width: 270px;
     border-radius: 12px;
 }
-<<<<<<< Updated upstream
 
 
 /*input[type=text] {
-=======
-.text-box input[type=text] {
->>>>>>> Stashed changes
     outline: none;
     border: 0px;
     padding: 10px;
@@ -1572,16 +1530,10 @@ input[type=text]:focus {
     font-family:roboto;
     font-size: 14px;
     letter-spacing: 1.4px;
-<<<<<<< Updated upstream
 }*/
 
 #originInfo {
     display: block;
-=======
-}
-#originInfo{
-    display:block;
->>>>>>> Stashed changes
     margin: auto;
 }
 
@@ -2026,31 +1978,8 @@ input[type=text]:focus {
     padding-bottom: 13%;
     margin: 23% 0% 0% 15%;
 }
-<<<<<<< Updated upstream
 
 .community-head {
-=======
-#drop-down-my-groups{
-        display: none;
-        width: 190px;
-        height: 210px;
-        position: absolute;
-        box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.29);
-        background-color: #FFFFFF;
-        border-radius: 0px 5px 5px 5px;
-}
-#drop-down-my-groups a{
-        display: block;
-        font-family: roboto;
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: 1.2px;
-        color: #747474;
-        line-height: 1.7;
-        margin: 20% 0% 0% 15%;
-}
-.community-head{
->>>>>>> Stashed changes
     font-family: roboto;
     font-size: 14px;
     font-weight: 900;
@@ -2065,16 +1994,8 @@ input[type=text]:focus {
     position: relative;
     cursor: pointer;
 }
-<<<<<<< HEAD
 
 #drop-down-menu {
-=======
-#drop-down-btn2{
-    position: relative;
-    cursor: pointer;
-}
-#drop-down-menu{
->>>>>>> web-app
     display: none;
     width: 170px;
     height: 285px;
@@ -2324,26 +2245,8 @@ input[type=text]:focus {
     margin-left: 7px;
     letter-spacing: 0.7px;
 }
-<<<<<<< HEAD
 
 #create-group-btn {
-=======
-#back-btn1{
-    display: flex;
-    cursor: pointer;
-    margin: 6vh 0vh 3vh 0vh;
-    align-items: center;
-}
-#back-btn1 p{
-    color: #32BDD2;
-    font-family: roboto;
-    font-weight: 900;
-    font-size: 14px;
-    margin-left: 7px;
-    letter-spacing: 0.7px;
-}
-#create-group-btn{
->>>>>>> web-app
     font-weight: 900;
     font-size: 12px;
     letter-spacing: 1.2px;
@@ -2359,17 +2262,8 @@ input[type=text]:focus {
     display: none;
     margin-top: 5px;
 }
-<<<<<<< HEAD
 
 .fav-head {
-=======
-#filter-clear-link1{
-    margin-right: 15px;
-    display: flex;
-    margin-top: 5px;
-}
-.fav-head{
->>>>>>> web-app
     color: #5A5A5A;
     text-align: right;
     font-size: 12px;
@@ -2377,7 +2271,6 @@ input[type=text]:focus {
     letter-spacing: 0.9px;
     line=height: 14px;
 }
-<<<<<<< HEAD
 
 .fav-clear-link {
     color: #32BDD2;
@@ -2391,9 +2284,6 @@ input[type=text]:focus {
 }
 
 .fav-drop-down {
-=======
-.fav-drop-down{
->>>>>>> web-app
     display: none;
     width: 170px;
     height: 164px;
@@ -2418,22 +2308,8 @@ input[type=text]:focus {
     padding-bottom: 13%;
     margin: 23% 0% 0% 15%;
 }
-<<<<<<< HEAD
 
 .fav-link {
-=======
-.fav-clear-link1{
-    color: #32BDD2;
-    text-align: right;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.82px;
-    line=height: 13px;
-    margin-top: 10px;
-    text-decoration: underline;
-}
-.fav-link{
->>>>>>> web-app
     display: block;
     font-family: roboto;
     font-size: 14px;
