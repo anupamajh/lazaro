@@ -12,6 +12,9 @@ public class HomeController {
     @RequestMapping(value = "/ForgotPassword")
     public String ForgotPassword(){ return "home/ForgotPassword";}
 
+    @RequestMapping(value = "/LoginDetailsError")
+    public String LoginDetailsError(){ return "home/LoginDetailsError";}
+
     @RequestMapping(value = "/ForgotPswdSuccess")
     public String ForgotPswdSuccess(){ return "home/ForgotPswdSuccess";}
 
@@ -65,6 +68,9 @@ public class HomeController {
 
     @RequestMapping(value = "InterestGroups/interest-groups")
     public String interestgroups(){ return "InterestGroups/interest-groups";}
+
+    @RequestMapping(value = "InterestGroups/interest-group-list")
+    public String groupsList(){ return "InterestGroups/interest-group-list";}
 
     @RequestMapping(value = "InterestGroups/group-conversation")
     public String groupConversation(){ return "InterestGroups/group-conversation";}

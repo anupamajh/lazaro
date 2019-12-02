@@ -5,7 +5,9 @@
 body {
     background-color: #FFFFFF;
 }
-
+[onClick] {
+    cursor: pointer;
+}
 */body {
     background-color: #E5E5E5;
 }*/
@@ -426,7 +428,7 @@ button {
     display: inline;
     position: absolute;
     margin-left: 40%;
-    bottom: 18%;
+    bottom: 19%;
     margin-bottom: 19%;
 }
 
@@ -434,7 +436,7 @@ button {
     display: inline;
     position: absolute;
     margin-left: 40%;
-    bottom: 18%;
+    bottom: 19%;
     margin-bottom: 5%;
 }
 
@@ -1100,11 +1102,6 @@ button {
     font-weight: 600;
     letter-spacing: 0.7px;
 }
-
-
-
-
-
 
 
 .group-select-menu{

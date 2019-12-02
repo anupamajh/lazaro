@@ -6,7 +6,9 @@
 body {
     background-color: #E5E5E5;
 }
-
+.community-header {
+    min-height: 6vh;
+}
 .community-desc {
     padding: 3%;
     background-color: #FFFFFF;

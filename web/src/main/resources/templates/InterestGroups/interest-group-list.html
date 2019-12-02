@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Interest-groups</title>
+    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto&display=swap}" rel="stylesheet">
+    <link th:href="@{/css/community.css}" rel="stylesheet">
+</head>
+<script>
+  function equalmark() {
+    document.getElementById("myDropdown").classList.toggle("show");
+    document.getElementById("cross-mark").style.display = "block";
+    document.getElementById("equals").style.display = "none";
+  }
+
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function (event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
+
+  function crossmark() {
+    document.getElementById("cross-mark").style.display = "none";
+    document.getElementById("equals").style.display = "block";
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+
+  function interestgroup() {
+    document.getElementById("interest-group").style.display = "block";
+    document.getElementById("ig").style.display = "block";
+    document.getElementById("filter-icon").style.display = "block";
+    document.getElementById("equals").style.display = "block";
+    document.getElementById("cross-mark").style.display = "none";
+    document.getElementById("select").style.display = "none";
+  }
+
+  function filter() {
+    if (document.getElementById("drop-down-menu").style.display === "none") {
+      document.getElementById("drop-down-menu").style.display = "block";
+    } else {
+      document.getElementById("drop-down-menu").style.display = "none";
+    }
+  }
+
+  function subscribe() {
+    document.getElementById("clear-filter").style.display = "block";
+    document.getElementById("drop-down-menu").style.display = "none";
+    document.getElementById("hiking").style.display = "none";
+    document.getElementById("sky").style.display = "none";
+    document.getElementById("gradening").style.display = "none";
+    document.getElementById("marathon").style.display = "none";
+  }
+
+  function pressnew() {
+    document.getElementById("clear-filter").style.display = "block";
+    document.getElementById("drop-down-menu").style.display = "none";
+    document.getElementById("gradening").style.display = "block";
+    document.getElementById("marathon").style.display = "block";
+    document.getElementById("hiking").style.display = "none";
+    document.getElementById("robotics").style.display = "none";
+    document.getElementById("cycling").style.display = "none";
+    document.getElementById("sky").style.display = "none";
+  }
+
+  function clear() {
+    document.getElementById("hiking").style.display = "block";
+    document.getElementById("sky").style.display = "block";
+  }
+
+  function searchGroups() {
+    var str = document.getElementById("search-groups").value.toUpperCase().trim();
+    var group_title = document.getElementsByClassName("group_info");
+    var group = document.getElementsByClassName("group");
+    var i;
+    var count = 0;
+    var groups = group_title.length;
+
+    for (i = 0; i < groups; i++) {
+      var res = group_title[i].textContent.toUpperCase();
+      var result = res.match(str);
+      console.log(result);
+      var empty = "";
+      if (result != null) {
+        group[i].style.display = "flex";
+        count = count + 1;
+      } else {
+        group[i].style.display = "none";
+      }
+      if (count === 0) {
+        document.getElementById("search-not-found").style.display = "flex";
+        document.getElementById("back-btn").style.display = "flex";
+        document.getElementById("show-more").style.display = "none";
+      } else {
+        document.getElementById("search-not-found").style.display = "none";
+
+        document.getElementById("back-btn").style.display = "flex";
+      }
+    }
+  }
+
+  function groupView() {
+    console.log("msg");
+    location.replace("/community/community-group-view");
+
+  }
+
+  function clearFilter() {
+    location.replace("/InterestGroups/interest-group-list");
+  }
+
+  function cycling() {
+    location.replace("/InterestGroups/group-conversation");
+
+  }
+
+  function hiking() {
+    location.replace("/InterestGroups/group-hiking");
+  }
+
+  function clearFilter() {
+    document.getElementById("groups").style.display = "block";
+
+  }
+</script>
+
+<body>
+<header class="community-header">
+    <div th:replace="shared/dashboard :: dashboard"></div>
+</header>
+
+<div class="content">
+
+    <div class="community-desc">
+        <span class="community-title">COMMUNITY</span>
+        <p class="community-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem
+            elementum, sit amet sollicitudin leo vestibulum.</p>
+    </div>
+
+    <div class="profile-container">
+        <div class="left-content">
+            <div class="empty-box"></div>
+            <div class="people">
+                <span class="red-notification-box"><br></span>
+                <span class="my-profile-head">MY PROFILE</span>
+                <p class="my-profile-txt">Based on your profile, you will be able to connect with the best matches who share
+                    your interests. Go ahead and setup your profile.</p>
+            </div>
+            <div class="people">
+                <span class="red-notification-box"><br></span>
+                <span class="my-profile-head">PEOPLE</span>
+                <p class="my-profile-txt">Meet the community members and make new friends.</p>
+            </div>
+            <div class="my-profile" onclick="openGroupsPage()">
+                <span class="red-notification-box"><br></span>
+                <span class="my-profile-head">GROUPS</span>
+                <p class="my-profile-txt">Join the groups and catch all the action. You will get suggestions based on your
+                    profile.</p>
+            </div>
+        </div>
+
+        <div class="right-content">
+
+            <div class="my-profile-options" id="interest-groups1">
+                <div class="groups-flex">
+                    <div class="groups-flex2">
+                        <img onclick="equalmark()" id="equals" class="dropbtn"
+                             th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon"
+                             style="box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.58); border-radius: 50%;">
+                        <img onclick="crossmark()" th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" width="35"
+                             height="35" alt="icon"
+                             style="box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.58); border-radius: 50%;display:none" ; id="cross-mark">
+                        <div id="myDropdown" class="dropdown-content">
+                            <a class="interest-group-opt1" onclick="interestgroup()" href="#home">INTEREST GROUPS</a>
+
+                            <a class="interest-group-opt1" href="#about">COMMUNITY GROUPS</a>
+                            <a class="interest-group-opt1" href="#about">MY GROUPS</a>
+                        </div>
+                        <span class="interest-group-small-heading">INTEREST GROUPS</span>
+                    </div>
+
+                    <div id="clear-filter group-view" style="display:none;">
+                        <p style=" width: 142px;margin-left: 47%;color:#5A5A5A; font-family:roboto;font-size:12px;">
+                            Showing new groups.
+                            <span onclick="clearFilter()" style="color:#32BDD2; cursor:pointer; font-family:roboto;"><u>Clear
+                    Filter</u></span>
+                        </p>
+                    </div>
+
+
+                    <div class="interest-group-filter-align">
+                        <img id="filter-icon" onclick="filter()" th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}"
+                             width="40" height="40" alt="drop-down">
+                        <div id="drop-down-menu">
+                            <a class="active-link">CLEAR</a>
+                            <a class="inactive-link" onclick="subscribe()">Subscribed</a>
+                            <a class="inactive-link" onclick="pressnew()">New</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="interest-group">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search…"
+                               style="padding: 8px 5px;; border: 0px; width: 95%; outline: none;cursor: pointer; margin-left: 10px;">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" width="20" height="20"
+                             alt="search-btn" id="search-btn">
+                    </div>
+
+                    <div class="groups" id="groups">
+                        <div class="accepted group" onclick="cycling()" id="cycling">
+                            <div>
+                                <span class="red-notification-box"><br></span>
+                                <p class="adventure-list">Outdoor Adventure</p>
+                                <div class="group-admin">
+                                    <p class="interest-group-event-list">CYCLING</p>
+                                </div>
+                                <p class="event-list-short-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
+                                    erat sapien.</p>
+                            </div>
+                            <div><img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30" height="30"
+                                      alt="search-btn" class="round-img">
+                            </div>
+                        </div>
+
+
+                        <div class="accepted group" id="robotics">
+                            <div>
+                                <p class="adventure-list">Tech</p>
+                                <div class="group-admin">
+                                    <p class="interest-group-event-list">ROBOTICS</p>
+                                </div>
+                                <p class="event-list-short-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien.</p>
+                            </div>
+                            <div>
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30" height="30"
+                                     alt="search-btn" class="round-img">
+                            </div>
+                        </div>
+
+
+                        <div class="accepted" id="hiking" onclick="ClickHiking()">
+                            <div>
+                                <script>
+                                            function ClickHiking() {
+                                                window.location = src = "/InterestGroups/group-hiking";
+                                            }
+                                        </script>
+                                <p class="adventure-list">Outdoor Adventure</p>
+                                <div class="group-admin">
+                                    <p class="interest-group-event-list">HIKING</p>
+                                </div>
+                                <p class="event-list-short-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
+                                    erat sapien.</p>
+                                <div class="interest-group-notification">
+                                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 28@16x.png}" width="30" height="30"
+                                         alt="search-btn" class="round-img">
+                                    <p class="interest-group-match">This group matches your interest.</p>
+                                </div>
+                            </div>
+                            <div>
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 15@16x.png}" width="30" height="30" alt="accepted-icon" class="round-img round-img-background">
+                            </div>
+                        </div>
+
+
+                        <div class="accepted" id="sky">
+                            <div>
+                                <p class="adventure-list">Outdoor Adventure</p>
+                                <div class="group-admin">
+                                    <p class="interest-group-event-list">SKY DIVING</p>
+                                </div>
+                                <p class="event-list-short-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
+                                    erat sapien.
+                                </p>
+                            </div>
+                            <div>
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 15@16x.png}" width="30" height="30"
+                                     alt="accepted-icon" class="round-img round-img-background">
+                            </div>
+                        </div>
+
+                        <div class="accepted group-view" id="gradening">
+                            <div>
+                                <p class="adventure-list">Outdoor Adventure</p>
+                                <div class="group-admin">
+                                    <p class="interest-group-event-list">GRADENING</p>
+                                </div>
+                                <p class="event-list-short-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
+                                    erat sapien.
+                                </p>
+                            </div>
+                            <div>
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 15@16x.png}" width="30" height="30"
+                                     alt="accepted-icon" class="round-img round-img-background">
+                            </div>
+                        </div>
+
+                        <div class="accepted group-view" id="marathon">
+                            <div>
+                                <p class="adventure-list">Fitness</p>
+                                <div class="group-admin">
+                                    <p class="interest-group-event-list">Marathon</p>
+                                </div>
+                                <p class="event-list-short-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
+                                    erat sapien.</p>
+                            </div>
+                            <div>
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 15@16x.png}" width="30" height="30"
+                                     alt="accepted-icon" class="round-img round-img-background">
+                            </div>
+                        </div>
+
+                        <div class="show-more">
+                            <p class="head-text show-more-txt">SHOW MORE</p>
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="10" width="10"
+                                 alt="list-button">
+                        </div>
+                        <div class="group-view-back-btn">
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 9@16x.png}" height="15" width="15"
+                                 onclick="backToGroupView()" />
+                            <p onclick="backToGroupView()">BACK</p>
+                           <script>
+                            function backToGroupView() {
+                            location.replace("/InterestGroups/interest-group-list");
+                                                        }
+                                  </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script th:src="@{/js/interest-groups.js}" type="text/javascript"></script>
+</html>
