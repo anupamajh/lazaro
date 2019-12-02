@@ -1,6 +1,8 @@
-    function viewInterestList(){
+function viewInterestList(){
             document.getElementById("view-interest-list").classList.toggle("show");
-        }
+            document.getElementById("drop-down-list").style.display = "none";
+            document.getElementById("drop-down-btn").src="/images/extra-large-256px/Artboard 1 copy@16x.png";
+}
 
         function viewDropDownList(){
             console.log("entered");
@@ -26,6 +28,18 @@
         function uploadPicture(){
             document.getElementById("photo-upload").style.display = "block";
         }
+        window.addEventListener('load', function() {
+            document.querySelector('input[type="file"]').addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    var img = document.getElementById("upload-profile-pic");  // $('img')[0]
+                    img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+                    img.onload = imageIsLoaded;
+                    var txt = document.getElementById("Upload-pic");
+                    txt.style.display = "none";
+                }
+        });
+    });
+
 
         function closeFrame(){
             document.getElementById("photo-upload").style.display = "none";
@@ -55,10 +69,19 @@
         }
 
         function upload(){
-            document.getElementById("upload-failed").style.display = "block";
+            document.getElementById("upload-failed").style.display = "none";
+            document.getElementById("photo-upload").style.display = "none";
+            document.getElementById("origin-frame").style.display = "none";
+            document.getElementById("upload-success").style.display = "block";
+        }
+        function uploaded(){
+            document.getElementById("edit-part").style.visibility = "visible";
+            document.getElementById("upload-failed").style.display = "none";
             document.getElementById("photo-upload").style.display = "none";
             document.getElementById("origin-frame").style.display = "none";
             document.getElementById("upload-success").style.display = "none";
+            document.getElementById("visible-pic").style.display = "block";
+            document.getElementById("upload-pic").style.display = "none";
         }
 
         function uploadSuccess(){
@@ -127,4 +150,36 @@
                              x.className = "show";
                              setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
                             }
+        }
+        function myFunctionProfile(img){
+                            if(img.src === "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%203@16x.png"){
+                             var x = document.getElementById("snackbar1-profile");
+                             x.className = "show";
+                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                            }
+                            else{
+                             var x = document.getElementById("snackbar-profile");
+                             x.className = "show";
+                             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                            }
+        }
+        function changePicture(){
+            if(document.getElementById("change-delete-picture").style.visibility === "hidden"){
+                var img = document.getElementById("picture-edit-btn");
+                img.src = "/images/extra-large-256px/Artboard 1 copy 53@16x.png";
+                document.getElementById("change-delete-picture").style.visibility = "visible";
+            }
+            else{
+                var img = document.getElementById("picture-edit-btn");
+                img.src = "/images/extra-large-256px/Artboard 1 copy 51@16x.png";
+                document.getElementById("change-delete-picture").style.visibility = "hidden";
+            }
+        }
+        function deletePhoto(){
+            var img = document.getElementById("upload-profile-pic").src = "/images/extra-large-256px/Artboard 1 copy 40@16x.png";
+            document.getElementById("visible-pic").style.display = "none";
+            document.getElementById("change-delete-picture").style.visibility = "visible";
+        }
+        function openGroupsPage(){
+            location.replace("/community/community-groups/community-groups");
         }
