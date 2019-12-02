@@ -116,37 +116,6 @@
         function openGroup(){
             location.replace("/community/community-groups/community-open-group");
         }
-        function searchPeople(){
-            var str = document.getElementById("search-people").value.toUpperCase().trim();
-            var person_name = document.getElementsByClassName("uname");
-            var people = document.getElementsByClassName("group-members");
-            var i;
-            var count = 0;
-            var people_list = person_name.length;
-
-            for(i=0;i<people_list;i++){
-                var res = person_name[i].textContent.toUpperCase().trim();
-                var result = res.match(str);
-                console.log(result);
-                if(result != null){
-                    people[i].style.display = "flex";
-                    count = count+1;
-                }else{
-                    people[i].style.display = "none";
-                }
-                if(count === 0){
-                    document.getElementById("search-not-found").style.display = "flex";
-                    document.getElementById("back-btn").style.display = "flex";
-                    document.getElementById("count-msg").style.display = "none";
-                    document.getElementById("show-more").style.display = "none";
-                }else{
-                    document.getElementById("search-not-found").style.display = "none";
-                    document.getElementById("back-btn").style.display = "flex";
-                }
-                    document.getElementById("count").innerHTML = count;
-                    document.getElementById("count-msg").style.display = "block";
-            }
-        }
 </script>
 
 <body>
