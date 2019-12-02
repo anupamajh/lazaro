@@ -120,90 +120,97 @@
 
         <div class="right-content">
 
-            <div class="my-profile-options" style="padding: 2%; min-height: 35vw;" id="community-groups">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="display: flex; align-items: center;">
-                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" style="box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.58); border-radius: 50%;" onclick="viewGroups()">
-                        <div style="display: none; width: 170px; height: 285px; position: absolute; box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.29); background-color: #FFFFFF; right: 0%; border-radius: 0px 5px 5px 5px;" id="drop-down-1">
-                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 1.05px; color: #747474; line-height: 1.6; padding-right: 40%; padding-bottom: 13%; margin: 23% 0% 0% 15%;">INTEREST GROUPS</a>
-                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #747474; line-height: 1.6; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%;">COMMUNITY GROUPS</a>
-                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #747474; line-height: 1.6; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%;">MY GROUPS</a>
+            <div class="my-profile-options" id="community-groups">
+                <div class="my-groups-flex1">
+                    <div class="my-groups-flex2">
+                        <div>
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" class="round-img" onclick="viewDropdown(this)" id="drop-down-btn1">
+                            <div class="my-groups-drop-down" id="drop-down-my-groups">
+                                <a class="interest-group-links">INTEREST GROUPS</a>
+                                <a class="community-group-links">COMMUNITY GROUPS</a>
+                                <a class="my-group-links">MY GROUPS</a>
+                            </div>
                         </div>
-                        <span style="font-family: roboto; font-size: 14px; font-weight: 900; letter-spacing: 1.4px; margin-left: 25px; margin-top: 5px; color: #464646;">COMMUNITY GROUPS</span>
+                        <span class="community-head">MY GROUPS</span>
                     </div>
-                    <input type="button" class="submit-btn" value="CREATE" style="font-weight: 900; font-size: 12px; letter-spacing: 1.2px; padding: 13px 50px; cursor: pointer;" id="create-group-btn" onclick="createGroup()">
-                    <div style="display: none; position: relative; cursor: pointer;" id="drop-down-btn">
-                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" width="40" height="40" alt="drop-down" onclick="viewDropdown()">
-                        <div style="display: none; width: 170px; height: 285px; position: absolute; border: solid 0.5px #CCCCCC; box-shadow: 0px 3px 17px rgba(0, 0, 0, 0.29); background-color: #FFFFFF; border-radius: 0px 0px 10px 10px; right: 0%;" id="drop-down-menu">
-                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 1.05px; color: #909090; line-height: 1.6; border-bottom: solid 0.5px #CCCCCC; padding-right: 40%; padding-bottom: 13%; margin: 23% 0% 0% 15%;">CLEAR</a>
-                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #464646; line-height: 1.6; border-bottom: solid 0.5px #CCCCCC; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%;">JOINED</a>
-                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #464646; line-height: 1.6; border-bottom: solid 0.5px #CCCCCC; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%;">REQUESTED</a>
-                            <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #464646; line-height: 1.6; padding-right: 40%; padding-bottom: 13%; margin: 13% 0px 0% 15%;">INVITED</a>
-                        </div>
-                    </div>
+                    <input type="button" class="submit-btn group-list-create-btn" value="CREATE" id="create-group-btn" onclick="createGroup()">
                 </div>
 
+                    <div id="drop-down-btn">
+                        <div class="just-relative">
+                            <div id="filter-clear-link">
+                                <p class="fav-head">Showing your favourites.</p>
+                                <p class="fav-clear-link1" onclick="clearFilter()">Clear Filter</p>
+                            </div>
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" width="40" height="40" alt="drop-down" onclick="viewDropdown1()">
+                            <div class="fav-drop-down" id="drop-down-menu1">
+                                <a class="fav-clear-link2" onclick="clearFilter()" id="clear-link">CLEAR</a>
+                                <a class="fav-link" id="fav-link" onclick="filterFav()">Favourites</a>
+                            </div>
+                        </div>
+                    </div>
+
                 <div class="group-content" id="group-content">
-                    <div class="groups-list" id="groups-list" style="display: block;">
+                    <div class="groups-list1" id="groups-list">
                         <div class="search-bar">
-                            <input type="text" placeholder="Search…" id="search-groups" style="padding: 8px 5px; border: 0px; width: 95%; outline: none; margin-left: 10px;">
+                            <input type="text" placeholder="Search…" id="search-groups">
                             <img th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" width="20" height="20" alt="search-btn" id="search-btn" onclick="searchGroups()">
                         </div>
 
                         <div class="search-not-found" id="search-not-found">
                             <img th:src="@{/images/extra-large-256px/search.png}" height="65" width="65" alt="search-not-found">
-                            <p style="font-family: roboto; font-size: 14px; letter-spacing: 0.7px; line-height: 16px; color: #747474; font-weight: 900; margin-top: 15px;">No Results Found</p>
-                            <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 14px; color: #909090; font-weight: 400; margin-top: 15px; width: 25%; text-align: center;">Sorry, we couldn’t find any results for search_keyword</p>
+                            <p class="no-results-found">No Results Found</p>
+                            <p class="no-results-found2">Sorry, we couldn’t find any results for search_keyword</p>
                         </div>
 
                         <div class="groups" id="groups">
 
                             <div class="accepted group" onclick="viewConversation();">
                                 <div>
-                                    <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                                    <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;" class="group_info">APACHE RIDERS</p>
-                                    <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
-                                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 10@16x.png}" width="40" height="40" alt="admin-pic" style="border-radius: 50%;">
-                                        <div style="margin-left: 5px; margin-bottom: 5px;">
-                                            <p class="group-admin-username" style="color: #747474; font-family: robot; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;">YOU</p>
-                                            <p class="notification-details" style="color: #272727; font-family: roboto; font-size: 11px; letter-spacing: 0.55px; line-height: 1.3;">2nd July 2019 06:21 PM (4 Days ago)</p>
+                                    <span class="red-notification-box"><br></span>
+                                    <p class="group_info">APACHE RIDERS</p>
+                                    <div class="group-admin">
+                                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 10@16x.png}" width="40" height="40" alt="admin-pic" class="round-img">
+                                        <div class="group-admin-details1">
+                                            <p class="group-admin-username">YOU</p>
+                                            <p class="notification-details">2nd July 2019 06:21 PM (4 Days ago)</p>
                                         </div>
                                     </div>
-                                    <p style="color: #747474; width: 75%; font-family: roboto; font-size: 12px; letter-spacing: 0.3px; line-height: 1.8;">
+                                    <p class="group-description">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.
                                     </p>
                                 </div>
                                 <div>
-                                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30" height="30" alt="search-btn" style="border-radius: 50%;">
+                                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30" height="30" alt="search-btn" class="round-img">
                                 </div>
                             </div>
 
                             <div class="accepted group">
                                 <div>
-                                    <span style="display:none; background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                                    <p style="color: #505050; font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 600;  margin-top: 20px;" class="group_info">STAND-UP COMEDY</p>
-                                    <div class="group-admin" style="display: flex; align-items: center; padding: 10px 0px;">
-                                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 10@16x.png}" width="40" height="40" alt="search-btn" style="border-radius: 50%;">
-                                        <div style="margin-left: 5px; margin-bottom: 5px;">
-                                            <p class="group-admin-username" style="color: #505050; font-family: robot; font-size: 12px; letter-spacing: 0.6px; line-height: 2.5;">YOU</p>
-                                            <p class="notification-details" style="color: #272727; font-family: roboto; font-size: 11px; letter-spacing: 0.55px; line-height: 1.3;">2nd July 2019 06:21 PM (4 Days ago)</p>
+<!--                                    <span style="display:none; background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>-->
+                                    <p class="group_info">STAND-UP COMEDY</p>
+                                    <div class="group-admin">
+                                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 10@16x.png}" width="40" height="40" alt="search-btn" class="round-img">
+                                        <div class="group-admin-details1">
+                                            <p class="group-admin-username">YOU</p>
+                                            <p class="notification-details">2nd July 2019 06:21 PM (4 Days ago)</p>
                                         </div>
                                     </div>
-                                    <p style="color: #505050; width: 75%; font-family: roboto; font-size: 12px; letter-spacing: 0.3px; line-height: 1.8;">
+                                    <p class="group-description">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.
                                     </p>
                                 </div>
                                 <div>
-                                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30" height="30" alt="search-btn" id="view-notification" style="border-radius: 50%;">
+                                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 48@16x.png}" width="30" height="30" alt="search-btn" id="view-notification" class="round-img">
                                 </div>
                             </div>
 
                         </div>
                     </div>
                 </div>
-                <div style="display: none; cursor: pointer; margin: 6vh 0vh 3vh 0vh;" id="back-btn">
+                <div id="back-btn">
                     <img th:src="@{/images/extra-large-256px/Artboard 1 copy 9@16x.png}" height="15" width="15" onclick="backToGroupView()"/>
-                    <p style="color: #32BDD2; font-family: roboto; font-weight: 900; font-size: 14px; margin-left: 7px; letter-spacing: 0.7px;" onclick="backToGroupView()">BACK</p>
+                    <p onclick="backToGroupView()">BACK</p>
                 </div>
 
             </div>

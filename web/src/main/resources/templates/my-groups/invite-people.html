@@ -8,11 +8,6 @@
     <link th:href="@{/css/community.css}" rel="stylesheet">
 </head>
 <script>
-    function createGroup(){
-        document.getElementById("groups-list").style.display = "block";
-        document.getElementById("no-groups").style.display = "none";
-        document.getElementById("create-group-btn").style.display = "none";
-    }
     function viewDropdown(img){
         if(document.getElementById("drop-down-1").style.display === "none"){
         document.getElementById("drop-down-1").style.display = "block";
@@ -25,21 +20,14 @@
         }
     }
     function viewDropdown1(){
-        if(document.getElementById("drop-down-menu").style.display === "none"){
-            document.getElementById("drop-down-menu").style.display = "block";
+        if(document.getElementById("drop-down-menu1").style.display === "none"){
+            document.getElementById("drop-down-menu1").style.display = "block";
         }else{
-            document.getElementById("drop-down-menu").style.display = "none";
+            document.getElementById("drop-down-menu1").style.display = "none";
         }
     }
-    function groupCreated(){
-        document.getElementById("groups-list").style.display = "none";
-        document.getElementById("no-groups").style.display = "block";
-        document.getElementById("invite-part").style.display = "block";
-        document.getElementById("create-group-btn").style.display = "none";
-        document.getElementById("upload-success").style.display = "none";
-    }
     function invitePeople1(position){
-        var list = document.getElementsByClassName("invite-btn");
+        var list = document.getElementsByClassName("invite-btn1");
         var sentlist = document.getElementsByClassName("msg-sent");
         list = [].slice.call(list);
         var n = list.indexOf(position);
@@ -50,34 +38,19 @@
         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     }
 
-    function createGroupDone(){
-<!--            document.getElementById("upload-failed").style.display = "none";-->
-<!--            document.getElementById("photo-upload").style.display = "none";-->
-<!--            document.getElementById("origin-frame").style.display = "none";-->
-                document.getElementById("upload-success").style.display = "block";
-        }
-
      function closeFrame(){
 <!--            document.getElementById("photo-upload").style.display = "none";-->
 <!--            document.getElementById("origin-frame").style.display = "none";-->
 <!--            document.getElementById("upload-failed").style.display = "none";-->
             document.getElementById("upload-success").style.display = "none";
         }
-       function invitePeople(){
-            document.getElementById("invite-part").style.display = "none";
-            document.getElementById("no-groups").style.display = "none";
-            document.getElementById("drop-down-btn").style.display = "flex";
-            document.getElementById("invite-people").style.display = "block";
-
-       }
-
        function filterFav(){
             var all = document.getElementsByClassName("group-members");
             var fav = document.getElementsByClassName("favourites");
             document.getElementById("filter-clear-link").style.display = "inline-block";
-            document.getElementById("drop-down-menu").style.display = "none";
+            document.getElementById("drop-down-menu1").style.display = "none";
             document.getElementById("count-msg").style.display = "none";
-            document.getElementById("favorite-link").style.color = "#909090";
+            document.getElementById("fav-link").style.color = "#909090";
             document.getElementById("clear-link").style.color = "#32BDD2";
             var i, j;
             for(i=0; i<all.length; i++){
@@ -89,32 +62,54 @@
        }
        function clearFilter(){
             var all = document.getElementsByClassName("group-members");
-            document.getElementById("drop-down-menu").style.display = "none";
+            document.getElementById("drop-down-menu1").style.display = "none";
             document.getElementById("filter-clear-link").style.display = "none";
             var i, j;
-            document.getElementById("favorite-link").style.color = "#464646";
+            document.getElementById("fav-link").style.color = "#464646";
             document.getElementById("clear-link").style.color = "#909090";
             for(i=0; i<all.length; i++){
                 all[i].style.display = "flex";
             }
        }
+       function backToGroupView(){
+           location.replace("/my-groups/my-groups-list");
+        }
+        function searchPeople(){
+            var str = document.getElementById("search-people").value.toUpperCase().trim();
+            var person_name = document.getElementsByClassName("uname");
+            var people = document.getElementsByClassName("group-members");
+            var i;
+            var count = 0;
+            var people_list = person_name.length;
 
-         function joinConversation(){
-            location.replace("/community/community-groups/community-group-conversation");
-        }
-         function backToGroupView(){
-            location.replace("/community/community-groups/community-groups");
-        }
-        function viewConversation(){
-            var x = document.getElementById("snackbar-group");
-            x.className = "show";
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-        }
-        function requestAwaiting(){
-            location.replace("/community/community-groups/community-awaiting-group");
-        }
-        function openGroup(){
-            location.replace("/community/community-groups/community-open-group");
+            for(i=0;i<people_list;i++){
+                var res = person_name[i].textContent.toUpperCase().trim();
+                var result = res.match(str);
+                console.log(result);
+                if(result != null){
+                    people[i].style.display = "flex";
+                    count = count+1;
+                }else{
+                    people[i].style.display = "none";
+                }
+                if(count === 0){
+                    document.getElementById("search-not-found").style.display = "flex";
+                    document.getElementById("back-btn1").style.display = "flex";
+                    document.getElementById("show-more").style.display = "none";
+                    document.getElementById("count-msg").style.display = "none";
+                }else{
+                    document.getElementById("search-not-found").style.display = "none";
+                    document.getElementById("back-btn1").style.display = "flex";
+<!--                    if(count != 1){-->
+<!--                    -->
+<!--                    }else{-->
+<!--                        document.getElementById("count-msg").style.display = "block";-->
+<!--                        document.getElementById("count-msg").innerHTML = "1 match found";-->
+<!--                    }-->
+                }
+                document.getElementById("count-msg").style.display = "block";
+                document.getElementById("count").innerHTML = count;
+            }
         }
 </script>
 
@@ -137,18 +132,9 @@
         <div class="left-content">
             <div class="empty-box"></div>
             <div class="people">
-<<<<<<< Updated upstream
-                    <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                <span style="color:#464646; font-family:roboto; font-size:16px; font-weight:700; letter-spacing: 1.4px;">MY
-                        PROFILE</span>
-                <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">Based on
-                    your profile, you will be able to connect with the best matches who share your interests. Go
-                    ahead and setup your profile.</p>
-=======
                 <span class="red-notification-box"><br></span>
                 <span class="my-profile-head">MY PROFILE</span>
                 <p class="my-profile-txt">Based on your profile, you will be able to connect with the best matches who share your interests. Go ahead and setup your profile.</p>
->>>>>>> Stashed changes
             </div>
             <div class="people">
                 <span class="red-notification-box"><br></span>
@@ -170,70 +156,71 @@
         </div>
 
         <div class="right-content">
-            <div class="my-profile-options" style="padding: 2%; min-height: 35vw;" id="community-groups">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="display: flex; align-items: center;">
+            <div class="my-profile-options" id="community-groups">
+                <div class="my-groups-flex1">
+                    <div class="my-groups-flex2">
                         <div>
-                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" style="border-radius: 50%;" onclick="viewDropdown(this)" id="drop-down-btn1">
-                            <div style="display: none; width: 188px; height: 208px; position: absolute; box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.29); background-color: #FFFFFF; right: 46.8%; border-radius: 0px 5px 5px 5px;" id="drop-down-1">
-                                <a style="display: block; cursor: pointer; font-family: roboto; font-size: 12px; font-weight: 600; letter-spacing: 1.2px; color: #747474; line-height: 17px; padding-bottom: 13%; margin: 20% 0% 0% 10%;">INTEREST GROUPS</a>
-                                <a style="display: block; cursor: pointer; font-family: roboto; font-size: 12px; font-weight: 600; letter-spacing: 1.2px; color: #747474; line-height: 17px; padding-bottom: 13%; margin: 13% 0% 0% 10%;">COMMUNITY GROUPS</a>
-                                <a style="display: block; cursor: pointer; font-family: roboto; font-size: 12px; font-weight: 600; letter-spacing: 1.2px; color: #747474; line-height: 17px; padding-bottom: 13%; margin: 13% 0% 0% 10%;">MY GROUPS</a>
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" class="round-img" onclick="viewDropdown(this)" id="drop-down-btn1">
+                            <div class="my-groups-drop-down" id="drop-down-my-groups">
+                                <a class="interest-group-links">INTEREST GROUPS</a>
+                                <a class="community-group-links">COMMUNITY GROUPS</a>
+                                <a class="my-group-links">MY GROUPS</a>
                             </div>
                         </div>
-                        <span style="font-family: roboto; font-size: 14px; font-weight: 900; letter-spacing: 1.4px; margin-left: 25px; margin-top: 5px; color: #464646;">MY GROUPS</span>
+                        <span class="community-head">MY GROUPS</span>
                     </div>
-                    <div style="display: block;" id="drop-down-btn">
-                        <div style="position: relative; cursor: pointer;" >
-                            <div id="filter-clear-link" style="margin-right: 15px; display: none; margin-top: 5px;">
-                                <p style="color: #5A5A5A; text-align: right; font-size: 12px; font-weight: 900; letter-spacing: 0.9px; line=height: 14px;">Showing your favourites.</p>
-                                <p style="color: #32BDD2; text-align: right; font-size: 11px; font-weight: 600; letter-spacing: 0.82px; line=height: 13px; margin-top: 10px; text-decoration: underline;" onclick="clearFilter()">Clear Filter</p>
+
+                    <div id="drop-down-btn2">
+                        <div class="just-relative">
+                            <div id="filter-clear-link">
+                                <p class="fav-head">Showing your favourites.</p>
+                                <p class="fav-clear-link1" onclick="clearFilter()">Clear Filter</p>
                             </div>
                             <img th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" width="40" height="40" alt="drop-down" onclick="viewDropdown1()">
-                            <div style="display: none; width: 170px; height: 164px; position: absolute; border: solid 0.5px #CCCCCC; box-shadow: 0px 3px 17px rgba(0, 0, 0, 0.29); background-color: #FFFFFF; border-radius: 0px 0px 10px 10px; right: 0%;" id="drop-down-menu">
-                                <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 1.05px; color: #909090; line-height: 1.6; border-bottom: solid 0.5px #CCCCCC; padding-right: 40%; padding-bottom: 13%; margin: 23% 0% 0% 15%;" id="clear-link" onclick="clearFilter()">CLEAR</a>
-                                <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #464646; line-height: 1.6; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%;" id="favorite-link" onclick="filterFav()">Favourites</a>
+                            <div class="fav-drop-down" id="drop-down-menu1">
+                                <a class="fav-clear-link2" onclick="clearFilter()" id="clear-link">CLEAR</a>
+                                <a class="fav-link" id="fav-link" onclick="filterFav()">Favourites</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="group-content" id="group-content">
-                    <div class="groups-list" id="groups-list" style="display: block;">
+                    <div class="groups-list1" id="groups-list">
 
                     <div class="invite-people" id="invite-people">
                         <div class="search-bar">
-                            <input type="text" placeholder="Search…" id="search-people" style="padding: 8px 5px;; border: 0px; width: 95%; outline: none; margin-left: 10px;">
+                            <input type="text" placeholder="Search…" id="search-people">
                             <img th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" width="20" height="20" alt="search-btn" id="search-btn" onclick="searchPeople()">
                         </div>
-                        <p style="display: none; text-align: right; margin-top: 15px; font-size: 12px; color: #464646; font-weight: 700;" id="count-msg"><span id="count">2</span> Matches found.</p>
+                        <p id="count-msg"><span id="count">2</span> Matches found.</p>
 
                         <div id="snackbar-invite">
-                            <p style="font-size: 12px; letter-spacing: 0.9px; text-align: left;">INVITE SENT</p>
-                            <p style="font-size: 12px; letter-spacing: 0.6px; text-align: left; margin-top: 10px;">Lorem ipsum doler sit amet.</p>
+                            <p class="invite-sent-toast">INVITE SENT</p>
+                            <p class="invite-sent-toast2">Lorem ipsum doler sit amet.</p>
                         </div>
 
 
                         <div class="search-not-found" id="search-not-found">
                             <img th:src="@{/images/extra-large-256px/search.png}" height="65" width="65" alt="search-not-found">
-                            <p style="font-family: roboto; font-size: 14px; letter-spacing: 0.7px; line-height: 16px; color: #747474; font-weight: 900; margin-top: 15px;">No Results Found</p>
-                            <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 14px; color: #909090; font-weight: 400; margin-top: 15px; width: 25%; text-align: center;">Sorry, we couldn’t find any results for search_keyword</p>
+                            <p class="no-results-found">No Results Found</p>
+                            <p class="no-results-found2">Sorry, we couldn’t find any results for search_keyword</p>
                         </div>
 
-                        <div class="group-members" style="margin-top: 3vh;">
+                        <div class="group-members invite-people-margin-top">
                             <div class="member">
-                                <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                <div style="display: flex; justify-content: center; flex-direction: column; margin-left: 35px;">
-                                    <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;" class="uname">Solomon Jakes</p>
-                                    <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Male, 21 Years</p>
+                                <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                <div class="invite-people-flex1">
+                                    <p class="group-member-name uname">Solomon Jakes</p>
+                                    <p class="group-member-join-date">Male, 21 Years</p>
                                 </div>
                             </div>
-                            <input type="button" class="submit-btn invite-btn" value="INVITE" style="font-weight: 900; font-size: 12px; letter-spacing: 1px; padding: 7px 25px;" onclick="invitePeople1(this)">
+                            <input type="button" class="invite-btn1 submit-btn" value="INVITE" onclick="invitePeople1(this)">
                             <div class="msg-sent">
-                                <p style="font-size: 12px; color: #5A5A5A; letter-spacing: 0.6px; line-height: 14px; font-weight: 600;">
+                                <p class="invite-status">
                                     Invitation Sent
                                 </p>
-                                <p style="font-size: 10px; color: #999999; letter-spacing: 0.5px; line-height: 14px; font-weight: 400;">
+                                <p class="invite-date">
                                     21 July 2019
                                 </p>
                             </div>
@@ -242,20 +229,20 @@
                         <div class="group-members favourites">
                             <div class="member">
                                 <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                <div style="display: flex; justify-content: center; flex-direction: column; margin-left: 35px;">
-                                    <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;" class="uname">Linda Raymond</p>
-                                    <div style="display: flex; align-items: center;">
+                                <div class="invite-people-flex1">
+                                    <p class="group-member-name uname">Linda Raymond</p>
+                                    <div class="fav-people-flex">
                                         <img th:src="@{/images/small-16px/Artboard 1 copy 45mdpi.png}" alt="fav-one" style="margin: 0px 10px 0px 0px;" width = "13" height="12" />
-                                        <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;"> Female, 23 Years</p>
+                                        <p class="group-member-join-date"> Female, 23 Years</p>
                                     </div>
                                 </div>
                             </div>
-                            <input type="button" class="submit-btn invite-btn" value="INVITE" style="font-weight: 900; font-size: 12px; letter-spacing: 1px; padding: 7px 25px;" onclick="invitePeople1(this)">
+                            <input type="button" class="invite-btn1 submit-btn" value="INVITE" onclick="invitePeople1(this)">
                             <div class="msg-sent">
-                                <p style="font-size: 12px; color: #5A5A5A; letter-spacing: 0.6px; line-height: 14px; font-weight: 600;">
+                                <p class="invite-status">
                                     Invitation Sent
                                 </p>
-                                <p style="font-size: 10px; color: #999999; letter-spacing: 0.5px; line-height: 14px; font-weight: 400;">
+                                <p class="invite-date">
                                     21 July 2019
                                 </p>
                             </div>
@@ -263,18 +250,18 @@
 
                         <div class="group-members">
                             <div class="member">
-                                <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                <div style="display: flex; justify-content: center; flex-direction: column; margin-left: 35px;">
-                                    <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;" class="uname">Daisy Lake</p>
-                                    <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Female</p>
+                                <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                <div class="invite-people-flex1">
+                                    <p class="group-member-name uname">Daisy Lake</p>
+                                    <p class="group-member-join-date">Female</p>
                                 </div>
                             </div>
-                            <input type="button" class="submit-btn invite-btn" value="INVITE" style="font-weight: 900; font-size: 12px; letter-spacing: 1px; padding: 7px 25px;" onclick="invitePeople1(this)">
+                            <input type="button" class="invite-btn1 submit-btn" value="INVITE" onclick="invitePeople1(this)">
                             <div class="msg-sent">
-                                <p style="font-size: 12px; color: #5A5A5A; letter-spacing: 0.6px; line-height: 14px; font-weight: 600;">
+                                <p class="invite-status">
                                     Invitation Sent
                                 </p>
-                                <p style="font-size: 10px; color: #999999; letter-spacing: 0.5px; line-height: 14px; font-weight: 400;">
+                                <p class="invite-date">
                                     21 July 2019
                                 </p>
                             </div>
@@ -282,21 +269,21 @@
 
                         <div class="group-members favourites">
                             <div class="member">
-                                <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                <div style="display: flex; justify-content: center; flex-direction: column; margin-left: 35px;">
-                                    <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;" class="uname">Diana Smith</p>
-                                    <div style="display: flex; align-items: center;">
+                                <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                <div class="invite-people-flex1">
+                                    <p class="group-member-name uname">Diana Smith</p>
+                                    <div class="fav-people-flex">
                                         <img th:src="@{/images/small-16px/Artboard 1 copy 45mdpi.png}" alt="fav-one" style="margin: 0px 10px 0px 0px;" width = "13" height="12" />
-                                        <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;"></p>
+                                        <p class="group-member-join-date"></p>
                                     </div>
                                 </div>
                             </div>
-                            <input type="button" class="submit-btn invite-btn" value="INVITE" style="font-weight: 900; font-size: 12px; letter-spacing: 1px; padding: 7px 25px;" onclick="invitePeople1(this)">
+                            <input type="button" class="invite-btn1 submit-btn" value="INVITE" onclick="invitePeople1(this)">
                             <div class="msg-sent">
-                                <p style="font-size: 12px; color: #5A5A5A; letter-spacing: 0.6px; line-height: 14px; font-weight: 600;">
+                                <p class="invite-status">
                                     Invitation Sent
                                 </p>
-                                <p style="font-size: 10px; color: #999999; letter-spacing: 0.5px; line-height: 14px; font-weight: 400;">
+                                <p class="invite-date">
                                     21 July 2019
                                 </p>
                             </div>
@@ -304,60 +291,61 @@
 
                         <div class="group-members">
                             <div class="member">
-                                <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                <div style="display: flex; justify-content: center; flex-direction: column; margin-left: 35px;">
-                                    <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;" class="uname">Dan Park</p>
-                                    <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Female, 27 Years</p>
+                                <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                <div class="invite-people-flex1">
+                                    <p class="group-member-name uname">Dan Park</p>
+                                    <p class="group-member-join-date">Female, 27 Years</p>
                                 </div>
                             </div>
-                            <input type="button" class="submit-btn invite-btn" value="INVITE" style="font-weight: 900; font-size: 12px; letter-spacing: 1px; padding: 7px 25px;" onclick="invitePeople1(this)">
+                            <input type="button" class="invite-btn1 submit-btn" value="INVITE" onclick="invitePeople1(this)">
                             <div class="msg-sent">
-                                <p style="font-size: 12px; color: #5A5A5A; letter-spacing: 0.6px; line-height: 14px; font-weight: 600;">
+                                <p class="invite-status">
                                     Invitation Sent
                                 </p>
-                                <p style="font-size: 10px; color: #999999; letter-spacing: 0.5px; line-height: 14px; font-weight: 400;">
+                                <p class="invite-date">
                                     21 July 2019
                                 </p>
                             </div>
                         </div>
 
-                        <div class="group-members" style="border: 0px;">
+                        <div class="no-border group-members">
                             <div class="member">
-                                <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                <div style="display: flex; justify-content: center; flex-direction: column; margin-left: 35px;">
-                                    <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;" class="uname">Nora Bravos</p>
-                                    <p style="display: none; font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;"></p>
+                                <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                <div class="invite-people-flex1">
+                                    <p class="group-member-name uname">Nora Bravos</p>
+                                    <p class="group-member-join-date"></p>
                                 </div>
                             </div>
-                            <input type="button" class="submit-btn invite-btn" value="INVITE" style="font-weight: 900; font-size: 12px; letter-spacing: 1px; padding: 7px 25px;" onclick="invitePeople1(this)">
+                            <input type="button" class="invite-btn1 submit-btn" value="INVITE" onclick="invitePeople1(this)">
                             <div class="msg-sent">
-                                <p style="font-size: 12px; color: #5A5A5A; letter-spacing: 0.6px; line-height: 14px; font-weight: 600;">
+                                <p class="invite-status">
                                     Invitation Sent
                                 </p>
-                                <p style="font-size: 10px; color: #999999; letter-spacing: 0.5px; line-height: 14px; font-weight: 400;">
+                                <p class="invite-date">
                                     21 July 2019
                                 </p>
                             </div>
                         </div>
 
                         <div class="show-more" id="show-more">
-                            <p class="head-text" style="font-weight: 700; margin-right: 10px; font-size: 14px;">
+                            <p class="head-text">
                                 SHOW MORE
                             </p>
-                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="10" width="10" alt="list-button" style="margin-right: 15px; margin-bottom: 5px;">
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="15" width="15" alt="list-button" class="view-btn">
                         </div>
 
                     </div>
                 </div>
             </div>
-            <div style="display: none; cursor: pointer; margin: 6vh 0vh 3vh 0vh;" id="back-btn">
+            <div id="back-btn1">
                 <img th:src="@{/images/extra-large-256px/Artboard 1 copy 9@16x.png}" height="15" width="15" onclick="backToGroupView()"/>
-                <p style="color: #32BDD2; font-family: roboto; font-weight: 900; font-size: 14px; margin-left: 7px; letter-spacing: 0.7px;" onclick="backToGroupView()">BACK</p>
+                <p onclick="backToGroupView()">BACK</p>
             </div>
         </div>
     </div>
 </div>
+</div>
 </body>
 <script th:href="@{/js/community-profile.js}" type="text/javascript"></script>
 
-</html>0
+</html>
