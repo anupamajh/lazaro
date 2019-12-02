@@ -75,17 +75,18 @@ public class SuiteCRMTasks {
                         person.setIsSynced(1);
                         personService.save(person);
                     }
+
                 } catch (Exception ex) {
                     person.setIsSynced(2);
                     personService.save(person);
                 }
             }
         }
+        this.UploadLeadTasks();
         logger.info("Fixed Rate Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
 
     }
 
-    @Scheduled(fixedRate = 30 * 1000)
     public void UploadLeadTasks() {
         String postURL = yamlConfig.getCrmURL();
         List<Phoned> phonedList = phonedService.findAllBySyncStatusIsNot(1);

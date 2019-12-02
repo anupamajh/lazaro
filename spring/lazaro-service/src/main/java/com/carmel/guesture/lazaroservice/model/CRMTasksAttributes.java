@@ -34,7 +34,7 @@ public class CRMTasksAttributes {
                 interests = " showing interests on " + String.join(",", website.getInterests()) + " Sections";
             }
         if(website.getWhere() != null){
-            interests = "Visited " + website.getWhere();
+            interests = "Visited " + website.getWhere() + interests;
         }
         this.description =   interests;
         this.parent_type = "Leads";
