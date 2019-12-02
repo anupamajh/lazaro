@@ -5,6 +5,8 @@ import com.carmel.guesture.lazaroservice.repository.WebsiteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class WebsiteServiceImpl implements WebsiteService{
 
@@ -14,5 +16,10 @@ public class WebsiteServiceImpl implements WebsiteService{
     @Override
     public Website save(Website website) {
         return websiteRepository.save(website);
+    }
+
+    @Override
+    public List<Website> findAllBySyncStatusIsNot(int isSynced) {
+        return websiteRepository.findAllByIsSyncedIsNot(isSynced);
     }
 }

@@ -147,6 +147,7 @@ public class PersonController {
         } else {
             returnAgent = agentService.save(agent);
         }
+        returnAgent.setIsSynced(0);
         return returnAgent;
     }
 

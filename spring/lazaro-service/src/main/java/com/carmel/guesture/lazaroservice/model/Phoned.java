@@ -2,7 +2,6 @@ package com.carmel.guesture.lazaroservice.model;
 
 import com.carmel.guesture.lazaroservice.request.PhonedData;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.ManyToAny;
 import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Length;
 
@@ -57,6 +56,10 @@ public class Phoned {
     @Column(name = "recording_url", columnDefinition = "TEXT")
     private String recordingURL;
 
+    @Column(name = "is_synced")
+    private Integer isSynced;
+
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "g_cupid_person_phoned_agent",
             joinColumns = {
@@ -85,6 +88,7 @@ public class Phoned {
         this.endTime = data.getEndTime();
         this.duration = data.getDuration();
         this.recordingURL = data.getRecordingURL();
+        this.isSynced = 0;
     }
 
 
@@ -182,5 +186,13 @@ public class Phoned {
 
     public void setAgents(List<Agent> agents) {
         this.agents = agents;
+    }
+
+    public Integer getIsSynced() {
+        return isSynced;
+    }
+
+    public void setIsSynced(Integer isSynced) {
+        this.isSynced = isSynced;
     }
 }

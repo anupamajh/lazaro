@@ -4,7 +4,6 @@ import com.carmel.guesture.lazaroservice.request.PersonData;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.ManyToAny;
 import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Length;
 
@@ -69,6 +68,13 @@ public class Person {
     @Column(name = "recording_url", columnDefinition = "TEXT")
     private String recordingURL;
 
+    @Column(name = "is_synced")
+    private Integer isSynced;
+
+    @Column(name = "suite_id")
+    @Length(max = 250)
+    private String suiteId;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(name = "g_cupid_person_agent",
@@ -113,6 +119,8 @@ public class Person {
         this.duration = personData.getDuration();
         this.recordingURL = personData.getRecordingURL();
         this.name = personData.getName();
+        this.isSynced = 0;
+        this.suiteId = "";
     }
 
     public Person() {
@@ -245,5 +253,21 @@ public class Person {
 
     public void setSources(List<Source> sources) {
         this.sources = sources;
+    }
+
+    public Integer getIsSynced() {
+        return isSynced;
+    }
+
+    public void setIsSynced(Integer isSynced) {
+        this.isSynced = isSynced;
+    }
+
+    public String getSuiteId() {
+        return suiteId;
+    }
+
+    public void setSuiteId(String suiteId) {
+        this.suiteId = suiteId;
     }
 }

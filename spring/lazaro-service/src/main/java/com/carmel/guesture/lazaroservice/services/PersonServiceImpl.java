@@ -22,4 +22,9 @@ public class PersonServiceImpl implements PersonService{
     public List<Person> findAllByCupidId(String cupidId) {
         return personRepository.findAllByCupidId(cupidId);
     }
+
+    @Override
+    public List<Person> findAllBySyncStatusIsNot(int isSynced) {
+        return personRepository.findAllByIsSyncedIsNot(isSynced);
+    }
 }

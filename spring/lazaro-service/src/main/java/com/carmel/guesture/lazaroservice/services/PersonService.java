@@ -7,4 +7,6 @@ import java.util.List;
 public interface PersonService {
     Person save(Person person);
     List<Person> findAllByCupidId(String cupidId);
+
+    List<Person> findAllBySyncStatusIsNot(int isSynced);
 }

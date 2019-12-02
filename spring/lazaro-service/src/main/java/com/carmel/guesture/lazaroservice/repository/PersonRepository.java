@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface PersonRepository  extends JpaRepository<Person, String> {
     List<Person> findAllByCupidId(String cupidId);
+
+    List<Person> findAllByIsSyncedIsNot(int isSynced);
 }

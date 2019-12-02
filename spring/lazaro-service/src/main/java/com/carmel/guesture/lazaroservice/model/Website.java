@@ -43,6 +43,16 @@ public class Website {
 
     @Column(name = "interests", columnDefinition = "TEXT")
     private String[] interests;
+
+
+    @Column(name = "is_synced")
+    private Integer isSynced;
+
+    @Column(name = "suite_id")
+    @Length(max = 250)
+    private String suiteId;
+
+
     public Website(){}
     public Website(WebsiteData data) {
         this.cupidId = data.getId();
@@ -51,6 +61,7 @@ public class Website {
         this.verified = data.getVerified();
         this.where = data.getWhere();
         this.interests = data.getInterests();
+        this.isSynced = 0;
     }
 
     public String getId() {
@@ -115,5 +126,21 @@ public class Website {
 
     public void setInterests(String[] interests) {
         this.interests = interests;
+    }
+
+    public Integer getIsSynced() {
+        return isSynced;
+    }
+
+    public void setIsSynced(Integer isSynced) {
+        this.isSynced = isSynced;
+    }
+
+    public String getSuiteId() {
+        return suiteId;
+    }
+
+    public void setSuiteId(String suiteId) {
+        this.suiteId = suiteId;
     }
 }
