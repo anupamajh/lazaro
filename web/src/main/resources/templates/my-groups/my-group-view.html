@@ -40,7 +40,7 @@
     }
     function invitePeople1(position){
         var list = document.getElementsByClassName("invite-btn");
-        var sentlist = document.getElementsByClassName("msg-sent");
+        var sentlist = document.getElementsByClassName("msg-sent1");
         list = [].slice.call(list);
         var n = list.indexOf(position);
         list[n].style.display = "none";
@@ -225,164 +225,164 @@
 
         <div class="right-content">
 
-            <div class="my-profile-options" style="padding: 2%; min-height: 35vw;" id="community-groups">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="display: flex; align-items: center;">
+            <div class="my-profile-options" id="community-groups">
+                <div class="my-groups-flex1">
+                    <div class="my-groups-flex2">
                         <div>
-                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" style="border-radius: 50%; cursor: pointer;" onclick="viewDropdown(this)" id="drop-down-btn1">
-                            <div style="display: none; width: 188px; height: 208px; position: absolute; box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.29); background-color: #FFFFFF; right: 46.8%; border-radius: 0px 5px 5px 5px;" id="drop-down-1">
-                                <a style="display: block; cursor: pointer; font-family: roboto; font-size: 12px; font-weight: 600; letter-spacing: 1.2px; color: #747474; line-height: 17px; padding-bottom: 13%; margin: 20% 0% 0% 10%;">INTEREST GROUPS</a>
-                                <a style="display: block; cursor: pointer; font-family: roboto; font-size: 12px; font-weight: 600; letter-spacing: 1.2px; color: #747474; line-height: 17px; padding-bottom: 13%; margin: 13% 0% 0% 10%;">COMMUNITY GROUPS</a>
-                                <a style="display: block; cursor: pointer; font-family: roboto; font-size: 12px; font-weight: 600; letter-spacing: 1.2px; color: #747474; line-height: 17px; padding-bottom: 13%; margin: 13% 0% 0% 10%;">MY GROUPS</a>
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" class="round-img" onclick="viewDropdown(this)" id="drop-down-btn1">
+                            <div class="my-groups-drop-down" id="drop-down-my-groups">
+                                <a class="interest-group-links">INTEREST GROUPS</a>
+                                <a class="community-group-links">COMMUNITY GROUPS</a>
+                                <a class="my-group-links">MY GROUPS</a>
                             </div>
                         </div>
-                        <span style="font-family: roboto; font-size: 14px; font-weight: 900; letter-spacing: 1.4px; margin-left: 25px; margin-top: 5px; color: #464646;">MY GROUPS</span>
+                        <span class="community-head">MY GROUPS</span>
                     </div>
-                    <div style="display: none;" id="drop-down-btn">
-                        <div style="position: relative; cursor: pointer;" >
-                            <div id="filter-clear-link" style="margin-right: 15px; display: none; margin-top: 5px;">
-                                <p style="color: #5A5A5A; text-align: right; font-size: 12px; font-weight: 900; letter-spacing: 0.9px; line=height: 14px;">Showing your favourites.</p>
-                                <p style="color: #32BDD2; text-align: right; font-size: 11px; font-weight: 600; letter-spacing: 0.82px; line=height: 13px; margin-top: 10px; text-decoration: underline; cursor: pointer;" onclick="clearFilter()">Clear Filter</p>
+                    <div class="my-group-view-drop-down-btn" id="drop-down-btn">
+                        <div class="my-group-view-drop-down">
+                            <div id="filter-clear-link">
+                                <p class="fav-head">Showing your favourites.</p>
+                                <p class="fav-clear-link" onclick="clearFilter()">Clear Filter</p>
                             </div>
-                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" width="40" height="40" alt="drop-down" style="cursor: pointer;" onclick="viewDropdown1()">
-                            <div style="display: none; width: 170px; height: 164px; position: absolute; border: solid 0.5px #CCCCCC; box-shadow: 0px 3px 17px rgba(0, 0, 0, 0.29); background-color: #FFFFFF; border-radius: 0px 0px 10px 10px; right: 0%;" id="drop-down-menu">
-                                <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 1.05px; color: #909090; line-height: 1.6; border-bottom: solid 0.5px #CCCCCC; padding-right: 40%; padding-bottom: 13%; margin: 23% 0% 0% 15%; cursor: pointer;" onclick="clearFilter()">CLEAR</a>
-                                <a style="display: block; cursor: pointer; font-family: roboto; font-size: 14px; font-weight: 600; letter-spacing: 0.7px; color: #464646; line-height: 1.6; padding-right: 40%; padding-bottom: 13%; margin: 13% 0% 0% 15%; cursor: pointer;" onclick="filterFav()">Favourites</a>
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" width="40" height="40" alt="drop-down" onclick="viewDropdown1()">
+                            <div class="fav-drop-down" id="drop-down-menu">
+                                <a class="fav-clear-link" onclick="clearFilter()">CLEAR</a>
+                                <a class="fav-link" onclick="filterFav()">Favourites</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="group-content" id="group-content">
-                    <div class="groups-list" id="groups-list" style="display: block;">
-                        <div class="group-view" id="group-view" style="display: block;">
-                            <div class="group-info" style="display: flex; align-items: center; justify-content: space-between;">
-                                <div style="width: 70%;">
-                                    <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; color: #505050; font-weight: 600; margin-bottom: 20px;">Apache Riders</p>
-                                    <p style="font-family: roboto; font-size: 10px; letter-spacing: 0.6px; line-height: 1.4; color: #505050; font-weight: 600; margin-bottom: 20px;">2nd July 2019 06:21 PM (4 Days ago)</p>
-                                    <p style="font-family: roboto; font-size: 10px; letter-spacing: 0; line-height: 1.4; color: #909090; font-weight: 400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim felis et magna mattis finibus. Nulla elit ligula, placerat tincidunt ipsum eu, ornare semper felis. Duis arcu massa, venenatis eget ante sodales, posuere volutpat risus</p>
+                    <div class="groups-list1" id="groups-list">
+                        <div class="group-view1" id="group-view">
+                            <div class="group-info-flex1">
+                                <div class="group-info-width">
+                                    <p class="group-info-head">Apache Riders</p>
+                                    <p class="group-info-date">2nd July 2019 06:21 PM (4 Days ago)</p>
+                                    <p class="group-info-sub">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim felis et magna mattis finibus. Nulla elit ligula, placerat tincidunt ipsum eu, ornare semper felis. Duis arcu massa, venenatis eget ante sodales, posuere volutpat risus</p>
                                 </div>
-                                <input type="button" class="submit-btn" style="background-color: #E65959; border: 0px; border-radius: 2px; padding: 10px 30px; box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.29); font-size: 12px; letter-spacing: 1.2px; cursor: pointer;" value="DELETE" onclick="exitGroup()">
+                                <input type="button" class="submit-btn delete-btn-my-groups" value="DELETE" onclick="exitGroup()">
                             </div>
-                    <div style="display: flex; flex-direction: column; cursor: pointer;">
-                        <div style="display: flex; flex-direction: column; align-items: flex-end;">
-                            <div style="margin-top: 4vh; border-radius: 0px 0px 0px 27px; width: 215px; height: 55px; background-color: #DFEBF7; box-shadow: 0px 2px 5px rgba( 0, 0, 0, 0.29); float: right; display: flex; align-items: center; justify-content: center; cursor: pointer;" onclick="openConversation()">
-                                <p style="color: #505050; font-size: 14px; letter-spacing: 0.7px; line-height: 16px;">CONVERSATION  <div id="conversation-notification"><span id="conversation-notification-count" style=" color: #FFFFFF;  font-size: 8px; letter-spacing: 0.4px;">23</span></div></p>
-                            </div>
-
-                        <div class="request" style="border: solid 0.25px #CCCCCC; cursor: pointer;" onclick="viewRequestList();">
-                    <span style="background-color:#E65959; padding: 1.6px; padding-left:30px; font-size:1px; line-height:20px;"><br></span>
-                            <span style="color:#505050; font-family:roboto; font-size:14px; font-weight:700; margin-top: 10px; letter-spacing: 0.7px;">REQUESTS</span>
-                            <p style="color:#747474; font-family:roboto; font-size:12px; width:75%; margin-top: 15px; letter-spacing: 0.3px;  line-height: 1.8;">You have requests to join the group from people whom you have not invited.</p>
+                            <div class="my-group-view-flex1">
+                                <div class="my-group-view-flex2">
+                                    <div class="conversation-link-box" onclick="openConversation()">
+                                        <p class="conversation-txt">CONVERSATION <div id="conversation-notification"><span id="conversation-notification-count">23</span></div></p>
+                                    </div>
+                 <div class="request request-box" onclick="viewRequestList();">
+                            <span class="red-notification-box"><br></span>
+                            <span class="request-txt">REQUESTS</span>
+                            <p class="request-txt2">You have requests to join the group from people whom you have not invited.</p>
                         </div>
                         </div>
 
-                        <div style="margin-top: 4vh;">
-                            <p style="color: #505050; font-size: 12px; letter-spacing: 0.9px; line-height: 13px; font-weight: 600;">Invite member(s) to your group.</p>
-                            <p style="color: #999999; font-size: 12px; letter-spacing: 0.9px; line-height: 13px; margin-top: 10px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <input type="button" class="submit-btn" value="INVITE" style="font-weight: 900; font-size: 10px; letter-spacing: 1px; padding: 13px 35px; margin-top: 2vh; cursor: pointer;" onclick="invitePeople()">
-                        </div>
+                         <div class="my-group-view-invite-members">
+                             <p class="invite-members-txt">Invite member(s) to your group.</p>
+                             <p class="invite-members-txt2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                             <input type="button" class="submit-btn invite-btn" value="INVITE" onclick="invitePeople()">
+                         </div>
 
                         <div>
-                            <div style="display: flex; align-items: center; margin-top: 6vh;">
-                                <p style="font-family: roboto; font-size: 14px; letter-spacing: 0.7px; line-height: 25px; color: #747474; font-weight: 900; width: 15%;">18 Invitations</p>
-                                <span style="height: 0.5px; background-color: #CCCCCC; padding: 0.25px 200px; font-size: 1px; width: 400px; margin-left: 15px;"></span>
+                            <div class="group-view-flex2">
+                                <p class="group-view-members-count">18 Invitations</p>
+                                <span class="group-view-line"></span>
                             </div>
-                            <div class="joined-members-head" style="cursor: pointer;"  onclick="viewJoined()">
-                                <p class="head-text" style="font-weight: 700; margin-right: 10px; font-size: 14px;">
+                            <div class="joined-members-head" onclick="viewJoined()">
+                                <p class="head-text joined-members-head-count">
                                     06 Joined
                                 </p>
-                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="15" width="15" alt="list-button" style="margin-right: 15px; margin-bottom: 5px;" id="view-joined-btn">
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="15" width="15" alt="list-button" class="view-btn" id="view-joined-btn">
                             </div>
 
                             <div class="joined-members" id="joined-members">
 
                                 <div class="group-members">
                                 <div class="member">
-                                    <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                    <div style="margin-left: 35px;">
-                                        <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Sam Colon</p>
-                                        <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Today (Just Now)</p>
+                                    <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                    <div class="group-view-margin2">
+                                        <p class="group-member-name">Sam Colon</p>
+                                        <p class="group-member-join-date">Today (Just Now)</p>
                                     </div>
                                 </div>
-                                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" height="30" width="30" style="cursor: pointer;" onclick="removeMember()">
+                                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" height="30" width="30" onclick="removeMember()">
                             </div>
 
                             <div class="group-members">
                                 <div class="member">
-                                    <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                    <div style="margin-left: 35px;">
-                                        <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Luke Ray</p>
-                                        <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Since 29 July 2019</p>
+                                    <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                    <div class="group-view-margin2">
+                                        <p class="group-member-name">Luke Ray</p>
+                                        <p class="group-member-join-date">Since 29 July 2019</p>
                                     </div>
                                 </div>
-                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" height="30" width="30" style="cursor: pointer;" onclick="removeMember()">
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" height="30" width="30" onclick="removeMember()">
                             </div>
 
                             <div class="group-members">
                                 <div class="member">
-                                    <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                    <div style="margin-left: 35px;">
-                                        <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Daisy Lake</p>
-                                        <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Since 29 July 2019</p>
+                                    <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                    <div class="group-view-margin2">
+                                        <p class="group-member-name">Daisy Lake</p>
+                                        <p class="group-member-join-date">Since 29 July 2019</p>
                                     </div>
                                 </div>
-                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" height="30" width="30" style="cursor: pointer;" onclick="removeMember()">
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" height="30" width="30" onclick="removeMember()">
                             </div>
                             <div class="group-members">
                                 <div class="member">
-                                    <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                    <div style="margin-left: 35px;">
-                                        <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Mark Smith</p>
-                                        <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Since 29 July 2019</p>
+                                    <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                    <div class="group-view-margin2">
+                                        <p class="group-member-name">Mark Smith</p>
+                                        <p class="group-member-join-date">Since 29 July 2019</p>
                                     </div>
                                 </div>
-                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" height="30" width="30" style="cursor: pointer;" onclick="removeMember()">
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" height="30" width="30" onclick="removeMember()">
                             </div>
 
                             <div class="group-members">
                                 <div class="member">
-                                    <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                    <div style="margin-left: 35px;">
-                                        <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Dan Park</p>
-                                        <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Since 29 July 2019</p>
+                                    <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                    <div class="group-view-margin2">
+                                        <p class="group-member-name">Dan Park</p>
+                                        <p class="group-member-join-date">Since 29 July 2019</p>
                                     </div>
                                 </div>
-                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" height="30" width="30" style="cursor: pointer;" onclick="removeMember()">
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" height="30" width="30" onclick="removeMember()">
                             </div>
                                 <div class="group-members">
                                     <div class="member">
-                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                        <div style="margin-left: 35px;">
-                                           <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Dan Smith</p>
-                                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Since 29 July 2019</p>
+                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                        <div class="group-view-margin2">
+                                           <p class="group-member-name">Dan Smith</p>
+                                            <p class="group-member-join-date">Since 29 July 2019</p>
                                         </div>
                                     </div>
-                                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" height="30" width="30" style="cursor: pointer;" onclick="removeMember()">
+                                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" height="30" width="30" onclick="removeMember()">
                                 </div>
                             </div>
 
-                            <div class="pending-members-head" style="cursor: pointer;"  onclick="viewPending()">
-                                <p class="head-text" style="font-weight: 700; margin-right: 10px; font-size: 14px;">
+                            <div class="pending-members-head" onclick="viewPending()">
+                                <p class="head-text pending-members-head-count">
                                     12 Pending
                                 </p>
-                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="15" width="15" alt="list-button" style="margin-right: 15px; margin-bottom: 5px;" id="view-pending-btn">
+                                <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="15" width="15" alt="list-button" class="view-btn" id="view-pending-btn">
                             </div>
+
                             <div class="pending-members" id="pending-members">
 
                                 <div class="group-members">
                                     <div class="member">
-                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                        <div style="margin-left: 35px;">
-                                            <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 16px; line-height: 25px; color: #464646;">Solomon jakes</p>
-                                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 14px; line-height: 14px; color: #909090;">Male, 21 years</p>
+                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                        <div class="group-view-margin2">
+                                            <p class="group-member-name">Solomon jakes</p>
+                                            <p class="group-member-join-date">Male, 21 years</p>
                                         </div>
                                     </div>
-                                    <div class="msg-sent" style="display: block;">
-                                        <p style="font-size: 12px; color: #5A5A5A; letter-spacing: 0.6px; line-height: 14px; font-weight: 600;">
+                                    <div class="msg-sent1 show">
+                                        <p class="invitation-sent-txt1">
                                             Invitation Sent
                                         </p>
-                                        <p style="font-size: 10px; color: #999999; letter-spacing: 0.5px; line-height: 14px; font-weight: 400;">
+                                        <p class="invitation-sent-txt2">
                                             21 July 2019
                                         </p>
                                     </div>
@@ -390,17 +390,17 @@
 
                                 <div class="group-members">
                                     <div class="member">
-                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                        <div style="margin-left: 35px;">
-                                            <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 16px; line-height: 25px; color: #464646;">Luke Ray</p>
-                                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 14px; line-height: 14px; color: #909090;">Female, 29 years</p>
+                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                        <div class="group-view-margin2">
+                                            <p class="group-member-name">Luke Ray</p>
+                                            <p class="group-member-join-date">Female, 29 years</p>
                                         </div>
                                     </div>
-                                    <div class="msg-sent" style="display: block;">
-                                        <p style="font-size: 12px; color: #5A5A5A; letter-spacing: 0.6px; line-height: 14px; font-weight: 600;">
+                                    <div class="msg-sent1 show">
+                                        <p class="invitation-sent-txt1">
                                             Invitation Sent
                                         </p>
-                                        <p style="font-size: 10px; color: #999999; letter-spacing: 0.5px; line-height: 14px; font-weight: 400;">
+                                        <p class="invitation-sent-txt2">
                                             21 July 2019
                                         </p>
                                     </div>
@@ -408,52 +408,34 @@
 
                                 <div class="group-members">
                                     <div class="member">
-                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                        <div style="margin-left: 35px;">
-                                            <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 16px; line-height: 25px; color: #464646;">Daisy Lake</p>
-                                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 14px; line-height: 14px; color: #909090;">Female</p>
+                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                        <div class="group-view-margin2">
+                                            <p class="group-member-name">Daisy Lake</p>
+                                            <p class="group-member-join-date">Female</p>
                                         </div>
                                     </div>
-                                    <div class="msg-sent" style="display: block;">
-                                        <p style="font-size: 12px; color: #5A5A5A; letter-spacing: 0.6px; line-height: 14px; font-weight: 600;">
+                                    <div class="msg-sent1 show">
+                                        <p class="invitation-sent-txt1">
                                             Invitation Sent
                                         </p>
-                                        <p style="font-size: 10px; color: #999999; letter-spacing: 0.5px; line-height: 14px; font-weight: 400;">
+                                        <p class="invitation-sent-txt2">
                                             21 July 2019
                                         </p>
                                     </div>
                                 </div>
                                 <div class="group-members">
                                     <div class="member">
-                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                        <div style="margin-left: 35px;">
-                                            <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 16px; line-height: 25px; color: #464646;">Alissa Smith</p>
-                                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 14px; line-height: 14px; color: #909090; display: none;"></p>
+                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                        <div class="group-view-margin2">
+                                            <p class="group-member-name">Alissa Smith</p>
+                                            <p class="group-member-join-date"></p>
                                         </div>
                                     </div>
-                                    <div class="msg-sent" style="display: block;">
-                                        <p style="font-size: 12px; color: #5A5A5A; letter-spacing: 0.6px; line-height: 14px; font-weight: 600;">
+                                    <div class="msg-sent1 show">
+                                        <p class="invitation-sent-txt1">
                                             Invitation Sent
                                         </p>
-                                        <p style="font-size: 10px; color: #999999; letter-spacing: 0.5px; line-height: 14px; font-weight: 400;">
-                                            21 July 2019
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="group-members">
-                                    <div class="member">
-                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                        <div style="margin-left: 35px;">
-                                            <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 16px; line-height: 25px; color: #464646;">Lucy Lake</p>
-                                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 14px; line-height: 14px; color: #909090;">Female</p>
-                                        </div>
-                                    </div>
-                                    <div class="msg-sent" style="display: block;">
-                                        <p style="font-size: 12px; color: #5A5A5A; letter-spacing: 0.6px; line-height: 14px; font-weight: 600;">
-                                            Invitation Sent
-                                        </p>
-                                        <p style="font-size: 10px; color: #999999; letter-spacing: 0.5px; line-height: 14px; font-weight: 400;">
+                                        <p class="invitation-sent-txt2">
                                             21 July 2019
                                         </p>
                                     </div>
@@ -461,17 +443,17 @@
 
                                 <div class="group-members">
                                     <div class="member">
-                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                        <div style="margin-left: 35px;">
-                                            <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 16px; line-height: 25px; color: #464646;">Den Smith</p>
-                                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 14px; line-height: 14px; color: #909090;">30 years</p>
+                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                        <div class="group-view-margin2">
+                                            <p class="group-member-name">Lucy Lake</p>
+                                            <p class="group-member-join-date">Female</p>
                                         </div>
                                     </div>
-                                    <div class="msg-sent" style="display: block;">
-                                        <p style="font-size: 12px; color: #5A5A5A; letter-spacing: 0.6px; line-height: 14px; font-weight: 600;">
+                                    <div class="msg-sent1 show">
+                                        <p class="invitation-sent-txt1">
                                             Invitation Sent
                                         </p>
-                                        <p style="font-size: 10px; color: #999999; letter-spacing: 0.5px; line-height: 14px; font-weight: 400;">
+                                        <p class="invitation-sent-txt2">
                                             21 July 2019
                                         </p>
                                     </div>
@@ -479,17 +461,17 @@
 
                                 <div class="group-members">
                                     <div class="member">
-                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                        <div style="margin-left: 35px;">
-                                            <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 16px; line-height: 25px; color: #464646;">Sandore Jakes</p>
-                                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 14px; line-height: 14px; color: #909090; display: none;"></p>
+                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                        <div class="group-view-margin2">
+                                            <p class="group-member-name">Den Smith</p>
+                                            <p class="group-member-join-date">30 years</p>
                                         </div>
                                     </div>
-                                    <div class="msg-sent" style="display: block;">
-                                        <p style="font-size: 12px; color: #5A5A5A; letter-spacing: 0.6px; line-height: 14px; font-weight: 600;">
+                                    <div class="msg-sent1 show">
+                                        <p class="invitation-sent-txt1">
                                             Invitation Sent
                                         </p>
-                                        <p style="font-size: 10px; color: #999999; letter-spacing: 0.5px; line-height: 14px; font-weight: 400;">
+                                        <p class="invitation-sent-txt2">
                                             21 July 2019
                                         </p>
                                     </div>
@@ -497,17 +479,17 @@
 
                                 <div class="group-members">
                                     <div class="member">
-                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                        <div style="margin-left: 35px;">
-                                            <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 16px; line-height: 25px; color: #464646;">Rosy Ray</p>
-                                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 14px; line-height: 14px; color: #909090;">Female, 26 Years</p>
+                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                        <div class="group-view-margin2">
+                                            <p class="group-member-name">Sandore Jakes</p>
+                                            <p class="group-member-join-date"></p>
                                         </div>
                                     </div>
-                                    <div class="msg-sent" style="display: block;">
-                                        <p style="font-size: 12px; color: #5A5A5A; letter-spacing: 0.6px; line-height: 14px; font-weight: 600;">
+                                    <div class="msg-sent1 show">
+                                        <p class="invitation-sent-txt1">
                                             Invitation Sent
                                         </p>
-                                        <p style="font-size: 10px; color: #999999; letter-spacing: 0.5px; line-height: 14px; font-weight: 400;">
+                                        <p class="invitation-sent-txt2">
                                             21 July 2019
                                         </p>
                                     </div>
@@ -515,17 +497,35 @@
 
                                 <div class="group-members">
                                     <div class="member">
-                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                        <div style="margin-left: 35px;">
-                                            <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 16px; line-height: 25px; color: #464646;">Alita Lake</p>
-                                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 14px; line-height: 14px; color: #909090;">Female, 26 Years</p>
+                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                        <div class="group-view-margin2">
+                                            <p class="group-member-name">Rosy Ray</p>
+                                            <p class="group-member-join-date">Female, 26 Years</p>
                                         </div>
                                     </div>
-                                    <div class="msg-sent" style="display: block;">
-                                        <p style="font-size: 12px; color: #5A5A5A; letter-spacing: 0.6px; line-height: 14px; font-weight: 600;">
+                                    <div class="msg-sent1 show">
+                                        <p class="invitation-sent-txt1">
                                             Invitation Sent
                                         </p>
-                                        <p style="font-size: 10px; color: #999999; letter-spacing: 0.5px; line-height: 14px; font-weight: 400;">
+                                        <p class="invitation-sent-txt2">
+                                            21 July 2019
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="group-members">
+                                   <div class="member">
+                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                        <div class="group-view-margin2">
+                                            <p class="group-member-name">Alita Lake</p>
+                                            <p class="group-member-join-date">Female, 26 Years</p>
+                                        </div>
+                                    </div>
+                                    <div class="msg-sent1 show">
+                                        <p class="invitation-sent-txt1">
+                                            Invitation Sent
+                                        </p>
+                                        <p class="invitation-sent-txt2">
                                             21 July 2019
                                         </p>
                                     </div>
@@ -533,17 +533,17 @@
 
                                 <div class="group-members">
                                     <div class="member">
-                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                        <div style="margin-left: 35px;">
-                                            <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 16px; line-height: 25px; color: #464646;">Margret Smith</p>
-                                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 14px; line-height: 14px; color: #909090;">Female, 26 Years</p>
+                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                        <div class="group-view-margin2">
+                                            <p class="group-member-name">Margret Smith</p>
+                                            <p class="group-member-join-date">Female, 26 Years</p>
                                         </div>
                                     </div>
-                                    <div class="msg-sent" style="display: block;">
-                                        <p style="font-size: 12px; color: #5A5A5A; letter-spacing: 0.6px; line-height: 14px; font-weight: 600;">
+                                    <div class="msg-sent1 show">
+                                        <p class="invitation-sent-txt1">
                                             Invitation Sent
                                         </p>
-                                        <p style="font-size: 10px; color: #999999; letter-spacing: 0.5px; line-height: 14px; font-weight: 400;">
+                                        <p class="invitation-sent-txt2">
                                             21 July 2019
                                         </p>
                                     </div>
@@ -551,17 +551,17 @@
 
                                 <div class="group-members">
                                     <div class="member">
-                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                        <div style="margin-left: 35px;">
-                                            <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 16px; line-height: 25px; color: #464646;">Lucy Rain</p>
-                                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 14px; line-height: 14px; color: #909090;">Female, 26 Years</p>
+                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                        <div class="group-view-margin2">
+                                            <p class="group-member-name">Lucy Rain</p>
+                                            <p class="group-member-join-date">Female, 26 Years</p>
                                         </div>
                                     </div>
-                                    <div class="msg-sent" style="display: block;">
-                                        <p style="font-size: 12px; color: #5A5A5A; letter-spacing: 0.6px; line-height: 14px; font-weight: 600;">
+                                    <div class="msg-sent1 show">
+                                        <p class="invitation-sent-txt1">
                                             Invitation Sent
                                         </p>
-                                        <p style="font-size: 10px; color: #999999; letter-spacing: 0.5px; line-height: 14px; font-weight: 400;">
+                                        <p class="invitation-sent-txt2">
                                             21 July 2019
                                         </p>
                                     </div>
@@ -569,17 +569,17 @@
 
                                 <div class="group-members">
                                     <div class="member">
-                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                                        <div style="margin-left: 35px;">
-                                            <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 16px; line-height: 25px; color: #464646;">Oneil Smith</p>
-                                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 14px; line-height: 14px; color: #909090;">Female</p>
+                                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                                        <div class="group-view-margin2">
+                                            <p class="group-member-name">Oneil Smith</p>
+                                            <p class="group-member-join-date">Female</p>
                                         </div>
                                     </div>
-                                    <div class="msg-sent" style="display: block;">
-                                        <p style="font-size: 12px; color: #5A5A5A; letter-spacing: 0.6px; line-height: 14px; font-weight: 600;">
+                                    <div class="msg-sent1 show">
+                                        <p class="invitation-sent-txt1">
                                             Invitation Sent
                                         </p>
-                                        <p style="font-size: 10px; color: #999999; letter-spacing: 0.5px; line-height: 14px; font-weight: 400;">
+                                        <p class="invitation-sent-txt2">
                                             21 July 2019
                                         </p>
                                     </div>

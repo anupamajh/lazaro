@@ -222,74 +222,71 @@
 
         <div class="right-content">
 
-            <div class="my-profile-options" style="padding: 2%; min-height: 35vw;" id="community-groups">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="display: flex; align-items: center;">
+            <div class="my-profile-options" id="community-groups">
+                <div class="my-groups-flex1">
+                    <div class="my-groups-flex2">
                         <div>
-                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" style="border-radius: 50%; cursor: pointer;" onclick="viewDropdown(this)" id="drop-down-btn1">
-                            <div style="display: none; width: 188px; height: 208px; position: absolute; box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.29); background-color: #FFFFFF; right: 46.8%; border-radius: 0px 5px 5px 5px;" id="drop-down-1">
-                                <a style="display: block; cursor: pointer; font-family: roboto; font-size: 12px; font-weight: 600; letter-spacing: 1.2px; color: #747474; line-height: 17px; padding-bottom: 13%; margin: 20% 0% 0% 10%;">INTEREST GROUPS</a>
-                                <a style="display: block; cursor: pointer; font-family: roboto; font-size: 12px; font-weight: 600; letter-spacing: 1.2px; color: #747474; line-height: 17px; padding-bottom: 13%; margin: 13% 0% 0% 10%;">COMMUNITY GROUPS</a>
-                                <a style="display: block; cursor: pointer; font-family: roboto; font-size: 12px; font-weight: 600; letter-spacing: 1.2px; color: #747474; line-height: 17px; padding-bottom: 13%; margin: 13% 0% 0% 10%;">MY GROUPS</a>
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" class="round-img" onclick="viewDropdown(this)" id="drop-down-btn1">
+                            <div class="my-groups-drop-down" id="drop-down-my-groups">
+                                <a class="interest-group-links">INTEREST GROUPS</a>
+                                <a class="community-group-links">COMMUNITY GROUPS</a>
+                                <a class="my-group-links">MY GROUPS</a>
                             </div>
                         </div>
-                        <span style="font-family: roboto; font-size: 14px; font-weight: 900; letter-spacing: 1.4px; margin-left: 25px; margin-top: 5px; color: #464646;">MY GROUPS</span>
+                        <span class="community-head">MY GROUPS</span>
                     </div>
                 </div>
 
                 <div class="group-content" id="group-content">
-                    <div class="groups-list" id="groups-list" style="display: block;">
-                        <div class="group-view" id="group-view" style="display: block;">
-                            <div class="group-info" style="display: flex; align-items: center; justify-content: space-between;">
-                                <div style="width: 70%;">
-                                    <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; color: #505050; font-weight: 600; margin-bottom: 20px;">REQUEST(s)</p>
-                                    <p style="font-family: roboto; font-size: 10px; letter-spacing: 0; line-height: 1.4; color: #909090; font-weight: 400;">These people have sent request to join the group. You have not sent an invitation to them. You can either accept or ignore.</p>
+                    <div class="groups-list1" id="groups-list">
+                        <div class="group-view1" id="group-view">
+                            <div class="group-info-flex1">
+                                <div class="group-info-width">
+                                    <p class="group-info-head">REQUEST(s)</p>
+                                    <p class="group-info-sub">These people have sent request to join the group. You have not sent an invitation to them. You can either accept or ignore.</p>
                                 </div>
                             </div>
 
                             <div class="request-list">
-                                <div class="request-details" style="border-bottom: solid #CCCCCC 0.5px; display: flex; margin-top: 4vh; width: 65%;">
-                                    <img th:src="@{/images/profile-pic.jpg}" height="45" width="45" alt="admin-pic" style="border-radius: 50%;">
-                                    <div style="margin-left: 10px;">
-                                        <p style="color: #747474; font-size: 14px; letter-spacing: 0.7px; line-height: 1.5;">Nora Bravos</p>
-                                        <p style="color: #505050; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; font-weight: 700;">Today 11:48 AM (2 Hours ago)</p>
-                                        <div class="request-stat" style="display: flex; align-items: center; margin-top: 2vh;  margin-bottom: 3vh;">
-                                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 33@16x1.png}" width="30" height="30" alt="icon" style="border-radius: 50%; cursor: pointer;" onclick="acceptRequest(this);" class="request-status">
-                                            <span style="font-size: 10px; letter-spacing: 0.5px; line-height: 1.1; font-weight: 700; color: #32BDD2; margin-left: 10px; margin-top: 2px; cursor: pointer;" onclick="acceptRequest(this);" class="request-status-txt">ACCEPT</span>
+                                <div class="request-details">
+                                    <img th:src="@{/images/profile-pic.jpg}" height="30" width="30" alt="admin-pic" class="round-img">
+                                    <div class="requester-details">
+                                        <p class="requester-name">Nora Bravos</p>
+                                        <p class="request-date-unread">Today 11:48 AM (2 Hours ago)</p>
+                                        <div class="request-stat">
+                                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 33@16x1.png}" width="30" height="30" alt="icon" onclick="acceptRequest(this);" class="request-status round-img">
+                                            <span onclick="acceptRequest(this);" class="request-status-txt">ACCEPT</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="request-details" style="border-bottom: solid #CCCCCC 0.5px; display: flex; margin-top: 4vh; width: 65%;">
-                                    <img th:src="@{/images/profile-pic.jpg}" height="45" width="45" alt="admin-pic" style="border-radius: 50%;">
-                                    <div style="margin-left: 10px;">
-                                        <p style="color: #747474; font-size: 14px; letter-spacing: 0.7px; line-height: 1.5;">Luke Ray</p>
-                                        <p style="color: #909090; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4;">29 Jun 2019 10:05 AM (1 Day ago)</p>
-                                        <div class="request-stat" style="display: flex; align-items: center; margin-top: 2vh;  margin-bottom: 3vh;">
-                                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 33@16x1.png}" width="30" height="30" alt="icon" style="border-radius: 50%; cursor: pointer;" onclick="acceptRequest(this);" class="request-status">
-                                            <span style="font-size: 10px; letter-spacing: 0.5px; line-height: 1.1; font-weight: 700; color: #32BDD2; margin-left: 10px; margin-top: 2px; cursor: pointer;" onclick="acceptRequest(this);" class="request-status-txt">ACCEPT</span>
+                                <div class="request-details">
+                                    <img th:src="@{/images/profile-pic.jpg}" height="30" width="30" alt="admin-pic" class="round-img">
+                                    <div class="requester-details">
+                                        <p class="requester-name">Luke Ray</p>
+                                        <p class="request-date-read">29 Jun 2019 10:05 AM (1 Day ago)</p>
+                                        <div class="request-stat">
+                                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 33@16x1.png}" width="30" height="30" alt="icon" onclick="acceptRequest(this);" class="request-status round-img">
+                                            <span onclick="acceptRequest(this);" class="request-status-txt">ACCEPT</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="request-details" style="border-bottom: solid #CCCCCC 0.5px; display: flex; margin-top: 4vh; width: 65%;">
-                                    <img th:src="@{/images/profile-pic.jpg}" height="45" width="45" alt="admin-pic" style="border-radius: 50%;">
-                                    <div style="margin-left: 10px;">
-                                        <p style="color: #747474; font-size: 14px; letter-spacing: 0.7px; line-height: 1.5;">Daisy Lake</p>
-                                        <p style="color: #909090; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4;">30 Jun 2019 06:32 PM (2 Days ago)</p>
-                                        <div class="request-stat" style="display: flex; align-items: center; margin-top: 2vh;  margin-bottom: 3vh;">
-                                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 33@16x1.png}" width="30" height="30" alt="icon" style="border-radius: 50%; cursor: pointer;" onclick="acceptRequest(this);" class="request-status">
-                                            <span style="font-size: 10px; letter-spacing: 0.5px; line-height: 1.1; font-weight: 700; color: #32BDD2; margin-left: 10px; margin-top: 2px; cursor: pointer;" onclick="acceptRequest(this);" class="request-status-txt">ACCEPT</span>
+                                <div class="request-details">
+                                    <img th:src="@{/images/profile-pic.jpg}" height="30" width="30" alt="admin-pic" class="round-img">
+                                    <div class="requester-details">
+                                        <p class="requester-name">Daisy Lake</p>
+                                        <p class="request-date-read">30 Jun 2019 06:32 PM (2 Days ago)</p>
+                                        <div class="request-stat">
+                                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 33@16x1.png}" width="30" height="30" alt="icon" onclick="acceptRequest(this);" class="request-status round-img">
+                                            <span onclick="acceptRequest(this);" class="request-status-txt">ACCEPT</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
-
                         </div>
                     </div>
-                    <div style="display: flex; cursor: pointer; margin: 6vh 0vh 3vh 0vh;" id="back-btn">
-                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 9@16x.png}" height="15" width="15" style="cursor: pointer;" onclick="backToGroupView()"/>
-                        <p style="color: #32BDD2; font-family: roboto; font-weight: 900; font-size: 14px; margin-left: 7px; letter-spacing: 0.7px; cursor: pointer;" onclick="backToGroupView()">BACK</p>
+                    <div id="back-btn1">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 9@16x.png}" height="15" width="15" onclick="backToGroupView()"/>
+                        <p onclick="backToGroupView()">BACK</p>
                     </div>
                 </div>
             </div>

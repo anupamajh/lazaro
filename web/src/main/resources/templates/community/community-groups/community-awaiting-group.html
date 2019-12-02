@@ -104,97 +104,96 @@
             <input type="button" class="submit-btn" value="DONE" onclick="closeFrame()">
         </div>
 
+        <div class="right-content1">
 
-        <div class="right-content" style="padding: 2% 2% 0% 2%;">
-
-            <div class="my-profile-options" style="padding: 2% 2% 0% 2%; min-height: 55vw;" id="community-groups">
-                <div style="display: flex; align-items: center;">
-                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" style="box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.58); border-radius: 50%;">
-                    <span style="font-family: roboto; font-size: 14px; font-weight: 900; letter-spacing: 1.4px; margin-left: 25px; margin-top: 5px; color: #464646;">COMMUNITY GROUPS</span>
+            <div class="my-profile-options" id="community-groups">
+                <div class="awaiting-flex">
+                    <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" class="round-img-shadow">
+                    <span class="community-head">COMMUNITY GROUPS</span>
                 </div>
-                <div class="group-view" id="group-view" style="display: block;">
+                <div class="group-view1" id="group-view">
                     <div class="group-info">
-                        <p style="font-family: roboto; font-size: 12px; letter-spacing: 0.6px; line-height: 1.4; color: #505050; font-weight: 600; margin-bottom: 20px;">POT LUCK</p>
-                        <p style="font-family: roboto; font-size: 10px; letter-spacing: 0; line-height: 1.4; color: #909090; font-weight: 400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim felis et magna mattis finibus. Nulla elit ligula, placerat tincidunt ipsum eu, ornare semper felis. Duis arcu massa, venenatis eget ante sodales, posuere volutpat risus. Aenean et justo eu massa sodales posuere. Nullam sollicitudin nibh in turpis placerat venenatis.</p>
+                        <p class="group-info-head">POT LUCK</p>
+                        <p class="group-info-sub">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim felis et magna mattis finibus. Nulla elit ligula, placerat tincidunt ipsum eu, ornare semper felis. Duis arcu massa, venenatis eget ante sodales, posuere volutpat risus. Aenean et justo eu massa sodales posuere. Nullam sollicitudin nibh in turpis placerat venenatis.</p>
                     </div>
                     <div class="group-admin-details">
-                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                        <div style="margin-left: 25px;">
-                            <p style="font-family: roboto; letter-spacing: 0.5px; font-size: 10px; line-height: 20px; color: #909090;">CREATED BY</p>
-                            <p style="font-family: roboto; letter-spacing: 0.35px; font-size: 14px; line-height: 15px; color: #5A5A5A; font-weight: 500;">Nora Bravos</p>
-                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 15px; margin-top: 15px; color: #909090;">7th July 2019 11:38 AM (2 Hours ago)</p>
+                        <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                        <div class="group-admin-margin">
+                            <p class="created-by">CREATED BY</p>
+                            <p class="group-admin-name">Nora Bravos</p>
+                            <p class="group-created-date">7th July 2019 11:38 AM (2 Hours ago)</p>
                         </div>
                     </div>
 
-                    <div style="display: flex; align-items: center; justify-content: center; background-color: #EDF8FA; border-top: solid #32BDD2 1px; border-bottom: solid #32BDD2 1px; padding: 2% 4%; width: 60%; margin-top: 4%;">
+                    <div class="awaiting-req-flex">
                         <div>
-                            <p style="font-family: roboto; font-weight: 600; letter-spacing: 0.6px; font-size: 12px; line-height: 17px; color: #206771; text-align: center;">You sent a request to join this group on 8th July 2019</p>
-                            <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; margin-top: 15px; color: #318E9B; text-align: left;">Awaiting Nora Bravos to accept your request.</p>
+                            <p class="awaiting-req-txt1">You sent a request to join this group on 8th July 2019</p>
+                            <p class="awaiting-req-txt2">Awaiting Nora Bravos to accept your request.</p>
                         </div>
                     </div>
 
-                    <div style="display: flex; align-items: center; margin-top: 6vh;">
-                        <p style="width: 10%; font-family: roboto; font-size: 14px; letter-spacing: 0.7px; line-height: 25px; color: #747474; font-weight: 900;">27 Members</p>
-                        <span style="height: 0.5px; background-color: #CCCCCC; padding: 0.25px 200px; font-size: 1px; width: 400px; margin-left: 15px;"></span>
+                    <div class="group-view-flex2">
+                        <p class="group-view-members-count">27 Members</p>
+                        <span class="group-view-line"></span>
                     </div>
                     <div class="group-members">
                         <div class="member">
-                            <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                            <div style="margin-left: 35px;">
-                                <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Sam Colon</p>
-                                <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Since 29 July 2019</p>
+                            <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                            <div class="group-view-margin2">
+                                <p class="group-member-name">Sam Colon</p>
+                                <p class="group-member-join-date">Since 29 July 2019</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="group-members">
                         <div class="member">
-                            <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                            <div style="margin-left: 35px;">
-                                <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Luke Ray</p>
-                                <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Since 29 July 2019</p>
+                            <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                            <div class="group-view-margin2">
+                                <p class="group-member-name">Luke Ray</p>
+                                <p class="group-member-join-date">Since 29 July 2019</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="group-members">
                         <div class="member">
-                            <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                            <div style="margin-left: 35px;">
-                                <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Daisy Lake</p>
-                                <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Since 29 July 2019</p>
+                            <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                            <div class="group-view-margin2">
+                                <p class="group-member-name">Daisy Lake</p>
+                                <p class="group-member-join-date">Since 29 July 2019</p>
                             </div>
                         </div>
                     </div>
                     <div class="group-members">
                         <div class="member">
-                            <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                            <div style="margin-left: 35px;">
-                                <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Mark Smith</p>
-                                <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Since 29 July 2019</p>
+                            <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                            <div class="group-view-margin2">
+                                <p class="group-member-name">Mark Smith</p>
+                                <p class="group-member-join-date">Since 29 July 2019</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="group-members">
                         <div class="member">
-                            <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" style="border-radius: 50%;">
-                            <div style="margin-left: 35px;">
-                                <p style="font-family: roboto; letter-spacing: 0.7px; font-size: 14px; line-height: 25px; color: #464646;">Dan Park</p>
-                                <p style="font-family: roboto; letter-spacing: 0.6px; font-size: 12px; line-height: 14px; color: #909090;">Since 29 July 2019</p>
+                            <img th:src="@{/images/profile-pic.jpg}" height="40" width="40" alt="admin-pic" class="round-img">
+                            <div class="group-view-margin2">
+                                <p class="group-member-name">Dan Park</p>
+                                <p class="group-member-join-date">Since 29 July 2019</p>
                             </div>
                         </div>
                     </div>
                     <div class="show-more">
-                        <p class="head-text" style="font-weight: 700; margin-right: 10px; font-size: 14px;">
+                        <p class="head-text show-more-txt">
                             SHOW MORE
                         </p>
-                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="10" width="10" alt="list-button" style="margin-right: 15px; margin-bottom: 5px;">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy@16x.png}" height="10" width="10" alt="list-button">
                     </div>
                 </div>
-                <div style="display: flex; cursor: pointer; margin: 6vh 0vh 3vh 0vh;">
+                <div class="group-view-back-btn">
                     <img th:src="@{/images/extra-large-256px/Artboard 1 copy 9@16x.png}" height="15" width="15" onclick="backToGroupView()"/>
-                    <p style="color: #32BDD2; font-family: roboto; font-weight: 900; font-size: 14px; margin-left: 7px; letter-spacing: 0.7px;" onclick="backToGroupView()">BACK</p>
+                    <p onclick="backToGroupView()">BACK</p>
                 </div>
             </div>
         </div>
