@@ -8,11 +8,6 @@
     <link th:href="@{/css/community.css}" rel="stylesheet">
 </head>
 <script>
-    function createGroup(){
-        document.getElementById("groups-list").style.display = "block";
-        document.getElementById("no-groups").style.display = "none";
-        document.getElementById("create-group-btn").style.display = "none";
-    }
     function viewDropdown(img){
         if(document.getElementById("drop-down-my-groups").style.display === "none"){
         document.getElementById("drop-down-my-groups").style.display = "block";
@@ -31,34 +26,9 @@
             document.getElementById("drop-down-menu").style.display = "none";
         }
     }
-    function groupCreated(){
-        document.getElementById("groups-list").style.display = "none";
-        document.getElementById("no-groups").style.display = "block";
-        document.getElementById("invite-part").style.display = "block";
-        document.getElementById("create-group-btn").style.display = "none";
-        document.getElementById("upload-success").style.display = "none";
-    }
-    function invitePeople1(position){
-        var list = document.getElementsByClassName("invite-btn");
-        var sentlist = document.getElementsByClassName("msg-sent");
-        list = [].slice.call(list);
-        var n = list.indexOf(position);
-        list[n].style.display = "none";
-        sentlist[n].style.display = "block";
-        var x = document.getElementById("snackbar-invite");
-        x.className = "show";
-        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-    }
     function invitePeople(){
             location.assign("/my-groups/invite-people");
        }
-    function createGroupDone(){
-<!--            document.getElementById("upload-failed").style.display = "none";-->
-<!--            document.getElementById("photo-upload").style.display = "none";-->
-<!--            document.getElementById("origin-frame").style.display = "none";-->
-                document.getElementById("upload-success").style.display = "block";
-        }
-
         function exitGroup(){
                 document.getElementById("delete").style.display = "block";
         }
