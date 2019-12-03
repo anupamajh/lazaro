@@ -19,27 +19,46 @@
                 <p class="para-lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     </br>Donec dignissim felis et magna mattis finibus. </p>
             </div>
-            <div class="error-login">
-                <p class="invalid-login">Invalid credentials</p>
+            <div class="error-login hidden-visibility" id="invalidLoginCredit">
+                <p class="invalid-login">Invalid login credentials</p>
             </div>
             <div class="Email">
                 <span class="registered-Email">REGISTERED EMAIL</span>
-                <input class="box" type="text" name="un" placeholder="example@address.com" size="48"
-                       onfocus="this.placeholder=''" onblur="this.placeholder='example@address.com'">
-                <span class="fieldError">This field is required</span>
+<!--                <input class="box" type="text" name="un" placeholder="example@address.com" size="48"-->
+<!--                       onfocus="this.placeholder=''" onblur="this.placeholder='example@address.com'">-->
+                <input class="box" type="text" name="username" placeholder="Email or Mobile Number" size="48"
+                       id="inputError" onfocus="this.placeholder=''" onblur="this.placeholder='Email or Mobile Number'">
+                <span class="fieldErrorLoginPage" id="FieldEmailError">This field is required</span>
             </div>
             <div class="Email">
                 <span class="registered-Email">REGISTERED PHONE NUMBER</span>
-                <input class="box" type="password" name="username" placeholder="98445 54783" size="48" border-radius="5px;"
-                       onfocus="this.placeholder=''" onblur="this.placeholder='98445 54783'">
-<!--                <img class="image-eye-landing" id="eye-icon" th:src="@{/images/EyeIcon.png}" alt="" width="24px"-->
-<!--                     height="24px" onclick="myFunction1()">-->
-<!--                <img class="image1-landing" th:src="@{/images/EyeIconblue.png}" alt="" width="24px" height="24px"-->
-<!--                     onclick="myFunction2()" style="display:none" id="eye-pswd">-->
-                <p class="fieldError">This field is required</p>
+                <input class="box" type="password" name="password" placeholder="Password" size="48" border-radius="5px;"
+                       id="passwordError"  onfocus="this.placeholder=''" onblur="this.placeholder='Password'">
+<!--                <input class="box" type="password" name="username" placeholder="98445 54783" size="48" border-radius="5px;"-->
+<!--                       onfocus="this.placeholder=''" onblur="this.placeholder='98445 54783'">-->
+                <p class="fieldErrorLoginPage" id="FieldPasswordError">This field is required</p>
             </div>
         </div>
-        <div class="submit-button"><button type="submit" class="button submitLanding"  onclick="landingPageSubmit()">SUBMIT</button>
+        <div class="submit-button"><button type="submit" class="button submitLanding"  onclick="SubmitlandingPage()">SUBMIT</button>
+            <script>
+          function SubmitlandingPage(){
+             var email = document.getElementById("inputError").value;
+            var password = document.getElementById("passwordError").value;
+            if (email == "Tasmia@gmail.com" && password == "9912345678")
+             {
+               document.getElementById("appsuccess").style.display = "block";
+               document.getElementById("landingPage").style.display = "none";
+            }
+           else{
+               document.getElementById("invalidLoginCredit").style.visibility = "visible";
+               document.getElementById("FieldEmailError").style.display = "block";
+               document.getElementById("FieldPasswordError").style.display = "block";
+               document.getElementById("passwordMask").style.display = "none";
+               document.getElementById("inputError").style.border = "1px solid #BF574A";
+              document.getElementById("passwordError").style.border = "1px solid #BF574A";
+             }
+           }
+           </script>
         </div>
     </div>
 </div>
@@ -54,8 +73,7 @@
             </p></div>
         <div class="success-message">
             <p class="message-title"><b>APP ACCESS REQUEST</b></p>
-            <p class="message-link">Lorem ipsum dolor sit amet, consectetur</br>
-                adipiscing elit. Mauris mattis, tortor sit.</p>
+            <p class="message-link">Lorem ipsum dolor sit amet, consectetur</br>adipiscing elit. Mauris mattis, tortor sit.</p>
         </div>
     </div>
 </div>

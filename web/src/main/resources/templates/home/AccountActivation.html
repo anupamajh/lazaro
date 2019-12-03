@@ -25,24 +25,49 @@
 
             <div class="Email-id">
                 <span class="registered-Email">NEW PASSWORD</span>
-                <input class="box activation" type="text" name="password" placeholder="*************" size="48"
-                       onfocus="this.placeholder=''" onblur="this.placeholder='*************'">
+                <input class="box" type="password" name="username" placeholder="*************" size="48"
+                       id="inputError" onfocus="this.placeholder=''" onblur="this.placeholder='*************'">
+<!--                <input class="box activation" type="text" name="password" placeholder="*************" size="48"-->
+<!--                       onfocus="this.placeholder=''" onblur="this.placeholder='*************'">-->
                 <img class="unmask-new-password" th:src="@{/images/EyeIcon.png}" alt="" width="24px" height="24px" >
-                <span class="fieldError" style="font-size:10px;" >This field is required</span>
-
+<!--                <span class="fieldError" style="font-size:10px;" >This field is required</span>-->
+                <span class="fieldError success-activation" id="FieldEmailError">This field is required</span>
             </div>
             <div class="Email-id">
                 <span class="registered-Email">CONFIRM PASSWORD</span>
-                <input class="box activation" type="password" name="password" placeholder="*************" size="48" border-radius="5px;"
-                       onfocus="this.placeholder=''" onblur="this.placeholder='*************'">
+                <input class="box" type="password" name="password" placeholder="*************" size="48" border-radius="5px;"
+                       id="passwordError"  onfocus="this.placeholder=''" onblur="this.placeholder='*************'">
+<!--                <input class="box activation" type="password" name="password" placeholder="*************" size="48" border-radius="5px;"-->
+<!--                       onfocus="this.placeholder=''" onblur="this.placeholder='*************'">-->
                 <img class="unmask-confirm-password" id="eye-icon" th:src="@{/images/EyeIcon.png}" alt="" width="24px" height="24px" >
-                <p class="fieldError" style="font-size:10px;">This field is required or Passwords not matching.</p>
+<!--                <p class="fieldError" style="font-size:10px;">This field is required or Passwords not matching.</p>-->
+                <p class="fieldError success-activation" id="FieldPasswordError">This field is required or Passwords not matching.</p>
             </div>
+
+        <div class="submit-button"><button type="submit" class="button submitotp"  id="SubmitActivation" onclick="SubmitAccountActivation()">SUBMIT</button>
+            <script>
+          function SubmitAccountActivation(){
+             var email = document.getElementById("inputError").value;
+            var password = document.getElementById("passwordError").value;
+            if (email == "9912345678" && password == "9912345678")
+             {
+                document.getElementById("congrats").style.display = "block";
+                 document.getElementById("Activation").style.display = "none";
+            }
+          else{
+               document.getElementById("FieldEmailError").style.display = "block";
+
+              document.getElementById("FieldPasswordError").style.display = "block";
+
+               document.getElementById("inputError").style.border = "1px solid #BF574A";
+              document.getElementById("passwordError").style.border = "1px solid #BF574A";
+              }
+            }
+              </script>
         </div>
-        <div class="submit-button"><button type="submit" class="button submitotp"  id="SubmitActivation" onclick="AccountActivationSubmit()">SUBMIT</button>
         </div>
 
-        <div class="success-activation" id="congrats">
+        <div class="congrats-success success-activation" id="congrats">
             <p class="login">CONGRATULATIONS!</p>
             <p class="link-reset ">Your account has been activated. You can change your password </br>
                 within the app in Settings.</p>

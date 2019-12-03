@@ -367,6 +367,7 @@ button {
     width: 445px;
     color: #747474;
     font-size: 14px;
+    margin-top: 2%;
     font-style: Roboto medium;
     letter-spacing: 0.4px;
 }
@@ -428,7 +429,7 @@ button {
     display: inline;
     position: absolute;
     margin-left: 40%;
-    bottom: 19%;
+    bottom: 20%;
     margin-bottom: 19%;
 }
 
@@ -436,7 +437,7 @@ button {
     display: inline;
     position: absolute;
     margin-left: 40%;
-    bottom: 19%;
+    bottom: 24%;
     margin-bottom: 5%;
 }
 
@@ -508,9 +509,13 @@ button {
     display: none;
 }
 
+.hidden-visibility{
+   visibility:hidden;
+}
 
-
-
+.congrats-success{
+    margin-top: 19%;
+}
 
 .people-community-desc {
     padding: 3%;
@@ -1057,7 +1062,7 @@ button {
 .return-back-page {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content:space-between;
     margin-top: 8%;
     margin-left: 10%;
 }
@@ -1072,6 +1077,11 @@ button {
     font-weight: 600;
     margin-right: 86%;
     cursor: pointer;
+}
+.button-reset-password{
+    width:226px;
+    cursor:pointer;
+    height:36px;
 }
 
 .interests {
@@ -1102,7 +1112,6 @@ button {
     font-weight: 600;
     letter-spacing: 0.7px;
 }
-
 
 .group-select-menu{
 display: flex; align-items: center;
