@@ -8,49 +8,6 @@
     <link th:href="@{/css/community.css}" rel="stylesheet">
 </head>
 
-<script>
-    function viewGroups(){
-        document.getElementById("groups-list").style.display = "block";
-        document.getElementById("no-groups").style.display = "none";
-        document.getElementById("drop-down-btn").style.display = "inline";
-    }
-    function viewDropdown(){
-        if(document.getElementById("drop-down-menu").style.display === "none"){
-        document.getElementById("drop-down-menu").style.display = "block";
-        }else{
-            document.getElementById("drop-down-menu").style.display = "none";
-        }
-    }
-    function groupView(){
-        console.log("msg");
-        document.getElementById("group-view").style.display = "block";
-        document.getElementById("group-content").style.display = "none";
-        document.getElementById("drop-down-btn").style.display = "none";
-    }
-    function joinGroup(){
-<!--            document.getElementById("upload-failed").style.display = "none";-->
-<!--            document.getElementById("photo-upload").style.display = "none";-->
-<!--            document.getElementById("origin-frame").style.display = "none";-->
-            document.getElementById("upload-success").style.display = "block";
-        }
-     function closeFrame(){
-<!--            document.getElementById("photo-upload").style.display = "none";-->
-<!--            document.getElementById("origin-frame").style.display = "none";-->
-<!--            document.getElementById("upload-failed").style.display = "none";-->
-            document.getElementById("ignore").style.display = "none";
-            document.getElementById("upload-success").style.display = "none";
-        }
-        function ignoreInvite(){
-            document.getElementById("ignore").style.display = "block";
-        }
-        function backToGroupView(){
-            location.replace("/my-groups/may-groups-view");
-        }
-        function viewExistingGroup(){
-            location.replace("/community/community-groups/community-existing-group-view");
-        }
-</script>
-
 <body>
 <header class="community-header">
     <div th:replace="shared/dashboard :: dashboard">
@@ -155,6 +112,6 @@
     </div>
 </div>
 </body>
-<script th:href="@{/js/community-profile.js}" type="text/javascript"></script>
+<script th:src="@{/js/myGroupConversation.js}" type="text/javascript"></script>
 
 </html>

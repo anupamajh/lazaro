@@ -7,166 +7,6 @@
     <link th:href="@{https://fonts.googleapis.com/css?family=Roboto&display=swap}" rel="stylesheet">
     <link th:href="@{/css/community.css}" rel="stylesheet">
 </head>
-<script>
-    function createGroup(){
-        document.getElementById("groups-list").style.display = "block";
-        document.getElementById("no-groups").style.display = "none";
-        document.getElementById("create-group-btn").style.display = "none";
-    }
-    function viewDropdown(img){
-        if(document.getElementById("drop-down-1").style.display === "none"){
-        document.getElementById("drop-down-1").style.display = "block";
-        img.src = "http://localhost:8000/images/extra-large-256px/Artboard 1 copy 53@16x.png";
-        document.getElementById("drop-down-btn1").style.borderRadius = "0%";
-        }else{
-            document.getElementById("drop-down-1").style.display = "none";
-            img.src = "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%2047@16x.png";
-            document.getElementById("drop-down-btn1").style.borderRadius = "50%";
-        }
-    }
-    function viewDropdown1(){
-        if(document.getElementById("drop-down-menu").style.display === "none"){
-            document.getElementById("drop-down-menu").style.display = "block";
-        }else{
-            document.getElementById("drop-down-menu").style.display = "none";
-        }
-    }
-    function groupCreated(){
-        document.getElementById("groups-list").style.display = "none";
-        document.getElementById("no-groups").style.display = "block";
-        document.getElementById("invite-part").style.display = "block";
-        document.getElementById("create-group-btn").style.display = "none";
-        document.getElementById("upload-success").style.display = "none";
-    }
-    function acceptRequest(position){
-        var requestlist = document.getElementsByClassName("request-status");
-        var requestlisttxt = document.getElementsByClassName("request-status-txt");
-        requestlist = [].slice.call(requestlist);
-        var n = requestlist.indexOf(position);
-        requestlist[n].src = "/images/extra-large-256px/Artboard 1 copy 46@16x.png";
-        requestlist[n].height = "15";
-        requestlist[n].width = "15";
-        requestlisttxt[n].innerHTML = "ACCEPTED";
-    }
-    function invitePeople(){
-            location.assign("/my-groups/invite-people");
-       }
-    function createGroupDone(){
-<!--            document.getElementById("upload-failed").style.display = "none";-->
-<!--            document.getElementById("photo-upload").style.display = "none";-->
-<!--            document.getElementById("origin-frame").style.display = "none";-->
-                document.getElementById("upload-success").style.display = "block";
-        }
-
-        function exitGroup(){
-                document.getElementById("delete").style.display = "block";
-        }
-
-     function closeFrame(){
-<!--            document.getElementById("photo-upload").style.display = "none";-->
-<!--            document.getElementById("origin-frame").style.display = "none";-->
-<!--            document.getElementById("upload-failed").style.display = "none";-->
-                document.getElementById("upload-success").style.display = "none";
-                document.getElementById("delete").style.display = "none";
-        }
-
-       function filterFav(){
-            var all = document.getElementsByClassName("group-members");
-            var fav = document.getElementsByClassName("favourites");
-            document.getElementById("filter-clear-link").style.display = "inline-block";
-            document.getElementById("drop-down-menu").style.display = "none";
-            document.getElementById("count-msg").style.display = "none";
-            var i, j;
-            for(i=0; i<all.length; i++){
-                all[i].style.display = "none";
-            }
-            for(j=0; j<fav.length; j++){
-                fav[j].style.display = "flex";
-            }
-       }
-       function clearFilter(){
-            var all = document.getElementsByClassName("group-members");
-            document.getElementById("drop-down-menu").style.display = "none";
-            document.getElementById("filter-clear-link").style.display = "none";
-            var i, j;
-            for(i=0; i<all.length; i++){
-                all[i].style.display = "flex";
-            }
-       }
-        function viewJoined(){
-                console.log("entered");
-            if(document.getElementById("joined-members").style.display === "none"){
-                 document.getElementById("joined-members").style.display = "block";
-                 document.getElementById("view-joined-btn").src="/images/extra-large-256px/Artboard 1 copy 2@16x.png";
-            }else{
-                document.getElementById("joined-members").style.display = "none";
-                document.getElementById("view-joined-btn").src="/images/extra-large-256px/Artboard 1 copy@16x.png";
-            }
-        }
-         function viewPending(){
-                console.log("entered");
-            if(document.getElementById("pending-members").style.display === "none"){
-                 document.getElementById("pending-members").style.display = "block";
-                 document.getElementById("view-pending-btn").src="/images/extra-large-256px/Artboard 1 copy 2@16x.png";
-            }else{
-                document.getElementById("pending-members").style.display = "none";
-                document.getElementById("view-pending-btn").src="/images/extra-large-256px/Artboard 1 copy@16x.png";
-            }
-        }
-
-        function openConversation(){
-            location.replace("/my-groups/my-group-conversation");
-        }
-
-         function joinConversation(){
-            location.replace("/community/community-groups/community-group-conversation");
-        }
-         function backToGroupView(){
-            location.replace("/my-groups/my-group-view");
-        }
-        function viewConversation(){
-            var x = document.getElementById("snackbar-group");
-            x.className = "show";
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-        }
-        function requestAwaiting(){
-            location.replace("/community/community-groups/community-awaiting-group");
-        }
-        function openGroup(){
-            location.replace("/community/community-groups/community-open-group");
-        }
-        function searchPeople(){
-            var str = document.getElementById("search-people").value.toUpperCase().trim();
-            var person_name = document.getElementsByClassName("uname");
-            var people = document.getElementsByClassName("group-members");
-            var i;
-            var count = 0;
-            var people_list = person_name.length;
-
-            for(i=0;i<people_list;i++){
-                var res = person_name[i].textContent.toUpperCase().trim();
-                var result = res.match(str);
-                console.log(result);
-                if(result != null){
-                    people[i].style.display = "flex";
-                    count = count+1;
-                }else{
-                    people[i].style.display = "none";
-                }
-                if(count === 0){
-                    document.getElementById("search-not-found").style.display = "flex";
-                    document.getElementById("back-btn").style.display = "flex";
-                    document.getElementById("count-msg").style.display = "none";
-                    document.getElementById("show-more").style.display = "none";
-                }else{
-                    document.getElementById("search-not-found").style.display = "none";
-                    document.getElementById("back-btn").style.display = "flex";
-                }
-                    document.getElementById("count").innerHTML = count;
-                    document.getElementById("count-msg").style.display = "block";
-            }
-        }
-</script>
 
 <body>
 <header class="community-header">
@@ -196,7 +36,7 @@
                 <span class="my-profile-head">PEOPLE</span>
                 <p class="my-profile-txt">Meet the community members and make new friends.</p>
             </div>
-            <div class="my-profile" onclick="openGroupsPage()">
+            <div class="my-profile">
                 <span class="red-notification-box"><br></span>
                 <span class="my-profile-head">GROUPS</span>
                 <p class="my-profile-txt">Join the groups and catch all the action. You will get suggestions based on your profile.</p>
@@ -295,5 +135,5 @@
 </div>
 </div>
 </body>
-<script th:href="@{/js/community-profile.js}" type="text/javascript"></script>
+<script th:src="@{/js/myGroupsRequests.js}" type="text/javascript"></script>
 </html>
