@@ -43,21 +43,25 @@
             </div>
         </div>
 
-        <div class="photo-upload" id="ignore">
-            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" onclick="closeFrame()"><br><br>
-            <p class="ignore-text1">IGNORE?</p>
-            <p class="ignore-text2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
-            <div class="ignore-flex">
-                <input type="button" class="submit-btn ignore-btn" value="IGNORE" onclick="">
-                <input type="button" class="submit-btn no-btn" value="NO" onclick="">
+        <div class="popup" id="ignore">
+            <div class="photo-upload">
+                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" onclick="closeFrame()"><br><br>
+                <p class="ignore-text1">IGNORE?</p>
+                <p class="ignore-text2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
+                <div class="ignore-flex">
+                    <input type="button" class="submit-btn ignore-btn" value="IGNORE" onclick="">
+                    <input type="button" class="submit-btn no-btn" value="NO" onclick="">
+                </div>
             </div>
         </div>
 
-        <div class="photo-upload" id="upload-success">
-            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" onclick="closeFrame()"><br><br>
-            <p class="success">SUCCESS</p>
-            <p class="success-txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
-            <input type="button" class="submit-btn" value="DONE" onclick="closeFrame(); joinConversation()">
+        <div class="popup" id="upload-success">
+            <div class="photo-upload">
+                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" onclick="closeFrame()"><br><br>
+                <p class="success">SUCCESS</p>
+                <p class="success-txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
+                <input type="button" class="submit-btn" value="DONE" onclick="closeFrame(); joinConversation()">
+            </div>
         </div>
 
         <div class="right-content1">

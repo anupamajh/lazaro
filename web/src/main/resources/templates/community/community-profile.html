@@ -23,39 +23,45 @@
             vestibulum.</p>
     </div>
 
-    <div class="photo-upload upload" id="photo-upload">
-        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" id="uplaod-profile-pic-close" onclick="closeFrame()"><br><br>
-        <p class="upload-head">UPLOAD PHOTO</p>
-        <div class="flex-box">
-            <div class="left-part">
-                <p class="file-from-computer">Select a file from my computer. <br><span>The file size should not exceed 5MB</span></p>
-                <div class="open-file-hidden">
-                    <input type="file" id="fileInput" name="fileInput" accept="image/*"/>
+    <div class="popup" id="photo-upload">
+        <div class="photo-upload upload">
+            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" id="uplaod-profile-pic-close" onclick="closeFrame()"><br><br>
+            <p class="upload-head">UPLOAD PHOTO</p>
+            <div class="flex-box">
+                <div class="left-part">
+                    <p class="file-from-computer">Select a file from my computer. <br><span>The file size should not exceed 5MB</span></p>
+                    <div class="open-file-hidden">
+                        <input type="file" id="fileInput" name="fileInput" accept="image/*"/>
+                    </div>
+                    <input type="button" class="submit-btn" id="profile-pic" value="BROWSE" onclick="chooseImg()">
                 </div>
-                <input type="button" class="submit-btn" id="profile-pic" value="BROWSE" onclick="chooseImg()">
-            </div>
-            <div class="right-part">
-                <div class="drop-file-upload">
-                    <img th:src="@{/images/extra-large-256px/upload.png}" width="45" height="45"/>
-                    <p>Drop a file here</p>
+                <div class="right-part">
+                    <div class="drop-file-upload">
+                        <img th:src="@{/images/extra-large-256px/upload.png}" width="45" height="45"/>
+                        <p>Drop a file here</p>
+                    </div>
                 </div>
             </div>
+            <input type="submit" class="submit-btn upload-btn" value="DONE" onclick="upload()">
         </div>
-        <input type="submit" class="submit-btn upload-btn" value="DONE" onclick="upload()">
     </div>
 
-    <div class="photo-upload" id="upload-failed">
+    <div class="popup" id="upload-failed">
+    <div class="photo-upload">
         <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" onclick="closeFrame()"><br><br>
         <p class="failed">FAILED</p>
         <p class="failed-txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
         <input type="button" class="submit-btn" value="Done" onclick="uploadSuccess()">
     </div>
+    </div>
 
-    <div class="photo-upload" id="upload-success">
+    <div class="popup" id="upload-success">
+    <div class="photo-upload">
         <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" onclick="uploaded()"><br><br>
         <p class="success">SUCCESS</p>
         <p class="success-txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
         <input type="button" class="submit-btn" value="DONE" onclick="uploaded()">
+    </div>
     </div>
 
 
@@ -79,8 +85,8 @@
             </div>
         </div>
 
-
-        <div class="photo-upload" id="origin-frame">
+        <div class="popup" id="origin-frame">
+        <div class="photo-upload">
             <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" onclick="closeFrame()"><br><br>
             <p class="success">YOUR PLACE OF ORIGIN</p>
             <p class="success-txt">If you have a profile picture, your chances of making more friends will be higher. However you can turn on or turn off the visibility of your photo anytime.</p>
@@ -88,6 +94,7 @@
                 <input type="text" placeholder="Hubli">
             </div>
             <input type="button" class="submit-btn" value="DONE" id="originInfo" onclick="closeFrame()">
+        </div>
         </div>
 
         <div class="right-content">

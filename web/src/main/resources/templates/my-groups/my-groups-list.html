@@ -43,11 +43,13 @@
             </div>
         </div>
 
-        <div class="photo-upload" id="upload-success">
+        <div class="popup" id="upload-success">
+        <div class="photo-upload">
             <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" onclick="closeFrame()"><br><br>
             <p class="success">SUCCESS</p>
             <p class="success-txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
             <input type="button" class="submit-btn" value="DONE" onclick="closeFrame()">
+        </div>
         </div>
 
         <div class="right-content">
@@ -91,8 +93,8 @@
 
                         <div class="search-not-found" id="search-not-found">
                             <img th:src="@{/images/extra-large-256px/search.png}" height="65" width="65" alt="search-not-found">
-                            <p class="no-results-found">No Results Found</p>
-                            <p class="no-results-found2">Sorry, we couldn’t find any results for search_keyword</p>
+                            <p class="not-found1">No Results Found</p>
+                            <p class="not-found2">Sorry, we couldn’t find any results for search_keyword</p>
                         </div>
 
                         <div class="groups" id="groups">

@@ -107,6 +107,10 @@ input[type=text]:focus {
     border-radius: 3px;
     letter-spacing: 1.5px;
 }
+.exit-btn{
+    background-color: #E65959;
+    border: 0px;
+}
 
 #loading-img {
     -webkit-animation: spin 2s linear infinite;
@@ -239,18 +243,21 @@ input[type=text]:focus {
 #interests-setup {
     display: none;
 }
-
-.photo-upload {
+.popup{
     display: none;
-    position: absolute;
-    width: 45%;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0,0,0,0.29);
+    top: 0%;
+    left: 0%;
+}
+.photo-upload {
+    width: 33%;
     background-color: #FFFFFF;
-    padding: 10px 1.5vw 0vw 1.5vw;
+    padding: 10px 1.5vw 1vw 1.5vw;
     border-radius: 20px;
-    margin: auto;
-    box-shadow: 0px 0px 35px 120vw rgba(0, 0, 0, 0.29);
-    top: 25%;
-    left: 25%;
+    margin: 18% auto;
 }
 
 .left-part {
@@ -868,6 +875,13 @@ input[type=text]:focus {
      align-items: center;
      justify-content: space-between;
  }
+ .request-flex{
+        background-color: #EEEEEE;
+        padding: 3% 5%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+ }
 .group_info1{
     display: flex;
     justify-content: space-between;
@@ -1063,9 +1077,9 @@ input[type=text]:focus {
 }
 
 #upload-failed {
-    width: 30%;
+ /*   width: 30%;
     height: 27%;
-    left: 30%;
+    left: 30%;*/
 }
 
 #upload-failed img {
@@ -1104,9 +1118,9 @@ input[type=text]:focus {
 }
 
 #upload-success {
-    width: 30%;
+ /*   width: 30%;
     left: 30%;
-    padding-bottom: 1vw;
+    padding-bottom: 1vw;*/
 }
 
 #upload-success img {
@@ -1139,7 +1153,7 @@ input[type=text]:focus {
 
 #upload-success input {
     display: block;
-    margin: 4vw auto;
+    margin: 2vw auto;
     border: 0px;
 }
 
@@ -1175,10 +1189,10 @@ input[type=text]:focus {
 }
 
 #origin-frame {
-    width: 30%;
+ /*   width: 30%;
     left: 30%;
     top: 115%;
-    padding-bottom: 2%;
+    padding-bottom: 2%;*/
 }
 
 #origin-frame img {
@@ -1330,7 +1344,7 @@ input[type=text]:focus {
     padding: 2% 23%;
 }
 
-.invited {
+.invited1 {
     padding: 5% 15% 10% 9%;
     background-color: #EEEEEE;
     border: solid #DBD6BC 0.25px;
@@ -1341,7 +1355,7 @@ input[type=text]:focus {
     display: flex;
     align-items: center;
     margin-top: 4vh;
-    padding: 5% 15% 10% 9%;
+    padding: 5% 15% 5% 9%;
     background-color: #EEEEEE;
     border: solid #CCCCCC 0.25px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.29);
@@ -1385,7 +1399,6 @@ input[type=text]:focus {
 .member {
     display: flex;
     align-items: center;
-    border-bottom: solid #CCCCCC 0.5px;
     padding: 4vh 0vh 3vh 0vh;
 }
 
@@ -1553,11 +1566,11 @@ input[type=text]:focus {
 }
 
 #ignore {
-    width: 30%;
+  /*  width: 30%;
     min-height: 27%;
     top: 50%;
     left: 30%;
-    padding-bottom: 2vw;
+    padding-bottom: 2vw;*/
 }
 
 #ignore img {
@@ -1608,11 +1621,11 @@ input[type=text]:focus {
 }
 
 #exit-group {
-    width: 30%;
+   /* width: 30%;
     min-height: 20%;
     top: 50%;
     left: 30%;
-    padding-bottom: 2vw;
+    padding-bottom: 2vw;*/
 }
 
 #exit-group img {
@@ -1664,14 +1677,22 @@ input[type=text]:focus {
 }
 
 #delete {
-    width: 30%;
+  /*  width: 30%;
     min-height: 27%;
     top: 50%;
     left: 30%;
-    padding-bottom: 2vw;
+    padding-bottom: 2vw;*/
 }
 
 #delete img {
+    float: right;
+    margin-top: 10px;
+    margin-bottom: 2vw;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);
+}
+
+#remove img{
     float: right;
     margin-top: 10px;
     margin-bottom: 2vw;

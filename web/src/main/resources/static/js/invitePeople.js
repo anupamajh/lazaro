@@ -1,10 +1,10 @@
     function viewDropdown(img){
-        if(document.getElementById("drop-down-1").style.display === "none"){
-        document.getElementById("drop-down-1").style.display = "block";
+        if(document.getElementById("drop-down-my-groups").style.display === "none"){
+        document.getElementById("drop-down-my-groups").style.display = "block";
         img.src = "http://localhost:8000/images/extra-large-256px/Artboard 1 copy 53@16x.png";
         document.getElementById("drop-down-btn1").style.borderRadius = "0%";
         }else{
-            document.getElementById("drop-down-1").style.display = "none";
+            document.getElementById("drop-down-my-groups").style.display = "none";
             img.src = "http://localhost:8000/images/extra-large-256px/Artboard%201%20copy%2047@16x.png";
             document.getElementById("drop-down-btn1").style.borderRadius = "50%";
         }

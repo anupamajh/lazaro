@@ -24,6 +24,8 @@ function viewDropdown(img){
        }
         function exitGroup(){
                 document.getElementById("delete").style.display = "block";
+                document.getElementById("upload-success").style.display = "none";
+                document.getElementById("remove").style.display = "none";
         }
 
      function closeFrame(){
@@ -32,6 +34,7 @@ function viewDropdown(img){
 <!--            document.getElementById("upload-failed").style.display = "none";-->
                 document.getElementById("upload-success").style.display = "none";
                 document.getElementById("delete").style.display = "none";
+                document.getElementById("remove").style.display = "none";
         }
 
        function filterFav(){
@@ -76,6 +79,11 @@ function viewDropdown(img){
                 document.getElementById("pending-members").style.display = "none";
                 document.getElementById("view-pending-btn").src="/images/extra-large-256px/Artboard 1 copy@16x.png";
             }
+        }
+        function removeMember(){
+            document.getElementById("upload-success").style.display = "none";
+            document.getElementById("delete").style.display = "none";
+            document.getElementById("remove").style.display = "block";
         }
 
         function openConversation(){
