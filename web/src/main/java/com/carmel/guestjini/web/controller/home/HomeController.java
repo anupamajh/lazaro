@@ -30,6 +30,18 @@ public class HomeController {
     @RequestMapping(value = "/AccountActivation")
     public String AccountActivate(){ return "home/AccountActivation";}
 
+    @RequestMapping(value = "/change-password/login-landing")
+    public String loginLanding(){ return "change-password/login-landing";}
+
+    @RequestMapping(value = "/change-password/private-policy")
+    public String privatePolicy(){ return "change-password/private-policy";}
+
+    @RequestMapping(value = "/change-password/terms-conditions")
+    public String termsConditions(){ return "change-password/terms-conditions";}
+
+    @RequestMapping(value = "/change-password/change-password")
+    public String changePassword(){ return "change-password/change-password";}
+
     @RequestMapping(value = "community/community-profile")
     public String communityProfile(){ return "community/community-profile";}
 

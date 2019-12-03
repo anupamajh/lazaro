@@ -38,14 +38,6 @@
 
 
 
-    <div class="photo-upload" id="exit-group" >
-        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45"  onclick="doneGroupHike()"><br><br>
-        <p class="success">SUCCESS</p>
-        <p  class="success-txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
-            <input type="button" class="submit-btn group-hike-button"  value="DONE" onclick="doneGroupHike()">
-        </div>
-
-
     <div class="profile-container">
         <div class="left-content">
             <div class="empty-box"></div>
@@ -66,6 +58,14 @@
             </div>
         </div>
 
+        <div class="popup" id="exit-group">
+        <div class="photo-upload"  >
+            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45"  onclick="doneGroupHike()"><br><br>
+            <p class="success">SUCCESS</p>
+            <p  class="success-txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
+            <input type="button" class="submit-btn group-hike-button"  value="DONE" onclick="doneGroupHike()">
+        </div>
+        </div>
 
         <div class="right-content1">
             <div class="my-profile-options" id="interest-groups1">
