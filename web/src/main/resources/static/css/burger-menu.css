@@ -6,17 +6,16 @@
     background-color: rgba(0,0,0,0.70);
     top: 0%;
     left: 0%;
+    z-index: 1;
 }
 .menu{
     width: 20%;
     background-color: #FFFFFF;
     height: 100%;
 }
-.active{
-    background-color: #32BDD2;
-}
-.active span{
-    color: #FFFFFF;
+.empty-div{
+    width: 80%;
+    height: 100%;
 }
 .menu-group1{
     padding: 10% 0% 5% 0%;

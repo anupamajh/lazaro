@@ -57,7 +57,7 @@
             location.replace("/my-groups/invite-people");
        }
        function inviteLater(){
-            location.assign("/my-groups/my-group-view1")
+            location.assign("/my-groups/my-group-view1");
        }
 
        function filterFav(){
@@ -86,3 +86,11 @@
          function backToGroupView(){
             location.replace("/community/community-groups/community-groups");
         }
+    function openBurgerMenu(){
+        if(document.getElementById("burger-menu").style.display === "none"){
+            document.getElementById("burger-menu").style.display = "block";
+        }
+        else{
+            document.getElementById("burger-menu").style.display = "none";
+        }
+    }

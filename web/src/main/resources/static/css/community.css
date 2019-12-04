@@ -3186,3 +3186,12 @@ input[type=text]:focus {
     letter-spacing: 1.2px;
     padding: 13px 50px;
 }
+.slideMenu{
+    display: none;
+}
+.active{
+    background-color: #32BDD2;
+}
+.active span{
+    color: #FFFFFF;
+}
