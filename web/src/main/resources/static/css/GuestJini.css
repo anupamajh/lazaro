@@ -1116,3 +1116,119 @@ button {
 .group-select-menu{
 display: flex; align-items: center;
 }
+
+
+.change-password-body {
+    background-color: #E5E5E5;
+    font-family: roboto;
+}
+
+.community-desc {
+    padding: 3%;
+    background-color: #FFFFFF;
+    margin-bottom: 5px;
+}
+
+.content {
+    margin: 2%;
+    background-color: #EEEEEE;
+}
+.community-header {
+    min-height: 6vh;
+}
+
+.change-password-title-name{
+    color:#464646;
+    font-family: roboto;
+    font-size: 14px;
+    font-weight: 900;
+    opacity: 1;
+    letter-spacing: 1.4px;
+}
+
+.change-password-text {
+    color: #747474;
+    font-family: roboto;
+    font-size: 12px;
+    width: 48%;
+    margin-top: 15px;
+    letter-spacing: 0.6px;
+    line-height: 2;
+}
+.profile-container {
+    display: flex;
+    height: 615px;
+    background-color: #FFFFFF;
+}
+.change-password-title{
+text-align: left;
+font-size:12px;
+padding: 2%;
+font-weight:400;
+font: Regular 12px/14px Roboto;
+letter-spacing: 0.12px;
+color: #464646;
+opacity: 1;
+}
+.change-password-content{
+margin-top: 7%;
+    margin-left: 8%;
+}
+.change-passwordbtn{
+    width: 41%;
+        margin-top: 14%;
+        font-size: 12px;
+        margin-left: 5%;
+        height: 36px;
+    background: #32BDD2 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #5E646980;
+    border-radius: 4px;
+    opacity: 1;
+}
+.mask-icon1{
+display: inline;
+    position: absolute;
+    margin-left: 40%;
+    bottom: 62%;
+    cursor: pointer;
+    margin-bottom: 0%;
+}
+.mask-icon2{
+display: inline;
+    position: absolute;
+    margin-left: 40%;
+    bottom: 45%;
+    cursor: pointer;
+    margin-bottom: 0%;
+}
+.mask-icon3{
+display: inline;
+    position: absolute;
+    margin-left: 40%;
+    bottom: 28%;
+    cursor: pointer;
+    margin-bottom: 0%;
+}
+.change-password-field{
+letter-spacing: 0.5px;
+font-size:10px;
+}
+.privacy-description{
+  width: 67%;
+    height: 376px;
+    font-size: 12px;
+    text-align: left;
+    font-family:roboto;
+    line-height: 2;
+    padding: 3%;
+    font: Regular 12px/20px Roboto;
+    letter-spacing: 0.6px;
+    color: #747474;
+    opacity: 1;
+}
+.margin-align{
+    margin-top: 2%;
+}
+.email-change-password{
+
+}

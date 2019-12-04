@@ -19,16 +19,6 @@
         <p class="community-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo vestibulum.</p>
     </div>
 
-    <div class="photo-upload" id="exit-group" style="width: 30%; min-height: 20%; top: 50%; left:30%; padding-bottom: 2vw;">
-        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame()"><br><br>
-        <p class="exit-text">EXIT GROUP?</p>
-        <p class="success-txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
-        <div class="exit-popup-message">
-            <input type="button" class="submit-btn interest-exit-button" value="EXIT" onclick="exitInterestGroup()">
-            <input type="button" class="submit-btn interest-no-button" value="NO" onclick="noExit()">
-        </div>
-    </div>
-
 
     <div class="profile-container">
         <div class="left-content">
@@ -50,6 +40,17 @@
             </div>
         </div>
 
+        <div class="popup" id="exit-group">
+        <div class="photo-upload">
+            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" style="float: right; margin-top: 10px; margin-bottom: 2vw; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.29);" onclick="closeFrame()"><br><br>
+            <p class="exit-text">EXIT GROUP?</p>
+            <p class="success-txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula, tortor ipsum faucibus nunc, id aliquam lacus odio nec magna.</p>
+            <div class="exit-popup-message">
+                <input type="button" class="submit-btn interest-exit-button" value="EXIT" onclick="exitInterestGroup()">
+                <input type="button" class="submit-btn interest-no-button" value="NO" onclick="noExit()">
+            </div>
+        </div>
+        </div>
 
         <div class="right-content1">
             <div class="my-profile-options" id="interest-groups1">
@@ -113,8 +114,6 @@
                         <p class="conversation-back" onclick="backToGroupView()">BACK</p>
                     </div>
                 </div>
-
-
 
                 <div class="group-view groups-list" id="group-view" >
                     <div class="group_information">
