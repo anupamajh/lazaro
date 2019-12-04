@@ -20,7 +20,9 @@ function closeFrame(){
                     x.className = "show";
                     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
         }
-        window.addEventListener('load', function(){
-                    var link = document.getElementById("community-link");
-                    link.className += " active";
-                })
+     window.addEventListener('load', function(){
+               var link = document.getElementById("community-link");
+               var linkImg = document.getElementById("community-img");
+               link.className += " active";
+               linkImg.src = "/images/burger-menu/extra-large-256px/Artboard 1 copy 42@16x1.png";
+           })
