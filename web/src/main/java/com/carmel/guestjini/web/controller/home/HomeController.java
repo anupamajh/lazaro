@@ -12,15 +12,6 @@ public class HomeController {
     @RequestMapping(value = "/ForgotPassword")
     public String ForgotPassword(){ return "home/ForgotPassword";}
 
-    @RequestMapping(value = "/LoginDetailsError")
-    public String LoginDetailsError(){ return "home/LoginDetailsError";}
-
-    @RequestMapping(value = "/ForgotPswdSuccess")
-    public String ForgotPswdSuccess(){ return "home/ForgotPswdSuccess";}
-
-    @RequestMapping(value = "/ForgotPasswordError")
-    public String ForgotPasswordError(){ return "home/ForgotPasswordError";}
-
     @RequestMapping(value = "/forgotpassword-otp")
     public String forgotpasswordotp(){ return "home/forgotpassword-otp";}
 
@@ -29,6 +20,7 @@ public class HomeController {
 
     @RequestMapping(value = "/AccountActivation")
     public String AccountActivate(){ return "home/AccountActivation";}
+
 
     @RequestMapping(value = "/change-password/login-landing")
     public String loginLanding(){ return "change-password/login-landing";}
@@ -41,6 +33,7 @@ public class HomeController {
 
     @RequestMapping(value = "/change-password/change-password")
     public String changePassword(){ return "change-password/change-password";}
+
 
     @RequestMapping(value = "community/community-profile")
     public String communityProfile(){ return "community/community-profile";}
@@ -63,6 +56,7 @@ public class HomeController {
     @RequestMapping(value = "community/community-groups/community-group-conversation")
     public String communityGroupConversation(){ return "community/community-groups/community-group-conversation";}
 
+
     @RequestMapping(value = "community/community-groups/people-list")
     public String peopleList(){ return "community/people-list";}
 
@@ -78,8 +72,9 @@ public class HomeController {
     @RequestMapping(value = "community/community-groups/people-filter")
     public String peopleFilter(){ return "community/people-filter";}
 
+
     @RequestMapping(value = "InterestGroups/interest-groups")
-    public String interestgroups(){ return "InterestGroups/interest-groups";}
+    public String interestGroups(){ return "InterestGroups/interest-groups";}
 
     @RequestMapping(value = "InterestGroups/interest-group-list")
     public String groupsList(){ return "InterestGroups/interest-group-list";}

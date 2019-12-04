@@ -40,25 +40,6 @@
             </div>
         </div>
         <div class="submit-button"><button type="submit" class="button submitLanding"  onclick="SubmitlandingPage()">SUBMIT</button>
-            <script>
-          function SubmitlandingPage(){
-             var email = document.getElementById("inputError").value;
-            var password = document.getElementById("passwordError").value;
-            if (email == "Tasmia@gmail.com" && password == "9912345678")
-             {
-               document.getElementById("appsuccess").style.display = "block";
-               document.getElementById("landingPage").style.display = "none";
-            }
-           else{
-               document.getElementById("invalidLoginCredit").style.visibility = "visible";
-               document.getElementById("FieldEmailError").style.display = "block";
-               document.getElementById("FieldPasswordError").style.display = "block";
-               document.getElementById("passwordMask").style.display = "none";
-               document.getElementById("inputError").style.border = "1px solid #BF574A";
-              document.getElementById("passwordError").style.border = "1px solid #BF574A";
-             }
-           }
-           </script>
         </div>
     </div>
 </div>

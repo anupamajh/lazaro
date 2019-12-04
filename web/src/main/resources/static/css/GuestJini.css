@@ -2,15 +2,19 @@
     margin: 0%;
     padding: 0%;
 }
+
 body {
     background-color: #FFFFFF;
 }
+
 [onClick] {
     cursor: pointer;
 }
-*/body {
+
+.community-people-body-color {
     background-color: #E5E5E5;
-}*/
+}
+
 * {
     font-family: roboto;
 }
@@ -367,6 +371,7 @@ button {
     width: 445px;
     color: #747474;
     font-size: 14px;
+    line-height: 1.5;
     margin-top: 2%;
     font-style: Roboto medium;
     letter-spacing: 0.4px;
@@ -410,7 +415,7 @@ button {
     display: inline;
     position: absolute;
     margin-left: 40%;
-    bottom: 40%;
+    bottom: 37%;
     cursor: pointer;
     margin-bottom: 0%;
 }
@@ -509,11 +514,11 @@ button {
     display: none;
 }
 
-.hidden-visibility{
-   visibility:hidden;
+.hidden-visibility {
+    visibility: hidden;
 }
 
-.congrats-success{
+.congrats-success {
     margin-top: 19%;
 }
 
@@ -1062,7 +1067,7 @@ button {
 .return-back-page {
     display: flex;
     align-items: center;
-    justify-content:space-between;
+    justify-content: space-between;
     margin-top: 8%;
     margin-left: 10%;
 }
@@ -1078,10 +1083,11 @@ button {
     margin-right: 86%;
     cursor: pointer;
 }
-.button-reset-password{
-    width:226px;
-    cursor:pointer;
-    height:36px;
+
+.button-reset-password {
+    width: 226px;
+    cursor: pointer;
+    height: 36px;
 }
 
 .interests {
@@ -1095,6 +1101,7 @@ button {
 .show {
     display: block;
 }
+
 .clear {
     color: #909090;
     font-size: 14px;
@@ -1113,10 +1120,10 @@ button {
     letter-spacing: 0.7px;
 }
 
-.group-select-menu{
-display: flex; align-items: center;
+.group-select-menu {
+    display: flex;
+    align-items: center;
 }
-
 
 .change-password-body {
     background-color: #E5E5E5;
@@ -1133,12 +1140,13 @@ display: flex; align-items: center;
     margin: 2%;
     background-color: #EEEEEE;
 }
+
 .community-header {
     min-height: 6vh;
 }
 
-.change-password-title-name{
-    color:#464646;
+.change-password-title-name {
+    color: #464646;
     font-family: roboto;
     font-size: 14px;
     font-weight: 900;
@@ -1155,70 +1163,73 @@ display: flex; align-items: center;
     letter-spacing: 0.6px;
     line-height: 2;
 }
+
 .profile-container {
     display: flex;
     height: 615px;
     background-color: #FFFFFF;
 }
-.change-password-title{
-text-align: left;
-font-size:12px;
-padding: 2%;
-font-weight:400;
-font: Regular 12px/14px Roboto;
-letter-spacing: 0.12px;
-color: #464646;
-opacity: 1;
+
+.change-password-title {
+    text-align: left;
+    font-size: 12px;
+    padding: 2%;
+    font-weight: 400;
+    font: Regular 12px/14px Roboto;
+    letter-spacing: 0.12px;
+    color: #464646;
+    opacity: 1;
 }
-.change-password-content{
-margin-top: 7%;
+
+.change-password-content {
+    margin-top: 7%;
     margin-left: 8%;
 }
-.change-passwordbtn{
+
+.change-passwordbtn {
     width: 41%;
-        margin-top: 14%;
-        font-size: 12px;
-        margin-left: 5%;
-        height: 36px;
+    margin-top: 14%;
+    font-size: 12px;
+    margin-left: 5%;
+    height: 36px;
     background: #32BDD2 0% 0% no-repeat padding-box;
     box-shadow: 0px 3px 6px #5E646980;
     border-radius: 4px;
     opacity: 1;
 }
-.mask-icon1{
-display: inline;
-    position: absolute;
-    margin-left: 40%;
-    bottom: 62%;
+
+.mask-icon1 {
+    display: inline;
+    cursor: pointer;
+    margin-right: 1%;
+    margin-bottom: 0%;
+}
+
+.mask-icon2 {
+    display: inline;
+    margin-right: 1%;
     cursor: pointer;
     margin-bottom: 0%;
 }
-.mask-icon2{
-display: inline;
-    position: absolute;
-    margin-left: 40%;
-    bottom: 45%;
+
+.mask-icon3 {
+    display: inline;
+    margin-right: 1%;
     cursor: pointer;
     margin-bottom: 0%;
 }
-.mask-icon3{
-display: inline;
-    position: absolute;
-    margin-left: 40%;
-    bottom: 28%;
-    cursor: pointer;
-    margin-bottom: 0%;
+
+.change-password-field {
+    letter-spacing: 0.5px;
+    font-size: 10px;
 }
-.change-password-field{
-letter-spacing: 0.5px;
-font-size:10px;
-}
-.privacy-description{
-  width: 67%;
+
+.privacy-description {
+    width: 67%;
     height: 376px;
     font-size: 12px;
     text-align: left;
-    font-family:roboto;
+    font-family: roboto;
     line-height: 2;
     padding: 3%;
     font: Regular 12px/20px Roboto;
@@ -1226,9 +1237,121 @@ font-size:10px;
     color: #747474;
     opacity: 1;
 }
-.margin-align{
+
+.margin-align {
     margin-top: 2%;
 }
-.email-change-password{
 
+.email-box-change-password {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 1px solid #F4F4F4;
+    border-radius: 10px;
+    opacity: 1;
+    margin-top: 3%;
+}
+
+.outline {
+    box-shadow: none;
+    border: 1px solid #FFFF;
+}
+
+.star {
+    color: #DC3442;
+    font-size: 12px;
+    padding: 1%;
+}
+
+.popup {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.29);
+    top: 0%;
+    left: 0%;
+}
+
+.photo-upload {
+    width: 33%;
+    background-color: #FFFFFF;
+    padding: 10px 1.5vw 1vw 1.5vw;
+    border-radius: 20px;
+    margin: 18% auto;
+}
+
+.success {
+    color: #32BDD2;
+    font-family: roboto;
+    font-weight: 900;
+    font-size: 16px;
+    letter-spacing: 1.6px;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+.success-txt {
+    color: #5A5A5A;
+    font-family: roboto;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.7px;
+    line-height: 2.4;
+    width: 80%;
+}
+
+.submit-btn {
+    background-color: #32BDD2;
+    padding-right: 35px;
+    padding-left: 35px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: roboto;
+    outline: none;
+    font-weight: 900;
+    font-size: 16px;
+    color: #FFFFFF;
+    border: solid 1px #32BDD2;
+    border-radius: 3px;
+    letter-spacing: 1.5px;
+}
+
+.group-hike-button {
+    margin-left: 34%;
+    margin-top: 13%;
+}
+
+.error-color {
+    color: #E65959;
+}
+
+.error-button {
+    background-color: #E65959;
+    box-shadow: 0px 4px 6px #00000029;
+    border-radius: 3px;
+    border: none;
+}
+
+.logout {
+    width: 271px;
+    margin-left: 24%;
+    margin-top: 10%;
+    height: 43px;
+    background: #747474 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 15px #00000033;
+    border-radius: 7px;
+    opacity: 1;
+}
+
+.logout-success {
+    text-align: center;
+    font: Medium 14px/17px Roboto;
+    letter-spacing: 0.7px;
+    color: #FFFFFF;
+    padding: 4%;
+    opacity: 1;
 }

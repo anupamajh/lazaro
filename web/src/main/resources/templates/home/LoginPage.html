@@ -6,7 +6,6 @@
     <title>Login-Page</title>
     <link th:href="@{https://fonts.googleapis.com/css?family=Roboto&display=swap}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/GuestJini.css}">
-
 </head>
 
 <body>
@@ -27,19 +26,14 @@
                 <div class="Email">
                     <input class="box" type="text" name="username" placeholder="Email or Mobile Number" size="48"
                            id="inputError" onfocus="this.placeholder=''" onblur="this.placeholder='Email or Mobile Number'">
-                    <input class="box landing" type="text" name="username" placeholder="Tasmia@gmail.com" size="48" border-radius="5px;" id="hideEmail"
-                           onfocus="this.placeholder=''" onblur="this.placeholder='Tasmia@gmail.com">
                     <span class="fieldErrorLoginPage" id="FieldEmailError">This field is required</span>
                 </div>
             </div>
 
-            <div class="password">
-                <input class="box" type="password" name="password" placeholder="Password" size="48" border-radius="5px;"
+            <div class="password" style="margin-top:10%;">
+                <input class="box" type="password" name="password" placeholder="Password" size="48" border-radius="5px"
                        id="passwordError"  onfocus="this.placeholder=''" onblur="this.placeholder='Password'">
-
-                <input class="box landing" type="password" name="password" placeholder="TASSU" size="48" border-radius="5px;" id="hidePassword"
-                       onfocus="this.placeholder=''" onblur="this.placeholder='TASSU'">
-                <img class="unmask-icon" id="passwordUnmask" th:src="@{/images/EyeIcon.png}" alt="" width="24px" height="24px" onclick="unmask()">
+                <img class="unmask-icon" id="passwordUnmask" th:src="@{/images/EyeIcon.png}" alt="" width="24px" height="24px" onclick="ToggleConfirmPassword()">
                 <img class="mask-icon" id="passwordMask" th:src="@{/images/EyeIconblue.png}" alt="" width="24px" height="24px" onclick="mask()">
                 <p class="fieldErrorLoginPage" id="FieldPasswordError">This field is required</p>
             </div>
@@ -49,29 +43,6 @@
             </div>
             <div class="login-button">
                 <button type="submit" class="button loginPage" onclick="loginpage()">LOGIN</button>
-                <script>
-          function loginpage(){
-             var email = document.getElementById("inputError").value;
-            var password = document.getElementById("passwordError").value;
-            if (email == "Tasmia@gmail.com" && password == "TASSU")
-             {
-               location.replace("/community/community-profile");
-            }
-<!--           else if(email != "Tasmia@gmail.com" && password != "TASSU") {-->
-<!--                document.getElementById("invalidLoginCredit").style.visibility = "visible";-->
-<!--                }-->
-           else{
-            document.getElementById("invalidLoginCredit").style.visibility = "visible";
-               document.getElementById("FieldEmailError").style.display = "block";
-              document.getElementById("hidePassword").style.display = "none";
-               document.getElementById("hideEmail").style.display = "none";
-              document.getElementById("FieldPasswordError").style.display = "block";
-               document.getElementById("passwordMask").style.display = "none";
-               document.getElementById("inputError").style.border = "1px solid #BF574A";
-              document.getElementById("passwordError").style.border = "1px solid #BF574A";
-              document.getElementById("passwordUnmask").style.display = "none";}
-            }
-              </script>
             </div>
 
             <div class="create-account">
