@@ -14,3 +14,7 @@
         function viewExistingGroup(){
             location.replace("/community/community-groups/community-existing-group-view");
         }
+window.addEventListener('load', function(){
+            var link = document.getElementById("community-link");
+            link.className += " active";
+        })

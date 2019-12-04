@@ -20,3 +20,7 @@
         function joinConversation(){
             location.replace("/community/community-groups/community-group-conversation");
         }
+        window.addEventListener('load', function(){
+                    var link = document.getElementById("community-link");
+                    link.className += " active";
+                })

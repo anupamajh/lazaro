@@ -74,3 +74,7 @@
                 }
             }
         }
+        window.addEventListener('load', function(){
+                    var link = document.getElementById("community-link");
+                    link.className += " active";
+                })

@@ -8,3 +8,7 @@ function closeFrame(){
         function backToGroupView(){
             location.replace("/community/community-groups/community-groups");
 }
+window.addEventListener('load', function(){
+            var link = document.getElementById("community-link");
+            link.className += " active";
+        })

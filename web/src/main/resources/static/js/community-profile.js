@@ -8,10 +8,10 @@ function viewInterestList(){
             console.log("entered");
             if(document.getElementById("drop-down-list").style.display === "none"){
                  document.getElementById("drop-down-list").style.display = "block";
-                 document.getElementById("drop-down-btn").src="/images/extra-large-256px/Artboard 1 copy 2@16x.png";
+                 document.getElementById("drop-down-btn-interest").src="/images/extra-large-256px/Artboard 1 copy 2@16x.png";
             }else{
                 document.getElementById("drop-down-list").style.display = "none";
-                document.getElementById("drop-down-btn").src="/images/extra-large-256px/Artboard 1 copy@16x.png";
+                document.getElementById("drop-down-btn-interest").src="/images/extra-large-256px/Artboard 1 copy@16x.png";
             }
         }
 
@@ -183,3 +183,7 @@ function viewInterestList(){
         function openGroupsPage(){
             location.replace("/community/community-groups/community-groups");
         }
+        window.addEventListener('load', function(){
+            var link = document.getElementById("community-link");
+            link.className += " active";
+        })

@@ -20,3 +20,7 @@ function closeFrame(){
                     x.className = "show";
                     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
         }
+        window.addEventListener('load', function(){
+                    var link = document.getElementById("community-link");
+                    link.className += " active";
+                })
