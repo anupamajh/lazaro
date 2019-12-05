@@ -2221,7 +2221,6 @@ input[type=text]:focus {
 
 #back-btn p {
     color: #32BDD2;
-    font-family: roboto;
     font-weight: 900;
     font-size: 14px;
     margin-left: 7px;
@@ -2235,7 +2234,6 @@ input[type=text]:focus {
 }
 #back-btn1 p{
     color: #32BDD2;
-    font-family: roboto;
     font-weight: 900;
     font-size: 14px;
     margin-left: 7px;
@@ -2284,7 +2282,6 @@ input[type=text]:focus {
 
 .fav-clear-link2 {
     display: block;
-    font-family: roboto;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 1.05px;
@@ -2307,7 +2304,6 @@ input[type=text]:focus {
 }
 .fav-link{
     display: block;
-    font-family: roboto;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.7px;
@@ -2415,7 +2411,6 @@ input[type=text]:focus {
 }
 
 .conversation-group-name {
-    font-family: roboto;
     color: #505050;
     font-size: 10px;
     font-weight: 600;
@@ -2424,7 +2419,6 @@ input[type=text]:focus {
 }
 
 .conversation-group-description {
-    font-family: roboto;
     color: #909090;
     font-size: 10px;
     font-weight: 400;
@@ -2434,7 +2428,6 @@ input[type=text]:focus {
 
 .msg-time {
     color: #909090;
-    font-family: roboto;
     font-size: 8px;
     letter-spacing: 0.4px;
     line-height: 9px;
@@ -2442,7 +2435,6 @@ input[type=text]:focus {
 
 .msg-by {
     color: #5A5A5A;
-    font-family: roboto;
     margin: 10px 0px;
     font-size: 10px;
     letter-spacing: 0.5px;
@@ -2452,7 +2444,6 @@ input[type=text]:focus {
 
 .msg-content {
     color: #747474;
-    font-family: roboto;
     font-size: 10px;
     letter-spacing: 0.25px;
     line-height: 13px;
@@ -2506,7 +2497,6 @@ input[type=text]:focus {
 
 .conversation-back {
     color: #32BDD2;
-    font-family: roboto;
     font-weight: 900;
     font-size: 14px;
     margin-left: 7px;
@@ -2519,7 +2509,6 @@ input[type=text]:focus {
 }
 
 .group-info-head {
-    font-family: roboto;
     font-size: 12px;
     letter-spacing: 0.6px;
     line-height: 1.4;
@@ -2529,7 +2518,6 @@ input[type=text]:focus {
 }
 
 .group-info-sub {
-    font-family: roboto;
     font-size: 10px;
     letter-spacing: 0;
     line-height: 1.4;
@@ -2542,7 +2530,6 @@ input[type=text]:focus {
 }
 
 .created-by {
-    font-family: roboto;
     letter-spacing: 0.5px;
     font-size: 10px;
     line-height: 20px;
@@ -2550,7 +2537,6 @@ input[type=text]:focus {
 }
 
 .group-admin-name {
-    font-family: roboto;
     letter-spacing: 0.35px;
     font-size: 14px;
     line-height: 15px;
@@ -2559,7 +2545,6 @@ input[type=text]:focus {
 }
 
 .group-created-date {
-    font-family: roboto;
     letter-spacing: 0.6px;
     font-size: 12px;
     line-height: 15px;
@@ -2568,7 +2553,6 @@ input[type=text]:focus {
 }
 
 .group-join1 {
-    font-family: roboto;
     font-size: 12px;
     letter-spacing: 0.6px;
     line-height: 14px;
@@ -2578,7 +2562,6 @@ input[type=text]:focus {
 }
 
 .group-join2 {
-    font-family: roboto;
     font-size: 12px;
     letter-spacing: 0.6px;
     line-height: 14px;
@@ -2613,7 +2596,6 @@ input[type=text]:focus {
 }
 
 .group-view-members-count {
-    font-family: roboto;
     font-size: 14px;
     letter-spacing: 0.7px;
     line-height: 25px;
@@ -2636,7 +2618,6 @@ input[type=text]:focus {
 }
 
 .group-member-name {
-    font-family: roboto;
     letter-spacing: 0.7px;
     font-size: 14px;
     line-height: 25px;
@@ -2644,7 +2625,6 @@ input[type=text]:focus {
 }
 
 .group-member-join-date {
-    font-family: roboto;
     letter-spacing: 0.6px;
     font-size: 12px;
     line-height: 14px;
@@ -2655,7 +2635,6 @@ input[type=text]:focus {
     display: flex;
     margin: 6vh 0vh 3vh 0vh;
 }
-
 .group-view-back-btn p {
     color: #32BDD2;
     font-family: roboto;

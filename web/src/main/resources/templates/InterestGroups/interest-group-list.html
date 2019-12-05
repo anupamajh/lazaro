@@ -189,7 +189,12 @@
                     <div id="clear-filter" style="display:none;">
                         <p style=" width: 142px;margin-left: 47%;color:#5A5A5A; font-family:roboto;font-size:12px;">
                             Showing new groups.
-                            <span onclick="clearFilter()" style="color:#32BDD2; cursor:pointer; font-family:roboto;"><u>Clear Filter</u></span>
+                            <span onclick="clearFiltergroup()" style="color:#32BDD2; cursor:pointer; font-family:roboto;"><u>Clear Filter</u></span>
+                            <script>
+                                function clearFiltergroup(){
+                                 location.replace("/InterestGroups/interest-group-list");
+                                }
+                            </script>
                         </p>
                     </div>
 
