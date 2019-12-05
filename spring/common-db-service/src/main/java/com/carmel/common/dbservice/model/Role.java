@@ -6,6 +6,9 @@ import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -23,10 +26,14 @@ public class Role implements Serializable {
 
     @Column(name = "org_id")
     @Length(max = 40)
+    @NotNull(message = "Organization cannot be blank")
     private String orgId;
 
     @Column(name = "role_name")
-    @Length(max = 255)
+    @Length(max = 255, min = 1, message = "Role name length should be between 1 and 100")
+    @NotNull(message = "Role Name cannot be null")
+    @NotEmpty(message = "Role name cannot be empty")
+    @NotBlank(message = "Role name cannot be blank")
     private String roleName;
 
     @Column(name = "home_page")

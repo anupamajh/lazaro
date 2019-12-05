@@ -33,19 +33,19 @@ logging:
     path: 'logs/'
     max-size: 5MB
     clean-history-on-start: false
-    name: 'logs/common-db-service.log'
+    name: '/var/log/carmel/common-db-service.log'
 
-  eureka:
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://139.59.32.238:8001/eureka/
+
+security:
+  oauth2:
+    resource:
+      token-info-uri: http://139.59.32.238:8005/oauth/check_token
     client:
-      register-with-eureka: true
-      fetch-registry: true
-      serviceUrl:
-        defaultZone: http://localhost:8001/eureka/
-
-  security:
-    oauth2:
-      resource:
-        token-info-uri: http://localhost:8005/oauth/check_token
-      client:
-        client-id: carmel
-        client-secret: P@ssw0rd
+      client-id: carmel
+      client-secret: P@ssw0rd

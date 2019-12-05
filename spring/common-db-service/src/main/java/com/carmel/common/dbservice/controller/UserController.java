@@ -1,6 +1,9 @@
 package com.carmel.common.dbservice.controller;
 
+import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.User;
+import com.carmel.common.dbservice.model.UserInfo;
+import com.carmel.common.dbservice.repository.UserRepository;
 import com.carmel.common.dbservice.response.UserResponse;
 import com.carmel.common.dbservice.response.UsersResponse;
 import com.carmel.common.dbservice.services.UserService;
@@ -13,11 +16,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -32,23 +39,38 @@ public class UserController {
     Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
+    UserInformation userInformation;
+
+    @Autowired
     UserService userService;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public UserResponse save(@RequestBody User user) {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserInfo userInfo = userInformation.getUserInfo(userName);
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         UserResponse userResponse = new UserResponse();
         try {
+            if (user.getId() == null) {
+                user.setId("");
+            }
             logger.trace("Data:{}", objectMapper.writeValueAsString(user));
             if (checkDuplicate(user)) {
                 userResponse.setUser(user);
                 userResponse.setSuccess(false);
                 userResponse.setError("Duplicate user name!");
             } else {
-                if (user.getId() == null || user.getId().isEmpty()  ) {
+                if (user.getId() == "") {
                     user.setPassword(passwordEncoder.encode(user.getPassword()));
+                    user.setCreatedBy(userInfo.getId());
+                    user.setCreationTime(new Date());
+                }else{
+                    Optional<User> optionalUser = userService.findById(user.getId());
+                    user.setPassword(optionalUser.get().getPassword());
+                    user.setLastModifiedBy(userInfo.getId());
+                    user.setLastModifiedTime(new Date());
                 }
                 userResponse.setUser(userService.save(user));
                 userResponse.setSuccess(true);
@@ -65,6 +87,8 @@ public class UserController {
 
     @RequestMapping(value = "/trash", method = RequestMethod.POST)
     public UserResponse moveToTrash(@RequestBody Map<String, String> formData) {
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserInfo userInfo = userInformation.getUserInfo(userName);
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         UserResponse userResponse = new UserResponse();
@@ -74,6 +98,8 @@ public class UserController {
             if (userOptional != null) {
                 User user = userOptional.get();
                 user.setIsDeleted(1);
+                user.setDeletedBy(userInfo.getId());
+                user.setDeletedTime(new Date());
                 userResponse.setSuccess(true);
                 userResponse.setError("");
                 userResponse.setUser(userService.save(user));
@@ -229,8 +255,13 @@ public class UserController {
     }
 
     @GetMapping("/me")
-    public Principal user(Principal principal) {
-        return principal;
+    public UserInfo user(Principal principal) {
+        String userName = principal.getName();
+        Optional<User> optionalUser = userService.findByUserName(userName);
+        optionalUser.orElseThrow(() ->
+                new UsernameNotFoundException("Cannot find the logged in principle, Please contact administrator"));
+        UserInfo userInfo = new UserInfo(optionalUser.get());
+        userInfo.setPrincipal(principal);
+        return userInfo;
     }
-
 }

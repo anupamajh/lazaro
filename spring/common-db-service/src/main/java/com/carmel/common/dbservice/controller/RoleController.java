@@ -1,6 +1,8 @@
 package com.carmel.common.dbservice.controller;
 
+import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.Role;
+import com.carmel.common.dbservice.model.UserInfo;
 import com.carmel.common.dbservice.response.RoleResponse;
 import com.carmel.common.dbservice.response.RolesResponse;
 import com.carmel.common.dbservice.services.RoleService;
@@ -12,11 +14,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -30,8 +34,13 @@ public class RoleController {
     @Autowired
     RoleService roleService;
 
+    @Autowired
+    UserInformation userInformation;
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public RoleResponse save(@RequestBody Role role) {
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserInfo userInfo = userInformation.getUserInfo(userName);
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         RoleResponse roleResponse = new RoleResponse();
@@ -42,6 +51,18 @@ public class RoleController {
                 roleResponse.setSuccess(false);
                 roleResponse.setError("Duplicate role name!");
             } else {
+                if (role.getId() != null) {
+                    if (!role.getId().trim().equals("")) {
+                        role.setLastModifiedBy(userInfo.getId());
+                        role.setLastModifiedTime(new Date());
+                    } else {
+                        role.setCreatedBy(userInfo.getId());
+                        role.setCreationTime(new Date());
+                    }
+                } else {
+                    role.setCreatedBy(userInfo.getId());
+                    role.setCreationTime(new Date());
+                }
                 roleResponse.setRole(roleService.save(role));
                 roleResponse.setSuccess(true);
                 roleResponse.setError("");
@@ -58,6 +79,8 @@ public class RoleController {
 
     @RequestMapping(value = "/trash", method = RequestMethod.POST)
     public RoleResponse moveToTrash(@RequestBody Map<String, String> formData) {
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserInfo userInfo = userInformation.getUserInfo(userName);
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         RoleResponse roleResponse = new RoleResponse();
@@ -67,6 +90,8 @@ public class RoleController {
             if (optionalRole != null) {
                 Role role = optionalRole.get();
                 role.setIsDeleted(1);
+                role.setDeletedBy(userInfo.getId());
+                role.setDeletedTime(new Date());
                 roleResponse.setSuccess(true);
                 roleResponse.setError("");
                 roleResponse.setRole(roleService.save(role));

@@ -6,6 +6,9 @@ import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -40,14 +43,23 @@ public class User implements Serializable {
 
     @Column(name = "org_id")
     @Length(max = 40)
+    @NotEmpty(message = "Organization cannot be empty")
+    @NotBlank(message = "Organization cannot be blank")
+    @NotNull(message = "Organization cannot be empty")
     private String orgId;
 
     @Column(name = "full_name")
-    @Length(max = 100)
+    @Length(max = 100, min = 1, message = "Full name length should be between 1 and 100")
+    @NotEmpty(message = "Full Name cannot be empty")
+    @NotBlank(message = "Full Name cannot be blank")
+    @NotNull(message = "Full Name cannot be empty")
     private String fullName;
 
     @Column(name = "user_name")
-    @Length(max = 100)
+    @Length(max = 100, min = 1, message = "User name length should be between 1 and 100")
+    @NotEmpty(message = "User Name cannot be empty")
+    @NotBlank(message = "User Name cannot be blank")
+    @NotNull(message = "User Name cannot be empty")
     private String userName;
 
     @Column(name = "password")

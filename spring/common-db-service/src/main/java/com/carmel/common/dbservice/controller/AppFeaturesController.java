@@ -1,9 +1,12 @@
 package com.carmel.common.dbservice.controller;
 
+import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.AppFeatures;
+import com.carmel.common.dbservice.model.UserInfo;
 import com.carmel.common.dbservice.response.AppFeatureResponse;
 import com.carmel.common.dbservice.response.AppFeaturesResponse;
 import com.carmel.common.dbservice.services.AppFeaturesService;
+import com.carmel.common.dbservice.services.UserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,11 +15,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -30,8 +40,13 @@ public class AppFeaturesController {
     @Autowired
     AppFeaturesService appFeaturesService;
 
+    @Autowired
+    UserInformation userInformation;
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public AppFeatureResponse save(@RequestBody AppFeatures appFeatures) {
+    public AppFeatureResponse save(@Valid @RequestBody AppFeatures appFeatures) {
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserInfo userInfo = userInformation.getUserInfo(userName);
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         AppFeatureResponse appFeatureResponse = new AppFeatureResponse();
@@ -46,6 +61,18 @@ public class AppFeaturesController {
                 appFeatureResponse.setSuccess(false);
                 appFeatureResponse.setError("Duplicate application feature name!");
             } else {
+                if (appFeatures.getId() != null) {
+                    if (!appFeatures.getId().trim().equals("")) {
+                        appFeatures.setLastModifiedBy(userInfo.getId());
+                        appFeatures.setLastModifiedTime(new Date());
+                    } else {
+                        appFeatures.setCreatedBy(userInfo.getId());
+                        appFeatures.setCreationTime(new Date());
+                    }
+                } else {
+                    appFeatures.setCreatedBy(userInfo.getId());
+                    appFeatures.setCreationTime(new Date());
+                }
                 appFeatureResponse.setAppFeatures(appFeaturesService.save(appFeatures));
                 appFeatureResponse.setSuccess(true);
                 appFeatureResponse.setError("");
@@ -63,6 +90,8 @@ public class AppFeaturesController {
     @RequestMapping(value = "/trash", method = RequestMethod.POST)
     public AppFeatureResponse moveToTrash(@RequestBody Map<String, String> formData) {
         ObjectMapper objectMapper = new ObjectMapper();
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserInfo userInfo = userInformation.getUserInfo(userName);
         logger.trace("Entering");
         AppFeatureResponse appFeatureResponse = new AppFeatureResponse();
         try {
@@ -70,6 +99,8 @@ public class AppFeaturesController {
             if (optionalAppFeature != null) {
                 AppFeatures appFeatures = optionalAppFeature.get();
                 appFeatures.setIsDeleted(1);
+                appFeatures.setDeletedBy(userInfo.getId());
+                appFeatures.setDeletedTime(new Date());
                 appFeatureResponse.setSuccess(true);
                 appFeatureResponse.setError("");
                 appFeatureResponse.setAppFeatures(appFeaturesService.save(appFeatures));
@@ -159,7 +190,7 @@ public class AppFeaturesController {
             int pageNumber = formData.get("current_page") == null ? 0 : Integer.parseInt(formData.get("current_page"));
             int pageSize = formData.get("page_size") == null ? 10 : Integer.parseInt(formData.get("page_size"));
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("featureName"));
-            Page<AppFeatures> page = appFeaturesService.findAllByIsDeleted(0,pageable);
+            Page<AppFeatures> page = appFeaturesService.findAllByIsDeleted(0, pageable);
             appFeaturesResponse.setTotalRecords(page.getTotalElements());
             appFeaturesResponse.setTotalPages(page.getTotalPages());
             appFeaturesResponse.setAppFeaturesList(page.getContent());
@@ -187,7 +218,7 @@ public class AppFeaturesController {
             String featureName = formData.get("feature_name") == null ? null : String.valueOf(formData.get("feature_name"));
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("featureName"));
             Page<AppFeatures> page;
-            if (featureName == null ) {
+            if (featureName == null) {
                 page = appFeaturesService.findAll(pageable);
             } else {
                 page = appFeaturesService.findAllByFeatureNameContaining(featureName, pageable);

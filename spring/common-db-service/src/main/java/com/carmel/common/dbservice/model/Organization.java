@@ -5,6 +5,8 @@ import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -20,15 +22,19 @@ public class Organization {
     private String id;
 
     @Column(name = "org_name")
-    @Length(max = 255)
+    @Length(max = 255, min = 1, message = "Organization name length should be between 1 and 255")
+    @NotBlank(message = "Organization name cannot be blank")
+    @NotNull(message = "Organization name cannot be null")
     private String orgName;
 
     @Column(name = "org_domain")
-    @Length(max = 255)
+    @Length(max = 255, min = 1, message = "Organization domain name length should be between 1 and 255")
+    @NotBlank(message = "Organization domain cannot be blank")
+    @NotNull(message = "Organization domain cannot be null")
     private String orgDomain;
 
     @Column(name = "description")
-    @Length(max = 1000)
+    @Length(max = 1000, message = "Description length cannot exceed 1000")
     private String description;
 
     @Column(name = "created_by")

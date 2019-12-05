@@ -7,6 +7,9 @@ import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,6 +29,9 @@ public class AppFeatures implements Serializable {
 
     @Column(name = "feature_name")
     @Length(max = 255)
+    @NotNull
+    @Length(min = 1, max = 100, message = "Application feature name length should be between 1 and 100")
+    @NotBlank(message = "Application feature Name cannot be blank")
     private String featureName;
 
     @Column(name = "tooltip")
@@ -34,6 +40,9 @@ public class AppFeatures implements Serializable {
 
     @Column(name = "system_role")
     @Length(max = 1000)
+    @NotNull
+    @Length(min = 1, max = 100, message = "System role name length should be between 1 and 100")
+    @NotBlank(message = "System role Name is mandatory")
     private String systemRole;
 
     @Column(name = "url")

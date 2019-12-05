@@ -1,6 +1,8 @@
 package com.carmel.common.dbservice.controller;
 
+import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.Organization;
+import com.carmel.common.dbservice.model.UserInfo;
 import com.carmel.common.dbservice.response.OrganizationResponse;
 import com.carmel.common.dbservice.response.OrganizationsResponse;
 import com.carmel.common.dbservice.services.OrganizationService;
@@ -12,11 +14,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -30,8 +34,13 @@ public class OrganizationController {
     @Autowired
     OrganizationService organizationService;
 
+    @Autowired
+    UserInformation userInformation;
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public OrganizationResponse save(@RequestBody Organization organization) {
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserInfo userInfo = userInformation.getUserInfo(userName);
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         OrganizationResponse organizationResponse = new OrganizationResponse();
@@ -42,6 +51,18 @@ public class OrganizationController {
                 organizationResponse.setSuccess(false);
                 organizationResponse.setError("Duplicate organization name!");
             } else {
+                if (organization.getId() != null) {
+                    if (!organization.getId().trim().equals("")) {
+                        organization.setLastModifiedBy(userInfo.getId());
+                        organization.setLastModifiedTime(new Date());
+                    } else {
+                        organization.setCreatedBy(userInfo.getId());
+                        organization.setCreationTime(new Date());
+                    }
+                } else {
+                    organization.setCreatedBy(userInfo.getId());
+                    organization.setCreationTime(new Date());
+                }
                 organizationResponse.setOrganization(organizationService.save(organization));
                 organizationResponse.setSuccess(true);
                 organizationResponse.setError("");
@@ -59,6 +80,8 @@ public class OrganizationController {
     @RequestMapping(value = "/trash", method = RequestMethod.POST)
     public OrganizationResponse moveToTrash(@RequestBody Map<String, String> formData) {
         ObjectMapper objectMapper = new ObjectMapper();
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserInfo userInfo = userInformation.getUserInfo(userName);
         logger.trace("Entering");
         OrganizationResponse organizationResponse = new OrganizationResponse();
         try {
@@ -67,6 +90,8 @@ public class OrganizationController {
             if (organization != null) {
                 Organization org = organization.get();
                 org.setIsDeleted(1);
+                org.setDeletedBy(userInfo.getId());
+                org.setDeletedTime(new Date());
                 organizationResponse.setSuccess(true);
                 organizationResponse.setError("");
                 organizationResponse.setOrganization(organizationService.save(org));
