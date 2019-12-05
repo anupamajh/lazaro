@@ -13,7 +13,7 @@
     <div class="main-layer">
         <img class="guesture-logo" th:src="@{/images/GuestureLogo.png}" alt="" >
 
-        <div class="lorem-Text">
+        <div class="text-description-align">
             <p class="description-text-medium">Lorem ipsum dolor sit amet, consectetur
                 <span class="description-text-medium">adipiscing elit. Etiam erat sapien, ultricies.</span></p>
         </div>
@@ -56,8 +56,8 @@
         <span class="link-reset">to the web application.</span>
         <p class="link-reset">or</p>
         <p class="link-reset">Download mobile app</p>
-            <img  th:src="@{/images/extra-large-256px/GooglePlayStore.png}" alt="" width="112px" height="43px">
-            <img  th:src="@{/images/extra-large-256px/AppleStore.png}" alt="" width="112px" height="82px">
+            <img  th:src="@{/images/extra-large-256px/GooglePlayStore.png}" alt="" width="112px" height="43px" onclick="LoginWeb()">
+            <img  th:src="@{/images/extra-large-256px/AppleStore.png}" alt="" width="112px" height="82px"onclick="LoginWeb()">
         </div>
 
         <div class="success-message-activation" id="link-expire">

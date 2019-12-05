@@ -12,9 +12,9 @@
 <div class="main">
     <div class="main-layer">
         <img class="guesture-logo" th:src="@{/images/GuestureLogo.png}" alt="" >
-        <div class="lorem-Text">
+        <div class="text-description-align">
             <p class="description-text-medium" >Lorem ipsum dolor sit amet, consectetur
-                <span class="description-text-medium" >adipiscing elit. Etiam erat sapien, ultricies.</span>
+                <span class="description-text-medium">adipiscing elit. Etiam erat sapien, ultricies.</span>
             </p>
         </div>
         <div class="align" >
@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            <div class="password" style="margin-top:10%;">
+            <div class="password align-top">
                 <input class="box" type="password" name="password" placeholder="Password" size="48" border-radius="5px"
                        id="passwordError"  onfocus="this.placeholder=''" onblur="this.placeholder='Password'">
                 <img class="unmask-icon" id="passwordUnmask" th:src="@{/images/EyeIcon.png}" alt="" width="24px" height="24px" onclick="ToggleConfirmPassword()">
