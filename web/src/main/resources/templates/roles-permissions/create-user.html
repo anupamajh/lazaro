@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create-User</title>
+    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto&display=swap}" rel="stylesheet">
+    <link th:href="@{/css/GuestJini.css}" rel="stylesheet">
+</head>
+
+<body class="change-password-body">
+<header class="community-header">
+    <div th:replace="shared/dashboard :: dashboard"></div>
+</header>
+<div th:replace="shared/burger-menu :: burgerMenu"></div>
+<div class="content">
+    <div class="community-desc">
+        <span class="change-password-title-name">NEW USER</span>
+        <p class="change-password-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo vestibulum.</p>
+    </div>
+
+
+    <div class="profile-container">
+        <div>
+            <div class="change-password-content">
+                <p class="change-password-title">Full Name<span class="star">*</span></p>
+                <div class="email-box-change-password" >
+                    <input class="box outline" type="text" name="password" placeholder="" size="48"
+                           onfocus="this.placeholder=''" onblur="this.placeholder=''">
+                   </div>
+            </div>
+
+            <div class="change-password-content">
+                <p class="change-password-title">Email<span class="star">*</span>
+                <span class="change-password-title" style="font-size:10px;color:#909090;">(An email will be sent to this address to validate and activate the account)</span></p>
+                <div class="email-box-change-password ">
+                    <input  class="box outline" type="text" name="password" placeholder="" size="48"
+                           onfocus="this.placeholder=''" onblur="this.placeholder=''">
+                    </div>
+              </div>
+
+
+            <div class="change-password-content">
+                <p class="change-password-title">Role<span class="star">*</span></p>
+                <div class="email-box-change-password " >
+                    <input  class="box outline" type="text" name="password" placeholder="Admin" size="48"
+                           onfocus="this.placeholder='Admin'" onblur="this.placeholder=''">
+                   </div>
+               </div>
+            <div style="display: flex; justify-content: space-between;align-items: center;margin-top: 16%;margin-left: 9%;">
+            <a class="hyperlink-text " href="#" style="color:#707070;font-weight:900;">CANCEL</a>
+            <button type="submit" class="button loginPage" style="margin-left: 255%;">SAVE</button></div>
+        </div>
+    </div>
+</div>
+</body>
+<script th:src="@{/js/change-password.js}" type="text/javascript"></script>
+</html>

@@ -16,3 +16,19 @@
 function openCommunity(){
       location.assign("/community/community-profile");
 }
+
+function changePassword(){
+      location.assign("/change-password/change-password");
+}
+
+function privatePolicy(){
+      location.assign("/change-password/private-policy");
+}
+
+function terms(){
+      location.assign("/change-password/terms-conditions");
+}
+
+function logOut(){
+      location.assign("/change-password/logout-landing");
+}

@@ -711,7 +711,7 @@ button {
     font-weight: 400;
     letter-spacing: 1.05px;
     margin-left: 12%;
-    width: 100px;
+    width: 107px;
 }
 
 .people-dot {
@@ -1305,4 +1305,24 @@ button {
     color: #FFFFFF;
     padding: 4%;
     opacity: 1;
+}
+.roles{
+width: 75%;
+    height: 107px;
+    margin-top: 12%;
+    margin-left: 5%;
+    position: absolute;
+    /* padding-right: 5%; */
+    background: #EEEEEE 0% 0% no-repeat padding-box;
+    opacity: 1;
+}
+.scroll{
+ margin:4px, 4px;
+                padding:4px;
+                background-color: green;
+                width: 500px;
+                height: 110px;
+                overflow-x: hidden;
+                overflow-x: auto;
+                text-align:justify;
 }
