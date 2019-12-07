@@ -56,5 +56,7 @@
                 }else{
                     document.getElementById("search-not-found").style.display = "none";
                 }
+                   document.getElementById("count-msg").style.display = "block";
+                   document.getElementById("count").innerHTML = count;
             }
         }

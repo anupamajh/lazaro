@@ -37,14 +37,14 @@ body {
 
 .left-content {
     background-color: #FFFFFF;
-    width: 40%;
+    width: 35%;
     border-right: solid 1px #CCCCCC;
 }
 
 .right-content {
     background-color: #FFFFFF;
     padding: 2%;
-    width: 60%;
+    width: 65%;
 }
 
 .right-content1 {
@@ -788,11 +788,11 @@ input[type=text]:focus {
 
 .groups {
     display: block;
-    padding: 10% 20%;
+   /* padding: 10% 20%;*/
 }
 
 .group-content {
-    padding: 05% 03%;
+    padding: 0% 03%;
 }
 
 .group-view {
@@ -971,7 +971,7 @@ input[type=text]:focus {
 
 .community-title {
     color: #464646;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
     letter-spacing: 1.4px;
 }
@@ -1135,7 +1135,7 @@ input[type=text]:focus {
 }
 
 .empty-box {
-    min-height: 3vh;
+    min-height: 1.2vh;
     background-color: #EEEEEE;
 }
 
@@ -1149,7 +1149,7 @@ input[type=text]:focus {
 
 .my-profile-head {
     color: #464646;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
     letter-spacing: 1.4px;
 }
@@ -1307,7 +1307,7 @@ input[type=text]:focus {
 }
 
 .groups {
-    padding: 2% 23%;
+   padding: 2% 23%;
 }
 
 .invited1 {
@@ -1459,7 +1459,7 @@ input[type=text]:focus {
 
 .groups {
     display: block;
-    padding: 10% 20%;
+   /* padding: 10% 20%;*/
 }
 
 .groups-list {

@@ -1,4 +1,4 @@
-    function viewGroups(){
+function viewGroups(){
         document.getElementById("groups-list").style.display = "block";
         document.getElementById("no-groups").style.display = "none";
         document.getElementById("drop-down-btn").style.display = "inline";
@@ -9,6 +9,11 @@
         }else{
             document.getElementById("drop-down-menu").style.display = "none";
         }
+    }
+    function viewGroups(){
+        document.getElementById("groups-list").style.display = "block";
+        document.getElementById("no-groups").style.display = "none";
+        document.getElementById("drop-down-btn").style.display = "inline";
     }
     function groupView(){
         console.log("msg");
