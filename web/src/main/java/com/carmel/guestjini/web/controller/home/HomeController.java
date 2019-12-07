@@ -40,6 +40,9 @@ public class HomeController {
     @RequestMapping(value = "/Account-heads/new-account-head")
     public String newAccountHead(){ return "Account-heads/new-account-head";}
 
+    @RequestMapping(value = "/amenities/amenities-home")
+    public String amenitiesHome(){ return "amenities/amenities-home";}
+
 
     @RequestMapping(value = "/Account-heads/accounts-head-view2")
     public String AccountHeadView(){ return "Account-heads/accounts-head-view2";}
