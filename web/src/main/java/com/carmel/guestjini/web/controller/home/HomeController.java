@@ -56,15 +56,9 @@ public class HomeController {
     @RequestMapping(value = "/roles-permissions/role-view")
     public String roleView(){ return "roles-permissions/role-view";}
 
-<<<<<<< HEAD
-=======
     @RequestMapping(value = "/roles-permissions/new-role-grant")
     public String roleGrant(){ return "roles-permissions/new-role-grant";}
 
-
-
-
->>>>>>> web-app
     @RequestMapping(value = "community/community-profile")
     public String communityProfile(){ return "community/community-profile";}
 
