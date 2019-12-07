@@ -19,82 +19,228 @@
         <p class="change-password-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo vestibulum.</p>
     </div>
 
-    <div class="profile-container" style="height:800px;overflow:scroll; scroll-behavior: smooth;">
+    <div class="popup" id="change-group">
+        <div class="photo-upload" style="width: 36%;height: 27%;">
+            <img class="people-filter-icon" th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45"><br><br>
+            <p class="success" style="color:#464646;">DELETE</p>
+            <p class="success-txt">Are you sure you want to delete?</p>
 
-  <div style="margin-left: 3%;margin-top: 3%;">
-      <div style="width: 84%;position: absolute;">
-          <div style="display: flex; align-items: center;justify-content: space-between;">
-              <div style="width:150px;">
-     <p  class="change-password-title-name">ADMIN </p>
-         <p style="color:#707070; font-size:12px;margin-top: 7%;">Description is not given.</p>
-                  <p style="color:#707070; font-size:12px;margin-top: 9%;">Homepage : Default</p></div>
-         <p style="width: 117px;height: 38px;color:#909090;font-size:12px;align-items: center;justify-content: space-around; display: flex;background: #FFFFFF 0% 0% no-repeat padding-box;box-shadow: 0px 0px 6px #00000029;border-radius: 19px;opacity: 1;">OPTIONS
-         <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" height="32" width="32"></p>
-     </div>
- </div>
-  </div>
-<!--    <div style="display:flex; flex-direction:column;">-->
-        <div  style="color: #FFFFFF;border: 0.25px solid #B5B5B5;;width: 50%;margin-top: 12%;height:37%;margin-left: 3%;display:inline;">
-            <div style="background-color: #EEEEEE;border: 0.25px solid #B5B5B5;">
-                <p class="other-interest-text">Front Office</p>
-            </div>
-            <div>
-            <p class="common-interest-option " style="padding: 4%;">Calendar</p>
-            <p class="common-interest-option " style="padding: 4%;">Inventory</p>
-            <p class="common-interest-option "style="padding: 4%;border-bottom:none;">Packages</p>
-            </div>
-        </div>
+            <div class="exit-popup-message">
+                <input type="button" class="submit-btn interest-no-button" value="YES" onclick="viewyes()">
+                <script>
+                        function viewyes() {
+                            location.replace("/roles-permissions/roles");
+                        }
+                    </script>
+                <input type="button" class="submit-btn interest-exit-button" value="NO" onclick="noview()">
+                <script>
+                        function noview() {
+                            location.replace("/roles-permissions/new-role-grant");
+                        }
+                    </script>
 
-        <div style="color: #FFFFFF;
-    border: 0.25px solid #B5B5B5;
-    width: 48%;
-    margin-left: 6%;
-    position: absolute;
-    margin-top: 35%;
-    height: 29%;
-    display: flex;
-    flex-direction: column;;">
-            <div style="background-color: #EEEEEE;border: 0.25px solid #B5B5B5;">
-                <p class="other-interest-text">Booking</p>
             </div>
-            <div>
-                <p class="common-interest-option " style="padding: 4%;">Browse</p>
-                <p class="common-interest-option " style="padding: 4%;border-bottom:none;">New Booking</p>
-            </div>
-        </div>
-
-
-    <div style="color: #FFFFFF;
-    border: 0.25px solid #B5B5B5;
-    width: 48%;
-    margin-left: 6%;
-    margin-top: 56%;
-    height: 29%;
-    position: absolute;
-    display: inline;">
-        <div style="background-color: #EEEEEE;border: 0.25px solid #B5B5B5;">
-            <p class="other-interest-text">Booking</p>
-        </div>
-        <div>
-            <p class="common-interest-option " style="padding: 4%;">Browse</p>
-            <p class="common-interest-option " style="padding: 4%;border-bottom:none;">New Booking</p>
         </div>
     </div>
-</div>
 
 
+    <div class="profile-container role-view-container">
+
+        <div class="role-view-profile">
+            <div class="role-width">
+                <div class="role-flex">
 
 
+                    <div class="popup" id="change-group1" style="margin-top: 15%;height: 85%;width:97.5%;">
+                        <div class="photo-upload" style="width: 37%; height:75%; margin-left: 56%;margin: 1% 0% 4% auto;border-radius:none;">
+                            <img class="people-filter-icon" th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45"><br><br>
+                            <p class="success" style="color:#464646;">ADD ACCOUNT</p>
+                            <p style="text-align: left;font: Light 13px/20px Lato;letter-spacing: 0.33px;color: #707070;">Create a new user account with this role.</p>
+                            <p style="text-align: left;font: Bold 12px/14px Roboto;letter-spacing: 0.9px;color: #32BDD2;margin-top: 4%;opacity: 1;font-weight:900;border-bottom: 0.5px solid #CCCCCC;" onclick="createuserview()">CREATE USER</p>
+                            <script>
+                function createuserview(){
+                   location.replace("/roles-permissions/create-user");
+                    }
+                </script>
+                            <p class="success" style="color:#464646;margin-top: 7%;">MEMBERS</p>
+                            <p class="success-txt" style="width:300px;color:#464646;font-weight:400;font: Light 13px/20px Lato;">This is the list of user accounts who are assigned to this role.
+                                Any changes to the role grants will be automatically applied to all these user accounts.</p>
+                            <p class="success-txt" style="margin-top: 2%;">noor@carmelsolutions.net</p>
+                            <p class="success-txt" style="margin-top: 2%;">chitrav@shanders.com</p>
+                        </div>
+                    </div>
 
- </div>
+
+                    <div style="width:150px;">
+                        <p class="change-password-title-name">ADMIN </p>
+                        <p class="role-description">Description is not given.</p>
+                        <p class="role-description top">Homepage : Default</p>
+                    </div>
+                    <p class="role-options">OPTIONS
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" height="32" width="32" onclick="viewDropdown()"> </p>
+                    <div class="people-filter-dropdown" id="drop-down-menu" style="margin-right: 10%;border-radius: 5px 21px 5px 5px;height: 311px;margin-top:7.5%;">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 50@16x.png}" height="32" width="32" onclick="viewDropdown()" style="float:right;">
+                        <a class="people-favourites" style="margin-top:32%;" onclick="operations()">OPERATIONS</a>
+                        <script>
+                                function operations() {
+                                document.getElementById("drop-down-menu").style.visibility = "hidden";
+                                    document.getElementById("change-group1").style.display = "block";
+                                     document.getElementById("community-desc").style.display = "block";
+                                       document.getElementById("community-header").style.display = "block";
+
+                                }
+                            </script>
+
+                        <a class="people-favourites" onclick="deletesure()">DELETE</a>
+                        <script>
+                                function deletesure() {
+                                    document.getElementById("change-group").style.display = "block";
+                                    document.getElementById("drop-down-menu").style.display = "none";
+                                }
+                            </script>
+                        <a class="people-favourites">EDIT</a>
+                        <a class="people-favourites">PRINT</a>
+                        <script>
+                                function viewDropdown() {
+                                    if (document.getElementById("drop-down-menu").style.display === "none") {
+                                        document.getElementById("drop-down-menu").style.display = "block";
+                                    } else {
+                                        document.getElementById("drop-down-menu").style.display = "none";
+                                    }
+                                }
+                                window.onclick = function(event) {
+                                    if (!event.target.matches('.dropbtn')) {
+                                        var dropdowns = document.getElementsByClassName("dropdown-content");
+                                        var i;
+                                        for (i = 0; i < dropdowns.length; i++) {
+                                            var openDropdown = dropdowns[i];
+                                            if (openDropdown.classList.contains('show')) {
+                                                openDropdown.classList.remove('show');
+                                            }
+                                        }
+                                    }
+                                }
+                            </script>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="scroll-options">
+            <div class="role-option-view">
+                <div class="start-role-options">
+                    <p class="other-interest-text" style="font-size:14px;color:#747474;">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 2@16x.png}" height="17" width="15">Front Office
+                        <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                </div>
+                <div>
+                    <p class="common-interest-option role-padding ">Calendar <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    <p class="common-interest-option role-padding">Inventory <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    <p class="common-interest-option role-padding-border">Packages <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                </div>
+            </div>
+
+            <div class="role-views">
+                <div class="role-view-selection">
+                    <p class="other-interest-text" style="font-size:14px;color:#747474;">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 2@16x.png}" height="17" width="15">Booking
+                        <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                </div>
+                <div>
+                    <p class="common-interest-option role-padding">Browse <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    <p class="common-interest-option role-padding-border">New Booking <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                </div>
+            </div>
+
+            <div class="role-views">
+                <div class="role-view-selection">
+                    <p class="other-interest-text" style="font-size:14px;color:#747474;">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 2@16x.png}" height="17" width="15">Guests
+                        <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                </div>
+                <div>
+                    <p class="common-interest-option role-padding-border">Browse <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                </div>
+            </div>
+
+            <div class="role-views">
+                <div class="role-view-selection">
+                    <p class="other-interest-text" style="font-size:14px;color:#747474;">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 2@16x.png}" height="17" width="15">Inventory
+                        <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                </div>
+                <div>
+                    <p class="common-interest-option role-padding-border">Browse <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                </div>
+            </div>
+
+            <div class="role-views">
+                <div class="role-view-selection">
+                    <p class="other-interest-text" style="font-size:14px;color:#747474;">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 2@16x.png}" height="17" width="15">Package
+                        <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                </div>
+                <div>
+                    <p class="common-interest-option role-padding-border">Browse <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                </div>
+            </div>
 
 
+            <div class="role-views">
+                <div class="role-view-selection">
+                    <p class="other-interest-text" style="font-size:14px;color:#747474;">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 2@16x.png}" height="17" width="15">Helpdesk
+                        <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                </div>
+                <div>
+                    <p class="common-interest-option role-padding">Self - Help <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    <p class="common-interest-option role-padding">Ticket <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    <p class="common-interest-option role-padding-border">Contact <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                </div>
+            </div>
+
+            <div class="role-views">
+                <div class="role-view-selection">
+                    <p class="other-interest-text" style="font-size:14px;color:#747474;">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 2@16x.png}" height="17" width="15">Ticket Central
+                        <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                </div>
+                <div>
+                    <p class="common-interest-option role-padding">Enterprise Tickets <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    <p class="common-interest-option role-padding-border">Task Force <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                </div>
+            </div>
 
 
-
-
-
+            <div class="role-views" style="height:127%;">
+                <div class="role-view-selection">
+                    <p class="other-interest-text" style="font-size:14px;color:#747474;">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 2@16x.png}" height="17" width="15">Setup
+                        <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                </div>
+                <div>
+                    <p class="common-interest-option role-padding">Roles & Permissions <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    <p class="common-interest-option role-padding">User Accounts <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    <p class="common-interest-option role-padding">Unique Transaction Number (UTN) <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    <p class="common-interest-option role-padding">Amenities <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    <p class="common-interest-option role-padding">Account Heads <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    <p class="common-interest-option role-padding">Financial Period <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    <p class="common-interest-option role-padding">Measurement Units <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    <p class="common-interest-option role-padding">Document Templates <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    <p class="common-interest-option role-padding">Help Desk Contacts <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    <p class="common-interest-option role-padding-border" style="padding: 4%;border-bottom:none;">Knowledge Base <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+
+
+
+
+
 </div>
 </body>
+
 </html>

@@ -17,12 +17,41 @@
     <div class="community-desc" style="display: flex;">
         <span class="change-password-title-name">ROLES
         <p class="change-password-text" style="width: 56%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo vestibulum.</p>
-           </span> <button style="margin-left: 31%;width: 160.4px;" type="submit" class="button loginPage" onclick="loginpage()">NEW ROLE</button>
+           </span> <button style="margin-left: 31%;width: 160.4px;" type="submit" class="button loginPage" onclick="newrole()">NEW ROLE</button>
+        <script>
+                function newrole(){
+                 location.replace("/roles-permissions/new-role-grant");
+                    }
+                </script>
     </div>
 
-    <div class="profile-container" style="height:1200px;">
+    <div class="popup" id="change-group">
+        <div class="photo-upload" style="width: 36%;height: 27%;" >
+            <img class="people-filter-icon" th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" ><br><br>
+            <p class="success" style="color:#464646;">DELETE</p>
+            <p  class="success-txt">Are you sure you want to delete?</p>
+
+    <div class="exit-popup-message">
+        <input type="button" class="submit-btn interest-no-button" value="YES" onclick="viewyes()">
+        <script>
+                function viewyes(){
+                 location.replace("/roles-permissions/roles");
+                    }
+                </script>
+        <input type="button" class="submit-btn interest-exit-button" value="NO" onclick="noview()">
+        <script>
+                function noview(){
+                 location.replace("/roles-permissions/new-role-grant");
+                    }
+                </script>
+
+    </div>
+</div>
+</div>
+    <div class="profile-container" style="height:1200px;" id="roles">
         <div style="margin-left: 4%;padding-top: 4%;display:inline;">
                 <img class="people-filter-icon" th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" width="40" height="40" alt="drop-down">
+
             </div>
         <div class="people-search-box-main" style="height: 45px; margin-left: 21%; width: 56%; margin-top: 4%;">
             <div class="people-search-box">
@@ -37,13 +66,50 @@
         <div class="roles">
         <div style="display: flex;align-items: center;justify-content: space-around;margin-top: 3%;">
         <p  class="change-password-title-name" style="width: 16%;">ADMIN</p>
-      <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" height="32" width="32">
+      <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" height="32" width="32"  onclick="viewDropdown()">
+
+            <div class="people-filter-dropdown" id="drop-down-menu" style="margin-right:42%;">
+                <a class="people-clear" onclick="edit()" >EDIT</a>
+                <script>
+                function deletesure(){
+                   location.replace("/roles-permissions/new-role-grant");
+                    }
+                </script>
+                <a class="people-favourites" onclick="deletesure()" >DELETE</a>
+                <script>
+                function deletesure(){
+                   document.getElementById("change-group").style.display = "block";
+                    document.getElementById("roles").style.display = "none";
+                    }
+
+    function viewDropdown() {
+        if (document.getElementById("drop-down-menu").style.display === "none") {
+            document.getElementById("drop-down-menu").style.display = "block";
+        } else {
+            document.getElementById("drop-down-menu").style.display = "none";
+        }
+    }
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+                </script>
+            </div>
+
             <p style="text-align: right;font-size:11px;letter-spacing: 0.55px;color: #707070;opacity: 1;font-weight:400;">Last Updated On</br>
         <span style="text-align: right;font-size: 12px;letter-spacing: 0.3px;color: #707070;opacity: 1;font-weight:600;">25 Oct 2019, 04:06 pm</span></p>
          </div>
         </div>
 
-        <div class="roles" style="margin-top: 22%;">
+        <div class="roles" style="margin-top: 22%;" >
             <div style="display: flex;align-items: center;justify-content: space-around;margin-top: 3%;">
                 <p  class="change-password-title-name" style="width: 16%;">AGENT</p>
                 <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" height="32" width="32">
@@ -79,17 +145,6 @@
                     <span style="text-align: right;font-size: 12px;letter-spacing: 0.3px;color: #707070;opacity: 1;font-weight:600;">25 Oct 2019, 04:06 pm</span></p>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
 
     </div>
 </div>
