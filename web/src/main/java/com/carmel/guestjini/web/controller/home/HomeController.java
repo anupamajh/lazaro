@@ -34,6 +34,18 @@ public class HomeController {
     @RequestMapping(value = "/change-password/change-password")
     public String changePassword(){ return "change-password/change-password";}
 
+    @RequestMapping(value = "/Account-heads/account-heads")
+    public String accountHeads(){ return "Account-heads/account-heads";}
+
+    @RequestMapping(value = "/Account-heads/new-account-head")
+    public String newAccountHead(){ return "Account-heads/new-account-head";}
+
+
+    @RequestMapping(value = "/Account-heads/accounts-head-view2")
+    public String AccountHeadView(){ return "Account-heads/accounts-head-view2";}
+
+    @RequestMapping(value = "/Account-heads/account-heads-list")
+    public String AccountHeadList(){ return "Account-heads/account-heads-list";}
 
     @RequestMapping(value = "/roles-permissions/roles")
     public String roles(){ return "roles-permissions/roles";}
@@ -43,8 +55,6 @@ public class HomeController {
 
     @RequestMapping(value = "/roles-permissions/role-view")
     public String roleView(){ return "roles-permissions/role-view";}
-
-
 
     @RequestMapping(value = "community/community-profile")
     public String communityProfile(){ return "community/community-profile";}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Account Heads</title>
+    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto&display=swap}" rel="stylesheet">
+    <link th:href="@{/css/GuestJini.css}" rel="stylesheet">
+</head>
+
+<body class="change-password-body">
+<header class="community-header">
+    <div th:replace="shared/dashboard :: dashboard"></div>
+</header>
+<div th:replace="shared/burger-menu :: burgerMenu"></div>
+
+<div class="content">
+    <div class="account-head-flex">
+        <div>
+            <span class="change-password-title-name">ACCOUNT HEADS</span>
+            <p class="change-password-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo vestibulum.</p>
+        </div>
+        <input type="button" class="new-account-btn" value="NEW ACCOUNT HEAD">
+    </div>
+
+    <div class="profile-container1">
+        <div class="account-head-flex1">
+            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" height="33" width="33" class="drop-down-btn" onclick="viewDropDown()">
+
+            <div class="large-drop-down" id="drop-down">
+                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 53@16x.png}" height="33" width="33" class="drop-down-close" onclick="closeDropDown()">
+                <div class="filter-part">
+                    <div class="account-head-flex2">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 22@16x.png}" height="25" width="25">
+                        <span class="filter-txt">FILTER</span>
+                    </div>
+                    <div class="clear-all-section">
+                        <p class="clear-all-link">CLEAR ALL</p>
+                        <p class="no-filter-msg">You have not applied any filter</p>
+                    </div>
+
+                    <div class="drop-down-list" id="drop-down-list">
+                        <form class="drop-down-form">
+                            <div class="container1">
+                                <label class="container">
+                                    <input type="checkbox" value="nothing" name="nothing">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <span class="checkbox-txt"> NOTHING</span>
+                            </div>
+                            <div class="container1">
+                                <label class="container">
+                                    <input type="checkbox" value="income" name="income">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <span class="checkbox-txt"> INCOME</span>
+                            </div>
+                            <div class="container1">
+                                <label class="container">
+                                    <input type="checkbox" value="expanse" name="expanse">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <span class="checkbox-txt"> EXPENSE</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="sort-part">
+                    <div class="account-head-flex3">
+                        <div class="account-head-flex2">
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 22@16x.png}" height="25" width="25">
+                            <span class="filter-txt">SORT</span>
+                        </div>
+                        <div class="account-head-flex2">
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" height="12" width="12">
+                            <span class="filter-txt1">ASCENDING</span>
+                        </div>
+                    </div>
+                    <form action="#">
+                        <p>
+                            <input type="radio" id="test1" name="radio-group" checked>
+                            <label for="test1"><span class="checkbox-txt title-radio">TITLE</span></label>
+                        </p>
+                        <p>
+                            <input type="radio" id="test2" name="radio-group">
+                            <label for="test2"><span class="checkbox-txt">CREATION DATE</span></label>
+                        </p>
+                        <p>
+                            <input type="radio" id="test3" name="radio-group">
+                            <label for="test3"><span class="checkbox-txt">LAST MODIFIED</span></label>
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search…" id="search-groups">
+                <img th:src="@{/images/extra-large-256px/Artboard 1 copy 39@16x.png}" width="20" height="20" alt="search-btn" onclick="">
+            </div>
+        </div>
+        <div class="account-head-view">
+            <div class="account-head-desc">
+                <p class="account-head">TESTING</p>
+                <p class="account-head-sub">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum.</p>
+            </div>
+            <div class="income-back">
+                <p class="income-txt">INCOME</p>
+            </div>
+            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="search-btn" class="edit-btn" onclick="">
+            <div>
+                <p class="last-update">Last Updated On</p>
+                <p class="last-update-time">25 Oct 2019, 04:06 pm</p>
+            </div>
+        </div>
+        <div class="account-head-view">
+            <div class="account-head-desc">
+                <p class="account-head">TESTING-2</p>
+                <p class="account-head-sub">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum.</p>
+            </div>
+            <div class="income-back">
+                <p class="expanse-txt">EXPENSE</p>
+            </div>
+            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="search-btn" class="edit-btn" onclick="">
+            <div>
+                <p class="last-update">Last Updated On</p>
+                <p class="last-update-time">25 Oct 2019, 04:06 pm</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script th:src="@{/js/change-password.js}" type="text/javascript"></script>
+</html>
