@@ -1812,6 +1812,8 @@ input[type=text] {
     margin-top: 15px;
 }
 .account-head-desc{
+    display: flex;
+    align-items: center;
     width: 40%;
 }
 .income-txt{
@@ -2003,4 +2005,7 @@ input[type=text] {
     border: 0px;
     margin-left: 0px;
     cursor: pointer;
+}
+.info-gap{
+    margin-left: 10px;
 }
