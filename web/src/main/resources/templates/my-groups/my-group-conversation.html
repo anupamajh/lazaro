@@ -49,11 +49,19 @@
         <div class="right-content1">
 
             <div class="my-profile-options" id="community-groups">
-                <div class="groups-flex">
-                    <div class="groups-flex2">
-                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" class="round-img-shadow" onclick="viewGroups()">
-                        <span class="community-head">COMMUNITY GROUPS</span>
+                <div class="my-groups-flex1">
+                    <div class="my-groups-flex2">
+                        <div>
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 47@16x.png}" width="35" height="35" alt="icon" class="round-img" onclick="viewDropdown(this)" id="drop-down-btn1">
+                            <div id="drop-down-my-groups">
+                                <a class="interest-group-links">INTEREST GROUPS</a>
+                                <a class="community-group-links">COMMUNITY GROUPS</a>
+                                <a class="my-group-links">MY GROUPS</a>
+                            </div>
+                        </div>
+                        <span class="community-head">MY GROUPS</span>
                     </div>
+
                     <div id="drop-down-btn">
                         <img th:src="@{/images/extra-large-256px/Artboard 1 copy 6@16x.png}" width="40" height="40" alt="drop-down" onclick="viewDropdown()">
                         <div id="drop-down-menu">
@@ -71,7 +79,7 @@
                             <p class="conversation-group-name">Apache Riders</p>
                             <p class="conversation-group-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo vestibulum.</p>
                         </div>
-                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 26@16x.png}" height="40" width="40" onclick="viewExistingGroup()">
+                        <img th:src="@{/images/extra-large-256px/Artboard 1 copy 26@16x.png}" height="40" width="40" onclick="">
                     </div>
                     <div class="conversation-view">
                         <div class="incoming-message">
