@@ -1125,6 +1125,13 @@ button {
     align-items: center;
     margin-bottom: 2vh;
 }
+.ascending{
+    margin:left: 20px;
+}
+
+.radio-form{
+    margin-left: 30px;
+}
 
 .clear-all-section{
     background-color: #E6E6E6;
@@ -1182,6 +1189,7 @@ button {
 }
 .large-drop-down{
     display: none;
+    width: 25%;
     top: 35%;
     position: absolute;
    background: #FFFFFF 0% 0% no-repeat padding-box;
@@ -1316,6 +1324,12 @@ button {
     margin-top: 4vh;
     border-top: 1px solid #CCCCCC;
     padding: 20px 0px;
+}
+
+.sort-part1{
+    width: 100%;
+   border-top: 1px solid #CCCCCC;
+   padding: 20px 0px;
 }
 
 #no-records{
@@ -1701,7 +1715,6 @@ input[type=text] {
     transform: scale(1);
 }
 .title-radio{
-    margin-left: 10px;
 }
 .account-head-txt{
     font-size: 12px;
@@ -1931,7 +1944,6 @@ input[type=text] {
 .role-option-view {
     color: #FFFFFF;
     border: 0.25px solid #B5B5B5;
-    ;
     width: 50%;
     margin-top: 4%;
     height: 44%;
