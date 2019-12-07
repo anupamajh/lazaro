@@ -5,7 +5,7 @@
 
 body {
     background-color: #FFFFFF;
-     font-family: roboto;
+    font-family: roboto;
 }
 
 [onClick] {
@@ -240,7 +240,7 @@ button {
 .submit-button {
     margin-top: 7%;
     letter-spacing: 1.7px;
-   font-weight:900;
+    font-weight: 900;
     padding: 4%;
     margin-left: 14%;
 }
@@ -297,7 +297,7 @@ button {
     height: 36px;
     margin-top: 5%;
     display: flex;
-    font-weight:600;
+    font-weight: 600;
     align-items: center;
     justify-content: space-between;
     background-color: #FFEEEB;
@@ -308,7 +308,7 @@ button {
     height: 71px;
     margin-top: 5%;
     display: flex;
-    font-weight:600;
+    font-weight: 600;
     align-items: center;
     justify-content: space-between;
     background-color: #FFEEEB;
@@ -320,7 +320,7 @@ button {
     height: 71px;
     margin-top: 5%;
     display: flex;
-    font-weight:600;
+    font-weight: 600;
     align-items: center;
     justify-content: space-between;
     background-color: #FFEEEB;
@@ -691,9 +691,11 @@ button {
     margin-left: 17%;
     padding-bottom: 20px;
 }
-.align-top{
-    margin-top:10%;
+
+.align-top {
+    margin-top: 10%;
 }
+
 .people-name-list {
     display: flex;
     align-items: flex-start;
@@ -1306,8 +1308,9 @@ button {
     padding: 4%;
     opacity: 1;
 }
-.roles{
-width: 75%;
+
+.roles {
+    width: 75%;
     height: 107px;
     margin-top: 12%;
     margin-left: 5%;
@@ -1316,13 +1319,151 @@ width: 75%;
     background: #EEEEEE 0% 0% no-repeat padding-box;
     opacity: 1;
 }
-.scroll{
- margin:4px, 4px;
-                padding:4px;
-                background-color: green;
-                width: 500px;
-                height: 110px;
-                overflow-x: hidden;
-                overflow-x: auto;
-                text-align:justify;
+
+.scroll {
+    margin: 4px, 4px;
+    padding: 4px;
+    background-color: green;
+    width: 500px;
+    height: 110px;
+    overflow-x: hidden;
+    overflow-x: auto;
+    text-align: justify;
+}
+
+.checkbox-role {
+    width: 4%;
+    float: right;
+    height: 22px;
+}
+
+.role-view-container {
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.role-view-profile {
+    margin-left: 3%;
+    margin-top: 2%;
+}
+
+.role-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.role-width {
+    width: 84%;
+}
+
+.role-description {
+    color: #707070;
+    font-size: 12px;
+    margin-top: 7%;
+}
+
+.top {
+    margin-top: 9%;
+}
+
+.role-padding {
+    padding: 4%;
+    font-size:14px;color:#747474;
+}
+
+.role-padding-border {
+    border-bottom: none;
+    padding: 4%;
+    font-size:14px;color:#747474;
+}
+
+.role-options {
+    width: 117px;
+    height: 38px;
+    color: #909090;
+    font-size: 12px;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 0px 6px #00000029;
+    border-radius: 19px;
+    opacity: 1;
+}
+
+.scroll-options {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: scroll;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+.role-option-view {
+    color: #FFFFFF;
+    border: 0.25px solid #B5B5B5;
+    ;
+    width: 50%;
+    margin-top: 4%;
+    height: 44%;
+    margin-left: 3%;
+    display: inline;
+}
+
+.start-role-options {
+    background-color: #EEEEEE;
+    border: 0.25px solid #B5B5B5;
+}
+
+.role-views {
+    color: #FFFFFF;
+    border: 0.25px solid #B5B5B5;
+    width: 50%;
+    margin-top: 3%;
+    height: 44%;
+    margin-left: 3%;
+    display: inline;
+}
+
+.role-grant {
+    width: 125%;
+    margin-top: 15%;
+    height: 44%;
+    margin-left: 9%;
+}
+
+.role-view-selection {
+    background-color: #EEEEEE;
+    border: 0.25px solid #B5B5B5;
+}
+
+.role-grant-scroll {
+    overflow: scroll;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    height: 542px;
+}
+.exit-popup-message {
+    display: flex;
+    margin: 3vw 5vw 1vh 5vh;
+    justify-content: space-evenly;
+}
+.interest-exit-button {
+    display: block;
+    background-color: #E65959;
+    cursor: pointer;
+    border: 0px;
+    padding: 0.5vw 2.5vw;
+}
+
+.interest-no-button {
+    display: block;
+    padding: 0.5vw 3vw;
+    border: 0px;
+    margin-left: 0px;
+    cursor: pointer;
 }

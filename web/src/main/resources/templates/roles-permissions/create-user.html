@@ -19,6 +19,32 @@
         <p class="change-password-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo vestibulum.</p>
     </div>
 
+    <div class="popup" id="change-group">
+        <div class="photo-upload" style="width: 36%;height: 27%;" >
+            <img class="people-filter-icon" th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" ><br><br>
+            <p class="success" style="color:#464646;">SUCCESS</p>
+            <p  class="success-txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula.</p>
+            <div style="margin-top:9%;display:flex;align-items:center;justify-content: space-around;">
+            <a class="hyperlink-text " href="#" style="font-weight:900;" onclick="createuser()">CREATE USER</a>
+                <script>
+                function createuser(){
+                 location.replace("/roles-permissions/create-user");
+                    }
+                </script>
+            <a class="hyperlink-text " href="#" style="font-weight:900;" onclick="viewuser()">VIEW USER</a>
+                <script>
+                function viewuser(){
+                 location.replace("/roles-permissions/role-view");
+                    }
+                </script>
+            <a class="hyperlink-text " href="#" style="font-weight:900;" onclick="userlist()">GOTO USER LIST</a>
+                <script>
+                function userlist(){
+                 location.replace("/roles-permissions/roles");
+                    }
+                </script></div>
+        </div>
+    </div>
 
     <div class="profile-container">
         <div>
@@ -49,7 +75,11 @@
                </div>
             <div style="display: flex; justify-content: space-between;align-items: center;margin-top: 16%;margin-left: 9%;">
             <a class="hyperlink-text " href="#" style="color:#707070;font-weight:900;">CANCEL</a>
-            <button type="submit" class="button loginPage" style="margin-left: 255%;">SAVE</button></div>
+            <button type="submit" class="button loginPage" style="margin-left: 255%;" onclick="saveUser()">SAVE</button></div>
+            <script>
+            function saveUser(){
+                   document.getElementById("change-group").style.display = "block";}
+            </script>
         </div>
     </div>
 </div>

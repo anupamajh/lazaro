@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>New-role-grant</title>
+    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto&display=swap}" rel="stylesheet">
+    <link th:href="@{/css/GuestJini.css}" rel="stylesheet">
+</head>
+
+<body class="change-password-body">
+<header class="community-header">
+    <div th:replace="shared/dashboard :: dashboard"></div>
+</header>
+<div th:replace="shared/burger-menu :: burgerMenu"></div>
+<div class="content">
+    <div class="community-desc">
+        <span class="change-password-title-name">NEW ROLE</span>
+        <p class="change-password-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean feugiat felis id sem elementum, sit amet sollicitudin leo vestibulum.</p>
+    </div>
+
+    <div class="popup" id="change-group">
+        <div class="photo-upload" style="width: 36%;height: 27%;" >
+            <img class="people-filter-icon" th:src="@{/images/extra-large-256px/Artboard 1 copy 38c@16x.png}" height="45" width="45" ><br><br>
+            <p class="success" style="color:#464646;">SUCCESS</p>
+            <p  class="success-txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mattis, tortor sit amet tempor vehicula.</p>
+            <div style="margin-top:9%;display:flex;align-items:center;justify-content: space-around;">
+                <a class="hyperlink-text " href="#" style="font-weight:900;" onclick="createuser()">CREATE USER</a>
+                <script>
+                function createuser(){
+                 location.replace("/roles-permissions/create-user");
+                    }
+                </script>
+                <a class="hyperlink-text " href="#" style="font-weight:900;" onclick="viewuser()">VIEW USER</a>
+                <script>
+                function viewuser(){
+                 location.replace("/roles-permissions/role-view");
+                    }
+                </script>
+                <a class="hyperlink-text " href="#" style="font-weight:900;" onclick="userlist()">GOTO USER LIST</a>
+                <script>
+                function userlist(){
+                 location.replace("/roles-permissions/roles");
+                    }
+                </script></div>
+        </div>
+    </div>
+
+    <div class="profile-container role-grant-scroll">
+        <div>
+            <div class="change-password-content">
+                <p class="change-password-title">Role Name<span class="star">*</span></p>
+                <div class="email-box-change-password" >
+                    <input class="box outline" type="text" name="password" placeholder="" size="48"
+                           onfocus="this.placeholder=''" onblur="this.placeholder=''">
+                </div>
+            </div>
+
+            <div class="change-password-content">
+                <p class="change-password-title">Homepage</p>
+                <div class="email-box-change-password ">
+                    <input  class="box outline" type="text" name="password" placeholder="" size="48"
+                            onfocus="this.placeholder=''" onblur="this.placeholder=''">
+                </div>
+            </div>
+
+
+            <div class="change-password-content">
+                <p class="change-password-title">Description</p>
+                <div class="email-box-change-password " >
+                    <input  class="box outline" type="text" name="password" placeholder="" size="48"
+                            onfocus="this.placeholder='Admin'" onblur="this.placeholder=''">
+                </div>
+            </div>
+
+            <div style="display:flex; flex-direction:column;width:100%;">
+                <div class="role-views role-grant">
+                    <div class="role-view-selection" >
+                        <p class="other-interest-text" onclick="option1()" style="font-size:14px;color:#747474;">
+                            <script>
+                                function option1(){
+                                document.getElementById("frontOffice").style.display = "block";
+                                }
+                            </script>
+
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 2@16x.png}" height="17" width="15">Front Office
+                        <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    </div>
+                    <div class="landing" id="frontOffice">
+                        <p class="common-interest-option role-padding" >Calendar
+                            <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                        <p class="common-interest-option role-padding" >Inventory
+                            <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                        <p class="common-interest-option role-padding-border" >
+                            <input type="checkbox" name="vehicle" value="" class="checkbox-role">Packages</p>
+                    </div>
+                </div>
+
+                <div class="role-views role-grant">
+                    <div class="role-view-selection" >
+                        <p class="other-interest-text" onclick="option2()" style="font-size:14px;color:#747474;">
+                            <script>
+                                function option2(){
+                                document.getElementById("Booking").style.display = "block";
+                                }
+                            </script>
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 2@16x.png}" height="17" width="15">Booking
+                            <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    </div>
+                    <div class="landing" id="Booking">
+                        <p class="common-interest-option role-padding" >Browse
+                            <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                        <p class="common-interest-option role-padding-border" >New Booking
+                            <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    </div>
+                </div>
+
+                <div class="role-views role-grant">
+                    <div class="role-view-selection" >
+                        <p class="other-interest-text" onclick="option3()" style="font-size:14px;color:#747474;">
+                            <script>
+                                function option3(){
+                                document.getElementById("Guests").style.display = "block";
+                                }
+                            </script>
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 2@16x.png}"height="17" width="15">Guests
+                            <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    </div>
+                    <div class="landing" id="Guests">
+                        <p class="common-interest-option role-padding-border">Browse
+                            <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    </div>
+                </div>
+
+                <div class="role-views role-grant">
+                    <div class="role-view-selection" >
+                        <p class="other-interest-text" onclick="option4()" style="font-size:14px;color:#747474;">
+                            <script>
+                                function option4(){
+                                document.getElementById("Inventory").style.display = "block";
+                                }
+                            </script>
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 2@16x.png}" height="17" width="15">Inventory
+                            <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    </div>
+                    <div class="landing" id="Inventory">
+                        <p class="common-interest-option role-padding-border">Browse
+                            <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    </div>
+                </div>
+
+                <div class="role-views role-grant">
+                    <div class="role-view-selection" >
+                        <p class="other-interest-text" onclick="option5()" style="font-size:14px;color:#747474;">
+                            <script>
+                                function option5(){
+                                document.getElementById("Package").style.display = "block";
+                                }
+                            </script>
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 2@16x.png}" height="17" width="15">Package
+                            <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    </div>
+                    <div class="landing" id="Package">
+                        <p class="common-interest-option role-padding-border" >Browse
+                            <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    </div>
+                </div>
+
+
+                <div class="role-views role-grant">
+                    <div class="role-view-selection" >
+                        <p class="other-interest-text" onclick="option6()" style="font-size:14px;color:#747474;">
+                            <script>
+                                function option6(){
+                                document.getElementById("Helpdesk").style.display = "block";
+                                }
+                            </script>
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 2@16x.png}" height="17" width="15">Helpdesk
+                            <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    </div>
+                    <div class="landing" id="Helpdesk">
+                        <p class="common-interest-option role-padding" >Self - Help
+                            <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                        <p class="common-interest-option role-padding" >Ticket
+                            <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                        <p class="common-interest-option role-padding-border" >Contact
+                            <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    </div>
+                </div>
+
+                <div class="role-views role-grant">
+                    <div class="role-view-selection" >
+                        <p class="other-interest-text" onclick="option7()" style="font-size:14px;color:#747474;">
+                            <script>
+                                function option7(){
+                                document.getElementById("Ticket").style.display = "block";
+                                }
+                            </script>
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 2@16x.png}" height="17" width="15">Ticket Central
+                            <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    </div>
+                    <div class="landing" id="Ticket">
+                        <p class="common-interest-option role-padding">Enterprise Tickets
+                            <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                        <p class="common-interest-option role-padding-border">Task Force
+                            <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    </div>
+                </div>
+
+
+                        <div class="role-views role-grant">
+                            <div class="role-view-selection" >
+                        <p class="other-interest-text" onclick="option8()" style="font-size:14px;color:#747474;">
+                            <script>
+                                function option8(){
+                                document.getElementById("Setup").style.display = "block";
+                                }
+                            </script>
+                            <img th:src="@{/images/extra-large-256px/Artboard 1 copy 2@16x.png}" height="17" width="15">Setup
+                            <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    </div>
+                    <div class="landing" id="Setup">
+                        <p class="common-interest-option role-padding" >Roles & Permissions <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                        <p class="common-interest-option role-padding" >User Accounts <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                        <p class="common-interest-option role-padding" >Unique Transaction Number (UTN) <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                        <p class="common-interest-option role-padding" >Amenities <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                        <p class="common-interest-option role-padding" >Account Heads <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                        <p class="common-interest-option role-padding" >Financial Period <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                        <p class="common-interest-option role-padding" >Measurement Units <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                        <p class="common-interest-option role-padding" >Document Templates <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                        <p class="common-interest-option role-padding" >Help Desk Contacts <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                        <p class="common-interest-option role-padding-border" >Knowledge Base <input type="checkbox" name="vehicle" value="" class="checkbox-role"></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+            <div style="background: #FFFFFF 0% 0% no-repeat padding-box;box-shadow: 0px 0px 10px #00000033;opacity: 1;">
+            <div style="display: flex;
+    width: 92%;
+    height: 70px;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 3%;">
+                <a class="hyperlink-text " href="#" style="color:#707070;font-weight:900;">CANCEL</a>
+                <button type="submit" class="button loginPage" onclick="saveUser()">SAVE</button>
+                <script>
+            function saveUser(){
+                   document.getElementById("change-group").style.display = "block";}
+            </script></div></div>
+        </div>
+    </div>
+</div>
+</body>
+<script th:src="@{/js/change-password.js}" type="text/javascript"></script>
+</html>
