@@ -21,7 +21,6 @@ public class HomeController {
     @RequestMapping(value = "/AccountActivation")
     public String AccountActivate(){ return "home/AccountActivation";}
 
-
     @RequestMapping(value = "/change-password/logout-landing")
     public String loginLanding(){ return "change-password/logout-landing";}
 
@@ -40,6 +39,14 @@ public class HomeController {
     @RequestMapping(value = "/Account-heads/new-account-head")
     public String newAccountHead(){ return "Account-heads/new-account-head";}
 
+    @RequestMapping(value = "/amenities/new-amenitie")
+    public String newAmenity(){ return "amenities/new-amenitie";}
+
+    @RequestMapping(value = "/amenities/amenities-list")
+    public String newAmenityList(){ return "amenities/amenities-list";}
+
+    @RequestMapping(value = "/amenities/amenities-home")
+    public String amenitiesHome(){ return "amenities/amenities-home";}
 
     @RequestMapping(value = "/Account-heads/accounts-head-view2")
     public String AccountHeadView(){ return "Account-heads/accounts-head-view2";}
@@ -56,15 +63,9 @@ public class HomeController {
     @RequestMapping(value = "/roles-permissions/role-view")
     public String roleView(){ return "roles-permissions/role-view";}
 
-<<<<<<< HEAD
-=======
     @RequestMapping(value = "/roles-permissions/new-role-grant")
     public String roleGrant(){ return "roles-permissions/new-role-grant";}
 
-
-
-
->>>>>>> web-app
     @RequestMapping(value = "community/community-profile")
     public String communityProfile(){ return "community/community-profile";}
 
