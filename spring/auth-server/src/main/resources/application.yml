@@ -22,22 +22,23 @@ logging:
     root: info
     org:
       hibernate:
-        type: trace
+        type: info
     com:
       carmel:
         common:
           dbservice: trace
+          authserver: trace
   pattern:
     console: '%d{"yyyy/MM/dd HH:mm:ss,SSS"} [%p] [%t] %M\(%F:%L\) - %msg%n'
   file:
     path: 'logs/'
     max-size: 5MB
     clean-history-on-start: false
-    name: 'logs/auth-service.log'
+    name: '/var/log/carmel/auth-service.log'
 
 eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://localhost:8001/eureka/
+      defaultZone: http://139.59.32.238:8001/eureka/
