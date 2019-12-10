@@ -3,7 +3,6 @@ package com.carmel.common.dbservice.model;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.ManyToAny;
 import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Length;
 
