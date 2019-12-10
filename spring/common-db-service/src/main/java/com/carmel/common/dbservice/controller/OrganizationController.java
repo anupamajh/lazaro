@@ -20,10 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import static com.carmel.common.dbservice.specifications.OrganizationSpecification.textInAllColumns;
 
 @RestController
 @RequestMapping(value = "/organization")
@@ -38,7 +41,7 @@ public class OrganizationController {
     UserInformation userInformation;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public OrganizationResponse save(@RequestBody Organization organization) {
+    public OrganizationResponse save(@Valid @RequestBody Organization organization) {
         String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserInfo userInfo = userInformation.getUserInfo(userName);
         ObjectMapper objectMapper = new ObjectMapper();
@@ -46,6 +49,12 @@ public class OrganizationController {
         OrganizationResponse organizationResponse = new OrganizationResponse();
         try {
             logger.trace("Data:{}", objectMapper.writeValueAsString(organization));
+            if(organization.getParent() != null){
+                Optional<Organization> optionalOrganization =
+                        organizationService.findById(organization.getParent().getId());
+                organization.setParent(optionalOrganization.get());
+
+            }
             if (checkDuplicate(organization)) {
                 organizationResponse.setOrganization(organization);
                 organizationResponse.setSuccess(false);
@@ -63,6 +72,7 @@ public class OrganizationController {
                     organization.setCreatedBy(userInfo.getId());
                     organization.setCreationTime(new Date());
                 }
+                organization.setClient(userInfo.getClient());
                 organizationResponse.setOrganization(organizationService.save(organization));
                 organizationResponse.setSuccess(true);
                 organizationResponse.setError("");
@@ -112,7 +122,7 @@ public class OrganizationController {
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public OrganizationResponse get(@RequestBody Map<String, String> formData) {
         ObjectMapper objectMapper = new ObjectMapper();
-        logger.trace("Entering");
+         logger.trace("Entering");
         OrganizationResponse organizationResponse = new OrganizationResponse();
         try {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
@@ -138,10 +148,12 @@ public class OrganizationController {
 
     @RequestMapping(value = "/get-all", method = RequestMethod.GET)
     public OrganizationsResponse getAll() {
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserInfo userInfo = userInformation.getUserInfo(userName);
         logger.trace("Entering");
         OrganizationsResponse organizationsResponse = new OrganizationsResponse();
         try {
-            organizationsResponse.setOrganizationList(organizationService.findAllByDeletionStatus(0));
+            organizationsResponse.setOrganizationList(organizationService.findAllByDeletionStatus(0,userInfo.getClient()));
             organizationsResponse.setSuccess(true);
             organizationsResponse.setError("");
             logger.trace("Completed Successfully");
@@ -156,10 +168,12 @@ public class OrganizationController {
 
     @RequestMapping(value = "/get-deleted", method = RequestMethod.GET)
     public OrganizationsResponse getDeleted() {
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserInfo userInfo = userInformation.getUserInfo(userName);
         logger.trace("Entering");
         OrganizationsResponse organizationsResponse = new OrganizationsResponse();
         try {
-            organizationsResponse.setOrganizationList(organizationService.findAllByDeletionStatus(1));
+            organizationsResponse.setOrganizationList(organizationService.findAllByDeletionStatus(1,userInfo.getClient()));
             organizationsResponse.setSuccess(true);
             organizationsResponse.setError("");
         } catch (Exception ex) {
@@ -170,8 +184,10 @@ public class OrganizationController {
         return organizationsResponse;
     }
 
-    @RequestMapping(value = "/get-organizations", method = RequestMethod.GET)
+    @RequestMapping(value = "/get-organizations", method = RequestMethod.POST)
     public OrganizationsResponse getPaginated(@RequestBody Map<String, String> formData) {
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserInfo userInfo = userInformation.getUserInfo(userName);
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         OrganizationsResponse orgResponse = new OrganizationsResponse();
@@ -180,7 +196,7 @@ public class OrganizationController {
             int pageNumber = formData.get("current_page") == null ? 0 : Integer.parseInt(formData.get("current_page"));
             int pageSize = formData.get("page_size") == null ? 10 : Integer.parseInt(formData.get("page_size"));
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("orgName"));
-            Page<Organization> page = organizationService.findAll(pageable);
+            Page<Organization> page = organizationService.findAllByClient(userInfo.getClient(), pageable);
             orgResponse.setTotalRecords(page.getTotalElements());
             orgResponse.setTotalPages(page.getTotalPages());
             orgResponse.setOrganizationList(page.getContent());
@@ -196,8 +212,10 @@ public class OrganizationController {
         return orgResponse;
     }
 
-    @RequestMapping(value = "/search-organizations", method = RequestMethod.GET)
+    @RequestMapping(value = "/search-organizations", method = RequestMethod.POST)
     public OrganizationsResponse searchPaginated(@RequestBody Map<String, String> formData) {
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserInfo userInfo = userInformation.getUserInfo(userName);
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         OrganizationsResponse orgResponse = new OrganizationsResponse();
@@ -205,20 +223,15 @@ public class OrganizationController {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
             int pageNumber = formData.get("current_page") == null ? 0 : Integer.parseInt(formData.get("current_page"));
             int pageSize = formData.get("page_size") == null ? 10 : Integer.parseInt(formData.get("page_size"));
-            String orgName = formData.get("org_name") == null ? null : String.valueOf(formData.get("org_name"));
-            String description = formData.get("description") == null ? null : String.valueOf(formData.get("description"));
+            String searchText = formData.get("search_text") == null ? null : String.valueOf(formData.get("search_text"));
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("orgName"));
             Page<Organization> page;
-            if (orgName == null && description == null) {
-                page = organizationService.findAll(pageable);
-            } else if (orgName != null && description == null) {
-                page = organizationService.findAllByOrgNameContaining(orgName, pageable);
-            } else if (description != null && orgName == null) {
-                page = organizationService.findAllByDescriptionContaining(description, pageable);
-            } else {
-                page = organizationService
-                        .findAllByOrgNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(orgName, description, pageable);
+            if (searchText == null ){
+                page = organizationService.findAllByClient(userInfo.getClient(),pageable);
+            } else  {
+                page = organizationService.findAll(textInAllColumns(searchText, userInfo.getClient()), pageable);
             }
+
             orgResponse.setTotalRecords(page.getTotalElements());
             orgResponse.setTotalPages(page.getTotalPages());
             orgResponse.setOrganizationList(page.getContent());

@@ -1,8 +1,10 @@
 package com.carmel.common.dbservice.services;
 
+import com.carmel.common.dbservice.model.Client;
 import com.carmel.common.dbservice.model.Organization;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,13 +19,11 @@ public interface OrganizationService {
 
     Optional<Organization> findById(String id);
 
-    List<Organization> findAllByDeletionStatus(int isDeleted);
+    List<Organization> findAllByDeletionStatus(int isDeleted, Client client);
 
     Page<Organization> findAll(Pageable pageable);
 
-    Page<Organization> findAllByOrgNameContaining(String orgName, Pageable pageable);
+    Page<Organization> findAllByClient(Client client, Pageable pageable);
 
-    Page<Organization> findAllByDescriptionContaining(String description, Pageable pageable);
-
-    Page<Organization> findAllByOrgNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String orgName, String description, Pageable pageable);
+    Page<Organization> findAll(Specification<Organization> textInAllColumns, Pageable pageable);
 }

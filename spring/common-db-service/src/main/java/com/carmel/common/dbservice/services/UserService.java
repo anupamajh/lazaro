@@ -1,14 +1,17 @@
 package com.carmel.common.dbservice.services;
 
+import com.carmel.common.dbservice.model.Client;
 import com.carmel.common.dbservice.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    User save(User user);
+
+    Optional<User> findByUserName(String userName);
 
     List<User> findAllByUserName(String userName);
 
@@ -16,11 +19,11 @@ public interface UserService {
 
     Optional<User> findById(String id);
 
-    List<User> findAllByDeletionStatus(int i);
+    User save(User user);
 
-    Page<User> findAll(Pageable pageable);
+    List<User> findAllByDeletionStatus(int isDeleted, Client client);
 
-    Page<User> findAllByUserNameContainingIgnoreCase(String userName, Pageable pageable);
+    Page<User> findAllByClient(Pageable pageable, Client client);
 
-    Optional<User> findByUserName(String userName);
+    Page<User> findAll(Specification<User> textInAllColumns, Pageable pageable);
 }

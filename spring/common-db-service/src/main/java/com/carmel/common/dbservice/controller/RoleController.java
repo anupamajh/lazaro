@@ -5,6 +5,7 @@ import com.carmel.common.dbservice.model.Role;
 import com.carmel.common.dbservice.model.UserInfo;
 import com.carmel.common.dbservice.response.RoleResponse;
 import com.carmel.common.dbservice.response.RolesResponse;
+import com.carmel.common.dbservice.services.OrganizationService;
 import com.carmel.common.dbservice.services.RoleService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -20,10 +21,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import static com.carmel.common.dbservice.specifications.RoleSpecification.textInAllColumns;
 
 @RestController
 @RequestMapping(value = "/roles")
@@ -37,8 +41,11 @@ public class RoleController {
     @Autowired
     UserInformation userInformation;
 
+    @Autowired
+    OrganizationService organizationService;
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public RoleResponse save(@RequestBody Role role) {
+    public RoleResponse save(@Valid @RequestBody Role role) {
         String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserInfo userInfo = userInformation.getUserInfo(userName);
         ObjectMapper objectMapper = new ObjectMapper();
@@ -63,6 +70,7 @@ public class RoleController {
                     role.setCreatedBy(userInfo.getId());
                     role.setCreationTime(new Date());
                 }
+                role.setClient(userInfo.getClient());
                 roleResponse.setRole(roleService.save(role));
                 roleResponse.setSuccess(true);
                 roleResponse.setError("");
@@ -136,37 +144,17 @@ public class RoleController {
         return roleResponse;
     }
 
-
-    @RequestMapping(value = "/get-all", method = RequestMethod.GET)
-    public RolesResponse getAll(@RequestBody Map<String, String> formData) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        logger.trace("Entering");
-        String orgId = formData.get("orgId") == null ? "" : formData.get("orgId");
-        RolesResponse rolesResponse = new RolesResponse();
-        try {
-            logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
-            rolesResponse.setRoleList(roleService.findAllByIsDeletedAndOrgId(0, orgId));
-            rolesResponse.setSuccess(true);
-            rolesResponse.setError("");
-            logger.trace("Completed Successfully");
-        } catch (Exception ex) {
-            logger.error(ex.getMessage(), ex);
-            rolesResponse.setSuccess(true);
-            rolesResponse.setError(ex.getMessage());
-        }
-        logger.trace("Exiting");
-        return rolesResponse;
-    }
-
-    @RequestMapping(value = "/get-deleted", method = RequestMethod.GET)
+    @RequestMapping(value = "/get-deleted", method = RequestMethod.POST)
     public RolesResponse getDeleted(@RequestBody Map<String, String> formData) {
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserInfo userInfo = userInformation.getUserInfo(userName);
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         String orgId = formData.get("orgId") == null ? "" : formData.get("orgId");
         RolesResponse rolesResponse = new RolesResponse();
         try {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
-            rolesResponse.setRoleList(roleService.findAllByIsDeletedAndOrgId(1, orgId));
+            rolesResponse.setRoleList(roleService.findAllByIsDeletedAndClient(1, userInfo.getClient()));
             rolesResponse.setSuccess(true);
             rolesResponse.setError("");
             logger.trace("Completed Successfully");
@@ -179,8 +167,32 @@ public class RoleController {
         return rolesResponse;
     }
 
-    @RequestMapping(value = "/get-roles", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/get-all", method = RequestMethod.POST)
+    public RolesResponse getAll() {
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserInfo userInfo = userInformation.getUserInfo(userName);
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        RolesResponse rolesResponse = new RolesResponse();
+        try {
+            rolesResponse.setRoleList(roleService.findAllByIsDeletedAndClient(0, userInfo.getClient()));
+            rolesResponse.setSuccess(true);
+            rolesResponse.setError("");
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            rolesResponse.setSuccess(true);
+            rolesResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return rolesResponse;
+    }
+
+    @RequestMapping(value = "/get-roles", method = RequestMethod.POST)
     public RolesResponse getPaginated(@RequestBody Map<String, String> formData) {
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserInfo userInfo = userInformation.getUserInfo(userName);
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         RolesResponse rolesResponse = new RolesResponse();
@@ -188,13 +200,13 @@ public class RoleController {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
             int pageNumber = formData.get("current_page") == null ? 0 : Integer.parseInt(formData.get("current_page"));
             int pageSize = formData.get("page_size") == null ? 10 : Integer.parseInt(formData.get("page_size"));
-            String orgId = formData.get("org_id") == null ? "" : String.valueOf(formData.get("org_id"));
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("roleName"));
-            Page<Role> page = roleService.findAllByOrOrgId(orgId, pageable);
+            Page<Role> page = roleService.findAllByClientAndIsDeleted(userInfo.getClient(), 0, pageable);
             rolesResponse.setTotalRecords(page.getTotalElements());
             rolesResponse.setTotalPages(page.getTotalPages());
             rolesResponse.setRoleList(page.getContent());
             rolesResponse.setCurrentRecords(rolesResponse.getRoleList().size());
+            rolesResponse.setSuccess(true);
             logger.trace("Completed Successfully");
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
@@ -206,8 +218,10 @@ public class RoleController {
         return rolesResponse;
     }
 
-    @RequestMapping(value = "/search-roles", method = RequestMethod.GET)
+    @RequestMapping(value = "/search-roles", method = RequestMethod.POST)
     public RolesResponse searchPaginated(@RequestBody Map<String, String> formData) {
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserInfo userInfo = userInformation.getUserInfo(userName);
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         RolesResponse rolesResponse = new RolesResponse();
@@ -215,20 +229,13 @@ public class RoleController {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
             int pageNumber = formData.get("current_page") == null ? 0 : Integer.parseInt(formData.get("current_page"));
             int pageSize = formData.get("page_size") == null ? 10 : Integer.parseInt(formData.get("page_size"));
-            String orgId = formData.get("org_id") == null ? "" : String.valueOf(formData.get("org_id"));
-            String roleName = formData.get("role_name") == null ? null : String.valueOf(formData.get("role_name"));
-            String description = formData.get("description") == null ? null : String.valueOf(formData.get("description"));
+            String searchText = formData.get("search_text") == null ? null : String.valueOf(formData.get("search_text"));
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("roleName"));
             Page<Role> page;
-            if (roleName == null && description == null) {
-                page = roleService.findAllByOrOrgId(orgId, pageable);
-            } else if (roleName != null && description == null) {
-                page = roleService.findAllByRoleNameContainingAndOrgId(roleName, orgId, pageable);
-            } else if (description != null && roleName == null) {
-                page = roleService.findAllByDescriptionContainingAndOrgId(description, orgId, pageable);
+            if (searchText == null) {
+                page = roleService.findAllByClient(userInfo.getClient(),pageable);
             } else {
-                page = roleService
-                        .findAllByOrgIdAndRoleNameContainingOrDescriptionContaining(orgId, roleName, description, pageable);
+                page = roleService.findAll(textInAllColumns(searchText, userInfo.getClient()), pageable);
             }
             rolesResponse.setTotalRecords(page.getTotalElements());
             rolesResponse.setTotalPages(page.getTotalPages());
@@ -251,9 +258,9 @@ public class RoleController {
             role.setId("");
         }
         if (role.getId() == "") {
-            roleList = roleService.findAllByRoleNameAndOrgId(role.getRoleName(), role.getOrgId());
+            roleList = roleService.findAllByRoleNameAndClient(role.getRoleName(), role.getClient());
         } else {
-            roleList = roleService.findAllByRoleNameAndIdIsNotAndOrgIdIs(role.getRoleName(), role.getId(), role.getOrgId());
+            roleList = roleService.findAllByRoleNameAndIdIsNotAndClient(role.getRoleName(), role.getId(), role.getClient());
         }
         if (roleList.size() > 0) {
             return true;

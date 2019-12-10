@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,9 +22,13 @@ public class User implements Serializable {
     public User() {
     }
 
+    public User(Role role) {
+        this.roles = new ArrayList<>();
+        this.roles.add(role);
+    }
     public User(User user) {
         this.id = user.getId();
-        this.orgId = user.getOrgId();
+        this.client = user.getClient();
         this.fullName = user.getFullName();
         this.userName = user.getUserName();
         this.password = user.getPassword();
@@ -40,13 +45,6 @@ public class User implements Serializable {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-
-    @Column(name = "org_id")
-    @Length(max = 40)
-    @NotEmpty(message = "Organization cannot be empty")
-    @NotBlank(message = "Organization cannot be blank")
-    @NotNull(message = "Organization cannot be empty")
-    private String orgId;
 
     @Column(name = "full_name")
     @Length(max = 100, min = 1, message = "Full name length should be between 1 and 100")
@@ -107,7 +105,6 @@ public class User implements Serializable {
     @Column(name = "deleted_time")
     private Date deletedTime;
 
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "g_role_accounts",
             joinColumns = {
@@ -119,20 +116,17 @@ public class User implements Serializable {
     )
     private List<Role> roles;
 
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
+
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getOrgId() {
-        return orgId;
-    }
-
-    public void setOrgId(String orgId) {
-        this.orgId = orgId;
     }
 
     public String getFullName() {
@@ -261,5 +255,13 @@ public class User implements Serializable {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

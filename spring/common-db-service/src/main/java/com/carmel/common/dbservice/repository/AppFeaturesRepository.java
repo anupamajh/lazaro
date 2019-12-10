@@ -3,6 +3,7 @@ package com.carmel.common.dbservice.repository;
 import com.carmel.common.dbservice.model.AppFeatures;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -22,4 +23,5 @@ public interface AppFeaturesRepository extends JpaRepository<AppFeatures, String
 
     Page<AppFeatures> findAllByIsDeleted(int isDeleted, Pageable pageable);
 
+    Page<AppFeatures> findAll(Specification<AppFeatures> textInAllColumns, Pageable pageable);
 }

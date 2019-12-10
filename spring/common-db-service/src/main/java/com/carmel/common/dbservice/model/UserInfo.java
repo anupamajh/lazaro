@@ -20,7 +20,6 @@ public class UserInfo {
     UserRepository repository;
 
     private String id;
-    private String orgId;
     private String fullName;
     private String userName;
     private String phone;
@@ -28,6 +27,7 @@ public class UserInfo {
     private String lastLoginFrom;
     private int accountStatus;
     private int isOperator;
+    private  Client client;
 
     private Principal principal;
 
@@ -37,13 +37,13 @@ public class UserInfo {
 
     public UserInfo(User user) {
         this.id = user.getId();
-        this.orgId = user.getOrgId();
         this.fullName =user.getUserName();
         this.userName = user.getUserName();
         this.phone = user.getPhone();
         this.lastLogin = user.getLastLogin();
         this.accountStatus = user.getAccountStatus();
         this.isOperator = user.getIsOperator();
+        this.client = user.getClient();
     }
 
     public UserInfo(String userName){
@@ -52,7 +52,6 @@ public class UserInfo {
                 new UsernameNotFoundException("Cannot find the logged in principle, Please contact administrator"));
         User user = optionalUser.get();
         this.id = user.getId();
-        this.orgId = user.getOrgId();
         this.fullName =user.getUserName();
         this.userName = user.getUserName();
         this.phone = user.getPhone();
@@ -67,14 +66,6 @@ public class UserInfo {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getOrgId() {
-        return orgId;
-    }
-
-    public void setOrgId(String orgId) {
-        this.orgId = orgId;
     }
 
     public String getFullName() {
@@ -139,5 +130,13 @@ public class UserInfo {
 
     public void setPrincipal(Principal principal) {
         this.principal = principal;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

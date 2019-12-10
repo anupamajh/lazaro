@@ -1,45 +1,36 @@
 package com.carmel.common.dbservice.services;
 
+import com.carmel.common.dbservice.model.Client;
 import com.carmel.common.dbservice.model.User;
-import com.carmel.common.dbservice.model.UserInfo;
 import com.carmel.common.dbservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private static UserRepository repository;
-
     @Autowired
     UserRepository userRepository;
 
-    @PostConstruct
-    private void setRepository(){
-        repository = this.userRepository;
-    }
-
     @Override
-    public User save(User user) {
-        return userRepository.save(user);
+    public Optional<User> findByUserName(String userName) {
+        return userRepository.findByUserName(userName);
     }
 
     @Override
     public List<User> findAllByUserName(String userName) {
-        return userRepository.findAllByUserNameAndIsDeletedIs(userName,0);
+        return userRepository.findAllByUserName(userName);
     }
 
     @Override
     public List<User> findAllByUserNameAndIdIsNot(String userName, String id) {
-        return userRepository.findAllByUserNameAndIdIsNotAndIsDeletedIs(userName, id,0);
+        return userRepository.findAllByUserNameAndIdIsNot(userName, id);
     }
 
     @Override
@@ -48,24 +39,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAllByDeletionStatus(int i) {
-        return userRepository.findAllByIsDeleted(i);
+    public User save(User user) {
+        return userRepository.save(user);
     }
 
     @Override
-    public Page<User> findAll(Pageable pageable) {
-        return userRepository.findAll(pageable);
+    public List<User> findAllByDeletionStatus(int isDeleted, Client client) {
+        return userRepository.findAllByIsDeletedAndClient(isDeleted, client);
     }
 
     @Override
-    public Page<User> findAllByUserNameContainingIgnoreCase(String userName, Pageable pageable) {
-        return userRepository.findAllByUserNameContainingAndIsDeletedIs(userName, 0, pageable);
+    public Page<User> findAllByClient(Pageable pageable, Client client) {
+        return userRepository.findAllByIsDeletedAndClient(0, client,pageable);
     }
-
 
     @Override
-    public Optional<User> findByUserName(String userName) {
-        return userRepository.findByUserName(userName);
+    public Page<User> findAll(Specification<User> textInAllColumns, Pageable pageable) {
+        return userRepository.findAll(textInAllColumns, pageable);
     }
+
 
 }

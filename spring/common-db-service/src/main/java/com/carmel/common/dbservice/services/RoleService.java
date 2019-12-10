@@ -1,22 +1,28 @@
 package com.carmel.common.dbservice.services;
 
+import com.carmel.common.dbservice.model.Client;
 import com.carmel.common.dbservice.model.Role;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface RoleService {
     Role save(Role role);
-    List<Role> findAllByRoleNameAndOrgId(String roleName, String orgId);
-    List<Role> findAllByRoleNameAndIdIsNotAndOrgIdIs(String roleName, String id, String orgId);
-    Optional<Role> findById(String id);
-    Page<Role> findAll(Pageable pageable);
-    List<Role> findAllByIsDeletedAndOrgId(int isDeleted, String orgId);
-    Page<Role> findAllByOrOrgId(String orgId, Pageable pageable);
-    Page<Role> findAllByRoleNameContainingAndOrgId(String roleName, String orgId, Pageable pageable);
-    Page<Role> findAllByDescriptionContainingAndOrgId(String description, String orgId, Pageable pageable);
-    Page<Role> findAllByOrgIdAndRoleNameContainingOrDescriptionContaining(String orgId, String roleName, String description, Pageable pageable);
 
+    List<Role> findAllByRoleNameAndClient(String roleName, Client client);
+
+    List<Role> findAllByRoleNameAndIdIsNotAndClient(String roleName, String id, Client client);
+
+    List<Role> findAllByIsDeletedAndClient(int isDeleted, Client client);
+
+    Optional<Role> findById(String id);
+
+    Page<Role> findAllByClient(Client client, Pageable pageable);
+
+    Page<Role> findAllByClientAndIsDeleted(Client client, int isDeleted, Pageable pageable);
+
+    Page<Role> findAll(Specification<Role> textInAllColumns, Pageable pageable);
 }

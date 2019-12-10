@@ -5,6 +5,7 @@ import com.carmel.common.dbservice.repository.AppFeaturesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,5 +55,10 @@ public class AppFeaturesServiceImpl implements AppFeaturesService{
     @Override
     public Page<AppFeatures> findAllByIsDeleted(int isDeleted, Pageable pageable) {
         return appFeaturesRepository.findAllByIsDeleted(isDeleted,pageable);
+    }
+
+    @Override
+    public Page<AppFeatures> findAll(Specification<AppFeatures> textInAllColumns, Pageable pageable) {
+        return appFeaturesRepository.findAll(textInAllColumns, pageable);
     }
 }

@@ -22,11 +22,11 @@ logging:
     root: info
     org:
       hibernate:
-        type: trace
+        type: info
     com:
       carmel:
         common:
-          dbservice: trace
+          dbservice: info
   pattern:
     console: '%d{"yyyy/MM/dd HH:mm:ss,SSS"} [%p] [%t] %M\(%F:%L\) - %msg%n'
   file:
@@ -45,7 +45,7 @@ eureka:
 security:
   oauth2:
     resource:
-      token-info-uri: http://139.59.32.238:8005/oauth/check_token
+      token-info-uri: http://139.59.32.238:8000/auth/oauth/check_token
     client:
-      client-id: carmel
+      client-id: 21e43c55-28ef-478a-ae65-dc896e5eaa34
       client-secret: P@ssw0rd

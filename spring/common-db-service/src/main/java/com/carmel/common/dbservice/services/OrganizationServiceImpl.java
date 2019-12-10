@@ -1,10 +1,12 @@
 package com.carmel.common.dbservice.services;
 
+import com.carmel.common.dbservice.model.Client;
 import com.carmel.common.dbservice.model.Organization;
 import com.carmel.common.dbservice.repository.OrganizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,8 +39,8 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public List<Organization> findAllByDeletionStatus(int isDeleted) {
-        return organizationRepository.findAllByIsDeleted(isDeleted);
+    public List<Organization> findAllByDeletionStatus(int isDeleted, Client client) {
+        return organizationRepository.findAllByIsDeletedAndClient(isDeleted, client);
     }
 
     @Override
@@ -47,17 +49,12 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public Page<Organization> findAllByOrgNameContaining(String orgName, Pageable pageable) {
-        return organizationRepository.findAllByOrgNameContainingAndIsDeleted(orgName, 0,pageable);
+    public Page<Organization> findAllByClient(Client client, Pageable pageable) {
+        return organizationRepository.findAllByClientAndIsDeleted(client, 0,pageable);
     }
 
     @Override
-    public Page<Organization> findAllByDescriptionContaining(String description, Pageable pageable) {
-        return organizationRepository.findAllByDescriptionContainingAndIsDeleted(description, 0,pageable);
-    }
-
-    @Override
-    public Page<Organization> findAllByOrgNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String orgName, String description, Pageable pageable) {
-        return organizationRepository.findAllByOrgNameContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndIsDeleted(orgName, description, 0,pageable);
+    public Page<Organization> findAll(Specification<Organization> textInAllColumns, Pageable pageable) {
+        return organizationRepository.findAll(textInAllColumns, pageable);
     }
 }

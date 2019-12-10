@@ -15,6 +15,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PostFilter;
+import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -23,11 +25,14 @@ import org.springframework.security.oauth2.provider.authentication.OAuth2Authent
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import static com.carmel.common.dbservice.specifications.UserSpecification.textInAllColumns;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -44,9 +49,9 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public UserResponse save(@RequestBody User user) {
 
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public UserResponse save(@Valid @RequestBody User user) {
         String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserInfo userInfo = userInformation.getUserInfo(userName);
         ObjectMapper objectMapper = new ObjectMapper();
@@ -56,6 +61,7 @@ public class UserController {
             if (user.getId() == null) {
                 user.setId("");
             }
+            user.setClient(userInfo.getClient());
             logger.trace("Data:{}", objectMapper.writeValueAsString(user));
             if (checkDuplicate(user)) {
                 userResponse.setUser(user);
@@ -66,6 +72,7 @@ public class UserController {
                     user.setPassword(passwordEncoder.encode(user.getPassword()));
                     user.setCreatedBy(userInfo.getId());
                     user.setCreationTime(new Date());
+                    user.setClient(userInfo.getClient());
                 }else{
                     Optional<User> optionalUser = userService.findById(user.getId());
                     user.setPassword(optionalUser.get().getPassword());
@@ -146,10 +153,12 @@ public class UserController {
 
     @RequestMapping(value = "/get-all", method = RequestMethod.GET)
     public UsersResponse getAll() {
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserInfo userInfo = userInformation.getUserInfo(userName);
         logger.trace("Entering");
         UsersResponse usersResponse = new UsersResponse();
         try {
-            usersResponse.setUserList(userService.findAllByDeletionStatus(0));
+            usersResponse.setUserList(userService.findAllByDeletionStatus(0, userInfo.getClient()));
             usersResponse.setSuccess(true);
             usersResponse.setError("");
             logger.trace("Completed Successfully");
@@ -164,10 +173,12 @@ public class UserController {
 
     @RequestMapping(value = "/get-deleted", method = RequestMethod.GET)
     public UsersResponse getDeleted() {
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserInfo userInfo = userInformation.getUserInfo(userName);
         logger.trace("Entering");
         UsersResponse usersResponse = new UsersResponse();
         try {
-            usersResponse.setUserList(userService.findAllByDeletionStatus(1));
+            usersResponse.setUserList(userService.findAllByDeletionStatus(1, userInfo.getClient()));
             usersResponse.setSuccess(true);
             usersResponse.setError("");
         } catch (Exception ex) {
@@ -178,8 +189,10 @@ public class UserController {
         return usersResponse;
     }
 
-    @RequestMapping(value = "/get-users", method = RequestMethod.GET)
+    @RequestMapping(value = "/get-users", method = RequestMethod.POST)
     public UsersResponse getPaginated(@RequestBody Map<String, String> formData) {
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserInfo userInfo = userInformation.getUserInfo(userName);
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         UsersResponse usersResponse = new UsersResponse();
@@ -187,8 +200,8 @@ public class UserController {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
             int pageNumber = formData.get("current_page") == null ? 0 : Integer.parseInt(formData.get("current_page"));
             int pageSize = formData.get("page_size") == null ? 10 : Integer.parseInt(formData.get("page_size"));
-            Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("orgName"));
-            Page<User> page = userService.findAll(pageable);
+            Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("fullName"));
+            Page<User> page = userService.findAllByClient(pageable,userInfo.getClient());
             usersResponse.setTotalRecords(page.getTotalElements());
             usersResponse.setTotalPages(page.getTotalPages());
             usersResponse.setUserList(page.getContent());
@@ -204,8 +217,12 @@ public class UserController {
         return usersResponse;
     }
 
-    @RequestMapping(value = "/search-users", method = RequestMethod.GET)
+
+
+    @RequestMapping(value = "/search-users", method = RequestMethod.POST)
     public UsersResponse searchPaginated(@RequestBody Map<String, String> formData) {
+        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserInfo userInfo = userInformation.getUserInfo(userName);
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         UsersResponse orgResponse = new UsersResponse();
@@ -213,14 +230,14 @@ public class UserController {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
             int pageNumber = formData.get("current_page") == null ? 0 : Integer.parseInt(formData.get("current_page"));
             int pageSize = formData.get("page_size") == null ? 10 : Integer.parseInt(formData.get("page_size"));
-            String userName = formData.get("user_name") == null ? null : String.valueOf(formData.get("user_name"));
+            String searchText = formData.get("search_text") == null ? null : String.valueOf(formData.get("search_text"));
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("userName"));
             Page<User> page;
-            if (userName == null) {
-                page = userService.findAll(pageable);
+            if (searchText == null) {
+                page = userService.findAllByClient(pageable,userInfo.getClient());
             } else {
                 page = userService
-                        .findAllByUserNameContainingIgnoreCase(userName, pageable);
+                        .findAll(textInAllColumns(searchText,userInfo.getClient()), pageable);
             }
             orgResponse.setTotalRecords(page.getTotalElements());
             orgResponse.setTotalPages(page.getTotalPages());
@@ -254,6 +271,7 @@ public class UserController {
         }
     }
 
+/*
     @GetMapping("/me")
     public UserInfo user(Principal principal) {
         String userName = principal.getName();
@@ -264,4 +282,6 @@ public class UserController {
         userInfo.setPrincipal(principal);
         return userInfo;
     }
+
+     */
 }

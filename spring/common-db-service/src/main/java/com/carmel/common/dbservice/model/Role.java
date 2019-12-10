@@ -24,11 +24,6 @@ public class Role implements Serializable {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
-    @Column(name = "org_id")
-    @Length(max = 40)
-    @NotNull(message = "Organization cannot be blank")
-    private String orgId;
-
     @Column(name = "role_name")
     @Length(max = 255, min = 1, message = "Role name length should be between 1 and 100")
     @NotNull(message = "Role Name cannot be null")
@@ -79,6 +74,10 @@ public class Role implements Serializable {
     )
     private List<AppFeatures> appFeatures;
 
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
+
 
     public String getId() {
         return id;
@@ -86,14 +85,6 @@ public class Role implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getOrgId() {
-        return orgId;
-    }
-
-    public void setOrgId(String orgId) {
-        this.orgId = orgId;
     }
 
     public String getRoleName() {
@@ -182,5 +173,13 @@ public class Role implements Serializable {
 
     public void setAppFeatures(List<AppFeatures> appFeatures) {
         this.appFeatures = appFeatures;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

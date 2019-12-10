@@ -1,8 +1,10 @@
 package com.carmel.common.dbservice.repository;
 
+import com.carmel.common.dbservice.model.Client;
 import com.carmel.common.dbservice.model.Organization;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -12,13 +14,11 @@ public interface OrganizationRepository extends JpaRepository<Organization, Stri
 
     List<Organization> findAllByOrgNameAndIdIsNotAndIsDeletedIs(String orgName, String id, int isDeleted);
 
-    List<Organization> findAllByIsDeleted(int isDeleted);
-
     Page<Organization> findAllByIsDeletedIs(int isDeleted, Pageable pageable);
 
-    Page<Organization> findAllByOrgNameContainingAndIsDeleted(String orgName, int isDeleted, Pageable pageable);
+    List<Organization> findAllByIsDeletedAndClient(int isDeleted, Client client);
 
-    Page<Organization> findAllByDescriptionContainingAndIsDeleted(String description, int isDeleted, Pageable pageable);
+    Page<Organization> findAllByClientAndIsDeleted(Client client, int isDeleted, Pageable pageable);
 
-    Page<Organization> findAllByOrgNameContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndIsDeleted(String orgName, String description, int isDeleted, Pageable pageable);
+    Page<Organization> findAll(Specification<Organization> textInAllColumns, Pageable pageable);
 }

@@ -1,10 +1,12 @@
 package com.carmel.common.dbservice.services;
 
+import com.carmel.common.dbservice.model.Client;
 import com.carmel.common.dbservice.model.Role;
 import com.carmel.common.dbservice.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,38 +24,18 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<Role> findAllByRoleNameAndOrgId(String roleName, String orgId) {
-        return roleRepository.findAllByRoleNameAndOrgIdAndIsDeletedIs(roleName, orgId,0);
+    public List<Role> findAllByRoleNameAndClient(String roleName, Client client) {
+        return roleRepository.findAllByRoleNameAndClient(roleName, client);
     }
 
     @Override
-    public List<Role> findAllByRoleNameAndIdIsNotAndOrgIdIs(String roleName, String id, String orgId) {
-        return roleRepository.findAllByRoleNameAndIdIsNotAndOrgIdIsAndIsDeletedIs(roleName, id, orgId,0);
+    public List<Role> findAllByRoleNameAndIdIsNotAndClient(String roleName, String id, Client client) {
+        return roleRepository.findAllByRoleNameAndIdIsNotAndClient(roleName, id, client);
     }
 
     @Override
-    public List<Role> findAllByIsDeletedAndOrgId(int isDeleted, String orgId) {
-        return roleRepository.findAllByIsDeletedAndOrgId(isDeleted, orgId);
-    }
-
-    @Override
-    public Page<Role> findAllByOrOrgId(String orgId, Pageable pageable) {
-        return roleRepository.findAllByOrOrgIdAndIsDeleted(orgId, 0, pageable);
-    }
-
-    @Override
-    public Page<Role> findAllByRoleNameContainingAndOrgId(String roleName, String orgId, Pageable pageable) {
-        return roleRepository.findAllByRoleNameContainingAndOrgIdAndIsDeleted(roleName, orgId, 0, pageable);
-    }
-
-    @Override
-    public Page<Role> findAllByDescriptionContainingAndOrgId(String description, String orgId, Pageable pageable) {
-        return roleRepository.findAllByDescriptionContainingAndOrgIdAndIsDeleted(description, orgId, 0, pageable);
-    }
-
-    @Override
-    public Page<Role> findAllByOrgIdAndRoleNameContainingOrDescriptionContaining(String orgId, String roleName, String description, Pageable pageable) {
-        return roleRepository.findAllByOrgIdAndRoleNameContainingOrDescriptionContainingAndIsDeleted(orgId, roleName, description, 0, pageable);
+    public List<Role> findAllByIsDeletedAndClient(int isDeleted, Client client) {
+        return roleRepository.findAllByIsDeletedAndClient(isDeleted, client);
     }
 
     @Override
@@ -62,7 +44,17 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Page<Role> findAll(Pageable pageable) {
-        return roleRepository.findAll(pageable);
+    public Page<Role> findAllByClient(Client client, Pageable pageable) {
+        return roleRepository.findAllByClient(client, pageable);
+    }
+
+    @Override
+    public Page<Role> findAllByClientAndIsDeleted(Client client, int isDeleted, Pageable pageable) {
+        return roleRepository.findAllByClientAndIsDeleted(client, isDeleted, pageable);
+    }
+
+    @Override
+    public Page<Role> findAll(Specification<Role> textInAllColumns, Pageable pageable) {
+        return roleRepository.findAll(textInAllColumns, pageable);
     }
 }

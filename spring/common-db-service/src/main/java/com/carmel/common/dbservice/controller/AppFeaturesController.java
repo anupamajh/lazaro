@@ -31,6 +31,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static com.carmel.common.dbservice.specifications.AppFeatureSpecification.textInAllColumns;
+
 @RestController
 @RequestMapping(value = "/app-features")
 public class AppFeaturesController {
@@ -180,7 +182,7 @@ public class AppFeaturesController {
         return appFeaturesResponse;
     }
 
-    @RequestMapping(value = "/get-app-features", method = RequestMethod.GET)
+    @RequestMapping(value = "/get-app-features", method = RequestMethod.POST)
     public AppFeaturesResponse getPaginated(@RequestBody Map<String, String> formData) {
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
@@ -206,7 +208,7 @@ public class AppFeaturesController {
         return appFeaturesResponse;
     }
 
-    @RequestMapping(value = "/search-app-features", method = RequestMethod.GET)
+    @RequestMapping(value = "/search-app-features", method = RequestMethod.POST)
     public AppFeaturesResponse searchPaginated(@RequestBody Map<String, String> formData) {
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
@@ -215,13 +217,13 @@ public class AppFeaturesController {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
             int pageNumber = formData.get("current_page") == null ? 0 : Integer.parseInt(formData.get("current_page"));
             int pageSize = formData.get("page_size") == null ? 10 : Integer.parseInt(formData.get("page_size"));
-            String featureName = formData.get("feature_name") == null ? null : String.valueOf(formData.get("feature_name"));
+            String searchText = formData.get("search_text") == null ? null : String.valueOf(formData.get("search_text"));
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("featureName"));
             Page<AppFeatures> page;
-            if (featureName == null) {
+            if (searchText == null) {
                 page = appFeaturesService.findAll(pageable);
             } else {
-                page = appFeaturesService.findAllByFeatureNameContaining(featureName, pageable);
+                page = appFeaturesService.findAll(textInAllColumns(searchText), pageable);
             }
             appFeaturesResponse.setTotalRecords(page.getTotalElements());
             appFeaturesResponse.setTotalPages(page.getTotalPages());
