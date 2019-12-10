@@ -1,5 +1,7 @@
 package com.carmel.common.dbservice.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.ManyToAny;
 import org.hibernate.envers.Audited;
@@ -114,7 +116,24 @@ public class User implements Serializable {
                     @JoinColumn(name = "role_id", referencedColumnName = "id")
             }
     )
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Role> roles;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "g_user_orgs",
+            joinColumns = {
+                    @JoinColumn(name = "user_id", referencedColumnName = "id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "org_id", referencedColumnName = "id")
+            }
+    )
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Organization> organizations;
+
+    @ManyToOne
+    @JoinColumn(name = "org_id")
+    private Organization defaultOrganization;
 
     @ManyToOne
     @JoinColumn(name = "client_id")
@@ -263,5 +282,21 @@ public class User implements Serializable {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public List<Organization> getOrganizations() {
+        return organizations;
+    }
+
+    public void setOrganizations(List<Organization> organizations) {
+        this.organizations = organizations;
+    }
+
+    public Organization getDefaultOrganization() {
+        return defaultOrganization;
+    }
+
+    public void setDefaultOrganization(Organization defaultOrganization) {
+        this.defaultOrganization = defaultOrganization;
     }
 }
