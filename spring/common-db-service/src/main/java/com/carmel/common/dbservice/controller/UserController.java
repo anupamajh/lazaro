@@ -270,18 +270,15 @@ public class UserController {
             return false;
         }
     }
-
-/*
     @GetMapping("/me")
     public UserInfo user(Principal principal) {
         String userName = principal.getName();
         Optional<User> optionalUser = userService.findByUserName(userName);
         optionalUser.orElseThrow(() ->
-                new UsernameNotFoundException("Cannot find the logged in principle, Please contact administrator"));
+                new UsernameNotFoundException("Cannot find the logged in principal, Please contact administrator"));
         UserInfo userInfo = new UserInfo(optionalUser.get());
         userInfo.setPrincipal(principal);
         return userInfo;
     }
 
-     */
 }
