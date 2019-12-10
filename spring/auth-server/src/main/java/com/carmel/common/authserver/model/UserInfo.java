@@ -1,9 +1,10 @@
 package com.carmel.common.authserver.model;
 
+import java.io.Serializable;
 import java.security.Principal;
 import java.util.Date;
 
-public class UserInfo {
+public class UserInfo implements Serializable {
     private String id;
     private String orgId;
     private String fullName;

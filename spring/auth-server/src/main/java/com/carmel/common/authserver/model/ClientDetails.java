@@ -7,12 +7,13 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "g_client_details")
 @Audited
-public class ClientDetails {
+public class ClientDetails implements Serializable {
 
     @Id
     @Column(name = "id")

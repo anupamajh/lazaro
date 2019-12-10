@@ -43,6 +43,8 @@ public class AuthorizationServiceConfig  implements AuthorizationServerConfigure
         return defaultTokenServices;
     }
 
+
+
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security.checkTokenAccess("isAuthenticated()").tokenKeyAccess("permitAll()");
