@@ -105,7 +105,7 @@ public class RoleController {
                 roleResponse.setRole(roleService.save(role));
             } else {
                 roleResponse.setSuccess(false);
-                roleResponse.setError("Error occurred while moving organization to Trash!! Please try after sometime");
+                roleResponse.setError("Error occurred while moving role to Trash!! Please try after sometime");
             }
             logger.trace("Completed Successfully");
         } catch (Exception ex) {

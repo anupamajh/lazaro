@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.security.Principal;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 public class UserInfo {
@@ -28,6 +29,8 @@ public class UserInfo {
     private int accountStatus;
     private int isOperator;
     private  Client client;
+    private  Organization defaultOrganization;
+    private List<Organization> organizations;
 
     private Principal principal;
 
@@ -44,6 +47,8 @@ public class UserInfo {
         this.accountStatus = user.getAccountStatus();
         this.isOperator = user.getIsOperator();
         this.client = user.getClient();
+        this.defaultOrganization = user.getDefaultOrganization();
+        this.organizations = user.getOrganizations();
     }
 
     public UserInfo(String userName){
@@ -58,6 +63,9 @@ public class UserInfo {
         this.lastLogin = user.getLastLogin();
         this.accountStatus = user.getAccountStatus();
         this.isOperator = user.getIsOperator();
+        this.client = user.getClient();
+        this.defaultOrganization = user.getDefaultOrganization();
+        this.organizations = user.getOrganizations();
     }
 
     public String getId() {
@@ -138,5 +146,21 @@ public class UserInfo {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public Organization getDefaultOrganization() {
+        return defaultOrganization;
+    }
+
+    public void setDefaultOrganization(Organization defaultOrganization) {
+        this.defaultOrganization = defaultOrganization;
+    }
+
+    public List<Organization> getOrganizations() {
+        return organizations;
+    }
+
+    public void setOrganizations(List<Organization> organizations) {
+        this.organizations = organizations;
     }
 }
