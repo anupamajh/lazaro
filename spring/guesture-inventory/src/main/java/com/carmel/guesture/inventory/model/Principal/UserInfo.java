@@ -1,12 +1,7 @@
 package com.carmel.guesture.inventory.model.Principal;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import java.security.Principal;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 public class UserInfo {
 

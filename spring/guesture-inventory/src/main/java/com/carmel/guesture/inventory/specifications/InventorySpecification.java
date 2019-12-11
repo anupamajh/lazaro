@@ -1,7 +1,6 @@
 package com.carmel.guesture.inventory.specifications;
 
 import com.carmel.guesture.inventory.model.Inventory;
-import com.carmel.guesture.inventory.model.InventoryType;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;

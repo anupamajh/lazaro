@@ -10,10 +10,9 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-@Table(name = "g_package")
+@Table(name = "g_amenity")
 @Audited
-public class Package {
-
+public class Amenity {
     @Id
     @Column(name = "id")
     @Length(max = 40)
@@ -27,24 +26,15 @@ public class Package {
     @Column(name = "org_id")
     private String orgId;
 
-    @Column(name = "package_title")
+    @Column(name = "title")
     @Length(max = 255, min = 1, message = "Package title length should be between 1 and 255")
-    @NotBlank(message = "Package title cannot be blank")
-    @NotNull(message = "Package title cannot be null")
-    private String packageTitle;
+    @NotBlank(message = "Title cannot be blank")
+    @NotNull(message = "Title cannot be null")
+    private String title;
 
-    @Column(name = "package_narration")
-    @Length(max = 1000, min = 1, message = "Package narration length should be between 1 and 1000")
-    private String packageNarration;
-
-    @Column(name = "rent")
-     private double rent;
-
-    @Column(name = "rent_cycle")
-    private int rentCycle;
-
-    @Column(name = "status")
-    private int packageStatus;
+    @Column(name = "narration")
+    @Length(max = 1000, min = 1, message = "Narration length should be between 1 and 1000")
+    private String naration;
 
     @Column(name = "created_by")
     @Length(max = 40)
@@ -94,44 +84,20 @@ public class Package {
         this.orgId = orgId;
     }
 
-    public String getPackageTitle() {
-        return packageTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setPackageTitle(String packageTitle) {
-        this.packageTitle = packageTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getPackageNarration() {
-        return packageNarration;
+    public String getNaration() {
+        return naration;
     }
 
-    public void setPackageNarration(String packageNarration) {
-        this.packageNarration = packageNarration;
-    }
-
-    public double getRent() {
-        return rent;
-    }
-
-    public void setRent(double rent) {
-        this.rent = rent;
-    }
-
-    public int getRentCycle() {
-        return rentCycle;
-    }
-
-    public void setRentCycle(int rentCycle) {
-        this.rentCycle = rentCycle;
-    }
-
-    public int getPackageStatus() {
-        return packageStatus;
-    }
-
-    public void setPackageStatus(int packageStatus) {
-        this.packageStatus = packageStatus;
+    public void setNaration(String naration) {
+        this.naration = naration;
     }
 
     public String getCreatedBy() {
