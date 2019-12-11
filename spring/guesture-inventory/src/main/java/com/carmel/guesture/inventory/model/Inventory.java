@@ -73,6 +73,11 @@ public class Inventory {
     @JoinColumn
     private InventoryType inventoryType;
 
+    @OneToOne(fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            mappedBy = "inventory")
+    private InventoryLocation inventoryLocation;
+
     public String getId() {
         return id;
     }
@@ -183,5 +188,13 @@ public class Inventory {
 
     public void setOrgId(String orgId) {
         this.orgId = orgId;
+    }
+
+    public InventoryLocation getInventoryLocation() {
+        return inventoryLocation;
+    }
+
+    public void setInventoryLocation(InventoryLocation inventoryLocation) {
+        this.inventoryLocation = inventoryLocation;
     }
 }

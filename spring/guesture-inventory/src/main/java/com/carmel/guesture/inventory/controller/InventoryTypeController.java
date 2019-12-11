@@ -13,7 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -119,7 +118,7 @@ public class InventoryTypeController {
                 inventoryTypeResponse.setInventoryType(inventoryType);
             } else {
                 inventoryTypeResponse.setSuccess(false);
-                inventoryTypeResponse.setError("Error occurred while moving organization to Trash!! Please try after sometime");
+                inventoryTypeResponse.setError("Error occurred while Fetching inventory!! Please try after sometime");
             }
             logger.trace("Completed Successfully");
         } catch (Exception ex) {
