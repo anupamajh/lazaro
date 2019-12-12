@@ -1,5 +1,6 @@
 package com.carmel.guestjini.inventory.components;
 
+import com.carmel.guestjini.inventory.common.YAMLConfig;
 import com.carmel.guestjini.inventory.model.Principal.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -15,6 +16,9 @@ public class UserInformation {
     @Autowired
     RestTemplate restTemplate;
 
+    @Autowired
+    YAMLConfig yamlConfig;
+
     public UserInfo getUserInfo(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         OAuth2AuthenticationDetails oAuth2AuthenticationDetails = (OAuth2AuthenticationDetails) auth.getDetails();
@@ -22,7 +26,7 @@ public class UserInformation {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("Authorization", "Bearer "+ oAuth2AuthenticationDetails.getTokenValue());
         HttpEntity<String> entity = new HttpEntity<>("body", headers);
-        ResponseEntity<UserInfo> result =restTemplate.exchange("http://common-db-service/user/me", HttpMethod.GET, entity, UserInfo.class);
+        ResponseEntity<UserInfo> result =restTemplate.exchange(yamlConfig.getUserInfoURL(), HttpMethod.GET, entity, UserInfo.class);
         return result.getBody();
     }
 }
