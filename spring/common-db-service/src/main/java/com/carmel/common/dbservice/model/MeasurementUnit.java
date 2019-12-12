@@ -10,9 +10,9 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-@Table(name = "g_common_account_head")
+@Table(name = "g_common_measurement_unit")
 @Audited
-public class AccountHead {
+public class MeasurementUnit {
     @Id
     @Column(name = "id")
     @Length(max = 40)
