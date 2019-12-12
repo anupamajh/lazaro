@@ -96,7 +96,7 @@ public class ClientController {
                 }
                 clientDetails.setClient(savedClient);
                 savedClient.setClientDetails(clientDetails);
-                clientResponse.setClient(clientService.save(client));
+                clientResponse.setClient(clientService.save(savedClient));
                 clientResponse.setSuccess(true);
                 clientResponse.setError("");
             }
