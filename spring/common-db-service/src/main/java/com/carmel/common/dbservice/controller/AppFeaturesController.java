@@ -47,8 +47,7 @@ public class AppFeaturesController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public AppFeatureResponse save(@Valid @RequestBody AppFeatures appFeatures) {
-        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserInfo userInfo = userInformation.getUserInfo(userName);
+        UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         AppFeatureResponse appFeatureResponse = new AppFeatureResponse();
@@ -92,8 +91,7 @@ public class AppFeaturesController {
     @RequestMapping(value = "/trash", method = RequestMethod.POST)
     public AppFeatureResponse moveToTrash(@RequestBody Map<String, String> formData) {
         ObjectMapper objectMapper = new ObjectMapper();
-        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserInfo userInfo = userInformation.getUserInfo(userName);
+        UserInfo userInfo = userInformation.getUserInfo();
         logger.trace("Entering");
         AppFeatureResponse appFeatureResponse = new AppFeatureResponse();
         try {

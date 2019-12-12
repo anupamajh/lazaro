@@ -50,8 +50,7 @@ public class ClientController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ClientResponse register(@Valid @RequestBody Client client) {
-        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserInfo userInfo = userInformation.getUserInfo(userName);
+        UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         ClientResponse clientResponse = new ClientResponse();

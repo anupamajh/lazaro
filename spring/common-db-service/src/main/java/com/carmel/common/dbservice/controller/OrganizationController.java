@@ -42,8 +42,7 @@ public class OrganizationController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public OrganizationResponse save(@Valid @RequestBody Organization organization) {
-        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserInfo userInfo = userInformation.getUserInfo(userName);
+        UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         OrganizationResponse organizationResponse = new OrganizationResponse();
@@ -90,8 +89,7 @@ public class OrganizationController {
     @RequestMapping(value = "/trash", method = RequestMethod.POST)
     public OrganizationResponse moveToTrash(@RequestBody Map<String, String> formData) {
         ObjectMapper objectMapper = new ObjectMapper();
-        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserInfo userInfo = userInformation.getUserInfo(userName);
+        UserInfo userInfo = userInformation.getUserInfo();
         logger.trace("Entering");
         OrganizationResponse organizationResponse = new OrganizationResponse();
         try {
@@ -148,8 +146,7 @@ public class OrganizationController {
 
     @RequestMapping(value = "/get-all", method = RequestMethod.GET)
     public OrganizationsResponse getAll() {
-        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserInfo userInfo = userInformation.getUserInfo(userName);
+        UserInfo userInfo = userInformation.getUserInfo();
         logger.trace("Entering");
         OrganizationsResponse organizationsResponse = new OrganizationsResponse();
         try {
@@ -168,8 +165,7 @@ public class OrganizationController {
 
     @RequestMapping(value = "/get-deleted", method = RequestMethod.GET)
     public OrganizationsResponse getDeleted() {
-        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserInfo userInfo = userInformation.getUserInfo(userName);
+        UserInfo userInfo = userInformation.getUserInfo();
         logger.trace("Entering");
         OrganizationsResponse organizationsResponse = new OrganizationsResponse();
         try {
@@ -186,8 +182,7 @@ public class OrganizationController {
 
     @RequestMapping(value = "/get-organizations", method = RequestMethod.POST)
     public OrganizationsResponse getPaginated(@RequestBody Map<String, String> formData) {
-        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserInfo userInfo = userInformation.getUserInfo(userName);
+        UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         OrganizationsResponse orgResponse = new OrganizationsResponse();
@@ -214,8 +209,7 @@ public class OrganizationController {
 
     @RequestMapping(value = "/search-organizations", method = RequestMethod.POST)
     public OrganizationsResponse searchPaginated(@RequestBody Map<String, String> formData) {
-        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserInfo userInfo = userInformation.getUserInfo(userName);
+        UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         OrganizationsResponse orgResponse = new OrganizationsResponse();

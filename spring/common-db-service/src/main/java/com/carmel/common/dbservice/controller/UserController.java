@@ -52,8 +52,7 @@ public class UserController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public UserResponse save(@Valid @RequestBody User user) {
-        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserInfo userInfo = userInformation.getUserInfo(userName);
+        UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         UserResponse userResponse = new UserResponse();
@@ -94,8 +93,7 @@ public class UserController {
 
     @RequestMapping(value = "/trash", method = RequestMethod.POST)
     public UserResponse moveToTrash(@RequestBody Map<String, String> formData) {
-        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserInfo userInfo = userInformation.getUserInfo(userName);
+        UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         UserResponse userResponse = new UserResponse();
@@ -153,8 +151,7 @@ public class UserController {
 
     @RequestMapping(value = "/get-all", method = RequestMethod.GET)
     public UsersResponse getAll() {
-        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserInfo userInfo = userInformation.getUserInfo(userName);
+        UserInfo userInfo = userInformation.getUserInfo();
         logger.trace("Entering");
         UsersResponse usersResponse = new UsersResponse();
         try {
@@ -173,8 +170,7 @@ public class UserController {
 
     @RequestMapping(value = "/get-deleted", method = RequestMethod.GET)
     public UsersResponse getDeleted() {
-        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserInfo userInfo = userInformation.getUserInfo(userName);
+        UserInfo userInfo = userInformation.getUserInfo();
         logger.trace("Entering");
         UsersResponse usersResponse = new UsersResponse();
         try {
@@ -191,8 +187,7 @@ public class UserController {
 
     @RequestMapping(value = "/get-users", method = RequestMethod.POST)
     public UsersResponse getPaginated(@RequestBody Map<String, String> formData) {
-        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserInfo userInfo = userInformation.getUserInfo(userName);
+        UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         UsersResponse usersResponse = new UsersResponse();
@@ -221,8 +216,7 @@ public class UserController {
 
     @RequestMapping(value = "/search-users", method = RequestMethod.POST)
     public UsersResponse searchPaginated(@RequestBody Map<String, String> formData) {
-        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserInfo userInfo = userInformation.getUserInfo(userName);
+        UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         UsersResponse orgResponse = new UsersResponse();

@@ -46,8 +46,7 @@ public class RoleController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public RoleResponse save(@Valid @RequestBody Role role) {
-        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserInfo userInfo = userInformation.getUserInfo(userName);
+        UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         RoleResponse roleResponse = new RoleResponse();
@@ -87,8 +86,7 @@ public class RoleController {
 
     @RequestMapping(value = "/trash", method = RequestMethod.POST)
     public RoleResponse moveToTrash(@RequestBody Map<String, String> formData) {
-        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserInfo userInfo = userInformation.getUserInfo(userName);
+        UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         RoleResponse roleResponse = new RoleResponse();
@@ -146,8 +144,7 @@ public class RoleController {
 
     @RequestMapping(value = "/get-deleted", method = RequestMethod.POST)
     public RolesResponse getDeleted(@RequestBody Map<String, String> formData) {
-        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserInfo userInfo = userInformation.getUserInfo(userName);
+        UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         String orgId = formData.get("orgId") == null ? "" : formData.get("orgId");
@@ -170,8 +167,7 @@ public class RoleController {
 
     @RequestMapping(value = "/get-all", method = RequestMethod.POST)
     public RolesResponse getAll() {
-        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserInfo userInfo = userInformation.getUserInfo(userName);
+        UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         RolesResponse rolesResponse = new RolesResponse();
@@ -191,8 +187,7 @@ public class RoleController {
 
     @RequestMapping(value = "/get-roles", method = RequestMethod.POST)
     public RolesResponse getPaginated(@RequestBody Map<String, String> formData) {
-        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserInfo userInfo = userInformation.getUserInfo(userName);
+        UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         RolesResponse rolesResponse = new RolesResponse();
@@ -220,8 +215,7 @@ public class RoleController {
 
     @RequestMapping(value = "/search-roles", method = RequestMethod.POST)
     public RolesResponse searchPaginated(@RequestBody Map<String, String> formData) {
-        String userName = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserInfo userInfo = userInformation.getUserInfo(userName);
+        UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         RolesResponse rolesResponse = new RolesResponse();
