@@ -1,68 +1,59 @@
-package com.carmel.guestjini.inventory.model;
+package com.carmel.guestjini.inventory.model.DTO;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.envers.Audited;
-import org.hibernate.validator.constraints.Length;
+import com.carmel.guestjini.inventory.components.PhotoInformation;
+import com.carmel.guestjini.inventory.model.Amenity;
+import com.carmel.guestjini.inventory.model.Photo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-@Entity
-@Table(name = "g_amenity")
-@Audited
-public class Amenity {
+@Component
+public class AmenityDTO {
 
-    @Id
-    @Column(name = "id")
-    @Length(max = 40)
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    public static PhotoInformation photoInformation;
     private String id;
-
-    @Column(name = "client_id")
     private String clientId;
-
-    @Column(name = "org_id")
     private String orgId;
-
-    @Column(name = "photo_id")
     private String photoId;
-
-    @Column(name = "title")
-    @Length(max = 255, min = 1, message = "Title length should be between 1 and 255")
-    @NotBlank(message = "Title cannot be blank")
-    @NotNull(message = "Title cannot be null")
     private String title;
-
-    @Column(name = "narration")
-    @Length(max = 1000, min = 1, message = "Narration length should be between 1 and 1000")
     private String narration;
-
-    @Column(name = "created_by")
-    @Length(max = 40)
     private String createdBy;
-
-    @Column(name = "creation_time")
     private Date creationTime;
-
-    @Column(name = "last_modified_by")
-    @Length(max = 40)
     private String lastModifiedBy;
-
-    @Column(name = "last_Modified_time")
     private Date lastModifiedTime;
-
-    @Column(name = "is_deleted")
     private int isDeleted;
-
-    @Column(name = "deleted_by")
-    @Length(max = 40)
     private String deletedBy;
-
-    @Column(name = "deleted_time")
     private Date deletedTime;
+
+    private Photo photo;
+
+    public AmenityDTO() {
+
+    }
+
+    public AmenityDTO(Amenity amenity) {
+        this.id = amenity.getId();
+        this.clientId = amenity.getClientId();
+        this.orgId = amenity.getOrgId();
+        this.photoId = amenity.getPhotoId();
+        this.title = amenity.getTitle();
+        this.narration = amenity.getNarration();
+        this.createdBy = amenity.getCreatedBy();
+        this.creationTime = amenity.getCreationTime();
+        this.lastModifiedBy = amenity.getLastModifiedBy();
+        this.lastModifiedTime = amenity.getLastModifiedTime();
+        this.isDeleted = amenity.getIsDeleted();
+        this.deletedBy = amenity.getDeletedBy();
+        this.deletedTime = amenity.getDeletedTime();
+        if (this.photoId == null) {
+            this.photoId = "";
+        }
+        if (this.photoId != "") {
+            this.photo = photoInformation.getPhoto(this.photoId);
+        }
+
+    }
 
     public String getId() {
         return id;
@@ -88,6 +79,14 @@ public class Amenity {
         this.orgId = orgId;
     }
 
+    public String getPhotoId() {
+        return photoId;
+    }
+
+    public void setPhotoId(String photoId) {
+        this.photoId = photoId;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -100,8 +99,8 @@ public class Amenity {
         return narration;
     }
 
-    public void setNarration(String naration) {
-        this.narration = naration;
+    public void setNarration(String narration) {
+        this.narration = narration;
     }
 
     public String getCreatedBy() {
@@ -160,11 +159,13 @@ public class Amenity {
         this.deletedTime = deletedTime;
     }
 
-    public String getPhotoId() {
-        return photoId;
-    }
-
-    public void setPhotoId(String photoId) {
-        this.photoId = photoId;
+    public Photo getPhoto() {
+        if (this.photoId == null) {
+            this.photoId = "";
+        }
+        if (this.photoId != "") {
+            this.photo = photoInformation.getPhoto(this.photoId);
+        }
+        return photo;
     }
 }

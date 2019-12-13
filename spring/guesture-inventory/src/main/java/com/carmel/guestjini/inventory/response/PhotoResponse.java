@@ -1,37 +1,32 @@
 package com.carmel.guestjini.inventory.response;
 
-import com.carmel.guestjini.inventory.model.DTO.InventoryTypeDTO;
-import com.carmel.guestjini.inventory.model.InventoryType;
+import com.carmel.guestjini.inventory.model.Photo;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class InventoryTypeResponse {
-    private InventoryTypeDTO inventoryType;
-    private List<InventoryTypeDTO> inventoryTypeList;
+public class PhotoResponse {
+    private Photo photo;
+    private List<Photo> photoList;
     private long totalPages;
     private long totalRecords;
     private long currentRecords;
     private boolean success;
     private String error;
 
-    public InventoryTypeDTO getInventoryType() {
-        return inventoryType;
+    public Photo getPhoto() {
+        return photo;
     }
 
-    public void setInventoryType(InventoryType inventoryType) {
-        this.inventoryType = new InventoryTypeDTO(inventoryType);
+    public void setPhoto(Photo photo) {
+        this.photo = photo;
     }
 
-    public List<InventoryTypeDTO> getInventoryTypeList() {
-        return inventoryTypeList;
+    public List<Photo> getPhotoList() {
+        return photoList;
     }
 
-    public void setInventoryTypeList(List<InventoryType> inventoryTypeList) {
-        this.inventoryTypeList = new ArrayList<>();
-        inventoryTypeList.forEach(inventoryType1 -> {
-            this.inventoryTypeList.add(new InventoryTypeDTO(inventoryType1));
-        });
+    public void setPhotoList(List<Photo> photoList) {
+        this.photoList = photoList;
     }
 
     public long getTotalPages() {

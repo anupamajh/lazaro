@@ -1,32 +1,45 @@
 package com.carmel.guestjini.inventory.response;
 
+import com.carmel.guestjini.inventory.components.PhotoInformation;
 import com.carmel.guestjini.inventory.model.Amenity;
+import com.carmel.guestjini.inventory.model.DTO.AmenityDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class AmenityResponse {
-    private Amenity amenity;
-    private List<Amenity> amenityList;
+
+    public static PhotoInformation photoInformation;
+
+    private AmenityDTO amenity;
+    private List<AmenityDTO> amenityList;
     private long totalPages;
     private long totalRecords;
     private long currentRecords;
     private boolean success;
     private String error;
 
-    public Amenity getAmenity() {
+    public AmenityDTO getAmenity() {
         return amenity;
     }
 
     public void setAmenity(Amenity amenity) {
-        this.amenity = amenity;
+        this.amenity = new AmenityDTO(amenity);
     }
 
-    public List<Amenity> getAmenityList() {
+    public List<AmenityDTO> getAmenityList() {
         return amenityList;
     }
 
     public void setAmenityList(List<Amenity> amenityList) {
-        this.amenityList = amenityList;
+        AmenityDTO.photoInformation = photoInformation;
+        this.amenityList = new ArrayList<>();
+        amenityList.forEach(amenity1 -> {
+            this.amenityList.add(new AmenityDTO(amenity1));
+        });
     }
 
     public long getTotalPages() {

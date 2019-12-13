@@ -25,6 +25,9 @@ public class InventoryType {
     @Column(name = "client_id")
     private String clientId;
 
+    @Column(name = "photo_id")
+    private String photoId;
+
     @Column(name = "title")
     @Length(max = 255, min = 1, message = "Inventory Type title length should be between 1 and 255")
     @NotBlank(message = "Inventory Type title cannot be blank")
@@ -168,5 +171,13 @@ public class InventoryType {
 
     public void setInventories(List<Inventory> inventories) {
         this.inventories = inventories;
+    }
+
+    public String getPhotoId() {
+        return photoId;
+    }
+
+    public void setPhotoId(String photoId) {
+        this.photoId = photoId;
     }
 }

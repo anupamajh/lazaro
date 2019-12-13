@@ -1,67 +1,22 @@
 package com.carmel.guestjini.inventory.model;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.envers.Audited;
-import org.hibernate.validator.constraints.Length;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-@Entity
-@Table(name = "g_amenity")
-@Audited
-public class Amenity {
-
-    @Id
-    @Column(name = "id")
-    @Length(max = 40)
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+public class Photo {
     private String id;
-
-    @Column(name = "client_id")
     private String clientId;
-
-    @Column(name = "org_id")
     private String orgId;
-
-    @Column(name = "photo_id")
-    private String photoId;
-
-    @Column(name = "title")
-    @Length(max = 255, min = 1, message = "Title length should be between 1 and 255")
-    @NotBlank(message = "Title cannot be blank")
-    @NotNull(message = "Title cannot be null")
-    private String title;
-
-    @Column(name = "narration")
-    @Length(max = 1000, min = 1, message = "Narration length should be between 1 and 1000")
-    private String narration;
-
-    @Column(name = "created_by")
-    @Length(max = 40)
+    private String type;
+    private String path;
+    private String name;
+    private int error;
+    private int size;
     private String createdBy;
-
-    @Column(name = "creation_time")
     private Date creationTime;
-
-    @Column(name = "last_modified_by")
-    @Length(max = 40)
     private String lastModifiedBy;
-
-    @Column(name = "last_Modified_time")
     private Date lastModifiedTime;
-
-    @Column(name = "is_deleted")
     private int isDeleted;
-
-    @Column(name = "deleted_by")
-    @Length(max = 40)
     private String deletedBy;
-
-    @Column(name = "deleted_time")
     private Date deletedTime;
 
     public String getId() {
@@ -88,20 +43,44 @@ public class Amenity {
         this.orgId = orgId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getType() {
+        return type;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getNarration() {
-        return narration;
+    public String getPath() {
+        return path;
     }
 
-    public void setNarration(String naration) {
-        this.narration = naration;
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getError() {
+        return error;
+    }
+
+    public void setError(int error) {
+        this.error = error;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 
     public String getCreatedBy() {
@@ -158,13 +137,5 @@ public class Amenity {
 
     public void setDeletedTime(Date deletedTime) {
         this.deletedTime = deletedTime;
-    }
-
-    public String getPhotoId() {
-        return photoId;
-    }
-
-    public void setPhotoId(String photoId) {
-        this.photoId = photoId;
     }
 }

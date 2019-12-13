@@ -1,5 +1,9 @@
 package com.carmel.guestjini.inventory.controller;
 
+import com.carmel.guestjini.inventory.model.Amenity;
+import com.carmel.guestjini.inventory.model.PackageCharge;
+import com.carmel.guestjini.inventory.services.AmenityService;
+import com.carmel.guestjini.inventory.services.PackageChargeService;
 import com.carmel.guestjini.inventory.specifications.PackageSpecification;
 import com.carmel.guestjini.inventory.components.UserInformation;
 import com.carmel.guestjini.inventory.model.Package;
@@ -20,10 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/package")
@@ -36,6 +37,12 @@ public class PackageController {
 
     @Autowired
     PackageService packageService;
+
+    @Autowired
+    PackageChargeService packageChargeService;
+
+    @Autowired
+    AmenityService amenityService;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public PackageResponse save(@Valid @RequestBody Package aPackage) {
@@ -58,12 +65,34 @@ public class PackageController {
                 aPackage.setLastModifiedTime(new Date());
             }
             aPackage.setClientId(userInfo.getClient().getClientId());
+//            if(aPackage.getAmenities()!=null){
+//                List<Amenity> amenities = new ArrayList<>();
+//                aPackage.getAmenities().forEach(amenity -> {
+//                    Optional<Amenity> optionalAmenity =  amenityService.findById(amenity.getId());
+//                    if(optionalAmenity.isPresent()){
+//                        amenities.add(optionalAmenity.get());
+//                    }
+//                });
+//                aPackage.setAmenities(amenities);
+//            }
+
             if (checkDuplicate(aPackage)) {
                 packageResponse.setPackage(aPackage);
                 packageResponse.setSuccess(false);
                 packageResponse.setError("Duplicate Package Name name!");
             } else {
-                packageResponse.setPackage(packageService.save(aPackage));
+                List<PackageCharge> packageCharges = aPackage.getPackageCharges();
+                aPackage.setPackageCharges(null);
+                Package savedPackage = packageService.save(aPackage);
+                if(packageCharges != null){
+                    for(int i = 0; i< packageCharges.size(); i++){
+                        packageCharges.get(i).setaPackage(savedPackage);
+                        packageCharges.get(i).setClientId(savedPackage.getClientId());
+                        packageCharges.get(i).setOrgId(savedPackage.getOrgId());
+                    }
+                }
+                savedPackage.setPackageCharges(packageCharges);
+                packageResponse.setPackage(packageService.save(savedPackage));
                 packageResponse.setSuccess(true);
                 packageResponse.setError("");
             }

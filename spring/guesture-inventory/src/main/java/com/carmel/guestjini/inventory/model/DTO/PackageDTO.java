@@ -1,12 +1,16 @@
 package com.carmel.guestjini.inventory.model.DTO;
 
+import com.carmel.guestjini.inventory.components.PhotoInformation;
 import com.carmel.guestjini.inventory.model.Package;
+import com.carmel.guestjini.inventory.model.Photo;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class PackageDTO {
+    public static PhotoInformation photoInformation;
+
     private String id;
     private String clientId;
     private String orgId;
@@ -23,6 +27,11 @@ public class PackageDTO {
     private String deletedBy;
     private Date deletedTime;
     private List<PackageChargeDTO> packageCharges;
+    private List<AmenityDTO> amenities;
+    private Photo photo;
+
+    private String photoId;
+
 
     public PackageDTO() {
     }
@@ -43,10 +52,25 @@ public class PackageDTO {
         this.isDeleted = aPackage.getIsDeleted();
         this.deletedBy = aPackage.getDeletedBy();
         this.deletedTime = aPackage.getDeletedTime();
+        this.photoId = aPackage.getPhotoId();
         this.packageCharges = new ArrayList<>();
-        aPackage.getPackageCharges().forEach(packageCharge -> {
-            this.packageCharges.add(new PackageChargeDTO(packageCharge));
-        });
+        if (aPackage.getPackageCharges() != null) {
+            aPackage.getPackageCharges().forEach(packageCharge -> {
+                this.packageCharges.add(new PackageChargeDTO(packageCharge));
+            });
+        }
+        this.amenities = new ArrayList<>();
+        if (aPackage.getAmenities() != null) {
+            aPackage.getAmenities().forEach(amenity -> {
+                this.amenities.add(new AmenityDTO(amenity));
+            });
+        }
+        if (this.photoId == null) {
+            this.photoId = "";
+        }
+        if (this.photoId != "") {
+            this.photo = photoInformation.getPhoto(this.photoId);
+        }
     }
 
     public static PackageDTO getSimple(Package aPackage) {
@@ -67,7 +91,18 @@ public class PackageDTO {
         packageDTO.deletedBy = aPackage.getDeletedBy();
         packageDTO.deletedTime = aPackage.getDeletedTime();
         packageDTO.packageCharges = new ArrayList<>();
-
+        packageDTO.amenities = new ArrayList<>();
+        if (aPackage.getAmenities() != null) {
+            aPackage.getAmenities().forEach(amenity -> {
+                packageDTO.amenities.add(new AmenityDTO(amenity));
+            });
+        }
+        if (packageDTO.photoId == null) {
+            packageDTO.photoId = "";
+        }
+        if (packageDTO.photoId != "") {
+            packageDTO.photo = photoInformation.getPhoto(packageDTO.photoId);
+        }
         return packageDTO;
     }
 
@@ -198,4 +233,23 @@ public class PackageDTO {
     public void setPackageCharges(List<PackageChargeDTO> packageCharges) {
         this.packageCharges = packageCharges;
     }
+
+    public List<AmenityDTO> getAmenities() {
+        return amenities;
+    }
+
+    public void setAmenities(List<AmenityDTO> amenities) {
+        this.amenities = amenities;
+    }
+
+    public Photo getPhoto() {
+        if (this.photoId == null) {
+            this.photoId = "";
+        }
+        if (this.photoId != "") {
+            this.photo = photoInformation.getPhoto(this.photoId);
+        }
+        return this.photo;
+    }
+
 }

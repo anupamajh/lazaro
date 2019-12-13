@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 public class InventoryDTO {
+
+
     private String id;
     private String clientId;
     private String orgId;
@@ -25,7 +27,7 @@ public class InventoryDTO {
     private InventoryTypeDTO inventoryType;
     private InventoryLocationDTO inventoryLocation;
     private List<PackageDTO> packages;
-    private List<Amenity> amenities;
+    private List<AmenityDTO> amenities;
 
     public InventoryDTO() {
     }
@@ -50,7 +52,10 @@ public class InventoryDTO {
                 this.packages.add(new PackageDTO(aPackage));
             });
         }
-        this.amenities = inventory.getAmenities();
+        this.amenities = new ArrayList<>();
+        inventory.getAmenities().forEach(amenity -> {
+            this.amenities.add(new AmenityDTO(amenity));
+        });
     }
 
     public String getId() {
@@ -185,11 +190,14 @@ public class InventoryDTO {
         this.packages = packages;
     }
 
-    public List<Amenity> getAmenities() {
+    public List<AmenityDTO> getAmenities() {
         return amenities;
     }
 
     public void setAmenities(List<Amenity> amenities) {
-        this.amenities = amenities;
+        this.amenities = new ArrayList<>();
+        amenities.forEach(amenity -> {
+            this.amenities.add(new AmenityDTO(amenity));
+        });
     }
 }

@@ -1,5 +1,9 @@
 package com.carmel.guestjini.inventory.controller;
 
+import com.carmel.guestjini.inventory.components.PhotoInformation;
+import com.carmel.guestjini.inventory.model.DTO.AmenityDTO;
+import com.carmel.guestjini.inventory.model.DTO.InventoryTypeDTO;
+import com.carmel.guestjini.inventory.model.DTO.PackageDTO;
 import com.carmel.guestjini.inventory.response.AmenityResponse;
 import com.carmel.guestjini.inventory.services.AmenityService;
 import com.carmel.guestjini.inventory.specifications.AmenitySpecification;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
@@ -35,6 +40,17 @@ public class AmenityController {
 
     @Autowired
     AmenityService amenityService;
+
+    @Autowired
+    PhotoInformation photoInformation;
+
+    @PostConstruct
+    public void setupPhotoService(){
+        AmenityResponse.photoInformation = photoInformation;
+        AmenityDTO.photoInformation = photoInformation;
+        InventoryTypeDTO.photoInformation = photoInformation;
+        PackageDTO.photoInformation = photoInformation;
+    }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public AmenityResponse save(@Valid @RequestBody Amenity amenity) {

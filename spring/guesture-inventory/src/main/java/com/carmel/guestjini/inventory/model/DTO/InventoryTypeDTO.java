@@ -1,10 +1,14 @@
 package com.carmel.guestjini.inventory.model.DTO;
 
+import com.carmel.guestjini.inventory.components.PhotoInformation;
 import com.carmel.guestjini.inventory.model.InventoryType;
+import com.carmel.guestjini.inventory.model.Photo;
 
 import java.util.Date;
 
 public class InventoryTypeDTO {
+    public static PhotoInformation photoInformation;
+
     private String id;
     private String clientId;
     private String title;
@@ -17,6 +21,10 @@ public class InventoryTypeDTO {
     private  int isDeleted;
     private String deletedBy;
     private Date deletedTime;
+    private String photoId;
+
+    private Photo photo;
+
 
     public InventoryTypeDTO() {
     }
@@ -34,6 +42,14 @@ public class InventoryTypeDTO {
         this.isDeleted = inventoryType.getIsDeleted();
         this.deletedBy = inventoryType.getDeletedBy();
         this.deletedTime = inventoryType.getDeletedTime();
+        this.photoId = inventoryType.getPhotoId();
+
+        if (this.photoId == null) {
+            this.photoId = "";
+        }
+        if (this.photoId != "") {
+            this.photo = photoInformation.getPhoto(this.photoId);
+        }
     }
 
     public String getId() {
@@ -131,4 +147,23 @@ public class InventoryTypeDTO {
     public void setDeletedTime(Date deletedTime) {
         this.deletedTime = deletedTime;
     }
+
+    public String getPhotoId() {
+        return photoId;
+    }
+
+    public void setPhotoId(String photoId) {
+        this.photoId = photoId;
+    }
+
+    public Photo getPhoto() {
+        if (this.photoId == null) {
+            this.photoId = "";
+        }
+        if (!this.photoId.equals("")) {
+            this.photo = photoInformation.getPhoto(this.photoId);
+        }
+        return photo;
+    }
+
 }

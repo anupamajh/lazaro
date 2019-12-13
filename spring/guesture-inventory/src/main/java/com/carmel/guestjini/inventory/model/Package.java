@@ -1,5 +1,7 @@
 package com.carmel.guestjini.inventory.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Length;
@@ -27,6 +29,10 @@ public class Package {
 
     @Column(name = "org_id")
     private String orgId;
+
+    @Column(name = "photo_id")
+    private String photoId;
+
 
     @Column(name = "package_title")
     @Length(max = 255, min = 1, message = "Package title length should be between 1 and 255")
@@ -75,6 +81,19 @@ public class Package {
             fetch = FetchType.LAZY,
             mappedBy = "aPackage")
     private List<PackageCharge> packageCharges;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "g_package_amenities",
+            joinColumns = {
+                    @JoinColumn(name = "package_id", referencedColumnName = "id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "amenity_id", referencedColumnName = "id")
+            }
+    )
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Amenity> amenities;
+
 
     public String getId() {
         return id;
@@ -202,5 +221,21 @@ public class Package {
 
     public void setPackageCharges(List<PackageCharge> packageCharges) {
         this.packageCharges = packageCharges;
+    }
+
+    public String getPhotoId() {
+        return photoId;
+    }
+
+    public void setPhotoId(String photoId) {
+        this.photoId = photoId;
+    }
+
+    public List<Amenity> getAmenities() {
+        return amenities;
+    }
+
+    public void setAmenities(List<Amenity> amenities) {
+        this.amenities = amenities;
     }
 }
