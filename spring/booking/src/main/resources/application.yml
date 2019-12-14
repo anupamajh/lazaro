@@ -22,7 +22,8 @@ logging:
     root: info
     org:
       hibernate:
-        type: info
+        type: trace
+        SQL: debug
     com:
       carmel:
         guestjini:

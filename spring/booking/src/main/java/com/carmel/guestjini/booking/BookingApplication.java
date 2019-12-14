@@ -1,5 +1,7 @@
 package com.carmel.guestjini.booking;
 
+import com.carmel.guestjini.booking.components.InventoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -21,8 +23,8 @@ public class BookingApplication {
 		return new RestTemplate();
 	}
 
-	@PostConstruct
 
+	@PostConstruct
 	public void setupServices(){
 
 	}
