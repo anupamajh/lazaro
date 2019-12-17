@@ -2,10 +2,15 @@ package com.carmel.guestjini.booking.controller;
 
 import com.carmel.guestjini.booking.common.BookingStatus;
 import com.carmel.guestjini.booking.components.InventoryService;
+import com.carmel.guestjini.booking.components.PackageService;
 import com.carmel.guestjini.booking.components.UserInformation;
 import com.carmel.guestjini.booking.model.Booking;
+import com.carmel.guestjini.booking.model.BookingAdditionalCharge;
+import com.carmel.guestjini.booking.model.DTO.Package;
+import com.carmel.guestjini.booking.model.DTO.PackageCharge;
 import com.carmel.guestjini.booking.model.Principal.UserInfo;
 import com.carmel.guestjini.booking.response.BookingResponse;
+import com.carmel.guestjini.booking.service.BookingAdditionalChargeService;
 import com.carmel.guestjini.booking.service.BookingService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -15,6 +20,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,6 +46,12 @@ public class BookingController {
 
     @Autowired
     InventoryService inventoryService;
+
+    @Autowired
+    PackageService packageService;
+
+    @Autowired
+    BookingAdditionalChargeService bookingAdditionalChargeService;
 
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -411,4 +423,93 @@ public class BookingController {
         return bookingResponse;
     }
 
+    @RequestMapping(value = "/remove-package")
+    @Transactional(rollbackFor = Exception.class)
+    public BookingResponse removePackage(@RequestBody Map<String, String> formData) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        BookingResponse bookingResponse = new BookingResponse();
+        try {
+            String bookingId = formData.get("bookingId") == null ? null : String.valueOf(formData.get("bookingId"));
+            if (bookingId == null) {
+                throw new Exception("Booking ID not received");
+            }
+            Optional<Booking> optionalBooking = bookingService.findById(bookingId);
+            if (optionalBooking.isPresent()) {
+                Booking booking = optionalBooking.get();
+                if(booking.getPackageId() == null){
+                    booking.setPackageId("");
+                }
+                if(booking.getPackageId().equals("")){
+                    throw  new Exception("Package is not assigned to this booking");
+                }
+                String packageId = booking.getPackageId();
+                booking.setPackageId(null);
+                bookingResponse.setBooking(bookingService.save(booking));
+                List<BookingAdditionalCharge> bookingAdditionalCharges = bookingAdditionalChargeService.findAllByPackageId(packageId);
+                bookingAdditionalChargeService.deleteAll(bookingAdditionalCharges);
+                bookingResponse.setSuccess(true);
+                bookingResponse.setError("");
+            } else {
+                throw new Exception("Booking not found!!!");
+            }
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            bookingResponse.setSuccess(false);
+            bookingResponse.setError(ex.getMessage());
+        }
+        return bookingResponse;
+    }
+
+    @RequestMapping(value = "/add-package")
+    @Transactional(rollbackFor = Exception.class)
+    public BookingResponse addPackage(@RequestBody Map<String, String> formData) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        BookingResponse bookingResponse = new BookingResponse();
+        try {
+            String bookingId = formData.get("bookingId") == null ? null : String.valueOf(formData.get("bookingId"));
+            String packageId = formData.get("packageId") == null ? null : String.valueOf(formData.get("packageId"));
+            if (bookingId == null) {
+                throw new Exception("Booking ID not received");
+            }
+            if (packageId == null) {
+                throw new Exception("Package Id not received");
+            }
+            Optional<Booking> optionalBooking = bookingService.findById(bookingId);
+            if (optionalBooking.isPresent()) {
+                Booking booking = optionalBooking.get();
+                if(booking.getPackageId() == null){
+                    booking.setPackageId("");
+                }
+                if(!booking.getPackageId().equals("")){
+                    throw  new Exception("Package is already assigned to booking, Please remove package and the assign new package");
+                }
+                Package aPackage = packageService.getPackage(packageId);
+                booking.setPackageId(aPackage.getId());
+                bookingResponse.setBooking(bookingService.save(booking));
+                BookingAdditionalCharge bookingAdditionalCharge;
+                for(PackageCharge packageCharge:aPackage.getPackageCharges()){
+                    bookingAdditionalCharge = new BookingAdditionalCharge(booking,packageCharge);
+                    bookingAdditionalCharge.setOrgId(userInfo.getDefaultOrganization().getId());
+                    bookingAdditionalCharge.setCreatedBy(userInfo.getId());
+                    bookingAdditionalCharge.setCreationTime(new Date());
+                    bookingAdditionalCharge.setClientId(userInfo.getClient().getClientId());
+                    bookingAdditionalCharge.setPackageId(packageId);
+                    bookingAdditionalChargeService.save(bookingAdditionalCharge);
+                }
+                bookingResponse.setSuccess(true);
+                bookingResponse.setError("");
+            } else {
+                throw new Exception("Booking not found!!!");
+            }
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            bookingResponse.setSuccess(false);
+            bookingResponse.setError(ex.getMessage());
+        }
+        return bookingResponse;
+    }
 }
