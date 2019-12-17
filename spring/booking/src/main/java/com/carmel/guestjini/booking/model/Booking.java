@@ -8,8 +8,6 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 
 @Entity
 @Table(name = "g_booking")

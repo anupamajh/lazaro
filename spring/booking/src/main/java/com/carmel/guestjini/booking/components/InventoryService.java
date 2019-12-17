@@ -1,8 +1,6 @@
 package com.carmel.guestjini.booking.components;
 
 import com.carmel.guestjini.booking.config.YAMLConfig;
-import com.carmel.guestjini.booking.model.DTO.Photo;
-import com.carmel.guestjini.booking.response.PhotoResponse;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;

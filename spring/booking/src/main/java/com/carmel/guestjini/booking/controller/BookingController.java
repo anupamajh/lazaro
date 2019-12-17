@@ -1,5 +1,6 @@
 package com.carmel.guestjini.booking.controller;
 
+import com.carmel.guestjini.booking.common.BookingStatus;
 import com.carmel.guestjini.booking.components.InventoryService;
 import com.carmel.guestjini.booking.components.UserInformation;
 import com.carmel.guestjini.booking.model.Booking;
@@ -10,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -19,10 +21,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.awt.print.Book;
 import java.util.*;
 
 import static com.carmel.guestjini.booking.specifications.BookingSpecification.checkInventoryAvailability;
+import static com.carmel.guestjini.booking.specifications.BookingSpecification.textInAllColumns;
 
 @RestController
 @RequestMapping(value = "/booking")
@@ -142,6 +144,53 @@ public class BookingController {
         return bookingResponse;
     }
 
+    @RequestMapping(value = "/apply-discount", method = RequestMethod.POST)
+    public BookingResponse applyDiscount(@RequestBody Map<String, String> formData) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        BookingResponse bookingResponse = new BookingResponse();
+        try {
+            String bookingId = formData.get("bookingId") == null ? null : String.valueOf(formData.get("bookingId"));
+            String strDiscountValue = formData.get("discountValue") == null ? null : String.valueOf(formData.get("discountValue"));
+            String strDiscountValueIdentifier = formData.get("discountValueIdentifier") == null ? null : String.valueOf(formData.get("discountValueIdentifier"));
+            String strDiscountIdentifier = formData.get("discountIdentifier") == null ? null : String.valueOf(formData.get("discountIdentifier"));
+
+            if (bookingId == null) {
+                throw new Exception("Booking ID not received");
+            }
+            if (strDiscountValue == null) {
+                throw new Exception("Discount Value not received");
+            }
+
+            if (strDiscountValueIdentifier == null) {
+                throw new Exception("Discount value type not received");
+            }
+
+            if (strDiscountIdentifier == null) {
+                throw new Exception("Discount type not received");
+            }
+
+            Optional<Booking> optionalBooking = bookingService.findById(bookingId);
+            if (optionalBooking.isPresent()) {
+                Booking booking = optionalBooking.get();
+                booking.setDiscountValue(Double.parseDouble(strDiscountValue));
+                booking.setDiscountValueIdentifier(Integer.parseInt(strDiscountValueIdentifier));
+                booking.setDiscountValue(Integer.parseInt(strDiscountValue));
+                bookingResponse.setBooking(bookingService.save(booking));
+                bookingResponse.setSuccess(true);
+                bookingResponse.setError("");
+            } else {
+                throw new Exception("Booking not found!!!");
+            }
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            bookingResponse.setSuccess(false);
+            bookingResponse.setError(ex.getMessage());
+        }
+        return bookingResponse;
+    }
+
     @RequestMapping(value = "/release-inventory", method = RequestMethod.POST)
     public BookingResponse releaseInventory(@RequestBody Map<String, String> formData) {
         UserInfo userInfo = userInformation.getUserInfo();
@@ -163,7 +212,7 @@ public class BookingController {
             } else {
                 throw new Exception("Booking not found!!!");
             }
-            } catch (Exception ex) {
+        } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             bookingResponse.setSuccess(false);
             bookingResponse.setError(ex.getMessage());
@@ -172,5 +221,194 @@ public class BookingController {
     }
 
 
+    @RequestMapping(value = "/cancel-booking")
+    public BookingResponse cancelBooking(@RequestBody Map<String, String> formData) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        BookingResponse bookingResponse = new BookingResponse();
+        try {
+            String bookingId = formData.get("bookingId") == null ? null : String.valueOf(formData.get("bookingId"));
+            if (bookingId == null) {
+                throw new Exception("Booking ID not received");
+            }
+            Optional<Booking> optionalBooking = bookingService.findById(bookingId);
+            if (optionalBooking.isPresent()) {
+                Booking booking = optionalBooking.get();
+                booking.setBookingStatus(BookingStatus.CANCELLED.getValue());
+                bookingResponse.setBooking(bookingService.save(booking));
+                bookingResponse.setSuccess(true);
+                bookingResponse.setError("");
+            } else {
+                throw new Exception("Booking not found!!!");
+            }
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            bookingResponse.setSuccess(false);
+            bookingResponse.setError(ex.getMessage());
+        }
+        return bookingResponse;
+    }
+
+
+    @RequestMapping(value = "/trash", method = RequestMethod.POST)
+    public BookingResponse moveToTrash(@RequestBody Map<String, String> formData) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        BookingResponse bookingResponse = new BookingResponse();
+        try {
+            logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
+            Optional<Booking> optionalBooking = bookingService.findById(formData.get("id"));
+            if (optionalBooking != null) {
+                Booking booking = optionalBooking.get();
+                booking.setIsDeleted(1);
+                booking.setBookingStatus(BookingStatus.CANCELLED.getValue());
+                booking.setDeletedBy(userInfo.getId());
+                booking.setDeletedTime(new Date());
+                bookingResponse.setSuccess(true);
+                bookingResponse.setError("");
+                bookingResponse.setBooking(bookingService.save(booking));
+            } else {
+                bookingResponse.setSuccess(false);
+                bookingResponse.setError("Error occurred while moving inventory to Trash!! Please try after sometime");
+            }
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            bookingResponse.setSuccess(false);
+            bookingResponse.setError(ex.getMessage());
+        }
+        return bookingResponse;
+    }
+
+
+    @RequestMapping(value = "/get", method = RequestMethod.POST)
+    public BookingResponse get(@RequestBody Map<String, String> formData) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        BookingResponse bookingResponse = new BookingResponse();
+        try {
+            logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
+            Optional<Booking> optionalBooking = bookingService.findById(formData.get("id"));
+            if (optionalBooking.isPresent()) {
+                Booking booking = optionalBooking.get();
+                bookingResponse.setSuccess(true);
+                bookingResponse.setError("");
+                bookingResponse.setBooking(booking);
+            } else {
+                bookingResponse.setSuccess(false);
+                bookingResponse.setError("Error occurred while fetching booking!! Please try after sometime");
+            }
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            bookingResponse.setSuccess(false);
+            bookingResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return bookingResponse;
+    }
+
+    @RequestMapping(value = "/get-deleted", method = RequestMethod.POST)
+    public BookingResponse getDeleted() {
+        UserInfo userInfo = userInformation.getUserInfo();
+        logger.trace("Entering");
+        BookingResponse bookingResponse = new BookingResponse();
+        try {
+            bookingResponse.setBookingList(bookingService.findAllByIsDeletedAndClientId(1, userInfo.getClient().getClientId()));
+            bookingResponse.setSuccess(true);
+            bookingResponse.setError("");
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            bookingResponse.setSuccess(true);
+            bookingResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return bookingResponse;
+    }
+
+    @RequestMapping(value = "/get-all", method = RequestMethod.POST)
+    public BookingResponse getAll() {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        BookingResponse bookingResponse = new BookingResponse();
+        try {
+            bookingResponse.setBookingList(bookingService.findAllByIsDeletedAndClientId(0, userInfo.getClient().getClientId()));
+            bookingResponse.setSuccess(true);
+            bookingResponse.setError("");
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            bookingResponse.setSuccess(true);
+            bookingResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return bookingResponse;
+    }
+
+    @RequestMapping(value = "/get-bookings", method = RequestMethod.POST)
+    public BookingResponse getPaginated(@RequestBody Map<String, String> formData) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        BookingResponse bookingResponse = new BookingResponse();
+        try {
+            logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
+            int pageNumber = formData.get("current_page") == null ? 0 : Integer.parseInt(formData.get("current_page"));
+            int pageSize = formData.get("page_size") == null ? 10 : Integer.parseInt(formData.get("page_size"));
+            Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("checkIn"));
+            Page<Booking> page = bookingService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(), 0, pageable);
+            bookingResponse.setTotalRecords(page.getTotalElements());
+            bookingResponse.setTotalPages(page.getTotalPages());
+            bookingResponse.setBookingList(page.getContent());
+            bookingResponse.setCurrentRecords(bookingResponse.getBookingList().size());
+            bookingResponse.setSuccess(true);
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            logger.error(ex.getMessage(), ex);
+            bookingResponse.setSuccess(false);
+            bookingResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return bookingResponse;
+    }
+
+    @RequestMapping(value = "/search-bookings", method = RequestMethod.POST)
+    public BookingResponse searchPaginated(@RequestBody Map<String, String> formData) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        BookingResponse bookingResponse = new BookingResponse();
+        try {
+            logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
+            int pageNumber = formData.get("current_page") == null ? 0 : Integer.parseInt(formData.get("current_page"));
+            int pageSize = formData.get("page_size") == null ? 10 : Integer.parseInt(formData.get("page_size"));
+            String searchText = formData.get("search_text") == null ? null : String.valueOf(formData.get("search_text"));
+            Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("checkIn"));
+            Page<Booking> page;
+            if (searchText == null) {
+                page = bookingService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(), 0, pageable);
+            } else {
+                page = bookingService.findAll(textInAllColumns(searchText, userInfo.getClient().getClientId()), pageable);
+            }
+            bookingResponse.setTotalRecords(page.getTotalElements());
+            bookingResponse.setTotalPages(page.getTotalPages());
+            bookingResponse.setBookingList(page.getContent());
+            bookingResponse.setCurrentRecords(bookingResponse.getBookingList().size());
+            bookingResponse.setSuccess(true);
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            logger.error(ex.getMessage(), ex);
+            bookingResponse.setSuccess(false);
+            bookingResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return bookingResponse;
+    }
 
 }

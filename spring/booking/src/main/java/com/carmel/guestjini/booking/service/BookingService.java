@@ -1,6 +1,8 @@
 package com.carmel.guestjini.booking.service;
 
 import com.carmel.guestjini.booking.model.Booking;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
@@ -12,4 +14,10 @@ public interface BookingService {
     Optional<Booking> findById(String id);
 
     List<Booking> findAll(Specification<Booking> bookingSpecification);
+
+    List<Booking> findAllByIsDeletedAndClientId(int isDeleted, String clientId);
+
+    Page<Booking> findAllByClientIdAndIsDeleted(String clientId, int isDeleted, Pageable pageable);
+
+    Page<Booking> findAll(Specification<Booking> textInAllColumns, Pageable pageable);
 }

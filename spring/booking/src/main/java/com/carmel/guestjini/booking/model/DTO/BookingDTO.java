@@ -2,11 +2,7 @@ package com.carmel.guestjini.booking.model.DTO;
 
 import com.carmel.guestjini.booking.model.Booking;
 import com.carmel.guestjini.booking.model.BookingSource;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class BookingDTO {

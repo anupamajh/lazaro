@@ -22,7 +22,7 @@ logging:
     root: info
     org:
       hibernate:
-        type: trace
+        type: info
         SQL: debug
     com:
       carmel:
