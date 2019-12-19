@@ -18,4 +18,6 @@ public interface BookingAdditionalChargeRepository extends JpaRepository<Booking
     Page<BookingAdditionalCharge> findAllByClientIdAndIsDeletedAndBooking(String clientId, int isDeleted, Booking booking, Pageable pageable);
 
     Page<BookingAdditionalCharge> findAll(Specification<BookingAdditionalCharge> textInAllColumns, Pageable pageable);
+
+    List<BookingAdditionalCharge> findAllByIsDeletedAndClientIdAndBookingAndBillingCycle(int isDeleted, String clientId, Booking booking, int billingCycle);
 }

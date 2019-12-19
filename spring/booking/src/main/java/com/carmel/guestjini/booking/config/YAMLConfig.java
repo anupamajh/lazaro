@@ -11,17 +11,9 @@ public class YAMLConfig {
     private String userInfoURL;
     private String dbServiceURL;
     private String inventoryServiceURL;
+    private String accountsServiceURL;
 
     public YAMLConfig(){}
-
-    private static YAMLConfig _instance;
-
-    public static YAMLConfig getConfig(){
-        if(_instance == null){
-            _instance = new YAMLConfig();
-        }
-        return _instance;
-    }
 
     public String getUserInfoURL() {
         return userInfoURL;
@@ -45,5 +37,13 @@ public class YAMLConfig {
 
     public void setInventoryServiceURL(String inventoryServiceURL) {
         this.inventoryServiceURL = inventoryServiceURL;
+    }
+
+    public String getAccountsServiceURL() {
+        return accountsServiceURL;
+    }
+
+    public void setAccountsServiceURL(String accountsServiceURL) {
+        this.accountsServiceURL = accountsServiceURL;
     }
 }

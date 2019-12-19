@@ -1,40 +1,32 @@
 package com.carmel.guestjini.booking.response;
 
-import com.carmel.guestjini.booking.model.Booking;
-import com.carmel.guestjini.booking.model.DTO.BookingDTO;
-import com.carmel.guestjini.booking.model.DTO.GuestDTO;
-import com.carmel.guestjini.booking.model.Guest;
+import com.carmel.guestjini.booking.model.DTO.AccountReceipts;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class BookingResponse {
-    private BookingDTO booking;
-    private GuestDTO guest;
-    private List<BookingDTO> bookingList;
+public class AccountReceiptsResponse {
+    private AccountReceipts accountReceipts;
+    private List<AccountReceipts> accountReceiptsList;
     private long totalPages;
     private long totalRecords;
     private long currentRecords;
     private boolean success;
     private String error;
 
-    public BookingDTO getBooking() {
-        return booking;
+    public AccountReceipts getAccountReceipts() {
+        return accountReceipts;
     }
 
-    public void setBooking(Booking booking) {
-        this.booking = new BookingDTO(booking);
+    public void setAccountReceipts(AccountReceipts accountReceipts) {
+        this.accountReceipts = accountReceipts;
     }
 
-    public List<BookingDTO> getBookingList() {
-        return bookingList;
+    public List<AccountReceipts> getAccountReceiptsList() {
+        return accountReceiptsList;
     }
 
-    public void setBookingList(List<Booking> bookingList) {
-        this.bookingList = new ArrayList<>();
-        bookingList.forEach(booking1 -> {
-            this.bookingList.add(new BookingDTO(booking1));
-        });
+    public void setAccountReceiptsList(List<AccountReceipts> accountReceiptsList) {
+        this.accountReceiptsList = accountReceiptsList;
     }
 
     public long getTotalPages() {
@@ -75,13 +67,5 @@ public class BookingResponse {
 
     public void setError(String error) {
         this.error = error;
-    }
-
-    public GuestDTO getGuest() {
-        return guest;
-    }
-
-    public void setGuest(Guest guest) {
-        this.guest = new GuestDTO(guest);
     }
 }

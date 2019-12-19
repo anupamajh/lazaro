@@ -1,39 +1,36 @@
 package com.carmel.guestjini.booking.response;
 
-import com.carmel.guestjini.booking.model.Booking;
-import com.carmel.guestjini.booking.model.DTO.BookingDTO;
 import com.carmel.guestjini.booking.model.DTO.GuestDTO;
 import com.carmel.guestjini.booking.model.Guest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookingResponse {
-    private BookingDTO booking;
+public class GuestResponse {
     private GuestDTO guest;
-    private List<BookingDTO> bookingList;
+    private List<GuestDTO> guestList;
     private long totalPages;
     private long totalRecords;
     private long currentRecords;
     private boolean success;
     private String error;
 
-    public BookingDTO getBooking() {
-        return booking;
+    public GuestDTO getGuest() {
+        return guest;
     }
 
-    public void setBooking(Booking booking) {
-        this.booking = new BookingDTO(booking);
+    public void setGuest(Guest guest) {
+        this.guest = new GuestDTO(guest);
     }
 
-    public List<BookingDTO> getBookingList() {
-        return bookingList;
+    public List<GuestDTO> getGuestList() {
+        return guestList;
     }
 
-    public void setBookingList(List<Booking> bookingList) {
-        this.bookingList = new ArrayList<>();
-        bookingList.forEach(booking1 -> {
-            this.bookingList.add(new BookingDTO(booking1));
+    public void setGuestList(List<Guest> guestList) {
+        this.guestList = new ArrayList<>();
+        guestList.forEach(guest1 -> {
+            this.guestList.add(new GuestDTO(guest1));
         });
     }
 
@@ -75,13 +72,5 @@ public class BookingResponse {
 
     public void setError(String error) {
         this.error = error;
-    }
-
-    public GuestDTO getGuest() {
-        return guest;
-    }
-
-    public void setGuest(Guest guest) {
-        this.guest = new GuestDTO(guest);
     }
 }

@@ -1,132 +1,77 @@
-package com.carmel.guestjini.booking.model;
+package com.carmel.guestjini.booking.model.DTO;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.envers.Audited;
-import org.hibernate.validator.constraints.Length;
+import com.carmel.guestjini.booking.model.Booking;
+import com.carmel.guestjini.booking.model.Guest;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-@Entity
-@Table(name = "g_booking")
-@Audited
-public class Booking {
-    @Id
-    @Column(name = "id")
-    @Length(max = 40)
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+public class GuestDTO {
     private String id;
-
-    @Column(name = "client_id")
     private String clientId;
-
-    @Column(name = "org_id")
     private String orgId;
-
-    @Column(name = "reference_no", columnDefinition = "text")
-    private String referenceNo;
-
-    @Column(name = "full_name")
-    @Length(min = 1, max = 255, message = "Full name length should be between 1 and 255")
+    private BookingDTO booking;
+    private String guestNo;
     private String fullName;
-
-    @Column(name = "gender")
     private int gender;
-
-    @Column(name = "phone")
-    @NotNull(message = "Phone number cannot be null")
-    @Length(max = 255)
     private String phone;
-
-    @Column(name = "email")
-    @NotNull(message = "Email cannot be null")
-    @Length(min=5,max = 255, message = "Email length should be between 5 and 255")
+    private String profilePicPath;
     private String email;
-
-    @Column(name = "check_in")
-    @NotNull(message = "Checkin Date cannot be null")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date checkIn;
-
-    @Column(name = "check_in_time")
-    @NotNull(message = "Checkin Time cannot be null")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date checkInTime;
-
-    @Column(name = "check_out")
-    @NotNull(message = "Checkout Date cannot be null")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date checkOut;
-
-    @Column(name = "check_out_time")
-    @NotNull(message = "Checkout Time cannot be null")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date checkOutTime;
-
-    @Column(name = "package_id")
+    private Date scheduledCheckIn;
+    private Date scheduledCheckout;
+    private Date actualCheckIn;
+    private Date actualCheckout;
     private String packageId;
-
-    @Column(name = "rent")
     private double rent;
-
-    @Column(name = "rent_unit")
     private int rentUnit;
-
-    @Column(name = "promo_code")
     private String promoCode;
-
-    @Column(name = "discount_value")
     private double discountValue;
-
-    @Column(name = "discount_value_identifier")
     private int discountValueIdentifier;
-
-    @Column(name = "discount_identifier")
     private int discountIdentifier;
-
-    @Column(name = "booking_status")
-    private int bookingStatus;
-
-    @Column(name = "inventory_group_id")
     private String inventoryId;
-
-    @Column(name = "process_id")
-    private String processId;
-
-    @Column(name = "approval_status")
-    private String approvalStatus;
-
-    @Column(name = "created_by")
-    @Length(max = 40)
+    private int guestStatus;
     private String createdBy;
-
-    @Column(name = "creation_time")
     private Date creationTime;
-
-    @Column(name = "last_modified_by")
-    @Length(max = 40)
     private String lastModifiedBy;
-
-    @Column(name = "last_Modified_time")
     private Date lastModifiedTime;
-
-    @Column(name = "is_deleted")
     private int isDeleted;
-
-    @Column(name = "deleted_by")
-    @Length(max = 40)
     private String deletedBy;
-
-    @Column(name = "deleted_time")
     private Date deletedTime;
 
-    @ManyToOne
-    @JoinColumn
-    private BookingSource bookingSource;
+    public GuestDTO() {
+    }
 
+    public GuestDTO(Guest guest) {
+        this.id = guest.getId();
+        this.clientId = guest.getClientId();
+        this.orgId = guest.getOrgId();
+        this.booking = new BookingDTO( guest.getBooking());
+        this.guestNo = guest.getGuestNo();
+        this.fullName = guest.getFullName();
+        this.gender = guest.getGender();
+        this.phone = guest.getPhone();
+        this.profilePicPath = guest.getProfilePicPath();
+        this.email = guest.getEmail();
+        this.scheduledCheckIn = guest.getScheduledCheckIn();
+        this.scheduledCheckout = guest.getScheduledCheckout();
+        this.actualCheckIn = guest.getActualCheckIn();
+        this.actualCheckout = guest.getActualCheckout();
+        this.packageId = guest.getPackageId();
+        this.rent = guest.getRent();
+        this.rentUnit = guest.getRentUnit();
+        this.promoCode = guest.getPromoCode();
+        this.discountValue = guest.getDiscountValue();
+        this.discountValueIdentifier = guest.getDiscountValueIdentifier();
+        this.discountIdentifier = guest.getDiscountIdentifier();
+        this.inventoryId = guest.getInventoryId();
+        this.guestStatus = guest.getGuestStatus();
+        this.createdBy = guest.getCreatedBy();
+        this.creationTime = guest.getCreationTime();
+        this.lastModifiedBy = guest.getLastModifiedBy();
+        this.lastModifiedTime = guest.getLastModifiedTime();
+        this.isDeleted = guest.getIsDeleted();
+        this.deletedBy = guest.getDeletedBy();
+        this.deletedTime = guest.getDeletedTime();
+    }
 
     public String getId() {
         return id;
@@ -152,12 +97,20 @@ public class Booking {
         this.orgId = orgId;
     }
 
-    public String getReferenceNo() {
-        return referenceNo;
+    public BookingDTO getBooking() {
+        return booking;
     }
 
-    public void setReferenceNo(String referenceNo) {
-        this.referenceNo = referenceNo;
+    public void setBooking(Booking booking) {
+        this.booking = new BookingDTO(booking);
+    }
+
+    public String getGuestNo() {
+        return guestNo;
+    }
+
+    public void setGuestNo(String guestNo) {
+        this.guestNo = guestNo;
     }
 
     public String getFullName() {
@@ -184,6 +137,14 @@ public class Booking {
         this.phone = phone;
     }
 
+    public String getProfilePicPath() {
+        return profilePicPath;
+    }
+
+    public void setProfilePicPath(String profilePicPath) {
+        this.profilePicPath = profilePicPath;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -192,36 +153,36 @@ public class Booking {
         this.email = email;
     }
 
-    public Date getCheckIn() {
-        return checkIn;
+    public Date getScheduledCheckIn() {
+        return scheduledCheckIn;
     }
 
-    public void setCheckIn(Date checkIn) {
-        this.checkIn = checkIn;
+    public void setScheduledCheckIn(Date scheduledCheckIn) {
+        this.scheduledCheckIn = scheduledCheckIn;
     }
 
-    public Date getCheckInTime() {
-        return checkInTime;
+    public Date getScheduledCheckout() {
+        return scheduledCheckout;
     }
 
-    public void setCheckInTime(Date checkInTime) {
-        this.checkInTime = checkInTime;
+    public void setScheduledCheckout(Date scheduledCheckout) {
+        this.scheduledCheckout = scheduledCheckout;
     }
 
-    public Date getCheckOut() {
-        return checkOut;
+    public Date getActualCheckIn() {
+        return actualCheckIn;
     }
 
-    public void setCheckOut(Date checkOut) {
-        this.checkOut = checkOut;
+    public void setActualCheckIn(Date actualCheckIn) {
+        this.actualCheckIn = actualCheckIn;
     }
 
-    public Date getCheckOutTime() {
-        return checkOutTime;
+    public Date getActualCheckout() {
+        return actualCheckout;
     }
 
-    public void setCheckOutTime(Date checkOutTime) {
-        this.checkOutTime = checkOutTime;
+    public void setActualCheckout(Date actualCheckout) {
+        this.actualCheckout = actualCheckout;
     }
 
     public String getPackageId() {
@@ -280,14 +241,6 @@ public class Booking {
         this.discountIdentifier = discountIdentifier;
     }
 
-    public int getBookingStatus() {
-        return bookingStatus;
-    }
-
-    public void setBookingStatus(int bookingStatus) {
-        this.bookingStatus = bookingStatus;
-    }
-
     public String getInventoryId() {
         return inventoryId;
     }
@@ -296,20 +249,12 @@ public class Booking {
         this.inventoryId = inventoryId;
     }
 
-    public String getProcessId() {
-        return processId;
+    public int getGuestStatus() {
+        return guestStatus;
     }
 
-    public void setProcessId(String processId) {
-        this.processId = processId;
-    }
-
-    public String getApprovalStatus() {
-        return approvalStatus;
-    }
-
-    public void setApprovalStatus(String approvalStatus) {
-        this.approvalStatus = approvalStatus;
+    public void setGuestStatus(int guestStatus) {
+        this.guestStatus = guestStatus;
     }
 
     public String getCreatedBy() {
@@ -366,13 +311,5 @@ public class Booking {
 
     public void setDeletedTime(Date deletedTime) {
         this.deletedTime = deletedTime;
-    }
-
-    public BookingSource getBookingSource() {
-        return bookingSource;
-    }
-
-    public void setBookingSource(BookingSource bookingSource) {
-        this.bookingSource = bookingSource;
     }
 }

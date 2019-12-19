@@ -1,40 +1,32 @@
 package com.carmel.guestjini.booking.response;
 
-import com.carmel.guestjini.booking.model.Booking;
-import com.carmel.guestjini.booking.model.DTO.BookingDTO;
-import com.carmel.guestjini.booking.model.DTO.GuestDTO;
-import com.carmel.guestjini.booking.model.Guest;
+import com.carmel.guestjini.booking.model.DTO.AccountTicket;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class BookingResponse {
-    private BookingDTO booking;
-    private GuestDTO guest;
-    private List<BookingDTO> bookingList;
+public class AccountTicketResponse {
+    private AccountTicket accountTicket;
+    private List<AccountTicket> accountTicketList;
     private long totalPages;
     private long totalRecords;
     private long currentRecords;
     private boolean success;
     private String error;
 
-    public BookingDTO getBooking() {
-        return booking;
+    public AccountTicket getAccountTicket() {
+        return accountTicket;
     }
 
-    public void setBooking(Booking booking) {
-        this.booking = new BookingDTO(booking);
+    public void setAccountTicket(AccountTicket accountTicket) {
+        this.accountTicket = accountTicket;
     }
 
-    public List<BookingDTO> getBookingList() {
-        return bookingList;
+    public List<AccountTicket> getAccountTicketList() {
+        return accountTicketList;
     }
 
-    public void setBookingList(List<Booking> bookingList) {
-        this.bookingList = new ArrayList<>();
-        bookingList.forEach(booking1 -> {
-            this.bookingList.add(new BookingDTO(booking1));
-        });
+    public void setAccountTicketList(List<AccountTicket> accountTicketList) {
+        this.accountTicketList = accountTicketList;
     }
 
     public long getTotalPages() {
@@ -75,13 +67,5 @@ public class BookingResponse {
 
     public void setError(String error) {
         this.error = error;
-    }
-
-    public GuestDTO getGuest() {
-        return guest;
-    }
-
-    public void setGuest(Guest guest) {
-        this.guest = new GuestDTO(guest);
     }
 }

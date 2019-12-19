@@ -52,4 +52,9 @@ public class BookingAdditionalChargeServiceImpl implements BookingAdditionalChar
     public Page<BookingAdditionalCharge> findAll(Specification<BookingAdditionalCharge> textInAllColumns, Pageable pageable) {
         return bookingAdditionalChargeRepository.findAll(textInAllColumns, pageable);
     }
+
+    @Override
+    public List<BookingAdditionalCharge> findAllByIsDeletedAndClientIdAndBookingAndBillingCycle(int isDeleted, String clientId, Booking booking, int billingCycle) {
+        return bookingAdditionalChargeRepository.findAllByIsDeletedAndClientIdAndBookingAndBillingCycle(isDeleted, clientId, booking, billingCycle);
+    }
 }

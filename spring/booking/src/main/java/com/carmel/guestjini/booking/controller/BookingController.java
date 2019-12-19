@@ -1,14 +1,18 @@
 package com.carmel.guestjini.booking.controller;
 
 import com.carmel.guestjini.booking.common.BookingStatus;
+import com.carmel.guestjini.booking.components.AccountReceiptsService;
 import com.carmel.guestjini.booking.components.InventoryService;
 import com.carmel.guestjini.booking.components.PackageService;
 import com.carmel.guestjini.booking.components.UserInformation;
 import com.carmel.guestjini.booking.model.Booking;
 import com.carmel.guestjini.booking.model.BookingAdditionalCharge;
+import com.carmel.guestjini.booking.model.DTO.AccountReceipts;
 import com.carmel.guestjini.booking.model.DTO.Package;
 import com.carmel.guestjini.booking.model.DTO.PackageCharge;
+import com.carmel.guestjini.booking.model.Guest;
 import com.carmel.guestjini.booking.model.Principal.UserInfo;
+import com.carmel.guestjini.booking.response.AccountReceiptsResponse;
 import com.carmel.guestjini.booking.response.BookingResponse;
 import com.carmel.guestjini.booking.service.BookingAdditionalChargeService;
 import com.carmel.guestjini.booking.service.BookingService;
@@ -52,6 +56,9 @@ public class BookingController {
 
     @Autowired
     BookingAdditionalChargeService bookingAdditionalChargeService;
+
+    @Autowired
+    AccountReceiptsService accountReceiptsService;
 
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -142,6 +149,8 @@ public class BookingController {
                     throw new Exception("Selected inventory not available for booking, Please select some other inventory");
                 }
                 booking.setInventoryId(inventoryId);
+                booking.setLastModifiedBy(userInfo.getId());
+                booking.setLastModifiedTime(new Date());
                 bookingResponse.setBooking(bookingService.save(booking));
                 bookingResponse.setSuccess(true);
                 bookingResponse.setError("");
@@ -189,6 +198,8 @@ public class BookingController {
                 booking.setDiscountValue(Double.parseDouble(strDiscountValue));
                 booking.setDiscountValueIdentifier(Integer.parseInt(strDiscountValueIdentifier));
                 booking.setDiscountValue(Integer.parseInt(strDiscountValue));
+                booking.setLastModifiedBy(userInfo.getId());
+                booking.setLastModifiedTime(new Date());
                 bookingResponse.setBooking(bookingService.save(booking));
                 bookingResponse.setSuccess(true);
                 bookingResponse.setError("");
@@ -218,6 +229,8 @@ public class BookingController {
             if (optionalBooking.isPresent()) {
                 Booking booking = optionalBooking.get();
                 booking.setInventoryId(null);
+                booking.setLastModifiedBy(userInfo.getId());
+                booking.setLastModifiedTime(new Date());
                 bookingResponse.setBooking(bookingService.save(booking));
                 bookingResponse.setSuccess(true);
                 bookingResponse.setError("");
@@ -234,6 +247,7 @@ public class BookingController {
 
 
     @RequestMapping(value = "/cancel-booking")
+    @Transactional(rollbackFor = Exception.class)
     public BookingResponse cancelBooking(@RequestBody Map<String, String> formData) {
         UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -248,6 +262,8 @@ public class BookingController {
             if (optionalBooking.isPresent()) {
                 Booking booking = optionalBooking.get();
                 booking.setBookingStatus(BookingStatus.CANCELLED.getValue());
+                booking.setLastModifiedBy(userInfo.getId());
+                booking.setLastModifiedTime(new Date());
                 bookingResponse.setBooking(bookingService.save(booking));
                 bookingResponse.setSuccess(true);
                 bookingResponse.setError("");
@@ -280,6 +296,8 @@ public class BookingController {
                 booking.setDeletedTime(new Date());
                 bookingResponse.setSuccess(true);
                 bookingResponse.setError("");
+                booking.setLastModifiedBy(userInfo.getId());
+                booking.setLastModifiedTime(new Date());
                 bookingResponse.setBooking(bookingService.save(booking));
             } else {
                 bookingResponse.setSuccess(false);
@@ -438,11 +456,11 @@ public class BookingController {
             Optional<Booking> optionalBooking = bookingService.findById(bookingId);
             if (optionalBooking.isPresent()) {
                 Booking booking = optionalBooking.get();
-                if(booking.getPackageId() == null){
+                if (booking.getPackageId() == null) {
                     booking.setPackageId("");
                 }
-                if(booking.getPackageId().equals("")){
-                    throw  new Exception("Package is not assigned to this booking");
+                if (booking.getPackageId().equals("")) {
+                    throw new Exception("Package is not assigned to this booking");
                 }
                 String packageId = booking.getPackageId();
                 booking.setPackageId(null);
@@ -481,18 +499,20 @@ public class BookingController {
             Optional<Booking> optionalBooking = bookingService.findById(bookingId);
             if (optionalBooking.isPresent()) {
                 Booking booking = optionalBooking.get();
-                if(booking.getPackageId() == null){
+                if (booking.getPackageId() == null) {
                     booking.setPackageId("");
                 }
-                if(!booking.getPackageId().equals("")){
-                    throw  new Exception("Package is already assigned to booking, Please remove package and the assign new package");
+                if (!booking.getPackageId().equals("")) {
+                    throw new Exception("Package is already assigned to booking, Please remove package and the assign new package");
                 }
                 Package aPackage = packageService.getPackage(packageId);
                 booking.setPackageId(aPackage.getId());
+                booking.setLastModifiedBy(userInfo.getId());
+                booking.setLastModifiedTime(new Date());
                 bookingResponse.setBooking(bookingService.save(booking));
                 BookingAdditionalCharge bookingAdditionalCharge;
-                for(PackageCharge packageCharge:aPackage.getPackageCharges()){
-                    bookingAdditionalCharge = new BookingAdditionalCharge(booking,packageCharge);
+                for (PackageCharge packageCharge : aPackage.getPackageCharges()) {
+                    bookingAdditionalCharge = new BookingAdditionalCharge(booking, packageCharge);
                     bookingAdditionalCharge.setOrgId(userInfo.getDefaultOrganization().getId());
                     bookingAdditionalCharge.setCreatedBy(userInfo.getId());
                     bookingAdditionalCharge.setCreationTime(new Date());
@@ -512,4 +532,56 @@ public class BookingController {
         }
         return bookingResponse;
     }
+
+    @RequestMapping(value = "/checkin")
+    @Transactional(rollbackFor = Exception.class)
+    public BookingResponse checkIn(@RequestBody Map<String, String> formData) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        BookingResponse bookingResponse = new BookingResponse();
+        try {
+            String bookingId = formData.get("bookingId") == null ? null : String.valueOf(formData.get("bookingId"));
+            Date actualCheckInDate = formData.get("actual_checkin") != null ? new Date(formData.get("actual_checkin")) : null;
+            if (bookingId == null) {
+                throw new Exception("Booking ID not received");
+            }
+            Optional<Booking> optionalBooking = bookingService.findById(bookingId);
+            if (optionalBooking.isPresent()) {
+                Booking booking = optionalBooking.get();
+                booking.setLastModifiedBy(userInfo.getId());
+                booking.setLastModifiedTime(new Date());
+                Guest guest = bookingService.doCheckIn(booking, actualCheckInDate);
+                bookingResponse.setBooking(booking);
+                bookingResponse.setGuest(guest);
+                bookingResponse.setSuccess(true);
+                bookingResponse.setError("");
+
+            } else {
+                throw new Exception("Booking not found!!!");
+            }
+
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            bookingResponse.setSuccess(false);
+            bookingResponse.setError(ex.getMessage());
+        }
+        return bookingResponse;
+    }
+
+    @RequestMapping(value = "/save-payment-receipts")
+    @Transactional(rollbackFor = Exception.class)
+    public AccountReceiptsResponse savePaymentReceipts(@RequestBody AccountReceipts accountReceipts) {
+        AccountReceiptsResponse accountReceiptsResponse;
+        try {
+            accountReceiptsResponse = accountReceiptsService.saveAccountReceiept(accountReceipts);
+        } catch (Exception ex) {
+            accountReceiptsResponse = new AccountReceiptsResponse();
+            logger.error(ex.getMessage(), ex);
+            accountReceiptsResponse.setSuccess(false);
+            accountReceiptsResponse.setError(ex.getMessage());
+        }
+        return accountReceiptsResponse;
+    }
+
 }

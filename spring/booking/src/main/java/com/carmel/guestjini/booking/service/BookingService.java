@@ -1,10 +1,12 @@
 package com.carmel.guestjini.booking.service;
 
 import com.carmel.guestjini.booking.model.Booking;
+import com.carmel.guestjini.booking.model.Guest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,4 +22,6 @@ public interface BookingService {
     Page<Booking> findAllByClientIdAndIsDeleted(String clientId, int isDeleted, Pageable pageable);
 
     Page<Booking> findAll(Specification<Booking> textInAllColumns, Pageable pageable);
+
+    Guest doCheckIn(Booking booking, Date actualCheckInDate) throws Exception;
 }

@@ -54,3 +54,4 @@ carmel:
   userInfoURL: http://common-db-service/user/me
   dbServiceURL: http://common-db-service
   inventoryServiceURL: http://guesture-inventory-service
+  accountsServiceURL: http://guesture-accounts-service
