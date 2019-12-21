@@ -1,22 +1,24 @@
 package com.carmel.common.authserver.model;
 
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "g_roles")
+@Table(name = "g_org")
 @Audited
-public class Role implements Serializable {
+public class Organization implements Serializable {
+
     @Id
     @Column(name = "id")
     @Length(max = 40)
@@ -24,19 +26,20 @@ public class Role implements Serializable {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
-    @Column(name = "role_name")
-    @Length(max = 255, min = 1, message = "Role name length should be between 1 and 100")
-    @NotNull(message = "Role Name cannot be null")
-    @NotEmpty(message = "Role name cannot be empty")
-    @NotBlank(message = "Role name cannot be blank")
-    private String roleName;
+    @Column(name = "org_name")
+    @Length(max = 255, min = 1, message = "Organization name length should be between 1 and 255")
+    @NotBlank(message = "Organization name cannot be blank")
+    @NotNull(message = "Organization name cannot be null")
+    private String orgName;
 
-    @Column(name = "home_page")
-    @Length(max = 255)
-    private String homePage;
+    @Column(name = "org_domain")
+    @Length(max = 255, min = 1, message = "Organization domain name length should be between 1 and 255")
+    @NotBlank(message = "Organization domain cannot be blank")
+    @NotNull(message = "Organization domain cannot be null")
+    private String orgDomain;
 
     @Column(name = "description")
-    @Length(max = 1000)
+    @Length(max = 1000, message = "Description length cannot exceed 1000")
     private String description;
 
     @Column(name = "created_by")
@@ -54,7 +57,7 @@ public class Role implements Serializable {
     private Date lastModifiedTime;
 
     @Column(name = "is_deleted")
-    private int isDeleted;
+    private  int isDeleted;
 
     @Column(name = "deleted_by")
     @Length(max = 40)
@@ -63,16 +66,14 @@ public class Role implements Serializable {
     @Column(name = "deleted_time")
     private Date deletedTime;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "g_role_grants",
-            joinColumns = {
-                    @JoinColumn(name = "role_id", referencedColumnName = "id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "app_feature_id", referencedColumnName = "id")
-            }
-    )
-    private List<AppFeatures> appFeatures;
+    @ManyToOne(cascade={CascadeType.ALL})
+    @JoinColumn(name="parent_id")
+    @JsonBackReference
+    private Organization parent;
+
+    @OneToMany(mappedBy="parent")
+    @JsonManagedReference
+    private List<Organization> childrens = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "client_id")
@@ -87,20 +88,20 @@ public class Role implements Serializable {
         this.id = id;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getOrgName() {
+        return orgName;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setOrgName(String orgName) {
+        this.orgName = orgName;
     }
 
-    public String getHomePage() {
-        return homePage;
+    public String getOrgDomain() {
+        return orgDomain;
     }
 
-    public void setHomePage(String homePage) {
-        this.homePage = homePage;
+    public void setOrgDomain(String orgDomain) {
+        this.orgDomain = orgDomain;
     }
 
     public String getDescription() {
@@ -167,12 +168,20 @@ public class Role implements Serializable {
         this.deletedTime = deletedTime;
     }
 
-    public List<AppFeatures> getAppFeatures() {
-        return appFeatures;
+    public Organization getParent() {
+        return parent;
     }
 
-    public void setAppFeatures(List<AppFeatures> appFeatures) {
-        this.appFeatures = appFeatures;
+    public void setParent(Organization parent) {
+        this.parent = parent;
+    }
+
+    public List<Organization> getChildrens() {
+        return childrens;
+    }
+
+    public void setChildrens(List<Organization> childrens) {
+        this.childrens = childrens;
     }
 
     public Client getClient() {
@@ -183,4 +192,3 @@ public class Role implements Serializable {
         this.client = client;
     }
 }
-

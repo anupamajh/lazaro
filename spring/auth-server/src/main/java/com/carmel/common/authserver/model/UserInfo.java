@@ -6,7 +6,6 @@ import java.util.Date;
 
 public class UserInfo implements Serializable {
     private String id;
-    private String orgId;
     private String fullName;
     private String userName;
     private String phone;
@@ -24,7 +23,6 @@ public class UserInfo implements Serializable {
 
     public UserInfo(User user) {
         this.id = user.getId();
-        this.orgId = user.getOrgId();
         this.fullName = user.getUserName();
         this.userName = user.getUserName();
         this.phone = user.getPhone();
@@ -40,14 +38,6 @@ public class UserInfo implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getOrgId() {
-        return orgId;
-    }
-
-    public void setOrgId(String orgId) {
-        this.orgId = orgId;
     }
 
     public String getFullName() {

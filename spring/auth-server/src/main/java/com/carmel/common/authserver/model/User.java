@@ -1,5 +1,7 @@
 package com.carmel.common.authserver.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Length;
@@ -9,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,9 +23,12 @@ public class User implements Serializable {
     public User() {
     }
 
+    public User(Role role) {
+        this.roles = new ArrayList<>();
+        this.roles.add(role);
+    }
     public User(User user) {
         this.id = user.getId();
-        this.orgId = user.getOrgId();
         this.client = user.getClient();
         this.fullName = user.getFullName();
         this.userName = user.getUserName();
@@ -40,13 +46,6 @@ public class User implements Serializable {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-
-    @Column(name = "org_id")
-    @Length(max = 40)
-    @NotEmpty(message = "Organization cannot be empty")
-    @NotBlank(message = "Organization cannot be blank")
-    @NotNull(message = "Organization cannot be empty")
-    private String orgId;
 
     @Column(name = "full_name")
     @Length(max = 100, min = 1, message = "Full name length should be between 1 and 100")
@@ -116,7 +115,24 @@ public class User implements Serializable {
                     @JoinColumn(name = "role_id", referencedColumnName = "id")
             }
     )
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Role> roles;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "g_user_orgs",
+            joinColumns = {
+                    @JoinColumn(name = "user_id", referencedColumnName = "id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "org_id", referencedColumnName = "id")
+            }
+    )
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Organization> organizations;
+
+    @ManyToOne
+    @JoinColumn(name = "org_id")
+    private Organization defaultOrganization;
 
     @ManyToOne
     @JoinColumn(name = "client_id")
@@ -129,14 +145,6 @@ public class User implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getOrgId() {
-        return orgId;
-    }
-
-    public void setOrgId(String orgId) {
-        this.orgId = orgId;
     }
 
     public String getFullName() {
@@ -273,5 +281,21 @@ public class User implements Serializable {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public List<Organization> getOrganizations() {
+        return organizations;
+    }
+
+    public void setOrganizations(List<Organization> organizations) {
+        this.organizations = organizations;
+    }
+
+    public Organization getDefaultOrganization() {
+        return defaultOrganization;
+    }
+
+    public void setDefaultOrganization(Organization defaultOrganization) {
+        this.defaultOrganization = defaultOrganization;
     }
 }
