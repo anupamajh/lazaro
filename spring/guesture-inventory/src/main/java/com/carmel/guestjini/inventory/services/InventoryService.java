@@ -22,4 +22,6 @@ public interface InventoryService {
     Page<Inventory> findAllByClientIdAndIsDeleted(String clientId, int isDeleted, Pageable pageable);
 
     Page<Inventory> findAll(Specification<Inventory> textInAllColumns, Pageable pageable);
+
+    List<Inventory> getAllParents(String id);
 }

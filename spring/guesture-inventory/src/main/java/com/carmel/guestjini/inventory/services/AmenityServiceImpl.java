@@ -1,7 +1,7 @@
 package com.carmel.guestjini.inventory.services;
 
-import com.carmel.guestjini.inventory.repository.AmenityRepository;
 import com.carmel.guestjini.inventory.model.Amenity;
+import com.carmel.guestjini.inventory.repository.AmenityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

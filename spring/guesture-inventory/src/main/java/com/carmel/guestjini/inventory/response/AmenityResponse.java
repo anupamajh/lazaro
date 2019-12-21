@@ -3,7 +3,6 @@ package com.carmel.guestjini.inventory.response;
 import com.carmel.guestjini.inventory.components.PhotoInformation;
 import com.carmel.guestjini.inventory.model.Amenity;
 import com.carmel.guestjini.inventory.model.DTO.AmenityDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

@@ -22,10 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 
 @RestController
@@ -52,7 +49,7 @@ public class InventoryController {
             inventory.setId("");
         }
 
-        if(inventory.getOrgId() == null || inventory.getOrgId().isEmpty()){
+        if (inventory.getOrgId() == null || inventory.getOrgId().isEmpty()) {
             inventory.setOrgId(userInfo.getDefaultOrganization().getId());
         }
 
@@ -240,7 +237,7 @@ public class InventoryController {
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("title"));
             Page<Inventory> page;
             if (searchText == null) {
-                page = inventoryService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(),0,pageable);
+                page = inventoryService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(), 0, pageable);
             } else {
                 page = inventoryService.findAll(InventorySpecification.textInAllColumns(searchText, userInfo.getClient().getClientId()), pageable);
             }
@@ -272,6 +269,29 @@ public class InventoryController {
         } else {
             return true;
         }
+    }
+
+    @RequestMapping(value = "/get-parent-ids")
+    public String getAllParentIds(@RequestBody Map<String, String> formData) {
+        List<Inventory> parents = inventoryService.getAllParents(formData.get("id"));
+        parents = removeDuplicates(parents);
+        String parentIds = "";
+        String delim = "";
+        for (Inventory inventory : parents) {
+            parentIds += delim  + inventory.getId();
+            delim = ",";
+        }
+        return parentIds;
+    }
+
+    public static <T> List<T> removeDuplicates(List<T> list) {
+        List<T> newList = new ArrayList<T>();
+        for (T element : list) {
+            if (!newList.contains(element)) {
+                newList.add(element);
+            }
+        }
+        return newList;
     }
 
 }

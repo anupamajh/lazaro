@@ -1,15 +1,15 @@
 package com.carmel.guestjini.inventory.controller;
 
 import com.carmel.guestjini.inventory.components.PhotoInformation;
+import com.carmel.guestjini.inventory.components.UserInformation;
+import com.carmel.guestjini.inventory.model.Amenity;
 import com.carmel.guestjini.inventory.model.DTO.AmenityDTO;
 import com.carmel.guestjini.inventory.model.DTO.InventoryTypeDTO;
 import com.carmel.guestjini.inventory.model.DTO.PackageDTO;
+import com.carmel.guestjini.inventory.model.Principal.UserInfo;
 import com.carmel.guestjini.inventory.response.AmenityResponse;
 import com.carmel.guestjini.inventory.services.AmenityService;
 import com.carmel.guestjini.inventory.specifications.AmenitySpecification;
-import com.carmel.guestjini.inventory.components.UserInformation;
-import com.carmel.guestjini.inventory.model.Amenity;
-import com.carmel.guestjini.inventory.model.Principal.UserInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

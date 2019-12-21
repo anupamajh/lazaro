@@ -25,8 +25,7 @@ logging:
         type: info
     com:
       carmel:
-        common:
-          dbservice: trace
+        guestjini:
           inventory: trace
   pattern:
     console: '%d{"yyyy/MM/dd HH:mm:ss,SSS"} [%p] [%t] %M\(%F:%L\) - %msg%n'

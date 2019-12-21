@@ -1,11 +1,11 @@
 package com.carmel.guestjini.inventory.controller;
 
+import com.carmel.guestjini.inventory.components.UserInformation;
 import com.carmel.guestjini.inventory.model.InventoryType;
+import com.carmel.guestjini.inventory.model.Principal.UserInfo;
 import com.carmel.guestjini.inventory.response.InventoryTypeResponse;
 import com.carmel.guestjini.inventory.services.InventoryTypeService;
 import com.carmel.guestjini.inventory.specifications.InventoryTypeSpecification;
-import com.carmel.guestjini.inventory.components.UserInformation;
-import com.carmel.guestjini.inventory.model.Principal.UserInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
