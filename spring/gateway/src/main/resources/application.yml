@@ -8,7 +8,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://localhost:8001/eureka/
+      defaultZone: http://139.59.32.238:8001/eureka/
 zuul:
   sensitiveHeaders: Cookie,Set-Cookie
   routes:
