@@ -568,8 +568,41 @@ public class BookingController {
         }
         return bookingResponse;
     }
+    @RequestMapping(value = "/undo-checkin")
+    @Transactional(rollbackFor = Exception.class)
+    public BookingResponse undoCheckIn(@RequestBody Map<String, String> formData) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        BookingResponse bookingResponse = new BookingResponse();
+        try {
+            String bookingId = formData.get("bookingId") == null ? null : String.valueOf(formData.get("bookingId"));
+            Date actualCheckInDate = formData.get("actual_checkin") != null ? new Date(formData.get("actual_checkin")) : null;
+            if (bookingId == null) {
+                throw new Exception("Booking ID not received");
+            }
+            Optional<Booking> optionalBooking = bookingService.findById(bookingId);
+            if (optionalBooking.isPresent()) {
+                Booking booking = optionalBooking.get();
+                booking.setLastModifiedBy(userInfo.getId());
+                booking.setLastModifiedTime(new Date());
+                booking = bookingService.doCancelCheckIn(booking);
+                bookingResponse.setBooking(booking);
+                bookingResponse.setSuccess(true);
+                bookingResponse.setError("");
 
-    @RequestMapping(value = "/save-payment-receipts")
+            } else {
+                throw new Exception("Booking not found!!!");
+            }
+
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            bookingResponse.setSuccess(false);
+            bookingResponse.setError(ex.getMessage());
+        }
+        return bookingResponse;
+    }
+        @RequestMapping(value = "/save-payment-receipts")
     @Transactional(rollbackFor = Exception.class)
     public AccountReceiptsResponse savePaymentReceipts(@RequestBody AccountReceipts accountReceipts) {
         AccountReceiptsResponse accountReceiptsResponse;

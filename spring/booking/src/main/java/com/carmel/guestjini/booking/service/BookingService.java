@@ -24,4 +24,6 @@ public interface BookingService {
     Page<Booking> findAll(Specification<Booking> textInAllColumns, Pageable pageable);
 
     Guest doCheckIn(Booking booking, Date actualCheckInDate) throws Exception;
+
+    Booking doCancelCheckIn(Booking booking)  throws Exception;
 }

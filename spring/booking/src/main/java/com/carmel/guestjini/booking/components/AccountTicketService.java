@@ -43,4 +43,25 @@ public class AccountTicketService {
             throw ex;
         }
     }
+
+    public AccountTicketResponse deleteAccountTicketsByGuest(String guestId) throws Exception{
+        try {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            OAuth2AuthenticationDetails oAuth2AuthenticationDetails = (OAuth2AuthenticationDetails) auth.getDetails();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.set("Authorization", "Bearer " + oAuth2AuthenticationDetails.getTokenValue());
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            JSONObject postData = new JSONObject();
+            postData.put("guestId", guestId);
+            HttpEntity<String> entity = new HttpEntity<>(postData.toJSONString(), headers);
+            ResponseEntity<AccountTicketResponse> result =
+                    restTemplate.exchange(yamlConfig.getAccountsServiceURL() + "/account-tickets//delete-account-tickets-by-guest",
+                            HttpMethod.POST, entity, AccountTicketResponse.class);
+            return result.getBody();
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
 }

@@ -104,6 +104,44 @@ public class BookingServiceImpl implements BookingService {
         }
     }
 
+    @Override
+    public Booking doCancelCheckIn(Booking booking) throws Exception {
+        try {
+            Optional<Guest> optionalGuest = guestService.findByBooking(booking);
+            Guest guest = new Guest();
+            Guest guestToDelete = new Guest();
+            if (optionalGuest.isPresent()) {
+                guest = optionalGuest.get();
+                guestToDelete = optionalGuest.get();
+            }
+
+            this._isBookingValidForCancelCheckIn(booking, guest);
+            guest.setId(null);
+            this._updateKYC(guest, booking);
+            this._updatePackageCharge(guest, booking);
+            booking.setBookingStatus(BookingStatus.ACTIVE.getValue());
+            this._revertChargeGuest(guestToDelete);
+            this._updateReceipts(guest, booking);
+            guestService.delete(guestToDelete);
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return null;
+    }
+
+    private void _isBookingValidForCancelCheckIn(Booking booking, Guest guest) throws Exception {
+        if (booking == null) {
+            throw new Exception("Booking not found");
+        }
+
+        if (booking.getBookingStatus() != BookingStatus.USED.getValue()) {
+            throw new Exception("This booking is not valid for cancel check in.");
+        }
+
+        if (guest.getGuestStatus() != GuestStatus.RESIDING.getValue()) {
+            throw new Exception("This guest is not residing with us at the moment.");
+        }
+    }
 
     private void _isBookingValidForCheckIn(Booking booking) throws Exception {
         if (booking == null) {
@@ -138,7 +176,7 @@ public class BookingServiceImpl implements BookingService {
             User user = new User(guest);
             user.setPassword("");
             UserResponse userResponse = userService.saveUser(user);
-            if(!userResponse.isSuccess()){
+            if (!userResponse.isSuccess()) {
                 throw new Exception(userResponse.getError());
             }
             return guest;
@@ -265,6 +303,17 @@ public class BookingServiceImpl implements BookingService {
             if (!accountTicketResponse.isSuccess()) {
                 throw new Exception(accountTicketResponse.getError());
             }
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return accountTicketResponse;
+    }
+
+    private AccountTicketResponse _revertChargeGuest(Guest guest) throws Exception {
+        AccountTicketResponse accountTicketResponse;
+        try {
+            accountTicketResponse = accountTicketService.deleteAccountTicketsByGuest(guest.getId());
+
         } catch (Exception ex) {
             throw ex;
         }
