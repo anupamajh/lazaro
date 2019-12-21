@@ -2,14 +2,7 @@ package com.carmel.common.dbservice.model.DTO;
 
 import com.carmel.common.dbservice.model.AppFeatures;
 import com.carmel.common.dbservice.model.ClientDetails;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 

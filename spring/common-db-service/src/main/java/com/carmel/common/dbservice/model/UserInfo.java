@@ -1,15 +1,9 @@
 package com.carmel.common.dbservice.model;
 
 import com.carmel.common.dbservice.repository.UserRepository;
-import com.carmel.common.dbservice.services.UserService;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;

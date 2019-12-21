@@ -2,7 +2,6 @@ package com.carmel.common.dbservice.specifications;
 
 import com.carmel.common.dbservice.model.Client;
 import com.carmel.common.dbservice.model.Organization;
-import com.carmel.common.dbservice.model.Role;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;

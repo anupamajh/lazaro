@@ -1,7 +1,6 @@
 package com.carmel.common.dbservice.model;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.ManyToAny;
 import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Length;
 

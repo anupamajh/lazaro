@@ -1,6 +1,5 @@
 package com.carmel.common.dbservice.response;
 
-import com.carmel.common.dbservice.model.AppFeatures;
 import com.carmel.common.dbservice.model.Client;
 import com.carmel.common.dbservice.model.DTO.ClientDTO;
 

@@ -1,6 +1,5 @@
 package com.carmel.common.dbservice.model;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Length;

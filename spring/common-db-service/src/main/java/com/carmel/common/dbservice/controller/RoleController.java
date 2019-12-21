@@ -15,7 +15,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -143,14 +142,12 @@ public class RoleController {
     }
 
     @RequestMapping(value = "/get-deleted", method = RequestMethod.POST)
-    public RolesResponse getDeleted(@RequestBody Map<String, String> formData) {
+    public RolesResponse getDeleted() {
         UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
-        String orgId = formData.get("orgId") == null ? "" : formData.get("orgId");
         RolesResponse rolesResponse = new RolesResponse();
         try {
-            logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
             rolesResponse.setRoleList(roleService.findAllByIsDeletedAndClient(1, userInfo.getClient()));
             rolesResponse.setSuccess(true);
             rolesResponse.setError("");

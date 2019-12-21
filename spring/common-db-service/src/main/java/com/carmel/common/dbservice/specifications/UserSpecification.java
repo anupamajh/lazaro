@@ -1,7 +1,6 @@
 package com.carmel.common.dbservice.specifications;
 
 import com.carmel.common.dbservice.model.Client;
-import com.carmel.common.dbservice.model.Role;
 import com.carmel.common.dbservice.model.User;
 import org.springframework.data.jpa.domain.Specification;
 

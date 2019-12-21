@@ -1,12 +1,6 @@
 package com.carmel.common.dbservice.model.DTO;
 
 import com.carmel.common.dbservice.model.Client;
-import com.carmel.common.dbservice.model.ClientDetails;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.Length;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 public class ClientDTO {
     private String clientId;

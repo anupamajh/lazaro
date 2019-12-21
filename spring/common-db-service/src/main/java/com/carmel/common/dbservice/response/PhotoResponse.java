@@ -1,6 +1,5 @@
 package com.carmel.common.dbservice.response;
 
-import com.carmel.common.dbservice.model.DTO.AlbumDTO;
 import com.carmel.common.dbservice.model.DTO.PhotoDTO;
 import com.carmel.common.dbservice.model.Photo;
 

@@ -4,7 +4,6 @@ import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.Album;
 import com.carmel.common.dbservice.model.Photo;
 import com.carmel.common.dbservice.model.UserInfo;
-import com.carmel.common.dbservice.response.AlbumResponse;
 import com.carmel.common.dbservice.response.PhotoResponse;
 import com.carmel.common.dbservice.services.AlbumService;
 import com.carmel.common.dbservice.services.PhotoService;
