@@ -14,4 +14,6 @@ public interface AccountTicketRepository extends JpaRepository<AccountTicket, St
     Page<AccountTicket> findAllByIsDeletedAndBookingId(int isDeleted, String bookingId, Pageable pageable);
 
     Page<AccountTicket> findAll(Specification<AccountTicket> textInAllColumns, Pageable pageable);
+
+    List<AccountTicket> findAllByGuestId(String guestId);
 }
