@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -253,5 +254,25 @@ public class AccountTicketController {
 
     private boolean checkDuplicate(AccountTicket accountTicket) {
         return false;
+    }
+
+    @RequestMapping(value = "/delete-account-tickets-by-guest", method = RequestMethod.POST)
+    public AccountTicketResponse deleteTicketsByGuestId(@RequestBody Map<String, String> formData) {
+        logger.trace("Entering");
+        AccountTicketResponse accountTicketResponse = new AccountTicketResponse();
+        try {
+            String guestId = formData.get("guestId") == null ? null : String.valueOf(formData.get("guestId"));
+            List<AccountTicket> accountTickets = accountTicketService.findAllByGuestId(guestId);
+            accountTicketService.deleteAll(accountTickets);
+            accountTicketResponse.setSuccess(true);
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            logger.error(ex.getMessage(), ex);
+            accountTicketResponse.setSuccess(false);
+            accountTicketResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return accountTicketResponse;
     }
 }

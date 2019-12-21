@@ -18,4 +18,8 @@ public interface AccountTicketService {
     Page<AccountTicket> findAllByIsDeletedAndBookingId(int isDeleted, String bookingId, Pageable pageable);
 
     Page<AccountTicket> findAll(Specification<AccountTicket> textInAllColumns, Pageable pageable);
+
+    List<AccountTicket> findAllByGuestId(String guestId);
+
+    void deleteAll(List<AccountTicket> accountTickets);
 }

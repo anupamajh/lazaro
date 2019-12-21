@@ -261,9 +261,6 @@ public class AccountReceiptController {
             if (bookingId == null) {
                 throw new Exception("Booking ID not received");
             }
-            if (guestId == null) {
-                throw new Exception("Guest ID not received");
-            }
             List<AccountReceipts> accountReceiptsList = accountReceiptService.findAllByIsDeletedAndBookingId(0, bookingId);
             for (AccountReceipts accountReceipts : accountReceiptsList) {
                 accountReceipts.setGuestId(guestId);

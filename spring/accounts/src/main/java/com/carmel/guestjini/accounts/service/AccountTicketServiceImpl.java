@@ -41,4 +41,14 @@ public class AccountTicketServiceImpl implements AccountTicketService{
     public Page<AccountTicket> findAll(Specification<AccountTicket> textInAllColumns, Pageable pageable) {
         return accountTicketRepository.findAll(textInAllColumns, pageable);
     }
+
+    @Override
+    public List<AccountTicket> findAllByGuestId(String guestId) {
+        return accountTicketRepository.findAllByGuestId(guestId);
+    }
+
+    @Override
+    public void deleteAll(List<AccountTicket> accountTickets) {
+        accountTicketRepository.deleteAll(accountTickets);
+    }
 }
