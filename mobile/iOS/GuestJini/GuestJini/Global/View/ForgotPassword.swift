@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct ForgotPassword: View {
+  
+    @ObservedObject var viewRouter: ViewRouter
     @State var loginId:String = "";
     var body: some View {
         GeometryReader { geometry in
@@ -21,7 +23,7 @@ struct ForgotPassword: View {
                 VStack{
                     HStack{
                         Button(action: {
-                            // What to perform
+                            self.viewRouter.currentPage = ViewRoutes.LOGIN_PAGE
                         }) { GuestJiniButtonSystemImagePlain(imageName: "arrow.left")
                             
                         }
@@ -71,6 +73,6 @@ struct ForgotPassword: View {
 
 struct ForgotPassword_Previews: PreviewProvider {
     static var previews: some View {
-        ForgotPassword()
+        ForgotPassword(viewRouter: ViewRouter())
     }
 }

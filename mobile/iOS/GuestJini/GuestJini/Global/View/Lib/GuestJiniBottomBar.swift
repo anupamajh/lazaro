@@ -23,7 +23,7 @@ struct GuestJiniBottomBar: View {
                 }.padding(.horizontal)
                 
                 Button(action: {
-                    self.viewRouter.currentPage = ViewRoutes.HOME_PAGE
+                    self.viewRouter.currentPage = ViewRoutes.SETTINGS_VIEW
                 }) {
                     GuestJiniBottomBarItem(systemImage: "gear", menuText: "Settings")
                     

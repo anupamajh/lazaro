@@ -26,6 +26,16 @@ struct ContentView: View {
                TicketList(viewRouter: viewRouter)
             }else if viewRouter.currentPage ==  ViewRoutes.TICKET_VIEW {
                TicketView(viewRouter: viewRouter)
+            }else if viewRouter.currentPage ==  ViewRoutes.FORGOT_PASSWORD_PAGE {
+               ForgotPassword(viewRouter: viewRouter)
+            }else if viewRouter.currentPage ==  ViewRoutes.SETTINGS_VIEW {
+               SettingsView(viewRouter: viewRouter)
+            }else if viewRouter.currentPage ==  ViewRoutes.MY_PROFILE_VIEW {
+               MyProfileView(viewRouter: viewRouter)
+            }else if viewRouter.currentPage ==  ViewRoutes.NOTIFICATION_VIEW {
+               NotificationsView(viewRouter: viewRouter)
+            }else if viewRouter.currentPage ==  ViewRoutes.HELP_VIEW {
+               HelpView(viewRouter: viewRouter)
             }
         }
         

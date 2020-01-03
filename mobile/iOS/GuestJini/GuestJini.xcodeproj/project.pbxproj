@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		61B96753C6D4A2615D274567 /* Pods_GuestJiniTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12EDB7E46FA5CA1E3AEAE956 /* Pods_GuestJiniTests.framework */; };
 		67069DFDAE3F9EECC47FE8AA /* Pods_GuestJini_GuestJiniUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6AFC97278410F79AF19B3D0 /* Pods_GuestJini_GuestJiniUITests.framework */; };
+		C10ACFF423BF78EE00C7CB70 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10ACFF323BF78EE00C7CB70 /* NotificationsView.swift */; };
+		C10ACFF623BF7B3700C7CB70 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10ACFF523BF7B3700C7CB70 /* WebView.swift */; };
+		C10ACFF823BF7BDF00C7CB70 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10ACFF723BF7BDF00C7CB70 /* HelpView.swift */; };
 		C127164423B74F9D001E4C99 /* GuestJiniHyperlinkButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C127164323B74F9D001E4C99 /* GuestJiniHyperlinkButtonText.swift */; };
 		C127164623B751CB001E4C99 /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C127164523B751CB001E4C99 /* ForgotPassword.swift */; };
 		C127164823B75409001E4C99 /* GuestJiniButtonSystemImagePlain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C127164723B75409001E4C99 /* GuestJiniButtonSystemImagePlain.swift */; };
@@ -73,6 +76,7 @@
 		C1BB7D6023BF418600BA410C /* TicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BB7D5F23BF418600BA410C /* TicketView.swift */; };
 		C1BB7D6223BF4AE200BA410C /* TicketSaveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BB7D6123BF4AE200BA410C /* TicketSaveService.swift */; };
 		C1BB7D6423BF59F600BA410C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BB7D6323BF59F600BA410C /* SettingsView.swift */; };
+		C1BB7D6623BF66A100BA410C /* GuestJiniSettingMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BB7D6523BF66A100BA410C /* GuestJiniSettingMenuItem.swift */; };
 		C1C74C3C23BA143E00FFA336 /* GuestJiniBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C74C3B23BA143E00FFA336 /* GuestJiniBottomBar.swift */; };
 		C1C74C3E23BA146700FFA336 /* GuestJiniBottomBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C74C3D23BA146700FFA336 /* GuestJiniBottomBarItem.swift */; };
 		C1D0000123B9D83400B93651 /* EndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D0000023B9D83400B93651 /* EndPoints.swift */; };
@@ -82,6 +86,7 @@
 		C1D0FFFF23B9D73700B93651 /* ViewRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D0FFFE23B9D73700B93651 /* ViewRoutes.swift */; };
 		C1DD878823B9EB2F00418AD8 /* GuestJiniFieldError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DD878723B9EB2F00418AD8 /* GuestJiniFieldError.swift */; };
 		C1E9E59223B740A300EB812F /* GuestJiniButtonSystemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E9E59123B740A300EB812F /* GuestJiniButtonSystemImage.swift */; };
+		C1F787A923BF700800FF9B85 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F787A823BF700800FF9B85 /* MyProfileView.swift */; };
 		C1F8A70A23BB14D5005158A5 /* GuestJiniSquareButtonSystemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8A70923BB14D5005158A5 /* GuestJiniSquareButtonSystemImage.swift */; };
 		C1F8A70C23BB16A2005158A5 /* ExploreSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8A70B23BB16A2005158A5 /* ExploreSupport.swift */; };
 		EC7ADD15BB96BEFEB1E712FA /* Pods_GuestJini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E805B33AF2C01FF6F11E5CA6 /* Pods_GuestJini.framework */; };
@@ -111,6 +116,9 @@
 		89AA4E4DDCE18C03A5807E40 /* Pods-GuestJini.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuestJini.release.xcconfig"; path = "Target Support Files/Pods-GuestJini/Pods-GuestJini.release.xcconfig"; sourceTree = "<group>"; };
 		AE9306028842963B3966FCE4 /* Pods-GuestJini-GuestJiniUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuestJini-GuestJiniUITests.release.xcconfig"; path = "Target Support Files/Pods-GuestJini-GuestJiniUITests/Pods-GuestJini-GuestJiniUITests.release.xcconfig"; sourceTree = "<group>"; };
 		BA7E24932EFB1E938F5C463B /* Pods-GuestJini-GuestJiniUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuestJini-GuestJiniUITests.debug.xcconfig"; path = "Target Support Files/Pods-GuestJini-GuestJiniUITests/Pods-GuestJini-GuestJiniUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C10ACFF323BF78EE00C7CB70 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
+		C10ACFF523BF7B3700C7CB70 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		C10ACFF723BF7BDF00C7CB70 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		C127164323B74F9D001E4C99 /* GuestJiniHyperlinkButtonText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniHyperlinkButtonText.swift; sourceTree = "<group>"; };
 		C127164523B751CB001E4C99 /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
 		C127164723B75409001E4C99 /* GuestJiniButtonSystemImagePlain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniButtonSystemImagePlain.swift; sourceTree = "<group>"; };
@@ -181,6 +189,7 @@
 		C1BB7D5F23BF418600BA410C /* TicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketView.swift; sourceTree = "<group>"; };
 		C1BB7D6123BF4AE200BA410C /* TicketSaveService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketSaveService.swift; sourceTree = "<group>"; };
 		C1BB7D6323BF59F600BA410C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		C1BB7D6523BF66A100BA410C /* GuestJiniSettingMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniSettingMenuItem.swift; sourceTree = "<group>"; };
 		C1C74C3B23BA143E00FFA336 /* GuestJiniBottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniBottomBar.swift; sourceTree = "<group>"; };
 		C1C74C3D23BA146700FFA336 /* GuestJiniBottomBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniBottomBarItem.swift; sourceTree = "<group>"; };
 		C1D0000023B9D83400B93651 /* EndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoints.swift; sourceTree = "<group>"; };
@@ -190,6 +199,7 @@
 		C1D0FFFE23B9D73700B93651 /* ViewRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRoutes.swift; sourceTree = "<group>"; };
 		C1DD878723B9EB2F00418AD8 /* GuestJiniFieldError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniFieldError.swift; sourceTree = "<group>"; };
 		C1E9E59123B740A300EB812F /* GuestJiniButtonSystemImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniButtonSystemImage.swift; sourceTree = "<group>"; };
+		C1F787A823BF700800FF9B85 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
 		C1F8A70923BB14D5005158A5 /* GuestJiniSquareButtonSystemImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniSquareButtonSystemImage.swift; sourceTree = "<group>"; };
 		C1F8A70B23BB16A2005158A5 /* ExploreSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreSupport.swift; sourceTree = "<group>"; };
 		C6AFC97278410F79AF19B3D0 /* Pods_GuestJini_GuestJiniUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GuestJini_GuestJiniUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -405,6 +415,9 @@
 				C1B1E43323BE1DDD009E1E3B /* TicketUI.swift */,
 				C1BB7D5F23BF418600BA410C /* TicketView.swift */,
 				C1BB7D6323BF59F600BA410C /* SettingsView.swift */,
+				C1F787A823BF700800FF9B85 /* MyProfileView.swift */,
+				C10ACFF323BF78EE00C7CB70 /* NotificationsView.swift */,
+				C10ACFF723BF7BDF00C7CB70 /* HelpView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -447,6 +460,8 @@
 				C1B1E43B23BEFA23009E1E3B /* GuestJiniTextArea.swift */,
 				C1B1E43D23BF0304009E1E3B /* TicketRow.swift */,
 				C1BB7D5A23BF3D7000BA410C /* ActivityIndicator.swift */,
+				C1BB7D6523BF66A100BA410C /* GuestJiniSettingMenuItem.swift */,
+				C10ACFF523BF7B3700C7CB70 /* WebView.swift */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -735,6 +750,7 @@
 				C1D0FFFF23B9D73700B93651 /* ViewRoutes.swift in Sources */,
 				C1F8A70C23BB16A2005158A5 /* ExploreSupport.swift in Sources */,
 				C1BB7D6223BF4AE200BA410C /* TicketSaveService.swift in Sources */,
+				C10ACFF623BF7B3700C7CB70 /* WebView.swift in Sources */,
 				C1B1E43223BE1DD1009E1E3B /* TicketList.swift in Sources */,
 				C1B1E43C23BEFA23009E1E3B /* GuestJiniTextArea.swift in Sources */,
 				C1BB27F623B75A6300E8E3F9 /* GuestJiniAlerBox.swift in Sources */,
@@ -762,9 +778,11 @@
 				C1C74C3C23BA143E00FFA336 /* GuestJiniBottomBar.swift in Sources */,
 				C1A73E2023B744F900E9F5B8 /* GuestJiniHeaderLarge.swift in Sources */,
 				C144F02123B481C100D6D218 /* GuestJiniErrorText.swift in Sources */,
+				C10ACFF823BF7BDF00C7CB70 /* HelpView.swift in Sources */,
 				C17BBFC623BB22E600FD5A21 /* Articles.swift in Sources */,
 				C12EF5AD23B223DD0024C22C /* GuestJini.xcdatamodeld in Sources */,
 				C1B1E42E23BE0C6C009E1E3B /* GuestJiniRegularTextBox.swift in Sources */,
+				C10ACFF423BF78EE00C7CB70 /* NotificationsView.swift in Sources */,
 				C1BB27FE23B7728000E8E3F9 /* ViewRouter.swift in Sources */,
 				C144F01B23B4816E00D6D218 /* GuestJiniLogoImage.swift in Sources */,
 				C1D0000123B9D83400B93651 /* EndPoints.swift in Sources */,
@@ -772,6 +790,7 @@
 				C1D0000323B9DC2A00B93651 /* AuthData.swift in Sources */,
 				C129E73923BB0509009144D6 /* GuestJiniRoundButtonSystemImage.swift in Sources */,
 				C127164423B74F9D001E4C99 /* GuestJiniHyperlinkButtonText.swift in Sources */,
+				C1F787A923BF700800FF9B85 /* MyProfileView.swift in Sources */,
 				C1BB27FC23B766EE00E8E3F9 /* GuestJiniFieldLabel.swift in Sources */,
 				C12EF5AA23B223DD0024C22C /* SceneDelegate.swift in Sources */,
 				C15C726023BA18CD0069CB6E /* HomePage.swift in Sources */,
@@ -781,6 +800,7 @@
 				C1A73E1C23B7448200E9F5B8 /* LandingScreen.swift in Sources */,
 				C1BB7D6423BF59F600BA410C /* SettingsView.swift in Sources */,
 				C144F01D23B4819900D6D218 /* GuestJiniTitleText.swift in Sources */,
+				C1BB7D6623BF66A100BA410C /* GuestJiniSettingMenuItem.swift in Sources */,
 				C1D0000723B9E45000B93651 /* Converters.swift in Sources */,
 				C1F8A70A23BB14D5005158A5 /* GuestJiniSquareButtonSystemImage.swift in Sources */,
 				C1D0000523B9E3EA00B93651 /* Vlidators.swift in Sources */,

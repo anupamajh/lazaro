@@ -64,7 +64,7 @@ struct LoginScreen: View {
                     HStack{
                         Spacer()
                         Button(action: {
-                            // What to perform
+                            self.viewRouter.currentPage = ViewRoutes.FORGOT_PASSWORD_PAGE
                         }) {
                             GuestJiniHyperlinkButtonText(buttonText: "Forgot Password?")
                             
