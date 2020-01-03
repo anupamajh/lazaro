@@ -10,15 +10,20 @@ import SwiftUI
 
 struct TicketUI: View {
     @ObservedObject var viewRouter: ViewRouter
-    @ObservedObject var ticketService:TicketService
     @State var ticketSubject:String = ""
     @State var ticketNarration:String = ""
     @State var hasSubject:Bool = true
     @State var hasNarration: Bool = true
+    @State private var showSuccess = false
+    @State private var showFailure = false
+
+    @ObservedObject var ticketSaveService:TicketSaveService
+      
+    
     
     init(viewRouter: ViewRouter){
         self.viewRouter = viewRouter
-        self.ticketService = TicketService(viewRouter: viewRouter)
+        self.ticketSaveService = TicketSaveService(viewRouter: viewRouter)
     }
     var body: some View {
         GeometryReader { geometry in
@@ -77,12 +82,29 @@ struct TicketUI: View {
                                 self.hasNarration = true
                             }
                             if(self.hasNarration && self.hasSubject){
-                                
+                                let ticket:Ticket = Ticket();
+                                ticket.ticketTitle = self.ticketSubject
+                                ticket.ticketNarration = self.ticketNarration
+                                self.ticketSaveService.saveTicket(ticketData: ticket) { (response) in
+                                    if(response.success == true){
+                                        self.showSuccess = true
+                                        self.viewRouter.currentPage = ViewRoutes.TICKET_LIST
+                                    }else{
+                                        self.showFailure = true
+                                    }
+                                }
                             }
                         }) {
                            GuestJiniButtonText(buttonText: "SUBMIT")
                             
                         }.padding(.horizontal)
+                            .actionSheet(isPresented: self.$showSuccess){
+                                      ActionSheet(title: Text("Success"), message: Text("Your complaint has been submitted successfully"), buttons: [.default(Text("OK"))])
+                                
+                        }.actionSheet(isPresented: self.$showFailure){
+                                      ActionSheet(title: Text("Failed!"), message: Text("We could not process your complaint, Please try after sometime!"), buttons: [.default(Text("OK"))])
+                                
+                        }
                     }.padding()
                     
                 }.frame(width: geometry.size.width, height: geometry.size.height-85, alignment: .top)

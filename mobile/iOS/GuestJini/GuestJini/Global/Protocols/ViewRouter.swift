@@ -32,4 +32,5 @@ class ViewRouter: ObservableObject {
             objectWillChange.send(self)
         }
     }
+    var primaryKey:String = ""
 }

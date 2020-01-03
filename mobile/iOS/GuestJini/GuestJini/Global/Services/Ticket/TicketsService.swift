@@ -10,19 +10,15 @@ import Foundation
 import Alamofire
 import SwiftUI
 
-class TicketService:ObservableObject{
+class TicketasasService:ObservableObject{
     @Published var ticketResponse = TicketResponse()
     @ObservedObject var viewRouter: ViewRouter
-    @Published var ticketList:[Ticket] = []
       
     var loginService = LoginService()
     
     init(viewRouter: ViewRouter) {
         self.viewRouter = viewRouter;
-        getTicketList { (response) in
-            self.ticketResponse = response
-            self.ticketList = response.taskTicketList!;
-        }
+   
     }
     
     func saveTicket(ticketData:Ticket, completionHandler: @escaping(TicketResponse)->Void) -> Void {

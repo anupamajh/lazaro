@@ -24,6 +24,8 @@ struct ContentView: View {
                TicketUI(viewRouter: viewRouter)
             }else if viewRouter.currentPage ==  ViewRoutes.TICKET_LIST {
                TicketList(viewRouter: viewRouter)
+            }else if viewRouter.currentPage ==  ViewRoutes.TICKET_VIEW {
+               TicketView(viewRouter: viewRouter)
             }
         }
         

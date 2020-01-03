@@ -13,10 +13,9 @@ import SwiftUI
 struct HomePage: View {
     @State var searchText:String = ""
     @ObservedObject var viewRouter: ViewRouter
-    @ObservedObject var ticketService:TicketService
     init(viewRouter: ViewRouter){
         self.viewRouter = viewRouter
-        self.ticketService = TicketService(viewRouter: viewRouter)
+        
     }
       
     var body: some View {

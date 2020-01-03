@@ -13,4 +13,10 @@ class ViewRoutes {
     static var HOME_PAGE = "home_page"
     static var TICKET_LIST = "ticket_list"
     static var TICKET_UI = "ticket_ui"
+    static var TICKET_VIEW = "ticket_view"
+    
+    
+    static var SETTINGS_VIEW = "settings_view"
+    
+    
 }

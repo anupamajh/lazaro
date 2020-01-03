@@ -10,10 +10,15 @@ import SwiftUI
 
 struct TicketList: View {
     @ObservedObject var viewRouter: ViewRouter
-    @ObservedObject var ticketService:TicketService
+    @ObservedObject var ticketListService:TicketListService
+    @State private var shouldAnimate = true
     init(viewRouter: ViewRouter){
         self.viewRouter = viewRouter
-        self.ticketService = TicketService(viewRouter: viewRouter)
+        self.ticketListService = TicketListService(viewRouter: viewRouter)
+        UITableView.appearance().tableFooterView = UIView()
+        
+        // To remove all separators including the actual ones:
+        UITableView.appearance().separatorStyle = .none
     }
     var body: some View {
         GeometryReader { geometry in
@@ -31,9 +36,17 @@ struct TicketList: View {
                         Spacer()
                     }.padding()
                     VStack{
+                        if(self.ticketListService.ticketList.count <= 0){
+                            ActivityIndicator(shouldAnimate: self.$shouldAnimate)
+                        }
                         List {
-                            ForEach(self.ticketService.ticketList) { ticket in
-                               TicketRow(ticket: ticket)
+                            ForEach(self.ticketListService.ticketList) { ticket in
+                                Button(action: {
+                                    self.viewRouter.primaryKey = ticket.id!
+                                    self.viewRouter.currentPage = ViewRoutes.TICKET_VIEW
+                                }) {
+                                    TicketRow(ticket: ticket)
+                                }
                             }
                         }
                     }
