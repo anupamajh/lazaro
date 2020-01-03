@@ -13,7 +13,11 @@ import SwiftUI
 struct HomePage: View {
     @State var searchText:String = ""
     @ObservedObject var viewRouter: ViewRouter
-    @ObservedObject var ticketService = TicketService()
+    @ObservedObject var ticketService:TicketService
+    init(viewRouter: ViewRouter){
+        self.viewRouter = viewRouter
+        self.ticketService = TicketService(viewRouter: viewRouter)
+    }
       
     var body: some View {
         GeometryReader { geometry in
@@ -103,7 +107,7 @@ struct HomePage: View {
                                 }
                                 HStack{
                                     Button(action: {
-                                        // What to perform
+                                        self.viewRouter.currentPage = ViewRoutes.TICKET_LIST
                                     }) {
                                         GuestJiniRoundButtonSystemImage(systemImage: "chevron.right")
                                         

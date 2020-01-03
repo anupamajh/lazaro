@@ -78,8 +78,8 @@
             filePath = "GuestJini/Global/Services/TicketsService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "getTicket(ticketId:completionHandler:)"
             landmarkType = "7">
             <Locations>
@@ -126,8 +126,8 @@
             filePath = "GuestJini/Global/Services/TicketsService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "getTicket(ticketId:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -136,15 +136,15 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "AA0379F2-E05B-4D0F-A74B-8EB04B42ACAF"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GuestJini/Global/Services/TicketsService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "getTicket(ticketId:completionHandler:)"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "getTicketList(completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -152,15 +152,221 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "6A0D47CF-DF03-43D2-BBEE-839D8587D835"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GuestJini/Global/Services/TicketsService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "119"
+            endingLineNumber = "119">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "379C24CB-98B1-42CF-8ADC-E2A26DD8E205"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GuestJini/Global/Services/TicketsService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "init(viewRouter:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "282099D7-2CE4-490B-A236-2741C5182394"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GuestJini/Global/Services/TicketsService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "getTicketList(completionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "282099D7-2CE4-490B-A236-2741C5182394 - a05d0a0b136ec53b"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GuestJini.TicketService.getTicketList(completionHandler: (GuestJini.TicketResponse) -&gt; ()) -&gt; ()"
+                  moduleName = "GuestJini"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pete/SVN/carmel/GuestJini-Development/mobile/iOS/GuestJini/GuestJini/Global/Services/TicketsService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "88"
+                  endingLineNumber = "88"
+                  offsetFromSymbolStart = "108">
+               </Location>
+               <Location
+                  uuid = "282099D7-2CE4-490B-A236-2741C5182394 - ff8e95a0c885fa2b"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (GuestJini.AuthData) -&gt; () in GuestJini.TicketService.getTicketList(completionHandler: (GuestJini.TicketResponse) -&gt; ()) -&gt; ()"
+                  moduleName = "GuestJini"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pete/SVN/carmel/GuestJini-Development/mobile/iOS/GuestJini/GuestJini/Global/Services/TicketsService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "168">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "00D1E1EF-5B09-4B9C-BC59-25EEF018CFB7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GuestJini/Global/Services/TicketsService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "getTicketList(completionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B58E060A-8F82-4053-8857-2E65F38340A7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GuestJini/Global/Services/TicketsService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "getTicketList(completionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B58E060A-8F82-4053-8857-2E65F38340A7 - ff8e95a0c885fa2b"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (GuestJini.AuthData) -&gt; () in GuestJini.TicketService.getTicketList(completionHandler: (GuestJini.TicketResponse) -&gt; ()) -&gt; ()"
+                  moduleName = "GuestJini"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pete/SVN/carmel/GuestJini-Development/mobile/iOS/GuestJini/GuestJini/Global/Services/TicketsService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "1684">
+               </Location>
+               <Location
+                  uuid = "B58E060A-8F82-4053-8857-2E65F38340A7 - af1283466fb44b33"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;GuestJini.TicketResponse, Alamofire.AFError&gt;) -&gt; () in closure #1 (GuestJini.AuthData) -&gt; () in GuestJini.TicketService.getTicketList(completionHandler: (GuestJini.TicketResponse) -&gt; ()) -&gt; ()"
+                  moduleName = "GuestJini"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pete/SVN/carmel/GuestJini-Development/mobile/iOS/GuestJini/GuestJini/Global/Services/TicketsService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "91"
+                  endingLineNumber = "91"
+                  offsetFromSymbolStart = "192">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A047503F-186F-44AB-85C7-D992CDB221BF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GuestJini/Global/Services/TicketsService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "getTicketList(completionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "10102B95-4B40-417D-9E55-CD16080DADD6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GuestJini/Global/Services/TicketsService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "getTicketList(completionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "10102B95-4B40-417D-9E55-CD16080DADD6 - ff8e95a0c885fa2b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (GuestJini.AuthData) -&gt; () in GuestJini.TicketService.getTicketList(completionHandler: (GuestJini.TicketResponse) -&gt; ()) -&gt; ()"
+                  moduleName = "GuestJini"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pete/SVN/carmel/GuestJini-Development/mobile/iOS/GuestJini/GuestJini/Global/Services/TicketsService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108"
+                  offsetFromSymbolStart = "3436">
+               </Location>
+               <Location
+                  uuid = "10102B95-4B40-417D-9E55-CD16080DADD6 - 41d6051d4fbbd0a9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Foundation.Data, Alamofire.AFError&gt;) -&gt; () in closure #1 (GuestJini.AuthData) -&gt; () in GuestJini.TicketService.getTicketList(completionHandler: (GuestJini.TicketResponse) -&gt; ()) -&gt; ()"
+                  moduleName = "GuestJini"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pete/SVN/carmel/GuestJini-Development/mobile/iOS/GuestJini/GuestJini/Global/Services/TicketsService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "109"
+                  endingLineNumber = "109"
+                  offsetFromSymbolStart = "56">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "91A64E5E-9C22-43E3-94BD-FE9D658BA90C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GuestJini/Global/View/TicketList.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "init(viewRouter:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -10,11 +10,16 @@ import SwiftUI
 
 struct TicketUI: View {
     @ObservedObject var viewRouter: ViewRouter
-    @ObservedObject var ticketService:TicketService = TicketService()
+    @ObservedObject var ticketService:TicketService
     @State var ticketSubject:String = ""
     @State var ticketNarration:String = ""
     @State var hasSubject:Bool = true
     @State var hasNarration: Bool = true
+    
+    init(viewRouter: ViewRouter){
+        self.viewRouter = viewRouter
+        self.ticketService = TicketService(viewRouter: viewRouter)
+    }
     var body: some View {
         GeometryReader { geometry in
             VStack{

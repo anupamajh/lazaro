@@ -10,17 +10,39 @@ import SwiftUI
 
 struct TicketList: View {
     @ObservedObject var viewRouter: ViewRouter
-    @ObservedObject var ticketService:TicketService = TicketService()
-    var tickets:[Ticket] = []
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    @ObservedObject var ticketService:TicketService
+    init(viewRouter: ViewRouter){
+        self.viewRouter = viewRouter
+        self.ticketService = TicketService(viewRouter: viewRouter)
     }
-    
-    func fetchTickets() -> Void {
-        self.ticketService.getTicketList { (response) in
-            if(response.success){
-                self.tickets = response.taskTicketList!
-            }
+    var body: some View {
+        GeometryReader { geometry in
+            VStack{
+                VStack{
+                    HStack{
+                        Button(action: {
+                            self.viewRouter.currentPage = ViewRoutes.HOME_PAGE
+                        }) {
+                            GuestJiniButtonSystemImagePlain(imageName: "arrow.left")
+                            
+                        }.padding(.horizontal)
+                        
+                        GuestJiniTitleText(title: "MY TICKETS")
+                        Spacer()
+                    }.padding()
+                    VStack{
+                        List {
+                            ForEach(self.ticketService.ticketList) { ticket in
+                               TicketRow(ticket: ticket)
+                            }
+                        }
+                    }
+                }.frame(width: geometry.size.width, height: geometry.size.height-85, alignment: .top)
+                    .padding()
+                Divider()
+                GuestJiniBottomBar(viewRouter: self.viewRouter)
+            }.frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
+                .edgesIgnoringSafeArea(.vertical)
         }
     }
 }

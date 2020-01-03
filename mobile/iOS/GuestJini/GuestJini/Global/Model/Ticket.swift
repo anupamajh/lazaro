@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Ticket: Decodable, Encodable {
+class Ticket: Decodable, Encodable, Identifiable {
     public var id:String? = ""
     public var clientId:String? = ""
     public var orgId:String? = ""
