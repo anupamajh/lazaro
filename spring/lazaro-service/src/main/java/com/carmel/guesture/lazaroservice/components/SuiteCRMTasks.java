@@ -101,6 +101,9 @@ public class SuiteCRMTasks {
                         ResponseEntity<String> leadResponse = restTemplate.postForEntity(postURL, data, String.class);
                         phoned.setIsSynced(1);
                         phonedService.save(phoned);
+                    }else{
+                        phoned.setIsSynced(null);
+                        phonedService.save(phoned);
                     }
 
                 }catch(Exception ex){
@@ -122,6 +125,9 @@ public class SuiteCRMTasks {
                         data.setData(tasks);
                         ResponseEntity<String> leadResponse = restTemplate.postForEntity(postURL, data, String.class);
                         website.setIsSynced(1);
+                        websiteService.save(website);
+                    }else{
+                        website.setIsSynced(null);
                         websiteService.save(website);
                     }
 

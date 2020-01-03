@@ -1,6 +1,8 @@
 package com.carmel.guestjini.accounts.service;
 
+import com.carmel.guestjini.accounts.common.GuestStatus;
 import com.carmel.guestjini.accounts.model.AccountTicket;
+import com.carmel.guestjini.accounts.model.DTO.Guest;
 import com.carmel.guestjini.accounts.repository.AccountTicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -8,14 +10,22 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 @Service
-public class AccountTicketServiceImpl implements AccountTicketService{
+public class AccountTicketServiceImpl implements AccountTicketService {
 
     @Autowired
     AccountTicketRepository accountTicketRepository;
+
+    @Autowired
+    DayRentService dayRentService;
+
+    @Autowired
+    MonthRentService monthRentService;
 
     @Override
     public AccountTicket save(AccountTicket accountTicket) {
@@ -50,5 +60,23 @@ public class AccountTicketServiceImpl implements AccountTicketService{
     @Override
     public void deleteAll(List<AccountTicket> accountTickets) {
         accountTicketRepository.deleteAll(accountTickets);
+    }
+
+    @Override
+    public List<AccountTicket> generateDayInvoices(Guest guest) throws Exception {
+        try {
+            return dayRentService.generateInvoices(guest);
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
+    @Override
+    public List<AccountTicket> generateMonthInvoices(Guest guest) throws Exception {
+        try {
+            return monthRentService.generateInvoices(guest);
+        } catch (Exception ex) {
+            throw ex;
+        }
     }
 }

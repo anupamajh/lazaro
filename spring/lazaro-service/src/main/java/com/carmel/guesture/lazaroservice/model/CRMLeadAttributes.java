@@ -49,7 +49,7 @@ public class CRMLeadAttributes {
                 this.lead_source = person.getSources().get(0).getMedium();
             }
         }
-        this.status = "Assigned";
+
         this.description = "";
         String delim = "";
         for (Source source : person.getSources()) {
@@ -58,7 +58,11 @@ public class CRMLeadAttributes {
         }
         if (person.isMissed()) {
             this.description += delim + "Missed call";
+            this.status = "Missed_Call";
+        }else{
+            this.status = "Assigned";
         }
+
         if (person.getInterests() != null) {
             this.product_c = String.join("/", person.getInterests());
         }

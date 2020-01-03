@@ -1,0 +1,6 @@
+framework module Pods_GuestJiniTests {
+  umbrella header "Pods-GuestJiniTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

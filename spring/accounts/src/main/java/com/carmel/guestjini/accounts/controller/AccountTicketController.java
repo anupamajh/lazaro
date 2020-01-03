@@ -3,6 +3,7 @@ package com.carmel.guestjini.accounts.controller;
 import com.carmel.guestjini.accounts.common.AccountTicketStatus;
 import com.carmel.guestjini.accounts.components.UserInformation;
 import com.carmel.guestjini.accounts.model.AccountTicket;
+import com.carmel.guestjini.accounts.model.DTO.Guest;
 import com.carmel.guestjini.accounts.model.Principal.UserInfo;
 import com.carmel.guestjini.accounts.response.AccountTicketResponse;
 import com.carmel.guestjini.accounts.service.AccountTicketService;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -268,11 +270,52 @@ public class AccountTicketController {
             logger.trace("Completed Successfully");
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
-            logger.error(ex.getMessage(), ex);
             accountTicketResponse.setSuccess(false);
             accountTicketResponse.setError(ex.getMessage());
         }
         logger.trace("Exiting");
+        return accountTicketResponse;
+    }
+
+    @RequestMapping(value = "/generate-day-invoices")
+    @Transactional(rollbackFor = Exception.class)
+    public AccountTicketResponse generateDayInvoices(@RequestBody Guest guest) {
+        logger.trace("Entering");
+        AccountTicketResponse accountTicketResponse = new AccountTicketResponse();
+        try {
+             if(guest == null){
+                throw new Exception("Guest not received");
+            }
+            List<AccountTicket> accountTickets = accountTicketService.generateDayInvoices(guest);
+            accountTicketResponse.setAccountTicketList(accountTickets);;
+            accountTicketResponse.setSuccess(true);
+            accountTicketResponse.setError("");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            accountTicketResponse.setSuccess(false);
+            accountTicketResponse.setError(ex.getMessage());
+        }
+        return accountTicketResponse;
+    }
+
+    @RequestMapping(value = "/generate-month-invoices")
+    @Transactional(rollbackFor = Exception.class)
+    public AccountTicketResponse generateMonthInvoices(@RequestBody Guest guest) {
+        logger.trace("Entering");
+        AccountTicketResponse accountTicketResponse = new AccountTicketResponse();
+        try {
+            if(guest == null){
+                throw new Exception("Guest not received");
+            }
+             List<AccountTicket> accountTickets = accountTicketService.generateMonthInvoices(guest);
+            accountTicketResponse.setAccountTicketList(accountTickets);;
+            accountTicketResponse.setSuccess(true);
+            accountTicketResponse.setError("");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            accountTicketResponse.setSuccess(false);
+            accountTicketResponse.setError(ex.getMessage());
+        }
         return accountTicketResponse;
     }
 }

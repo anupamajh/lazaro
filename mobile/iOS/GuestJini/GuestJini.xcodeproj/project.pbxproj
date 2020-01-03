@@ -1,0 +1,1106 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		61B96753C6D4A2615D274567 /* Pods_GuestJiniTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12EDB7E46FA5CA1E3AEAE956 /* Pods_GuestJiniTests.framework */; };
+		67069DFDAE3F9EECC47FE8AA /* Pods_GuestJini_GuestJiniUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6AFC97278410F79AF19B3D0 /* Pods_GuestJini_GuestJiniUITests.framework */; };
+		C127164423B74F9D001E4C99 /* GuestJiniHyperlinkButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C127164323B74F9D001E4C99 /* GuestJiniHyperlinkButtonText.swift */; };
+		C127164623B751CB001E4C99 /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C127164523B751CB001E4C99 /* ForgotPassword.swift */; };
+		C127164823B75409001E4C99 /* GuestJiniButtonSystemImagePlain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C127164723B75409001E4C99 /* GuestJiniButtonSystemImagePlain.swift */; };
+		C127164A23B75553001E4C99 /* GuestJiniInformationText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C127164923B75553001E4C99 /* GuestJiniInformationText.swift */; };
+		C129E73523BAFD60009144D6 /* GuestJiniSearchBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C129E73423BAFD60009144D6 /* GuestJiniSearchBox.swift */; };
+		C129E73723BB008C009144D6 /* GuestJiniSubAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C129E73623BB008C009144D6 /* GuestJiniSubAction.swift */; };
+		C129E73923BB0509009144D6 /* GuestJiniRoundButtonSystemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C129E73823BB0509009144D6 /* GuestJiniRoundButtonSystemImage.swift */; };
+		C12C4EFE23B781C200CD4B8F /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12C4EFD23B781C200CD4B8F /* LoginService.swift */; };
+		C12EF5A823B223DD0024C22C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12EF5A723B223DD0024C22C /* AppDelegate.swift */; };
+		C12EF5AA23B223DD0024C22C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12EF5A923B223DD0024C22C /* SceneDelegate.swift */; };
+		C12EF5AD23B223DD0024C22C /* GuestJini.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C12EF5AB23B223DD0024C22C /* GuestJini.xcdatamodeld */; };
+		C12EF5AF23B223DD0024C22C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12EF5AE23B223DD0024C22C /* ContentView.swift */; };
+		C12EF5B123B223DF0024C22C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C12EF5B023B223DF0024C22C /* Assets.xcassets */; };
+		C12EF5B423B223DF0024C22C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C12EF5B323B223DF0024C22C /* Preview Assets.xcassets */; };
+		C12EF5B723B223DF0024C22C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C12EF5B523B223DF0024C22C /* LaunchScreen.storyboard */; };
+		C12EF5C223B223DF0024C22C /* GuestJiniTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12EF5C123B223DF0024C22C /* GuestJiniTests.swift */; };
+		C12EF5CD23B223DF0024C22C /* GuestJiniUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12EF5CC23B223DF0024C22C /* GuestJiniUITests.swift */; };
+		C144F01223B477B100D6D218 /* CarouselImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F01123B477B100D6D218 /* CarouselImage.swift */; };
+		C144F01423B478BF00D6D218 /* GuestJiniTextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F01323B478BF00D6D218 /* GuestJiniTextBox.swift */; };
+		C144F01723B4812600D6D218 /* GuestJiniButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F01623B4812600D6D218 /* GuestJiniButtonText.swift */; };
+		C144F01923B4814B00D6D218 /* GuestJiniRoundButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F01823B4814B00D6D218 /* GuestJiniRoundButtonText.swift */; };
+		C144F01B23B4816E00D6D218 /* GuestJiniLogoImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F01A23B4816E00D6D218 /* GuestJiniLogoImage.swift */; };
+		C144F01D23B4819900D6D218 /* GuestJiniTitleText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F01C23B4819900D6D218 /* GuestJiniTitleText.swift */; };
+		C144F01F23B481B400D6D218 /* GuestJiniDescriptionText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F01E23B481B400D6D218 /* GuestJiniDescriptionText.swift */; };
+		C144F02123B481C100D6D218 /* GuestJiniErrorText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F02023B481C100D6D218 /* GuestJiniErrorText.swift */; };
+		C144F02323B483CB00D6D218 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F02223B483CB00D6D218 /* FontExtension.swift */; };
+		C15C726023BA18CD0069CB6E /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15C725F23BA18CD0069CB6E /* HomePage.swift */; };
+		C17BBFC623BB22E600FD5A21 /* Articles.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BBFC523BB22E600FD5A21 /* Articles.swift */; };
+		C1903E6523B73B2B00AD8F63 /* GuestJiniImageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1903E6423B73B2B00AD8F63 /* GuestJiniImageCard.swift */; };
+		C1A73E1C23B7448200E9F5B8 /* LandingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A73E1B23B7448200E9F5B8 /* LandingScreen.swift */; };
+		C1A73E1E23B744DF00E9F5B8 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A73E1D23B744DF00E9F5B8 /* LoginScreen.swift */; };
+		C1A73E2023B744F900E9F5B8 /* GuestJiniHeaderLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A73E1F23B744F900E9F5B8 /* GuestJiniHeaderLarge.swift */; };
+		C1AF642623B4969700375D32 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1AF641A23B4969600375D32 /* Roboto-Black.ttf */; };
+		C1AF642723B4969700375D32 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1AF641B23B4969600375D32 /* Roboto-Medium.ttf */; };
+		C1AF642823B4969700375D32 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1AF641C23B4969600375D32 /* Roboto-Thin.ttf */; };
+		C1AF642923B4969700375D32 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1AF641D23B4969600375D32 /* Roboto-Regular.ttf */; };
+		C1AF642A23B4969700375D32 /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1AF641E23B4969700375D32 /* Roboto-ThinItalic.ttf */; };
+		C1AF642B23B4969700375D32 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1AF641F23B4969700375D32 /* Roboto-LightItalic.ttf */; };
+		C1AF642C23B4969700375D32 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1AF642023B4969700375D32 /* Roboto-Bold.ttf */; };
+		C1AF642D23B4969700375D32 /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1AF642123B4969700375D32 /* Roboto-BlackItalic.ttf */; };
+		C1AF642E23B4969700375D32 /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1AF642223B4969700375D32 /* Roboto-MediumItalic.ttf */; };
+		C1AF642F23B4969700375D32 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1AF642323B4969700375D32 /* Roboto-Light.ttf */; };
+		C1AF643023B4969700375D32 /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1AF642423B4969700375D32 /* Roboto-BoldItalic.ttf */; };
+		C1AF643123B4969700375D32 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1AF642523B4969700375D32 /* Roboto-Italic.ttf */; };
+		C1B1E42E23BE0C6C009E1E3B /* GuestJiniRegularTextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E42D23BE0C6C009E1E3B /* GuestJiniRegularTextBox.swift */; };
+		C1B1E43023BE0D1F009E1E3B /* GuestJiniSecureTextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E42F23BE0D1F009E1E3B /* GuestJiniSecureTextBox.swift */; };
+		C1B1E43223BE1DD1009E1E3B /* TicketList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E43123BE1DD1009E1E3B /* TicketList.swift */; };
+		C1B1E43423BE1DDD009E1E3B /* TicketUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E43323BE1DDD009E1E3B /* TicketUI.swift */; };
+		C1B1E43623BE1EEB009E1E3B /* TicketsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E43523BE1EEB009E1E3B /* TicketsService.swift */; };
+		C1B1E43823BE1EFF009E1E3B /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E43723BE1EFF009E1E3B /* Ticket.swift */; };
+		C1B1E43A23BE1F1B009E1E3B /* TicketResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E43923BE1F1B009E1E3B /* TicketResponse.swift */; };
+		C1BB27F423B7578A00E8E3F9 /* OTPVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BB27F323B7578A00E8E3F9 /* OTPVerification.swift */; };
+		C1BB27F623B75A6300E8E3F9 /* GuestJiniAlerBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BB27F523B75A6300E8E3F9 /* GuestJiniAlerBox.swift */; };
+		C1BB27F823B7644000E8E3F9 /* GuestJiniHeaderSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BB27F723B7644000E8E3F9 /* GuestJiniHeaderSmall.swift */; };
+		C1BB27FA23B764A200E8E3F9 /* AppAccessRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BB27F923B764A200E8E3F9 /* AppAccessRequest.swift */; };
+		C1BB27FC23B766EE00E8E3F9 /* GuestJiniFieldLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BB27FB23B766EE00E8E3F9 /* GuestJiniFieldLabel.swift */; };
+		C1BB27FE23B7728000E8E3F9 /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BB27FD23B7728000E8E3F9 /* ViewRouter.swift */; };
+		C1C74C3C23BA143E00FFA336 /* GuestJiniBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C74C3B23BA143E00FFA336 /* GuestJiniBottomBar.swift */; };
+		C1C74C3E23BA146700FFA336 /* GuestJiniBottomBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C74C3D23BA146700FFA336 /* GuestJiniBottomBarItem.swift */; };
+		C1D0000123B9D83400B93651 /* EndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D0000023B9D83400B93651 /* EndPoints.swift */; };
+		C1D0000323B9DC2A00B93651 /* AuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D0000223B9DC2A00B93651 /* AuthData.swift */; };
+		C1D0000523B9E3EA00B93651 /* Vlidators.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D0000423B9E3EA00B93651 /* Vlidators.swift */; };
+		C1D0000723B9E45000B93651 /* Converters.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D0000623B9E45000B93651 /* Converters.swift */; };
+		C1D0FFFF23B9D73700B93651 /* ViewRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D0FFFE23B9D73700B93651 /* ViewRoutes.swift */; };
+		C1DD878823B9EB2F00418AD8 /* GuestJiniFieldError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DD878723B9EB2F00418AD8 /* GuestJiniFieldError.swift */; };
+		C1E9E59223B740A300EB812F /* GuestJiniButtonSystemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E9E59123B740A300EB812F /* GuestJiniButtonSystemImage.swift */; };
+		C1F8A70A23BB14D5005158A5 /* GuestJiniSquareButtonSystemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8A70923BB14D5005158A5 /* GuestJiniSquareButtonSystemImage.swift */; };
+		C1F8A70C23BB16A2005158A5 /* ExploreSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8A70B23BB16A2005158A5 /* ExploreSupport.swift */; };
+		EC7ADD15BB96BEFEB1E712FA /* Pods_GuestJini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E805B33AF2C01FF6F11E5CA6 /* Pods_GuestJini.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C12EF5BE23B223DF0024C22C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C12EF59C23B223DD0024C22C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C12EF5A323B223DD0024C22C;
+			remoteInfo = GuestJini;
+		};
+		C12EF5C923B223DF0024C22C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C12EF59C23B223DD0024C22C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C12EF5A323B223DD0024C22C;
+			remoteInfo = GuestJini;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0971977A82F850DE6D4E2CBC /* Pods-GuestJini.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuestJini.debug.xcconfig"; path = "Target Support Files/Pods-GuestJini/Pods-GuestJini.debug.xcconfig"; sourceTree = "<group>"; };
+		12EDB7E46FA5CA1E3AEAE956 /* Pods_GuestJiniTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GuestJiniTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		21967EB9F5795674DBF396CD /* Pods-GuestJiniTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuestJiniTests.debug.xcconfig"; path = "Target Support Files/Pods-GuestJiniTests/Pods-GuestJiniTests.debug.xcconfig"; sourceTree = "<group>"; };
+		89AA4E4DDCE18C03A5807E40 /* Pods-GuestJini.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuestJini.release.xcconfig"; path = "Target Support Files/Pods-GuestJini/Pods-GuestJini.release.xcconfig"; sourceTree = "<group>"; };
+		AE9306028842963B3966FCE4 /* Pods-GuestJini-GuestJiniUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuestJini-GuestJiniUITests.release.xcconfig"; path = "Target Support Files/Pods-GuestJini-GuestJiniUITests/Pods-GuestJini-GuestJiniUITests.release.xcconfig"; sourceTree = "<group>"; };
+		BA7E24932EFB1E938F5C463B /* Pods-GuestJini-GuestJiniUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuestJini-GuestJiniUITests.debug.xcconfig"; path = "Target Support Files/Pods-GuestJini-GuestJiniUITests/Pods-GuestJini-GuestJiniUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C127164323B74F9D001E4C99 /* GuestJiniHyperlinkButtonText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniHyperlinkButtonText.swift; sourceTree = "<group>"; };
+		C127164523B751CB001E4C99 /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
+		C127164723B75409001E4C99 /* GuestJiniButtonSystemImagePlain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniButtonSystemImagePlain.swift; sourceTree = "<group>"; };
+		C127164923B75553001E4C99 /* GuestJiniInformationText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniInformationText.swift; sourceTree = "<group>"; };
+		C129E73423BAFD60009144D6 /* GuestJiniSearchBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniSearchBox.swift; sourceTree = "<group>"; };
+		C129E73623BB008C009144D6 /* GuestJiniSubAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniSubAction.swift; sourceTree = "<group>"; };
+		C129E73823BB0509009144D6 /* GuestJiniRoundButtonSystemImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniRoundButtonSystemImage.swift; sourceTree = "<group>"; };
+		C12C4EFD23B781C200CD4B8F /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		C12EF5A423B223DD0024C22C /* GuestJini.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuestJini.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C12EF5A723B223DD0024C22C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C12EF5A923B223DD0024C22C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		C12EF5AC23B223DD0024C22C /* GuestJini.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GuestJini.xcdatamodel; sourceTree = "<group>"; };
+		C12EF5AE23B223DD0024C22C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		C12EF5B023B223DF0024C22C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C12EF5B323B223DF0024C22C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C12EF5B623B223DF0024C22C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C12EF5B823B223DF0024C22C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C12EF5BD23B223DF0024C22C /* GuestJiniTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GuestJiniTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C12EF5C123B223DF0024C22C /* GuestJiniTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniTests.swift; sourceTree = "<group>"; };
+		C12EF5C323B223DF0024C22C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C12EF5C823B223DF0024C22C /* GuestJiniUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GuestJiniUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C12EF5CC23B223DF0024C22C /* GuestJiniUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniUITests.swift; sourceTree = "<group>"; };
+		C12EF5CE23B223DF0024C22C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C144F01123B477B100D6D218 /* CarouselImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselImage.swift; sourceTree = "<group>"; };
+		C144F01323B478BF00D6D218 /* GuestJiniTextBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniTextBox.swift; sourceTree = "<group>"; };
+		C144F01623B4812600D6D218 /* GuestJiniButtonText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniButtonText.swift; sourceTree = "<group>"; };
+		C144F01823B4814B00D6D218 /* GuestJiniRoundButtonText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniRoundButtonText.swift; sourceTree = "<group>"; };
+		C144F01A23B4816E00D6D218 /* GuestJiniLogoImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniLogoImage.swift; sourceTree = "<group>"; };
+		C144F01C23B4819900D6D218 /* GuestJiniTitleText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniTitleText.swift; sourceTree = "<group>"; };
+		C144F01E23B481B400D6D218 /* GuestJiniDescriptionText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniDescriptionText.swift; sourceTree = "<group>"; };
+		C144F02023B481C100D6D218 /* GuestJiniErrorText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniErrorText.swift; sourceTree = "<group>"; };
+		C144F02223B483CB00D6D218 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
+		C15C725F23BA18CD0069CB6E /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
+		C17BBFC523BB22E600FD5A21 /* Articles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Articles.swift; sourceTree = "<group>"; };
+		C1903E6423B73B2B00AD8F63 /* GuestJiniImageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniImageCard.swift; sourceTree = "<group>"; };
+		C1A73E1B23B7448200E9F5B8 /* LandingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingScreen.swift; sourceTree = "<group>"; };
+		C1A73E1D23B744DF00E9F5B8 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		C1A73E1F23B744F900E9F5B8 /* GuestJiniHeaderLarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniHeaderLarge.swift; sourceTree = "<group>"; };
+		C1AF641A23B4969600375D32 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
+		C1AF641B23B4969600375D32 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		C1AF641C23B4969600375D32 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		C1AF641D23B4969600375D32 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		C1AF641E23B4969700375D32 /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
+		C1AF641F23B4969700375D32 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
+		C1AF642023B4969700375D32 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		C1AF642123B4969700375D32 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
+		C1AF642223B4969700375D32 /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
+		C1AF642323B4969700375D32 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		C1AF642423B4969700375D32 /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
+		C1AF642523B4969700375D32 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
+		C1B1E42D23BE0C6C009E1E3B /* GuestJiniRegularTextBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniRegularTextBox.swift; sourceTree = "<group>"; };
+		C1B1E42F23BE0D1F009E1E3B /* GuestJiniSecureTextBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniSecureTextBox.swift; sourceTree = "<group>"; };
+		C1B1E43123BE1DD1009E1E3B /* TicketList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketList.swift; sourceTree = "<group>"; };
+		C1B1E43323BE1DDD009E1E3B /* TicketUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketUI.swift; sourceTree = "<group>"; };
+		C1B1E43523BE1EEB009E1E3B /* TicketsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsService.swift; sourceTree = "<group>"; };
+		C1B1E43723BE1EFF009E1E3B /* Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticket.swift; sourceTree = "<group>"; };
+		C1B1E43923BE1F1B009E1E3B /* TicketResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketResponse.swift; sourceTree = "<group>"; };
+		C1BB27F323B7578A00E8E3F9 /* OTPVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerification.swift; sourceTree = "<group>"; };
+		C1BB27F523B75A6300E8E3F9 /* GuestJiniAlerBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniAlerBox.swift; sourceTree = "<group>"; };
+		C1BB27F723B7644000E8E3F9 /* GuestJiniHeaderSmall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniHeaderSmall.swift; sourceTree = "<group>"; };
+		C1BB27F923B764A200E8E3F9 /* AppAccessRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAccessRequest.swift; sourceTree = "<group>"; };
+		C1BB27FB23B766EE00E8E3F9 /* GuestJiniFieldLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniFieldLabel.swift; sourceTree = "<group>"; };
+		C1BB27FD23B7728000E8E3F9 /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
+		C1C74C3B23BA143E00FFA336 /* GuestJiniBottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniBottomBar.swift; sourceTree = "<group>"; };
+		C1C74C3D23BA146700FFA336 /* GuestJiniBottomBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniBottomBarItem.swift; sourceTree = "<group>"; };
+		C1D0000023B9D83400B93651 /* EndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoints.swift; sourceTree = "<group>"; };
+		C1D0000223B9DC2A00B93651 /* AuthData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthData.swift; sourceTree = "<group>"; };
+		C1D0000423B9E3EA00B93651 /* Vlidators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vlidators.swift; sourceTree = "<group>"; };
+		C1D0000623B9E45000B93651 /* Converters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converters.swift; sourceTree = "<group>"; };
+		C1D0FFFE23B9D73700B93651 /* ViewRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRoutes.swift; sourceTree = "<group>"; };
+		C1DD878723B9EB2F00418AD8 /* GuestJiniFieldError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniFieldError.swift; sourceTree = "<group>"; };
+		C1E9E59123B740A300EB812F /* GuestJiniButtonSystemImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniButtonSystemImage.swift; sourceTree = "<group>"; };
+		C1F8A70923BB14D5005158A5 /* GuestJiniSquareButtonSystemImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniSquareButtonSystemImage.swift; sourceTree = "<group>"; };
+		C1F8A70B23BB16A2005158A5 /* ExploreSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreSupport.swift; sourceTree = "<group>"; };
+		C6AFC97278410F79AF19B3D0 /* Pods_GuestJini_GuestJiniUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GuestJini_GuestJiniUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E68783AD19DEBF01DE1FFD4B /* Pods-GuestJiniTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuestJiniTests.release.xcconfig"; path = "Target Support Files/Pods-GuestJiniTests/Pods-GuestJiniTests.release.xcconfig"; sourceTree = "<group>"; };
+		E805B33AF2C01FF6F11E5CA6 /* Pods_GuestJini.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GuestJini.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C12EF5A123B223DD0024C22C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC7ADD15BB96BEFEB1E712FA /* Pods_GuestJini.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C12EF5BA23B223DF0024C22C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61B96753C6D4A2615D274567 /* Pods_GuestJiniTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C12EF5C523B223DF0024C22C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				67069DFDAE3F9EECC47FE8AA /* Pods_GuestJini_GuestJiniUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5808FAFA5F0586ECED67AADD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0971977A82F850DE6D4E2CBC /* Pods-GuestJini.debug.xcconfig */,
+				89AA4E4DDCE18C03A5807E40 /* Pods-GuestJini.release.xcconfig */,
+				BA7E24932EFB1E938F5C463B /* Pods-GuestJini-GuestJiniUITests.debug.xcconfig */,
+				AE9306028842963B3966FCE4 /* Pods-GuestJini-GuestJiniUITests.release.xcconfig */,
+				21967EB9F5795674DBF396CD /* Pods-GuestJiniTests.debug.xcconfig */,
+				E68783AD19DEBF01DE1FFD4B /* Pods-GuestJiniTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		914AC77A243CB8224257532E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E805B33AF2C01FF6F11E5CA6 /* Pods_GuestJini.framework */,
+				C6AFC97278410F79AF19B3D0 /* Pods_GuestJini_GuestJiniUITests.framework */,
+				12EDB7E46FA5CA1E3AEAE956 /* Pods_GuestJiniTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C12EF59B23B223DD0024C22C = {
+			isa = PBXGroup;
+			children = (
+				C12EF5A623B223DD0024C22C /* GuestJini */,
+				C12EF5C023B223DF0024C22C /* GuestJiniTests */,
+				C12EF5CB23B223DF0024C22C /* GuestJiniUITests */,
+				C12EF5A523B223DD0024C22C /* Products */,
+				5808FAFA5F0586ECED67AADD /* Pods */,
+				914AC77A243CB8224257532E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		C12EF5A523B223DD0024C22C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C12EF5A423B223DD0024C22C /* GuestJini.app */,
+				C12EF5BD23B223DF0024C22C /* GuestJiniTests.xctest */,
+				C12EF5C823B223DF0024C22C /* GuestJiniUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C12EF5A623B223DD0024C22C /* GuestJini */ = {
+			isa = PBXGroup;
+			children = (
+				C12EF5DA23B2248F0024C22C /* Global */,
+				C12EF5B823B223DF0024C22C /* Info.plist */,
+				C12EF5B223B223DF0024C22C /* Preview Content */,
+			);
+			path = GuestJini;
+			sourceTree = "<group>";
+		};
+		C12EF5B223B223DF0024C22C /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				C12EF5B323B223DF0024C22C /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C12EF5C023B223DF0024C22C /* GuestJiniTests */ = {
+			isa = PBXGroup;
+			children = (
+				C12EF5C123B223DF0024C22C /* GuestJiniTests.swift */,
+				C12EF5C323B223DF0024C22C /* Info.plist */,
+			);
+			path = GuestJiniTests;
+			sourceTree = "<group>";
+		};
+		C12EF5CB23B223DF0024C22C /* GuestJiniUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C12EF5CC23B223DF0024C22C /* GuestJiniUITests.swift */,
+				C12EF5CE23B223DF0024C22C /* Info.plist */,
+			);
+			path = GuestJiniUITests;
+			sourceTree = "<group>";
+		};
+		C12EF5DA23B2248F0024C22C /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				C12EF5DC23B224D80024C22C /* Common */,
+				C12EF5DB23B224BC0024C22C /* Controller */,
+				C12EF5DD23B224E10024C22C /* Data */,
+				C12EF5DE23B224E90024C22C /* Extensions */,
+				C12EF5DF23B224F30024C22C /* Model */,
+				C12EF5E023B224FC0024C22C /* Protocols */,
+				C12EF5E123B225040024C22C /* Services */,
+				C12EF5E223B2250F0024C22C /* View */,
+				C12EF5E323B225160024C22C /* ViewModel */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		C12EF5DB23B224BC0024C22C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C12EF5A723B223DD0024C22C /* AppDelegate.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C12EF5DC23B224D80024C22C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C1D0FFFE23B9D73700B93651 /* ViewRoutes.swift */,
+				C1D0000023B9D83400B93651 /* EndPoints.swift */,
+				C1D0000423B9E3EA00B93651 /* Vlidators.swift */,
+				C1D0000623B9E45000B93651 /* Converters.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		C12EF5DD23B224E10024C22C /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C12EF5AB23B223DD0024C22C /* GuestJini.xcdatamodeld */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		C12EF5DE23B224E90024C22C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C144F02223B483CB00D6D218 /* FontExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C12EF5DF23B224F30024C22C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C1D0000223B9DC2A00B93651 /* AuthData.swift */,
+				C17BBFC523BB22E600FD5A21 /* Articles.swift */,
+				C1B1E43723BE1EFF009E1E3B /* Ticket.swift */,
+				C1B1E43923BE1F1B009E1E3B /* TicketResponse.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C12EF5E023B224FC0024C22C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				C12EF5A923B223DD0024C22C /* SceneDelegate.swift */,
+				C1BB27FD23B7728000E8E3F9 /* ViewRouter.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		C12EF5E123B225040024C22C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C12C4EFD23B781C200CD4B8F /* LoginService.swift */,
+				C1B1E43523BE1EEB009E1E3B /* TicketsService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		C12EF5E223B2250F0024C22C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C1AF643223B496A300375D32 /* Fonts */,
+				C144F01523B478CE00D6D218 /* Lib */,
+				C12EF5AE23B223DD0024C22C /* ContentView.swift */,
+				C12EF5B523B223DF0024C22C /* LaunchScreen.storyboard */,
+				C12EF5B023B223DF0024C22C /* Assets.xcassets */,
+				C1A73E1B23B7448200E9F5B8 /* LandingScreen.swift */,
+				C1A73E1D23B744DF00E9F5B8 /* LoginScreen.swift */,
+				C127164523B751CB001E4C99 /* ForgotPassword.swift */,
+				C1BB27F323B7578A00E8E3F9 /* OTPVerification.swift */,
+				C1BB27F923B764A200E8E3F9 /* AppAccessRequest.swift */,
+				C15C725F23BA18CD0069CB6E /* HomePage.swift */,
+				C1F8A70B23BB16A2005158A5 /* ExploreSupport.swift */,
+				C1B1E43123BE1DD1009E1E3B /* TicketList.swift */,
+				C1B1E43323BE1DDD009E1E3B /* TicketUI.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C12EF5E323B225160024C22C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C144F01523B478CE00D6D218 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				C144F01123B477B100D6D218 /* CarouselImage.swift */,
+				C1BB27F523B75A6300E8E3F9 /* GuestJiniAlerBox.swift */,
+				C1C74C3B23BA143E00FFA336 /* GuestJiniBottomBar.swift */,
+				C1C74C3D23BA146700FFA336 /* GuestJiniBottomBarItem.swift */,
+				C1E9E59123B740A300EB812F /* GuestJiniButtonSystemImage.swift */,
+				C127164723B75409001E4C99 /* GuestJiniButtonSystemImagePlain.swift */,
+				C144F01623B4812600D6D218 /* GuestJiniButtonText.swift */,
+				C144F01E23B481B400D6D218 /* GuestJiniDescriptionText.swift */,
+				C144F02023B481C100D6D218 /* GuestJiniErrorText.swift */,
+				C1DD878723B9EB2F00418AD8 /* GuestJiniFieldError.swift */,
+				C1BB27FB23B766EE00E8E3F9 /* GuestJiniFieldLabel.swift */,
+				C1A73E1F23B744F900E9F5B8 /* GuestJiniHeaderLarge.swift */,
+				C1BB27F723B7644000E8E3F9 /* GuestJiniHeaderSmall.swift */,
+				C127164323B74F9D001E4C99 /* GuestJiniHyperlinkButtonText.swift */,
+				C1903E6423B73B2B00AD8F63 /* GuestJiniImageCard.swift */,
+				C127164923B75553001E4C99 /* GuestJiniInformationText.swift */,
+				C144F01A23B4816E00D6D218 /* GuestJiniLogoImage.swift */,
+				C1B1E42D23BE0C6C009E1E3B /* GuestJiniRegularTextBox.swift */,
+				C129E73823BB0509009144D6 /* GuestJiniRoundButtonSystemImage.swift */,
+				C144F01823B4814B00D6D218 /* GuestJiniRoundButtonText.swift */,
+				C129E73423BAFD60009144D6 /* GuestJiniSearchBox.swift */,
+				C1F8A70923BB14D5005158A5 /* GuestJiniSquareButtonSystemImage.swift */,
+				C129E73623BB008C009144D6 /* GuestJiniSubAction.swift */,
+				C144F01323B478BF00D6D218 /* GuestJiniTextBox.swift */,
+				C144F01C23B4819900D6D218 /* GuestJiniTitleText.swift */,
+				C1B1E42F23BE0D1F009E1E3B /* GuestJiniSecureTextBox.swift */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		C1AF643223B496A300375D32 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C1AF642223B4969700375D32 /* Roboto-MediumItalic.ttf */,
+				C1AF641D23B4969600375D32 /* Roboto-Regular.ttf */,
+				C1AF641C23B4969600375D32 /* Roboto-Thin.ttf */,
+				C1AF641E23B4969700375D32 /* Roboto-ThinItalic.ttf */,
+				C1AF641A23B4969600375D32 /* Roboto-Black.ttf */,
+				C1AF642123B4969700375D32 /* Roboto-BlackItalic.ttf */,
+				C1AF642023B4969700375D32 /* Roboto-Bold.ttf */,
+				C1AF642423B4969700375D32 /* Roboto-BoldItalic.ttf */,
+				C1AF642523B4969700375D32 /* Roboto-Italic.ttf */,
+				C1AF642323B4969700375D32 /* Roboto-Light.ttf */,
+				C1AF641F23B4969700375D32 /* Roboto-LightItalic.ttf */,
+				C1AF641B23B4969600375D32 /* Roboto-Medium.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C12EF5A323B223DD0024C22C /* GuestJini */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C12EF5D123B223DF0024C22C /* Build configuration list for PBXNativeTarget "GuestJini" */;
+			buildPhases = (
+				164D17A651F1D1B3C88379A2 /* [CP] Check Pods Manifest.lock */,
+				C12EF5A023B223DD0024C22C /* Sources */,
+				C12EF5A123B223DD0024C22C /* Frameworks */,
+				C12EF5A223B223DD0024C22C /* Resources */,
+				0BAE8C0787AB5F0F3E3DF19D /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GuestJini;
+			productName = GuestJini;
+			productReference = C12EF5A423B223DD0024C22C /* GuestJini.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C12EF5BC23B223DF0024C22C /* GuestJiniTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C12EF5D423B223DF0024C22C /* Build configuration list for PBXNativeTarget "GuestJiniTests" */;
+			buildPhases = (
+				9D6D678556D712D4B417ED53 /* [CP] Check Pods Manifest.lock */,
+				C12EF5B923B223DF0024C22C /* Sources */,
+				C12EF5BA23B223DF0024C22C /* Frameworks */,
+				C12EF5BB23B223DF0024C22C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C12EF5BF23B223DF0024C22C /* PBXTargetDependency */,
+			);
+			name = GuestJiniTests;
+			productName = GuestJiniTests;
+			productReference = C12EF5BD23B223DF0024C22C /* GuestJiniTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C12EF5C723B223DF0024C22C /* GuestJiniUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C12EF5D723B223DF0024C22C /* Build configuration list for PBXNativeTarget "GuestJiniUITests" */;
+			buildPhases = (
+				AC1FE4242100FF138CA36B17 /* [CP] Check Pods Manifest.lock */,
+				C12EF5C423B223DF0024C22C /* Sources */,
+				C12EF5C523B223DF0024C22C /* Frameworks */,
+				C12EF5C623B223DF0024C22C /* Resources */,
+				B2459D320CBC847779CA7C1F /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C12EF5CA23B223DF0024C22C /* PBXTargetDependency */,
+			);
+			name = GuestJiniUITests;
+			productName = GuestJiniUITests;
+			productReference = C12EF5C823B223DF0024C22C /* GuestJiniUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C12EF59C23B223DD0024C22C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "Prasanna Kumar Pete";
+				TargetAttributes = {
+					C12EF5A323B223DD0024C22C = {
+						CreatedOnToolsVersion = 11.3;
+					};
+					C12EF5BC23B223DF0024C22C = {
+						CreatedOnToolsVersion = 11.3;
+						TestTargetID = C12EF5A323B223DD0024C22C;
+					};
+					C12EF5C723B223DF0024C22C = {
+						CreatedOnToolsVersion = 11.3;
+						TestTargetID = C12EF5A323B223DD0024C22C;
+					};
+				};
+			};
+			buildConfigurationList = C12EF59F23B223DD0024C22C /* Build configuration list for PBXProject "GuestJini" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C12EF59B23B223DD0024C22C;
+			productRefGroup = C12EF5A523B223DD0024C22C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C12EF5A323B223DD0024C22C /* GuestJini */,
+				C12EF5BC23B223DF0024C22C /* GuestJiniTests */,
+				C12EF5C723B223DF0024C22C /* GuestJiniUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C12EF5A223B223DD0024C22C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C1AF642723B4969700375D32 /* Roboto-Medium.ttf in Resources */,
+				C1AF642923B4969700375D32 /* Roboto-Regular.ttf in Resources */,
+				C1AF642C23B4969700375D32 /* Roboto-Bold.ttf in Resources */,
+				C12EF5B723B223DF0024C22C /* LaunchScreen.storyboard in Resources */,
+				C1AF642E23B4969700375D32 /* Roboto-MediumItalic.ttf in Resources */,
+				C1AF642823B4969700375D32 /* Roboto-Thin.ttf in Resources */,
+				C1AF642A23B4969700375D32 /* Roboto-ThinItalic.ttf in Resources */,
+				C1AF643123B4969700375D32 /* Roboto-Italic.ttf in Resources */,
+				C1AF642D23B4969700375D32 /* Roboto-BlackItalic.ttf in Resources */,
+				C1AF642B23B4969700375D32 /* Roboto-LightItalic.ttf in Resources */,
+				C1AF642F23B4969700375D32 /* Roboto-Light.ttf in Resources */,
+				C12EF5B423B223DF0024C22C /* Preview Assets.xcassets in Resources */,
+				C12EF5B123B223DF0024C22C /* Assets.xcassets in Resources */,
+				C1AF643023B4969700375D32 /* Roboto-BoldItalic.ttf in Resources */,
+				C1AF642623B4969700375D32 /* Roboto-Black.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C12EF5BB23B223DF0024C22C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C12EF5C623B223DF0024C22C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0BAE8C0787AB5F0F3E3DF19D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GuestJini/Pods-GuestJini-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GuestJini/Pods-GuestJini-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GuestJini/Pods-GuestJini-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		164D17A651F1D1B3C88379A2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GuestJini-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9D6D678556D712D4B417ED53 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GuestJiniTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AC1FE4242100FF138CA36B17 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GuestJini-GuestJiniUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B2459D320CBC847779CA7C1F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GuestJini-GuestJiniUITests/Pods-GuestJini-GuestJiniUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GuestJini-GuestJiniUITests/Pods-GuestJini-GuestJiniUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GuestJini-GuestJiniUITests/Pods-GuestJini-GuestJiniUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C12EF5A023B223DD0024C22C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C1D0FFFF23B9D73700B93651 /* ViewRoutes.swift in Sources */,
+				C1F8A70C23BB16A2005158A5 /* ExploreSupport.swift in Sources */,
+				C1B1E43223BE1DD1009E1E3B /* TicketList.swift in Sources */,
+				C1BB27F623B75A6300E8E3F9 /* GuestJiniAlerBox.swift in Sources */,
+				C144F01723B4812600D6D218 /* GuestJiniButtonText.swift in Sources */,
+				C12C4EFE23B781C200CD4B8F /* LoginService.swift in Sources */,
+				C144F01223B477B100D6D218 /* CarouselImage.swift in Sources */,
+				C1903E6523B73B2B00AD8F63 /* GuestJiniImageCard.swift in Sources */,
+				C127164823B75409001E4C99 /* GuestJiniButtonSystemImagePlain.swift in Sources */,
+				C129E73523BAFD60009144D6 /* GuestJiniSearchBox.swift in Sources */,
+				C1E9E59223B740A300EB812F /* GuestJiniButtonSystemImage.swift in Sources */,
+				C12EF5A823B223DD0024C22C /* AppDelegate.swift in Sources */,
+				C1DD878823B9EB2F00418AD8 /* GuestJiniFieldError.swift in Sources */,
+				C144F01923B4814B00D6D218 /* GuestJiniRoundButtonText.swift in Sources */,
+				C1BB27F423B7578A00E8E3F9 /* OTPVerification.swift in Sources */,
+				C1B1E43623BE1EEB009E1E3B /* TicketsService.swift in Sources */,
+				C1BB27FA23B764A200E8E3F9 /* AppAccessRequest.swift in Sources */,
+				C1B1E43A23BE1F1B009E1E3B /* TicketResponse.swift in Sources */,
+				C1A73E1E23B744DF00E9F5B8 /* LoginScreen.swift in Sources */,
+				C1B1E43023BE0D1F009E1E3B /* GuestJiniSecureTextBox.swift in Sources */,
+				C127164A23B75553001E4C99 /* GuestJiniInformationText.swift in Sources */,
+				C1C74C3C23BA143E00FFA336 /* GuestJiniBottomBar.swift in Sources */,
+				C1A73E2023B744F900E9F5B8 /* GuestJiniHeaderLarge.swift in Sources */,
+				C144F02123B481C100D6D218 /* GuestJiniErrorText.swift in Sources */,
+				C17BBFC623BB22E600FD5A21 /* Articles.swift in Sources */,
+				C12EF5AD23B223DD0024C22C /* GuestJini.xcdatamodeld in Sources */,
+				C1B1E42E23BE0C6C009E1E3B /* GuestJiniRegularTextBox.swift in Sources */,
+				C1BB27FE23B7728000E8E3F9 /* ViewRouter.swift in Sources */,
+				C144F01B23B4816E00D6D218 /* GuestJiniLogoImage.swift in Sources */,
+				C1D0000123B9D83400B93651 /* EndPoints.swift in Sources */,
+				C12EF5AF23B223DD0024C22C /* ContentView.swift in Sources */,
+				C1D0000323B9DC2A00B93651 /* AuthData.swift in Sources */,
+				C129E73923BB0509009144D6 /* GuestJiniRoundButtonSystemImage.swift in Sources */,
+				C127164423B74F9D001E4C99 /* GuestJiniHyperlinkButtonText.swift in Sources */,
+				C1BB27FC23B766EE00E8E3F9 /* GuestJiniFieldLabel.swift in Sources */,
+				C12EF5AA23B223DD0024C22C /* SceneDelegate.swift in Sources */,
+				C15C726023BA18CD0069CB6E /* HomePage.swift in Sources */,
+				C1BB27F823B7644000E8E3F9 /* GuestJiniHeaderSmall.swift in Sources */,
+				C1B1E43823BE1EFF009E1E3B /* Ticket.swift in Sources */,
+				C1A73E1C23B7448200E9F5B8 /* LandingScreen.swift in Sources */,
+				C144F01D23B4819900D6D218 /* GuestJiniTitleText.swift in Sources */,
+				C1D0000723B9E45000B93651 /* Converters.swift in Sources */,
+				C1F8A70A23BB14D5005158A5 /* GuestJiniSquareButtonSystemImage.swift in Sources */,
+				C1D0000523B9E3EA00B93651 /* Vlidators.swift in Sources */,
+				C144F01F23B481B400D6D218 /* GuestJiniDescriptionText.swift in Sources */,
+				C1C74C3E23BA146700FFA336 /* GuestJiniBottomBarItem.swift in Sources */,
+				C1B1E43423BE1DDD009E1E3B /* TicketUI.swift in Sources */,
+				C144F02323B483CB00D6D218 /* FontExtension.swift in Sources */,
+				C129E73723BB008C009144D6 /* GuestJiniSubAction.swift in Sources */,
+				C144F01423B478BF00D6D218 /* GuestJiniTextBox.swift in Sources */,
+				C127164623B751CB001E4C99 /* ForgotPassword.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C12EF5B923B223DF0024C22C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C12EF5C223B223DF0024C22C /* GuestJiniTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C12EF5C423B223DF0024C22C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C12EF5CD23B223DF0024C22C /* GuestJiniUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C12EF5BF23B223DF0024C22C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C12EF5A323B223DD0024C22C /* GuestJini */;
+			targetProxy = C12EF5BE23B223DF0024C22C /* PBXContainerItemProxy */;
+		};
+		C12EF5CA23B223DF0024C22C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C12EF5A323B223DD0024C22C /* GuestJini */;
+			targetProxy = C12EF5C923B223DF0024C22C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C12EF5B523B223DF0024C22C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C12EF5B623B223DF0024C22C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C12EF5CF23B223DF0024C22C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C12EF5D023B223DF0024C22C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C12EF5D223B223DF0024C22C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0971977A82F850DE6D4E2CBC /* Pods-GuestJini.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"GuestJini/Preview Content\"";
+				DEVELOPMENT_TEAM = 9UEK3YG88G;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = GuestJini/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.carmel.iOS.GuestJini;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C12EF5D323B223DF0024C22C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89AA4E4DDCE18C03A5807E40 /* Pods-GuestJini.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"GuestJini/Preview Content\"";
+				DEVELOPMENT_TEAM = 9UEK3YG88G;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = GuestJini/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.carmel.iOS.GuestJini;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C12EF5D523B223DF0024C22C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21967EB9F5795674DBF396CD /* Pods-GuestJiniTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = GuestJiniTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.carmel.iOS.GuestJiniTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GuestJini.app/GuestJini";
+			};
+			name = Debug;
+		};
+		C12EF5D623B223DF0024C22C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E68783AD19DEBF01DE1FFD4B /* Pods-GuestJiniTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = GuestJiniTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.carmel.iOS.GuestJiniTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GuestJini.app/GuestJini";
+			};
+			name = Release;
+		};
+		C12EF5D823B223DF0024C22C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA7E24932EFB1E938F5C463B /* Pods-GuestJini-GuestJiniUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = GuestJiniUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.carmel.iOS.GuestJiniUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GuestJini;
+			};
+			name = Debug;
+		};
+		C12EF5D923B223DF0024C22C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE9306028842963B3966FCE4 /* Pods-GuestJini-GuestJiniUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = GuestJiniUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.carmel.iOS.GuestJiniUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GuestJini;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C12EF59F23B223DD0024C22C /* Build configuration list for PBXProject "GuestJini" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C12EF5CF23B223DF0024C22C /* Debug */,
+				C12EF5D023B223DF0024C22C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C12EF5D123B223DF0024C22C /* Build configuration list for PBXNativeTarget "GuestJini" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C12EF5D223B223DF0024C22C /* Debug */,
+				C12EF5D323B223DF0024C22C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C12EF5D423B223DF0024C22C /* Build configuration list for PBXNativeTarget "GuestJiniTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C12EF5D523B223DF0024C22C /* Debug */,
+				C12EF5D623B223DF0024C22C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C12EF5D723B223DF0024C22C /* Build configuration list for PBXNativeTarget "GuestJiniUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C12EF5D823B223DF0024C22C /* Debug */,
+				C12EF5D923B223DF0024C22C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C12EF5AB23B223DD0024C22C /* GuestJini.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C12EF5AC23B223DD0024C22C /* GuestJini.xcdatamodel */,
+			);
+			currentVersion = C12EF5AC23B223DD0024C22C /* GuestJini.xcdatamodel */;
+			path = GuestJini.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = C12EF59C23B223DD0024C22C /* Project object */;
+}

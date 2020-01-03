@@ -1,0 +1,6 @@
+framework module Pods_GuestJini_GuestJiniUITests {
+  umbrella header "Pods-GuestJini-GuestJiniUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

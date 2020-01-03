@@ -2,6 +2,7 @@ package com.carmel.guestjini.booking.components;
 
 import com.carmel.guestjini.booking.config.YAMLConfig;
 import com.carmel.guestjini.booking.model.DTO.AccountTicket;
+import com.carmel.guestjini.booking.model.Guest;
 import com.carmel.guestjini.booking.response.AccountTicketResponse;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
@@ -22,7 +23,7 @@ public class AccountTicketService {
     @Autowired
     YAMLConfig yamlConfig;
 
-    public AccountTicketResponse saveAccountTicket(AccountTicket accountTicket) throws Exception{
+    public AccountTicketResponse saveAccountTicket(AccountTicket accountTicket) throws Exception {
         try {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             OAuth2AuthenticationDetails oAuth2AuthenticationDetails = (OAuth2AuthenticationDetails) auth.getDetails();
@@ -44,7 +45,7 @@ public class AccountTicketService {
         }
     }
 
-    public AccountTicketResponse deleteAccountTicketsByGuest(String guestId) throws Exception{
+    public AccountTicketResponse deleteAccountTicketsByGuest(String guestId) throws Exception {
         try {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             OAuth2AuthenticationDetails oAuth2AuthenticationDetails = (OAuth2AuthenticationDetails) auth.getDetails();
@@ -59,6 +60,53 @@ public class AccountTicketService {
                     restTemplate.exchange(yamlConfig.getAccountsServiceURL() + "/account-tickets//delete-account-tickets-by-guest",
                             HttpMethod.POST, entity, AccountTicketResponse.class);
             return result.getBody();
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
+    public AccountTicketResponse generateMonthRentInvoice(Guest guest) throws Exception {
+        try {
+
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            OAuth2AuthenticationDetails oAuth2AuthenticationDetails = (OAuth2AuthenticationDetails) auth.getDetails();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.set("Authorization", "Bearer " + oAuth2AuthenticationDetails.getTokenValue());
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            ObjectMapper objectMapper = new ObjectMapper();
+            String postJsonString = objectMapper.writeValueAsString(guest);
+            JSONParser parser = new JSONParser(JSONParser.MODE_PERMISSIVE);
+            JSONObject postData = (JSONObject) parser.parse(postJsonString);
+            HttpEntity<String> entity = new HttpEntity<>(postData.toJSONString(), headers);
+            ResponseEntity<AccountTicketResponse> result =
+                    restTemplate.exchange(yamlConfig.getAccountsServiceURL() + "/account-tickets//generate-month-invoices",
+                            HttpMethod.POST, entity, AccountTicketResponse.class);
+            return result.getBody();
+
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
+    public AccountTicketResponse generateDayRentInvoice(Guest guest) throws Exception {
+        try {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            OAuth2AuthenticationDetails oAuth2AuthenticationDetails = (OAuth2AuthenticationDetails) auth.getDetails();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.set("Authorization", "Bearer " + oAuth2AuthenticationDetails.getTokenValue());
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            ObjectMapper objectMapper = new ObjectMapper();
+            String postJsonString = objectMapper.writeValueAsString(guest);
+            JSONParser parser = new JSONParser(JSONParser.MODE_PERMISSIVE);
+            JSONObject postData = (JSONObject) parser.parse(postJsonString);
+            HttpEntity<String> entity = new HttpEntity<>(postData.toJSONString(), headers);
+            ResponseEntity<AccountTicketResponse> result =
+                    restTemplate.exchange(yamlConfig.getAccountsServiceURL() + "/account-tickets/generate-day-invoices",
+                            HttpMethod.POST, entity, AccountTicketResponse.class);
+            return result.getBody();
+
         } catch (Exception ex) {
             throw ex;
         }

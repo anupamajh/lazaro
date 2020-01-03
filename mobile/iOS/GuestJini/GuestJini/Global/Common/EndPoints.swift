@@ -1,0 +1,27 @@
+//
+//  EndPoints.swift
+//  GuestJini
+//
+//  Created by Prasanna Kumar Pete on 30/12/19.
+//  Copyright © 2019 Prasanna Kumar Pete. All rights reserved.
+//
+
+import Foundation
+
+class EndPoints{
+    
+    static var CLIENT_ID = "21e43c55-28ef-478a-ae65-dc896e5eaa34"
+    static var CLIENT_SECRETE = "P@ssw0rd"
+    
+    
+    static var END_POINT_URL = "http://139.59.32.238:8000"
+    static var AUTHORISATION_URL = END_POINT_URL + "/auth/oauth/token"
+    
+    
+    //TICKET
+    static var TICKET_SAVE_URL = END_POINT_URL + "/helpdesk/task-ticket/save"
+    static var TICKET_GET_URL = END_POINT_URL + "/helpdesk/task-ticket/get"
+    static var TICKET_LIST_URL = END_POINT_URL + "/helpdesk/task-ticket/get-all"
+    
+    
+}

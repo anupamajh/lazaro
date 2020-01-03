@@ -24,6 +24,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -534,7 +535,7 @@ public class BookingController {
     }
 
     @RequestMapping(value = "/checkin")
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS)
     public BookingResponse checkIn(@RequestBody Map<String, String> formData) {
         UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -568,6 +569,7 @@ public class BookingController {
         }
         return bookingResponse;
     }
+
     @RequestMapping(value = "/undo-checkin")
     @Transactional(rollbackFor = Exception.class)
     public BookingResponse undoCheckIn(@RequestBody Map<String, String> formData) {
@@ -602,7 +604,8 @@ public class BookingController {
         }
         return bookingResponse;
     }
-        @RequestMapping(value = "/save-payment-receipts")
+
+    @RequestMapping(value = "/save-payment-receipts")
     @Transactional(rollbackFor = Exception.class)
     public AccountReceiptsResponse savePaymentReceipts(@RequestBody AccountReceipts accountReceipts) {
         AccountReceiptsResponse accountReceiptsResponse;
