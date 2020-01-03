@@ -46,26 +46,26 @@ struct OTPVerification: View {
                     }.padding(.horizontal,35)
                     HStack{
                         Spacer()
-                        GuestJiniTextBox.plain(label: "", text: self.$OTPDigit1)
+                        GuestJiniRegularTextBox(placeHolderText: "", text: self.$OTPDigit1)
                             .padding(.horizontal, 20)
-                        GuestJiniTextBox.plain(label: "", text: self.$OTPDigit1)
-                       .padding(.horizontal, 20)
-                        GuestJiniTextBox.plain(label: "", text: self.$OTPDigit1)
-                        .padding(.horizontal, 20)
-                        GuestJiniTextBox.plain(label: "", text: self.$OTPDigit1)
-                        .padding(.horizontal, 20)
+                        GuestJiniRegularTextBox(placeHolderText: "", text: self.$OTPDigit2)
+                            .padding(.horizontal, 20)
+                        GuestJiniRegularTextBox(placeHolderText: "", text: self.$OTPDigit3)
+                            .padding(.horizontal, 20)
+                        GuestJiniRegularTextBox(placeHolderText: "", text: self.$OTPDigit3)
+                            .padding(.horizontal, 20)
                         Spacer()
                     }
                     HStack{
                         Spacer()
-                                              Button(action: {
-                                                  // What to perform
-                                              }) {
-                                                  GuestJiniHyperlinkButtonText(buttonText: "Resend OTP")
-                                                  
-                                              }
+                        Button(action: {
+                            // What to perform
+                        }) {
+                            GuestJiniHyperlinkButtonText(buttonText: "Resend OTP")
+                            
+                        }
                         Spacer()
-                                              
+                        
                     }
                     HStack{
                         Spacer()

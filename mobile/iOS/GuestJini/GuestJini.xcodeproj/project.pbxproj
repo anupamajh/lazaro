@@ -27,7 +27,6 @@
 		C12EF5C223B223DF0024C22C /* GuestJiniTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12EF5C123B223DF0024C22C /* GuestJiniTests.swift */; };
 		C12EF5CD23B223DF0024C22C /* GuestJiniUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12EF5CC23B223DF0024C22C /* GuestJiniUITests.swift */; };
 		C144F01223B477B100D6D218 /* CarouselImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F01123B477B100D6D218 /* CarouselImage.swift */; };
-		C144F01423B478BF00D6D218 /* GuestJiniTextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F01323B478BF00D6D218 /* GuestJiniTextBox.swift */; };
 		C144F01723B4812600D6D218 /* GuestJiniButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F01623B4812600D6D218 /* GuestJiniButtonText.swift */; };
 		C144F01923B4814B00D6D218 /* GuestJiniRoundButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F01823B4814B00D6D218 /* GuestJiniRoundButtonText.swift */; };
 		C144F01B23B4816E00D6D218 /* GuestJiniLogoImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F01A23B4816E00D6D218 /* GuestJiniLogoImage.swift */; };
@@ -60,6 +59,8 @@
 		C1B1E43623BE1EEB009E1E3B /* TicketsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E43523BE1EEB009E1E3B /* TicketsService.swift */; };
 		C1B1E43823BE1EFF009E1E3B /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E43723BE1EFF009E1E3B /* Ticket.swift */; };
 		C1B1E43A23BE1F1B009E1E3B /* TicketResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E43923BE1F1B009E1E3B /* TicketResponse.swift */; };
+		C1B1E43C23BEFA23009E1E3B /* GuestJiniTextArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E43B23BEFA23009E1E3B /* GuestJiniTextArea.swift */; };
+		C1B1E43E23BF0304009E1E3B /* TicketRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E43D23BF0304009E1E3B /* TicketRow.swift */; };
 		C1BB27F423B7578A00E8E3F9 /* OTPVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BB27F323B7578A00E8E3F9 /* OTPVerification.swift */; };
 		C1BB27F623B75A6300E8E3F9 /* GuestJiniAlerBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BB27F523B75A6300E8E3F9 /* GuestJiniAlerBox.swift */; };
 		C1BB27F823B7644000E8E3F9 /* GuestJiniHeaderSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BB27F723B7644000E8E3F9 /* GuestJiniHeaderSmall.swift */; };
@@ -128,7 +129,6 @@
 		C12EF5CC23B223DF0024C22C /* GuestJiniUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniUITests.swift; sourceTree = "<group>"; };
 		C12EF5CE23B223DF0024C22C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C144F01123B477B100D6D218 /* CarouselImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselImage.swift; sourceTree = "<group>"; };
-		C144F01323B478BF00D6D218 /* GuestJiniTextBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniTextBox.swift; sourceTree = "<group>"; };
 		C144F01623B4812600D6D218 /* GuestJiniButtonText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniButtonText.swift; sourceTree = "<group>"; };
 		C144F01823B4814B00D6D218 /* GuestJiniRoundButtonText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniRoundButtonText.swift; sourceTree = "<group>"; };
 		C144F01A23B4816E00D6D218 /* GuestJiniLogoImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniLogoImage.swift; sourceTree = "<group>"; };
@@ -161,6 +161,8 @@
 		C1B1E43523BE1EEB009E1E3B /* TicketsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsService.swift; sourceTree = "<group>"; };
 		C1B1E43723BE1EFF009E1E3B /* Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticket.swift; sourceTree = "<group>"; };
 		C1B1E43923BE1F1B009E1E3B /* TicketResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketResponse.swift; sourceTree = "<group>"; };
+		C1B1E43B23BEFA23009E1E3B /* GuestJiniTextArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniTextArea.swift; sourceTree = "<group>"; };
+		C1B1E43D23BF0304009E1E3B /* TicketRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketRow.swift; sourceTree = "<group>"; };
 		C1BB27F323B7578A00E8E3F9 /* OTPVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerification.swift; sourceTree = "<group>"; };
 		C1BB27F523B75A6300E8E3F9 /* GuestJiniAlerBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniAlerBox.swift; sourceTree = "<group>"; };
 		C1BB27F723B7644000E8E3F9 /* GuestJiniHeaderSmall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniHeaderSmall.swift; sourceTree = "<group>"; };
@@ -426,9 +428,10 @@
 				C129E73423BAFD60009144D6 /* GuestJiniSearchBox.swift */,
 				C1F8A70923BB14D5005158A5 /* GuestJiniSquareButtonSystemImage.swift */,
 				C129E73623BB008C009144D6 /* GuestJiniSubAction.swift */,
-				C144F01323B478BF00D6D218 /* GuestJiniTextBox.swift */,
 				C144F01C23B4819900D6D218 /* GuestJiniTitleText.swift */,
 				C1B1E42F23BE0D1F009E1E3B /* GuestJiniSecureTextBox.swift */,
+				C1B1E43B23BEFA23009E1E3B /* GuestJiniTextArea.swift */,
+				C1B1E43D23BF0304009E1E3B /* TicketRow.swift */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -706,6 +709,7 @@
 				C1D0FFFF23B9D73700B93651 /* ViewRoutes.swift in Sources */,
 				C1F8A70C23BB16A2005158A5 /* ExploreSupport.swift in Sources */,
 				C1B1E43223BE1DD1009E1E3B /* TicketList.swift in Sources */,
+				C1B1E43C23BEFA23009E1E3B /* GuestJiniTextArea.swift in Sources */,
 				C1BB27F623B75A6300E8E3F9 /* GuestJiniAlerBox.swift in Sources */,
 				C144F01723B4812600D6D218 /* GuestJiniButtonText.swift in Sources */,
 				C12C4EFE23B781C200CD4B8F /* LoginService.swift in Sources */,
@@ -740,6 +744,7 @@
 				C1BB27FC23B766EE00E8E3F9 /* GuestJiniFieldLabel.swift in Sources */,
 				C12EF5AA23B223DD0024C22C /* SceneDelegate.swift in Sources */,
 				C15C726023BA18CD0069CB6E /* HomePage.swift in Sources */,
+				C1B1E43E23BF0304009E1E3B /* TicketRow.swift in Sources */,
 				C1BB27F823B7644000E8E3F9 /* GuestJiniHeaderSmall.swift in Sources */,
 				C1B1E43823BE1EFF009E1E3B /* Ticket.swift in Sources */,
 				C1A73E1C23B7448200E9F5B8 /* LandingScreen.swift in Sources */,
@@ -752,7 +757,6 @@
 				C1B1E43423BE1DDD009E1E3B /* TicketUI.swift in Sources */,
 				C144F02323B483CB00D6D218 /* FontExtension.swift in Sources */,
 				C129E73723BB008C009144D6 /* GuestJiniSubAction.swift in Sources */,
-				C144F01423B478BF00D6D218 /* GuestJiniTextBox.swift in Sources */,
 				C127164623B751CB001E4C99 /* ForgotPassword.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -966,8 +970,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9UEK3YG88G;
 				INFOPLIST_FILE = GuestJiniTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -989,8 +994,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9UEK3YG88G;
 				INFOPLIST_FILE = GuestJiniTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1011,8 +1017,9 @@
 			baseConfigurationReference = BA7E24932EFB1E938F5C463B /* Pods-GuestJini-GuestJiniUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9UEK3YG88G;
 				INFOPLIST_FILE = GuestJiniUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1032,8 +1039,9 @@
 			baseConfigurationReference = AE9306028842963B3966FCE4 /* Pods-GuestJini-GuestJiniUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9UEK3YG88G;
 				INFOPLIST_FILE = GuestJiniUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

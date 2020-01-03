@@ -27,4 +27,5 @@ class Ticket: Decodable, Encodable {
     public var ticketStatus:Int? = 0
     public var requesterType:Int? = 0
     public var requesterId:String? = ""
+    public var creationTime:String? = ""
 }

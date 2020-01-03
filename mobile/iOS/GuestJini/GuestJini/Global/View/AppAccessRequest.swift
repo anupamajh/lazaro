@@ -48,13 +48,13 @@ struct AppAccessRequest: View {
                         GuestJiniFieldLabel(labelText: "REGISTERED EMAIL")
                         Spacer()
                     }
-                    GuestJiniTextBox.plain(label: "email@ddress.com", text: self.$email)
+                    GuestJiniRegularTextBox(placeHolderText:  "email@ddress.com", text: self.$email)
                         .padding(.horizontal)
                     HStack{
                         GuestJiniFieldLabel(labelText: "REGISTERED MOBILE NUMBER")
                         Spacer()
                     }
-                    GuestJiniTextBox.plain(label: "Mobile number", text: self.$mobileNumber)
+                    GuestJiniRegularTextBox(placeHolderText: "Mobile number", text: self.$mobileNumber)
                         .padding(.horizontal)
                     
                     

@@ -37,7 +37,7 @@ struct ForgotPassword: View {
                     HStack{
                         GuestJiniErrorText(message:"This mobile number is not registered with GuestJini ")
                     }.padding()
-                    GuestJiniTextBox.plain(label: "Email or Mobile number", text: self.$loginId)
+                    GuestJiniRegularTextBox(placeHolderText: "Email or Mobile number", text: self.$loginId)
                         .padding(.horizontal)
                     
                     HStack{
