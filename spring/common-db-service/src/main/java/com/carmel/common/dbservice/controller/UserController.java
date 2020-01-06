@@ -1,5 +1,6 @@
 package com.carmel.common.dbservice.controller;
 
+import com.carmel.common.dbservice.component.MailClient;
 import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.User;
 import com.carmel.common.dbservice.model.UserInfo;
@@ -43,6 +44,9 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    MailClient mailClient;
+
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public UserResponse save(@Valid @RequestBody User user) {
@@ -66,7 +70,7 @@ public class UserController {
                     user.setCreatedBy(userInfo.getId());
                     user.setCreationTime(new Date());
                     user.setClient(userInfo.getClient());
-                }else{
+                } else {
                     Optional<User> optionalUser = userService.findById(user.getId());
                     user.setPassword(optionalUser.get().getPassword());
                     user.setLastModifiedBy(userInfo.getId());
@@ -190,7 +194,7 @@ public class UserController {
             int pageNumber = formData.get("current_page") == null ? 0 : Integer.parseInt(formData.get("current_page"));
             int pageSize = formData.get("page_size") == null ? 10 : Integer.parseInt(formData.get("page_size"));
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("fullName"));
-            Page<User> page = userService.findAllByClient(pageable,userInfo.getClient());
+            Page<User> page = userService.findAllByClient(pageable, userInfo.getClient());
             usersResponse.setTotalRecords(page.getTotalElements());
             usersResponse.setTotalPages(page.getTotalPages());
             usersResponse.setUserList(page.getContent());
@@ -207,7 +211,6 @@ public class UserController {
     }
 
 
-
     @RequestMapping(value = "/search-users", method = RequestMethod.POST)
     public UsersResponse searchPaginated(@RequestBody Map<String, String> formData) {
         UserInfo userInfo = userInformation.getUserInfo();
@@ -222,10 +225,10 @@ public class UserController {
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("userName"));
             Page<User> page;
             if (searchText == null) {
-                page = userService.findAllByClient(pageable,userInfo.getClient());
+                page = userService.findAllByClient(pageable, userInfo.getClient());
             } else {
                 page = userService
-                        .findAll(textInAllColumns(searchText,userInfo.getClient()), pageable);
+                        .findAll(textInAllColumns(searchText, userInfo.getClient()), pageable);
             }
             orgResponse.setTotalRecords(page.getTotalElements());
             orgResponse.setTotalPages(page.getTotalPages());
@@ -258,8 +261,9 @@ public class UserController {
             return false;
         }
     }
-    @GetMapping("/me")
-    public UserInfo user(Principal principal) {
+
+    @GetMapping("/old-me")
+    public UserInfo oldUser(Principal principal) {
         String userName = principal.getName();
         Optional<User> optionalUser = userService.findByUserName(userName);
         optionalUser.orElseThrow(() ->
@@ -269,4 +273,22 @@ public class UserController {
         return userInfo;
     }
 
+    @GetMapping("/me")
+    public UserInfo user(Principal principal) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        return userInfo;
+    }
+
+    @RequestMapping(value = "/reset-password", method = RequestMethod.POST)
+    public UserInfo resetPassword(@RequestBody Map<String, String> formData) {
+        String userName = formData.get("user_name");
+        Optional<User> optionalUser = userService.findByUserName(userName);
+        optionalUser.orElseThrow(() ->
+                new UsernameNotFoundException("Cannot find the logged in principal, Please contact administrator"));
+        UserInfo userInfo = new UserInfo(optionalUser.get());
+
+        mailClient.prepareAndSend(userInfo.getUserName(), "Reset password link here");
+
+        return userInfo;
+    }
 }

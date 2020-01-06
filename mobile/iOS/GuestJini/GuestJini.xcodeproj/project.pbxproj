@@ -12,6 +12,9 @@
 		C10ACFF423BF78EE00C7CB70 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10ACFF323BF78EE00C7CB70 /* NotificationsView.swift */; };
 		C10ACFF623BF7B3700C7CB70 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10ACFF523BF7B3700C7CB70 /* WebView.swift */; };
 		C10ACFF823BF7BDF00C7CB70 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10ACFF723BF7BDF00C7CB70 /* HelpView.swift */; };
+		C10ACFFD23C2ECFD00C7CB70 /* ForgotPasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10ACFFC23C2ECFD00C7CB70 /* ForgotPasswordService.swift */; };
+		C10ACFFF23C30CE100C7CB70 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10ACFFE23C30CE100C7CB70 /* UserInfo.swift */; };
+		C10AD00123C3155B00C7CB70 /* UserInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10AD00023C3155B00C7CB70 /* UserInfoService.swift */; };
 		C127164423B74F9D001E4C99 /* GuestJiniHyperlinkButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C127164323B74F9D001E4C99 /* GuestJiniHyperlinkButtonText.swift */; };
 		C127164623B751CB001E4C99 /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C127164523B751CB001E4C99 /* ForgotPassword.swift */; };
 		C127164823B75409001E4C99 /* GuestJiniButtonSystemImagePlain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C127164723B75409001E4C99 /* GuestJiniButtonSystemImagePlain.swift */; };
@@ -119,6 +122,9 @@
 		C10ACFF323BF78EE00C7CB70 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		C10ACFF523BF7B3700C7CB70 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		C10ACFF723BF7BDF00C7CB70 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
+		C10ACFFC23C2ECFD00C7CB70 /* ForgotPasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordService.swift; sourceTree = "<group>"; };
+		C10ACFFE23C30CE100C7CB70 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		C10AD00023C3155B00C7CB70 /* UserInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoService.swift; sourceTree = "<group>"; };
 		C127164323B74F9D001E4C99 /* GuestJiniHyperlinkButtonText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniHyperlinkButtonText.swift; sourceTree = "<group>"; };
 		C127164523B751CB001E4C99 /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
 		C127164723B75409001E4C99 /* GuestJiniButtonSystemImagePlain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniButtonSystemImagePlain.swift; sourceTree = "<group>"; };
@@ -258,6 +264,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C10ACFFB23C2ECC700C7CB70 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				C12C4EFD23B781C200CD4B8F /* LoginService.swift */,
+				C10ACFFC23C2ECFD00C7CB70 /* ForgotPasswordService.swift */,
+				C10AD00023C3155B00C7CB70 /* UserInfoService.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		C12EF59B23B223DD0024C22C = {
 			isa = PBXGroup;
 			children = (
@@ -374,6 +390,7 @@
 				C17BBFC523BB22E600FD5A21 /* Articles.swift */,
 				C1B1E43723BE1EFF009E1E3B /* Ticket.swift */,
 				C1B1E43923BE1F1B009E1E3B /* TicketResponse.swift */,
+				C10ACFFE23C30CE100C7CB70 /* UserInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -390,8 +407,8 @@
 		C12EF5E123B225040024C22C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C10ACFFB23C2ECC700C7CB70 /* User */,
 				C1BB7D5C23BF3F0000BA410C /* Ticket */,
-				C12C4EFD23B781C200CD4B8F /* LoginService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -755,9 +772,11 @@
 				C1B1E43C23BEFA23009E1E3B /* GuestJiniTextArea.swift in Sources */,
 				C1BB27F623B75A6300E8E3F9 /* GuestJiniAlerBox.swift in Sources */,
 				C144F01723B4812600D6D218 /* GuestJiniButtonText.swift in Sources */,
+				C10ACFFF23C30CE100C7CB70 /* UserInfo.swift in Sources */,
 				C12C4EFE23B781C200CD4B8F /* LoginService.swift in Sources */,
 				C1BB7D5923BF3A4000BA410C /* TicketListService.swift in Sources */,
 				C144F01223B477B100D6D218 /* CarouselImage.swift in Sources */,
+				C10ACFFD23C2ECFD00C7CB70 /* ForgotPasswordService.swift in Sources */,
 				C1903E6523B73B2B00AD8F63 /* GuestJiniImageCard.swift in Sources */,
 				C1BB7D6023BF418600BA410C /* TicketView.swift in Sources */,
 				C127164823B75409001E4C99 /* GuestJiniButtonSystemImagePlain.swift in Sources */,
@@ -787,6 +806,7 @@
 				C144F01B23B4816E00D6D218 /* GuestJiniLogoImage.swift in Sources */,
 				C1D0000123B9D83400B93651 /* EndPoints.swift in Sources */,
 				C12EF5AF23B223DD0024C22C /* ContentView.swift in Sources */,
+				C10AD00123C3155B00C7CB70 /* UserInfoService.swift in Sources */,
 				C1D0000323B9DC2A00B93651 /* AuthData.swift in Sources */,
 				C129E73923BB0509009144D6 /* GuestJiniRoundButtonSystemImage.swift in Sources */,
 				C127164423B74F9D001E4C99 /* GuestJiniHyperlinkButtonText.swift in Sources */,

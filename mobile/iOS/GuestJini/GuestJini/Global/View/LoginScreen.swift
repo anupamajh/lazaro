@@ -101,12 +101,12 @@ struct LoginScreen: View {
                     }
                     HStack{
                         Spacer()
-                        GuestJiniDescriptionText(description: "Don't Have account yet?")
+                       /* GuestJiniDescriptionText(description: "Don't Have account yet?")
                         Button(action: {
                             // What to perform
                         }) {
                             GuestJiniHyperlinkButtonText(buttonText: "Get one now")
-                        }.offset(x: -15)
+                        }.offset(x: -15) */
                         Spacer()
                     }.padding()
                 }

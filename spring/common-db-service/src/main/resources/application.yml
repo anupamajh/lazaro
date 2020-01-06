@@ -17,6 +17,21 @@ spring:
     database: mysql
   application:
     name: common-db-service
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: amazon@carmelsolutions.net
+    password: P@ssw0rd
+    properties:
+      mail:
+        smtp:
+          auth: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+          starttls:
+            enable: true
+
 logging:
   level:
     root: info

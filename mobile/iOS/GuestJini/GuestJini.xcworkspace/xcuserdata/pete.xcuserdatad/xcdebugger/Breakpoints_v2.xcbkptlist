@@ -7,64 +7,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0DABCC5A-6C1B-4693-B372-749526499AE1"
+            uuid = "5B6E6E7F-E8DE-44DD-955C-B7D8D51FED8C"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GuestJini/Global/View/TicketUI.swift"
+            filePath = "GuestJini/Global/Services/User/UserInfoService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B1B04FAD-E334-4780-ACC1-9714D69D3723"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GuestJini/Global/Services/Ticket/TicketSaveService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "saveTicket(ticketData:completionHandler:)"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "getUserInfo(completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7088E552-7351-4C8E-B0C7-84129A4341D4"
+            uuid = "347C11F4-970A-46D6-B82F-A5BBBA9A0358"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GuestJini/Global/Services/Ticket/TicketSaveService.swift"
+            filePath = "GuestJini/Global/Services/User/UserInfoService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "saveTicket(ticketData:completionHandler:)"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "getUserInfo(completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CE7566FE-79E8-436E-BCD5-9C0DAA72D819"
+            uuid = "E053AC38-379E-44F5-B86E-18FA28D6122F"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GuestJini/Global/Services/Ticket/TicketSaveService.swift"
+            filePath = "GuestJini/Global/Services/User/UserInfoService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "saveTicket(ticketData:completionHandler:)"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "getUserInfo(completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

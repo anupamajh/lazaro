@@ -22,44 +22,49 @@ struct SettingsView: View {
                     }.padding(.horizontal)
                     
                     Button(action: {
-                         self.viewRouter.currentPage = ViewRoutes.NOTIFICATION_VIEW
+                        self.viewRouter.currentPage = ViewRoutes.NOTIFICATION_VIEW
+                    }) {
+                        GuestJiniSettingMenuItem(imageName: "bell", menuText: "Notifications")
+                        
+                    }.padding(.horizontal)
+                    
+                    /*
+                     Button(action: {
+                     self.viewRouter.currentPage = ViewRoutes.HOME_PAGE
                      }) {
-                         GuestJiniSettingMenuItem(imageName: "bell", menuText: "Notifications")
-                         
+                     GuestJiniSettingMenuItem(imageName: "gear", menuText: "Settings")
+                     
                      }.padding(.horizontal)
-
-                  /*
-                    Button(action: {
-                         self.viewRouter.currentPage = ViewRoutes.HOME_PAGE
+                     
+                     
+                     Button(action: {
+                     self.viewRouter.currentPage = ViewRoutes.HOME_PAGE
                      }) {
-                         GuestJiniSettingMenuItem(imageName: "gear", menuText: "Settings")
-                         
+                     GuestJiniSettingMenuItem(imageName: "bag", menuText: "Change Password")
+                     
                      }.padding(.horizontal)
-
+                     */
                     
                     Button(action: {
-                         self.viewRouter.currentPage = ViewRoutes.HOME_PAGE
-                     }) {
-                         GuestJiniSettingMenuItem(imageName: "bag", menuText: "Change Password")
-                         
-                     }.padding(.horizontal)
-*/
+                        self.viewRouter.currentPage = ViewRoutes.HELP_VIEW
+                    }) {
+                        GuestJiniSettingMenuItem(imageName: "questionmark.circle", menuText: "Help")
+                        
+                    }.padding(.horizontal)
+                    
                     
                     Button(action: {
-                         self.viewRouter.currentPage = ViewRoutes.HELP_VIEW
-                     }) {
-                         GuestJiniSettingMenuItem(imageName: "questionmark.circle", menuText: "Help")
-                         
-                     }.padding(.horizontal)
-
+                        UserDefaults.standard.set(false, forKey: "isLoggedIn")
+                        UserDefaults.standard.set("", forKey: "access_token")
+                        UserDefaults.standard.set("", forKey: "refresh_token")
+                        UserDefaults.standard.set("", forKey: "token_type")
+                        UserDefaults.standard.set("", forKey: "expires_in")
+                        
+                    }) {
+                        GuestJiniSettingMenuItem(imageName: "power", menuText: "Log out")
+                        
+                    }.padding(.horizontal)
                     
-                    Button(action: {
-                         self.viewRouter.currentPage = ViewRoutes.HOME_PAGE
-                     }) {
-                         GuestJiniSettingMenuItem(imageName: "power", menuText: "Log out")
-                         
-                     }.padding(.horizontal)
-
                 }.frame(width: geometry.size.width, height: geometry.size.height-85, alignment: .top)
                     .padding()
                 Divider()
