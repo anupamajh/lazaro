@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".HomePage"
+    tools:showIn="@layout/activity_home_page"
+    android:id="@+id/home_page"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/home_page_header_wrap"
+        app:layout_constraintTop_toTopOf="@id/home_page"
+        >
+
+        <TextView
+            android:id="@+id/header_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="We’re here to help you"
+            android:textColor="@color/brownishGrey"
+            android:textSize="24sp"
+            app:fontFamily="@font/roboto_light"
+            android:layout_marginTop="10dp"
+            app:layout_constraintCircle="@id/home_page_header_wrap"
+            app:layout_constraintStart_toStartOf="@id/home_page_header_wrap"
+            app:layout_constraintTop_toTopOf="@id/home_page_header_wrap" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/home_page_scroll_wrap"
+        app:layout_constraintTop_toBottomOf="@id/home_page_header_wrap"
+        >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/content_wrap"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ticket_card_wrap"
+            android:padding="25dp"
+            android:outlineAmbientShadowColor="@color/brownishGrey"
+            app:layout_constraintTop_toTopOf="@id/content_wrap"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ticket_card"
+                android:background="@color/whiteThree"
+                app:layout_constraintTop_toTopOf="@id/ticket_card_wrap"
+                android:elevation="3dp"
+                android:padding="5dp"
+                >
+            <TextView
+                android:id="@+id/login_page_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TICKETS"
+                android:textSize="18sp"
+                app:fontFamily="@font/roboto_bold"
+                app:layout_constraintStart_toStartOf="@id/ticket_card"
+                app:layout_constraintTop_toTopOf="@id/ticket_card"
+                />
+                <TextView
+                    android:id="@+id/ticket_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="The link to reset your password will be sent to your
+registered email address and mobile number."
+                    android:textSize="12sp"
+                    android:layout_marginTop="15dp"
+                    app:fontFamily="@font/roboto"
+                    app:layout_constraintStart_toStartOf="@id/ticket_card"
+                    app:layout_constraintTop_toBottomOf="@id/login_page_title" />
+                <Button
+                    android:id="@+id/btnCreateTicket"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/guestjinibutton"
+                    android:minWidth="150dp"
+                    android:padding="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="CREATE TICKET"
+                    android:textColor="#ffffff"
+                    app:layout_constraintTop_toBottomOf="@id/ticket_description"
+                    app:layout_constraintStart_toStartOf="@id/ticket_card"
+                    />
+                <View
+                    android:id="@+id/ticket_card_divider"
+                    style="@style/Divider.Horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/btnCreateTicket"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    />
+                <TextView
+                    android:id="@+id/ticket_list_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Goto your ticket(s)"
+                    android:textSize="12sp"
+                    android:layout_marginTop="15dp"
+                    app:fontFamily="@font/roboto"
+                    app:layout_constraintStart_toStartOf="@id/ticket_card"
+                    app:layout_constraintTop_toBottomOf="@id/ticket_card_divider" />
+                <Button
+                    android:id="@+id/btnTicketList"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/guestjinibutton"
+                    android:padding="10dp"
+                    android:layout_width="35dp"
+
+                    android:layout_marginBottom="10dp"
+                    android:text=">"
+                    android:textColor="#ffffff"
+                    app:layout_constraintTop_toBottomOf="@id/ticket_list_description"
+                    app:layout_constraintStart_toStartOf="@id/ticket_card"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_navigation" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
