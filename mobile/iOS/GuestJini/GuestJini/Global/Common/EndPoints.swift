@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Network
 
 class EndPoints{
     
@@ -25,5 +26,15 @@ class EndPoints{
     static var TICKET_GET_URL = END_POINT_URL + "/helpdesk/task-ticket/get"
     static var TICKET_LIST_URL = END_POINT_URL + "/helpdesk/task-ticket/get-all"
     
-    
+    static let monitor = NWPathMonitor()
+
+    static func checkInterwebs() -> Bool {
+        var status = false
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                status = true  // online
+            }
+        }
+        return status
+    }
 }

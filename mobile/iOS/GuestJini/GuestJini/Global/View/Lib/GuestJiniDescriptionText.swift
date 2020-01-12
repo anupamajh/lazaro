@@ -11,14 +11,14 @@ import SwiftUI
 struct GuestJiniDescriptionText: View {
     var description:String
     var body: some View {
-        Group{
+        VStack{
             Text(description)
                 .font(Fonts.RobotRegular)
                 .multilineTextAlignment(.center)
                 .lineSpacing(10)
-                   .lineLimit(nil)
+                   .lineLimit(5)
             
-        }
+        }.padding()
         
     }
 }

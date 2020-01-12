@@ -15,8 +15,9 @@ struct GuestJiniHeaderLarge: View {
                 VStack{
                 GuestJiniLogoImage()
                     .padding(.vertical,25)
-                GuestJiniDescriptionText(description: "Lorem ipsum dolor sit amet, consectetur  adipiscing elit. Etiam erat sapien, ultricies. ")
+                GuestJiniDescriptionText(description: "Experience like-minded co-living while you also perceive your passion and interests.")
                     .padding(.horizontal,30)
+                    .padding(.vertical)
                 }
             }   .background(Color("veryLightPink"))
             

@@ -62,6 +62,11 @@ public class TicketListPage extends AppCompatActivity implements TicketListAdapt
     @Override
     public void onItemClick(View view, int position) {
 
+        Ticket ticket = ticketList.get(position);
+        Intent intent = new Intent(TicketListPage.this, ViewTicketPage.class);
+        intent.putExtra("ticketId", ticket.getId());
+        TicketListPage.this.startActivity(intent);
+
     }
 
     private void fetchTickets() {

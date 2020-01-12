@@ -4,6 +4,8 @@ import com.carmel.android.guestjini.datalayer.Common.EndPoints;
 import com.carmel.android.guestjini.models.Ticket.Ticket;
 import com.carmel.android.guestjini.models.Ticket.TicketResponse;
 
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -24,5 +26,12 @@ public interface TicketAPI {
     Call<TicketResponse>  getAll(
             @Header("Authorization") String accessToken
     );
+
+    @POST("/helpdesk/task-ticket/get")
+    Call<TicketResponse>  get(
+            @Header("Authorization") String accessToken,
+            @Body Map<String, String> requestData
+            );
+
 
 }

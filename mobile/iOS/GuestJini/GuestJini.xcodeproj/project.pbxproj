@@ -88,6 +88,8 @@
 		C1D0000723B9E45000B93651 /* Converters.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D0000623B9E45000B93651 /* Converters.swift */; };
 		C1D0FFFF23B9D73700B93651 /* ViewRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D0FFFE23B9D73700B93651 /* ViewRoutes.swift */; };
 		C1DD878823B9EB2F00418AD8 /* GuestJiniFieldError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DD878723B9EB2F00418AD8 /* GuestJiniFieldError.swift */; };
+		C1E4C02723CB5D3100D6C578 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E4C02623CB5D3100D6C578 /* StringExtension.swift */; };
+		C1E4C02923CB793700D6C578 /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E4C02823CB793700D6C578 /* MultilineTextView.swift */; };
 		C1E9E59223B740A300EB812F /* GuestJiniButtonSystemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E9E59123B740A300EB812F /* GuestJiniButtonSystemImage.swift */; };
 		C1F787A923BF700800FF9B85 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F787A823BF700800FF9B85 /* MyProfileView.swift */; };
 		C1F8A70A23BB14D5005158A5 /* GuestJiniSquareButtonSystemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8A70923BB14D5005158A5 /* GuestJiniSquareButtonSystemImage.swift */; };
@@ -204,6 +206,8 @@
 		C1D0000623B9E45000B93651 /* Converters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converters.swift; sourceTree = "<group>"; };
 		C1D0FFFE23B9D73700B93651 /* ViewRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRoutes.swift; sourceTree = "<group>"; };
 		C1DD878723B9EB2F00418AD8 /* GuestJiniFieldError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniFieldError.swift; sourceTree = "<group>"; };
+		C1E4C02623CB5D3100D6C578 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		C1E4C02823CB793700D6C578 /* MultilineTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextView.swift; sourceTree = "<group>"; };
 		C1E9E59123B740A300EB812F /* GuestJiniButtonSystemImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniButtonSystemImage.swift; sourceTree = "<group>"; };
 		C1F787A823BF700800FF9B85 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
 		C1F8A70923BB14D5005158A5 /* GuestJiniSquareButtonSystemImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniSquareButtonSystemImage.swift; sourceTree = "<group>"; };
@@ -379,6 +383,7 @@
 			isa = PBXGroup;
 			children = (
 				C144F02223B483CB00D6D218 /* FontExtension.swift */,
+				C1E4C02623CB5D3100D6C578 /* StringExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -479,6 +484,7 @@
 				C1BB7D5A23BF3D7000BA410C /* ActivityIndicator.swift */,
 				C1BB7D6523BF66A100BA410C /* GuestJiniSettingMenuItem.swift */,
 				C10ACFF523BF7B3700C7CB70 /* WebView.swift */,
+				C1E4C02823CB793700D6C578 /* MultilineTextView.swift */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -781,6 +787,7 @@
 				C1BB7D6023BF418600BA410C /* TicketView.swift in Sources */,
 				C127164823B75409001E4C99 /* GuestJiniButtonSystemImagePlain.swift in Sources */,
 				C129E73523BAFD60009144D6 /* GuestJiniSearchBox.swift in Sources */,
+				C1E4C02923CB793700D6C578 /* MultilineTextView.swift in Sources */,
 				C1E9E59223B740A300EB812F /* GuestJiniButtonSystemImage.swift in Sources */,
 				C12EF5A823B223DD0024C22C /* AppDelegate.swift in Sources */,
 				C1DD878823B9EB2F00418AD8 /* GuestJiniFieldError.swift in Sources */,
@@ -802,6 +809,7 @@
 				C12EF5AD23B223DD0024C22C /* GuestJini.xcdatamodeld in Sources */,
 				C1B1E42E23BE0C6C009E1E3B /* GuestJiniRegularTextBox.swift in Sources */,
 				C10ACFF423BF78EE00C7CB70 /* NotificationsView.swift in Sources */,
+				C1E4C02723CB5D3100D6C578 /* StringExtension.swift in Sources */,
 				C1BB27FE23B7728000E8E3F9 /* ViewRouter.swift in Sources */,
 				C144F01B23B4816E00D6D218 /* GuestJiniLogoImage.swift in Sources */,
 				C1D0000123B9D83400B93651 /* EndPoints.swift in Sources */,

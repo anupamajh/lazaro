@@ -13,12 +13,11 @@ struct TicketUI: View {
     @State var ticketSubject:String = ""
     @State var ticketNarration:String = ""
     @State var hasSubject:Bool = true
-    @State var hasNarration: Bool = true
     @State private var showSuccess = false
     @State private var showFailure = false
-
+    
     @ObservedObject var ticketSaveService:TicketSaveService
-      
+    
     
     
     init(viewRouter: ViewRouter){
@@ -41,33 +40,42 @@ struct TicketUI: View {
                         Spacer()
                     }.padding()
                     HStack{
-                        Text("Subject").font(Fonts.RobotTitle)
+                        Text("Subject *").font(Fonts.RobotTitle)
                         Spacer()
                     }.padding()
                     
                     GuestJiniRegularTextBox(placeHolderText: "Please write your subject here", text: self.$ticketSubject)
-                        .padding()
+                        .padding(.horizontal)
                     if(!self.hasSubject){
-                        GuestJiniFieldError()
-                            .padding(.leading)
+                        HStack{
+                            GuestJiniFieldError()
+                            Spacer()
+                        }.padding(.leading)
                     }else{
+                        HStack{
                         GuestJiniDescriptionText(description: "")
-                            .padding(.leading)
+                             Spacer()
+                                                   }.padding(.leading)
                     }
                     HStack{
                         Text("Complaint").font(Fonts.RobotTitle)
                         Spacer()
-                                           
+                        
                     }.padding()
-                    GuestJiniTextArea(placeHolderText: "Please write your message here", text: self.$ticketNarration).frame(width: geometry.size.width-45, height:100, alignment: .top)
-                    .padding()
-                    if(!self.hasNarration){
-                        GuestJiniFieldError()
-                            .padding(.leading)
-                    }else{
-                        GuestJiniDescriptionText(description: "")
-                            .padding(.leading)
+                    VStack{
+                        MultilineTextView(text: self.$ticketNarration)
+                            .frame(width: geometry.size.width-45, height:100, alignment: .top)
+                            .padding(.all,10)
+                            .font(Fonts.RobotRegular)
+                            .background(Color.white
+                                .shadow(radius: 10))
+                            .cornerRadius(25)
+                            .overlay(
+                                RoundedRectangle(cornerRadius:5)
+                                    .stroke(Color("veryLightPink"), lineWidth: 1)
+                        )
                     }
+                    
                     HStack{
                         Spacer()
                         Button(action: {
@@ -76,12 +84,7 @@ struct TicketUI: View {
                             }else{
                                 self.hasSubject = true
                             }
-                            if(self.ticketNarration.trimmingCharacters(in: .whitespacesAndNewlines) == ""){
-                                self.hasNarration = false
-                            }else{
-                                self.hasNarration = true
-                            }
-                            if(self.hasNarration && self.hasSubject){
+                            if(self.hasSubject){
                                 let ticket:Ticket = Ticket();
                                 ticket.ticketTitle = self.ticketSubject
                                 ticket.ticketNarration = self.ticketNarration
@@ -95,15 +98,15 @@ struct TicketUI: View {
                                 }
                             }
                         }) {
-                           GuestJiniButtonText(buttonText: "SUBMIT")
+                            GuestJiniButtonText(buttonText: "SUBMIT")
                             
                         }.padding(.horizontal)
                             .actionSheet(isPresented: self.$showSuccess){
-                                      ActionSheet(title: Text("Success"), message: Text("Your complaint has been submitted successfully"), buttons: [.default(Text("OK"))])
+                                ActionSheet(title: Text("Success"), message: Text("Your complaint has been submitted successfully"), buttons: [.default(Text("OK"))])
                                 
                         }.actionSheet(isPresented: self.$showFailure){
-                                      ActionSheet(title: Text("Failed!"), message: Text("We could not process your complaint, Please try after sometime!"), buttons: [.default(Text("OK"))])
-                                
+                            ActionSheet(title: Text("Failed!"), message: Text("We could not process your complaint, Please try after sometime!"), buttons: [.default(Text("OK"))])
+                            
                         }
                     }.padding()
                     

@@ -81,6 +81,7 @@ public class TicketListAdapter extends RecyclerView.Adapter<TicketListAdapter.Ti
             super(itemView);
             this.initViews(context);
             this.recyclerViewClickListener = recyclerViewClickListener;
+            itemView.setOnClickListener(this);
         }
 
         @Override

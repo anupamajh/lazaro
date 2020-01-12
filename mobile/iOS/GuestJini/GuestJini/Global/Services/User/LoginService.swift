@@ -34,11 +34,14 @@ class LoginService:ObservableObject{
             (response: DataResponse<AuthData, AFError>) in
             var authData = AuthData()
             if(response.value != nil){
-                authData = try! response.result.get()
+                do{
+                    authData = try response.result.get()
+                }catch{
+                    debugPrint(error)
+                }
             }
             completionHandler(authData)
         })
-        
     }
     
     func refreshToken(RefreshToken:String, completionHandler:@escaping(AuthData)->Void) -> Void {
@@ -52,12 +55,15 @@ class LoginService:ObservableObject{
                    "refresh_token" :RefreshToken,
                    "grant_type" : "refresh_token"
                ]
-               
         AF.request(EndPoints.AUTHORISATION_URL, method: .post, parameters: parameters, encoder: URLEncodedFormParameterEncoder.default,headers: headers).responseDecodable(completionHandler: {
             (response: DataResponse<AuthData, AFError>) in
             var authData = AuthData()
             if(response.value != nil){
-                authData = try! response.result.get()
+                do{
+                    authData = try response.result.get()
+                }catch{
+                    debugPrint(error)
+                }
             }
             completionHandler(authData)
         })

@@ -35,8 +35,8 @@ class TicketSaveService:ObservableObject{
                     "Accept": "application/json"
                 ]
                 
-                let parameters = [
-                    "ticketTitle" : ticketData.ticketTitle,
+                let parameters:[String: String] = [
+                    "ticketTitle" : ticketData.ticketTitle!,
                     "ticketNarration" : ticketData.ticketNarration
                 ]
                 AF.request(EndPoints.TICKET_SAVE_URL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: headers)

@@ -59,6 +59,7 @@ struct SettingsView: View {
                         UserDefaults.standard.set("", forKey: "refresh_token")
                         UserDefaults.standard.set("", forKey: "token_type")
                         UserDefaults.standard.set("", forKey: "expires_in")
+                        self.viewRouter.currentPage = ViewRoutes.LANDING_PAGE
                         
                     }) {
                         GuestJiniSettingMenuItem(imageName: "power", menuText: "Log out")

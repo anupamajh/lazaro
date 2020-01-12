@@ -46,7 +46,7 @@ struct TicketRow: View {
                 Spacer()
             }
             HStack{
-                Text(ticket.creationTime!)
+                Text(ticket.creationTime!.convetToDate())
                     .font(Fonts.RobotRegularSmallText)
                     .foregroundColor(Color("brownishGrey"))
                 Spacer()

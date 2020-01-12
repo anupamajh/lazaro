@@ -38,7 +38,7 @@ struct AppAccessRequest: View {
                         Spacer()
                     }.padding()
                     HStack{
-                        GuestJiniInformationText(information: "Lorem ipsum dolor sit amet, consectetur  adipiscing elit. Etiam erat sapien, ultricies. ")
+                        GuestJiniInformationText(information: "Experience like-minded co-living while you also perceive your passion and interests. ")
                     }.padding()
                     HStack{
                         GuestJiniErrorText(message: "Invalid Login Credentials")
