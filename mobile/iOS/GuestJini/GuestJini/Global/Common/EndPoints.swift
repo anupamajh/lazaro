@@ -17,8 +17,13 @@ class EndPoints{
     
     static var END_POINT_URL = "http://139.59.32.238:8000"
     static var AUTHORISATION_URL = END_POINT_URL + "/auth/oauth/token"
+    static var CHECK_TOKEN_URL = END_POINT_URL + "/auth/oauth/check_token"
     static var FORGOT_PASSWORD = END_POINT_URL + "/api/user/reset-password"
     static var MY_PROFILE_URL = END_POINT_URL + "/common/user/me"
+    static var SAVE_USER_PREFERENCE_URL = END_POINT_URL + "/common/user-preference/save"
+    static var GET_USER_PREFERENCES_URL = END_POINT_URL + "/common/user-preference/get-all"
+    static var SAVE_PROFILE_PIC_URL = END_POINT_URL + "/common/address-book/save-profile-pic"
+    static var GET_MY_ADDRESS_BOOK_URL = END_POINT_URL + "/common/address-book/get-my-address-book"
     
     
     //TICKET

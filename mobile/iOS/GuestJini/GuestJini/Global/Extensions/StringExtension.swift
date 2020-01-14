@@ -11,7 +11,7 @@ import Foundation
 extension String{
     
     func convetToDate()->String{
-        var input:String = self
+        let input:String = self
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZ"
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")

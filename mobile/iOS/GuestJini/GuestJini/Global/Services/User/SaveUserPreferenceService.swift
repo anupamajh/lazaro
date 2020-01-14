@@ -1,8 +1,8 @@
 //
-//  UserInfoService.swift
+//  SaveUserPreferenceService.swift
 //  GuestJini
 //
-//  Created by Prasanna Kumar Pete on 06/01/20.
+//  Created by Prasanna Kumar Pete on 14/01/20.
 //  Copyright © 2020 Prasanna Kumar Pete. All rights reserved.
 //
 
@@ -10,40 +10,45 @@ import Foundation
 import Alamofire
 import SwiftUI
 
-class UserInfoService: ObservableObject{
+class SaveUserPreferenceService: ObservableObject {
+    
     @ObservedObject var viewRouter: ViewRouter
     var checkTokenService:CheckTokenService
-    @Published var userInfo:UserInfo = UserInfo()
     
     init(viewRouter: ViewRouter) {
         self.viewRouter = viewRouter;
         checkTokenService = CheckTokenService(viewRouter: viewRouter)
-        getUserInfo { (response) in
-            self.userInfo = response
-        }
         
     }
     
-    func getUserInfo(completionHandler: @escaping(UserInfo)->Void) -> Void {
+    func saveUserPreference(userPreferenceType:Int, isHidden:Int, completionHandler:@escaping(UserPreferenceResponse)->Void)-> Void{
         checkTokenService.CheckToken { (checkStatus) in
             if(checkStatus){
                 let headers: HTTPHeaders = [
                     "Authorization": "Bearer \(UserDefaults.standard.string(forKey: "access_token")!)",
                     "Accept": "application/json"
                 ]
+                let parameters:[String: Int] = [
+                    "preferenceType" : userPreferenceType,
+                    "isHidden" : isHidden
+                ]
                 
-                AF.request(EndPoints.MY_PROFILE_URL,
-                           method: .get,
+                AF.request(EndPoints.SAVE_USER_PREFERENCE_URL,
+                           method: .post,
+                           parameters: parameters,
                            encoding: JSONEncoding.default,
                            headers: headers
                 )
                     .responseData { (response) in
+                    
                         let jsonDecoder = JSONDecoder()
                         do{
-                            let parsedData =  try jsonDecoder.decode(UserInfo.self, from: response.data!)
+                            let parsedData =  try jsonDecoder.decode(UserPreferenceResponse.self, from: response.data!)
                             completionHandler(parsedData)
                         }catch{
-                            let parsedData = UserInfo()
+                            let parsedData = UserPreferenceResponse()
+                            parsedData.error = "Unknow error has occrred"
+                            parsedData.success = false;
                             completionHandler(parsedData)
                         }
                 }

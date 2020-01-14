@@ -40,6 +40,17 @@
 		C144F01F23B481B400D6D218 /* GuestJiniDescriptionText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F01E23B481B400D6D218 /* GuestJiniDescriptionText.swift */; };
 		C144F02123B481C100D6D218 /* GuestJiniErrorText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F02023B481C100D6D218 /* GuestJiniErrorText.swift */; };
 		C144F02323B483CB00D6D218 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F02223B483CB00D6D218 /* FontExtension.swift */; };
+		C1504AA223CD89C700302EB7 /* UserPreferenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1504AA123CD89C700302EB7 /* UserPreferenceType.swift */; };
+		C1504AA423CD8A5000302EB7 /* UserPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1504AA323CD8A5000302EB7 /* UserPreference.swift */; };
+		C1504AA623CD8AD800302EB7 /* UserPreferenceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1504AA523CD8AD800302EB7 /* UserPreferenceResponse.swift */; };
+		C1504AA823CD8B2800302EB7 /* SaveUserPreferenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1504AA723CD8B2800302EB7 /* SaveUserPreferenceService.swift */; };
+		C1504AAA23CD901200302EB7 /* CheckTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1504AA923CD901200302EB7 /* CheckTokenService.swift */; };
+		C1504AAD23CD924500302EB7 /* CheckTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1504AAC23CD924500302EB7 /* CheckTokenResponse.swift */; };
+		C1504AAF23CD925200302EB7 /* OAuthErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1504AAE23CD925200302EB7 /* OAuthErrorResponse.swift */; };
+		C1504AB123CDA42800302EB7 /* GuestJiniEditIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1504AB023CDA42800302EB7 /* GuestJiniEditIconButton.swift */; };
+		C1504AB323CDA90700302EB7 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1504AB223CDA90700302EB7 /* ImagePicker.swift */; };
+		C1504AB523CDBC1B00302EB7 /* ImageConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1504AB423CDBC1B00302EB7 /* ImageConverter.swift */; };
+		C1504AB723CDBC6A00302EB7 /* SaveProfilePicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1504AB623CDBC6A00302EB7 /* SaveProfilePicService.swift */; };
 		C15C726023BA18CD0069CB6E /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15C725F23BA18CD0069CB6E /* HomePage.swift */; };
 		C17BBFC623BB22E600FD5A21 /* Articles.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BBFC523BB22E600FD5A21 /* Articles.swift */; };
 		C1903E6523B73B2B00AD8F63 /* GuestJiniImageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1903E6423B73B2B00AD8F63 /* GuestJiniImageCard.swift */; };
@@ -158,6 +169,17 @@
 		C144F01E23B481B400D6D218 /* GuestJiniDescriptionText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniDescriptionText.swift; sourceTree = "<group>"; };
 		C144F02023B481C100D6D218 /* GuestJiniErrorText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniErrorText.swift; sourceTree = "<group>"; };
 		C144F02223B483CB00D6D218 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
+		C1504AA123CD89C700302EB7 /* UserPreferenceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferenceType.swift; sourceTree = "<group>"; };
+		C1504AA323CD8A5000302EB7 /* UserPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreference.swift; sourceTree = "<group>"; };
+		C1504AA523CD8AD800302EB7 /* UserPreferenceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferenceResponse.swift; sourceTree = "<group>"; };
+		C1504AA723CD8B2800302EB7 /* SaveUserPreferenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveUserPreferenceService.swift; sourceTree = "<group>"; };
+		C1504AA923CD901200302EB7 /* CheckTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTokenService.swift; sourceTree = "<group>"; };
+		C1504AAC23CD924500302EB7 /* CheckTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTokenResponse.swift; sourceTree = "<group>"; };
+		C1504AAE23CD925200302EB7 /* OAuthErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthErrorResponse.swift; sourceTree = "<group>"; };
+		C1504AB023CDA42800302EB7 /* GuestJiniEditIconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniEditIconButton.swift; sourceTree = "<group>"; };
+		C1504AB223CDA90700302EB7 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		C1504AB423CDBC1B00302EB7 /* ImageConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConverter.swift; sourceTree = "<group>"; };
+		C1504AB623CDBC6A00302EB7 /* SaveProfilePicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveProfilePicService.swift; sourceTree = "<group>"; };
 		C15C725F23BA18CD0069CB6E /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		C17BBFC523BB22E600FD5A21 /* Articles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Articles.swift; sourceTree = "<group>"; };
 		C1903E6423B73B2B00AD8F63 /* GuestJiniImageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniImageCard.swift; sourceTree = "<group>"; };
@@ -274,6 +296,9 @@
 				C12C4EFD23B781C200CD4B8F /* LoginService.swift */,
 				C10ACFFC23C2ECFD00C7CB70 /* ForgotPasswordService.swift */,
 				C10AD00023C3155B00C7CB70 /* UserInfoService.swift */,
+				C1504AA723CD8B2800302EB7 /* SaveUserPreferenceService.swift */,
+				C1504AA923CD901200302EB7 /* CheckTokenService.swift */,
+				C1504AB623CDBC6A00302EB7 /* SaveProfilePicService.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -367,6 +392,8 @@
 				C1D0000023B9D83400B93651 /* EndPoints.swift */,
 				C1D0000423B9E3EA00B93651 /* Vlidators.swift */,
 				C1D0000623B9E45000B93651 /* Converters.swift */,
+				C1504AA123CD89C700302EB7 /* UserPreferenceType.swift */,
+				C1504AB423CDBC1B00302EB7 /* ImageConverter.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -391,11 +418,14 @@
 		C12EF5DF23B224F30024C22C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C1504AAB23CD923400302EB7 /* Responses */,
 				C1D0000223B9DC2A00B93651 /* AuthData.swift */,
 				C17BBFC523BB22E600FD5A21 /* Articles.swift */,
 				C1B1E43723BE1EFF009E1E3B /* Ticket.swift */,
 				C1B1E43923BE1F1B009E1E3B /* TicketResponse.swift */,
 				C10ACFFE23C30CE100C7CB70 /* UserInfo.swift */,
+				C1504AA323CD8A5000302EB7 /* UserPreference.swift */,
+				C1504AA523CD8AD800302EB7 /* UserPreferenceResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -485,8 +515,19 @@
 				C1BB7D6523BF66A100BA410C /* GuestJiniSettingMenuItem.swift */,
 				C10ACFF523BF7B3700C7CB70 /* WebView.swift */,
 				C1E4C02823CB793700D6C578 /* MultilineTextView.swift */,
+				C1504AB023CDA42800302EB7 /* GuestJiniEditIconButton.swift */,
+				C1504AB223CDA90700302EB7 /* ImagePicker.swift */,
 			);
 			path = Lib;
+			sourceTree = "<group>";
+		};
+		C1504AAB23CD923400302EB7 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				C1504AAC23CD924500302EB7 /* CheckTokenResponse.swift */,
+				C1504AAE23CD925200302EB7 /* OAuthErrorResponse.swift */,
+			);
+			path = Responses;
 			sourceTree = "<group>";
 		};
 		C1AF643223B496A300375D32 /* Fonts */ = {
@@ -775,6 +816,7 @@
 				C1BB7D6223BF4AE200BA410C /* TicketSaveService.swift in Sources */,
 				C10ACFF623BF7B3700C7CB70 /* WebView.swift in Sources */,
 				C1B1E43223BE1DD1009E1E3B /* TicketList.swift in Sources */,
+				C1504AAF23CD925200302EB7 /* OAuthErrorResponse.swift in Sources */,
 				C1B1E43C23BEFA23009E1E3B /* GuestJiniTextArea.swift in Sources */,
 				C1BB27F623B75A6300E8E3F9 /* GuestJiniAlerBox.swift in Sources */,
 				C144F01723B4812600D6D218 /* GuestJiniButtonText.swift in Sources */,
@@ -794,9 +836,12 @@
 				C144F01923B4814B00D6D218 /* GuestJiniRoundButtonText.swift in Sources */,
 				C1BB7D5B23BF3D7000BA410C /* ActivityIndicator.swift in Sources */,
 				C1BB27F423B7578A00E8E3F9 /* OTPVerification.swift in Sources */,
+				C1504AB123CDA42800302EB7 /* GuestJiniEditIconButton.swift in Sources */,
 				C1B1E43623BE1EEB009E1E3B /* TicketsService.swift in Sources */,
+				C1504AAA23CD901200302EB7 /* CheckTokenService.swift in Sources */,
 				C1BB7D5E23BF3F1F00BA410C /* TicketGetService.swift in Sources */,
 				C1BB27FA23B764A200E8E3F9 /* AppAccessRequest.swift in Sources */,
+				C1504AA223CD89C700302EB7 /* UserPreferenceType.swift in Sources */,
 				C1B1E43A23BE1F1B009E1E3B /* TicketResponse.swift in Sources */,
 				C1A73E1E23B744DF00E9F5B8 /* LoginScreen.swift in Sources */,
 				C1B1E43023BE0D1F009E1E3B /* GuestJiniSecureTextBox.swift in Sources */,
@@ -809,6 +854,7 @@
 				C12EF5AD23B223DD0024C22C /* GuestJini.xcdatamodeld in Sources */,
 				C1B1E42E23BE0C6C009E1E3B /* GuestJiniRegularTextBox.swift in Sources */,
 				C10ACFF423BF78EE00C7CB70 /* NotificationsView.swift in Sources */,
+				C1504AA823CD8B2800302EB7 /* SaveUserPreferenceService.swift in Sources */,
 				C1E4C02723CB5D3100D6C578 /* StringExtension.swift in Sources */,
 				C1BB27FE23B7728000E8E3F9 /* ViewRouter.swift in Sources */,
 				C144F01B23B4816E00D6D218 /* GuestJiniLogoImage.swift in Sources */,
@@ -817,11 +863,14 @@
 				C10AD00123C3155B00C7CB70 /* UserInfoService.swift in Sources */,
 				C1D0000323B9DC2A00B93651 /* AuthData.swift in Sources */,
 				C129E73923BB0509009144D6 /* GuestJiniRoundButtonSystemImage.swift in Sources */,
+				C1504AB723CDBC6A00302EB7 /* SaveProfilePicService.swift in Sources */,
 				C127164423B74F9D001E4C99 /* GuestJiniHyperlinkButtonText.swift in Sources */,
 				C1F787A923BF700800FF9B85 /* MyProfileView.swift in Sources */,
 				C1BB27FC23B766EE00E8E3F9 /* GuestJiniFieldLabel.swift in Sources */,
 				C12EF5AA23B223DD0024C22C /* SceneDelegate.swift in Sources */,
+				C1504AB523CDBC1B00302EB7 /* ImageConverter.swift in Sources */,
 				C15C726023BA18CD0069CB6E /* HomePage.swift in Sources */,
+				C1504AA423CD8A5000302EB7 /* UserPreference.swift in Sources */,
 				C1B1E43E23BF0304009E1E3B /* TicketRow.swift in Sources */,
 				C1BB27F823B7644000E8E3F9 /* GuestJiniHeaderSmall.swift in Sources */,
 				C1B1E43823BE1EFF009E1E3B /* Ticket.swift in Sources */,
@@ -831,12 +880,15 @@
 				C1BB7D6623BF66A100BA410C /* GuestJiniSettingMenuItem.swift in Sources */,
 				C1D0000723B9E45000B93651 /* Converters.swift in Sources */,
 				C1F8A70A23BB14D5005158A5 /* GuestJiniSquareButtonSystemImage.swift in Sources */,
+				C1504AAD23CD924500302EB7 /* CheckTokenResponse.swift in Sources */,
 				C1D0000523B9E3EA00B93651 /* Vlidators.swift in Sources */,
 				C144F01F23B481B400D6D218 /* GuestJiniDescriptionText.swift in Sources */,
 				C1C74C3E23BA146700FFA336 /* GuestJiniBottomBarItem.swift in Sources */,
 				C1B1E43423BE1DDD009E1E3B /* TicketUI.swift in Sources */,
 				C144F02323B483CB00D6D218 /* FontExtension.swift in Sources */,
+				C1504AB323CDA90700302EB7 /* ImagePicker.swift in Sources */,
 				C129E73723BB008C009144D6 /* GuestJiniSubAction.swift in Sources */,
+				C1504AA623CD8AD800302EB7 /* UserPreferenceResponse.swift in Sources */,
 				C127164623B751CB001E4C99 /* ForgotPassword.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
