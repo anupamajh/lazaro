@@ -19,6 +19,10 @@ struct ForgotPassword: View {
     @State var success: Bool = false
     @State var isAnimating: Bool = false
     
+    @State var showPopover: Bool = false
+    @State var alertTitle:String = ""
+    @State var alertBody:String = ""
+      
     var body: some View {
         GeometryReader { geometry in
             ZStack{
@@ -82,13 +86,12 @@ struct ForgotPassword: View {
                         }
                         HStack{
                             Spacer()
-                            /*GuestJiniDescriptionText(description: "Don't Have account yet?")
-                             Button(action: {
-                             // What to perform
-                             }) {
-                             GuestJiniHyperlinkButtonText(buttonText: "Get one now")
-                             
-                             }.offset(x: -15)*/
+                            GuestJiniDescriptionText(description: "Don't Have account yet?")
+                            Button(action: {
+                                self.viewRouter.currentPage = ViewRoutes.APP_ACCESS_REQUEST_PAGE
+                            }) {
+                                GuestJiniHyperlinkButtonText(buttonText: "Get one now")
+                            }.offset(x: -15)
                             Spacer()
                         }.padding()
                         
@@ -102,6 +105,12 @@ struct ForgotPassword: View {
                         Spacer()
                     }
                 }
+                
+                if(self.showPopover){
+                    GuestJiniAlerBox(showAlert: self.$showPopover, alertTitle: self.$alertTitle, alertBody: self.$alertBody)
+                }else{
+                    GuestJiniAlerBox(showAlert: self.$showPopover, alertTitle: self.$alertTitle, alertBody: self.$alertBody).hidden()
+                }
             }
         }
     }
@@ -110,11 +119,16 @@ struct ForgotPassword: View {
         if(userInfo.id == ""){
             self.hasLoginError = true
             self.isAnimating = false
+            self.alertTitle = "SUCCESS"
+            self.alertBody = "A link has been sent to your email account to reset your password."
+            self.showPopover = true
             
         }else{
             self.success = true
             self.isAnimating = true
-            
+            self.alertTitle = "FAILED"
+            self.alertBody = "Please try again or contact administrtaor."
+            self.showPopover = true
         }
     }
 }

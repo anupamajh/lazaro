@@ -15,6 +15,8 @@
 		C10ACFFD23C2ECFD00C7CB70 /* ForgotPasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10ACFFC23C2ECFD00C7CB70 /* ForgotPasswordService.swift */; };
 		C10ACFFF23C30CE100C7CB70 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10ACFFE23C30CE100C7CB70 /* UserInfo.swift */; };
 		C10AD00123C3155B00C7CB70 /* UserInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10AD00023C3155B00C7CB70 /* UserInfoService.swift */; };
+		C10CD04923CF1809001F30BB /* AppAccessRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10CD04823CF1809001F30BB /* AppAccessRequestService.swift */; };
+		C10CD04B23CF18CE001F30BB /* AppAccessRequestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10CD04A23CF18CE001F30BB /* AppAccessRequestResponse.swift */; };
 		C12523ED23CEDE4C00ADCE17 /* UserPreferenceUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12523EC23CEDE4C00ADCE17 /* UserPreferenceUIModel.swift */; };
 		C12523EF23CEE4C700ADCE17 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12523EE23CEE4C700ADCE17 /* DateExtension.swift */; };
 		C127164423B74F9D001E4C99 /* GuestJiniHyperlinkButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C127164323B74F9D001E4C99 /* GuestJiniHyperlinkButtonText.swift */; };
@@ -142,6 +144,8 @@
 		C10ACFFC23C2ECFD00C7CB70 /* ForgotPasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordService.swift; sourceTree = "<group>"; };
 		C10ACFFE23C30CE100C7CB70 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		C10AD00023C3155B00C7CB70 /* UserInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoService.swift; sourceTree = "<group>"; };
+		C10CD04823CF1809001F30BB /* AppAccessRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAccessRequestService.swift; sourceTree = "<group>"; };
+		C10CD04A23CF18CE001F30BB /* AppAccessRequestResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAccessRequestResponse.swift; sourceTree = "<group>"; };
 		C12523EC23CEDE4C00ADCE17 /* UserPreferenceUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferenceUIModel.swift; sourceTree = "<group>"; };
 		C12523EE23CEE4C700ADCE17 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		C127164323B74F9D001E4C99 /* GuestJiniHyperlinkButtonText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniHyperlinkButtonText.swift; sourceTree = "<group>"; };
@@ -308,6 +312,7 @@
 				C1504AA923CD901200302EB7 /* CheckTokenService.swift */,
 				C1504AB623CDBC6A00302EB7 /* SaveProfilePicService.swift */,
 				C1EB388A23CEFA3F0057975E /* GetProfilePicService.swift */,
+				C10CD04823CF1809001F30BB /* AppAccessRequestService.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -381,7 +386,6 @@
 				C12EF5E023B224FC0024C22C /* Protocols */,
 				C12EF5E123B225040024C22C /* Services */,
 				C12EF5E223B2250F0024C22C /* View */,
-				C12EF5E323B225160024C22C /* ViewModel */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -461,25 +465,26 @@
 		C12EF5E223B2250F0024C22C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C1AF643223B496A300375D32 /* Fonts */,
 				C144F01523B478CE00D6D218 /* Lib */,
+				C12EF5E323B225160024C22C /* ViewModel */,
+				C1AF643223B496A300375D32 /* Fonts */,
+				C1BB27F923B764A200E8E3F9 /* AppAccessRequest.swift */,
 				C12EF5AE23B223DD0024C22C /* ContentView.swift */,
-				C12EF5B523B223DF0024C22C /* LaunchScreen.storyboard */,
-				C12EF5B023B223DF0024C22C /* Assets.xcassets */,
+				C1F8A70B23BB16A2005158A5 /* ExploreSupport.swift */,
+				C127164523B751CB001E4C99 /* ForgotPassword.swift */,
+				C10ACFF723BF7BDF00C7CB70 /* HelpView.swift */,
+				C15C725F23BA18CD0069CB6E /* HomePage.swift */,
 				C1A73E1B23B7448200E9F5B8 /* LandingScreen.swift */,
 				C1A73E1D23B744DF00E9F5B8 /* LoginScreen.swift */,
-				C127164523B751CB001E4C99 /* ForgotPassword.swift */,
+				C1F787A823BF700800FF9B85 /* MyProfileView.swift */,
+				C10ACFF323BF78EE00C7CB70 /* NotificationsView.swift */,
 				C1BB27F323B7578A00E8E3F9 /* OTPVerification.swift */,
-				C1BB27F923B764A200E8E3F9 /* AppAccessRequest.swift */,
-				C15C725F23BA18CD0069CB6E /* HomePage.swift */,
-				C1F8A70B23BB16A2005158A5 /* ExploreSupport.swift */,
+				C1BB7D6323BF59F600BA410C /* SettingsView.swift */,
 				C1B1E43123BE1DD1009E1E3B /* TicketList.swift */,
 				C1B1E43323BE1DDD009E1E3B /* TicketUI.swift */,
 				C1BB7D5F23BF418600BA410C /* TicketView.swift */,
-				C1BB7D6323BF59F600BA410C /* SettingsView.swift */,
-				C1F787A823BF700800FF9B85 /* MyProfileView.swift */,
-				C10ACFF323BF78EE00C7CB70 /* NotificationsView.swift */,
-				C10ACFF723BF7BDF00C7CB70 /* HelpView.swift */,
+				C12EF5B023B223DF0024C22C /* Assets.xcassets */,
+				C12EF5B523B223DF0024C22C /* LaunchScreen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -538,6 +543,7 @@
 				C1504AA523CD8AD800302EB7 /* UserPreferenceResponse.swift */,
 				C1504AAC23CD924500302EB7 /* CheckTokenResponse.swift */,
 				C1504AAE23CD925200302EB7 /* OAuthErrorResponse.swift */,
+				C10CD04A23CF18CE001F30BB /* AppAccessRequestResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -858,8 +864,10 @@
 				C1BB27FA23B764A200E8E3F9 /* AppAccessRequest.swift in Sources */,
 				C1504AA223CD89C700302EB7 /* UserPreferenceType.swift in Sources */,
 				C1B1E43A23BE1F1B009E1E3B /* TicketResponse.swift in Sources */,
+				C10CD04B23CF18CE001F30BB /* AppAccessRequestResponse.swift in Sources */,
 				C1A73E1E23B744DF00E9F5B8 /* LoginScreen.swift in Sources */,
 				C1B1E43023BE0D1F009E1E3B /* GuestJiniSecureTextBox.swift in Sources */,
+				C10CD04923CF1809001F30BB /* AppAccessRequestService.swift in Sources */,
 				C127164A23B75553001E4C99 /* GuestJiniInformationText.swift in Sources */,
 				C1C74C3C23BA143E00FFA336 /* GuestJiniBottomBar.swift in Sources */,
 				C1A73E2023B744F900E9F5B8 /* GuestJiniHeaderLarge.swift in Sources */,
