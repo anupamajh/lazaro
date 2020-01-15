@@ -2,12 +2,17 @@ package com.carmel.common.dbservice.controller;
 
 import com.carmel.common.dbservice.component.MailClient;
 import com.carmel.common.dbservice.component.UserInformation;
+import com.carmel.common.dbservice.model.AddressBook;
 import com.carmel.common.dbservice.model.User;
 import com.carmel.common.dbservice.model.UserInfo;
+import com.carmel.common.dbservice.model.UserPreference;
 import com.carmel.common.dbservice.response.UserResponse;
 import com.carmel.common.dbservice.response.UsersResponse;
+import com.carmel.common.dbservice.services.AddressBookService;
+import com.carmel.common.dbservice.services.UserPreferenceService;
 import com.carmel.common.dbservice.services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +26,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileInputStream;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
@@ -46,6 +53,12 @@ public class UserController {
 
     @Autowired
     MailClient mailClient;
+
+    @Autowired
+    AddressBookService addressBookService;
+
+    @Autowired
+    UserPreferenceService userPreferenceService;
 
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -276,16 +289,47 @@ public class UserController {
     @GetMapping("/me")
     public UserInfo user(Principal principal) {
         UserInfo userInfo = userInformation.getUserInfo();
+        Optional<AddressBook> optionalAddressBook = addressBookService.findByUserId(userInfo.getId());
+        if (optionalAddressBook.isPresent()) {
+            userInfo.setAddressBook(optionalAddressBook.get());
+        }
+        List<UserPreference> userPreferences = userPreferenceService.findAllByUserId(userInfo.getId());
+        userInfo.setUserPreferences(userPreferences);
         return userInfo;
     }
+
+    @GetMapping("/me/pic")
+    public String myPic() {
+        try {
+            UserInfo userInfo = userInformation.getUserInfo();
+            Optional<AddressBook> optionalAddressBook = addressBookService.findByUserId(userInfo.getId());
+            if (optionalAddressBook.isPresent()) {
+                AddressBook addressBook = optionalAddressBook.get();
+                if(addressBook.getLogoPath().trim() != "") {
+                    String logoPath = addressBook.getLogoPath();
+                    File myPic = new File(logoPath);
+                    FileInputStream fileInputStreamReader = new FileInputStream(myPic);
+                    byte[] bytes = new byte[(int) myPic.length()];
+                    fileInputStreamReader.read(bytes);
+                    return new String(Base64.encodeBase64(bytes), "UTF-8");
+                }
+            } 
+        }catch (Exception ex){
+            logger.trace(ex.getMessage());
+        }
+        return "";
+    }
+
 
     @RequestMapping(value = "/reset-password", method = RequestMethod.POST)
     public UserInfo resetPassword(@RequestBody Map<String, String> formData) {
         String userName = formData.get("user_name");
+        logger.trace(userName);
         Optional<User> optionalUser = userService.findByUserName(userName);
         optionalUser.orElseThrow(() ->
                 new UsernameNotFoundException("Cannot find the logged in principal, Please contact administrator"));
         UserInfo userInfo = new UserInfo(optionalUser.get());
+        logger.trace(userInfo.getId());
 
         mailClient.prepareAndSend(userInfo.getUserName(), "Reset password link here");
 

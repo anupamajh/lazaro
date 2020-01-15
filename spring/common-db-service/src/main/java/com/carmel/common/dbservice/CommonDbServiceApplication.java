@@ -13,7 +13,6 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableResourceServer
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class CommonDbServiceApplication {
 
 	@LoadBalanced

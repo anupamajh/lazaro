@@ -82,6 +82,9 @@ public class User implements Serializable {
     @Column(name = "is_operator")
     private int isOperator;
 
+    @Column(name = "gender")
+    private int gender;
+
     @Column(name = "created_by")
     @Length(max = 40)
     private String createdBy;
@@ -297,5 +300,13 @@ public class User implements Serializable {
 
     public void setDefaultOrganization(Organization defaultOrganization) {
         this.defaultOrganization = defaultOrganization;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 }

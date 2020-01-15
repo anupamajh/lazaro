@@ -73,7 +73,6 @@ public class AddressBook {
     private String website;
 
     @Column(name = "dob")
-    @Length(max = 255)
     private Date dateOfBirth;
 
     @Column(name = "logo_path")

@@ -22,9 +22,12 @@ public class UserInfo {
     private String lastLoginFrom;
     private int accountStatus;
     private int isOperator;
+    private int gender;
     private  Client client;
     private  Organization defaultOrganization;
     private List<Organization> organizations;
+    private AddressBook addressBook;
+    private List<UserPreference> userPreferences;
 
     private Principal principal;
 
@@ -43,6 +46,7 @@ public class UserInfo {
         this.client = user.getClient();
         this.defaultOrganization = user.getDefaultOrganization();
         this.organizations = user.getOrganizations();
+        this.gender = user.getGender();
     }
 
     public UserInfo(String userName){
@@ -60,6 +64,7 @@ public class UserInfo {
         this.client = user.getClient();
         this.defaultOrganization = user.getDefaultOrganization();
         this.organizations = user.getOrganizations();
+        this.gender = user.getGender();
     }
 
     public String getId() {
@@ -156,5 +161,29 @@ public class UserInfo {
 
     public void setOrganizations(List<Organization> organizations) {
         this.organizations = organizations;
+    }
+
+    public AddressBook getAddressBook() {
+        return addressBook;
+    }
+
+    public void setAddressBook(AddressBook addressBook) {
+        this.addressBook = addressBook;
+    }
+
+    public List<UserPreference> getUserPreferences() {
+        return userPreferences;
+    }
+
+    public void setUserPreferences(List<UserPreference> userPreferences) {
+        this.userPreferences = userPreferences;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 }
