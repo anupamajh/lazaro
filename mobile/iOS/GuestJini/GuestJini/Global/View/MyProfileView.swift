@@ -8,116 +8,32 @@
 
 import SwiftUI
 
-struct UserPreferenceUIModel {
-    @ObservedObject var viewRouter: ViewRouter
-    var saveUserPreferenceService:SaveUserPreferenceService
-    init(){
-        let viewRouter = ViewRouter()
-        self.viewRouter = viewRouter
-        saveUserPreferenceService = SaveUserPreferenceService(viewRouter: viewRouter)
-    }
-    
-    var hasFinishedLoading = false
-    var showGender: Bool = false {
-        willSet {
-            if(hasFinishedLoading){
-                if(newValue){
-                    saveUserPreference(hide: 0, userPreferenceType: UserPreferenceType.USER_PREFERENCE_SHOW_GENDER)
-                }else{
-                    saveUserPreference(hide: 1, userPreferenceType: UserPreferenceType.USER_PREFERENCE_SHOW_GENDER)
-                }
-            }
-        }
-    }
-    
-    var showProfilePic = false {
-        willSet {
-            if(hasFinishedLoading){
-                if(newValue){
-                    saveUserPreference(hide: 0, userPreferenceType: UserPreferenceType.USER_PREFERENCE_SHOW_PROFILE_PIC)
-                }else{
-                    saveUserPreference(hide: 1, userPreferenceType: UserPreferenceType.USER_PREFERENCE_SHOW_PROFILE_PIC)
-                }
-            }
-        }
-    }
-    var showAge = false {
-        willSet {
-            if(hasFinishedLoading){
-                if(newValue){
-                    saveUserPreference(hide: 0, userPreferenceType: UserPreferenceType.USER_PREFERENCE_SHOW_AGE)
-                }else{
-                    saveUserPreference(hide: 1, userPreferenceType: UserPreferenceType.USER_PREFERENCE_SHOW_AGE)
-                }
-            }
-        }
-    }
-    var showEmail = false {
-        willSet {
-            if(hasFinishedLoading){
-                if(newValue){
-                    saveUserPreference(hide: 0, userPreferenceType: UserPreferenceType.USER_PREFERENCE_SHOW_EMAIL)
-                }else{
-                    saveUserPreference(hide: 1, userPreferenceType: UserPreferenceType.USER_PREFERENCE_SHOW_EMAIL)
-                }
-            }
-        }
-    }
-    var showPlaceofOrigin = false {
-        willSet {
-            if(hasFinishedLoading){
-                if(newValue){
-                    saveUserPreference(hide: 0, userPreferenceType: UserPreferenceType.USER_PREFERENCE_SHOW_PLACE_OF_ORIGIN)
-                }else{
-                    saveUserPreference(hide: 1, userPreferenceType: UserPreferenceType.USER_PREFERENCE_SHOW_PLACE_OF_ORIGIN)
-                }
-            }
-        }
-    }
-    var showMobileNumber = false {
-        willSet {
-            if(hasFinishedLoading){
-                if(newValue){
-                    saveUserPreference(hide: 0, userPreferenceType: UserPreferenceType.USER_PREFERENCE_SHOW_MOBILE_NUMBER)
-                }else{
-                    saveUserPreference(hide: 1, userPreferenceType: UserPreferenceType.USER_PREFERENCE_SHOW_MOBILE_NUMBER)
-                }
-            }
-        }
-    }
-    
-    mutating func saveUserPreference(hide:Int, userPreferenceType:Int) -> Void {
-        saveUserPreferenceService.saveUserPreference(userPreferenceType: userPreferenceType, isHidden: hide) {
-            (response) in
-            
-        }
-    }
-}
+
 
 struct MyProfileView: View {
     @ObservedObject var viewRouter: ViewRouter
     @State var isInfoLoaded = true
-    @State var userPreferenceUIModel:UserPreferenceUIModel = UserPreferenceUIModel()
     @State var imagePickerViewModel = ImagePickerViewModel()
     @State var isAnimating:Bool = false;
     
     
     var saveProfilePicService: SaveProfilePicService
     @ObservedObject var userInfoService:UserInfoService;
-      
-    @State var profilePic:Image = Image(systemName: "person.crop.circle")
+    @ObservedObject var getProfilePicService:GetProfilePicService;
+    
+    
+    @State var profilePic:Image = Image(systemName: "camera")
     
     @State var showAction: Bool = false
     @State var showImagePicker: Bool = false
     @State var isCamera: Bool = false
-    
-    
     
     init(viewRouter: ViewRouter) {
         self.viewRouter = viewRouter
         UISwitch.appearance().onTintColor = UIColor(named: "aquaMarine")
         saveProfilePicService = SaveProfilePicService(viewRouter: viewRouter)
         userInfoService = UserInfoService(viewRouter: viewRouter)
+        getProfilePicService = GetProfilePicService(viewRouter: viewRouter)
     }
     
     var sheet: ActionSheet {
@@ -147,23 +63,22 @@ struct MyProfileView: View {
     }
     
     
-    
     var body: some View {
         GeometryReader { geometry in
             VStack{
                 ZStack{
-                VStack{
-                    HStack{
-                        Button(action: {
-                            self.viewRouter.currentPage = ViewRoutes.SETTINGS_VIEW
-                        }) {
-                            GuestJiniButtonSystemImagePlain(imageName: "arrow.left")
+                    VStack{
+                        HStack{
+                            Button(action: {
+                                self.viewRouter.currentPage = ViewRoutes.SETTINGS_VIEW
+                            }) {
+                                GuestJiniButtonSystemImagePlain(imageName: "arrow.left")
+                                
+                            }.padding(.horizontal)
                             
-                        }.padding(.horizontal)
-                        
-                        GuestJiniTitleText(title: "MY PROFILE")
-                        Spacer()
-                    }.padding()
+                            GuestJiniTitleText(title: "MY PROFILE")
+                            Spacer()
+                        }.padding()
                         VStack{
                             HStack{
                                 Spacer()
@@ -173,6 +88,7 @@ struct MyProfileView: View {
                                     .clipShape(Circle())
                                     .shadow(radius: 10)
                                     .overlay(Circle().stroke(Color.white, lineWidth: 1))
+                                    .padding()
                                 Button(action: {
                                     self.showAction = true
                                 }) {
@@ -185,7 +101,7 @@ struct MyProfileView: View {
                                 .onReceive(self.imagePickerViewModel.pickedImagesSubject) { (image: Image) -> Void in
                                     withAnimation {
                                         self.profilePic = image
-                                         self.isAnimating = true
+                                        self.isAnimating = true
                                         self.saveProfilePic(image: self.imagePickerViewModel.sourceImage!)
                                         debugPrint("Hello")
                                     }
@@ -194,7 +110,7 @@ struct MyProfileView: View {
                                     self.sheet
                                 }
                                 Spacer()
-                               
+                                
                             }.padding()
                             VStack{
                                 HStack{
@@ -204,11 +120,11 @@ struct MyProfileView: View {
                                     Spacer()
                                 }.padding(.horizontal)
                                 HStack{
-                                   if(self.userInfoService.userInfo.fullName == nil){
+                                    if(self.userInfoService.userInfo.fullName == ""){
                                         Text("") .font(Fonts.RobotFieldText)
                                             .foregroundColor(Color("greyishBrownThree"))
                                     }else{
-                                        Text(self.userInfoService.userInfo.fullName!) .font(Fonts.RobotFieldText)
+                                        Text(self.userInfoService.userInfo.fullName) .font(Fonts.RobotFieldText)
                                             .foregroundColor(Color("greyishBrownThree"))
                                     }
                                     Spacer()
@@ -224,17 +140,33 @@ struct MyProfileView: View {
                                     Spacer()
                                 }.padding(.horizontal)
                                 VStack{
-                                    Toggle(isOn:self.$userPreferenceUIModel.showGender)
+                                    Toggle(isOn:self.$userInfoService.userPreferenceUIModel.showGender)
                                     {
-                                        Text("Male")
-                                            .font(Fonts.RobotFieldText)
-                                            .foregroundColor(Color("greyishBrownThree"))
+                                        if(self.userInfoService.userInfo.gender != 0){
+                                            if(self.userInfoService.userInfo.gender == 1){
+                                                Text("MALE")
+                                                    .font(Fonts.RobotFieldText)
+                                                    .foregroundColor(Color("greyishBrownThree"))
+                                            }else if(self.userInfoService.userInfo.gender == 2){
+                                                Text("FEMALE")
+                                                    .font(Fonts.RobotFieldText)
+                                                    .foregroundColor(Color("greyishBrownThree"))
+                                            }else{
+                                                Text("NOT SPECIFIED")
+                                                    .font(Fonts.RobotFieldText)
+                                                    .foregroundColor(Color("greyishBrownThree"))
+                                            }
+                                            
+                                        }else{
+                                            Text("NOT SPECIFIED")
+                                                .font(Fonts.RobotFieldText)
+                                                .foregroundColor(Color("greyishBrownThree"))
+                                        }
                                     }
                                     
                                 }.padding(.horizontal)
                                 Divider()
                             }
-                            
                             VStack{
                                 HStack{
                                     Text("AGE")
@@ -243,17 +175,22 @@ struct MyProfileView: View {
                                     Spacer()
                                 }.padding(.horizontal)
                                 VStack{
-                                    Toggle(isOn:self.$userPreferenceUIModel.showAge)
+                                    Toggle(isOn:self.$userInfoService.userPreferenceUIModel.showAge)
                                     {
-                                        Text("33 Years")
-                                            .font(Fonts.RobotFieldText)
-                                            .foregroundColor(Color("greyishBrownThree"))
+                                        if(self.userInfoService.userInfo.addressBook.dateOfBirth != nil){
+                                            Text(String(format: "%d Years", (self.userInfoService.userInfo.addressBook.dateOfBirth?.convetToAgeFromMySQLDate().year)!))
+                                                .font(Fonts.RobotFieldText)
+                                                .foregroundColor(Color("greyishBrownThree"))
+                                        }else{
+                                            Text("")
+                                                .font(Fonts.RobotFieldText)
+                                                .foregroundColor(Color("greyishBrownThree"))
+                                        }
                                     }
                                     
                                 }.padding(.horizontal)
                                 Divider()
                             }
-                            
                             VStack{
                                 HStack{
                                     Text("MOBILE NUMBER")
@@ -262,17 +199,23 @@ struct MyProfileView: View {
                                     Spacer()
                                 }.padding(.horizontal)
                                 VStack{
-                                    Toggle(isOn:self.$userPreferenceUIModel.showMobileNumber)
+                                    Toggle(isOn:self.$userInfoService.userPreferenceUIModel.showMobileNumber)
                                     {
-                                        Text("mobile number")
-                                            .font(Fonts.RobotFieldText)
-                                            .foregroundColor(Color("greyishBrownThree"))
+                                        if(self.userInfoService.userInfo.addressBook.phone1 != nil){
+                                            Text(self.userInfoService.userInfo.addressBook.phone1!)
+                                                .font(Fonts.RobotFieldText)
+                                                .foregroundColor(Color("greyishBrownThree"))
+                                        }else{
+                                            
+                                            Text("")
+                                                .font(Fonts.RobotFieldText)
+                                                .foregroundColor(Color("greyishBrownThree"))
+                                        }
                                     }
                                     
                                 }.padding(.horizontal)
                                 Divider()
                             }
-                            
                             VStack{
                                 HStack{
                                     Text("EMAIL")
@@ -281,17 +224,22 @@ struct MyProfileView: View {
                                     Spacer()
                                 }.padding(.horizontal)
                                 VStack{
-                                    Toggle(isOn:self.$userPreferenceUIModel.showMobileNumber)
+                                    Toggle(isOn:self.$userInfoService.userPreferenceUIModel.showEmail)
                                     {
-                                        Text("email")
-                                            .font(Fonts.RobotFieldText)
-                                            .foregroundColor(Color("greyishBrownThree"))
+                                        if(self.userInfoService.userInfo.addressBook.email1 != nil){
+                                            Text(self.userInfoService.userInfo.addressBook.email1!)
+                                                .font(Fonts.RobotFieldText)
+                                                .foregroundColor(Color("greyishBrownThree"))
+                                        }else{
+                                            Text("")
+                                                .font(Fonts.RobotFieldText)
+                                                .foregroundColor(Color("greyishBrownThree"))
+                                        }
                                     }
                                     
                                 }.padding(.horizontal)
                                 Divider()
                             }
-                            
                             VStack{
                                 HStack{
                                     Text("PLACE OF ORIGIN")
@@ -300,28 +248,34 @@ struct MyProfileView: View {
                                     Spacer()
                                 }.padding(.horizontal)
                                 VStack{
-                                    Toggle(isOn:self.$userPreferenceUIModel.showMobileNumber)
+                                    Toggle(isOn:self.$userInfoService.userPreferenceUIModel.showPlaceofOrigin)
                                     {
-                                        Text("email")
-                                            .font(Fonts.RobotFieldText)
-                                            .foregroundColor(Color("greyishBrownThree"))
+                                        if(self.userInfoService.userInfo.addressBook.place != nil){
+                                            Text(self.userInfoService.userInfo.addressBook.place!)
+                                                .font(Fonts.RobotFieldText)
+                                                .foregroundColor(Color("greyishBrownThree"))
+                                        }else{
+                                            
+                                            Text("")
+                                                .font(Fonts.RobotFieldText)
+                                                .foregroundColor(Color("greyishBrownThree"))
+                                        }
                                     }
                                     
                                 }.padding(.horizontal)
                                 Divider()
                             }
                             
-                    }
-                    
-                }.frame(width: geometry.size.width, height: geometry.size.height-85, alignment: .top)
-                    .padding()
+                        }
+                        
+                    }.frame(width: geometry.size.width, height: geometry.size.height-85, alignment: .top)
+                        .padding()
                     HStack{
                         Spacer()
                         
-                        if(self.userInfoService.userInfo.id == nil){
+                        if(self.userInfoService.userInfo.id == ""){
                             ActivityIndicator(shouldAnimate: .constant(true))
                         }
-                        
                         if(self.isAnimating){
                             ActivityIndicator(shouldAnimate: .constant(true))
                         }
@@ -330,6 +284,7 @@ struct MyProfileView: View {
                 }
                 Divider()
                 GuestJiniBottomBar(viewRouter: self.viewRouter)
+                
             }.frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
                 .edgesIgnoringSafeArea(.vertical)
             
@@ -342,7 +297,6 @@ struct MyProfileView: View {
         }
         
     }
-    
     
 }
 

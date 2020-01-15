@@ -36,6 +36,8 @@ struct ContentView: View {
                NotificationsView(viewRouter: viewRouter)
             }else if viewRouter.currentPage ==  ViewRoutes.HELP_VIEW {
                HelpView(viewRouter: viewRouter)
+            }else if viewRouter.currentPage ==  ViewRoutes.APP_ACCESS_REQUEST_PAGE {
+               AppAccessRequest(viewRouter: viewRouter)
             }
         }
         

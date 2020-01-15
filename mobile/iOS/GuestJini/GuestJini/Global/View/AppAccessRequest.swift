@@ -9,7 +9,8 @@
 import SwiftUI
 
 struct AppAccessRequest: View {
-    @State var email:String = "";
+    @ObservedObject var viewRouter: ViewRouter
+      @State var email:String = "";
     @State var mobileNumber:String = "";
     
     var body: some View {
@@ -68,6 +69,6 @@ struct AppAccessRequest: View {
 
 struct AppAccessRequest_Previews: PreviewProvider {
     static var previews: some View {
-        AppAccessRequest()
+        AppAccessRequest(viewRouter: ViewRouter())
     }
 }

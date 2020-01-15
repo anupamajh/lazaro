@@ -107,7 +107,7 @@ struct ForgotPassword: View {
     }
     
     func processResponse(userInfo:UserInfo) -> Void {
-        if(userInfo.id == nil){
+        if(userInfo.id == ""){
             self.hasLoginError = true
             self.isAnimating = false
             
