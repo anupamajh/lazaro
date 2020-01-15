@@ -22,7 +22,7 @@ struct ForgotPassword: View {
     @State var showPopover: Bool = false
     @State var alertTitle:String = ""
     @State var alertBody:String = ""
-      
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack{
@@ -51,7 +51,7 @@ struct ForgotPassword: View {
                         HStack{
                             if(self.hasLoginError){
                                 
-                                GuestJiniErrorText(message:"This mobile number is not registered with GuestJini ")
+                                GuestJiniErrorText(message:"This email or mobile number is not registered with GuestJini ")
                             }
                         }.padding()
                         GuestJiniRegularTextBox(placeHolderText: "Email or Mobile number", text: self.$loginId)
@@ -79,9 +79,7 @@ struct ForgotPassword: View {
                                 GuestJiniButtonText(buttonText: "RESET PASSWORD")
                                 
                             }.disabled(self.isAnimating)
-                            .alert(isPresented: self.$success) {
-                                Alert(title: Text("Reset Password"), message: Text("An email is sent to you with the reset password link"), dismissButton: .default(Text("OK")))
-                            }
+                            
                             Spacer()
                         }
                         HStack{
@@ -119,15 +117,11 @@ struct ForgotPassword: View {
         if(userInfo.id == ""){
             self.hasLoginError = true
             self.isAnimating = false
-            self.alertTitle = "SUCCESS"
-            self.alertBody = "A link has been sent to your email account to reset your password."
-            self.showPopover = true
-            
         }else{
             self.success = true
             self.isAnimating = true
-            self.alertTitle = "FAILED"
-            self.alertBody = "Please try again or contact administrtaor."
+            self.alertTitle = "SUCCESS"
+            self.alertBody = "A link has been sent to your email account to reset your password."
             self.showPopover = true
         }
     }

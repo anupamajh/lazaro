@@ -8,6 +8,7 @@
 
 import Foundation
 class AppAccessRequestResponse: Decodable {
-    public var success:Bool = false
-    public var error:String = ""
+    public var id:String = ""
+       public var fullName:String  = ""
+       public var userName:String = ""
 }
