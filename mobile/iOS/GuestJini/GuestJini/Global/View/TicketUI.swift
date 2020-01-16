@@ -76,6 +76,43 @@ struct TicketUI: View {
                         )
                     }
                     
+                    VStack{
+                        HStack{
+                            VStack{
+                                HStack{
+                                    Text("Attachments(0)")
+                                        .font(Fonts.RobotSectionTitle)
+                                        .foregroundColor(Color("brownishGrey"))
+                                    Spacer()
+                                }.padding(.leading)
+                                HStack{
+                                    Text("You can attach photos, video, documents or any other files here.")
+                                        .font(Fonts.RobotRegularText)
+                                        .foregroundColor(Color("brownishGrey"))
+                                    Spacer()
+                                }.padding(.leading)
+                                
+                            }.padding()
+                            VStack{
+                            Button(action: {
+                                self.viewRouter.currentPage = ViewRoutes.TICKET_ATTACHMENT_LIST
+                            }){
+                                 VStack{
+                                           Image(systemName: "chevron.right")
+                                           .resizable()
+                                               .foregroundColor(Color("greyishBrownFour"))
+                                       }.frame(width: 7, height: 14, alignment: .center)
+                            }
+                            }.padding()
+                        } .cornerRadius(5)
+                            .background(Color("whiteThree")
+                           .shadow(radius: 10))
+                            .overlay(
+                            RoundedRectangle(cornerRadius:5)
+                                .stroke(Color("veryLightPink"), lineWidth: 1))
+                    }.padding()
+                       
+                    
                     HStack{
                         Spacer()
                         Button(action: {

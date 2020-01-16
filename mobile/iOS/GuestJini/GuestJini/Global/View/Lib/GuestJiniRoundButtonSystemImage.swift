@@ -14,7 +14,7 @@ struct GuestJiniRoundButtonSystemImage: View {
            VStack{
             Image(systemName: systemImage)
                .resizable()
-               .padding()
+                .padding(.all, 11)
            }.frame(width: 40, height: 40, alignment: .center)
         .foregroundColor(Color.white)
         .background(Color("aquaMarine"))

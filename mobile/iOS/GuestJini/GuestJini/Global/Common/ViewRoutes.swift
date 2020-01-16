@@ -18,6 +18,8 @@ class ViewRoutes {
     static var TICKET_LIST = "ticket_list"
     static var TICKET_UI = "ticket_ui"
     static var TICKET_VIEW = "ticket_view"
+    static var TICKET_ATTACHMENT_LIST = "ticket_attachment_list"
+    static var FIND_HELP_PAGE = "find_help_page"
     
     
     static var SETTINGS_VIEW = "settings_view"

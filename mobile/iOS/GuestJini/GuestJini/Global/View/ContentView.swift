@@ -38,6 +38,10 @@ struct ContentView: View {
                HelpView(viewRouter: viewRouter)
             }else if viewRouter.currentPage ==  ViewRoutes.APP_ACCESS_REQUEST_PAGE {
                AppAccessRequest(viewRouter: viewRouter)
+            }else if viewRouter.currentPage ==  ViewRoutes.FIND_HELP_PAGE {
+               FindHelpPage(viewRouter: viewRouter)
+            }else if viewRouter.currentPage ==  ViewRoutes.TICKET_ATTACHMENT_LIST {
+               TicketAttachmentList(viewRouter: viewRouter, ticketAttachmentDrawerAction: TicketAttachmentDrawerAction())
             }
         }
         

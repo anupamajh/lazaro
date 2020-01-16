@@ -1,23 +1,30 @@
 //
-//  ImagePicker.swift
+//  VideoPicker.swift
 //  GuestJini
 //
-//  Created by Prasanna Kumar Pete on 14/01/20.
+//  Created by Prasanna Kumar Pete on 16/01/20.
 //  Copyright © 2020 Prasanna Kumar Pete. All rights reserved.
 //
 
 import SwiftUI
 import Combine
+import AVFoundation
+import AVKit
+import MobileCoreServices
 
-struct ImagePickerView : UIViewControllerRepresentable {
+struct VideoPickerView: UIViewControllerRepresentable {
     
-    @Binding var model: ImagePickerViewModel
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<VideoPickerView>) {
+        
+    }
+    
+    @Binding var model: VideoPickerViewModel
     @Binding var isCamera: Bool
     
     typealias UIViewControllerType = UIImagePickerController
     
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+    func makeCoordinator() -> VideoCoordinator {
+        VideoCoordinator(self)
     }
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<Self>) -> UIImagePickerController {
@@ -25,11 +32,11 @@ struct ImagePickerView : UIViewControllerRepresentable {
         let controller = UIImagePickerController()
         controller.delegate = context.coordinator
         controller.allowsEditing = false
-        controller.mediaTypes = ["public.image"]
+        controller.mediaTypes = [kUTTypeMovie as String]
         if(isCamera){
             controller.sourceType = .camera
         } else{
-            controller.sourceType = .savedPhotosAlbum
+            controller.sourceType = .photoLibrary
         }
         return controller
         
@@ -40,11 +47,11 @@ struct ImagePickerView : UIViewControllerRepresentable {
         
     }
     
-    class Coordinator : NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    class VideoCoordinator : NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         
-        var parentView: ImagePickerView
+        var parentView: VideoPickerView
         
-        init(_ parentView: ImagePickerView) {
+        init(_ parentView: VideoPickerView) {
             self.parentView = parentView
         }
         
@@ -55,11 +62,11 @@ struct ImagePickerView : UIViewControllerRepresentable {
         func imagePickerController(_ picker: UIImagePickerController,
                                    didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
             
-            guard let uiImage = info[.originalImage] as? UIImage else { return }
-            
-            let image = Image(uiImage: uiImage)
-            parentView.model.sourceImage = uiImage
-            parentView.model.pickedImagesSubject?.send(image)
+            guard let selectedVideo:URL = info[.mediaURL] as? URL else {return }
+            let videoData = try? Data(contentsOf: selectedVideo)
+            let playerView = PlayerView(videoURL: selectedVideo)
+            parentView.model.sourceVideo = videoData
+            parentView.model.pickedVideoSubject?.send(playerView)
             parentView.model.isPresented = false
             
         }
@@ -68,8 +75,10 @@ struct ImagePickerView : UIViewControllerRepresentable {
     
 }
 
-struct ImagePickerViewModel {
+
+
+struct VideoPickerViewModel {
     var isPresented: Bool = false
-    var sourceImage:UIImage? = nil
-    let pickedImagesSubject: PassthroughSubject<Image, Never>! = PassthroughSubject<Image, Never>()
+    var sourceVideo:Data? = nil
+    let pickedVideoSubject: PassthroughSubject<PlayerView, Never>! = PassthroughSubject<PlayerView, Never>()
 }

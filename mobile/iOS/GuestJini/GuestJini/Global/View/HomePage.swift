@@ -11,7 +11,9 @@ import SwiftUI
 //9845792195
 
 struct HomePage: View {
-    @State var searchText:String = ""
+    @State var helpSearchText:String = ""
+    @State var helpSearchCancel:Bool = false
+    
     @ObservedObject var viewRouter: ViewRouter
     init(viewRouter: ViewRouter){
         self.viewRouter = viewRouter
@@ -29,7 +31,6 @@ struct HomePage: View {
                             .foregroundColor(Color("brownishGrey"))
                         Spacer()
                     }.padding(.bottom)
-                    /*
                     VStack{
                         VStack{
                             HStack{
@@ -39,8 +40,37 @@ struct HomePage: View {
                                 Spacer()
                             }.padding()
                             VStack{
-                                GuestJiniSearchBox(text: self.$searchText)
-                            }.padding(.horizontal)
+                                HStack {
+                                    HStack {
+                                        TextField("search", text: self.$helpSearchText, onEditingChanged: { isEditing in
+                                            self.helpSearchCancel = true
+                                        }, onCommit: {
+                                            print("onCommit")
+                                        }).foregroundColor(.primary)
+
+                                        Button(action: {
+                                            self.helpSearchText = ""
+                                        }) {
+                                            Image(systemName: "xmark.circle.fill").opacity(self.helpSearchText == "" ? 0 : 1)
+                                        }
+                                        
+                                        Button(action: {
+                                           
+                                        }) {
+                                             Image(systemName: "magnifyingglass")
+                                        }.padding(.leading)
+                                       
+                                        
+                                    }
+                                    .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 15))
+                                    .foregroundColor(.secondary)
+                                    .background(Color.white)
+                                    .cornerRadius(20.0)
+                                }
+                                .padding(.horizontal)
+                                .navigationBarHidden(self.helpSearchCancel)
+                                //GuestJiniSearchView(searchText: self.$helpSearchText, showCancelButton: self.$helpSearchCancel)
+                            }
                             HStack{
                                 Spacer()
                                 GuestJiniSubAction(actionText: "Popular Searches", systemImage: "chevron.down")
@@ -55,7 +85,8 @@ struct HomePage: View {
                                     Spacer()
                                 }.padding()
                                 HStack{
-                                    GuestJiniDescriptionText(description: "Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra.")
+                                    GuestJiniInformationText(information: "Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra.")
+                                        .padding()
                                     Button(action: {
                                         // What to perform
                                     }) {
@@ -73,7 +104,6 @@ struct HomePage: View {
                         .cornerRadius(15)
                         .shadow(radius: 5)
                     }
-                    */
                     VStack{
                         VStack{
                             HStack{
@@ -123,7 +153,6 @@ struct HomePage: View {
                         .shadow(radius: 5)
                     }
                     
-                    /*
                     VStack{
                         VStack{
                             
@@ -152,12 +181,12 @@ struct HomePage: View {
                         .cornerRadius(15)
                         .shadow(radius: 5)
                     }
-                    */
                 }.frame(width: geometry.size.width, height: geometry.size.height-65, alignment: .top)
                 Divider()
                 GuestJiniBottomBar(viewRouter: self.viewRouter)
             }.frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
                 .edgesIgnoringSafeArea(.bottom)
+            .resignKeyboardOnTapGesture()
         }
     }
 }
