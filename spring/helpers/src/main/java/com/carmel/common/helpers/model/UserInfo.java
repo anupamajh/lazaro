@@ -13,9 +13,18 @@ public class UserInfo {
     private String id;
     private String fullName;
     private String userName;
+    private String phone;
+    private int gender;
+    private String[] addressBook;
+    private String[] userPreferences;
 
 
     public UserInfo(){
+        this.phone = "";
+        this.gender = 0;
+        this.addressBook = new String[0];
+        this.userPreferences = new String[0];
+
 
     }
 
@@ -23,6 +32,11 @@ public class UserInfo {
         this.fullName =user.getUserName();
         this.userName = user.getUserName();
         this.id = user.getId();
+        this.phone = "";
+        this.gender = 0;
+        this.addressBook = new String[0];
+        this.userPreferences = new String[0];
+
 
     }
 
@@ -58,5 +72,37 @@ public class UserInfo {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+    public String[] getAddressBook() {
+        return addressBook;
+    }
+
+    public void setAddressBook(String[] addressBook) {
+        this.addressBook = addressBook;
+    }
+
+    public String[] getUserPreferences() {
+        return userPreferences;
+    }
+
+    public void setUserPreferences(String[] userPreferences) {
+        this.userPreferences = userPreferences;
     }
 }
