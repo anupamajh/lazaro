@@ -106,7 +106,7 @@ struct AppAccessRequest: View {
                                     self.isAnimating = false
                                     if(response.id != ""){
                                         self.alertTitle = "Success"
-                                        self.alertBody = "A link has been sent to your email account to gain access to app."
+                                        self.alertBody = "Request has been sent to administrator, You will receive an activation email once details are verified."
                                         self.showPopover = true
                                     }else{
                                         self.hasError = true
@@ -130,6 +130,11 @@ struct AppAccessRequest: View {
                         Spacer()
                     }
                 }
+                GeometryReader { _ in
+                    EmptyView()
+                }
+                .background(Color.gray.opacity(0.9))
+                .opacity(self.showPopover ? 1.0 : 0.0)
                 
                 if(self.showPopover){
                     GuestJiniAlerBox(showAlert: self.$showPopover, alertTitle: self.$alertTitle, alertBody: self.$alertBody)

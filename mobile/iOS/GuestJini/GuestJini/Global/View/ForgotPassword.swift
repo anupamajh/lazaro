@@ -86,6 +86,7 @@ struct ForgotPassword: View {
                             Spacer()
                             GuestJiniDescriptionText(description: "Don't Have account yet?")
                             Button(action: {
+                                self.hasLoginError = false
                                 self.viewRouter.currentPage = ViewRoutes.APP_ACCESS_REQUEST_PAGE
                             }) {
                                 GuestJiniHyperlinkButtonText(buttonText: "Get one now")
@@ -103,8 +104,13 @@ struct ForgotPassword: View {
                         Spacer()
                     }
                 }
-                
+                GeometryReader { _ in
+                                       EmptyView()
+                                   }
+                                   .background(Color.gray.opacity(0.9))
+                                   .opacity(self.showPopover ? 1.0 : 0.0)
                 if(self.showPopover){
+                   
                     GuestJiniAlerBox(showAlert: self.$showPopover, alertTitle: self.$alertTitle, alertBody: self.$alertBody)
                 }else{
                     GuestJiniAlerBox(showAlert: self.$showPopover, alertTitle: self.$alertTitle, alertBody: self.$alertBody).hidden()
@@ -113,13 +119,13 @@ struct ForgotPassword: View {
         }
     }
     
-    func processResponse(userInfo:UserInfo) -> Void {
+    func processResponse(userInfo:ForgotPasswordResponse) -> Void {
         if(userInfo.id == ""){
             self.hasLoginError = true
             self.isAnimating = false
         }else{
             self.success = true
-            self.isAnimating = true
+            self.isAnimating = false
             self.alertTitle = "SUCCESS"
             self.alertBody = "A link has been sent to your email account to reset your password."
             self.showPopover = true

@@ -28,9 +28,9 @@ class CheckTokenService: ObservableObject {
         ]
         let parameters = [
             "token" : accessToekn
-        ]
+               ]
         
-        AF.request(EndPoints.AUTHORISATION_URL, method: .post, parameters: parameters,headers: headers)
+        AF.request(EndPoints.CHECK_TOKEN_URL, method: .post, parameters: parameters,headers: headers)
             .responseData { (response) in
                 let jsonDecoder = JSONDecoder()
                 var isSuccess = false

@@ -20,27 +20,36 @@ struct TicketAttachmentDrawerContent: View {
                 HStack{
                     GuestJiniRoundButtonSystemImage(systemImage: "camera")
                         .padding()
-                    GuestJiniInformationText(information: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. .")
+                    GuestJiniInformationText(information: "Take pictures to help us know the exact issue")
+                    Spacer()
+                }.onTapGesture {
+                    self.ticketAttachmentDrawerAction.currentAction = 1
                 }
                 Divider()
             }.onTapGesture {
-                print("Camera Upload")
+                self.ticketAttachmentDrawerAction.currentAction = 1
             }
             VStack{
                 HStack{
                     GuestJiniRoundButtonSystemImage(systemImage: "photo")
                         .padding()
-                    GuestJiniInformationText(information: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. .")
+                    GuestJiniInformationText(information: "Upload a picture relevant to the issue")
+                    Spacer()
+                }.onTapGesture {
+                    self.ticketAttachmentDrawerAction.currentAction = 2
                 }
                 Divider()
             }.onTapGesture {
-                print("Image Upload")
+                self.ticketAttachmentDrawerAction.currentAction = 2
             }
             VStack{
                 HStack{
                     GuestJiniRoundButtonSystemImage(systemImage: "video")
                         .padding()
-                    GuestJiniInformationText(information: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. .")
+                    GuestJiniInformationText(information: "Upload a video relevant to the issue")
+                    Spacer()
+                }.onTapGesture {
+                    self.ticketAttachmentDrawerAction.currentAction = 3
                 }
                 Divider()
             }.onTapGesture {
@@ -50,21 +59,27 @@ struct TicketAttachmentDrawerContent: View {
                 HStack{
                     GuestJiniRoundButtonSystemImage(systemImage: "mic")
                         .padding()
-                    GuestJiniInformationText(information: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. .")
+                    GuestJiniInformationText(information: "You can send us an audio message too!")
+                    Spacer()
+                }.onTapGesture {
+                   self.ticketAttachmentDrawerAction.currentAction = 4
                 }
                 Divider()
             }.onTapGesture {
-                print("Camera Upload")
+               self.ticketAttachmentDrawerAction.currentAction = 4
             }
             VStack{
                 HStack{
                     GuestJiniRoundButtonSystemImage(systemImage: "folder")
                         .padding()
-                    GuestJiniInformationText(information: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. .")
+                    GuestJiniInformationText(information: "Upload documents like bills, warranties or any other files relevant to the issue")
+                    Spacer()
+                }.onTapGesture {
+                    self.ticketAttachmentDrawerAction.currentAction = 5
                 }
                 Divider()
             }.onTapGesture {
-                print("Camera Upload")
+                self.ticketAttachmentDrawerAction.currentAction = 5
             }
         }
     }

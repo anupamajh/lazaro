@@ -55,14 +55,18 @@ struct ImagePickerView : UIViewControllerRepresentable {
         func imagePickerController(_ picker: UIImagePickerController,
                                    didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
             
-            guard let uiImage = info[.originalImage] as? UIImage else { return }
+            guard let uiImage = info[.originalImage] as? UIImage else {
+                parentView.model.isPresented = false
+                return
+            }
             
             let image = Image(uiImage: uiImage)
             parentView.model.sourceImage = uiImage
+            parentView.model.sourceImageData = uiImage.jpegData(compressionQuality: 0.7)
             parentView.model.pickedImagesSubject?.send(image)
             parentView.model.isPresented = false
-            
         }
+        
         
     }
     
@@ -71,5 +75,8 @@ struct ImagePickerView : UIViewControllerRepresentable {
 struct ImagePickerViewModel {
     var isPresented: Bool = false
     var sourceImage:UIImage? = nil
+    var sourceImageData:Data? = nil
+    var sourceFileName:String? = nil
+    
     let pickedImagesSubject: PassthroughSubject<Image, Never>! = PassthroughSubject<Image, Never>()
 }

@@ -16,8 +16,7 @@ struct GuestJiniHyperlinkButtonText: View {
         .underline()
                        .padding(.top, 10)
                        .padding(.bottom, 10)
-                       .padding(.leading, 20)
-                       .padding(.trailing, 20) .foregroundColor(Color("aquaMarine"))
+                       .foregroundColor(Color("aquaMarine"))
     }
 }
 

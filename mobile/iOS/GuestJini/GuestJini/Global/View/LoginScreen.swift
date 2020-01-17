@@ -69,7 +69,7 @@ struct LoginScreen: View {
                             Button(action: {
                                 self.viewRouter.currentPage = ViewRoutes.FORGOT_PASSWORD_PAGE
                             }) {
-                                GuestJiniHyperlinkButtonText(buttonText: "Forgot Password?")
+                                GuestJiniHyperlinkButtonText(buttonText: "Forgot Password?").padding(.trailing, 25)
                             }
                         }
                         HStack{
@@ -109,7 +109,7 @@ struct LoginScreen: View {
                                 self.viewRouter.currentPage = ViewRoutes.APP_ACCESS_REQUEST_PAGE
                              }) {
                              GuestJiniHyperlinkButtonText(buttonText: "Get one now")
-                             }.offset(x: -15)
+                             }.offset(x: -20)
                             Spacer()
                         }.padding()
                     }

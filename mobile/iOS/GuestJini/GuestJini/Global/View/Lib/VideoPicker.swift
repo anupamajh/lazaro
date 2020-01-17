@@ -65,6 +65,8 @@ struct VideoPickerView: UIViewControllerRepresentable {
             guard let selectedVideo:URL = info[.mediaURL] as? URL else {return }
             let videoData = try? Data(contentsOf: selectedVideo)
             let playerView = PlayerView(videoURL: selectedVideo)
+            parentView.model.sourceURL = selectedVideo
+            parentView.model.fileName = selectedVideo.lastPathComponent
             parentView.model.sourceVideo = videoData
             parentView.model.pickedVideoSubject?.send(playerView)
             parentView.model.isPresented = false
@@ -80,5 +82,7 @@ struct VideoPickerView: UIViewControllerRepresentable {
 struct VideoPickerViewModel {
     var isPresented: Bool = false
     var sourceVideo:Data? = nil
+    var sourceURL:URL? = nil
+    var fileName:String = ""
     let pickedVideoSubject: PassthroughSubject<PlayerView, Never>! = PassthroughSubject<PlayerView, Never>()
 }

@@ -23,9 +23,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Get the managed object context from the shared persistent container.
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
+        let ticketUIData = TicketUIModel()
+        
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
         let contentView = ContentView(viewRouter: ViewRouter()).environment(\.managedObjectContext, context)
+            
         
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
@@ -33,7 +36,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             if #available(iOS 13.0, *) {
                 window.overrideUserInterfaceStyle = .light
             }
-            window.rootViewController = UIHostingController(rootView: contentView
+            window.rootViewController = UIHostingController(rootView: contentView.environmentObject(ticketUIData)
             )
             self.window = window
             window.makeKeyAndVisible()

@@ -15,10 +15,11 @@ class TicketListService:ObservableObject{
     @ObservedObject var viewRouter: ViewRouter
     @Published var ticketList:[Ticket] = []
     
-    var loginService = LoginService()
+    var checkTokenService:CheckTokenService
     
     init(viewRouter: ViewRouter) {
         self.viewRouter = viewRouter;
+        self.checkTokenService = CheckTokenService(viewRouter: viewRouter)
         self.getTicketList { (response) in
             self.ticketResponse = response
             self.ticketList = response.taskTicketList!;
@@ -26,19 +27,10 @@ class TicketListService:ObservableObject{
     }
     
     func getTicketList(completionHandler: @escaping(TicketResponse)->Void) -> Void {
-         loginService.refreshToken(RefreshToken: UserDefaults.standard.string(forKey: "refresh_token")!) { (authData) in
-             if(authData.access_token.trimmingCharacters(in: .whitespacesAndNewlines)==""){
-                 UserDefaults.standard.set(false, forKey: "isLoggedIn")
-                 self.viewRouter.currentPage = ViewRoutes.LOGIN_PAGE
-             }else{
-                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                 UserDefaults.standard.set(authData.access_token, forKey: "access_token")
-                 UserDefaults.standard.set(authData.refresh_token, forKey: "refresh_token")
-                 UserDefaults.standard.set(authData.token_type, forKey: "token_type")
-                 UserDefaults.standard.set(authData.expires_in, forKey: "expires_in")
-                 
+         checkTokenService.CheckToken { (checkStatus) in
+             if(checkStatus){
                  let headers: HTTPHeaders = [
-                     "Authorization": "Bearer \(authData.access_token)",
+                     "Authorization": "Bearer \(UserDefaults.standard.string(forKey: "access_token")!)",
                      "Accept": "application/json"
                  ]
                  

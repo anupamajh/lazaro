@@ -9,7 +9,10 @@
 import SwiftUI
 
 struct TicketUI: View {
+    @EnvironmentObject var ticketUIData: TicketUIModel
+
     @ObservedObject var viewRouter: ViewRouter
+    @State var taskAttachment:[TaskAttachment] = []
     @State var ticketSubject:String = ""
     @State var ticketNarration:String = ""
     @State var hasSubject:Bool = true
@@ -18,12 +21,11 @@ struct TicketUI: View {
     
     @ObservedObject var ticketSaveService:TicketSaveService
     
-    
-    
     init(viewRouter: ViewRouter){
         self.viewRouter = viewRouter
         self.ticketSaveService = TicketSaveService(viewRouter: viewRouter)
     }
+    
     var body: some View {
         GeometryReader { geometry in
             VStack{
@@ -39,10 +41,12 @@ struct TicketUI: View {
                         GuestJiniTitleText(title: "NEW TICKET")
                         Spacer()
                     }.padding()
+                        .resignKeyboardOnTapGesture()
                     HStack{
                         Text("Subject *").font(Fonts.RobotTitle)
                         Spacer()
                     }.padding()
+                    .resignKeyboardOnTapGesture()
                     
                     GuestJiniRegularTextBox(placeHolderText: "Please write your subject here", text: self.$ticketSubject)
                         .padding(.horizontal)
@@ -51,17 +55,21 @@ struct TicketUI: View {
                             GuestJiniFieldError()
                             Spacer()
                         }.padding(.leading)
+                        .resignKeyboardOnTapGesture()
                     }else{
                         HStack{
-                        GuestJiniDescriptionText(description: "")
-                             Spacer()
-                                                   }.padding(.leading)
+                            GuestJiniDescriptionText(description: "")
+                            Spacer()
+                            }.padding(.leading).resignKeyboardOnTapGesture()
                     }
                     HStack{
                         Text("Complaint").font(Fonts.RobotTitle)
+                        .resignKeyboardOnTapGesture()
                         Spacer()
+                        .resignKeyboardOnTapGesture()
                         
                     }.padding()
+                    .resignKeyboardOnTapGesture()
                     VStack{
                         MultilineTextView(text: self.$ticketNarration)
                             .frame(width: geometry.size.width-45, height:100, alignment: .top)
@@ -80,7 +88,7 @@ struct TicketUI: View {
                         HStack{
                             VStack{
                                 HStack{
-                                    Text("Attachments(0)")
+                                    Text("Attachments(\(self.taskAttachment.count))")
                                         .font(Fonts.RobotSectionTitle)
                                         .foregroundColor(Color("brownishGrey"))
                                     Spacer()
@@ -94,24 +102,30 @@ struct TicketUI: View {
                                 
                             }.padding()
                             VStack{
-                            Button(action: {
-                                self.viewRouter.currentPage = ViewRoutes.TICKET_ATTACHMENT_LIST
-                            }){
-                                 VStack{
-                                           Image(systemName: "chevron.right")
-                                           .resizable()
-                                               .foregroundColor(Color("greyishBrownFour"))
-                                       }.frame(width: 7, height: 14, alignment: .center)
-                            }
+                                Button(action: {
+                                    self.ticketUIData.title = self.ticketSubject
+                                    self.ticketUIData.narration = self.ticketNarration
+                                    self.ticketUIData.ticketAttachments = self.taskAttachment
+                                    self.viewRouter.taskAttachment = self.taskAttachment
+                                    self.viewRouter.currentPage = ViewRoutes.TICKET_ATTACHMENT_LIST
+                                }){
+                                    VStack{
+                                        VStack{
+                                            Image(systemName: "chevron.right")
+                                                .resizable()
+                                                .foregroundColor(Color("greyishBrownFour"))
+                                        }.frame(width: 7, height: 14, alignment: .center)
+                                    }.padding()
+                                }
                             }.padding()
                         } .cornerRadius(5)
                             .background(Color("whiteThree")
-                           .shadow(radius: 10))
+                                .shadow(radius: 10))
                             .overlay(
-                            RoundedRectangle(cornerRadius:5)
-                                .stroke(Color("veryLightPink"), lineWidth: 1))
-                    }.padding()
-                       
+                                RoundedRectangle(cornerRadius:5)
+                                    .stroke(Color("veryLightPink"), lineWidth: 1))
+                        }.padding().resignKeyboardOnTapGesture()
+                    
                     
                     HStack{
                         Spacer()
@@ -125,7 +139,10 @@ struct TicketUI: View {
                                 let ticket:Ticket = Ticket();
                                 ticket.ticketTitle = self.ticketSubject
                                 ticket.ticketNarration = self.ticketNarration
-                                self.ticketSaveService.saveTicket(ticketData: ticket) { (response) in
+                                let ticketRequest = TaskTicketRequest()
+                                ticketRequest.taskTicket = ticket
+                                ticketRequest.taskAttachmentList = self.taskAttachment
+                                self.ticketSaveService.saveTicket(ticketData: ticketRequest) { (response) in
                                     if(response.success == true){
                                         self.showSuccess = true
                                         self.viewRouter.currentPage = ViewRoutes.TICKET_LIST
@@ -149,10 +166,23 @@ struct TicketUI: View {
                     
                 }.frame(width: geometry.size.width, height: geometry.size.height-85, alignment: .top)
                     .padding()
+                     .resignKeyboardOnTapGesture()
+                    .onAppear(){
+                        if(self.viewRouter.taskAttachment != nil){
+                            self.taskAttachment = self.viewRouter.taskAttachment!
+                        }
+                        
+                }.onAppear(){
+                    self.ticketSubject = self.ticketUIData.title
+                    self.ticketNarration = self.ticketUIData.narration
+                    self.taskAttachment = self.ticketUIData.ticketAttachments
+                }
                 Divider()
                 GuestJiniBottomBar(viewRouter: self.viewRouter)
             }.frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
                 .edgesIgnoringSafeArea(.vertical)
+                .resignKeyboardOnTapGesture()
+           
         }
     }
 }

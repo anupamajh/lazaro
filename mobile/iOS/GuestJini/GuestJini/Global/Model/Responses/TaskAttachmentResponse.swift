@@ -1,16 +1,15 @@
 //
-//  TicketResponse.swift
+//  TaskAttachmentResponse.swift
 //  GuestJini
 //
-//  Created by Prasanna Kumar Pete on 02/01/20.
+//  Created by Prasanna Kumar Pete on 17/01/20.
 //  Copyright © 2020 Prasanna Kumar Pete. All rights reserved.
 //
 
 import Foundation
-class TicketResponse: Decodable {
-    public var taskTicket:Ticket? = nil
-    public var taskTicketList:[Ticket]?  = nil
-    public var taskAttachments:[TaskAttachment]?  = nil
+class TaskAttachmentResponse: Decodable {
+    public var taskAttachment:TaskAttachment? = nil
+    public var taskAttachmentList:[TaskAttachment]?  = nil
     public var totalPages:Int = 0
     public var totalRecords:Int = 0
     public var currentRecords:Int = 0

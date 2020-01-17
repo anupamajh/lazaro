@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		61B96753C6D4A2615D274567 /* Pods_GuestJiniTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12EDB7E46FA5CA1E3AEAE956 /* Pods_GuestJiniTests.framework */; };
 		67069DFDAE3F9EECC47FE8AA /* Pods_GuestJini_GuestJiniUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6AFC97278410F79AF19B3D0 /* Pods_GuestJini_GuestJiniUITests.framework */; };
+		C102721023D1852300F2D227 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C102720F23D1852300F2D227 /* AudioPlayer.swift */; };
+		C102721223D185C000F2D227 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C102721123D185C000F2D227 /* AudioRecorder.swift */; };
+		C102721423D1869E00F2D227 /* RecordingDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C102721323D1869E00F2D227 /* RecordingDataModel.swift */; };
+		C102721623D1880C00F2D227 /* AudioRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C102721523D1880C00F2D227 /* AudioRecorderView.swift */; };
+		C102721823D1904400F2D227 /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C102721723D1904400F2D227 /* AudioPlayerView.swift */; };
+		C102721A23D19CC700F2D227 /* FilePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C102721923D19CC700F2D227 /* FilePickerView.swift */; };
+		C102721C23D19DBE00F2D227 /* FilePickerUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C102721B23D19DBE00F2D227 /* FilePickerUIView.swift */; };
+		C102721E23D1A7CC00F2D227 /* UploadTicketAttachmentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C102721D23D1A7CC00F2D227 /* UploadTicketAttachmentService.swift */; };
+		C102722023D1C4FF00F2D227 /* AttachmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C102721F23D1C4FF00F2D227 /* AttachmentModel.swift */; };
 		C10ACFF423BF78EE00C7CB70 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10ACFF323BF78EE00C7CB70 /* NotificationsView.swift */; };
 		C10ACFF623BF7B3700C7CB70 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10ACFF523BF7B3700C7CB70 /* WebView.swift */; };
 		C10ACFF823BF7BDF00C7CB70 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10ACFF723BF7BDF00C7CB70 /* HelpView.swift */; };
@@ -40,6 +49,9 @@
 		C12EF5B723B223DF0024C22C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C12EF5B523B223DF0024C22C /* LaunchScreen.storyboard */; };
 		C12EF5C223B223DF0024C22C /* GuestJiniTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12EF5C123B223DF0024C22C /* GuestJiniTests.swift */; };
 		C12EF5CD23B223DF0024C22C /* GuestJiniUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12EF5CC23B223DF0024C22C /* GuestJiniUITests.swift */; };
+		C14322D323D1FAE300D7E0EA /* TaskTicketRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14322D223D1FAE300D7E0EA /* TaskTicketRequest.swift */; };
+		C14322D623D1FCDB00D7E0EA /* TicketUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14322D523D1FCDB00D7E0EA /* TicketUIModel.swift */; };
+		C14322D823D2253B00D7E0EA /* ForgotPasswordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14322D723D2253B00D7E0EA /* ForgotPasswordResponse.swift */; };
 		C144F01223B477B100D6D218 /* CarouselImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F01123B477B100D6D218 /* CarouselImage.swift */; };
 		C144F01723B4812600D6D218 /* GuestJiniButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F01623B4812600D6D218 /* GuestJiniButtonText.swift */; };
 		C144F01923B4814B00D6D218 /* GuestJiniRoundButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F01823B4814B00D6D218 /* GuestJiniRoundButtonText.swift */; };
@@ -48,6 +60,9 @@
 		C144F01F23B481B400D6D218 /* GuestJiniDescriptionText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F01E23B481B400D6D218 /* GuestJiniDescriptionText.swift */; };
 		C144F02123B481C100D6D218 /* GuestJiniErrorText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F02023B481C100D6D218 /* GuestJiniErrorText.swift */; };
 		C144F02323B483CB00D6D218 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144F02223B483CB00D6D218 /* FontExtension.swift */; };
+		C147F27323D1D234000CF770 /* TaskAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C147F27223D1D234000CF770 /* TaskAttachment.swift */; };
+		C147F27523D1D2A8000CF770 /* TaskAttachmentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C147F27423D1D2A8000CF770 /* TaskAttachmentResponse.swift */; };
+		C147F27723D1D379000CF770 /* AttachmentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C147F27623D1D379000CF770 /* AttachmentRow.swift */; };
 		C1504AA223CD89C700302EB7 /* UserPreferenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1504AA123CD89C700302EB7 /* UserPreferenceType.swift */; };
 		C1504AA423CD8A5000302EB7 /* UserPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1504AA323CD8A5000302EB7 /* UserPreference.swift */; };
 		C1504AA623CD8AD800302EB7 /* UserPreferenceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1504AA523CD8AD800302EB7 /* UserPreferenceResponse.swift */; };
@@ -89,7 +104,6 @@
 		C1B1E43023BE0D1F009E1E3B /* GuestJiniSecureTextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E42F23BE0D1F009E1E3B /* GuestJiniSecureTextBox.swift */; };
 		C1B1E43223BE1DD1009E1E3B /* TicketList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E43123BE1DD1009E1E3B /* TicketList.swift */; };
 		C1B1E43423BE1DDD009E1E3B /* TicketUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E43323BE1DDD009E1E3B /* TicketUI.swift */; };
-		C1B1E43623BE1EEB009E1E3B /* TicketsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E43523BE1EEB009E1E3B /* TicketsService.swift */; };
 		C1B1E43823BE1EFF009E1E3B /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E43723BE1EFF009E1E3B /* Ticket.swift */; };
 		C1B1E43A23BE1F1B009E1E3B /* TicketResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E43923BE1F1B009E1E3B /* TicketResponse.swift */; };
 		C1B1E43C23BEFA23009E1E3B /* GuestJiniTextArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E43B23BEFA23009E1E3B /* GuestJiniTextArea.swift */; };
@@ -149,6 +163,15 @@
 		89AA4E4DDCE18C03A5807E40 /* Pods-GuestJini.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuestJini.release.xcconfig"; path = "Target Support Files/Pods-GuestJini/Pods-GuestJini.release.xcconfig"; sourceTree = "<group>"; };
 		AE9306028842963B3966FCE4 /* Pods-GuestJini-GuestJiniUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuestJini-GuestJiniUITests.release.xcconfig"; path = "Target Support Files/Pods-GuestJini-GuestJiniUITests/Pods-GuestJini-GuestJiniUITests.release.xcconfig"; sourceTree = "<group>"; };
 		BA7E24932EFB1E938F5C463B /* Pods-GuestJini-GuestJiniUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuestJini-GuestJiniUITests.debug.xcconfig"; path = "Target Support Files/Pods-GuestJini-GuestJiniUITests/Pods-GuestJini-GuestJiniUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C102720F23D1852300F2D227 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		C102721123D185C000F2D227 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
+		C102721323D1869E00F2D227 /* RecordingDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingDataModel.swift; sourceTree = "<group>"; };
+		C102721523D1880C00F2D227 /* AudioRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderView.swift; sourceTree = "<group>"; };
+		C102721723D1904400F2D227 /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
+		C102721923D19CC700F2D227 /* FilePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePickerView.swift; sourceTree = "<group>"; };
+		C102721B23D19DBE00F2D227 /* FilePickerUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePickerUIView.swift; sourceTree = "<group>"; };
+		C102721D23D1A7CC00F2D227 /* UploadTicketAttachmentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTicketAttachmentService.swift; sourceTree = "<group>"; };
+		C102721F23D1C4FF00F2D227 /* AttachmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentModel.swift; sourceTree = "<group>"; };
 		C10ACFF323BF78EE00C7CB70 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		C10ACFF523BF7B3700C7CB70 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		C10ACFF723BF7BDF00C7CB70 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
@@ -186,6 +209,9 @@
 		C12EF5C823B223DF0024C22C /* GuestJiniUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GuestJiniUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C12EF5CC23B223DF0024C22C /* GuestJiniUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniUITests.swift; sourceTree = "<group>"; };
 		C12EF5CE23B223DF0024C22C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C14322D223D1FAE300D7E0EA /* TaskTicketRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTicketRequest.swift; sourceTree = "<group>"; };
+		C14322D523D1FCDB00D7E0EA /* TicketUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketUIModel.swift; sourceTree = "<group>"; };
+		C14322D723D2253B00D7E0EA /* ForgotPasswordResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordResponse.swift; sourceTree = "<group>"; };
 		C144F01123B477B100D6D218 /* CarouselImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselImage.swift; sourceTree = "<group>"; };
 		C144F01623B4812600D6D218 /* GuestJiniButtonText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniButtonText.swift; sourceTree = "<group>"; };
 		C144F01823B4814B00D6D218 /* GuestJiniRoundButtonText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniRoundButtonText.swift; sourceTree = "<group>"; };
@@ -194,6 +220,9 @@
 		C144F01E23B481B400D6D218 /* GuestJiniDescriptionText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniDescriptionText.swift; sourceTree = "<group>"; };
 		C144F02023B481C100D6D218 /* GuestJiniErrorText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniErrorText.swift; sourceTree = "<group>"; };
 		C144F02223B483CB00D6D218 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
+		C147F27223D1D234000CF770 /* TaskAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAttachment.swift; sourceTree = "<group>"; };
+		C147F27423D1D2A8000CF770 /* TaskAttachmentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAttachmentResponse.swift; sourceTree = "<group>"; };
+		C147F27623D1D379000CF770 /* AttachmentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentRow.swift; sourceTree = "<group>"; };
 		C1504AA123CD89C700302EB7 /* UserPreferenceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferenceType.swift; sourceTree = "<group>"; };
 		C1504AA323CD8A5000302EB7 /* UserPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreference.swift; sourceTree = "<group>"; };
 		C1504AA523CD8AD800302EB7 /* UserPreferenceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferenceResponse.swift; sourceTree = "<group>"; };
@@ -235,7 +264,6 @@
 		C1B1E42F23BE0D1F009E1E3B /* GuestJiniSecureTextBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniSecureTextBox.swift; sourceTree = "<group>"; };
 		C1B1E43123BE1DD1009E1E3B /* TicketList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketList.swift; sourceTree = "<group>"; };
 		C1B1E43323BE1DDD009E1E3B /* TicketUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketUI.swift; sourceTree = "<group>"; };
-		C1B1E43523BE1EEB009E1E3B /* TicketsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsService.swift; sourceTree = "<group>"; };
 		C1B1E43723BE1EFF009E1E3B /* Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticket.swift; sourceTree = "<group>"; };
 		C1B1E43923BE1F1B009E1E3B /* TicketResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketResponse.swift; sourceTree = "<group>"; };
 		C1B1E43B23BEFA23009E1E3B /* GuestJiniTextArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniTextArea.swift; sourceTree = "<group>"; };
@@ -456,6 +484,8 @@
 		C12EF5DF23B224F30024C22C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C14322D423D1FCCC00D7E0EA /* UIModel */,
+				C14322D123D1FACB00D7E0EA /* Request */,
 				C1504AAB23CD923400302EB7 /* Responses */,
 				C1D0000223B9DC2A00B93651 /* AuthData.swift */,
 				C17BBFC523BB22E600FD5A21 /* Articles.swift */,
@@ -464,6 +494,9 @@
 				C1504AA323CD8A5000302EB7 /* UserPreference.swift */,
 				C1504AB823CECF1B00302EB7 /* AddressBook.swift */,
 				C12523EC23CEDE4C00ADCE17 /* UserPreferenceUIModel.swift */,
+				C102721323D1869E00F2D227 /* RecordingDataModel.swift */,
+				C102721F23D1C4FF00F2D227 /* AttachmentModel.swift */,
+				C147F27223D1D234000CF770 /* TaskAttachment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -474,6 +507,8 @@
 				C18CF01023D096BE00B3E2BB /* TicketAttachmentDrawerAction.swift */,
 				C12EF5A923B223DD0024C22C /* SceneDelegate.swift */,
 				C1BB27FD23B7728000E8E3F9 /* ViewRouter.swift */,
+				C102720F23D1852300F2D227 /* AudioPlayer.swift */,
+				C102721123D185C000F2D227 /* AudioRecorder.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -525,6 +560,22 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		C14322D123D1FACB00D7E0EA /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				C14322D223D1FAE300D7E0EA /* TaskTicketRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		C14322D423D1FCCC00D7E0EA /* UIModel */ = {
+			isa = PBXGroup;
+			children = (
+				C14322D523D1FCDB00D7E0EA /* TicketUIModel.swift */,
+			);
+			path = UIModel;
+			sourceTree = "<group>";
+		};
 		C144F01523B478CE00D6D218 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
@@ -565,6 +616,11 @@
 				C18CF00A23D07E5800B3E2BB /* VideoPicker.swift */,
 				C18CF00C23D085CA00B3E2BB /* PlayerView.swift */,
 				C18CF00E23D085EB00B3E2BB /* PlayerUIView.swift */,
+				C102721523D1880C00F2D227 /* AudioRecorderView.swift */,
+				C102721723D1904400F2D227 /* AudioPlayerView.swift */,
+				C102721923D19CC700F2D227 /* FilePickerView.swift */,
+				C102721B23D19DBE00F2D227 /* FilePickerUIView.swift */,
+				C147F27623D1D379000CF770 /* AttachmentRow.swift */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -577,6 +633,8 @@
 				C1504AAC23CD924500302EB7 /* CheckTokenResponse.swift */,
 				C1504AAE23CD925200302EB7 /* OAuthErrorResponse.swift */,
 				C10CD04A23CF18CE001F30BB /* AppAccessRequestResponse.swift */,
+				C147F27423D1D2A8000CF770 /* TaskAttachmentResponse.swift */,
+				C14322D723D2253B00D7E0EA /* ForgotPasswordResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -603,10 +661,10 @@
 		C1BB7D5C23BF3F0000BA410C /* Ticket */ = {
 			isa = PBXGroup;
 			children = (
-				C1B1E43523BE1EEB009E1E3B /* TicketsService.swift */,
 				C1BB7D5823BF3A4000BA410C /* TicketListService.swift */,
 				C1BB7D5D23BF3F1F00BA410C /* TicketGetService.swift */,
 				C1BB7D6123BF4AE200BA410C /* TicketSaveService.swift */,
+				C102721D23D1A7CC00F2D227 /* UploadTicketAttachmentService.swift */,
 			);
 			path = Ticket;
 			sourceTree = "<group>";
@@ -871,8 +929,11 @@
 				C1B1E43223BE1DD1009E1E3B /* TicketList.swift in Sources */,
 				C1504AAF23CD925200302EB7 /* OAuthErrorResponse.swift in Sources */,
 				C10CD05123CF4BF2001F30BB /* ViewExtension.swift in Sources */,
+				C102721623D1880C00F2D227 /* AudioRecorderView.swift in Sources */,
 				C1B1E43C23BEFA23009E1E3B /* GuestJiniTextArea.swift in Sources */,
 				C10CD04D23CF49D8001F30BB /* GuestJiniSearchView.swift in Sources */,
+				C102721023D1852300F2D227 /* AudioPlayer.swift in Sources */,
+				C102721423D1869E00F2D227 /* RecordingDataModel.swift in Sources */,
 				C1BB27F623B75A6300E8E3F9 /* GuestJiniAlerBox.swift in Sources */,
 				C18CF00D23D085CA00B3E2BB /* PlayerView.swift in Sources */,
 				C144F01723B4812600D6D218 /* GuestJiniButtonText.swift in Sources */,
@@ -880,15 +941,19 @@
 				C12C4EFE23B781C200CD4B8F /* LoginService.swift in Sources */,
 				C1BB7D5923BF3A4000BA410C /* TicketListService.swift in Sources */,
 				C144F01223B477B100D6D218 /* CarouselImage.swift in Sources */,
+				C147F27323D1D234000CF770 /* TaskAttachment.swift in Sources */,
 				C1504AB923CECF1B00302EB7 /* AddressBook.swift in Sources */,
 				C10CD04F23CF4A75001F30BB /* UIApplicationExtension.swift in Sources */,
 				C10ACFFD23C2ECFD00C7CB70 /* ForgotPasswordService.swift in Sources */,
+				C14322D623D1FCDB00D7E0EA /* TicketUIModel.swift in Sources */,
+				C102721223D185C000F2D227 /* AudioRecorder.swift in Sources */,
 				C1903E6523B73B2B00AD8F63 /* GuestJiniImageCard.swift in Sources */,
 				C1BB7D6023BF418600BA410C /* TicketView.swift in Sources */,
 				C18CF00B23D07E5800B3E2BB /* VideoPicker.swift in Sources */,
 				C12523EF23CEE4C700ADCE17 /* DateExtension.swift in Sources */,
 				C127164823B75409001E4C99 /* GuestJiniButtonSystemImagePlain.swift in Sources */,
 				C129E73523BAFD60009144D6 /* GuestJiniSearchBox.swift in Sources */,
+				C14322D323D1FAE300D7E0EA /* TaskTicketRequest.swift in Sources */,
 				C1E4C02923CB793700D6C578 /* MultilineTextView.swift in Sources */,
 				C1E9E59223B740A300EB812F /* GuestJiniButtonSystemImage.swift in Sources */,
 				C12EF5A823B223DD0024C22C /* AppDelegate.swift in Sources */,
@@ -899,7 +964,6 @@
 				C1BB7D5B23BF3D7000BA410C /* ActivityIndicator.swift in Sources */,
 				C1BB27F423B7578A00E8E3F9 /* OTPVerification.swift in Sources */,
 				C1504AB123CDA42800302EB7 /* GuestJiniEditIconButton.swift in Sources */,
-				C1B1E43623BE1EEB009E1E3B /* TicketsService.swift in Sources */,
 				C12523ED23CEDE4C00ADCE17 /* UserPreferenceUIModel.swift in Sources */,
 				C1504AAA23CD901200302EB7 /* CheckTokenService.swift in Sources */,
 				C1BB7D5E23BF3F1F00BA410C /* TicketGetService.swift in Sources */,
@@ -910,6 +974,7 @@
 				C1A73E1E23B744DF00E9F5B8 /* LoginScreen.swift in Sources */,
 				C1B1E43023BE0D1F009E1E3B /* GuestJiniSecureTextBox.swift in Sources */,
 				C10CD04923CF1809001F30BB /* AppAccessRequestService.swift in Sources */,
+				C14322D823D2253B00D7E0EA /* ForgotPasswordResponse.swift in Sources */,
 				C127164A23B75553001E4C99 /* GuestJiniInformationText.swift in Sources */,
 				C1C74C3C23BA143E00FFA336 /* GuestJiniBottomBar.swift in Sources */,
 				C1A73E2023B744F900E9F5B8 /* GuestJiniHeaderLarge.swift in Sources */,
@@ -923,19 +988,25 @@
 				C1E4C02723CB5D3100D6C578 /* StringExtension.swift in Sources */,
 				C1BB27FE23B7728000E8E3F9 /* ViewRouter.swift in Sources */,
 				C144F01B23B4816E00D6D218 /* GuestJiniLogoImage.swift in Sources */,
+				C102721E23D1A7CC00F2D227 /* UploadTicketAttachmentService.swift in Sources */,
 				C1D0000123B9D83400B93651 /* EndPoints.swift in Sources */,
 				C12EF5AF23B223DD0024C22C /* ContentView.swift in Sources */,
 				C10AD00123C3155B00C7CB70 /* UserInfoService.swift in Sources */,
+				C102721A23D19CC700F2D227 /* FilePickerView.swift in Sources */,
 				C1EB388B23CEFA3F0057975E /* GetProfilePicService.swift in Sources */,
+				C102721C23D19DBE00F2D227 /* FilePickerUIView.swift in Sources */,
 				C1D0000323B9DC2A00B93651 /* AuthData.swift in Sources */,
 				C129E73923BB0509009144D6 /* GuestJiniRoundButtonSystemImage.swift in Sources */,
 				C1504AB723CDBC6A00302EB7 /* SaveProfilePicService.swift in Sources */,
 				C127164423B74F9D001E4C99 /* GuestJiniHyperlinkButtonText.swift in Sources */,
 				C1F787A923BF700800FF9B85 /* MyProfileView.swift in Sources */,
+				C102722023D1C4FF00F2D227 /* AttachmentModel.swift in Sources */,
+				C102721823D1904400F2D227 /* AudioPlayerView.swift in Sources */,
 				C1BB27FC23B766EE00E8E3F9 /* GuestJiniFieldLabel.swift in Sources */,
 				C12EF5AA23B223DD0024C22C /* SceneDelegate.swift in Sources */,
 				C1504AB523CDBC1B00302EB7 /* ImageConverter.swift in Sources */,
 				C15C726023BA18CD0069CB6E /* HomePage.swift in Sources */,
+				C147F27523D1D2A8000CF770 /* TaskAttachmentResponse.swift in Sources */,
 				C1504AA423CD8A5000302EB7 /* UserPreference.swift in Sources */,
 				C1B1E43E23BF0304009E1E3B /* TicketRow.swift in Sources */,
 				C1BB27F823B7644000E8E3F9 /* GuestJiniHeaderSmall.swift in Sources */,
@@ -958,6 +1029,7 @@
 				C129E73723BB008C009144D6 /* GuestJiniSubAction.swift in Sources */,
 				C1504AA623CD8AD800302EB7 /* UserPreferenceResponse.swift in Sources */,
 				C127164623B751CB001E4C99 /* ForgotPassword.swift in Sources */,
+				C147F27723D1D379000CF770 /* AttachmentRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

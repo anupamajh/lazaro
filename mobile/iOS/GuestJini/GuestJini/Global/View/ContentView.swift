@@ -9,7 +9,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var ticketUIData: TicketUIModel
     @ObservedObject var viewRouter: ViewRouter
+    
     
     var body: some View {
         VStack {
@@ -21,7 +23,7 @@ struct ContentView: View {
                           HomePage(viewRouter: viewRouter)
                        }
             else if viewRouter.currentPage ==  ViewRoutes.TICKET_UI {
-               TicketUI(viewRouter: viewRouter)
+               TicketUI(viewRouter: viewRouter).environmentObject(self.ticketUIData)
             }else if viewRouter.currentPage ==  ViewRoutes.TICKET_LIST {
                TicketList(viewRouter: viewRouter)
             }else if viewRouter.currentPage ==  ViewRoutes.TICKET_VIEW {
@@ -41,7 +43,10 @@ struct ContentView: View {
             }else if viewRouter.currentPage ==  ViewRoutes.FIND_HELP_PAGE {
                FindHelpPage(viewRouter: viewRouter)
             }else if viewRouter.currentPage ==  ViewRoutes.TICKET_ATTACHMENT_LIST {
-               TicketAttachmentList(viewRouter: viewRouter, ticketAttachmentDrawerAction: TicketAttachmentDrawerAction())
+               TicketAttachmentList(
+                viewRouter: viewRouter,
+                ticketAttachmentDrawerAction: TicketAttachmentDrawerAction()
+               ).environmentObject(self.ticketUIData)
             }
         }
         

@@ -15,6 +15,9 @@ struct TicketList: View {
     @State var ticketSearchText:String = ""
     @State var ticketSearchCancel:Bool = false
     
+    @ObservedObject var audioPlayer = AudioPlayer()
+    
+    
     init(viewRouter: ViewRouter){
         self.viewRouter = viewRouter
         self.ticketListService = TicketListService(viewRouter: viewRouter)
@@ -73,11 +76,11 @@ struct TicketList: View {
                         .padding(.horizontal)
                         .navigationBarHidden(self.ticketSearchCancel)
                         
-                        HStack{
+                        /*HStack{
                             Spacer()
                             GuestJiniSubAction(actionText: "Popular Searches", systemImage: "chevron.down")
                                 .padding(.horizontal)
-                        }
+                        }*/
                     }
                     
                     

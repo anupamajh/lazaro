@@ -79,26 +79,26 @@ struct TicketView: View {
                                             .font(Fonts.RobotRegularSmallText)
                                             .foregroundColor(Color("brownishGrey"))
                                         Spacer()
-                                    }.padding(.bottom, 10)
+                                    }.padding(.bottom, 3)
                                     HStack{
-                                        Text(self.ticketGetService.ticket.creationTime!)
-                                            .font(Fonts.RobotRegularSmallText)
+                                        Text(self.ticketGetService.ticket.creationTime!.convetToDateFromMySQLUTC())
+                                            .font(Fonts.RobotSectionTitle)
                                             .foregroundColor(Color("brownishGrey"))
                                         Spacer()
-                                    }.padding(.top, 15)
+                                    }.padding(.bottom, 15)
                                     
                                     HStack{
                                         Text("Ticket #")
                                             .font(Fonts.RobotRegularSmallText)
                                             .foregroundColor(Color("brownishGrey"))
                                         Spacer()
-                                    }.padding(.bottom, 10)
+                                    }.padding(.bottom, 3)
                                     HStack{
                                         Text(self.ticketGetService.ticket.ticketNo!)
-                                            .font(Fonts.RobotRegular)
+                                            .font(Fonts.RobotSectionTitle)
                                             .foregroundColor(Color("greyishBrown"))
                                         Spacer()
-                                    }.padding(.bottom, 10)
+                                    }.padding(.bottom, 15)
                                 }.padding()
                             }
                         }
@@ -115,10 +115,37 @@ struct TicketView: View {
                                 Text(self.ticketGetService.ticket.ticketTitle!)
                                     .font(Fonts.RobotSectionTitle)
                                 Spacer()
-                            }
+                            }.padding(.bottom)
                             HStack{
                                 GuestJiniInformationText(information: self.ticketGetService.ticket.ticketNarration)
                                 Spacer()
+                            }.padding(.bottom)
+                            Divider()
+                            HStack{
+                                VStack{
+                                    HStack{
+                                        Spacer()
+                                        Text("ATTACHMENTS")
+                                            .font(Fonts.RobotSectionTitle)
+                                        .foregroundColor(Color("greyishBrownTwo"))
+                                    }
+                                    HStack{
+                                        Spacer()
+                                        if(self.ticketGetService.ticketResponse.taskAttachments != nil){
+                                            Text("\( self.ticketGetService.ticketResponse.taskAttachments!.count ) Attachments")
+                                                .font(Fonts.RobotRegularSmallText)
+                                                .foregroundColor(Color("brownGrey"))
+                                        } else {
+                                            Text("0 Attachments")
+                                                .font(Fonts.RobotRegularSmallText)
+                                                .foregroundColor(Color("brownGrey"))
+                                        }
+                                    }
+                                }.padding()
+                                Button(action:{}){
+                                    GuestJiniRoundButtonSystemImage(systemImage: "paperclip")
+                                }
+                                
                             }
                             
                         }.padding()

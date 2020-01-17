@@ -25,7 +25,7 @@ struct HelpView: View {
                         GuestJiniTitleText(title: "HELP")
                         Spacer()
                     }.padding()
-                     WebView(request: URLRequest(url: URL(string: "http://carmelsolutions.net")!))
+                     WebView(request: URLRequest(url: URL(string: "https://guesture.in/")!))
                 }.frame(width: geometry.size.width, height: geometry.size.height-85, alignment: .top)
                     .padding()
                 Divider()

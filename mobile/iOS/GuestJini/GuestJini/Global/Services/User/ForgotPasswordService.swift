@@ -17,7 +17,7 @@ class ForgotPasswordService:ObservableObject{
         
     }
     
-    func resetPassword(UserName:String, completionHandler:@escaping(UserInfo)->Void) -> Void {
+    func resetPassword(UserName:String, completionHandler:@escaping(ForgotPasswordResponse)->Void) -> Void {
         let headers: HTTPHeaders = [
             "Accept": "application/json"
         ]
@@ -28,11 +28,11 @@ class ForgotPasswordService:ObservableObject{
         AF.request(EndPoints.FORGOT_PASSWORD, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: headers).responseData { (response) in
             let jsonDecoder = JSONDecoder()
             do{
-                let parsedData = try jsonDecoder.decode(UserInfo.self, from: response.data!)
+                let parsedData = try jsonDecoder.decode(ForgotPasswordResponse.self, from: response.data!)
                 completionHandler(parsedData)
             }catch{
                 debugPrint(error)
-                let parsedData = UserInfo();
+                let parsedData = ForgotPasswordResponse();
                 completionHandler(parsedData)
             }
         }

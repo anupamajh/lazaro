@@ -15,6 +15,8 @@ struct HomePage: View {
     @State var helpSearchCancel:Bool = false
     
     @ObservedObject var viewRouter: ViewRouter
+    @EnvironmentObject var ticketUIData: TicketUIModel
+
     init(viewRouter: ViewRouter){
         self.viewRouter = viewRouter
         
@@ -31,6 +33,7 @@ struct HomePage: View {
                             .foregroundColor(Color("brownishGrey"))
                         Spacer()
                     }.padding(.bottom)
+                    /*
                     VStack{
                         VStack{
                             HStack{
@@ -104,6 +107,7 @@ struct HomePage: View {
                         .cornerRadius(15)
                         .shadow(radius: 5)
                     }
+                    */
                     VStack{
                         VStack{
                             HStack{
@@ -117,6 +121,9 @@ struct HomePage: View {
                                 HStack{
                                     Button(action: {
                                         self.viewRouter.currentPage = ViewRoutes.TICKET_UI
+                                        self.ticketUIData.narration = ""
+                                        self.ticketUIData.title = ""
+                                        self.ticketUIData.ticketAttachments = []
                                         
                                     }) {
                                         GuestJiniButtonText(buttonText: "CREATE TICKET")
@@ -153,6 +160,7 @@ struct HomePage: View {
                         .shadow(radius: 5)
                     }
                     
+                    /*
                     VStack{
                         VStack{
                             
@@ -181,6 +189,8 @@ struct HomePage: View {
                         .cornerRadius(15)
                         .shadow(radius: 5)
                     }
+                    */
+                    
                 }.frame(width: geometry.size.width, height: geometry.size.height-65, alignment: .top)
                 Divider()
                 GuestJiniBottomBar(viewRouter: self.viewRouter)

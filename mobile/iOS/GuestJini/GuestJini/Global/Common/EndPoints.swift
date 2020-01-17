@@ -16,6 +16,7 @@ class EndPoints{
     
     
     static var END_POINT_URL = "http://139.59.32.238:8000"
+    static var LOCAL_END_POINT_URL = "http://192.168.0.101:8010"
     static var AUTHORISATION_URL = END_POINT_URL + "/auth/oauth/token"
     static var CHECK_TOKEN_URL = END_POINT_URL + "/auth/oauth/check_token"
     static var FORGOT_PASSWORD = END_POINT_URL + "/public/api/reset-password"
@@ -32,6 +33,7 @@ class EndPoints{
     static var TICKET_SAVE_URL = END_POINT_URL + "/helpdesk/task-ticket/save"
     static var TICKET_GET_URL = END_POINT_URL + "/helpdesk/task-ticket/get"
     static var TICKET_LIST_URL = END_POINT_URL + "/helpdesk/task-ticket/get-all"
+    static var TICKET_ATTACHMENT_URL = END_POINT_URL + "/helpdesk/task-ticket/upload"
     
     static let monitor = NWPathMonitor()
 

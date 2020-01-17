@@ -34,4 +34,5 @@ class ViewRouter: ObservableObject {
     }
     var primaryKey:String = ""
     var searchText:String = ""
+    var taskAttachment: [TaskAttachment]? = nil
 }

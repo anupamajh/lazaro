@@ -12,34 +12,24 @@ import SwiftUI
 
 class TicketSaveService:ObservableObject{
     @ObservedObject var viewRouter: ViewRouter
-    var loginService = LoginService()
+    var checkTokenService:CheckTokenService
     
     init(viewRouter: ViewRouter) {
         self.viewRouter = viewRouter;
+        self.checkTokenService = CheckTokenService(viewRouter: viewRouter)
     }
     
-    func saveTicket(ticketData:Ticket, completionHandler: @escaping(TicketResponse)->Void) -> Void {
-        loginService.refreshToken(RefreshToken: UserDefaults.standard.string(forKey: "refresh_token")!) { (authData) in
-            if(authData.access_token.trimmingCharacters(in: .whitespacesAndNewlines)==""){
-                UserDefaults.standard.set(false, forKey: "isLoggedIn")
-                self.viewRouter.currentPage = ViewRoutes.LOGIN_PAGE
-            }else{
-                UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                UserDefaults.standard.set(authData.access_token, forKey: "access_token")
-                UserDefaults.standard.set(authData.refresh_token, forKey: "refresh_token")
-                UserDefaults.standard.set(authData.token_type, forKey: "token_type")
-                UserDefaults.standard.set(authData.expires_in, forKey: "expires_in")
-                
+    func saveTicket(ticketData:TaskTicketRequest, completionHandler: @escaping(TicketResponse)->Void) -> Void {
+        checkTokenService.CheckToken { (checkStatus) in
+            if(checkStatus){
                 let headers: HTTPHeaders = [
-                    "Authorization": "Bearer \(authData.access_token)",
+                    "Authorization": "Bearer \(UserDefaults.standard.string(forKey: "access_token")!)",
                     "Accept": "application/json"
                 ]
-                
-                let parameters:[String: String] = [
-                    "ticketTitle" : ticketData.ticketTitle!,
-                    "ticketNarration" : ticketData.ticketNarration
-                ]
-                AF.request(EndPoints.TICKET_SAVE_URL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: headers)
+                let jsonEncoder = JSONEncoder()
+                let taskTicketData = try! jsonEncoder.encode(ticketData)
+                let json = try! JSONSerialization.jsonObject(with: taskTicketData, options: []) as? [String : Any]
+                 AF.request(EndPoints.TICKET_SAVE_URL, method: .post, parameters: json,encoding: JSONEncoding.default, headers: headers)
                     .responseData { (response) in
                         let jsonDecoder = JSONDecoder()
                         do{
