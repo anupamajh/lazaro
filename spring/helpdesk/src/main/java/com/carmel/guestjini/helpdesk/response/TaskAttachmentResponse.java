@@ -1,52 +1,37 @@
 package com.carmel.guestjini.helpdesk.response;
 
 import com.carmel.guestjini.helpdesk.model.DTO.TaskAttachmentDTO;
-import com.carmel.guestjini.helpdesk.model.DTO.TaskTicketDTO;
 import com.carmel.guestjini.helpdesk.model.TaskAttachment;
-import com.carmel.guestjini.helpdesk.model.TaskTicket;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskTicketResponse {
-    private TaskTicketDTO taskTicket;
-    private List<TaskTicketDTO> taskTicketList;
-    private List<TaskAttachmentDTO> taskAttachments;
+public class TaskAttachmentResponse {
+    private TaskAttachmentDTO taskAttachment;
+    private List<TaskAttachmentDTO> taskAttachmentList;
     private long totalPages;
     private long totalRecords;
     private long currentRecords;
     private boolean success;
     private String error;
 
-    public TaskTicketDTO getTaskTicket() {
-        return taskTicket;
+    public TaskAttachmentDTO getTaskAttachment() {
+        return taskAttachment;
     }
 
-    public void setTaskTicket(TaskTicket taskTicket) {
-        this.taskTicket = new TaskTicketDTO(taskTicket);
+    public void setTaskAttachment(TaskAttachment taskAttachment) {
+        this.taskAttachment = new TaskAttachmentDTO(taskAttachment);
     }
 
-    public List<TaskTicketDTO> getTaskTicketList() {
-        return taskTicketList;
+    public List<TaskAttachmentDTO> getTaskAttachmentList() {
+        return taskAttachmentList;
     }
 
-    public void setTaskTicketList(List<TaskTicket> taskTicketList) {
-        this.taskTicketList = new ArrayList<>();
-        taskTicketList.forEach(taskTicket -> {
-            this.taskTicketList.add(new TaskTicketDTO(taskTicket));
+    public void setTaskAttachmentList(List<TaskAttachment> taskAttachmentList) {
+        this.taskAttachmentList = new ArrayList<>();
+        taskAttachmentList.forEach(taskAttachment1 -> {
+            this.taskAttachmentList.add(new TaskAttachmentDTO(taskAttachment1));
         });
-    }
-
-    public List<TaskAttachmentDTO> getTaskAttachments() {
-        return taskAttachments;
-    }
-
-    public void setTaskAttachments(List<TaskAttachment> taskAttachments) {
-        this.taskAttachments = new ArrayList<>();
-        taskAttachments.forEach(taskAttachment -> {
-            this.taskAttachments.add(new TaskAttachmentDTO(taskAttachment));
-        });
-
     }
 
     public long getTotalPages() {

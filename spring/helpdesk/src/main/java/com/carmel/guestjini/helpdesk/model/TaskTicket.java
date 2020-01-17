@@ -45,7 +45,7 @@ public class TaskTicket {
     private String ticketNo;
 
     @Column(name = "ticket_title")
-    @Length(min = 10, max = 255, message = "Ticket title length should be between 10 and 255")
+    @Length(min = 1, max = 255, message = "Ticket title length should be between 10 and 255")
     @NotNull(message = "Ticket title cannot be null")
     @NotEmpty(message = "Ticket title cannot be empty")
     private String ticketTitle;

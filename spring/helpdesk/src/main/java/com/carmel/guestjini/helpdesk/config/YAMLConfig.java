@@ -12,6 +12,7 @@ public class YAMLConfig {
     private String dbServiceURL;
     private String inventoryServiceURL;
     private String accountsServiceURL;
+    private String imageSavePath;
 
     public YAMLConfig(){}
 
@@ -45,5 +46,13 @@ public class YAMLConfig {
 
     public void setAccountsServiceURL(String accountsServiceURL) {
         this.accountsServiceURL = accountsServiceURL;
+    }
+
+    public String getImageSavePath() {
+        return imageSavePath;
+    }
+
+    public void setImageSavePath(String imageSavePath) {
+        this.imageSavePath = imageSavePath;
     }
 }

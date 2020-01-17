@@ -17,6 +17,12 @@ spring:
     database: mysql
   application:
     name: guesture-helpdesk-service
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 200MB
+
 logging:
   level:
     root: info
@@ -54,3 +60,4 @@ carmel:
   userInfoURL: http://common-db-service/user/me
   dbServiceURL: http://common-db-service
   inventoryServiceURL: http://guesture-inventory-service
+  imageSavePath: /opt/carmel/storage/images/
