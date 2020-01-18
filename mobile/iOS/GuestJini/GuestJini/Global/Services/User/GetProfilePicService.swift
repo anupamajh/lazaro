@@ -13,7 +13,8 @@ import SwiftUI
 class GetProfilePicService: ObservableObject{
     @ObservedObject var viewRouter: ViewRouter
     var checkTokenService:CheckTokenService
-    @Published var profilePic:Image? = nil
+    @Published var profilePic:Image? = Image(systemName: "camera")
+    @Published var isLoading: Bool = true
     
     init(viewRouter: ViewRouter) {
         self.viewRouter = viewRouter;
@@ -37,7 +38,7 @@ class GetProfilePicService: ObservableObject{
                            headers: headers
                 )
                     .responseData { (response) in
-                        
+                        self.isLoading = false
                         let str = String(decoding: response.data!, as: UTF8.self)
                         let image = ImageConverter.base64ToImage(str)
                         if(image != nil){

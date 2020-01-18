@@ -82,13 +82,17 @@ struct MyProfileView: View {
                         VStack{
                             HStack{
                                 Spacer()
-                                self.profilePic
+                                VStack{
+                                    ZStack{
+                                    self.getProfilePicService.profilePic!
                                     .resizable()
-                                    .frame(width: 60, height: 60, alignment: .center)
                                     .clipShape(Circle())
-                                    .shadow(radius: 10)
                                     .overlay(Circle().stroke(Color.white, lineWidth: 1))
-                                    .padding()
+                                        if(self.getProfilePicService.isLoading){
+                                            ActivityIndicator(shouldAnimate: .constant(true), style: .medium)
+                                        }
+                                    }
+                                }.frame(width: 60, height: 60, alignment: .center)
                                 Button(action: {
                                     self.showAction = true
                                 }) {
@@ -100,10 +104,10 @@ struct MyProfileView: View {
                                 }
                                 .onReceive(self.imagePickerViewModel.pickedImagesSubject) { (image: Image) -> Void in
                                     withAnimation {
+                                        self.getProfilePicService.profilePic = image
                                         self.profilePic = image
                                         self.isAnimating = true
                                         self.saveProfilePic(image: self.imagePickerViewModel.sourceImage!)
-                                        debugPrint("Hello")
                                     }
                                 }
                                 .actionSheet(isPresented: self.$showAction) {
