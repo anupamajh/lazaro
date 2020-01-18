@@ -1,5 +1,6 @@
 package com.carmel.common.helpers.component;
 
+import com.carmel.common.helpers.model.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -19,13 +20,13 @@ public class MailClient {
         this.mailSender = mailSender;
     }
 
-    public void sendPasswordResetMail(String recipient, String message) {
+    public void sendPasswordResetMail(String recipient, UserInfo user) {
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setFrom("no-reply@carmelsolutions.net");
             messageHelper.setTo(recipient);
-            messageHelper.setSubject("Sample mail subject");
-            String content = mailContentBuilder.build(message , "mailTemplates/resetPassword");
+            messageHelper.setSubject("Guesture :: Reset your password");
+            String content = mailContentBuilder.buildWithUser(user , "mailTemplates/resetPassword");
             messageHelper.setText(content, true);
         };
         try {
@@ -35,13 +36,13 @@ public class MailClient {
         }
     }
 
-    public void sendAppAccessRequestMail(String recipient, String message) {
+    public void sendAppAccessRequestMail(String recipient, UserInfo userInfo) {
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setFrom("no-reply@carmelsolutions.net");
             messageHelper.setTo(recipient);
-            messageHelper.setSubject("App access request");
-            String content = mailContentBuilder.build(message , "mailTemplates/appAccessRequest");
+            messageHelper.setSubject("Guesture :: App access request");
+            String content = mailContentBuilder.buildWithUser(userInfo , "mailTemplates/appAccessRequest");
             messageHelper.setText(content, true);
         };
         try {

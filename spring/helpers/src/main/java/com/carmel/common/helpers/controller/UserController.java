@@ -38,8 +38,9 @@ public class UserController {
         Optional<User> optionalUser = userService.findByUserName(userName);
         if(optionalUser.isPresent()) {
             UserInfo userInfo = new UserInfo(optionalUser.get());
+            userInfo.setPasswordResetLink("http://guesture.in/reset-password");
             logger.trace(userInfo.getId());
-            mailClient.sendPasswordResetMail(userInfo.getUserName(), "Reset password link here");
+            mailClient.sendPasswordResetMail(userInfo.getUserName(), userInfo);
             return userInfo;
         }else{
             return new UserInfo();
@@ -53,8 +54,9 @@ public class UserController {
         Optional<User> optionalUser = userService.findByUserName(userName);
         if(optionalUser.isPresent()) {
             UserInfo userInfo = new UserInfo(optionalUser.get());
+            userInfo.setPasswordResetLink("http://guesture.in/reset-password");
             logger.trace(userInfo.getId());
-            mailClient.sendAppAccessRequestMail(yamlConfig.getSupportEmail(), "App Access Request Mail");
+            mailClient.sendAppAccessRequestMail(yamlConfig.getSupportEmail(), userInfo);
             return userInfo;
         }else{
             return new UserInfo();

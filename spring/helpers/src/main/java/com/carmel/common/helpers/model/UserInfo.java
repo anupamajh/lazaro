@@ -14,6 +14,7 @@ public class UserInfo {
     private String fullName;
     private String userName;
     private String phone;
+    private String passwordResetLink;
     private int gender;
     private String[] addressBook;
     private String[] userPreferences;
@@ -104,5 +105,13 @@ public class UserInfo {
 
     public void setUserPreferences(String[] userPreferences) {
         this.userPreferences = userPreferences;
+    }
+
+    public String getPasswordResetLink() {
+        return passwordResetLink;
+    }
+
+    public void setPasswordResetLink(String passwordResetLink) {
+        this.passwordResetLink = passwordResetLink;
     }
 }
