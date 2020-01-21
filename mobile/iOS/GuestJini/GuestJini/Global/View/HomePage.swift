@@ -16,12 +16,12 @@ struct HomePage: View {
     
     @ObservedObject var viewRouter: ViewRouter
     @EnvironmentObject var ticketUIData: TicketUIModel
-
+    
     init(viewRouter: ViewRouter){
         self.viewRouter = viewRouter
         
     }
-      
+    
     var body: some View {
         GeometryReader { geometry in
             VStack{
@@ -33,7 +33,6 @@ struct HomePage: View {
                             .foregroundColor(Color("brownishGrey"))
                         Spacer()
                     }.padding(.bottom)
-                    /*
                     VStack{
                         VStack{
                             HStack{
@@ -50,7 +49,7 @@ struct HomePage: View {
                                         }, onCommit: {
                                             print("onCommit")
                                         }).foregroundColor(.primary)
-
+                                        
                                         Button(action: {
                                             self.helpSearchText = ""
                                         }) {
@@ -58,11 +57,11 @@ struct HomePage: View {
                                         }
                                         
                                         Button(action: {
-                                           
+                                            
                                         }) {
-                                             Image(systemName: "magnifyingglass")
+                                            Image(systemName: "magnifyingglass")
                                         }.padding(.leading)
-                                       
+                                        
                                         
                                     }
                                     .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 15))
@@ -88,14 +87,18 @@ struct HomePage: View {
                                     Spacer()
                                 }.padding()
                                 HStack{
-                                    GuestJiniInformationText(information: "Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra.")
-                                        .padding()
-                                    Button(action: {
-                                        // What to perform
-                                    }) {
-                                        GuestJiniRoundButtonSystemImage(systemImage: "chevron.right")
-                                        
-                                    }.padding(.horizontal)
+                                    VStack{
+                                        GuestJiniInformationText(information: "Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra.")
+                                    }
+                                    VStack{
+                                        Button(action: {
+                                            self.viewRouter.currentPage = ViewRoutes.FIND_HELP_PAGE
+                                            self.viewRouter.searchText = self.helpSearchText
+                                        }) {
+                                            GuestJiniRoundButtonSystemImage(systemImage: "chevron.right")
+                                            
+                                        }.padding(.horizontal)
+                                    }
                                 }
                                 
                             }
@@ -107,7 +110,6 @@ struct HomePage: View {
                         .cornerRadius(15)
                         .shadow(radius: 5)
                     }
-                    */
                     VStack{
                         VStack{
                             HStack{
@@ -134,7 +136,7 @@ struct HomePage: View {
                                 Divider()
                             }.padding(.horizontal)
                             
-                           
+                            
                             
                             VStack{
                                 HStack{
@@ -161,42 +163,42 @@ struct HomePage: View {
                     }
                     
                     /*
-                    VStack{
-                        VStack{
-                            
-                            VStack{
-                                GuestJiniInformationText(information: "Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra.")
-                                    .padding(.top)
-                                HStack{
-                                    Image(systemName: "phone.fill")
-                                        .resizable()
-                                        .frame(width: 10, height: 10, alignment: .center)
-                                    Text("1800 0156 4237")
-                                        .font(Fonts.RobotButtonFont)
-                                    Spacer()
-                                }.padding()
-                                HStack{
-                                GuestJiniInformationText(information: "(Monday - Friday, 09:00am - 06:00pm)")
-                                    Spacer()
-                                }.padding()
-                            }.padding(.horizontal)
-                            
-                    
-                        }
-                        .frame(width: geometry.size.width-20, height: 170, alignment: .top)
-                        .background(Color("whiteThree"))
-                        .padding()
-                        .cornerRadius(15)
-                        .shadow(radius: 5)
-                    }
-                    */
+                     VStack{
+                     VStack{
+                     
+                     VStack{
+                     GuestJiniInformationText(information: "Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra.")
+                     .padding(.top)
+                     HStack{
+                     Image(systemName: "phone.fill")
+                     .resizable()
+                     .frame(width: 10, height: 10, alignment: .center)
+                     Text("1800 0156 4237")
+                     .font(Fonts.RobotButtonFont)
+                     Spacer()
+                     }.padding()
+                     HStack{
+                     GuestJiniInformationText(information: "(Monday - Friday, 09:00am - 06:00pm)")
+                     Spacer()
+                     }.padding()
+                     }.padding(.horizontal)
+                     
+                     
+                     }
+                     .frame(width: geometry.size.width-20, height: 170, alignment: .top)
+                     .background(Color("whiteThree"))
+                     .padding()
+                     .cornerRadius(15)
+                     .shadow(radius: 5)
+                     }
+                     */
                     
                 }.frame(width: geometry.size.width, height: geometry.size.height-65, alignment: .top)
                 Divider()
                 GuestJiniBottomBar(viewRouter: self.viewRouter)
             }.frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
                 .edgesIgnoringSafeArea(.bottom)
-            .resignKeyboardOnTapGesture()
+                .resignKeyboardOnTapGesture()
         }
     }
 }

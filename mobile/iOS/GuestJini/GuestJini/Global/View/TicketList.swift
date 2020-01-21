@@ -85,7 +85,7 @@ struct TicketList: View {
                     
                     
                     VStack{
-                        if(self.ticketListService.ticketList.count <= 0){
+                        if(self.ticketListService.fetchComplete != true){
                             ActivityIndicator(shouldAnimate: self.$shouldAnimate)
                         }
                         if(self.ticketListService.ticketList.filter{($0.ticketTitle?.lowercased().contains(self.ticketSearchText.lowercased()))! || $0.ticketNarration.lowercased().contains(self.ticketSearchText.lowercased()) || self.ticketSearchText == ""}.count == 0){

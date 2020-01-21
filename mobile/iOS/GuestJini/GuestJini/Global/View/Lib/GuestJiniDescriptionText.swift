@@ -12,11 +12,16 @@ struct GuestJiniDescriptionText: View {
     var description:String
     var body: some View {
         VStack{
+            VStack{
             Text(description)
                 .font(Fonts.RobotRegular)
                 .multilineTextAlignment(.center)
                 .lineSpacing(10)
                    .lineLimit(5)
+            
+            }.background(Color("aquaMarine"))
+            .shadow(radius: 10)
+            
             
         }.padding()
         

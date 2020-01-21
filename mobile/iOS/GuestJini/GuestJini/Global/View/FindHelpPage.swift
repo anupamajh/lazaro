@@ -10,12 +10,16 @@ import SwiftUI
 
 struct FindHelpPage: View {
     @ObservedObject var viewRouter: ViewRouter
+    @ObservedObject var kbListService:KBListService
+    @State private var shouldAnimate = true
     @State var helpSearchText:String = ""
     @State var helpSearchCancel:Bool = false
     
     init(viewRouter:ViewRouter) {
         self.viewRouter = viewRouter
+        self.kbListService = KBListService(viewRouter: viewRouter)
         self.helpSearchText = viewRouter.searchText;
+        UITableView.appearance().separatorStyle = .none
     }
     
     var body: some View {
@@ -60,6 +64,10 @@ struct FindHelpPage: View {
                                 .foregroundColor(.secondary)
                                 .background(Color.white)
                                 .cornerRadius(20.0)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius:20)
+                                        .stroke(Color("veryLightPink"), lineWidth: 1)
+                                )
                             }
                             .padding(.horizontal)
                             .navigationBarHidden(self.helpSearchCancel)
@@ -68,6 +76,22 @@ struct FindHelpPage: View {
                                 GuestJiniSubAction(actionText: "Popular Searches", systemImage: "chevron.down")
                                 .padding(.horizontal)
                             }
+                        }
+                        VStack{
+                            if(self.kbListService.fetchComplete != true){
+                                ActivityIndicator(shouldAnimate: self.$shouldAnimate)
+                            }
+                            List {
+                                ForEach(self.kbListService.kbList) { kb in
+                                    Button(action: {
+                                        self.viewRouter.primaryKey = kb.id!
+                                        self.viewRouter.currentPage = ViewRoutes.HELP_ARTICLE_PAGE
+                                    }) {
+                                       KBRow(kb: kb)
+                                    }
+                                }
+                            }
+                            
                         }
                         
                         

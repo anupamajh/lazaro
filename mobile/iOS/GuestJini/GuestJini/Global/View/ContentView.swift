@@ -47,6 +47,8 @@ struct ContentView: View {
                 viewRouter: viewRouter,
                 ticketAttachmentDrawerAction: TicketAttachmentDrawerAction()
                ).environmentObject(self.ticketUIData)
+            }else if viewRouter.currentPage ==  ViewRoutes.HELP_ARTICLE_PAGE {
+                HelpArticleView(viewRouter: viewRouter)
             }
         }
         

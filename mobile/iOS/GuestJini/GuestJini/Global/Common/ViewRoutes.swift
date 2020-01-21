@@ -20,7 +20,8 @@ class ViewRoutes {
     static var TICKET_VIEW = "ticket_view"
     static var TICKET_ATTACHMENT_LIST = "ticket_attachment_list"
     static var FIND_HELP_PAGE = "find_help_page"
-    
+    static var HELP_ARTICLE_PAGE = "help_article_page"
+        
     
     static var SETTINGS_VIEW = "settings_view"
     static var MY_PROFILE_VIEW = "my_profile_view"

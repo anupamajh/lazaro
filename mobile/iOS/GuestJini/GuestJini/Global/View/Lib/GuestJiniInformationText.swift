@@ -11,10 +11,10 @@ import SwiftUI
 struct GuestJiniInformationText: View {
    var information:String
     var body: some View {
-        Group{
+        VStack{
             Text(information)
                 .font(Fonts.RobotRegular) .multilineTextAlignment(.leading)
-                   .lineLimit(nil)
+                   .lineLimit(200)
         }
         
     }

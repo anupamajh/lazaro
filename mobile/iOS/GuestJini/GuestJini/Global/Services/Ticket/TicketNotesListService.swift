@@ -1,8 +1,8 @@
 //
-//  TicketListService.swift
+//  TicketNotesListService.swift
 //  GuestJini
 //
-//  Created by Prasanna Kumar Pete on 03/01/20.
+//  Created by Prasanna Kumar Pete on 20/01/20.
 //  Copyright © 2020 Prasanna Kumar Pete. All rights reserved.
 //
 
@@ -10,25 +10,26 @@ import Foundation
 import Alamofire
 import SwiftUI
 
-class TicketListService:ObservableObject{
-    @Published var ticketResponse = TicketResponse()
+class TicketNotesListService:ObservableObject{
+    @Published var taskNotesResponse = TaskNotesResponse()
     @ObservedObject var viewRouter: ViewRouter
-    @Published var ticketList:[Ticket] = []
+    @Published var taskNotesList:[TaskNote] = []
     @Published var fetchComplete:Bool = false
     
     var checkTokenService:CheckTokenService
     
-    init(viewRouter: ViewRouter) {
+    init(viewRouter: ViewRouter, ticketId:String) {
         self.viewRouter = viewRouter;
         self.checkTokenService = CheckTokenService(viewRouter: viewRouter)
-        self.getTicketList { (response) in
-            self.ticketResponse = response
-            self.ticketList = response.taskTicketList!;
+        self.getNotesList(ticketId: ticketId) { (response) in
+            self.taskNotesResponse = response
+            self.taskNotesList = response.taskNoteList!;
             self.fetchComplete = true
         }
+        
     }
     
-    func getTicketList(completionHandler: @escaping(TicketResponse)->Void) -> Void {
+    func getNotesList(ticketId:String, completionHandler: @escaping(TaskNotesResponse)->Void) -> Void {
          checkTokenService.CheckToken { (checkStatus) in
              if(checkStatus){
                  let headers: HTTPHeaders = [
@@ -36,11 +37,11 @@ class TicketListService:ObservableObject{
                      "Accept": "application/json"
                  ]
                  
-                 let parameters = ["" : ""]
-                 AF.request(EndPoints.TICKET_LIST_URL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: headers)
+                 let parameters = ["ticketId" : ticketId]
+                 AF.request(EndPoints.TASK_NOTES_GET_BY_TICKET_URL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: headers)
                      .responseData { (response) in
                          let jsonDecoder = JSONDecoder()
-                         let parsedData = try! jsonDecoder.decode(TicketResponse.self, from: response.data!)
+                         let parsedData = try! jsonDecoder.decode(TaskNotesResponse.self, from: response.data!)
                          completionHandler(parsedData)
                  }
              }

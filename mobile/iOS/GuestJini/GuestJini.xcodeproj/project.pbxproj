@@ -77,6 +77,8 @@
 		C1504AB923CECF1B00302EB7 /* AddressBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1504AB823CECF1B00302EB7 /* AddressBook.swift */; };
 		C15C726023BA18CD0069CB6E /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15C725F23BA18CD0069CB6E /* HomePage.swift */; };
 		C17BBFC623BB22E600FD5A21 /* Articles.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BBFC523BB22E600FD5A21 /* Articles.swift */; };
+		C1813B6723D5BABA00450B1E /* TicketNotesListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1813B6623D5BABA00450B1E /* TicketNotesListService.swift */; };
+		C1813B6923D5BC3C00450B1E /* TaskNoteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1813B6823D5BC3C00450B1E /* TaskNoteRow.swift */; };
 		C18CF00523D05EC300B3E2BB /* TicketAttachmentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18CF00423D05EC300B3E2BB /* TicketAttachmentList.swift */; };
 		C18CF00723D063F900B3E2BB /* TicketAttachmentDrawerContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18CF00623D063F900B3E2BB /* TicketAttachmentDrawerContent.swift */; };
 		C18CF00923D065EF00B3E2BB /* TicketAttachmentDrawerMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18CF00823D065EF00B3E2BB /* TicketAttachmentDrawerMenu.swift */; };
@@ -85,6 +87,11 @@
 		C18CF00F23D085EB00B3E2BB /* PlayerUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18CF00E23D085EB00B3E2BB /* PlayerUIView.swift */; };
 		C18CF01123D096BE00B3E2BB /* TicketAttachmentDrawerAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18CF01023D096BE00B3E2BB /* TicketAttachmentDrawerAction.swift */; };
 		C1903E6523B73B2B00AD8F63 /* GuestJiniImageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1903E6423B73B2B00AD8F63 /* GuestJiniImageCard.swift */; };
+		C1997B8123D6F3A90076A56C /* KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1997B8023D6F3A90076A56C /* KB.swift */; };
+		C1997B8323D6F3E30076A56C /* KBResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1997B8223D6F3E30076A56C /* KBResponse.swift */; };
+		C1997B8623D6F42A0076A56C /* KBListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1997B8523D6F42A0076A56C /* KBListService.swift */; };
+		C1997B8823D6F69F0076A56C /* KBRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1997B8723D6F69F0076A56C /* KBRow.swift */; };
+		C1997B8A23D7032E0076A56C /* HelpArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1997B8923D7032E0076A56C /* HelpArticleView.swift */; };
 		C1A73E1C23B7448200E9F5B8 /* LandingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A73E1B23B7448200E9F5B8 /* LandingScreen.swift */; };
 		C1A73E1E23B744DF00E9F5B8 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A73E1D23B744DF00E9F5B8 /* LoginScreen.swift */; };
 		C1A73E2023B744F900E9F5B8 /* GuestJiniHeaderLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A73E1F23B744F900E9F5B8 /* GuestJiniHeaderLarge.swift */; };
@@ -100,6 +107,9 @@
 		C1AF642F23B4969700375D32 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1AF642323B4969700375D32 /* Roboto-Light.ttf */; };
 		C1AF643023B4969700375D32 /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1AF642423B4969700375D32 /* Roboto-BoldItalic.ttf */; };
 		C1AF643123B4969700375D32 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1AF642523B4969700375D32 /* Roboto-Italic.ttf */; };
+		C1AF8A3223D5AFA600041662 /* TicketNotesSaveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AF8A3123D5AFA600041662 /* TicketNotesSaveService.swift */; };
+		C1AF8A3423D5AFEB00041662 /* TaskNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AF8A3323D5AFEB00041662 /* TaskNote.swift */; };
+		C1AF8A3623D5B02E00041662 /* TaskNotesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AF8A3523D5B02E00041662 /* TaskNotesResponse.swift */; };
 		C1B1E42E23BE0C6C009E1E3B /* GuestJiniRegularTextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E42D23BE0C6C009E1E3B /* GuestJiniRegularTextBox.swift */; };
 		C1B1E43023BE0D1F009E1E3B /* GuestJiniSecureTextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E42F23BE0D1F009E1E3B /* GuestJiniSecureTextBox.swift */; };
 		C1B1E43223BE1DD1009E1E3B /* TicketList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E43123BE1DD1009E1E3B /* TicketList.swift */; };
@@ -237,6 +247,8 @@
 		C1504AB823CECF1B00302EB7 /* AddressBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBook.swift; sourceTree = "<group>"; };
 		C15C725F23BA18CD0069CB6E /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		C17BBFC523BB22E600FD5A21 /* Articles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Articles.swift; sourceTree = "<group>"; };
+		C1813B6623D5BABA00450B1E /* TicketNotesListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketNotesListService.swift; sourceTree = "<group>"; };
+		C1813B6823D5BC3C00450B1E /* TaskNoteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskNoteRow.swift; sourceTree = "<group>"; };
 		C18CF00423D05EC300B3E2BB /* TicketAttachmentList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketAttachmentList.swift; sourceTree = "<group>"; };
 		C18CF00623D063F900B3E2BB /* TicketAttachmentDrawerContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketAttachmentDrawerContent.swift; sourceTree = "<group>"; };
 		C18CF00823D065EF00B3E2BB /* TicketAttachmentDrawerMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketAttachmentDrawerMenu.swift; sourceTree = "<group>"; };
@@ -245,6 +257,11 @@
 		C18CF00E23D085EB00B3E2BB /* PlayerUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerUIView.swift; sourceTree = "<group>"; };
 		C18CF01023D096BE00B3E2BB /* TicketAttachmentDrawerAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketAttachmentDrawerAction.swift; sourceTree = "<group>"; };
 		C1903E6423B73B2B00AD8F63 /* GuestJiniImageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniImageCard.swift; sourceTree = "<group>"; };
+		C1997B8023D6F3A90076A56C /* KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KB.swift; sourceTree = "<group>"; };
+		C1997B8223D6F3E30076A56C /* KBResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBResponse.swift; sourceTree = "<group>"; };
+		C1997B8523D6F42A0076A56C /* KBListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBListService.swift; sourceTree = "<group>"; };
+		C1997B8723D6F69F0076A56C /* KBRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBRow.swift; sourceTree = "<group>"; };
+		C1997B8923D7032E0076A56C /* HelpArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpArticleView.swift; sourceTree = "<group>"; };
 		C1A73E1B23B7448200E9F5B8 /* LandingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingScreen.swift; sourceTree = "<group>"; };
 		C1A73E1D23B744DF00E9F5B8 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		C1A73E1F23B744F900E9F5B8 /* GuestJiniHeaderLarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniHeaderLarge.swift; sourceTree = "<group>"; };
@@ -260,6 +277,9 @@
 		C1AF642323B4969700375D32 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		C1AF642423B4969700375D32 /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
 		C1AF642523B4969700375D32 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
+		C1AF8A3123D5AFA600041662 /* TicketNotesSaveService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketNotesSaveService.swift; sourceTree = "<group>"; };
+		C1AF8A3323D5AFEB00041662 /* TaskNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskNote.swift; sourceTree = "<group>"; };
+		C1AF8A3523D5B02E00041662 /* TaskNotesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskNotesResponse.swift; sourceTree = "<group>"; };
 		C1B1E42D23BE0C6C009E1E3B /* GuestJiniRegularTextBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniRegularTextBox.swift; sourceTree = "<group>"; };
 		C1B1E42F23BE0D1F009E1E3B /* GuestJiniSecureTextBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniSecureTextBox.swift; sourceTree = "<group>"; };
 		C1B1E43123BE1DD1009E1E3B /* TicketList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketList.swift; sourceTree = "<group>"; };
@@ -497,6 +517,8 @@
 				C102721323D1869E00F2D227 /* RecordingDataModel.swift */,
 				C102721F23D1C4FF00F2D227 /* AttachmentModel.swift */,
 				C147F27223D1D234000CF770 /* TaskAttachment.swift */,
+				C1AF8A3323D5AFEB00041662 /* TaskNote.swift */,
+				C1997B8023D6F3A90076A56C /* KB.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -516,6 +538,7 @@
 		C12EF5E123B225040024C22C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C1997B8423D6F4170076A56C /* KB */,
 				C10ACFFB23C2ECC700C7CB70 /* User */,
 				C1BB7D5C23BF3F0000BA410C /* Ticket */,
 			);
@@ -549,6 +572,7 @@
 				C18CF00423D05EC300B3E2BB /* TicketAttachmentList.swift */,
 				C18CF00623D063F900B3E2BB /* TicketAttachmentDrawerContent.swift */,
 				C18CF00823D065EF00B3E2BB /* TicketAttachmentDrawerMenu.swift */,
+				C1997B8923D7032E0076A56C /* HelpArticleView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -621,6 +645,8 @@
 				C102721923D19CC700F2D227 /* FilePickerView.swift */,
 				C102721B23D19DBE00F2D227 /* FilePickerUIView.swift */,
 				C147F27623D1D379000CF770 /* AttachmentRow.swift */,
+				C1813B6823D5BC3C00450B1E /* TaskNoteRow.swift */,
+				C1997B8723D6F69F0076A56C /* KBRow.swift */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -635,8 +661,18 @@
 				C10CD04A23CF18CE001F30BB /* AppAccessRequestResponse.swift */,
 				C147F27423D1D2A8000CF770 /* TaskAttachmentResponse.swift */,
 				C14322D723D2253B00D7E0EA /* ForgotPasswordResponse.swift */,
+				C1AF8A3523D5B02E00041662 /* TaskNotesResponse.swift */,
+				C1997B8223D6F3E30076A56C /* KBResponse.swift */,
 			);
 			path = Responses;
+			sourceTree = "<group>";
+		};
+		C1997B8423D6F4170076A56C /* KB */ = {
+			isa = PBXGroup;
+			children = (
+				C1997B8523D6F42A0076A56C /* KBListService.swift */,
+			);
+			path = KB;
 			sourceTree = "<group>";
 		};
 		C1AF643223B496A300375D32 /* Fonts */ = {
@@ -665,6 +701,8 @@
 				C1BB7D5D23BF3F1F00BA410C /* TicketGetService.swift */,
 				C1BB7D6123BF4AE200BA410C /* TicketSaveService.swift */,
 				C102721D23D1A7CC00F2D227 /* UploadTicketAttachmentService.swift */,
+				C1AF8A3123D5AFA600041662 /* TicketNotesSaveService.swift */,
+				C1813B6623D5BABA00450B1E /* TicketNotesListService.swift */,
 			);
 			path = Ticket;
 			sourceTree = "<group>";
@@ -962,17 +1000,21 @@
 				C18CF00F23D085EB00B3E2BB /* PlayerUIView.swift in Sources */,
 				C144F01923B4814B00D6D218 /* GuestJiniRoundButtonText.swift in Sources */,
 				C1BB7D5B23BF3D7000BA410C /* ActivityIndicator.swift in Sources */,
+				C1813B6923D5BC3C00450B1E /* TaskNoteRow.swift in Sources */,
+				C1997B8823D6F69F0076A56C /* KBRow.swift in Sources */,
 				C1BB27F423B7578A00E8E3F9 /* OTPVerification.swift in Sources */,
 				C1504AB123CDA42800302EB7 /* GuestJiniEditIconButton.swift in Sources */,
 				C12523ED23CEDE4C00ADCE17 /* UserPreferenceUIModel.swift in Sources */,
 				C1504AAA23CD901200302EB7 /* CheckTokenService.swift in Sources */,
 				C1BB7D5E23BF3F1F00BA410C /* TicketGetService.swift in Sources */,
 				C1BB27FA23B764A200E8E3F9 /* AppAccessRequest.swift in Sources */,
+				C1AF8A3623D5B02E00041662 /* TaskNotesResponse.swift in Sources */,
 				C1504AA223CD89C700302EB7 /* UserPreferenceType.swift in Sources */,
 				C1B1E43A23BE1F1B009E1E3B /* TicketResponse.swift in Sources */,
 				C10CD04B23CF18CE001F30BB /* AppAccessRequestResponse.swift in Sources */,
 				C1A73E1E23B744DF00E9F5B8 /* LoginScreen.swift in Sources */,
 				C1B1E43023BE0D1F009E1E3B /* GuestJiniSecureTextBox.swift in Sources */,
+				C1997B8A23D7032E0076A56C /* HelpArticleView.swift in Sources */,
 				C10CD04923CF1809001F30BB /* AppAccessRequestService.swift in Sources */,
 				C14322D823D2253B00D7E0EA /* ForgotPasswordResponse.swift in Sources */,
 				C127164A23B75553001E4C99 /* GuestJiniInformationText.swift in Sources */,
@@ -1002,13 +1044,17 @@
 				C1F787A923BF700800FF9B85 /* MyProfileView.swift in Sources */,
 				C102722023D1C4FF00F2D227 /* AttachmentModel.swift in Sources */,
 				C102721823D1904400F2D227 /* AudioPlayerView.swift in Sources */,
+				C1AF8A3423D5AFEB00041662 /* TaskNote.swift in Sources */,
 				C1BB27FC23B766EE00E8E3F9 /* GuestJiniFieldLabel.swift in Sources */,
 				C12EF5AA23B223DD0024C22C /* SceneDelegate.swift in Sources */,
 				C1504AB523CDBC1B00302EB7 /* ImageConverter.swift in Sources */,
+				C1997B8323D6F3E30076A56C /* KBResponse.swift in Sources */,
+				C1997B8123D6F3A90076A56C /* KB.swift in Sources */,
 				C15C726023BA18CD0069CB6E /* HomePage.swift in Sources */,
 				C147F27523D1D2A8000CF770 /* TaskAttachmentResponse.swift in Sources */,
 				C1504AA423CD8A5000302EB7 /* UserPreference.swift in Sources */,
 				C1B1E43E23BF0304009E1E3B /* TicketRow.swift in Sources */,
+				C1997B8623D6F42A0076A56C /* KBListService.swift in Sources */,
 				C1BB27F823B7644000E8E3F9 /* GuestJiniHeaderSmall.swift in Sources */,
 				C1B1E43823BE1EFF009E1E3B /* Ticket.swift in Sources */,
 				C1A73E1C23B7448200E9F5B8 /* LandingScreen.swift in Sources */,
@@ -1016,10 +1062,12 @@
 				C144F01D23B4819900D6D218 /* GuestJiniTitleText.swift in Sources */,
 				C1BB7D6623BF66A100BA410C /* GuestJiniSettingMenuItem.swift in Sources */,
 				C1D0000723B9E45000B93651 /* Converters.swift in Sources */,
+				C1AF8A3223D5AFA600041662 /* TicketNotesSaveService.swift in Sources */,
 				C1F8A70A23BB14D5005158A5 /* GuestJiniSquareButtonSystemImage.swift in Sources */,
 				C1504AAD23CD924500302EB7 /* CheckTokenResponse.swift in Sources */,
 				C1D0000523B9E3EA00B93651 /* Vlidators.swift in Sources */,
 				C18CF00723D063F900B3E2BB /* TicketAttachmentDrawerContent.swift in Sources */,
+				C1813B6723D5BABA00450B1E /* TicketNotesListService.swift in Sources */,
 				C144F01F23B481B400D6D218 /* GuestJiniDescriptionText.swift in Sources */,
 				C1C74C3E23BA146700FFA336 /* GuestJiniBottomBarItem.swift in Sources */,
 				C10CD05323CF52DF001F30BB /* FindHelpPage.swift in Sources */,

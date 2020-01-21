@@ -16,7 +16,7 @@ class EndPoints{
     
     
     static var END_POINT_URL = "http://139.59.32.238:8000"
-    static var LOCAL_END_POINT_URL = "http://192.168.0.101:8010"
+    static var LOCAL_END_POINT_URL = "http://192.168.0.104:8010"
     static var AUTHORISATION_URL = END_POINT_URL + "/auth/oauth/token"
     static var CHECK_TOKEN_URL = END_POINT_URL + "/auth/oauth/check_token"
     static var FORGOT_PASSWORD = END_POINT_URL + "/public/api/reset-password"
@@ -34,8 +34,14 @@ class EndPoints{
     static var TICKET_GET_URL = END_POINT_URL + "/helpdesk/task-ticket/get"
     static var TICKET_LIST_URL = END_POINT_URL + "/helpdesk/task-ticket/get-all"
     static var TICKET_ATTACHMENT_URL = END_POINT_URL + "/helpdesk/task-ticket/upload"
+      
+    static var KB_LIST_URL = END_POINT_URL + "/helpdesk/kb/get-all"
+    static var KB_GET_URL = END_POINT_URL + "/helpdesk/kb/get"
     
-    static let monitor = NWPathMonitor()
+    static var TASK_NOTES_SAVE_URL = END_POINT_URL + "/helpdesk/task-ticket-notes/save"
+    static var TASK_NOTES_GET_BY_TICKET_URL = END_POINT_URL + "/helpdesk/task-ticket-notes/get-ticket-notes"
+              
+      static let monitor = NWPathMonitor()
 
     static func checkInterwebs() -> Bool {
         var status = false
