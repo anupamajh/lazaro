@@ -6,7 +6,6 @@ import com.carmel.guestjini.helpdesk.config.YAMLConfig;
 import com.carmel.guestjini.helpdesk.model.Principal.UserInfo;
 import com.carmel.guestjini.helpdesk.model.TaskAttachment;
 import com.carmel.guestjini.helpdesk.model.TaskTicket;
-import com.carmel.guestjini.helpdesk.request.TicketAttachmentRequest;
 import com.carmel.guestjini.helpdesk.request.TicketRequest;
 import com.carmel.guestjini.helpdesk.response.TaskAttachmentResponse;
 import com.carmel.guestjini.helpdesk.response.TaskTicketResponse;
@@ -27,7 +26,6 @@ import javax.validation.Valid;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.nio.file.Files;
 import java.util.*;
 
 import static com.carmel.guestjini.helpdesk.specification.TaskTicketSpecification.textInAllColumns;

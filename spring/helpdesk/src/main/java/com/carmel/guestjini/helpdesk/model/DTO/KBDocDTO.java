@@ -1,5 +1,7 @@
 package com.carmel.guestjini.helpdesk.model.DTO;
 
+import com.carmel.guestjini.helpdesk.model.KBDoc;
+
 import java.util.Date;
 
 public class KBDocDTO {
@@ -20,6 +22,29 @@ public class KBDocDTO {
     private int isDeleted;
     private String deletedBy;
     private Date deletedTime;
+
+    public KBDocDTO() {
+    }
+
+    public KBDocDTO(KBDoc kbDoc) {
+        this.id = kbDoc.getId();
+        this.clientId = kbDoc.getClientId();
+        this.orgId = kbDoc.getOrgId();
+        this.kbId = kbDoc.getKbId();
+        this.docTitle = kbDoc.getDocTitle();
+        this.path = kbDoc.getPath();
+        this.name = kbDoc.getName();
+        this.type = kbDoc.getType();
+        this.error = kbDoc.getError();
+        this.size = kbDoc.getSize();
+        this.createdBy = kbDoc.getCreatedBy();
+        this.creationTime = kbDoc.getCreationTime();
+        this.lastModifiedBy = kbDoc.getLastModifiedBy();
+        this.lastModifiedTime = kbDoc.getLastModifiedTime();
+        this.isDeleted = kbDoc.getIsDeleted();
+        this.deletedBy = kbDoc.getDeletedBy();
+        this.deletedTime = kbDoc.getDeletedTime();
+    }
 
     public String getId() {
         return id;

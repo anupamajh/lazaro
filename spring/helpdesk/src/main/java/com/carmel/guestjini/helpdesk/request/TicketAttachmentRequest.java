@@ -1,7 +1,5 @@
 package com.carmel.guestjini.helpdesk.request;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class TicketAttachmentRequest {
     private String ticketId;
     private String fileName;

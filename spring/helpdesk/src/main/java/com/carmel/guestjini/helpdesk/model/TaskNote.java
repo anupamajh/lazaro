@@ -39,6 +39,9 @@ public class TaskNote {
     @NotEmpty(message = "Note cannot be empty")
     private String notes;
 
+    @Column(name = "is_read")
+    private int isRead;
+
     @Column(name = "created_by")
     @Length(max = 40)
     private String createdBy;
@@ -106,6 +109,14 @@ public class TaskNote {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public int getIsRead() {
+        return isRead;
+    }
+
+    public void setIsRead(int isRead) {
+        this.isRead = isRead;
     }
 
     public String getCreatedBy() {

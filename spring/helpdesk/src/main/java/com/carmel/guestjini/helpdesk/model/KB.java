@@ -29,10 +29,10 @@ public class KB {
 
     @Column(name = "topic_title")
     @Length(max = 255)
-    private String topic_title;
+    private String topicTitle;
 
     @Column(name = "topic_narration", columnDefinition = "TEXT")
-    private String topic_narration;
+    private String topicNarration;
 
     @Column(name = "created_by")
     @Length(max = 40)
@@ -82,20 +82,20 @@ public class KB {
         this.orgId = orgId;
     }
 
-    public String getTopic_title() {
-        return topic_title;
+    public String getTopicTitle() {
+        return topicTitle;
     }
 
-    public void setTopic_title(String topic_title) {
-        this.topic_title = topic_title;
+    public void setTopicTitle(String topicTitle) {
+        this.topicTitle = topicTitle;
     }
 
-    public String getTopic_narration() {
-        return topic_narration;
+    public String getTopicNarration() {
+        return topicNarration;
     }
 
-    public void setTopic_narration(String topic_narration) {
-        this.topic_narration = topic_narration;
+    public void setTopicNarration(String topicNarration) {
+        this.topicNarration = topicNarration;
     }
 
     public String getCreatedBy() {

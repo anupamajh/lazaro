@@ -1,13 +1,15 @@
 package com.carmel.guestjini.helpdesk.model.DTO;
 
+import com.carmel.guestjini.helpdesk.model.KB;
+
 import java.util.Date;
 
 public class KBDTO {
     private String id;
     private String clientId;
     private String orgId;
-    private String topic_title;
-    private String topic_narration;
+    private String topicTitle;
+    private String topicNarration;
     private String createdBy;
     private Date creationTime;
     private String lastModifiedBy;
@@ -15,6 +17,25 @@ public class KBDTO {
     private int isDeleted;
     private String deletedBy;
     private Date deletedTime;
+
+    public KBDTO() {
+    }
+
+    public KBDTO(KB kb) {
+        this.id = kb.getId();
+        this.clientId = kb.getClientId();
+        this.orgId = kb.getOrgId();
+        this.topicTitle = kb.getTopicTitle();
+        this.topicNarration = kb.getTopicNarration();
+        this.createdBy = kb.getCreatedBy();
+        this.creationTime = kb.getCreationTime();
+        this.lastModifiedBy = kb.getLastModifiedBy();
+        this.lastModifiedTime = kb.getLastModifiedTime();
+        this.isDeleted = kb.getIsDeleted();
+        this.deletedBy = kb.getDeletedBy();
+        this.deletedTime = kb.getDeletedTime();
+
+    }
 
     public String getId() {
         return id;
@@ -40,20 +61,20 @@ public class KBDTO {
         this.orgId = orgId;
     }
 
-    public String getTopic_title() {
-        return topic_title;
+    public String getTopicTitle() {
+        return topicTitle;
     }
 
-    public void setTopic_title(String topic_title) {
-        this.topic_title = topic_title;
+    public void setTopicTitle(String topicTitle) {
+        this.topicTitle = topicTitle;
     }
 
-    public String getTopic_narration() {
-        return topic_narration;
+    public String getTopicNarration() {
+        return topicNarration;
     }
 
-    public void setTopic_narration(String topic_narration) {
-        this.topic_narration = topic_narration;
+    public void setTopicNarration(String topicNarration) {
+        this.topicNarration = topicNarration;
     }
 
     public String getCreatedBy() {
