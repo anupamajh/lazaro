@@ -1,70 +1,42 @@
-package com.carmel.guestjini.helpdesk.model;
+package com.carmel.guestjini.helpdesk.model.DTO;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.envers.Audited;
-import org.hibernate.validator.constraints.Length;
+import com.carmel.guestjini.helpdesk.model.KBRating;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Table(name = "g_help_desk_kb")
-@Audited
-public class KB {
-
-    @Id
-    @Column(name = "id")
-    @Length(max = 40)
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+public class KBRatingDTO {
     private String id;
-
-    @Column(name = "client_id")
-    @Length(max = 40)
     private String clientId;
-
-    @Column(name = "org_id")
-    @Length(max = 40)
     private String orgId;
-
-    @Column(name = "topic_title")
-    @Length(max = 255)
-    private String topicTitle;
-
-    @Column(name = "author_name")
-    @Length(max = 255)
-    private String authorName;
-
-    @Column(name = "author_logo_path")
-    @Length(max = 255)
-    private String authorLogoPath;
-
-    @Column(name = "topic_narration", columnDefinition = "TEXT")
-    private String topicNarration;
-
-    @Column(name = "created_by")
-    @Length(max = 40)
+    private String kbId;
+    private String ratingBy;
+    private int isLiked;
     private String createdBy;
-
-    @Column(name = "creation_time")
     private Date creationTime;
-
-    @Column(name = "last_modified_by")
-    @Length(max = 40)
     private String lastModifiedBy;
-
-    @Column(name = "last_Modified_time")
     private Date lastModifiedTime;
-
-    @Column(name = "is_deleted")
     private int isDeleted;
-
-    @Column(name = "deleted_by")
-    @Length(max = 40)
     private String deletedBy;
-
-    @Column(name = "deleted_time")
     private Date deletedTime;
+
+    public KBRatingDTO() {
+    }
+
+    public KBRatingDTO(KBRating kbRating) {
+        this.id = kbRating.getId();
+        this.clientId = kbRating.getClientId();
+        this.orgId = kbRating.getOrgId();
+        this.kbId = kbRating.getKbId();
+        this.ratingBy = kbRating.getRatingBy();
+        this.isLiked = kbRating.getIsLiked();
+        this.createdBy = kbRating.getCreatedBy();
+        this.creationTime = kbRating.getCreationTime();
+        this.lastModifiedBy = kbRating.getLastModifiedBy();
+        this.lastModifiedTime = kbRating.getLastModifiedTime();
+        this.isDeleted = kbRating.getIsDeleted();
+        this.deletedBy = kbRating.getDeletedBy();
+        this.deletedTime = kbRating.getDeletedTime();
+    }
 
     public String getId() {
         return id;
@@ -90,36 +62,28 @@ public class KB {
         this.orgId = orgId;
     }
 
-    public String getTopicTitle() {
-        return topicTitle;
+    public String getKbId() {
+        return kbId;
     }
 
-    public void setTopicTitle(String topicTitle) {
-        this.topicTitle = topicTitle;
+    public void setKbId(String kbId) {
+        this.kbId = kbId;
     }
 
-    public String getTopicNarration() {
-        return topicNarration;
+    public String getRatingBy() {
+        return ratingBy;
     }
 
-    public void setTopicNarration(String topicNarration) {
-        this.topicNarration = topicNarration;
+    public void setRatingBy(String ratingBy) {
+        this.ratingBy = ratingBy;
     }
 
-    public String getAuthorName() {
-        return authorName;
+    public int getIsLiked() {
+        return isLiked;
     }
 
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
-    }
-
-    public String getAuthorLogoPath() {
-        return authorLogoPath;
-    }
-
-    public void setAuthorLogoPath(String authorLogoPath) {
-        this.authorLogoPath = authorLogoPath;
+    public void setIsLiked(int isLiked) {
+        this.isLiked = isLiked;
     }
 
     public String getCreatedBy() {

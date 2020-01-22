@@ -8,9 +8,9 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "g_help_desk_kb")
+@Table(name = "g_help_desk_kb_rating")
 @Audited
-public class KB {
+public class KBRating {
 
     @Id
     @Column(name = "id")
@@ -27,20 +27,16 @@ public class KB {
     @Length(max = 40)
     private String orgId;
 
-    @Column(name = "topic_title")
-    @Length(max = 255)
-    private String topicTitle;
+    @Column(name = "kb_id")
+    @Length(max = 40)
+    private String kbId;
 
-    @Column(name = "author_name")
-    @Length(max = 255)
-    private String authorName;
+    @Column(name = "rating_by")
+    @Length(max = 40)
+    private String ratingBy;
 
-    @Column(name = "author_logo_path")
-    @Length(max = 255)
-    private String authorLogoPath;
-
-    @Column(name = "topic_narration", columnDefinition = "TEXT")
-    private String topicNarration;
+    @Column(name = "is_liked")
+    private int isLiked;
 
     @Column(name = "created_by")
     @Length(max = 40)
@@ -66,6 +62,7 @@ public class KB {
     @Column(name = "deleted_time")
     private Date deletedTime;
 
+
     public String getId() {
         return id;
     }
@@ -90,36 +87,28 @@ public class KB {
         this.orgId = orgId;
     }
 
-    public String getTopicTitle() {
-        return topicTitle;
+    public String getKbId() {
+        return kbId;
     }
 
-    public void setTopicTitle(String topicTitle) {
-        this.topicTitle = topicTitle;
+    public void setKbId(String kbId) {
+        this.kbId = kbId;
     }
 
-    public String getTopicNarration() {
-        return topicNarration;
+    public String getRatingBy() {
+        return ratingBy;
     }
 
-    public void setTopicNarration(String topicNarration) {
-        this.topicNarration = topicNarration;
+    public void setRatingBy(String ratingBy) {
+        this.ratingBy = ratingBy;
     }
 
-    public String getAuthorName() {
-        return authorName;
+    public int getIsLiked() {
+        return isLiked;
     }
 
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
-    }
-
-    public String getAuthorLogoPath() {
-        return authorLogoPath;
-    }
-
-    public void setAuthorLogoPath(String authorLogoPath) {
-        this.authorLogoPath = authorLogoPath;
+    public void setIsLiked(int isLiked) {
+        this.isLiked = isLiked;
     }
 
     public String getCreatedBy() {

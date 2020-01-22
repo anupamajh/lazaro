@@ -1,70 +1,46 @@
-package com.carmel.guestjini.helpdesk.model;
+package com.carmel.guestjini.helpdesk.model.DTO;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.envers.Audited;
-import org.hibernate.validator.constraints.Length;
+import com.carmel.guestjini.helpdesk.model.KBReview;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Table(name = "g_help_desk_kb")
-@Audited
-public class KB {
-
-    @Id
-    @Column(name = "id")
-    @Length(max = 40)
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+public class KBReviewDTO {
     private String id;
-
-    @Column(name = "client_id")
-    @Length(max = 40)
     private String clientId;
-
-    @Column(name = "org_id")
-    @Length(max = 40)
     private String orgId;
-
-    @Column(name = "topic_title")
-    @Length(max = 255)
-    private String topicTitle;
-
-    @Column(name = "author_name")
-    @Length(max = 255)
-    private String authorName;
-
-    @Column(name = "author_logo_path")
-    @Length(max = 255)
-    private String authorLogoPath;
-
-    @Column(name = "topic_narration", columnDefinition = "TEXT")
-    private String topicNarration;
-
-    @Column(name = "created_by")
-    @Length(max = 40)
+    private String kbId;
+    private String reviewBy;
+    private String reviewByName;
+    private String reviewComment;
+    private String reviewByLogoPath;
     private String createdBy;
-
-    @Column(name = "creation_time")
     private Date creationTime;
-
-    @Column(name = "last_modified_by")
-    @Length(max = 40)
     private String lastModifiedBy;
-
-    @Column(name = "last_Modified_time")
     private Date lastModifiedTime;
-
-    @Column(name = "is_deleted")
     private int isDeleted;
-
-    @Column(name = "deleted_by")
-    @Length(max = 40)
     private String deletedBy;
-
-    @Column(name = "deleted_time")
     private Date deletedTime;
+
+    public KBReviewDTO() {
+    }
+
+    public KBReviewDTO(KBReview kbReview) {
+        this.id = kbReview.getId();
+        this.clientId = kbReview.getClientId();
+        this.orgId = kbReview.getOrgId();
+        this.kbId = kbReview.getKbId();
+        this.reviewBy = kbReview.getReviewBy();
+        this.reviewByName = kbReview.getReviewByName();
+        this.reviewByLogoPath = kbReview.getReviewByLogoPath();
+        this.reviewComment = kbReview.getReviewComment();
+        this.createdBy = kbReview.getCreatedBy();
+        this.creationTime = kbReview.getCreationTime();
+        this.lastModifiedBy = kbReview.getLastModifiedBy();
+        this.lastModifiedTime = kbReview.getLastModifiedTime();
+        this.isDeleted = kbReview.getIsDeleted();
+        this.deletedBy = kbReview.getDeletedBy();
+        this.deletedTime = kbReview.getDeletedTime();
+    }
 
     public String getId() {
         return id;
@@ -90,36 +66,44 @@ public class KB {
         this.orgId = orgId;
     }
 
-    public String getTopicTitle() {
-        return topicTitle;
+    public String getKbId() {
+        return kbId;
     }
 
-    public void setTopicTitle(String topicTitle) {
-        this.topicTitle = topicTitle;
+    public void setKbId(String kbId) {
+        this.kbId = kbId;
     }
 
-    public String getTopicNarration() {
-        return topicNarration;
+    public String getReviewBy() {
+        return reviewBy;
     }
 
-    public void setTopicNarration(String topicNarration) {
-        this.topicNarration = topicNarration;
+    public void setReviewBy(String reviewBy) {
+        this.reviewBy = reviewBy;
     }
 
-    public String getAuthorName() {
-        return authorName;
+    public String getReviewByName() {
+        return reviewByName;
     }
 
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
+    public void setReviewByName(String reviewByName) {
+        this.reviewByName = reviewByName;
     }
 
-    public String getAuthorLogoPath() {
-        return authorLogoPath;
+    public String getReviewByLogoPath() {
+        return reviewByLogoPath;
     }
 
-    public void setAuthorLogoPath(String authorLogoPath) {
-        this.authorLogoPath = authorLogoPath;
+    public void setReviewByLogoPath(String reviewByLogoPath) {
+        this.reviewByLogoPath = reviewByLogoPath;
+    }
+
+    public String getReviewComment() {
+        return reviewComment;
+    }
+
+    public void setReviewComment(String reviewComment) {
+        this.reviewComment = reviewComment;
     }
 
     public String getCreatedBy() {

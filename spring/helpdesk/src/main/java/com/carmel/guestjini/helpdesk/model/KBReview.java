@@ -8,10 +8,9 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "g_help_desk_kb")
+@Table(name = "g_help_desk_kb_review")
 @Audited
-public class KB {
-
+public class KBReview {
     @Id
     @Column(name = "id")
     @Length(max = 40)
@@ -27,20 +26,24 @@ public class KB {
     @Length(max = 40)
     private String orgId;
 
-    @Column(name = "topic_title")
-    @Length(max = 255)
-    private String topicTitle;
+    @Column(name = "kb_id")
+    @Length(max = 40)
+    private String kbId;
 
-    @Column(name = "author_name")
-    @Length(max = 255)
-    private String authorName;
+    @Column(name = "review_by")
+    @Length(max = 40)
+    private String reviewBy;
 
-    @Column(name = "author_logo_path")
-    @Length(max = 255)
-    private String authorLogoPath;
+    @Column(name = "review_by_name")
+    @Length(max = 40)
+    private String reviewByName;
 
-    @Column(name = "topic_narration", columnDefinition = "TEXT")
-    private String topicNarration;
+    @Column(name = "review_by_logo_path")
+    @Length(max = 40)
+    private String reviewByLogoPath;
+
+    @Column(name = "review_comment", columnDefinition = "TEXT")
+    private String reviewComment;
 
     @Column(name = "created_by")
     @Length(max = 40)
@@ -90,36 +93,44 @@ public class KB {
         this.orgId = orgId;
     }
 
-    public String getTopicTitle() {
-        return topicTitle;
+    public String getKbId() {
+        return kbId;
     }
 
-    public void setTopicTitle(String topicTitle) {
-        this.topicTitle = topicTitle;
+    public void setKbId(String kbId) {
+        this.kbId = kbId;
     }
 
-    public String getTopicNarration() {
-        return topicNarration;
+    public String getReviewBy() {
+        return reviewBy;
     }
 
-    public void setTopicNarration(String topicNarration) {
-        this.topicNarration = topicNarration;
+    public void setReviewBy(String reviewBy) {
+        this.reviewBy = reviewBy;
     }
 
-    public String getAuthorName() {
-        return authorName;
+    public String getReviewByName() {
+        return reviewByName;
     }
 
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
+    public void setReviewByName(String reviewByName) {
+        this.reviewByName = reviewByName;
     }
 
-    public String getAuthorLogoPath() {
-        return authorLogoPath;
+    public String getReviewByLogoPath() {
+        return reviewByLogoPath;
     }
 
-    public void setAuthorLogoPath(String authorLogoPath) {
-        this.authorLogoPath = authorLogoPath;
+    public void setReviewByLogoPath(String reviewByLogoPath) {
+        this.reviewByLogoPath = reviewByLogoPath;
+    }
+
+    public String getReviewComment() {
+        return reviewComment;
+    }
+
+    public void setReviewComment(String reviewComment) {
+        this.reviewComment = reviewComment;
     }
 
     public String getCreatedBy() {

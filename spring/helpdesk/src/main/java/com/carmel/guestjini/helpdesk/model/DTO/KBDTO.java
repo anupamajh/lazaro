@@ -10,6 +10,8 @@ public class KBDTO {
     private String orgId;
     private String topicTitle;
     private String topicNarration;
+    private String authorName;
+    private String authorLogoPath;
     private String createdBy;
     private Date creationTime;
     private String lastModifiedBy;
@@ -27,6 +29,8 @@ public class KBDTO {
         this.orgId = kb.getOrgId();
         this.topicTitle = kb.getTopicTitle();
         this.topicNarration = kb.getTopicNarration();
+        this.authorName = kb.getAuthorName();
+        this.authorLogoPath = kb.getAuthorLogoPath();
         this.createdBy = kb.getCreatedBy();
         this.creationTime = kb.getCreationTime();
         this.lastModifiedBy = kb.getLastModifiedBy();
@@ -75,6 +79,22 @@ public class KBDTO {
 
     public void setTopicNarration(String topicNarration) {
         this.topicNarration = topicNarration;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public String getAuthorLogoPath() {
+        return authorLogoPath;
+    }
+
+    public void setAuthorLogoPath(String authorLogoPath) {
+        this.authorLogoPath = authorLogoPath;
     }
 
     public String getCreatedBy() {
