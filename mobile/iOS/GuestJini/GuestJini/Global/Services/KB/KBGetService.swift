@@ -1,8 +1,8 @@
 //
-//  KBListService.swift
+//  KBGetService.swift
 //  GuestJini
 //
-//  Created by Prasanna Kumar Pete on 21/01/20.
+//  Created by Prasanna Kumar Pete on 22/01/20.
 //  Copyright © 2020 Prasanna Kumar Pete. All rights reserved.
 //
 
@@ -10,25 +10,25 @@ import Foundation
 import Alamofire
 import SwiftUI
 
-class KBListService:ObservableObject{
+class KBGetService:ObservableObject{
     @Published var kbResponse = KBResponse()
     @ObservedObject var viewRouter: ViewRouter
-    @Published var kbList:[KB] = []
+    @Published var kb:KB = KB()
     @Published var fetchComplete:Bool = false
     
     var checkTokenService:CheckTokenService
     
-    init(viewRouter: ViewRouter) {
+    init(viewRouter: ViewRouter, id:String) {
         self.viewRouter = viewRouter;
         self.checkTokenService = CheckTokenService(viewRouter: viewRouter)
-        self.getKBList { (response) in
+        self.getKB(id: id) { (response) in
             self.kbResponse = response
-            self.kbList = response.kbList!;
+            self.kb = response.kb!;
             self.fetchComplete = true
         }
     }
     
-    func getKBList(completionHandler: @escaping(KBResponse)->Void) -> Void {
+    func getKB(id:String, completionHandler: @escaping(KBResponse)->Void) -> Void {
         checkTokenService.CheckToken { (checkStatus) in
             if(checkStatus){
                 let headers: HTTPHeaders = [
@@ -36,8 +36,8 @@ class KBListService:ObservableObject{
                     "Accept": "application/json"
                 ]
                 
-                let parameters = ["" : ""]
-                AF.request(EndPoints.KB_LIST_URL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: headers)
+                let parameters = ["id" : id]
+                AF.request(EndPoints.KB_GET_URL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: headers)
                     .responseData { (response) in
                         let jsonDecoder = JSONDecoder()
                         do{

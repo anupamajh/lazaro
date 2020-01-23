@@ -49,6 +49,8 @@ struct ContentView: View {
                ).environmentObject(self.ticketUIData)
             }else if viewRouter.currentPage ==  ViewRoutes.HELP_ARTICLE_PAGE {
                 HelpArticleView(viewRouter: viewRouter)
+            }else if viewRouter.currentPage ==  ViewRoutes.MY_INTERESTS_VIEW {
+                MyInterestsPage(viewRouter: viewRouter)
             }
         }
         

@@ -19,10 +19,7 @@ struct GuestJiniDescriptionText: View {
                 .lineSpacing(10)
                    .lineLimit(5)
             
-            }.background(Color("aquaMarine"))
-            .shadow(radius: 10)
-            
-            
+            }
         }.padding()
         
     }

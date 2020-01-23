@@ -87,7 +87,13 @@ struct FindHelpPage: View {
                                         self.viewRouter.primaryKey = kb.id!
                                         self.viewRouter.currentPage = ViewRoutes.HELP_ARTICLE_PAGE
                                     }) {
-                                       KBRow(kb: kb)
+                                        KBRow(
+                                            kb: kb,
+                                            getKbAuthorPicService: GetKBAuthorPicService(
+                                                viewRouter: self.viewRouter,
+                                                kbId: kb.id!
+                                            )
+                                        )
                                     }
                                 }
                             }

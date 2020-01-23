@@ -68,6 +68,7 @@ struct MyProfileView: View {
             VStack{
                 ZStack{
                     VStack{
+                        ScrollView{
                         HStack{
                             Button(action: {
                                 self.viewRouter.currentPage = ViewRoutes.SETTINGS_VIEW
@@ -269,7 +270,22 @@ struct MyProfileView: View {
                                 }.padding(.horizontal)
                                 Divider()
                             }
+                            VStack{
+                                HStack{
+                                    Text("MY INTERESTS")
+                                        .font(Fonts.RobotFieldText)
+                                    .foregroundColor(Color("brownishGrey"))
+                                    Spacer()
+                                    Button(action:{
+                                        self.viewRouter.currentPage = ViewRoutes.MY_INTERESTS_VIEW
+                                    }){
+                                        GuestJiniButtonText(buttonText: "SETUP")
+                                    }
+                                    
+                                }.padding()
+                            }
                             
+                        }
                         }
                         
                     }.frame(width: geometry.size.width, height: geometry.size.height-85, alignment: .top)

@@ -63,6 +63,31 @@
 		C147F27323D1D234000CF770 /* TaskAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C147F27223D1D234000CF770 /* TaskAttachment.swift */; };
 		C147F27523D1D2A8000CF770 /* TaskAttachmentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C147F27423D1D2A8000CF770 /* TaskAttachmentResponse.swift */; };
 		C147F27723D1D379000CF770 /* AttachmentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C147F27623D1D379000CF770 /* AttachmentRow.swift */; };
+		C14C386923D8420500DADF9C /* KBReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14C386823D8420500DADF9C /* KBReview.swift */; };
+		C14C386B23D8421500DADF9C /* KBRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14C386A23D8421500DADF9C /* KBRating.swift */; };
+		C14C386D23D8422500DADF9C /* KBReviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14C386C23D8422500DADF9C /* KBReviewResponse.swift */; };
+		C14C386F23D8423300DADF9C /* KBRatingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14C386E23D8423300DADF9C /* KBRatingResponse.swift */; };
+		C14C387123D8424100DADF9C /* KBRatingPercentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14C387023D8424100DADF9C /* KBRatingPercentResponse.swift */; };
+		C14C387323D854CE00DADF9C /* KBGetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14C387223D854CE00DADF9C /* KBGetService.swift */; };
+		C14C387523D854E800DADF9C /* KBSaveReviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14C387423D854E800DADF9C /* KBSaveReviewService.swift */; };
+		C14C387723D8550500DADF9C /* KBListReviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14C387623D8550500DADF9C /* KBListReviewService.swift */; };
+		C14C387923D8551F00DADF9C /* KBSaveRatingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14C387823D8551F00DADF9C /* KBSaveRatingService.swift */; };
+		C14C387B23D8553100DADF9C /* KBGetRatingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14C387A23D8553100DADF9C /* KBGetRatingService.swift */; };
+		C14C387D23D8554500DADF9C /* KBGetPercentRatingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14C387C23D8554400DADF9C /* KBGetPercentRatingService.swift */; };
+		C14C387F23D8679D00DADF9C /* GetKBAuthorPicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14C387E23D8679D00DADF9C /* GetKBAuthorPicService.swift */; };
+		C14C388123D86DE100DADF9C /* GuestJiniWhiteRoundButtonSystemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14C388023D86DE100DADF9C /* GuestJiniWhiteRoundButtonSystemImage.swift */; };
+		C14C388323D87D8E00DADF9C /* KBReviewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14C388223D87D8E00DADF9C /* KBReviewRow.swift */; };
+		C14E1C1E23D968F000FF16C6 /* InterestCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14E1C1D23D968F000FF16C6 /* InterestCategory.swift */; };
+		C14E1C2023D968FB00FF16C6 /* Interest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14E1C1F23D968FB00FF16C6 /* Interest.swift */; };
+		C14E1C2223D9696300FF16C6 /* InterestCategoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14E1C2123D9696300FF16C6 /* InterestCategoryResponse.swift */; };
+		C14E1C2423D9697000FF16C6 /* InterestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14E1C2323D9697000FF16C6 /* InterestResponse.swift */; };
+		C14E1C2623D96D7B00FF16C6 /* MyInterestsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14E1C2523D96D7B00FF16C6 /* MyInterestsPage.swift */; };
+		C14E1C2923D9737400FF16C6 /* GetInterestCategoryListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14E1C2823D9737400FF16C6 /* GetInterestCategoryListService.swift */; };
+		C14E1C2B23D9748E00FF16C6 /* GetInterestListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14E1C2A23D9748E00FF16C6 /* GetInterestListService.swift */; };
+		C14E1C2D23D9A84E00FF16C6 /* UserInterests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14E1C2C23D9A84E00FF16C6 /* UserInterests.swift */; };
+		C14E1C2F23D9A89800FF16C6 /* UserInterestsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14E1C2E23D9A89800FF16C6 /* UserInterestsResponse.swift */; };
+		C14E1C3123D9A8CD00FF16C6 /* GetUserInterests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14E1C3023D9A8CD00FF16C6 /* GetUserInterests.swift */; };
+		C14E1C3323D9A8D800FF16C6 /* SaveUserInterests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14E1C3223D9A8D800FF16C6 /* SaveUserInterests.swift */; };
 		C1504AA223CD89C700302EB7 /* UserPreferenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1504AA123CD89C700302EB7 /* UserPreferenceType.swift */; };
 		C1504AA423CD8A5000302EB7 /* UserPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1504AA323CD8A5000302EB7 /* UserPreference.swift */; };
 		C1504AA623CD8AD800302EB7 /* UserPreferenceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1504AA523CD8AD800302EB7 /* UserPreferenceResponse.swift */; };
@@ -233,6 +258,31 @@
 		C147F27223D1D234000CF770 /* TaskAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAttachment.swift; sourceTree = "<group>"; };
 		C147F27423D1D2A8000CF770 /* TaskAttachmentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAttachmentResponse.swift; sourceTree = "<group>"; };
 		C147F27623D1D379000CF770 /* AttachmentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentRow.swift; sourceTree = "<group>"; };
+		C14C386823D8420500DADF9C /* KBReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBReview.swift; sourceTree = "<group>"; };
+		C14C386A23D8421500DADF9C /* KBRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBRating.swift; sourceTree = "<group>"; };
+		C14C386C23D8422500DADF9C /* KBReviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBReviewResponse.swift; sourceTree = "<group>"; };
+		C14C386E23D8423300DADF9C /* KBRatingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBRatingResponse.swift; sourceTree = "<group>"; };
+		C14C387023D8424100DADF9C /* KBRatingPercentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBRatingPercentResponse.swift; sourceTree = "<group>"; };
+		C14C387223D854CE00DADF9C /* KBGetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBGetService.swift; sourceTree = "<group>"; };
+		C14C387423D854E800DADF9C /* KBSaveReviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBSaveReviewService.swift; sourceTree = "<group>"; };
+		C14C387623D8550500DADF9C /* KBListReviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBListReviewService.swift; sourceTree = "<group>"; };
+		C14C387823D8551F00DADF9C /* KBSaveRatingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBSaveRatingService.swift; sourceTree = "<group>"; };
+		C14C387A23D8553100DADF9C /* KBGetRatingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBGetRatingService.swift; sourceTree = "<group>"; };
+		C14C387C23D8554400DADF9C /* KBGetPercentRatingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBGetPercentRatingService.swift; sourceTree = "<group>"; };
+		C14C387E23D8679D00DADF9C /* GetKBAuthorPicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetKBAuthorPicService.swift; sourceTree = "<group>"; };
+		C14C388023D86DE100DADF9C /* GuestJiniWhiteRoundButtonSystemImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniWhiteRoundButtonSystemImage.swift; sourceTree = "<group>"; };
+		C14C388223D87D8E00DADF9C /* KBReviewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBReviewRow.swift; sourceTree = "<group>"; };
+		C14E1C1D23D968F000FF16C6 /* InterestCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestCategory.swift; sourceTree = "<group>"; };
+		C14E1C1F23D968FB00FF16C6 /* Interest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interest.swift; sourceTree = "<group>"; };
+		C14E1C2123D9696300FF16C6 /* InterestCategoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestCategoryResponse.swift; sourceTree = "<group>"; };
+		C14E1C2323D9697000FF16C6 /* InterestResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestResponse.swift; sourceTree = "<group>"; };
+		C14E1C2523D96D7B00FF16C6 /* MyInterestsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInterestsPage.swift; sourceTree = "<group>"; };
+		C14E1C2823D9737400FF16C6 /* GetInterestCategoryListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetInterestCategoryListService.swift; sourceTree = "<group>"; };
+		C14E1C2A23D9748E00FF16C6 /* GetInterestListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetInterestListService.swift; sourceTree = "<group>"; };
+		C14E1C2C23D9A84E00FF16C6 /* UserInterests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInterests.swift; sourceTree = "<group>"; };
+		C14E1C2E23D9A89800FF16C6 /* UserInterestsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInterestsResponse.swift; sourceTree = "<group>"; };
+		C14E1C3023D9A8CD00FF16C6 /* GetUserInterests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserInterests.swift; sourceTree = "<group>"; };
+		C14E1C3223D9A8D800FF16C6 /* SaveUserInterests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveUserInterests.swift; sourceTree = "<group>"; };
 		C1504AA123CD89C700302EB7 /* UserPreferenceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferenceType.swift; sourceTree = "<group>"; };
 		C1504AA323CD8A5000302EB7 /* UserPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreference.swift; sourceTree = "<group>"; };
 		C1504AA523CD8AD800302EB7 /* UserPreferenceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferenceResponse.swift; sourceTree = "<group>"; };
@@ -519,6 +569,11 @@
 				C147F27223D1D234000CF770 /* TaskAttachment.swift */,
 				C1AF8A3323D5AFEB00041662 /* TaskNote.swift */,
 				C1997B8023D6F3A90076A56C /* KB.swift */,
+				C14C386823D8420500DADF9C /* KBReview.swift */,
+				C14C386A23D8421500DADF9C /* KBRating.swift */,
+				C14E1C1D23D968F000FF16C6 /* InterestCategory.swift */,
+				C14E1C1F23D968FB00FF16C6 /* Interest.swift */,
+				C14E1C2C23D9A84E00FF16C6 /* UserInterests.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -538,6 +593,7 @@
 		C12EF5E123B225040024C22C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C14E1C2723D9735600FF16C6 /* Interest */,
 				C1997B8423D6F4170076A56C /* KB */,
 				C10ACFFB23C2ECC700C7CB70 /* User */,
 				C1BB7D5C23BF3F0000BA410C /* Ticket */,
@@ -573,6 +629,7 @@
 				C18CF00623D063F900B3E2BB /* TicketAttachmentDrawerContent.swift */,
 				C18CF00823D065EF00B3E2BB /* TicketAttachmentDrawerMenu.swift */,
 				C1997B8923D7032E0076A56C /* HelpArticleView.swift */,
+				C14E1C2523D96D7B00FF16C6 /* MyInterestsPage.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -647,8 +704,21 @@
 				C147F27623D1D379000CF770 /* AttachmentRow.swift */,
 				C1813B6823D5BC3C00450B1E /* TaskNoteRow.swift */,
 				C1997B8723D6F69F0076A56C /* KBRow.swift */,
+				C14C388023D86DE100DADF9C /* GuestJiniWhiteRoundButtonSystemImage.swift */,
+				C14C388223D87D8E00DADF9C /* KBReviewRow.swift */,
 			);
 			path = Lib;
+			sourceTree = "<group>";
+		};
+		C14E1C2723D9735600FF16C6 /* Interest */ = {
+			isa = PBXGroup;
+			children = (
+				C14E1C2823D9737400FF16C6 /* GetInterestCategoryListService.swift */,
+				C14E1C2A23D9748E00FF16C6 /* GetInterestListService.swift */,
+				C14E1C3023D9A8CD00FF16C6 /* GetUserInterests.swift */,
+				C14E1C3223D9A8D800FF16C6 /* SaveUserInterests.swift */,
+			);
+			path = Interest;
 			sourceTree = "<group>";
 		};
 		C1504AAB23CD923400302EB7 /* Responses */ = {
@@ -663,6 +733,12 @@
 				C14322D723D2253B00D7E0EA /* ForgotPasswordResponse.swift */,
 				C1AF8A3523D5B02E00041662 /* TaskNotesResponse.swift */,
 				C1997B8223D6F3E30076A56C /* KBResponse.swift */,
+				C14C386C23D8422500DADF9C /* KBReviewResponse.swift */,
+				C14C386E23D8423300DADF9C /* KBRatingResponse.swift */,
+				C14C387023D8424100DADF9C /* KBRatingPercentResponse.swift */,
+				C14E1C2123D9696300FF16C6 /* InterestCategoryResponse.swift */,
+				C14E1C2323D9697000FF16C6 /* InterestResponse.swift */,
+				C14E1C2E23D9A89800FF16C6 /* UserInterestsResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -671,6 +747,13 @@
 			isa = PBXGroup;
 			children = (
 				C1997B8523D6F42A0076A56C /* KBListService.swift */,
+				C14C387223D854CE00DADF9C /* KBGetService.swift */,
+				C14C387423D854E800DADF9C /* KBSaveReviewService.swift */,
+				C14C387623D8550500DADF9C /* KBListReviewService.swift */,
+				C14C387823D8551F00DADF9C /* KBSaveRatingService.swift */,
+				C14C387A23D8553100DADF9C /* KBGetRatingService.swift */,
+				C14C387C23D8554400DADF9C /* KBGetPercentRatingService.swift */,
+				C14C387E23D8679D00DADF9C /* GetKBAuthorPicService.swift */,
 			);
 			path = KB;
 			sourceTree = "<group>";
@@ -959,6 +1042,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C18CF00523D05EC300B3E2BB /* TicketAttachmentList.swift in Sources */,
+				C14E1C3123D9A8CD00FF16C6 /* GetUserInterests.swift in Sources */,
 				C18CF01123D096BE00B3E2BB /* TicketAttachmentDrawerAction.swift in Sources */,
 				C1D0FFFF23B9D73700B93651 /* ViewRoutes.swift in Sources */,
 				C1F8A70C23BB16A2005158A5 /* ExploreSupport.swift in Sources */,
@@ -966,6 +1050,8 @@
 				C10ACFF623BF7B3700C7CB70 /* WebView.swift in Sources */,
 				C1B1E43223BE1DD1009E1E3B /* TicketList.swift in Sources */,
 				C1504AAF23CD925200302EB7 /* OAuthErrorResponse.swift in Sources */,
+				C14C387923D8551F00DADF9C /* KBSaveRatingService.swift in Sources */,
+				C14E1C1E23D968F000FF16C6 /* InterestCategory.swift in Sources */,
 				C10CD05123CF4BF2001F30BB /* ViewExtension.swift in Sources */,
 				C102721623D1880C00F2D227 /* AudioRecorderView.swift in Sources */,
 				C1B1E43C23BEFA23009E1E3B /* GuestJiniTextArea.swift in Sources */,
@@ -980,23 +1066,34 @@
 				C1BB7D5923BF3A4000BA410C /* TicketListService.swift in Sources */,
 				C144F01223B477B100D6D218 /* CarouselImage.swift in Sources */,
 				C147F27323D1D234000CF770 /* TaskAttachment.swift in Sources */,
+				C14E1C3323D9A8D800FF16C6 /* SaveUserInterests.swift in Sources */,
 				C1504AB923CECF1B00302EB7 /* AddressBook.swift in Sources */,
 				C10CD04F23CF4A75001F30BB /* UIApplicationExtension.swift in Sources */,
 				C10ACFFD23C2ECFD00C7CB70 /* ForgotPasswordService.swift in Sources */,
+				C14C386923D8420500DADF9C /* KBReview.swift in Sources */,
 				C14322D623D1FCDB00D7E0EA /* TicketUIModel.swift in Sources */,
+				C14C387D23D8554500DADF9C /* KBGetPercentRatingService.swift in Sources */,
 				C102721223D185C000F2D227 /* AudioRecorder.swift in Sources */,
 				C1903E6523B73B2B00AD8F63 /* GuestJiniImageCard.swift in Sources */,
+				C14E1C2923D9737400FF16C6 /* GetInterestCategoryListService.swift in Sources */,
 				C1BB7D6023BF418600BA410C /* TicketView.swift in Sources */,
 				C18CF00B23D07E5800B3E2BB /* VideoPicker.swift in Sources */,
 				C12523EF23CEE4C700ADCE17 /* DateExtension.swift in Sources */,
 				C127164823B75409001E4C99 /* GuestJiniButtonSystemImagePlain.swift in Sources */,
+				C14C387B23D8553100DADF9C /* KBGetRatingService.swift in Sources */,
+				C14E1C2623D96D7B00FF16C6 /* MyInterestsPage.swift in Sources */,
 				C129E73523BAFD60009144D6 /* GuestJiniSearchBox.swift in Sources */,
+				C14C386F23D8423300DADF9C /* KBRatingResponse.swift in Sources */,
 				C14322D323D1FAE300D7E0EA /* TaskTicketRequest.swift in Sources */,
+				C14E1C2D23D9A84E00FF16C6 /* UserInterests.swift in Sources */,
+				C14C387523D854E800DADF9C /* KBSaveReviewService.swift in Sources */,
 				C1E4C02923CB793700D6C578 /* MultilineTextView.swift in Sources */,
 				C1E9E59223B740A300EB812F /* GuestJiniButtonSystemImage.swift in Sources */,
 				C12EF5A823B223DD0024C22C /* AppDelegate.swift in Sources */,
+				C14E1C2223D9696300FF16C6 /* InterestCategoryResponse.swift in Sources */,
 				C1DD878823B9EB2F00418AD8 /* GuestJiniFieldError.swift in Sources */,
 				C18CF00923D065EF00B3E2BB /* TicketAttachmentDrawerMenu.swift in Sources */,
+				C14C388123D86DE100DADF9C /* GuestJiniWhiteRoundButtonSystemImage.swift in Sources */,
 				C18CF00F23D085EB00B3E2BB /* PlayerUIView.swift in Sources */,
 				C144F01923B4814B00D6D218 /* GuestJiniRoundButtonText.swift in Sources */,
 				C1BB7D5B23BF3D7000BA410C /* ActivityIndicator.swift in Sources */,
@@ -1009,12 +1106,14 @@
 				C1BB7D5E23BF3F1F00BA410C /* TicketGetService.swift in Sources */,
 				C1BB27FA23B764A200E8E3F9 /* AppAccessRequest.swift in Sources */,
 				C1AF8A3623D5B02E00041662 /* TaskNotesResponse.swift in Sources */,
+				C14C387323D854CE00DADF9C /* KBGetService.swift in Sources */,
 				C1504AA223CD89C700302EB7 /* UserPreferenceType.swift in Sources */,
 				C1B1E43A23BE1F1B009E1E3B /* TicketResponse.swift in Sources */,
 				C10CD04B23CF18CE001F30BB /* AppAccessRequestResponse.swift in Sources */,
 				C1A73E1E23B744DF00E9F5B8 /* LoginScreen.swift in Sources */,
 				C1B1E43023BE0D1F009E1E3B /* GuestJiniSecureTextBox.swift in Sources */,
 				C1997B8A23D7032E0076A56C /* HelpArticleView.swift in Sources */,
+				C14E1C2B23D9748E00FF16C6 /* GetInterestListService.swift in Sources */,
 				C10CD04923CF1809001F30BB /* AppAccessRequestService.swift in Sources */,
 				C14322D823D2253B00D7E0EA /* ForgotPasswordResponse.swift in Sources */,
 				C127164A23B75553001E4C99 /* GuestJiniInformationText.swift in Sources */,
@@ -1036,6 +1135,8 @@
 				C10AD00123C3155B00C7CB70 /* UserInfoService.swift in Sources */,
 				C102721A23D19CC700F2D227 /* FilePickerView.swift in Sources */,
 				C1EB388B23CEFA3F0057975E /* GetProfilePicService.swift in Sources */,
+				C14E1C2023D968FB00FF16C6 /* Interest.swift in Sources */,
+				C14C386B23D8421500DADF9C /* KBRating.swift in Sources */,
 				C102721C23D19DBE00F2D227 /* FilePickerUIView.swift in Sources */,
 				C1D0000323B9DC2A00B93651 /* AuthData.swift in Sources */,
 				C129E73923BB0509009144D6 /* GuestJiniRoundButtonSystemImage.swift in Sources */,
@@ -1049,12 +1150,15 @@
 				C12EF5AA23B223DD0024C22C /* SceneDelegate.swift in Sources */,
 				C1504AB523CDBC1B00302EB7 /* ImageConverter.swift in Sources */,
 				C1997B8323D6F3E30076A56C /* KBResponse.swift in Sources */,
+				C14C387723D8550500DADF9C /* KBListReviewService.swift in Sources */,
 				C1997B8123D6F3A90076A56C /* KB.swift in Sources */,
 				C15C726023BA18CD0069CB6E /* HomePage.swift in Sources */,
 				C147F27523D1D2A8000CF770 /* TaskAttachmentResponse.swift in Sources */,
 				C1504AA423CD8A5000302EB7 /* UserPreference.swift in Sources */,
+				C14C388323D87D8E00DADF9C /* KBReviewRow.swift in Sources */,
 				C1B1E43E23BF0304009E1E3B /* TicketRow.swift in Sources */,
 				C1997B8623D6F42A0076A56C /* KBListService.swift in Sources */,
+				C14C386D23D8422500DADF9C /* KBReviewResponse.swift in Sources */,
 				C1BB27F823B7644000E8E3F9 /* GuestJiniHeaderSmall.swift in Sources */,
 				C1B1E43823BE1EFF009E1E3B /* Ticket.swift in Sources */,
 				C1A73E1C23B7448200E9F5B8 /* LandingScreen.swift in Sources */,
@@ -1071,13 +1175,17 @@
 				C144F01F23B481B400D6D218 /* GuestJiniDescriptionText.swift in Sources */,
 				C1C74C3E23BA146700FFA336 /* GuestJiniBottomBarItem.swift in Sources */,
 				C10CD05323CF52DF001F30BB /* FindHelpPage.swift in Sources */,
+				C14C387F23D8679D00DADF9C /* GetKBAuthorPicService.swift in Sources */,
 				C1B1E43423BE1DDD009E1E3B /* TicketUI.swift in Sources */,
 				C144F02323B483CB00D6D218 /* FontExtension.swift in Sources */,
 				C1504AB323CDA90700302EB7 /* ImagePicker.swift in Sources */,
 				C129E73723BB008C009144D6 /* GuestJiniSubAction.swift in Sources */,
 				C1504AA623CD8AD800302EB7 /* UserPreferenceResponse.swift in Sources */,
+				C14E1C2423D9697000FF16C6 /* InterestResponse.swift in Sources */,
 				C127164623B751CB001E4C99 /* ForgotPassword.swift in Sources */,
+				C14E1C2F23D9A89800FF16C6 /* UserInterestsResponse.swift in Sources */,
 				C147F27723D1D379000CF770 /* AttachmentRow.swift in Sources */,
+				C14C387123D8424100DADF9C /* KBRatingPercentResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

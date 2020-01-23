@@ -10,22 +10,23 @@ import SwiftUI
 
 struct KBRow: View {
     @State var kb:KB
-      
-    @State var authorPic:Image = Image(systemName: "camera")
+    @ObservedObject var getKbAuthorPicService:GetKBAuthorPicService
     
     var body: some View {
         VStack{
             HStack{
                 ZStack{
                     VStack{
-                    self.authorPic
+                        self.getKbAuthorPicService.kbAuthorPic!
                         .resizable()
                         .clipShape(Circle())
                         Spacer()
                         
                     }.frame(width:45, height: 45)
                     .overlay(Circle().stroke(Color.white, lineWidth: 1))
-                    
+                    if(self.getKbAuthorPicService.isLoading){
+                        ActivityIndicator(shouldAnimate: .constant(true), style: .medium)
+                    }
                 }.padding()
                     .frame(alignment:.top)
                 VStack{
@@ -37,14 +38,14 @@ struct KBRow: View {
                         Spacer()
                     }
                     HStack{
-                        Text("Authur : John Doe")
+                        Text("Author : \(self.kb.authorName!)")
                             .font(Fonts.RobotSectionTitle)
                         .foregroundColor(Color("greyishBrownFour"))
                         Spacer()
                     }
                     
                     HStack{
-                        Text("10 Jan 2019")
+                        Text(self.kb.creationTime!.convetToDateFromMySQL())
                             .font(Fonts.RobotSectionTitle)
                             .foregroundColor(Color("greyishBrownFour"))
                         Spacer()
@@ -76,6 +77,6 @@ struct KBRow: View {
     
     struct KBRow_Previews: PreviewProvider {
         static var previews: some View {
-            KBRow(kb: KB())
+            KBRow(kb: KB(),getKbAuthorPicService: GetKBAuthorPicService(viewRouter: ViewRouter(), kbId: ""))
         }
 }

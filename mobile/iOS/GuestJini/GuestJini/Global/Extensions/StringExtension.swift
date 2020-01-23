@@ -12,6 +12,9 @@ extension String{
     
     func convetToDateFromMySQLUTC()->String{
         let input:String = self
+        if(self.trimmingCharacters(in: .whitespacesAndNewlines) == ""){
+             return ""
+         }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZ"
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
@@ -23,6 +26,9 @@ extension String{
     
     func convetToDateFromMySQL()->String{
         let input:String = self
+        if(self.trimmingCharacters(in: .whitespacesAndNewlines) == ""){
+            return ""
+        }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZ"
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
@@ -33,6 +39,9 @@ extension String{
     
     func convetToAgeFromMySQLDate()->(year :Int, month : Int, day : Int){
         let input:String = self
+        if(self.trimmingCharacters(in: .whitespacesAndNewlines) == ""){
+             return (0,0,0)
+         }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZ"
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")

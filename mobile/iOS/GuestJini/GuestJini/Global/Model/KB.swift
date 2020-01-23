@@ -8,10 +8,12 @@
 
 import Foundation
 class KB: Codable, Identifiable, ObservableObject {
-    public var id:String? = nil
-    public var clientId:String?  = nil
-    public var orgId:String? = nil
-    public var topicTitle:String? = nil
-    public var topicNarration:String? = nil
+    public var id:String? = ""
+    public var clientId:String?  = ""
+    public var orgId:String? = ""
+    public var topicTitle:String? = ""
+    public var topicNarration:String? = ""
+    public var authorName:String? = ""
+    public var authorLogoPath:String? = ""
     public var creationTime:String? = ""
 }

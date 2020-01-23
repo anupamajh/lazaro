@@ -25,6 +25,7 @@ class ViewRoutes {
     
     static var SETTINGS_VIEW = "settings_view"
     static var MY_PROFILE_VIEW = "my_profile_view"
+    static var MY_INTERESTS_VIEW = "my_interests_view"
     static var NOTIFICATION_VIEW = "notification_view"
     static var HELP_VIEW = "help_view"
 
