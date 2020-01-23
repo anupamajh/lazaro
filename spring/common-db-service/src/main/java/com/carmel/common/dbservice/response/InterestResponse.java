@@ -1,32 +1,37 @@
 package com.carmel.common.dbservice.response;
 
-import com.carmel.common.dbservice.model.AddressBook;
+import com.carmel.common.dbservice.model.DTO.InterestDTO;
+import com.carmel.common.dbservice.model.Interest;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class AddressBookResponse {
-    private List<AddressBook> addressBookList;
-    private AddressBook addressBook;
+public class InterestResponse {
+    private InterestDTO interest;
+    private List<InterestDTO> interestList;
     private long totalPages;
     private long totalRecords;
     private long currentRecords;
     private boolean success;
     private String error;
 
-    public List<AddressBook> getAddressBookList() {
-        return addressBookList;
+    public InterestDTO getInterest() {
+        return interest;
     }
 
-    public void setAddressBookList(List<AddressBook> addressBookList) {
-        this.addressBookList = addressBookList;
+    public void setInterest(Interest interest) {
+        this.interest = new InterestDTO(interest);
     }
 
-    public AddressBook getAddressBook() {
-        return addressBook;
+    public List<InterestDTO> getInterestList() {
+        return interestList;
     }
 
-    public void setAddressBook(AddressBook addressBook) {
-        this.addressBook = addressBook;
+    public void setInterestList(List<Interest> interestList) {
+        this.interestList = new ArrayList<>();
+        interestList.forEach(interest1 -> {
+            this.interestList.add(new InterestDTO(interest1));
+        });
     }
 
     public long getTotalPages() {

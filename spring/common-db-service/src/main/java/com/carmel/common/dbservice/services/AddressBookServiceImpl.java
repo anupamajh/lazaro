@@ -2,7 +2,6 @@ package com.carmel.common.dbservice.services;
 
 import com.carmel.common.dbservice.model.AddressBook;
 import com.carmel.common.dbservice.repository.AddressBookRepository;
-import com.carmel.common.dbservice.response.AddressBookResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

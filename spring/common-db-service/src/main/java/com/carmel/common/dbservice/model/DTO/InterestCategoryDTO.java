@@ -1,12 +1,15 @@
 package com.carmel.common.dbservice.model.DTO;
 
+import com.carmel.common.dbservice.model.InterestCategory;
+
 import java.util.Date;
 
-public class UserPreferenceDTO {
+public class InterestCategoryDTO {
     private String id;
-    private String userId;
-    private int preferenceType;
-    private int isHidden;
+    private String clientId;
+    private String orgId;
+    private String name;
+    private String description;
     private String createdBy;
     private Date creationTime;
     private String lastModifiedBy;
@@ -14,6 +17,25 @@ public class UserPreferenceDTO {
     private int isDeleted;
     private String deletedBy;
     private Date deletedTime;
+
+    public InterestCategoryDTO() {
+    }
+
+    public InterestCategoryDTO(InterestCategory interestCategory) {
+        this.id = interestCategory.getId();
+        this.clientId = interestCategory.getClientId();
+        this.orgId = interestCategory.getOrgId();
+        this.name = interestCategory.getName();
+        this.description = interestCategory.getDescription();
+        this.createdBy = interestCategory.getCreatedBy();
+        this.creationTime = interestCategory.getCreationTime();
+        this.lastModifiedBy = interestCategory.getLastModifiedBy();
+        this.lastModifiedTime = interestCategory.getLastModifiedTime();
+        this.isDeleted = interestCategory.getIsDeleted();
+        this.deletedBy = interestCategory.getDeletedBy();
+        this.deletedTime = interestCategory.getDeletedTime();
+
+    }
 
     public String getId() {
         return id;
@@ -23,28 +45,36 @@ public class UserPreferenceDTO {
         this.id = id;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getClientId() {
+        return clientId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
-    public int getPreferenceType() {
-        return preferenceType;
+    public String getOrgId() {
+        return orgId;
     }
 
-    public void setPreferenceType(int preferenceType) {
-        this.preferenceType = preferenceType;
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
     }
 
-    public int getIsHidden() {
-        return isHidden;
+    public String getName() {
+        return name;
     }
 
-    public void setIsHidden(int isHidden) {
-        this.isHidden = isHidden;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCreatedBy() {

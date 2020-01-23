@@ -3,7 +3,6 @@ package com.carmel.common.dbservice.controller;
 import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.UserInfo;
 import com.carmel.common.dbservice.model.UserPreference;
-import com.carmel.common.dbservice.response.AccountHeadResponse;
 import com.carmel.common.dbservice.response.UserPrefrenceResponse;
 import com.carmel.common.dbservice.services.UserPreferenceService;
 import com.fasterxml.jackson.databind.ObjectMapper;
