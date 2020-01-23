@@ -29,7 +29,7 @@ import static com.carmel.common.dbservice.specifications.InterestSpecification.t
 @RestController
 @RequestMapping(value = "/interest")
 public class InterestController {
-    Logger logger = LoggerFactory.getLogger(InterestCategoryController.class);
+    Logger logger = LoggerFactory.getLogger(InterestController.class);
 
     @Autowired
     UserInformation userInformation;
