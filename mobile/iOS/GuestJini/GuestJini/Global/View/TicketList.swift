@@ -111,7 +111,10 @@ struct TicketList: View {
                             
                         }else{
                             List {
-                                ForEach(self.ticketListService.ticketList.filter{($0.ticketTitle?.lowercased().contains(self.ticketSearchText.lowercased()))! || $0.ticketNarration.lowercased().contains(self.ticketSearchText.lowercased()) || self.ticketSearchText == ""}) { ticket in
+                                ForEach(self.ticketListService.ticketList.filter{
+                                    ($0.ticketTitle?.lowercased().contains(self.ticketSearchText.lowercased()))! ||
+                                        $0.ticketNarration.lowercased().contains(self.ticketSearchText.lowercased()) ||
+                                        self.ticketSearchText == ""}) { ticket in
                                     Button(action: {
                                         self.viewRouter.primaryKey = ticket.id!
                                         self.viewRouter.currentPage = ViewRoutes.TICKET_VIEW

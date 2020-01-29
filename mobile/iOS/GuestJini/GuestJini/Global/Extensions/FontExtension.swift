@@ -11,8 +11,8 @@ import SwiftUI
 
 struct Fonts {
     static let RobotRegular = Font.custom("Roboto", size: 12)
-     static let RobotRegularButton = Font.custom("Roboto", size: 14)
-     static let RobotTitle = Font.custom("Roboto-Bold", size: 18)
+    static let RobotRegularButton = Font.custom("Roboto", size: 14)
+    static let RobotTitle = Font.custom("Roboto-Bold", size: 18)
     static let RobotButtonFont = Font.custom("Roboto-Bold", size: 14)
     static let RobotRegularText = Font.custom("Roboto-Regular", size: 12)
     static let RobotRegularSmallText = Font.custom("Roboto-Regular", size: 10)

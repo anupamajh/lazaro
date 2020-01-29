@@ -29,12 +29,19 @@ class SaveUserInterests:ObservableObject{
                 let jsonEncoder = JSONEncoder()
                 let userInterestData = try! jsonEncoder.encode(userInterest)
                 let json = try! JSONSerialization.jsonObject(with: userInterestData, options: []) as? [String : Any]
-                 AF.request(EndPoints.SAVE_MY_INTEREST_URL, method: .post, parameters: json,encoding: JSONEncoding.default, headers: headers)
+                AF.request(EndPoints.SAVE_MY_INTEREST_URL, method: .post, parameters: json,encoding: JSONEncoding.default, headers: headers)
                     .responseData { (response) in
                         let jsonDecoder = JSONDecoder()
                         do{
-                            let parsedData =  try jsonDecoder.decode(UserInterestsResponse.self, from: response.data!)
-                            completionHandler(parsedData)
+                            if(response.data != nil){
+                                let parsedData =  try jsonDecoder.decode(UserInterestsResponse.self, from: response.data!)
+                                completionHandler(parsedData)
+                            }else{
+                                let parsedData = UserInterestsResponse()
+                                parsedData.error = "Unknow error has occrred"
+                                parsedData.success = false;
+                                completionHandler(parsedData)
+                            }
                         }catch{
                             let parsedData = UserInterestsResponse()
                             parsedData.error = "Unknow error has occrred"

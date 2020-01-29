@@ -29,24 +29,36 @@ class TicketListService:ObservableObject{
     }
     
     func getTicketList(completionHandler: @escaping(TicketResponse)->Void) -> Void {
-         checkTokenService.CheckToken { (checkStatus) in
-             if(checkStatus){
-                 let headers: HTTPHeaders = [
-                     "Authorization": "Bearer \(UserDefaults.standard.string(forKey: "access_token")!)",
-                     "Accept": "application/json"
-                 ]
-                 
-                 let parameters = ["" : ""]
-                 AF.request(EndPoints.TICKET_LIST_URL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: headers)
-                     .responseData { (response) in
-                         let jsonDecoder = JSONDecoder()
-                         let parsedData = try! jsonDecoder.decode(TicketResponse.self, from: response.data!)
-                         completionHandler(parsedData)
-                 }
-             }
-             
-         }
-     }
+        checkTokenService.CheckToken { (checkStatus) in
+            if(checkStatus){
+                let headers: HTTPHeaders = [
+                    "Authorization": "Bearer \(UserDefaults.standard.string(forKey: "access_token")!)",
+                    "Accept": "application/json"
+                ]
+                
+                let parameters = ["" : ""]
+                AF.request(EndPoints.TICKET_LIST_URL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: headers)
+                    .responseData { (response) in
+                        if(response.data != nil){
+                            do{
+                                let jsonDecoder = JSONDecoder()
+                                let parsedData = try jsonDecoder.decode(TicketResponse.self, from: response.data!)
+                                completionHandler(parsedData)
+                            }catch{
+                                let parsedData = TicketResponse()
+                                parsedData.error = "Unknown error has occurred!"
+                                completionHandler(parsedData)
+                            }
+                        }else{
+                            let parsedData = TicketResponse()
+                            parsedData.error = "Unknown error has occurred!"
+                            completionHandler(parsedData)
+                        }
+                }
+            }
+            
+        }
+    }
     
     
     

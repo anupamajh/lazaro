@@ -29,5 +29,14 @@ class ViewRoutes {
     static var NOTIFICATION_VIEW = "notification_view"
     static var HELP_VIEW = "help_view"
 
+    static var COMMUNIT_LANDING_PAGE = "community_landing_page"
+    static var PEOPLE_LIST_PAGE = "people_list_page"
+    static var PEOPLE_DETAIL_PAGE = "people_detal_page"
+
+    static var GROUP_LANDING_PAGE = "group_landing_page"
+    static var GROUP_LIST_PAGE = "group_list_page"
+    static var GROUP_DETAIL_PAGE = "group_detail_page"
+    static var GROUP_CONVERSATION_PAGE = "group_conversation_page"
+
     
 }

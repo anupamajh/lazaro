@@ -71,7 +71,11 @@ struct MyProfileView: View {
                         ScrollView{
                         HStack{
                             Button(action: {
-                                self.viewRouter.currentPage = ViewRoutes.SETTINGS_VIEW
+                                if(self.viewRouter.returnPage == ""){
+                                    self.viewRouter.currentPage = ViewRoutes.SETTINGS_VIEW
+                                }else{
+                                    self.viewRouter.currentPage = self.viewRouter.returnPage
+                                }
                             }) {
                                 GuestJiniButtonSystemImagePlain(imageName: "arrow.left")
                                 

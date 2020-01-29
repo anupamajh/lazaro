@@ -15,6 +15,7 @@ struct SettingsView: View {
             VStack{
                 VStack{
                     Button(action: {
+                        self.viewRouter.returnPage = ""
                         self.viewRouter.currentPage = ViewRoutes.MY_PROFILE_VIEW
                     }) {
                         GuestJiniSettingMenuItem(imageName: "person", menuText: "My Profile")

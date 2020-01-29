@@ -13,6 +13,10 @@ class UserInterests: Codable, Identifiable, ObservableObject {
     public var orgId:String? = ""
     public var userId:String? = ""
     public var interestId:String? = ""
+    public var interestName:String? = ""
+    public var interestCategoryName:String? = ""
+    public var interestCategoryId:String? = ""
     public var isInterested:Int? = 0
+    public var interestCategory:InterestCategory? = InterestCategory()
     public var creationTime:String? = ""
 }

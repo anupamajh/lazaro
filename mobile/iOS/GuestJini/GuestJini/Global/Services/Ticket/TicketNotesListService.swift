@@ -23,31 +23,47 @@ class TicketNotesListService:ObservableObject{
         self.checkTokenService = CheckTokenService(viewRouter: viewRouter)
         self.getNotesList(ticketId: ticketId) { (response) in
             self.taskNotesResponse = response
-            self.taskNotesList = response.taskNoteList!;
+            if(response.taskNoteList != nil){
+                self.taskNotesList = response.taskNoteList!;
+            }else{
+                self.taskNotesList = []
+            }
             self.fetchComplete = true
         }
         
     }
     
     func getNotesList(ticketId:String, completionHandler: @escaping(TaskNotesResponse)->Void) -> Void {
-         checkTokenService.CheckToken { (checkStatus) in
-             if(checkStatus){
-                 let headers: HTTPHeaders = [
-                     "Authorization": "Bearer \(UserDefaults.standard.string(forKey: "access_token")!)",
-                     "Accept": "application/json"
-                 ]
-                 
-                 let parameters = ["ticketId" : ticketId]
-                 AF.request(EndPoints.TASK_NOTES_GET_BY_TICKET_URL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: headers)
-                     .responseData { (response) in
-                         let jsonDecoder = JSONDecoder()
-                         let parsedData = try! jsonDecoder.decode(TaskNotesResponse.self, from: response.data!)
-                         completionHandler(parsedData)
-                 }
-             }
-             
-         }
-     }
+        checkTokenService.CheckToken { (checkStatus) in
+            if(checkStatus){
+                let headers: HTTPHeaders = [
+                    "Authorization": "Bearer \(UserDefaults.standard.string(forKey: "access_token")!)",
+                    "Accept": "application/json"
+                ]
+                
+                let parameters = ["ticketId" : ticketId]
+                AF.request(EndPoints.TASK_NOTES_GET_BY_TICKET_URL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: headers)
+                    .responseData { (response) in
+                        if(response.data == nil){
+                            let parsedData = TaskNotesResponse()
+                            parsedData.error = "Unknown error has occurred!"
+                            completionHandler(parsedData)
+                        }else{
+                            do{
+                                let jsonDecoder = JSONDecoder()
+                                let parsedData = try jsonDecoder.decode(TaskNotesResponse.self, from: response.data!)
+                                completionHandler(parsedData)
+                            }catch{
+                                let parsedData = TaskNotesResponse()
+                                parsedData.error = "Unknown error has occurred!"
+                                completionHandler(parsedData)
+                            }
+                        }
+                }
+            }
+            
+        }
+    }
     
     
     

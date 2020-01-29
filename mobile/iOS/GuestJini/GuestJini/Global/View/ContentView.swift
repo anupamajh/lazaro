@@ -51,6 +51,20 @@ struct ContentView: View {
                 HelpArticleView(viewRouter: viewRouter)
             }else if viewRouter.currentPage ==  ViewRoutes.MY_INTERESTS_VIEW {
                 MyInterestsPage(viewRouter: viewRouter)
+            }else if viewRouter.currentPage ==  ViewRoutes.COMMUNIT_LANDING_PAGE {
+                CommunityLanding(viewRouter: viewRouter)
+            }else if viewRouter.currentPage ==  ViewRoutes.PEOPLE_LIST_PAGE {
+                PeopleListPage(viewRouter: viewRouter)
+            }else if viewRouter.currentPage ==  ViewRoutes.PEOPLE_DETAIL_PAGE {
+                PeopleDetailPage(viewRouter: viewRouter)
+            }else if viewRouter.currentPage ==  ViewRoutes.GROUP_LANDING_PAGE {
+                GroupLandingPage(viewRouter: viewRouter)
+            }else if viewRouter.currentPage ==  ViewRoutes.GROUP_LIST_PAGE {
+                GroupList(viewRouter: viewRouter)
+            }else if viewRouter.currentPage ==  ViewRoutes.GROUP_DETAIL_PAGE {
+                GroupDetailPage(viewRouter: viewRouter)
+            }else if viewRouter.currentPage ==  ViewRoutes.GROUP_CONVERSATION_PAGE {
+                GroupConversationPage(viewRouter: viewRouter)
             }
         }
         

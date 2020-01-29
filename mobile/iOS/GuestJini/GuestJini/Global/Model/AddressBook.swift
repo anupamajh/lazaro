@@ -7,19 +7,22 @@
 //
 
 import Foundation
-class AddressBook: Decodable {
-    public var id:String? = nil
-    public var displayName:String?  = nil
-    public var address:String? = nil
-    public var dateOfBirth:String? = nil
-    public var place:String? = nil
-    public var pinCode:String? = nil
-    public var phone1:String? = nil
-    public var phone2:String? = nil
-    public var email1:String? = nil
-    public var email2:String? = nil
-    public var logoPath:String? = nil
-    public var logoBlob:String? = nil
-    public var geoLat:String? = nil
-    public var geoLon:String? = nil
+import SwiftUI
+
+class AddressBook: Codable, Identifiable {
+    public var id:String? = ""
+    public var userId:String? = ""
+    public var displayName:String?  = ""
+    public var address:String? = ""
+    public var dateOfBirth:String? = ""
+    public var place:String? = ""
+    public var pinCode:String? = ""
+    public var phone1:String? = ""
+    public var phone2:String? = ""
+    public var email1:String? = ""
+    public var email2:String? = ""
+    public var logoPath:String? = ""
+    public var logoBlob:String? = ""
+    public var geoLat:String? = ""
+    public var geoLon:String? = ""
 }

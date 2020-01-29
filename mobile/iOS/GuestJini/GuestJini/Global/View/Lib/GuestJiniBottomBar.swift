@@ -23,6 +23,11 @@ struct GuestJiniBottomBar: View {
                 }.padding(.horizontal)
                 
                 Button(action: {
+                    self.viewRouter.currentPage = ViewRoutes.COMMUNIT_LANDING_PAGE
+                }) {
+                    GuestJiniBottomBarItem(systemImage: "person.2", menuText: "Community")
+                }.padding(.horizontal)
+                Button(action: {
                     self.viewRouter.currentPage = ViewRoutes.SETTINGS_VIEW
                 }) {
                     GuestJiniBottomBarItem(systemImage: "gear", menuText: "Settings")
