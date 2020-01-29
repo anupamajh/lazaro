@@ -11,4 +11,6 @@ public interface UserInterestsService {
     UserInterests save(UserInterests userInterests);
 
     List<UserInterests> findByUserId(String id);
+
+    List<UserInterests> findAll();
 }

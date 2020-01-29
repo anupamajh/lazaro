@@ -1,44 +1,61 @@
-package com.carmel.common.dbservice.model.DTO;
+package com.carmel.common.dbservice.model;
 
-import com.carmel.common.dbservice.model.Interest;
-import com.carmel.common.dbservice.model.InterestCategory;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.envers.Audited;
+import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
-public class InterestCategoryDTO {
+@Entity
+@Table(name = "g_user_favourite_people")
+@Audited
+public class FavouritePeople {
+    @Id
+    @Column(name = "id")
+    @Length(max = 40)
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
+
+    @Column(name = "client_id")
     private String clientId;
+
+    @Column(name = "org_id")
     private String orgId;
-    private String name;
-    private String description;
+
+    @Column(name = "user_id")
+    private String userId;
+
+    @Column(name = "other_user_id")
+    private String otherUserId;
+
+    @Column(name = "is_favourite")
+    private int isFavourite;
+
+    @Column(name = "created_by")
+    @Length(max = 40)
     private String createdBy;
+
+    @Column(name = "creation_time")
     private Date creationTime;
+
+    @Column(name = "last_modified_by")
+    @Length(max = 40)
     private String lastModifiedBy;
+
+    @Column(name = "last_Modified_time")
     private Date lastModifiedTime;
+
+    @Column(name = "is_deleted")
     private int isDeleted;
+
+    @Column(name = "deleted_by")
+    @Length(max = 40)
     private String deletedBy;
+
+    @Column(name = "deleted_time")
     private Date deletedTime;
-    private List<Interest> interestList;
-
-    public InterestCategoryDTO() {
-    }
-
-    public InterestCategoryDTO(InterestCategory interestCategory) {
-        this.id = interestCategory.getId();
-        this.clientId = interestCategory.getClientId();
-        this.orgId = interestCategory.getOrgId();
-        this.name = interestCategory.getName();
-        this.description = interestCategory.getDescription();
-        this.createdBy = interestCategory.getCreatedBy();
-        this.creationTime = interestCategory.getCreationTime();
-        this.lastModifiedBy = interestCategory.getLastModifiedBy();
-        this.lastModifiedTime = interestCategory.getLastModifiedTime();
-        this.isDeleted = interestCategory.getIsDeleted();
-        this.deletedBy = interestCategory.getDeletedBy();
-        this.deletedTime = interestCategory.getDeletedTime();
-
-    }
 
     public String getId() {
         return id;
@@ -64,20 +81,28 @@ public class InterestCategoryDTO {
         this.orgId = orgId;
     }
 
-    public String getName() {
-        return name;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getDescription() {
-        return description;
+    public String getOtherUserId() {
+        return otherUserId;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setOtherUserId(String otherUserId) {
+        this.otherUserId = otherUserId;
+    }
+
+    public int getIsFavourite() {
+        return isFavourite;
+    }
+
+    public void setIsFavourite(int isFavourite) {
+        this.isFavourite = isFavourite;
     }
 
     public String getCreatedBy() {

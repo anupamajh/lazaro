@@ -51,4 +51,9 @@ public class InterestServiceImpl implements InterestService {
     public List<Interest> findAllByClientIdAndIsDeletedAndNameAndIdIsNot(String clientId, int isDeleted, String name, String id) {
         return interestRepository.findAllByClientIdAndIsDeletedAndNameAndIdIsNot(clientId, isDeleted, name, id);
     }
+
+    @Override
+    public int countByIsDeleted(int isDeleted) {
+        return interestRepository.countByIsDeleted(isDeleted);
+    }
 }

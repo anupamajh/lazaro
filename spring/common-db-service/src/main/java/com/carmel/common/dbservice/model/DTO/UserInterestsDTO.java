@@ -1,5 +1,6 @@
 package com.carmel.common.dbservice.model.DTO;
 
+import com.carmel.common.dbservice.model.InterestCategory;
 import com.carmel.common.dbservice.model.UserInterests;
 
 import java.util.Date;
@@ -18,6 +19,11 @@ public class UserInterestsDTO {
     private int isDeleted;
     private String deletedBy;
     private Date deletedTime;
+    private String interestCategoryName;
+    private String interestCategoryId;
+    private String interestName;
+    private InterestCategory interestCategory;
+
 
     public UserInterestsDTO() {
     }
@@ -140,5 +146,37 @@ public class UserInterestsDTO {
 
     public void setDeletedTime(Date deletedTime) {
         this.deletedTime = deletedTime;
+    }
+
+    public String getInterestCategoryName() {
+        return interestCategoryName;
+    }
+
+    public void setInterestCategoryName(String interestCategoryName) {
+        this.interestCategoryName = interestCategoryName;
+    }
+
+    public String getInterestName() {
+        return interestName;
+    }
+
+    public void setInterestName(String interestName) {
+        this.interestName = interestName;
+    }
+
+    public String getInterestCategoryId() {
+        return interestCategoryId;
+    }
+
+    public void setInterestCategoryId(String interestCategoryId) {
+        this.interestCategoryId = interestCategoryId;
+    }
+
+    public InterestCategory getInterestCategory() {
+        return interestCategory;
+    }
+
+    public void setInterestCategory(InterestCategory interestCategory) {
+        this.interestCategory = interestCategory;
     }
 }

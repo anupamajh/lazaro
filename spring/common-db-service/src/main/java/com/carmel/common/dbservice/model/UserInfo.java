@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -47,6 +48,8 @@ public class UserInfo {
         this.defaultOrganization = user.getDefaultOrganization();
         this.organizations = user.getOrganizations();
         this.gender = user.getGender();
+        this.userPreferences = new ArrayList<>();
+        this.addressBook = new AddressBook();
     }
 
     public UserInfo(String userName){

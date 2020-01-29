@@ -22,4 +22,6 @@ public interface InterestService {
     List<Interest> findAllByClientIdAndIsDeletedAndName(String clientId, int isDeleted, String name);
 
     List<Interest> findAllByClientIdAndIsDeletedAndNameAndIdIsNot(String clientId, int isDeleted, String name, String id);
+
+    int countByIsDeleted(int i);
 }

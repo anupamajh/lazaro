@@ -18,6 +18,8 @@ public class InterestDTO {
     private int isDeleted;
     private String deletedBy;
     private Date deletedTime;
+    private UserInterestsDTO userInterests;
+
 
     public InterestDTO() {
     }

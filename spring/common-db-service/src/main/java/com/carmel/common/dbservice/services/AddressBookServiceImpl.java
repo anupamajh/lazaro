@@ -5,6 +5,7 @@ import com.carmel.common.dbservice.repository.AddressBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,5 +22,10 @@ public class AddressBookServiceImpl implements AddressBookService {
     @Override
     public AddressBook save(AddressBook addressBook) {
         return addressBookRepository.save(addressBook);
+    }
+
+    @Override
+    public List<AddressBook> findAllByIsDeleted(int isDeleted) {
+        return addressBookRepository.findAllByIsDeleted(isDeleted);
     }
 }

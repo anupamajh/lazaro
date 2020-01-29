@@ -28,4 +28,9 @@ public class UserInterestsServiceImpl implements UserInterestsService {
     public List<UserInterests> findByUserId(String id) {
         return userInterestsRepository.findByUserId(id);
     }
+
+    @Override
+    public List<UserInterests> findAll() {
+        return userInterestsRepository.findAll();
+    }
 }

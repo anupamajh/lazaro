@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -41,7 +40,8 @@ public class UserInterestsController {
                 userInterests.setId("");
             }
             if (userInterests.getOrgId() == null || userInterests.getOrgId().isEmpty()) {
-                userInterests.setOrgId(userInfo.getDefaultOrganization().getId());
+                if (userInfo.getDefaultOrganization() != null)
+                    userInterests.setOrgId(userInfo.getDefaultOrganization().getId());
             }
             if (userInterests.getId().equals("")) {
                 userInterests.setCreatedBy(userInfo.getId());

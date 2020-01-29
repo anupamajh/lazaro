@@ -1,17 +1,16 @@
 package com.carmel.common.dbservice.model.DTO;
 
-import com.carmel.common.dbservice.model.Interest;
-import com.carmel.common.dbservice.model.InterestCategory;
+import com.carmel.common.dbservice.model.FavouritePeople;
 
 import java.util.Date;
-import java.util.List;
 
-public class InterestCategoryDTO {
+public class FavouritePeopleDTO {
     private String id;
     private String clientId;
     private String orgId;
-    private String name;
-    private String description;
+    private String userId;
+    private String otherUserId;
+    private int isFavourite;
     private String createdBy;
     private Date creationTime;
     private String lastModifiedBy;
@@ -19,25 +18,24 @@ public class InterestCategoryDTO {
     private int isDeleted;
     private String deletedBy;
     private Date deletedTime;
-    private List<Interest> interestList;
 
-    public InterestCategoryDTO() {
+    public FavouritePeopleDTO() {
     }
 
-    public InterestCategoryDTO(InterestCategory interestCategory) {
-        this.id = interestCategory.getId();
-        this.clientId = interestCategory.getClientId();
-        this.orgId = interestCategory.getOrgId();
-        this.name = interestCategory.getName();
-        this.description = interestCategory.getDescription();
-        this.createdBy = interestCategory.getCreatedBy();
-        this.creationTime = interestCategory.getCreationTime();
-        this.lastModifiedBy = interestCategory.getLastModifiedBy();
-        this.lastModifiedTime = interestCategory.getLastModifiedTime();
-        this.isDeleted = interestCategory.getIsDeleted();
-        this.deletedBy = interestCategory.getDeletedBy();
-        this.deletedTime = interestCategory.getDeletedTime();
-
+    public FavouritePeopleDTO(FavouritePeople favouritePeople) {
+        this.id = favouritePeople.getId();
+        this.clientId = favouritePeople.getClientId();
+        this.orgId = favouritePeople.getOrgId();
+        this.userId = favouritePeople.getUserId();
+        this.otherUserId = favouritePeople.getOtherUserId();
+        this.isFavourite = favouritePeople.getIsFavourite();
+        this.createdBy = favouritePeople.getCreatedBy();
+        this.creationTime = favouritePeople.getCreationTime();
+        this.lastModifiedBy = favouritePeople.getLastModifiedBy();
+        this.lastModifiedTime = favouritePeople.getLastModifiedTime();
+        this.isDeleted = favouritePeople.getIsDeleted();
+        this.deletedBy = favouritePeople.getDeletedBy();
+        this.deletedTime = favouritePeople.getDeletedTime();
     }
 
     public String getId() {
@@ -64,20 +62,28 @@ public class InterestCategoryDTO {
         this.orgId = orgId;
     }
 
-    public String getName() {
-        return name;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getDescription() {
-        return description;
+    public String getOtherUserId() {
+        return otherUserId;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setOtherUserId(String otherUserId) {
+        this.otherUserId = otherUserId;
+    }
+
+    public int getIsFavourite() {
+        return isFavourite;
+    }
+
+    public void setIsFavourite(int isFavourite) {
+        this.isFavourite = isFavourite;
     }
 
     public String getCreatedBy() {

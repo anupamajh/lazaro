@@ -78,18 +78,28 @@ public class UserController {
                 userResponse.setSuccess(false);
                 userResponse.setError("Duplicate user name!");
             } else {
-                if (user.getId() == "") {
+                 if (user.getId() == "") {
                     user.setPassword(passwordEncoder.encode(user.getPassword()));
                     user.setCreatedBy(userInfo.getId());
                     user.setCreationTime(new Date());
                     user.setClient(userInfo.getClient());
-                } else {
+                     } else {
                     Optional<User> optionalUser = userService.findById(user.getId());
                     user.setPassword(optionalUser.get().getPassword());
                     user.setLastModifiedBy(userInfo.getId());
                     user.setLastModifiedTime(new Date());
                 }
-                userResponse.setUser(userService.save(user));
+                User savedUser = userService.save(user);
+                AddressBook addressBook = new AddressBook();
+                Optional<AddressBook> optionalAddressBook = addressBookService.findByUserId(savedUser.getId());
+                if(optionalAddressBook.isPresent()){
+                    addressBook = optionalAddressBook.get();
+                }
+                addressBook.setEmail1(user.getUserName());
+                addressBook.setDisplayName(user.getFullName());
+                addressBook.setUserId(savedUser.getId());
+                addressBookService.save(addressBook);
+                userResponse.setUser(savedUser);
                 userResponse.setSuccess(true);
                 userResponse.setError("");
             }
@@ -290,8 +300,13 @@ public class UserController {
     public UserInfo user(Principal principal) {
         UserInfo userInfo = userInformation.getUserInfo();
         Optional<AddressBook> optionalAddressBook = addressBookService.findByUserId(userInfo.getId());
-        if (optionalAddressBook.isPresent()) {
-            userInfo.setAddressBook(optionalAddressBook.get());
+        optionalAddressBook.ifPresent(userInfo::setAddressBook);
+        if(!optionalAddressBook.isPresent()){
+            AddressBook addressBook = new AddressBook();
+            addressBook.setEmail1(userInfo.getUserName());
+            addressBook.setDisplayName(userInfo.getFullName());
+            addressBook.setUserId(userInfo.getId());
+            userInfo.setAddressBook(addressBookService.save(addressBook));
         }
         List<UserPreference> userPreferences = userPreferenceService.findAllByUserId(userInfo.getId());
         userInfo.setUserPreferences(userPreferences);
@@ -305,7 +320,7 @@ public class UserController {
             Optional<AddressBook> optionalAddressBook = addressBookService.findByUserId(userInfo.getId());
             if (optionalAddressBook.isPresent()) {
                 AddressBook addressBook = optionalAddressBook.get();
-                if(addressBook.getLogoPath().trim() != "") {
+                if (addressBook.getLogoPath().trim() != "") {
                     String logoPath = addressBook.getLogoPath();
                     File myPic = new File(logoPath);
                     FileInputStream fileInputStreamReader = new FileInputStream(myPic);
@@ -313,8 +328,8 @@ public class UserController {
                     fileInputStreamReader.read(bytes);
                     return new String(Base64.encodeBase64(bytes), "UTF-8");
                 }
-            } 
-        }catch (Exception ex){
+            }
+        } catch (Exception ex) {
             logger.trace(ex.getMessage());
         }
         return "";

@@ -1,17 +1,19 @@
 package com.carmel.common.dbservice.model.DTO;
 
-import com.carmel.common.dbservice.model.Interest;
-import com.carmel.common.dbservice.model.InterestCategory;
+import com.carmel.common.dbservice.model.Group;
 
 import java.util.Date;
-import java.util.List;
 
-public class InterestCategoryDTO {
+public class GroupDTO {
     private String id;
     private String clientId;
     private String orgId;
+    private String interestId;
+    private String interestCategoryId;
+    private String groupOwnerId;
     private String name;
     private String description;
+    private int groupType;
     private String createdBy;
     private Date creationTime;
     private String lastModifiedBy;
@@ -19,25 +21,28 @@ public class InterestCategoryDTO {
     private int isDeleted;
     private String deletedBy;
     private Date deletedTime;
-    private List<Interest> interestList;
 
-    public InterestCategoryDTO() {
+
+    public GroupDTO() {
     }
 
-    public InterestCategoryDTO(InterestCategory interestCategory) {
-        this.id = interestCategory.getId();
-        this.clientId = interestCategory.getClientId();
-        this.orgId = interestCategory.getOrgId();
-        this.name = interestCategory.getName();
-        this.description = interestCategory.getDescription();
-        this.createdBy = interestCategory.getCreatedBy();
-        this.creationTime = interestCategory.getCreationTime();
-        this.lastModifiedBy = interestCategory.getLastModifiedBy();
-        this.lastModifiedTime = interestCategory.getLastModifiedTime();
-        this.isDeleted = interestCategory.getIsDeleted();
-        this.deletedBy = interestCategory.getDeletedBy();
-        this.deletedTime = interestCategory.getDeletedTime();
 
+    public GroupDTO(Group group) {
+        this.id = group.getId();
+        this.clientId = group.getClientId();
+        this.orgId = group.getOrgId();
+        this.interestId = group.getInterestId();
+        this.interestCategoryId = group.getInterestCategoryId();
+        this.groupOwnerId = group.getGroupOwnerId();
+        this.name = group.getName();
+        this.description = group.getDescription();
+        this.groupType = group.getGroupType();
+        this.createdBy = group.getCreatedBy();
+        this.lastModifiedBy = group.getLastModifiedBy();
+        this.lastModifiedTime = group.getLastModifiedTime();
+        this.isDeleted = group.getIsDeleted();
+        this.deletedBy = group.getDeletedBy();
+        this.deletedTime = group.getDeletedTime();
     }
 
     public String getId() {
@@ -64,6 +69,30 @@ public class InterestCategoryDTO {
         this.orgId = orgId;
     }
 
+    public String getInterestId() {
+        return interestId;
+    }
+
+    public void setInterestId(String interestId) {
+        this.interestId = interestId;
+    }
+
+    public String getInterestCategoryId() {
+        return interestCategoryId;
+    }
+
+    public void setInterestCategoryId(String interestCategoryId) {
+        this.interestCategoryId = interestCategoryId;
+    }
+
+    public String getGroupOwnerId() {
+        return groupOwnerId;
+    }
+
+    public void setGroupOwnerId(String groupOwnerId) {
+        this.groupOwnerId = groupOwnerId;
+    }
+
     public String getName() {
         return name;
     }
@@ -78,6 +107,14 @@ public class InterestCategoryDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getGroupType() {
+        return groupType;
+    }
+
+    public void setGroupType(int groupType) {
+        this.groupType = groupType;
     }
 
     public String getCreatedBy() {
