@@ -1,63 +1,46 @@
-package com.carmel.common.dbservice.model;
+package com.carmel.common.dbservice.model.DTO;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.Length;
+import com.carmel.common.dbservice.model.GroupConversation;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Table(name = "g_group_people")
-public class GroupPeople {
-    @Id
-    @Column(name = "id")
-    @Length(max = 40)
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+public class GroupConversationDTO {
     private String id;
-
-    @Column(name = "client_id")
-    @Length(max = 40)
     private String clientId;
-
-    @Column(name = "org_id")
-    @Length(max = 40)
     private String orgId;
-
-    @Column(name = "group_id")
-    @Length(max = 40)
     private String groupId;
-
-    @Column(name = "user_id")
-    @Length(max = 40)
     private String userId;
-
-    @Column(name = "has_accepted_invitation")
-    private int hasAcceptedInvitation;
-
-    @Column(name = "created_by")
-    @Length(max = 40)
+    private String displayName;
+    private String message;
     private String createdBy;
-
-    @Column(name = "creation_time")
     private Date creationTime;
-
-    @Column(name = "last_modified_by")
-    @Length(max = 40)
     private String lastModifiedBy;
-
-    @Column(name = "last_Modified_time")
     private Date lastModifiedTime;
-
-    @Column(name = "is_deleted")
     private int isDeleted;
-
-    @Column(name = "deleted_by")
-    @Length(max = 40)
     private String deletedBy;
-
-    @Column(name = "deleted_time")
     private Date deletedTime;
+    private int isItMe;
+
+
+    public GroupConversationDTO() {
+    }
+
+    public GroupConversationDTO(GroupConversation groupConversation) {
+        this.id = groupConversation.getId();
+        this.clientId = groupConversation.getClientId();
+        this.orgId = groupConversation.getOrgId();
+        this.groupId = groupConversation.getGroupId();
+        this.userId = groupConversation.getUserId();
+        this.displayName = groupConversation.getDisplayName();
+        this.message = groupConversation.getMessage();
+        this.createdBy = groupConversation.getCreatedBy();
+        this.creationTime = groupConversation.getCreationTime();
+        this.lastModifiedBy = groupConversation.getLastModifiedBy();
+        this.lastModifiedTime = groupConversation.getLastModifiedTime();
+        this.isDeleted = groupConversation.getIsDeleted();
+        this.deletedBy = groupConversation.getDeletedBy();
+        this.deletedTime = groupConversation.getDeletedTime();
+    }
 
     public String getId() {
         return id;
@@ -99,12 +82,20 @@ public class GroupPeople {
         this.userId = userId;
     }
 
-    public int getHasAcceptedInvitation() {
-        return hasAcceptedInvitation;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setHasAcceptedInvitation(int hasAcceptedInvitation) {
-        this.hasAcceptedInvitation = hasAcceptedInvitation;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getCreatedBy() {
@@ -163,4 +154,11 @@ public class GroupPeople {
         this.deletedTime = deletedTime;
     }
 
+    public int getIsItMe() {
+        return isItMe;
+    }
+
+    public void setIsItMe(int isItMe) {
+        this.isItMe = isItMe;
+    }
 }

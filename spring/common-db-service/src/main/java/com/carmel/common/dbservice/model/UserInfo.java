@@ -38,7 +38,7 @@ public class UserInfo {
 
     public UserInfo(User user) {
         this.id = user.getId();
-        this.fullName =user.getUserName();
+        this.fullName =user.getFullName();
         this.userName = user.getUserName();
         this.phone = user.getPhone();
         this.lastLogin = user.getLastLogin();

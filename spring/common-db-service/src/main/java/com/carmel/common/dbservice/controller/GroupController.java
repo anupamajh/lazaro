@@ -3,10 +3,10 @@ package com.carmel.common.dbservice.controller;
 
 import com.carmel.common.dbservice.common.GroupType;
 import com.carmel.common.dbservice.component.UserInformation;
-import com.carmel.common.dbservice.model.Group;
-import com.carmel.common.dbservice.model.UserInfo;
+import com.carmel.common.dbservice.model.*;
+import com.carmel.common.dbservice.model.DTO.GroupDTO;
 import com.carmel.common.dbservice.response.GroupResponse;
-import com.carmel.common.dbservice.services.GroupService;
+import com.carmel.common.dbservice.services.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static com.carmel.common.dbservice.specifications.GroupSpecification.textInAllColumns;
 
@@ -39,6 +36,18 @@ public class GroupController {
 
     @Autowired
     GroupService groupService;
+
+    @Autowired
+    InterestCategoryService interestCategoryService;
+
+    @Autowired
+    GroupPeopleService groupPeopleService;
+
+    @Autowired
+    AddressBookService addressBookService;
+
+    @Autowired
+    UserInterestsService userInterestsService;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @Transactional(rollbackFor = Exception.class)
@@ -110,8 +119,36 @@ public class GroupController {
         return groupResponse;
     }
 
+    @RequestMapping(value = "/subscribe", method = RequestMethod.POST)
+    public GroupResponse subscribe(@RequestBody Map<String, String> formData) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        GroupResponse groupResponse = new GroupResponse();
+        try {
+            GroupPeople groupPeople = new GroupPeople();
+            groupPeople.setCreatedBy(userInfo.getId());
+            groupPeople.setCreationTime(new Date());
+            groupPeople.setUserId(userInfo.getId());
+            groupPeople.setGroupId(formData.get("groupId"));
+            groupPeople.setHasAcceptedInvitation(1);
+            groupPeople.setClientId(userInfo.getClient().getClientId());
+            groupPeople = groupPeopleService.save(groupPeople);
+            groupResponse.setSuccess(true);
+            groupResponse.setError("");
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            groupResponse.setSuccess(false);
+            groupResponse.setError(ex.getMessage());
+        }
+        return groupResponse;
+    }
+
+
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public GroupResponse get(@RequestBody Map<String, String> formData) {
+        UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         GroupResponse groupResponse = new GroupResponse();
@@ -120,9 +157,30 @@ public class GroupController {
             Optional<Group> optionalInterest = groupService.findById(formData.get("id"));
             if (optionalInterest.isPresent()) {
                 Group group = optionalInterest.get();
+                GroupDTO groupDTO = new GroupDTO(group);
+                if (group.getInterestCategoryId() != null && !group.getInterestCategoryId().equals("")) {
+                    Optional<InterestCategory> optionalInterestCategory = interestCategoryService.findById(group.getInterestCategoryId());
+                    optionalInterestCategory.ifPresent(interestCategory -> groupDTO.setInterestCategoryName(interestCategory.getName()));
+                }
+                List<GroupPeople> groupPeopleList = groupPeopleService.findAllByGroupIdAndHasAcceptedInvitationAndUserIdIsNot(group.getId(), 1, userInfo.getId());
+                Optional<GroupPeople> optionalGroupPeople = groupPeopleService.findByUserIdAndGroupId(userInfo.getId(), group.getId());
+                if (optionalGroupPeople.isPresent()) {
+                    groupDTO.setIsSubscribed(1);
+                    groupDTO.setSubscribedDate(optionalGroupPeople.get().getCreationTime());
+                }
+                List<AddressBook> addressBookList = new ArrayList<>();
+                groupPeopleList.forEach(groupPeople -> {
+                    Optional<AddressBook> optionalAddressBook = addressBookService.findByUserId(groupPeople.getUserId());
+                    if (optionalAddressBook.isPresent()) {
+                        AddressBook addressBook = optionalAddressBook.get();
+                        addressBook.setCreationTime(groupPeople.getCreationTime());
+                        addressBookList.add(addressBook);
+                    }
+                });
+                groupResponse.setGroupPeople(addressBookList);
+                groupResponse.setGroupDTO(groupDTO);
                 groupResponse.setSuccess(true);
                 groupResponse.setError("");
-                groupResponse.setGroup(group);
             } else {
                 groupResponse.setSuccess(false);
                 groupResponse.setError("Error occurred while Fetching group!! Please try after sometime");
@@ -176,7 +234,41 @@ public class GroupController {
         return groupResponse;
     }
 
-    @RequestMapping(value = "/get-group-categories", method = RequestMethod.POST)
+    @RequestMapping(value = "/get-all-by-type", method = RequestMethod.POST)
+    public GroupResponse getAllByType(@RequestBody Map<String, String> formData) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        logger.trace("Entering");
+        GroupResponse groupResponse = new GroupResponse();
+        try {
+            List<InterestCategory> interestCategoryList =
+                    interestCategoryService
+                            .findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(), 0);
+            List<GroupPeople> groupPeopleList = groupPeopleService.findByUserId(userInfo.getId());
+            List<UserInterests> userInterests = userInterestsService.findByUserId(userInfo.getId());
+
+                    groupResponse.setGroupListWithInterestCategory(groupService
+                            .findAllByClientIdAndIsDeletedAndGroupType(
+                                    userInfo.getClient().getClientId(),
+                                    0,
+                                    Integer.parseInt(formData.get("groupType"))
+                            ),
+                    interestCategoryList,
+                    groupPeopleList,
+                            userInterests
+            );
+            groupResponse.setSuccess(true);
+            groupResponse.setError("");
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            groupResponse.setSuccess(true);
+            groupResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return groupResponse;
+    }
+
+    @RequestMapping(value = "/get-groups", method = RequestMethod.POST)
     public GroupResponse getPaginated(@RequestBody Map<String, String> formData) {
         UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -204,7 +296,7 @@ public class GroupController {
         return groupResponse;
     }
 
-    @RequestMapping(value = "/search-account-heads", method = RequestMethod.POST)
+    @RequestMapping(value = "/search-groups", method = RequestMethod.POST)
     public GroupResponse searchPaginated(@RequestBody Map<String, String> formData) {
         UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();

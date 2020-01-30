@@ -10,6 +10,7 @@ public class GroupDTO {
     private String orgId;
     private String interestId;
     private String interestCategoryId;
+    private String interestCategoryName;
     private String groupOwnerId;
     private String name;
     private String description;
@@ -21,6 +22,11 @@ public class GroupDTO {
     private int isDeleted;
     private String deletedBy;
     private Date deletedTime;
+    private Date subscribedDate;
+    private int isSubscribed;
+    private int isInvited;
+    private int isMatchingInterest;
+    private int cardType;
 
 
     public GroupDTO() {
@@ -83,6 +89,14 @@ public class GroupDTO {
 
     public void setInterestCategoryId(String interestCategoryId) {
         this.interestCategoryId = interestCategoryId;
+    }
+
+    public String getInterestCategoryName() {
+        return interestCategoryName;
+    }
+
+    public void setInterestCategoryName(String interestCategoryName) {
+        this.interestCategoryName = interestCategoryName;
     }
 
     public String getGroupOwnerId() {
@@ -171,5 +185,45 @@ public class GroupDTO {
 
     public void setDeletedTime(Date deletedTime) {
         this.deletedTime = deletedTime;
+    }
+
+    public int getIsSubscribed() {
+        return isSubscribed;
+    }
+
+    public void setIsSubscribed(int isSubscribed) {
+        this.isSubscribed = isSubscribed;
+    }
+
+    public int getIsInvited() {
+        return isInvited;
+    }
+
+    public void setIsInvited(int isInvited) {
+        this.isInvited = isInvited;
+    }
+
+    public int getIsMatchingInterest() {
+        return isMatchingInterest;
+    }
+
+    public void setIsMatchingInterest(int isMatchingInterest) {
+        this.isMatchingInterest = isMatchingInterest;
+    }
+
+    public Date getSubscribedDate() {
+        return subscribedDate;
+    }
+
+    public void setSubscribedDate(Date subscribedDate) {
+        this.subscribedDate = subscribedDate;
+    }
+
+    public int getCardType() {
+        return cardType;
+    }
+
+    public void setCardType(int cardType) {
+        this.cardType = cardType;
     }
 }

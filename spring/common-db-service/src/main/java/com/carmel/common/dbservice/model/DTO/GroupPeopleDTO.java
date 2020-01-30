@@ -7,7 +7,7 @@ public class GroupPeopleDTO {
     private String clientId;
     private String orgId;
     private String groupId;
-    private String hasAcceptedInvitation;
+    private int hasAcceptedInvitation;
     private String createdBy;
     private Date creationTime;
     private String lastModifiedBy;
@@ -48,11 +48,11 @@ public class GroupPeopleDTO {
         this.groupId = groupId;
     }
 
-    public String getHasAcceptedInvitation() {
+    public int getHasAcceptedInvitation() {
         return hasAcceptedInvitation;
     }
 
-    public void setHasAcceptedInvitation(String hasAcceptedInvitation) {
+    public void setHasAcceptedInvitation(int hasAcceptedInvitation) {
         this.hasAcceptedInvitation = hasAcceptedInvitation;
     }
 

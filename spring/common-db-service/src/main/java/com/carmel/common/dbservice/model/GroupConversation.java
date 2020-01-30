@@ -7,8 +7,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "g_group_people")
-public class GroupPeople {
+@Table(name = "g_group_conversation")
+public class GroupConversation {
     @Id
     @Column(name = "id")
     @Length(max = 40)
@@ -32,8 +32,12 @@ public class GroupPeople {
     @Length(max = 40)
     private String userId;
 
-    @Column(name = "has_accepted_invitation")
-    private int hasAcceptedInvitation;
+    @Column(name = "display_name")
+    @Length(max = 250)
+    private String displayName;
+
+    @Column(name = "message", columnDefinition = "TEXT")
+    private String message;
 
     @Column(name = "created_by")
     @Length(max = 40)
@@ -99,12 +103,20 @@ public class GroupPeople {
         this.userId = userId;
     }
 
-    public int getHasAcceptedInvitation() {
-        return hasAcceptedInvitation;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setHasAcceptedInvitation(int hasAcceptedInvitation) {
-        this.hasAcceptedInvitation = hasAcceptedInvitation;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getCreatedBy() {
@@ -162,5 +174,4 @@ public class GroupPeople {
     public void setDeletedTime(Date deletedTime) {
         this.deletedTime = deletedTime;
     }
-
 }

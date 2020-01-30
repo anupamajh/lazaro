@@ -56,4 +56,9 @@ public class GroupServiceImpl implements GroupService {
     public Page<Group> findAll(Specification<Group> textInAllColumns, Pageable pageable) {
         return groupRepository.findAll(textInAllColumns, pageable);
     }
+
+    @Override
+    public List<Group> findAllByClientIdAndIsDeletedAndGroupType(String clientId, int isDeleted, int groupType) {
+        return groupRepository.findAllByClientIdAndIsDeletedAndGroupType(clientId, isDeleted, groupType);
+    }
 }
