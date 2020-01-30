@@ -12,8 +12,11 @@ struct GuestJiniErrorText: View {
     var message: String
     var body: some View {
         VStack{
+            HStack{
             Text(message)
                 .font(Fonts.RobotRegular)
+                Spacer()
+            }
         }.padding(.all, 10)
         .background(Color("veryLightPinkTwo"))
     }

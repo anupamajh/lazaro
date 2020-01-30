@@ -251,18 +251,17 @@ struct TicketView: View {
                             }.padding()
                             
                             VStack{
-                                List { ForEach(self.ticketNotesListService.taskNotesList){ taskNote in
-                                        VStack{
-                                            TaskNoteRow(ticketNote: taskNote)
+                                ForEach(self.ticketNotesListService.taskNotesList){ taskNote in
+                                    VStack{
+                                        TaskNoteRow(ticketNote: taskNote)
                                             .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-                                                .edgesIgnoringSafeArea(.all)
-
-                                            Divider()
-                                                .padding(.bottom, 25)
+                                            .edgesIgnoringSafeArea(.all)
+                                        
+                                        Divider()
+                                            .padding(.bottom, 25)
                                             .padding(.leading, 40)
-                                        }
                                     }
-                                }.frame(minHeight: 200, maxHeight: .infinity)
+                                }
                             }
                         }
                         

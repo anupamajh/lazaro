@@ -22,6 +22,7 @@ struct ForgotPassword: View {
     @State var showPopover: Bool = false
     @State var alertTitle:String = ""
     @State var alertBody:String = ""
+    @State var showInternetDown:Bool = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -50,7 +51,6 @@ struct ForgotPassword: View {
                         }.padding()
                         HStack{
                             if(self.hasLoginError){
-                                
                                 GuestJiniErrorText(message:"This email or mobile number is not registered with GuestJini ")
                             }
                         }.padding()
@@ -67,13 +67,17 @@ struct ForgotPassword: View {
                         HStack{
                             Spacer()
                             Button(action: {
-                                if(self.loginId.trimmingCharacters(in: .whitespacesAndNewlines) == ""){
-                                    self.hasEmail = false
-                                }else{
-                                    self.isAnimating = true
-                                    self.forgotPasswordService.resetPassword(UserName: self.loginId) { (response) in
-                                        self.processResponse(userInfo: response)
+                                if(Connectivity.isConnectedToInternet()){
+                                    if(self.loginId.trimmingCharacters(in: .whitespacesAndNewlines) == ""){
+                                        self.hasEmail = false
+                                    }else{
+                                        self.isAnimating = true
+                                        self.forgotPasswordService.resetPassword(UserName: self.loginId) { (response) in
+                                            self.processResponse(userInfo: response)
+                                        }
                                     }
+                                }else{
+                                    self.showInternetDown = true
                                 }
                             }) {
                                 GuestJiniButtonText(buttonText: "RESET PASSWORD")
@@ -97,6 +101,7 @@ struct ForgotPassword: View {
                     }
                 }.frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
                     .edgesIgnoringSafeArea(.all)
+                    .resignKeyboardOnTapGesture()
                 if(self.isAnimating){
                     HStack{
                         Spacer()
@@ -107,7 +112,7 @@ struct ForgotPassword: View {
                 GeometryReader { _ in
                                        EmptyView()
                                    }
-                                   .background(Color.gray.opacity(0.9))
+                                   .background(Color.black.opacity(0.8))
                                    .opacity(self.showPopover ? 1.0 : 0.0)
                 if(self.showPopover){
                    
@@ -115,7 +120,17 @@ struct ForgotPassword: View {
                 }else{
                     GuestJiniAlerBox(showAlert: self.$showPopover, alertTitle: self.$alertTitle, alertBody: self.$alertBody).hidden()
                 }
-            }
+                GeometryReader { _ in
+                    EmptyView()
+                }
+                .background(Color.black.opacity(0.8))
+                .opacity(self.showInternetDown ? 1.0 : 0.0)
+                if(self.showInternetDown){
+                    GuestJiniAlerBox(showAlert: self.$showInternetDown, alertTitle: .constant("Oops!"), alertBody: .constant("Looks like internet connectivity is weak or not available!"))
+                }else{
+                    GuestJiniAlerBox(showAlert: self.$showInternetDown, alertTitle: .constant("Oops!"), alertBody: .constant("Looks like internet connectivity is weak or not available!")).hidden()
+                }
+            }.resignKeyboardOnTapGesture()
         }
     }
     
@@ -123,6 +138,9 @@ struct ForgotPassword: View {
         if(userInfo.id == ""){
             self.hasLoginError = true
             self.isAnimating = false
+            self.alertTitle = "FAILED"
+            self.alertBody = "We could not process your request, Kindly try after sometime."
+            self.showPopover = true
         }else{
             self.success = true
             self.isAnimating = false

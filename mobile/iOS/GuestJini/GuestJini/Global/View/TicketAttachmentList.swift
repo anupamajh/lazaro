@@ -55,6 +55,7 @@ struct TicketAttachmentList: View {
                     VStack{
                         HStack{
                             Button(action: {
+                                Connectivity.cancelAllRequests()
                                 self.viewRouter.currentPage = ViewRoutes.TICKET_UI
                             }) {
                                 GuestJiniButtonSystemImagePlain(imageName: "arrow.left")

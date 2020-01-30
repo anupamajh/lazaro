@@ -23,7 +23,11 @@ class KBListService:ObservableObject{
         self.checkTokenService = CheckTokenService(viewRouter: viewRouter)
         self.getKBList { (response) in
             self.kbResponse = response
-            self.kbList = response.kbList!;
+            if(response.success){
+                self.kbList = response.kbList!;
+            }else{
+                self.kbList  = []
+            }
             self.fetchComplete = true
         }
     }
@@ -41,10 +45,17 @@ class KBListService:ObservableObject{
                     .responseData { (response) in
                         let jsonDecoder = JSONDecoder()
                         do{
-                            let parsedData = try jsonDecoder.decode(KBResponse.self, from: response.data!)
-                            completionHandler(parsedData)
+                            if(response.data != nil){
+                                let parsedData = try jsonDecoder.decode(KBResponse.self, from: response.data!)
+                                completionHandler(parsedData)
+                            }else{
+                                let parsedData = KBResponse()
+                                parsedData.error = "Unknow error has occurred"
+                                completionHandler(parsedData)
+                            }
                         }catch{
                             let parsedData = KBResponse()
+                            parsedData.error = "Unknow error has occurred"
                             completionHandler(parsedData)
                         }
                         

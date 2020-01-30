@@ -45,10 +45,17 @@ class KBGetRatingService:ObservableObject{
                     .responseData { (response) in
                         let jsonDecoder = JSONDecoder()
                         do{
-                            let parsedData = try jsonDecoder.decode(KBRatingResponse.self, from: response.data!)
-                            completionHandler(parsedData)
+                            if(response.data != nil){
+                                let parsedData = try jsonDecoder.decode(KBRatingResponse.self, from: response.data!)
+                                completionHandler(parsedData)
+                            }else{
+                                let parsedData = KBRatingResponse()
+                                parsedData.error = "Unknow error has occrred"
+                                completionHandler(parsedData)
+                            }
                         }catch{
                             let parsedData = KBRatingResponse()
+                            parsedData.error = "Unknow error has occrred"
                             completionHandler(parsedData)
                         }
                         

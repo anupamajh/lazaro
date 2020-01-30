@@ -9,53 +9,67 @@
 import SwiftUI
 
 struct GroupLandingPage: View {
-   @ObservedObject var viewRouter: ViewRouter
-     var body: some View {
-            GeometryReader { geometry in
+    @ObservedObject var viewRouter: ViewRouter
+    var body: some View {
+        GeometryReader { geometry in
+            VStack{
                 VStack{
+                    HStack{
+                        Button(action: {
+                            self.viewRouter.currentPage = ViewRoutes.COMMUNIT_LANDING_PAGE
+                        }) {
+                            GuestJiniButtonSystemImagePlain(imageName: "arrow.left")
+                            
+                        }.padding(.horizontal)
+                        
+                        GuestJiniTitleText(title: "GROUPS")
+                        Spacer()
+                    }.padding()
                     VStack{
-                        VStack{
-                            Button(action:{
-                                self.viewRouter.currentPage = ViewRoutes.GROUP_LIST_PAGE
-                            }){
-                                GroupLandingPageCard(
-                                    title: "INTEREST GROUPS",
-                                    description: "There is a group for every activity, hobby or topic. Connect with like minded people."
-                                )
-                            }
+                        Button(action:{
+                            self.viewRouter.groupType = GroupTypes.GROUP_TYPE_SYSTEM_GENERATED
+                            self.viewRouter.currentPage = ViewRoutes.GROUP_LIST_PAGE
+                        }){
+                            GroupLandingPageCard(
+                                title: "INTEREST GROUPS",
+                                description: "There is a group for every activity, hobby or topic. Connect with like minded people."
+                            )
                         }
-                        
-                        VStack{
-                            Button(action:{
-                                self.viewRouter.returnPage = ""
-                                self.viewRouter.currentPage = ViewRoutes.GROUP_LIST_PAGE
-                            }){
-                                 GroupLandingPageCard(
-                                    title: "COMMUNITY GROUPS",
-                                    description: "Explore groups created by the community members. Participate and catch all the action."
-                                )
-                            }
+                    }
+                    
+                    VStack{
+                        Button(action:{
+                            self.viewRouter.returnPage = ""
+                            self.viewRouter.groupType = GroupTypes.GROUP_TYPE_USER_GENERATED
+                            self.viewRouter.currentPage = ViewRoutes.GROUP_LIST_PAGE
+                        }){
+                            GroupLandingPageCard(
+                                title: "COMMUNITY GROUPS",
+                                description: "Explore groups created by the community members. Participate and catch all the action."
+                            )
                         }
-                        
-                        VStack{
-                            Button(action:{
-                                self.viewRouter.returnPage = ""
-                                self.viewRouter.currentPage = ViewRoutes.GROUP_LIST_PAGE
-                            }){
-                                GroupLandingPageCard(
-                                    title: "MY GROUPS",
-                                    description: "Create and manage your own groups. Host parties, events or simply bond together."
-                                )
-                            }
+                    }
+                    
+                    VStack{
+                        Button(action:{
+                            self.viewRouter.returnPage = ""
+                            self.viewRouter.groupType = GroupTypes.GROUP_TYPE_MY_GENERATED
+                            self.viewRouter.currentPage = ViewRoutes.GROUP_LIST_PAGE
+                        }){
+                            GroupLandingPageCard(
+                                title: "MY GROUPS",
+                                description: "Create and manage your own groups. Host parties, events or simply bond together."
+                            )
                         }
-                    }.frame(width: geometry.size.width, height: geometry.size.height-85, alignment: .top)
-                        .padding()
-                    Divider()
-                    GuestJiniBottomBar(viewRouter: self.viewRouter)
-                }.frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
-                    .edgesIgnoringSafeArea(.vertical)
-            }
+                    }
+                }.frame(width: geometry.size.width, height: geometry.size.height-85, alignment: .top)
+                    .padding()
+                Divider()
+                GuestJiniBottomBar(viewRouter: self.viewRouter)
+            }.frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
+                .edgesIgnoringSafeArea(.vertical)
         }
+    }
 }
 
 struct GroupLandingPageCard: View {

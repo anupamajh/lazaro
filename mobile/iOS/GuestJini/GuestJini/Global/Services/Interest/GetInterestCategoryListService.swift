@@ -41,10 +41,17 @@ class GetInterestCategoryListService:ObservableObject{
                     .responseData { (response) in
                         let jsonDecoder = JSONDecoder()
                         do{
-                            let parsedData = try jsonDecoder.decode(InterestCategoryResponse.self, from: response.data!)
-                            completionHandler(parsedData)
+                            if(response.data != nil){
+                                let parsedData = try jsonDecoder.decode(InterestCategoryResponse.self, from: response.data!)
+                                completionHandler(parsedData)
+                            }else{
+                                let parsedData = InterestCategoryResponse()
+                                parsedData.error = "Unknown error has occurred!"
+                                completionHandler(parsedData)
+                            }
                         }catch{
                             let parsedData = InterestCategoryResponse()
+                            parsedData.error = "Unknown error has occurred!"
                             completionHandler(parsedData)
                         }
                         

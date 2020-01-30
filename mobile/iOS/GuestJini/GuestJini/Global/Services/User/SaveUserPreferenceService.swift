@@ -40,11 +40,18 @@ class SaveUserPreferenceService: ObservableObject {
                            headers: headers
                 )
                     .responseData { (response) in
-                    
+                        
                         let jsonDecoder = JSONDecoder()
                         do{
-                            let parsedData =  try jsonDecoder.decode(UserPreferenceResponse.self, from: response.data!)
-                            completionHandler(parsedData)
+                            if(response.data != nil){
+                                let parsedData =  try jsonDecoder.decode(UserPreferenceResponse.self, from: response.data!)
+                                completionHandler(parsedData)
+                            }else{
+                                let parsedData = UserPreferenceResponse()
+                                parsedData.error = "Unknow error has occrred"
+                                parsedData.success = false;
+                                completionHandler(parsedData)
+                            }
                         }catch{
                             let parsedData = UserPreferenceResponse()
                             parsedData.error = "Unknow error has occrred"

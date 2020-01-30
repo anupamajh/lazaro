@@ -14,13 +14,14 @@ struct TicketList: View {
     @State private var shouldAnimate = true
     @State var ticketSearchText:String = ""
     @State var ticketSearchCancel:Bool = false
-    
+    @State var showInternetDown:Bool = false
+      
     @ObservedObject var audioPlayer = AudioPlayer()
     
     
     init(viewRouter: ViewRouter){
         self.viewRouter = viewRouter
-        self.ticketListService = TicketListService(viewRouter: viewRouter)
+         self.ticketListService = TicketListService(viewRouter: viewRouter)
         UITableView.appearance().tableFooterView = UIView()
         
         // To remove all separators including the actual ones:
@@ -32,6 +33,7 @@ struct TicketList: View {
                 VStack{
                     HStack{
                         Button(action: {
+                            Connectivity.cancelAllRequests()
                             self.viewRouter.currentPage = ViewRoutes.HOME_PAGE
                         }) {
                             GuestJiniButtonSystemImagePlain(imageName: "arrow.left")
@@ -41,7 +43,6 @@ struct TicketList: View {
                         GuestJiniTitleText(title: "MY TICKETS")
                         Spacer()
                     }.padding()
-                    
                     VStack{
                         HStack {
                             HStack {
@@ -82,8 +83,6 @@ struct TicketList: View {
                                 .padding(.horizontal)
                         }*/
                     }
-                    
-                    
                     VStack{
                         if(self.ticketListService.fetchComplete != true){
                             ActivityIndicator(shouldAnimate: self.$shouldAnimate)
@@ -124,6 +123,11 @@ struct TicketList: View {
                                 }
                             }
                         }
+                    }.onAppear(){
+                        if(!Connectivity.isConnectedToInternet()){
+                                   self.showInternetDown = true
+                               }
+                             
                     }
                 }.frame(width: geometry.size.width, height: geometry.size.height-85, alignment: .top)
                     .padding()

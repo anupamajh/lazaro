@@ -41,19 +41,16 @@ class GetProfilePicService: ObservableObject{
                         
                         self.isLoading = false
                         if(response.data != nil){
-                        let str = String(decoding: response.data!, as: UTF8.self)
-                        let image = ImageConverter.base64ToImage(str)
-                        if(image != nil){
-                            completionHandler(Image(uiImage: image!))
+                            let str = String(decoding: response.data!, as: UTF8.self)
+                            let image = ImageConverter.base64ToImage(str)
+                            if(image != nil){
+                                completionHandler(Image(uiImage: image!))
+                            }else{
+                                completionHandler(Image(systemName: "camera"))
+                            }
                         }else{
                             completionHandler(Image(systemName: "camera"))
                         }
-                        }else{
-                            completionHandler(Image(systemName: "camera"))
-                        }
-                        
-                        
-                       
                 }
             }
         }

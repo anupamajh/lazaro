@@ -29,15 +29,21 @@ class KBSaveReviewService:ObservableObject{
                 let jsonEncoder = JSONEncoder()
                 let kbReviewData = try! jsonEncoder.encode(kbReview)
                 let json = try! JSONSerialization.jsonObject(with: kbReviewData, options: []) as? [String : Any]
-                 AF.request(EndPoints.KB_SAVE_REVIEW, method: .post, parameters: json,encoding: JSONEncoding.default, headers: headers)
+                AF.request(EndPoints.KB_SAVE_REVIEW, method: .post, parameters: json,encoding: JSONEncoding.default, headers: headers)
                     .responseData { (response) in
                         let jsonDecoder = JSONDecoder()
                         do{
-                            let parsedData =  try jsonDecoder.decode(KBResponse.self, from: response.data!)
-                            completionHandler(parsedData)
+                            if(response.data != nil){
+                                let parsedData =  try jsonDecoder.decode(KBResponse.self, from: response.data!)
+                                completionHandler(parsedData)
+                            }else{
+                                let parsedData = KBResponse()
+                                parsedData.error = "Unknown error has occurred"
+                                parsedData.success = false;
+                            }
                         }catch{
                             let parsedData = KBResponse()
-                            parsedData.error = "Unknow error has occrred"
+                            parsedData.error = "Unknown error has occurred"
                             parsedData.success = false;
                             completionHandler(parsedData)
                         }

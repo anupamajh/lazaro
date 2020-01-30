@@ -10,15 +10,29 @@ import SwiftUI
 
 struct GroupConversationPage: View {
     @ObservedObject var viewRouter: ViewRouter
+    @ObservedObject var groupDetailService:GroupDetailService
+    @ObservedObject var groupSaveConversationService:GroupSaveConversationService
+    @ObservedObject var groupConversationListService:GroupConversationListService
+    
     
     @State var message:String = ""
+    @State var isConversationSaving: Bool = false
+    
+    init(viewRouter: ViewRouter){
+        self.viewRouter = viewRouter
+        self.groupDetailService = GroupDetailService(viewRouter: viewRouter, groupId: viewRouter.primaryKey)
+        self.groupSaveConversationService = GroupSaveConversationService(viewRouter: viewRouter)
+        self.groupConversationListService = GroupConversationListService(viewRouter: viewRouter, groupId: viewRouter.primaryKey)
+        UITableView.appearance().separatorStyle = .none
+    }
+    
     var body: some View {
         GeometryReader { geometry in
             VStack{
                 VStack{
                     HStack{
                         Button(action: {
-                            self.viewRouter.currentPage = ViewRoutes.PEOPLE_LIST_PAGE
+                            self.viewRouter.currentPage = ViewRoutes.GROUP_LIST_PAGE
                         }) {
                             GuestJiniButtonSystemImagePlain(imageName: "arrow.left")
                             
@@ -27,66 +41,120 @@ struct GroupConversationPage: View {
                         GuestJiniTitleText(title: "INTEREST GROUPS")
                         Spacer()
                     }.padding()
-                    VStack{
-                        HStack{
+                    ZStack{
+                        VStack{
                             VStack{
                                 HStack{
-                                    Text("Outdoor Adventure")
-                                        .foregroundColor(Color("brownGrey"))
-                                        .font(Fonts.RobotRegular)
+                                    VStack{
+                                        HStack{
+                                            if(self.groupDetailService.fetchComplete == true && self.groupDetailService.group.interestCategoryName != nil){
+                                                Text(self.groupDetailService.group.interestCategoryName!)
+                                                    .foregroundColor(Color("brownGrey"))
+                                                    .font(Fonts.RobotRegular)
+                                            }else{
+                                                Text("")
+                                                    .foregroundColor(Color("brownGrey"))
+                                                    .font(Fonts.RobotRegular)
+                                            }
+                                            Spacer()
+                                        }
+                                        HStack{
+                                            
+                                            if(self.groupDetailService.fetchComplete == true && self.groupDetailService.group.name != nil){
+                                                Text(self.groupDetailService.group.name!)
+                                                    .foregroundColor(Color("brownGrey"))
+                                                    .font(Fonts.RobotButtonFont)
+                                                    .bold()
+                                            }else{
+                                                Text("")
+                                                    .foregroundColor(Color("brownGrey"))
+                                                    .font(Fonts.RobotButtonFont)
+                                                    .bold()
+                                            }
+                                            
+                                            
+                                            Spacer()
+                                        }
+                                    }
                                     Spacer()
+                                    Button(action:{
+                                        self.viewRouter.primaryKey = self.viewRouter.primaryKey
+                                        self.viewRouter.currentPage = ViewRoutes.GROUP_DETAIL_PAGE
+                                    }){
+                                        GuestJiniRoundButtonSystemImage(systemImage: "info")
+                                    }
                                 }
                                 HStack{
-                                    Text("CYCLING") .foregroundColor(Color("brownGrey"))
-                                        .font(Fonts.RobotButtonFont)
-                                        .bold()
+                                    VStack{
+                                        if(self.groupDetailService.fetchComplete == true && self.groupDetailService.group.description != nil){
+                                            GuestJiniInformationText(information:  self.groupDetailService.group.description!)
+                                        }else{
+                                            GuestJiniInformationText(information:  "")
+                                        }
+                                    }
                                     Spacer()
+                                }.padding(.top)
+                                    .foregroundColor(Color("brownGrey"))
+                            }.padding()
+                                .background(Color("whiteThree"))
+                            ScrollView{
+                                if(self.groupConversationListService.fetchComplete){
+                                    ForEach(self.groupConversationListService.groupConversationResponse.groupConversationList!){
+                                        conversation in
+                                        
+                                        if(conversation.isItMe == 1){
+                                            HStack{
+                                                Spacer()
+                                                MyTextCard(
+                                                    sentDate: conversation.creationTime!.convetToDateFromMySQLUTC(),
+                                                    sender: conversation.displayName!,
+                                                    message: conversation.message!
+                                                )
+                                                
+                                            }
+                                        }else{
+                                            HStack{
+                                                OthersTextCard(
+                                                    sentDate: conversation.creationTime!.convetToDateFromMySQLUTC(),
+                                                    sender: conversation.displayName!,
+                                                    message: conversation.message!
+                                                )
+                                                Spacer()
+                                            }
+                                        }
+                                    }
                                 }
-                            }
-                            Spacer()
-                            Button(action:{}){
-                                GuestJiniRoundButtonSystemImage(systemImage: "info")
-                            }
-                        }
-                        VStack{
-                            GuestJiniInformationText(information: "Lorem ipsum dolor sit amet, consectetur adip elit.In tempor suscipit augue sit amet egestas")
-                        }.padding(.top)
-                            .foregroundColor(Color("brownGrey"))
-                    }.padding()
-                        .background(Color("whiteThree"))
-                    ScrollView{
-                        VStack{
-                            HStack{
-                                OthersTextCard(sentDate: "25-03-1982", sender: "Prasanna umar Pete", message: "Lorem ipsum dolor sit amet, consectetur  adipiscing elit. Etiam erat sapien, ultricies.")
-                                Spacer()
-                            }
-                            HStack{
-                                OthersTextCard(sentDate: "25-03-1982", sender: "Prasanna umar Pete", message: "Lorem ipsum dolor sit amet, consectetur  adipiscing elit. Etiam erat sapien, ultricies.")
-                                Spacer()
-                            }
-                            HStack{
-                                Spacer()
-                                MyTextCard(sentDate: "25-03-1982", sender: "Prasanna umar Pete", message: "Lorem ipsum dolor sit amet, consectetur  adipiscing elit. Etiam erat sapien, ultricies.")
                                 
-                            }
-                            
-                        }.frame(maxHeight:.infinity)
-                            .background(Color("lightBlueGrey"))
-                    }.frame(maxWidth: .infinity, maxHeight:.infinity)
-                        .background(Color("lightBlueGrey"))
-                    HStack{
-                        TextField("Write here..", text: self.$message)
-                        Button(action:{}){
-                            Text("SEND")
-                                .font(Fonts.RobotButtonFont)
-                                .padding(.top, 10)
-                                .padding(.bottom, 10)
-                                .padding(.leading, 20)
-                                .padding(.trailing, 20)
-                                .foregroundColor(Color.white)
-                                .background(Color("aquaMarine"))
+                            }.frame(maxWidth: .infinity, maxHeight:.infinity)
+                                .background(Color("lightBlueGrey"))
+                            HStack{
+                                TextField("Write here..", text: self.$message)
+                                Button(action:{
+                                    self.isConversationSaving = true
+                                    self.groupSaveConversationService.saveConversation(groupId: self.viewRouter.primaryKey, message: self.message) { (response) in
+                                        self.isConversationSaving = false
+                                        self.message = ""
+                                        self.groupConversationListService.reload(groupId: self.viewRouter.primaryKey)
+                                    }
+                                }){
+                                    Text("SEND")
+                                        .font(Fonts.RobotButtonFont)
+                                        .padding(.top, 10)
+                                        .padding(.bottom, 10)
+                                        .padding(.leading, 20)
+                                        .padding(.trailing, 20)
+                                        .foregroundColor(Color.white)
+                                        .background(Color("aquaMarine"))
+                                }
+                            }.keyboardResponsive()
                         }
-                    }
+                        if(self.groupDetailService.fetchComplete != true){
+                            ActivityIndicator(shouldAnimate: .constant(true))
+                        }
+                        if(self.isConversationSaving){
+                            ActivityIndicator(shouldAnimate: .constant(true))
+                        }
+                    }.resignKeyboardOnTapGesture()
                     
                 }.frame(width: geometry.size.width, height: geometry.size.height-85, alignment: .top)
                     .padding()

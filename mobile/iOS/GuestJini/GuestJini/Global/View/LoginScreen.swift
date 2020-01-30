@@ -18,7 +18,7 @@ struct LoginScreen: View {
     @State var hasEmail: Bool = true;
     @State var hasPassword: Bool = true;
     @State var isAnimating:Bool = false;
-    
+    @State var showInternetDown:Bool = false
     @State private var shwLoginSuccess = false
     
     
@@ -75,23 +75,27 @@ struct LoginScreen: View {
                         HStack{
                             Spacer()
                             Button(action: {
-                                if(self.loginId.trimmingCharacters(in: .whitespacesAndNewlines) == ""){
-                                    self.hasEmail = false
-                                }else{
-                                    self.hasEmail = true
-                                }
-                                if(self.password.trimmingCharacters(in: .whitespacesAndNewlines) == ""){
-                                    self.hasPassword = false
-                                }else{
-                                    self.hasPassword = true
-                                }
-                                if(self.hasPassword && self.hasEmail){
-                                    self.isAnimating = true
-                                    
-                                    self.loginService.performLogin(UserName: self.loginId, Password: self.password) { (response) in
-                                        self.processLogin(authData: response)
+                                if(Connectivity.isConnectedToInternet()){
+                                    if(self.loginId.trimmingCharacters(in: .whitespacesAndNewlines) == ""){
+                                        self.hasEmail = false
+                                    }else{
+                                        self.hasEmail = true
                                     }
-                                    
+                                    if(self.password.trimmingCharacters(in: .whitespacesAndNewlines) == ""){
+                                        self.hasPassword = false
+                                    }else{
+                                        self.hasPassword = true
+                                    }
+                                    if(self.hasPassword && self.hasEmail){
+                                        self.isAnimating = true
+                                        
+                                        self.loginService.performLogin(UserName: self.loginId, Password: self.password) { (response) in
+                                            self.processLogin(authData: response)
+                                        }
+                                        
+                                    }
+                                }else{
+                                    self.showInternetDown = true
                                 }
                             }) {
                                 GuestJiniButtonText(buttonText: "Login")
@@ -104,18 +108,20 @@ struct LoginScreen: View {
                         }
                         HStack{
                             Spacer()
-                             GuestJiniDescriptionText(description: "Don't Have account yet?")
-                             Button(action: {
+                            GuestJiniDescriptionText(description: "Don't Have account yet?")
+                            Button(action: {
                                 self.viewRouter.currentPage = ViewRoutes.APP_ACCESS_REQUEST_PAGE
-                             }) {
-                             GuestJiniHyperlinkButtonText(buttonText: "Get one now")
-                             }.offset(x: -20)
+                            }) {
+                                GuestJiniHyperlinkButtonText(buttonText: "Get one now")
+                            }.offset(x: -20)
                             Spacer()
                         }.padding()
-                    }
+                    }.resignKeyboardOnTapGesture()
+                        .keyboardResponsive()
                     
                 }.frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
                     .edgesIgnoringSafeArea(.all)
+                    .resignKeyboardOnTapGesture()
                 if(self.isAnimating){
                     HStack{
                         Spacer()
@@ -123,8 +129,18 @@ struct LoginScreen: View {
                         Spacer()
                     }
                 }
+                GeometryReader { _ in
+                    EmptyView()
+                }
+                .background(Color.black.opacity(0.8))
+                .opacity(self.showInternetDown ? 1.0 : 0.0)
+                if(self.showInternetDown){
+                    GuestJiniAlerBox(showAlert: self.$showInternetDown, alertTitle: .constant("Oops!"), alertBody: .constant("Looks like internet connectivity is weak or not available!"))
+                }else{
+                    GuestJiniAlerBox(showAlert: self.$showInternetDown, alertTitle: .constant("Oops!"), alertBody: .constant("Looks like internet connectivity is weak or not available!")).hidden()
+                }
                 
-            }
+            }.resignKeyboardOnTapGesture()
             
         }
         

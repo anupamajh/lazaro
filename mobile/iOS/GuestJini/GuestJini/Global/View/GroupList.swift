@@ -10,59 +10,54 @@ import SwiftUI
 
 struct GroupList: View {
     @ObservedObject var viewRouter: ViewRouter
+    @ObservedObject var groupListService:GroupListService
+    
+    init(viewRouter: ViewRouter){
+        self.viewRouter = viewRouter
+        self.groupListService = GroupListService(viewRouter: viewRouter,groupType: viewRouter.groupType)
+        UITableView.appearance().tableFooterView = UIView()
+        UITableView.appearance().separatorStyle = .none
+    }
     var body: some View {
         GeometryReader { geometry in
             VStack{
                 VStack{
-                    VStack{
-                        Button(action:{
-                            self.viewRouter.currentPage = ViewRoutes.GROUP_CONVERSATION_PAGE
-                        }){
-                            GroupListSubscribedCard(
-                                groupCategory:"Outdoor Adventure",
-                                title: "Cyclink",
-                                description: "There is a group for every activity, hobby or topic. Connect with like minded people."
-                            )
-                        }
-                    }
+                    HStack{
+                        Button(action: {
+                            self.viewRouter.currentPage = ViewRoutes.GROUP_LANDING_PAGE
+                        }) {
+                            GuestJiniButtonSystemImagePlain(imageName: "arrow.left")
+                            
+                        }.padding(.horizontal)
+                        GuestJiniTitleText(title: "GROUPS")
+                        Spacer()
+                    }.padding()
                     
-                    VStack{
-                        Button(action:{
-                            self.viewRouter.returnPage = ""
-                            self.viewRouter.currentPage = ViewRoutes.GROUP_LIST_PAGE
-                        }){
-                            GroupListGroupCard(
-                                groupCategory:"Tech",
-                                title: "ROBOTICS",
-                                description: "Explore groups created by the community members. Participate and catch all the action."
-                            )
+                    if(self.groupListService.fetchComplete == true){
+                        ScrollView{
+                            ForEach(self.groupListService.groupResponse.groupList!){ group in
+                                VStack{
+                                    Button(action:{
+                                        if(group.isSubscribed != 1){
+                                            self.viewRouter.primaryKey = group.id!
+                                            self.viewRouter.currentPage = ViewRoutes.GROUP_DETAIL_PAGE
+                                        }else{
+                                            self.viewRouter.primaryKey = group.id!
+                                            self.viewRouter.currentPage = ViewRoutes.GROUP_CONVERSATION_PAGE
+                                        }
+                                    }){
+                                        GroupListSubscribedCard(
+                                            groupCategory:group.interestCategoryName!,
+                                            title: group.name!,
+                                            description: group.description!
+                                        )
+                                    }
+                                }
+                                
+                            }
                         }
-                    }
-                    
-                    VStack{
-                        Button(action:{
-                            self.viewRouter.returnPage = ""
-                            self.viewRouter.currentPage = ViewRoutes.GROUP_LIST_PAGE
-                        }){
-                            GroupListMatchingGroupCard(
-                                groupCategory:"Outdoor Adventure",
-                                title: "HIKING",
-                                description: "Create and manage your own groups. Host parties, events or simply bond together."
-                            )
-                        }
-                    }
-                    
-                    VStack{
-                        Button(action:{
-                            self.viewRouter.returnPage = ""
-                            self.viewRouter.currentPage = ViewRoutes.GROUP_LIST_PAGE
-                        }){
-                            GroupLisGroupCardWithInformation(
-                                groupCategory:"Outdoor Adventure",
-                                title: "SKY DIVING",
-                                description: "Create and manage your own groups. Host parties, events or simply bond together."
-                            )
-                        }
+                    }else{
+                        ActivityIndicator(shouldAnimate: .constant(true))
                     }
                 }.frame(width: geometry.size.width, height: geometry.size.height-85, alignment: .top)
                     .padding()
@@ -125,7 +120,7 @@ struct GroupListSubscribedCard: View {
                 }.padding()
             }.background(Color("whiteThree"))
                 .shadow(radius: 10)
-        }.padding(.all, 25)
+        }.padding()
     }
     
 }
@@ -213,24 +208,24 @@ struct GroupListMatchingGroupCard: View {
                     }
                     VStack{
                         HStack{
-                           VStack{
+                            VStack{
                                 Image(systemName: "heart")
-                                   .resizable()
+                                    .resizable()
                                     .padding(.all, 11)
-                               }.frame(width: 40, height: 40, alignment: .center)
-                            .foregroundColor(Color.white)
-                            .background(Color("bland"))
-                            .clipped()
-                            .clipShape(Circle())
-                            .shadow(radius: 5)
+                            }.frame(width: 40, height: 40, alignment: .center)
+                                .foregroundColor(Color.white)
+                                .background(Color("bland"))
+                                .clipped()
+                                .clipShape(Circle())
+                                .shadow(radius: 5)
                             Spacer()
                             
                             VStack{
                                 Divider()
                                 HStack{
-                                Text("This group matches your interest.")
-                                    .font(Fonts.RobotRegularSmallText)
-                                    .foregroundColor(Color("brownGrey"))
+                                    Text("This group matches your interest.")
+                                        .font(Fonts.RobotRegularSmallText)
+                                        .foregroundColor(Color("brownGrey"))
                                     Spacer()
                                 }
                             }.padding(.horizontal)

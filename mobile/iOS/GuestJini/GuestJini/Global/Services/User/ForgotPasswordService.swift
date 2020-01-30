@@ -28,11 +28,18 @@ class ForgotPasswordService:ObservableObject{
         AF.request(EndPoints.FORGOT_PASSWORD, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: headers).responseData { (response) in
             let jsonDecoder = JSONDecoder()
             do{
-                let parsedData = try jsonDecoder.decode(ForgotPasswordResponse.self, from: response.data!)
-                completionHandler(parsedData)
+                if(response.data != nil){
+                    let parsedData = try jsonDecoder.decode(ForgotPasswordResponse.self, from: response.data!)
+                    completionHandler(parsedData)
+                }else{
+                    let parsedData = ForgotPasswordResponse();
+                    parsedData.error = "Unknow error has occurred"
+                    completionHandler(parsedData)
+                }
             }catch{
                 debugPrint(error)
                 let parsedData = ForgotPasswordResponse();
+                parsedData.error = "Unknown error has occurred"
                 completionHandler(parsedData)
             }
         }

@@ -11,8 +11,8 @@ import SwiftUI
 struct FindHelpPage: View {
     @ObservedObject var viewRouter: ViewRouter
     @ObservedObject var kbListService:KBListService
-    @State private var shouldAnimate = true
     @State var helpSearchText:String = ""
+    @State private var shouldAnimate = true
     @State var helpSearchCancel:Bool = false
     
     init(viewRouter:ViewRouter) {
@@ -29,6 +29,7 @@ struct FindHelpPage: View {
                     VStack{
                         HStack{
                             Button(action: {
+                                Connectivity.cancelAllRequests()
                                 self.viewRouter.currentPage = ViewRoutes.HOME_PAGE
                             }) {
                                 GuestJiniButtonSystemImagePlain(imageName: "arrow.left")
@@ -73,8 +74,8 @@ struct FindHelpPage: View {
                             .navigationBarHidden(self.helpSearchCancel)
                             HStack{
                                 Spacer()
-                                GuestJiniSubAction(actionText: "Popular Searches", systemImage: "chevron.down")
-                                .padding(.horizontal)
+                                /*GuestJiniSubAction(actionText: "Popular Searches", systemImage: "chevron.down")
+                                .padding(.horizontal)*/
                             }
                         }
                         VStack{
@@ -99,8 +100,6 @@ struct FindHelpPage: View {
                             }
                             
                         }
-                        
-                        
                     }.frame(width: geometry.size.width, height: geometry.size.height-85, alignment: .top)
                         .padding()
                     Divider()
@@ -108,6 +107,7 @@ struct FindHelpPage: View {
                 }.frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
                     .edgesIgnoringSafeArea(.vertical)
             }
+                
         }
     }
 }

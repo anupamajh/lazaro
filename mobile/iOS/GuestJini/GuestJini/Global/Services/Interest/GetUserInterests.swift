@@ -48,15 +48,21 @@ class GetUserInterests:ObservableObject{
                     encoding: JSONEncoding.default,
                     headers: headers
                 ).responseData { (response) in
-                        do{
+                    do{
+                        if(response.data != nil){
                             let jsonDecoder = JSONDecoder()
                             let parsedData = try jsonDecoder.decode(UserInterestsResponse.self, from: response.data!)
                             completionHandler(parsedData)
-                        }catch{
+                        }else{
                             let parsedData = UserInterestsResponse();
                             parsedData.error = "Unknown error has occured"
                             completionHandler(parsedData)
                         }
+                    }catch{
+                        let parsedData = UserInterestsResponse();
+                        parsedData.error = "Unknown error has occured"
+                        completionHandler(parsedData)
+                    }
                 }
             }
             

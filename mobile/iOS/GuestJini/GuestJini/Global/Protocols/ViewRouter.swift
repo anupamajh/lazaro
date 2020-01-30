@@ -36,5 +36,5 @@ class ViewRouter: ObservableObject {
     var searchText:String = ""
     var taskAttachment: [TaskAttachment]? = nil
     var returnPage:String = ""
-    
+    var groupType:Int = 0
 }

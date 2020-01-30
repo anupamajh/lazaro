@@ -29,10 +29,15 @@ class AppAccessRequestService:ObservableObject{
         AF.request(EndPoints.APP_ACCESS_REQUEST_URL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: headers).responseData { (response) in
             let jsonDecoder = JSONDecoder()
             do{
-                let parsedData = try jsonDecoder.decode(AppAccessRequestResponse.self, from: response.data!)
-                completionHandler(parsedData)
+                if(response.data != nil){
+                    let parsedData = try jsonDecoder.decode(AppAccessRequestResponse.self, from: response.data!)
+                    completionHandler(parsedData)
+                }else{
+                    let parsedData = AppAccessRequestResponse();
+                    completionHandler(parsedData)
+                }
             }catch{
-               let parsedData = AppAccessRequestResponse();
+                let parsedData = AppAccessRequestResponse();
                 completionHandler(parsedData)
             }
         }

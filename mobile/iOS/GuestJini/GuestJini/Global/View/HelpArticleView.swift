@@ -95,10 +95,9 @@ struct HelpArticleView: View {
                                                 .foregroundColor(Color("greyishBrownFour"))
                                                 .multilineTextAlignment(.leading)
                                                 .lineLimit(500)
-                                            
-                                            Spacer()
+                                           
                                         }
-                                    }.frame(minHeight:200, maxHeight: .infinity)
+                                    }
                                 }.padding()
                                 
                                 if(!self.kbGetService.fetchComplete){
@@ -246,7 +245,7 @@ struct HelpArticleView: View {
                             
                             ZStack{
                                 VStack{
-                                    List { ForEach(self.kbListReviewService.kbReviewList){ kbReview in
+                                    ScrollView { ForEach(self.kbListReviewService.kbReviewList){ kbReview in
                                             VStack{
                                                 KBReviewRow(kbReview: kbReview)
                                                 Divider()
@@ -254,7 +253,7 @@ struct HelpArticleView: View {
                                                 .padding(.leading, 40)
                                             }
                                         }
-                                    }.frame(minHeight: 200, maxHeight: .infinity)
+                                    }
                                 }
                                 if(!self.kbListReviewService.fetchComplete){
                                     ActivityIndicator(shouldAnimate: .constant(true), style: .large)

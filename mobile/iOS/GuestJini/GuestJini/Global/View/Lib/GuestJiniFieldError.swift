@@ -12,9 +12,12 @@ struct GuestJiniFieldError: View {
     
     var body: some View {
         VStack{
+            HStack{
             Text("This field is required")
                 .font(Fonts.RobotRegular)
             .foregroundColor(Color("terracotta"))
+                Spacer()
+            }
         }
     }
 }

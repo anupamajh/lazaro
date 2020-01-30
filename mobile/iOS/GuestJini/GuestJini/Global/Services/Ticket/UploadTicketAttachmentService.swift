@@ -36,8 +36,15 @@ class UploadTicketAttachmentService: ObservableObject{
                     }) .responseData { (response) in
                         let jsonDecoder = JSONDecoder()
                         do{
-                            let parsedData =  try jsonDecoder.decode(TaskAttachmentResponse.self, from: response.data!)
-                            completionHandler(parsedData)
+                            if(response.data != nil){
+                                let parsedData =  try jsonDecoder.decode(TaskAttachmentResponse.self, from: response.data!)
+                                completionHandler(parsedData)
+                            }else{
+                                let parsedData = TaskAttachmentResponse()
+                                parsedData.error = "Unknow error has occrred"
+                                parsedData.success = false;
+                                completionHandler(parsedData)
+                            }
                         }catch{
                             let parsedData = TaskAttachmentResponse()
                             parsedData.error = "Unknow error has occrred"

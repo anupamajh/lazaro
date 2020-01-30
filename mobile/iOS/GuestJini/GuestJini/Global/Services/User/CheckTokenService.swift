@@ -35,12 +35,16 @@ class CheckTokenService: ObservableObject {
                 let jsonDecoder = JSONDecoder()
                 var isSuccess = false
                 do{
-                    let parsedData =  try jsonDecoder.decode(CheckTokenResponse.self, from: response.data!)
-                    if(parsedData.client_id != nil ){
-                        if(parsedData.client_id?.trimmingCharacters(in: .whitespacesAndNewlines) != ""){
-                            isSuccess = true
-                            completionHandler(isSuccess)
+                    if(response.data != nil){
+                        let parsedData =  try jsonDecoder.decode(CheckTokenResponse.self, from: response.data!)
+                        if(parsedData.client_id != nil ){
+                            if(parsedData.client_id?.trimmingCharacters(in: .whitespacesAndNewlines) != ""){
+                                isSuccess = true
+                                completionHandler(isSuccess)
+                            }
                         }
+                    }else{
+                        
                     }
                     if(!isSuccess){
                         self.loginService.refreshToken(RefreshToken: UserDefaults.standard.string(forKey: "refresh_token")!) { (authData) in
@@ -59,9 +63,6 @@ class CheckTokenService: ObservableObject {
                     }
                     
                 }catch{
-                    let parsedData = TicketResponse()
-                    parsedData.error = "Unknow error has occrred"
-                    parsedData.success = false;
                     self.loginService.refreshToken(RefreshToken: UserDefaults.standard.string(forKey: "refresh_token")!) { (authData) in
                         if(authData.access_token.trimmingCharacters(in: .whitespacesAndNewlines)==""){
                             UserDefaults.standard.set(false, forKey: "isLoggedIn")
@@ -75,31 +76,7 @@ class CheckTokenService: ObservableObject {
                             completionHandler(true)
                         }
                     }
-                    //completionHandler(false)
                 }
         }
     }
 }
-
-/*
- {
- "aud": [
- "inventory",
- "payment"
- ],
- "user_name": "prasanna.pete@gmail.com",
- "scope": [
- "READ",
- "WRITE"
- ],
- "active": true,
- "exp": 1578306823,
- "authorities": [
- "Admin",
- "USER",
- "ROLE_ROLE",
- "ROLE_USER"
- ],
- "client_id": "21e43c55-28ef-478a-ae65-dc896e5eaa34"
- }
- */

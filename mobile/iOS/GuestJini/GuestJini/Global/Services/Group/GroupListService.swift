@@ -1,8 +1,8 @@
 //
-//  KBListReviewService.swift
+//  GroupListService.swift
 //  GuestJini
 //
-//  Created by Prasanna Kumar Pete on 22/01/20.
+//  Created by Prasanna Kumar Pete on 30/01/20.
 //  Copyright © 2020 Prasanna Kumar Pete. All rights reserved.
 //
 
@@ -10,25 +10,23 @@ import Foundation
 import Alamofire
 import SwiftUI
 
-class KBListReviewService:ObservableObject{
-    @Published var kbReviewResponse = KBReviewResponse()
+class GroupListService:ObservableObject{
+    @Published var groupResponse = GroupResponse()
     @ObservedObject var viewRouter: ViewRouter
-    @Published var kbReviewList:[KBReview] = []
     @Published var fetchComplete:Bool = false
     
     var checkTokenService:CheckTokenService
     
-    init(viewRouter: ViewRouter, kbId:String) {
+    init(viewRouter: ViewRouter,groupType:Int) {
         self.viewRouter = viewRouter;
         self.checkTokenService = CheckTokenService(viewRouter: viewRouter)
-        self.getKBList(kbId: kbId) { (response) in
-            self.kbReviewResponse = response
-            self.kbReviewList = response.kbReviewList!;
+        self.getGroupByType(groupType:groupType) { (response) in
+            self.groupResponse = response
             self.fetchComplete = true
         }
     }
     
-    func getKBList(kbId:String, completionHandler: @escaping(KBReviewResponse)->Void) -> Void {
+    func getGroupByType(groupType:Int, completionHandler: @escaping(GroupResponse)->Void) -> Void {
         checkTokenService.CheckToken { (checkStatus) in
             if(checkStatus){
                 let headers: HTTPHeaders = [
@@ -36,28 +34,27 @@ class KBListReviewService:ObservableObject{
                     "Accept": "application/json"
                 ]
                 
-                let parameters = ["kbId" : kbId]
-                AF.request(EndPoints.KB_GET_ALL_REVIEWS, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: headers)
+                let parameters = ["groupType" : "\(groupType)"]
+                AF.request(EndPoints.GET_GROUP_LIST_BY_TYPE, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: headers)
                     .responseData { (response) in
-                        let jsonDecoder = JSONDecoder()
                         do{
-                            if(response.data != nil){
-                                let parsedData = try jsonDecoder.decode(KBReviewResponse.self, from: response.data!)
+                            if(response.data == nil){
+                                let parsedData = GroupResponse()
+                                parsedData.error = "Unknown error has occurred"
                                 completionHandler(parsedData)
                             }else{
-                                let parsedData = KBReviewResponse()
-                                parsedData.error = "Unknown error has occurred"
+                                let jsonDecoder = JSONDecoder()
+                                let parsedData = try jsonDecoder.decode(GroupResponse.self, from: response.data!)
                                 completionHandler(parsedData)
                             }
                         }catch{
-                            let parsedData = KBReviewResponse()
+                            let parsedData = GroupResponse()
                             parsedData.error = "Unknown error has occurred"
                             completionHandler(parsedData)
                         }
-                        
                 }
             }
-            
         }
+        
     }
 }

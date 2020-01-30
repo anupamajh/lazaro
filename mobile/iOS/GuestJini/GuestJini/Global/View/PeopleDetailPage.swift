@@ -112,19 +112,29 @@ struct PeopleDetailPage: View {
                                                 
                                             }){
                                                 VStack{
-                                                    Image(systemName: "heart")
-                                                        .resizable()
-                                                        .frame(width:25, height:25)
-                                                        .foregroundColor(Color.white)
-                                                    if(self.getPersonDetailService.peopleResponse.isFavourite == 0){
-                                                        GuestJiniInformationText(information: "Add to favourites")
+                                                    if(self.getPersonDetailService.peopleResponse.isFavourite == 1){
+                                                        Image(systemName: "heart.fill")
+                                                            .resizable()
+                                                            .frame(width:20, height:18)
                                                             .foregroundColor(Color.white)
+                                                        Text("Remove from favourites")
+                                                            .font(Fonts.RobotRegularSmallText) .multilineTextAlignment(.leading)
+                                                            .lineLimit(200)
+                                                            .foregroundColor(Color.white)
+                                                            
                                                     }else{
-                                                        GuestJiniInformationText(information: "Remove from favourites")
+                                                        Image(systemName: "heart")
+                                                            .resizable()
+                                                            .frame(width:20, height:18)
                                                             .foregroundColor(Color.white)
-                                                        
+                                                        Text("Add to favourites")
+                                                            .font(Fonts.RobotRegularSmallText) .multilineTextAlignment(.leading)
+                                                            .lineLimit(200)
+                                                            .foregroundColor(Color.white)
+                                                            .multilineTextAlignment(.center)
                                                     }
                                                 } .frame(width:100, height:100)
+                                                    .multilineTextAlignment(.center)
                                             }
                                         }.background(Color("aquaMarine"))
                                             .foregroundColor(Color("aquaMarine"))

@@ -38,13 +38,13 @@ class SaveUserInterests:ObservableObject{
                                 completionHandler(parsedData)
                             }else{
                                 let parsedData = UserInterestsResponse()
-                                parsedData.error = "Unknow error has occrred"
+                                parsedData.error = "Unknow error has occurred"
                                 parsedData.success = false;
                                 completionHandler(parsedData)
                             }
                         }catch{
                             let parsedData = UserInterestsResponse()
-                            parsedData.error = "Unknow error has occrred"
+                            parsedData.error = "Unknow error has occurred"
                             parsedData.success = false;
                             completionHandler(parsedData)
                         }

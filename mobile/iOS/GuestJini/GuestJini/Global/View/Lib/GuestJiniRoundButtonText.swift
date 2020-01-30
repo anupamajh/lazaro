@@ -11,7 +11,7 @@ import SwiftUI
 struct GuestJiniRoundButtonText: View {
     var imageName: String
     var body: some View {
-        Group{
+        Group {
         Image(imageName)
             .resizable()
             .padding(.all, 1)

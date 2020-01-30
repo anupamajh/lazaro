@@ -21,6 +21,7 @@ struct AppAccessRequest: View {
     @State var alertBody:String = ""
     
     @State var isAnimating: Bool = false
+    @State var showInternetDown:Bool = false
     
     var appAccessRequestService:AppAccessRequestService = AppAccessRequestService()
     
@@ -41,7 +42,6 @@ struct AppAccessRequest: View {
                             
                         }
                         GuestJiniTitleText(title: "CUSTOMER CARE")
-                        
                         Spacer()
                     }.padding()
                     VStack{
@@ -87,31 +87,35 @@ struct AppAccessRequest: View {
                                 .padding(.leading)
                         }
                         Button(action: {
-                            self.hasError = false
-                            if(self.email.trimmingCharacters(in: .whitespacesAndNewlines) == ""){
-                                self.hasEmail = false
-                            }else{
-                                self.hasEmail = true
-                            }
-                            
-                            if(self.mobileNumber.trimmingCharacters(in: .whitespacesAndNewlines) == "" ){
-                                self.hasMobile = false;
-                            }else{
-                                self.hasMobile = true
-                            }
-                            
-                            if(self.hasEmail && self.hasMobile){
-                                self.isAnimating = true
-                                self.appAccessRequestService.requestAppAccess(email: self.email, mobile: self.mobileNumber) { (response) in
-                                    self.isAnimating = false
-                                    if(response.id != ""){
-                                        self.alertTitle = "Success"
-                                        self.alertBody = "Request has been sent to administrator, You will receive an activation email once details are verified."
-                                        self.showPopover = true
-                                    }else{
-                                        self.hasError = true
+                            if(Connectivity.isConnectedToInternet()){
+                                self.hasError = false
+                                if(self.email.trimmingCharacters(in: .whitespacesAndNewlines) == ""){
+                                    self.hasEmail = false
+                                }else{
+                                    self.hasEmail = true
+                                }
+                                
+                                if(self.mobileNumber.trimmingCharacters(in: .whitespacesAndNewlines) == "" ){
+                                    self.hasMobile = false;
+                                }else{
+                                    self.hasMobile = true
+                                }
+                                
+                                if(self.hasEmail && self.hasMobile){
+                                    self.isAnimating = true
+                                    self.appAccessRequestService.requestAppAccess(email: self.email, mobile: self.mobileNumber) { (response) in
+                                        self.isAnimating = false
+                                        if(response.id != ""){
+                                            self.alertTitle = "Success"
+                                            self.alertBody = "Request has been sent to administrator, You will receive an activation email once details are verified."
+                                            self.showPopover = true
+                                        }else{
+                                            self.hasError = true
+                                        }
                                     }
                                 }
+                            }else{
+                                self.showInternetDown = true
                             }
                             
                         }) { GuestJiniRoundButtonSystemImage(systemImage: "checkmark")
@@ -122,6 +126,7 @@ struct AppAccessRequest: View {
                     
                 }.frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
                     .edgesIgnoringSafeArea(.all)
+                    .keyboardResponsive()
                 
                 if(self.isAnimating){
                     HStack{
@@ -133,7 +138,7 @@ struct AppAccessRequest: View {
                 GeometryReader { _ in
                     EmptyView()
                 }
-                .background(Color.gray.opacity(0.9))
+                .background(Color.black.opacity(0.8))
                 .opacity(self.showPopover ? 1.0 : 0.0)
                 
                 if(self.showPopover){
@@ -141,7 +146,18 @@ struct AppAccessRequest: View {
                 }else{
                     GuestJiniAlerBox(showAlert: self.$showPopover, alertTitle: self.$alertTitle, alertBody: self.$alertBody).hidden()
                 }
-            }
+                
+                GeometryReader { _ in
+                    EmptyView()
+                }
+                .background(Color.black.opacity(0.8))
+                .opacity(self.showInternetDown ? 1.0 : 0.0)
+                if(self.showInternetDown){
+                    GuestJiniAlerBox(showAlert: self.$showInternetDown, alertTitle: .constant("Oops!"), alertBody: .constant("Looks like internet connectivity is weak or not available!"))
+                }else{
+                    GuestJiniAlerBox(showAlert: self.$showInternetDown, alertTitle: .constant("Oops!"), alertBody: .constant("Looks like internet connectivity is weak or not available!")).hidden()
+                }
+            }.resignKeyboardOnTapGesture()
         }
     }
 }

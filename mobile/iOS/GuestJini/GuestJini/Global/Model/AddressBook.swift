@@ -25,4 +25,5 @@ class AddressBook: Codable, Identifiable {
     public var logoBlob:String? = ""
     public var geoLat:String? = ""
     public var geoLon:String? = ""
+    public var creationTime:String? = ""
 }

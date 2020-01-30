@@ -30,12 +30,19 @@ class KBSaveRatingService:ObservableObject{
                 let jsonEncoder = JSONEncoder()
                 let kbRatingData = try! jsonEncoder.encode(kbRating)
                 let json = try! JSONSerialization.jsonObject(with: kbRatingData, options: []) as? [String : Any]
-                 AF.request(EndPoints.KB_SAVE_RATING, method: .post, parameters: json,encoding: JSONEncoding.default, headers: headers)
+                AF.request(EndPoints.KB_SAVE_RATING, method: .post, parameters: json,encoding: JSONEncoding.default, headers: headers)
                     .responseData { (response) in
                         let jsonDecoder = JSONDecoder()
                         do{
-                            let parsedData =  try jsonDecoder.decode(KBRatingResponse.self, from: response.data!)
-                            completionHandler(parsedData)
+                            if(response.data != nil){
+                                let parsedData =  try jsonDecoder.decode(KBRatingResponse.self, from: response.data!)
+                                completionHandler(parsedData)
+                            }else{
+                                let parsedData = KBRatingResponse()
+                                parsedData.error = "Unknow error has occrred"
+                                parsedData.success = false;
+                                completionHandler(parsedData)
+                            }
                         }catch{
                             let parsedData = KBRatingResponse()
                             parsedData.error = "Unknow error has occrred"
@@ -44,7 +51,6 @@ class KBSaveRatingService:ObservableObject{
                         }
                         
                 }
-                
                 
             }
         }

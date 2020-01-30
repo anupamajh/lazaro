@@ -21,10 +21,16 @@ class TicketListService:ObservableObject{
     init(viewRouter: ViewRouter) {
         self.viewRouter = viewRouter;
         self.checkTokenService = CheckTokenService(viewRouter: viewRouter)
-        self.getTicketList { (response) in
-            self.ticketResponse = response
-            self.ticketList = response.taskTicketList!;
-            self.fetchComplete = true
+        if(Connectivity.isConnectedToInternet()){
+            self.getTicketList { (response) in
+                self.ticketResponse = response
+                if(response.taskTicketList != nil){
+                    self.ticketList = response.taskTicketList!;
+                }else{
+                    self.ticketList  = []
+                }
+                self.fetchComplete = true
+            }
         }
     }
     

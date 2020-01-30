@@ -39,11 +39,16 @@ class SaveProfilePicService: ObservableObject {
                            headers: headers
                 )
                     .responseData { (response) in
-                    
+                        
                         let jsonDecoder = JSONDecoder()
                         do{
-                            let parsedData =  try jsonDecoder.decode(UserInfo.self, from: response.data!)
-                            completionHandler(parsedData)
+                            if(response.data != nil){
+                                let parsedData =  try jsonDecoder.decode(UserInfo.self, from: response.data!)
+                                completionHandler(parsedData)
+                            }else{
+                                let parsedData = UserInfo()
+                                completionHandler(parsedData)
+                            }
                         }catch{
                             let parsedData = UserInfo()
                             completionHandler(parsedData)
