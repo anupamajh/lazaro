@@ -6,6 +6,7 @@ import com.carmel.guestjini.helpdesk.model.Principal.UserInfo;
 import com.carmel.guestjini.helpdesk.response.KBResponse;
 import com.carmel.guestjini.helpdesk.service.KBService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +14,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -251,6 +252,27 @@ public class KBController {
             return true;
         }
         return false;
+    }
+
+    @PostMapping("/kb-author/pic")
+    public String kbAuthorPic(@RequestBody Map<String, String> formData) {
+        try {
+            Optional<KB> optionalKB = kbService.findById(formData.get("id"));
+            if (optionalKB.isPresent()) {
+                KB kb = optionalKB.get();
+                if(kb.getAuthorLogoPath().trim() != "") {
+                    String logoPath = kb.getAuthorLogoPath();
+                    File myPic = new File(logoPath);
+                    FileInputStream fileInputStreamReader = new FileInputStream(myPic);
+                    byte[] bytes = new byte[(int) myPic.length()];
+                    fileInputStreamReader.read(bytes);
+                    return new String(Base64.encodeBase64(bytes), "UTF-8");
+                }
+            }
+        }catch (Exception ex){
+            logger.trace(ex.getMessage());
+        }
+        return "";
     }
 
 }

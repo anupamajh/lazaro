@@ -65,7 +65,25 @@ public class KBRatingController {
         return kbRatingResponse;
     }
 
-    @RequestMapping(value = "/get-rating-percent", method = RequestMethod.POST)
+    @RequestMapping(value = "/get-my-rating", method = RequestMethod.POST)
+    public KBRatingResponse getMyRating(@RequestBody Map<String, String> formData) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        logger.trace("Entering");
+        KBRatingResponse kbRatingResponse = new KBRatingResponse();
+        try {
+            Optional<KBRating> optionalKBRating = kbRatingService.findByKbIdAndRatingBy(formData.get("kbId"), userInfo.getId());
+            optionalKBRating.ifPresent(kbRatingResponse::setKbRating);
+            kbRatingResponse.setSuccess(true);
+            kbRatingResponse.setError("");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            kbRatingResponse.setSuccess(false);
+            kbRatingResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return kbRatingResponse;
+    }
+        @RequestMapping(value = "/get-rating-percent", method = RequestMethod.POST)
     public KBRatingPercentResponse getRatingPercent(@RequestBody Map<String, String> formData) {
         logger.trace("Entering");
         KBRatingPercentResponse kbRatingPercentResponse = new KBRatingPercentResponse();
