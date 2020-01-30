@@ -23,6 +23,7 @@ class PeopleResponse: Decodable {
     
     
     public var personList:[Person]?  = []
+    public var isFavourite:Int? = 0
     public var totalInterestCount:Int? = 0
     public var totalPages:Int? = 0
     public var totalRecords:Int? = 0

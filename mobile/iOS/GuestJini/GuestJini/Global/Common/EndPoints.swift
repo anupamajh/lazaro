@@ -16,7 +16,7 @@ class EndPoints{
     
     
     static var END_POINT_URL = "http://139.59.32.238:8000"
-    static var LOCAL_END_POINT_URL = "http://192.168.1.102:8006"
+    static var LOCAL_END_POINT_URL = "http://192.168.0.8:8006"
     static var AUTHORISATION_URL = END_POINT_URL + "/auth/oauth/token"
     static var CHECK_TOKEN_URL = END_POINT_URL + "/auth/oauth/check_token"
     static var FORGOT_PASSWORD = END_POINT_URL + "/public/api/reset-password"
@@ -28,13 +28,14 @@ class EndPoints{
     static var GET_PROFILE_PIC_URL = END_POINT_URL + "/common/user/me/pic"
     static var GET_MY_ADDRESS_BOOK_URL = END_POINT_URL + "/common/address-book/get-my-address-book"
     
-    static var GET_LIST_OF_PEOPLE =  LOCAL_END_POINT_URL + "/people/get-people"
-    static var GET_PERSON_DETAIL =  LOCAL_END_POINT_URL + "/people/get-person"
+    static var GET_LIST_OF_PEOPLE =  END_POINT_URL + "/common/people/get-people"
+    static var GET_PERSON_DETAIL =  END_POINT_URL + "/common/people/get-person"
+    static var AD_PERSON_TO_FAVOURITE =  END_POINT_URL + "/common/people/add-remove-favourite"
     
     static var GET_INTEREST_CATEGORY_LIST_URL = END_POINT_URL + "/common/interest-category/get-all"
     static var GET_INTEREST_LIST_URL = END_POINT_URL + "/common/interest/get-all"
     static var GET_MY_INTEREST_LIST_URL = END_POINT_URL + "/common/user-interests/get-user-interests"
-    static var SAVE_MY_INTEREST_URL = LOCAL_END_POINT_URL + "/user-interests/save"
+    static var SAVE_MY_INTEREST_URL = END_POINT_URL + "/common/user-interests/save"
     
     
     //TICKET

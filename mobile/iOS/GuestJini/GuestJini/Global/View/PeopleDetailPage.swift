@@ -11,10 +11,14 @@ import SwiftUI
 struct PeopleDetailPage: View {
     @ObservedObject var viewRouter: ViewRouter
     @ObservedObject var getPersonDetailService:GetPersonDetailService
+    @ObservedObject var personAddFavouriteService:PersonAddFavouriteService
+    
+    @State var showAddFavouriteActivitiIndicater:Bool = false
     
     init(viewRouter: ViewRouter){
         self.viewRouter = viewRouter
         self.getPersonDetailService = GetPersonDetailService(viewRouter: viewRouter,userId: viewRouter.primaryKey)
+        self.personAddFavouriteService = PersonAddFavouriteService(viewRouter: viewRouter)
         UITableView.appearance().tableFooterView = UIView()
         UITableView.appearance().separatorStyle = .none
     }
@@ -92,6 +96,19 @@ struct PeopleDetailPage: View {
                                     HStack{
                                         VStack{
                                             Button(action: {
+                                                self.showAddFavouriteActivitiIndicater = true
+                                                
+                                                self.personAddFavouriteService.addToFavourite(
+                                                    userId: self.viewRouter.primaryKey,
+                                                    isFavourite: (self.getPersonDetailService.peopleResponse.isFavourite! == 0) ? 1 : 0
+                                                ) { (response) in
+                                                    self.showAddFavouriteActivitiIndicater = false
+                                                    if(self.getPersonDetailService.peopleResponse.isFavourite == 1){
+                                                        self.getPersonDetailService.peopleResponse.isFavourite = 0
+                                                    }else{
+                                                        self.getPersonDetailService.peopleResponse.isFavourite = 1
+                                                    }
+                                                }
                                                 
                                             }){
                                                 VStack{
@@ -99,8 +116,14 @@ struct PeopleDetailPage: View {
                                                         .resizable()
                                                         .frame(width:25, height:25)
                                                         .foregroundColor(Color.white)
-                                                    GuestJiniInformationText(information: "Add to favourites")
-                                                        .foregroundColor(Color.white)
+                                                    if(self.getPersonDetailService.peopleResponse.isFavourite == 0){
+                                                        GuestJiniInformationText(information: "Add to favourites")
+                                                            .foregroundColor(Color.white)
+                                                    }else{
+                                                        GuestJiniInformationText(information: "Remove from favourites")
+                                                            .foregroundColor(Color.white)
+                                                        
+                                                    }
                                                 } .frame(width:100, height:100)
                                             }
                                         }.background(Color("aquaMarine"))
@@ -255,6 +278,9 @@ struct PeopleDetailPage: View {
                                 
                             }
                             if(self.getPersonDetailService.fetchComplete != true){
+                                ActivityIndicator(shouldAnimate: .constant(true))
+                            }
+                            if(self.showAddFavouriteActivitiIndicater == true){
                                 ActivityIndicator(shouldAnimate: .constant(true))
                             }
                         }

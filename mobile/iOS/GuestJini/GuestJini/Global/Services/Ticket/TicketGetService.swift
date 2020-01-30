@@ -38,13 +38,23 @@ class TicketGetService:ObservableObject{
                 ]
                 AF.request(EndPoints.TICKET_GET_URL, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: headers)
                     .responseData { (response) in
-                        let jsonDecoder = JSONDecoder()
-                        let parsedData = try! jsonDecoder.decode(TicketResponse.self, from: response.data!)
-                        completionHandler(parsedData)
+                        if(response.data != nil){
+                            do{
+                                let jsonDecoder = JSONDecoder()
+                                let parsedData = try jsonDecoder.decode(TicketResponse.self, from: response.data!)
+                                completionHandler(parsedData)
+                            }catch{
+                                let parsedData = TicketResponse()
+                                parsedData.error = "Unknow error has occurred!"
+                                completionHandler(parsedData)
+                            }
+                        }else{
+                            let parsedData = TicketResponse()
+                            parsedData.error = "Unknow error has occurred!"
+                            completionHandler(parsedData)
+                        }
                 }
             }
         }
     }
-    
-    
 }

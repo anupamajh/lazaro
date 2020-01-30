@@ -72,25 +72,25 @@ struct PeopleListPage: View {
                         .navigationBarHidden(self.peopleSearchCancel)
                     }
                     ZStack{
-                    VStack{
-                        if(self.getPeopleListService.fetchComplete == true && self.getPeopleListService.peopleResponse.peopleList != nil){
-                            List {
-                                ForEach(self.getPeopleListService.peopleResponse.personList!){ person in
-                                    Button(action:{
-                                        self.viewRouter.primaryKey = person.addressBook!.userId!
-                                        self.viewRouter.currentPage = ViewRoutes.PEOPLE_DETAIL_PAGE
-                                    }){
-                                        PeopleCard(
-                                            addressBook: person.addressBook!,
-                                            peopleResponse: self.getPeopleListService.peopleResponse,
-                                            person: person)
+                        VStack{
+                            if(self.getPeopleListService.fetchComplete == true && self.getPeopleListService.peopleResponse.peopleList != nil){
+                                List {
+                                    ForEach(self.getPeopleListService.peopleResponse.personList!){ person in
+                                        Button(action:{
+                                            self.viewRouter.primaryKey = person.addressBook!.userId!
+                                            self.viewRouter.currentPage = ViewRoutes.PEOPLE_DETAIL_PAGE
+                                        }){
+                                            PeopleCard(
+                                                addressBook: person.addressBook!,
+                                                peopleResponse: self.getPeopleListService.peopleResponse,
+                                                person: person)
+                                        }
                                     }
+                                    
+                                    
                                 }
-                                
-                                
                             }
                         }
-                    }
                         if(self.getPeopleListService.fetchComplete != true){
                             ActivityIndicator(shouldAnimate: .constant(true))
                         }
@@ -145,7 +145,9 @@ struct PeopleCard : View {
                 }.padding()
                 VStack{
                     HStack{
-                        Button(action:{}){
+                        if(person.isFavourite == 1){
+                            GuestJiniRoundButtonSystemImage(systemImage: "heart.fill")
+                        }else{
                             GuestJiniRoundButtonSystemImage(systemImage: "heart")
                         }
                         ProgressBar(
@@ -195,9 +197,9 @@ struct ProgressBar:View{
                 ZStack(alignment: .leading) {
                     Rectangle()
                         .opacity(0)
-                    .overlay(
-                        Rectangle()
-                            .stroke(Color("aquaMarine"), lineWidth: 1)
+                        .overlay(
+                            Rectangle()
+                                .stroke(Color("aquaMarine"), lineWidth: 1)
                     )
                     Rectangle()
                         .frame(minWidth: 0, idealWidth:self.getProgressBarWidth(geometry: geometry),
@@ -207,12 +209,12 @@ struct ProgressBar:View{
                 }
                 .frame(height:10)
                 HStack{
-                Text("Common Interests")
+                    Text("Common Interests")
                     Spacer();
                     Text( "\(self.currentCount)/\(self.totalCount)")
                         .font(Fonts.RobotRegular)
                 }
-                              
+                
             }.frame(height:10)
         }
     }
