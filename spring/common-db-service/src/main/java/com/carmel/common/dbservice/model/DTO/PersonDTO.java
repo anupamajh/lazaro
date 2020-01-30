@@ -1,13 +1,13 @@
 package com.carmel.common.dbservice.model.DTO;
 
 import com.carmel.common.dbservice.model.AddressBook;
-import com.carmel.common.dbservice.model.UserInterests;
 
 import java.util.List;
 
 public class PersonDTO {
     private AddressBook addressBook;
     private List<UserInterestsDTO> userInterestsList;
+    private int isFavourite;
 
     public AddressBook getAddressBook() {
         return addressBook;
@@ -23,5 +23,13 @@ public class PersonDTO {
 
     public void setUserInterestsList(List<UserInterestsDTO> userInterestsList) {
         this.userInterestsList = userInterestsList;
+    }
+
+    public int getIsFavourite() {
+        return isFavourite;
+    }
+
+    public void setIsFavourite(int isFavourite) {
+        this.isFavourite = isFavourite;
     }
 }

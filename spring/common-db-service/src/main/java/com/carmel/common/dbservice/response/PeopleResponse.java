@@ -4,12 +4,9 @@ import com.carmel.common.dbservice.model.AddressBook;
 import com.carmel.common.dbservice.model.DTO.PersonDTO;
 import com.carmel.common.dbservice.model.DTO.UserInterestCategoryDTO;
 import com.carmel.common.dbservice.model.DTO.UserInterestsDTO;
-import com.carmel.common.dbservice.model.InterestCategory;
 import com.carmel.common.dbservice.model.UserInfo;
-import com.carmel.common.dbservice.model.UserInterests;
 
 import java.util.List;
-import java.util.Map;
 
 public class PeopleResponse {
     private UserInfo myUserInfo;
@@ -24,6 +21,7 @@ public class PeopleResponse {
     private List<UserInterestCategoryDTO> otherInterestMap;
     private List<UserInterestCategoryDTO> commonInterest;
     private List<UserInterestCategoryDTO> unCommonInterest;
+    private int isFavourite;
     private long totalInterestCount;
     private long totalPages;
     private long totalRecords;
@@ -173,5 +171,13 @@ public class PeopleResponse {
 
     public void setUnCommonInterest(List<UserInterestCategoryDTO> unCommonInterest) {
         this.unCommonInterest = unCommonInterest;
+    }
+
+    public int getIsFavourite() {
+        return isFavourite;
+    }
+
+    public void setIsFavourite(int isFavourite) {
+        this.isFavourite = isFavourite;
     }
 }

@@ -4,6 +4,8 @@ import com.carmel.common.dbservice.model.InterestCategory;
 import com.carmel.common.dbservice.model.UserInterests;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserInterestsDTO {
     private String id;
@@ -25,6 +27,19 @@ public class UserInterestsDTO {
     private InterestCategory interestCategory;
 
 
+    public boolean hasSameInterestId(List<UserInterestsDTO> userInterestsDTOS){
+        if(userInterestsDTOS.stream().filter(uidto -> uidto.getInterestId().equals(this.interestId)).collect(Collectors.toList()).size() > 0){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasDiferentInterestId(List<UserInterestsDTO> userInterestsDTOS){
+        if(userInterestsDTOS.stream().filter(uidto -> uidto.getInterestId().equals(this.interestId)).collect(Collectors.toList()).size() > 0){
+            return false;
+        }
+        return true;
+    }
     public UserInterestsDTO() {
     }
 

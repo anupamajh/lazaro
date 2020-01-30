@@ -72,6 +72,7 @@ public class PeopleController {
             List<UserInterestsDTO> othersInterests = userInterests.stream().filter(
                     ui -> !ui.getUserId().equals(userInfo.getId())
             ).collect(Collectors.toList());
+            List<FavouritePeople> favouritePeopleList = favouritePeopleService.findByUserIdAndIsFavourite(userInfo.getId(), 1);
             List<PersonDTO> personList = new ArrayList<>();
             othersAddressBook.forEach(addressBook -> {
                 PersonDTO person = new PersonDTO();
@@ -79,7 +80,11 @@ public class PeopleController {
                 List<UserInterestsDTO> userInterestsList = userInterests.stream().filter(
                         ui -> ui.getUserId().equals(addressBook.getUserId())
                 ).collect(Collectors.toList());
-
+                if (favouritePeopleList.stream().filter(fp -> fp.getOtherUserId().equals(addressBook.getUserId())).collect(Collectors.toList()).isEmpty()) {
+                    person.setIsFavourite(0);
+                } else {
+                    person.setIsFavourite(1);
+                }
                 person.setUserInterestsList(userInterestsList);
                 personList.add(person);
 
@@ -201,10 +206,8 @@ public class PeopleController {
                 }
             }
 
-            List<UserInterestsDTO> commonInterests = otherInterests.stream().distinct()
-                    .filter(myInterests::contains).collect(Collectors.toList());
-            List<UserInterestsDTO> unCommonInterests = myInterests.stream().distinct()
-                    .filter(userInterestsDTO -> !otherInterests.contains(userInterestsDTO)).collect(Collectors.toList());
+            List<UserInterestsDTO> commonInterests = myInterests.stream().filter(uidto -> uidto.hasSameInterestId(otherInterests)).collect(Collectors.toList());
+            List<UserInterestsDTO> unCommonInterests = myInterests.stream().filter(uidto -> uidto.hasDiferentInterestId(otherInterests)).collect(Collectors.toList());
             Map<InterestCategory, List<UserInterestsDTO>> myInterestResult =
                     myInterests.stream().collect(Collectors.groupingBy(UserInterestsDTO::getInterestCategory, Collectors.toList()));
             Map<InterestCategory, List<UserInterestsDTO>> othersInterestResult =
@@ -247,7 +250,15 @@ public class PeopleController {
                 userInterestCategoryDTO.setInterestList(userInterestsDTOS);
                 unCommonInterestCategoryDTOList.add(userInterestCategoryDTO);
             });
-
+            Optional<FavouritePeople> optionalFavouritePeople =
+                    favouritePeopleService
+                            .findByUserIdAndOtherUserId(userInfo.getId(), formData.get("userId"));
+            peopleResponse.setIsFavourite(0);
+            if (optionalFavouritePeople.isPresent()) {
+                if (optionalFavouritePeople.get().getIsFavourite() == 1) {
+                    peopleResponse.setIsFavourite(1);
+                }
+            }
             peopleResponse.setCommonInterest(commonUserInterestCategoryDTOList);
             peopleResponse.setUnCommonInterest(unCommonInterestCategoryDTOList);
             peopleResponse.setMyInterestMap(myInterestCategoryDTOList);
