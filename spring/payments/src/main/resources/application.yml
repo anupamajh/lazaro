@@ -9,6 +9,7 @@ paytm.payment:
     website: WEBSTAGING
     industryTypeId: Retail
     paytmUrl:  https://securegw-stage.paytm.in/order/process
+    paytmStatusUrl:  https://securegw-stage.paytm.in/order/status
     callbackUrl: http://localhost:8012/pgresponse
     details:
       MID: ${paytm.payment.sandbox.merchantid}

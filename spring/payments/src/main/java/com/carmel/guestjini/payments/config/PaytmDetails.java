@@ -18,6 +18,8 @@ public class PaytmDetails {
 
     private String paytmUrl;
 
+    private String paytmStatusUrl;
+
     private Map<String, String> details;
 
     public String getMerchantId() {
@@ -74,5 +76,13 @@ public class PaytmDetails {
 
     public void setDetails(Map<String, String> details) {
         this.details = details;
+    }
+
+    public String getPaytmStatusUrl() {
+        return paytmStatusUrl;
+    }
+
+    public void setPaytmStatusUrl(String paytmStatusUrl) {
+        this.paytmStatusUrl = paytmStatusUrl;
     }
 }
