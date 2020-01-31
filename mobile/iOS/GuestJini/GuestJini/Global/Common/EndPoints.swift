@@ -16,7 +16,7 @@ class EndPoints{
     
     
     static var END_POINT_URL = "http://139.59.32.238:8000"
-    static var LOCAL_END_POINT_URL = "http://192.168.1.101:8010"
+    static var LOCAL_END_POINT_URL = "http://192.168.0.8:8006"
     static var AUTHORISATION_URL = END_POINT_URL + "/auth/oauth/token"
     static var CHECK_TOKEN_URL = END_POINT_URL + "/auth/oauth/check_token"
     static var FORGOT_PASSWORD = END_POINT_URL + "/public/api/reset-password"
@@ -27,6 +27,7 @@ class EndPoints{
     static var SAVE_PROFILE_PIC_URL = END_POINT_URL + "/common/address-book/save-profile-pic"
     static var GET_PROFILE_PIC_URL = END_POINT_URL + "/common/user/me/pic"
     static var GET_MY_ADDRESS_BOOK_URL = END_POINT_URL + "/common/address-book/get-my-address-book"
+    static var CHANGE_PASSWORD_URL = END_POINT_URL + "/common/user/change-password"
     
     static var GET_LIST_OF_PEOPLE =  END_POINT_URL + "/common/people/get-people"
     static var GET_PERSON_DETAIL =  END_POINT_URL + "/common/people/get-person"

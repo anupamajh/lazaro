@@ -111,6 +111,9 @@
 		C1504AB923CECF1B00302EB7 /* AddressBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1504AB823CECF1B00302EB7 /* AddressBook.swift */; };
 		C153439523DFF0140064176A /* GetPeopleListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C153439423DFF0140064176A /* GetPeopleListService.swift */; };
 		C15C726023BA18CD0069CB6E /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15C725F23BA18CD0069CB6E /* HomePage.swift */; };
+		C177AF7C23E3EDFE00E49786 /* ChangePasswordPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C177AF7B23E3EDFE00E49786 /* ChangePasswordPage.swift */; };
+		C177AF7E23E406D000E49786 /* GenericResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C177AF7D23E406D000E49786 /* GenericResponse.swift */; };
+		C177AF8023E406F700E49786 /* ChangePasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C177AF7F23E406F700E49786 /* ChangePasswordService.swift */; };
 		C17BBFC623BB22E600FD5A21 /* Articles.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BBFC523BB22E600FD5A21 /* Articles.swift */; };
 		C1813B6723D5BABA00450B1E /* TicketNotesListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1813B6623D5BABA00450B1E /* TicketNotesListService.swift */; };
 		C1813B6923D5BC3C00450B1E /* TaskNoteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1813B6823D5BC3C00450B1E /* TaskNoteRow.swift */; };
@@ -181,6 +184,7 @@
 		C1BB7D6223BF4AE200BA410C /* TicketSaveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BB7D6123BF4AE200BA410C /* TicketSaveService.swift */; };
 		C1BB7D6423BF59F600BA410C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BB7D6323BF59F600BA410C /* SettingsView.swift */; };
 		C1BB7D6623BF66A100BA410C /* GuestJiniSettingMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BB7D6523BF66A100BA410C /* GuestJiniSettingMenuItem.swift */; };
+		C1C49E0923E4123F00CCAEA2 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C49E0823E4123F00CCAEA2 /* UIImageExtension.swift */; };
 		C1C74C3C23BA143E00FFA336 /* GuestJiniBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C74C3B23BA143E00FFA336 /* GuestJiniBottomBar.swift */; };
 		C1C74C3E23BA146700FFA336 /* GuestJiniBottomBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C74C3D23BA146700FFA336 /* GuestJiniBottomBarItem.swift */; };
 		C1D0000123B9D83400B93651 /* EndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D0000023B9D83400B93651 /* EndPoints.swift */; };
@@ -332,6 +336,9 @@
 		C1504AB823CECF1B00302EB7 /* AddressBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBook.swift; sourceTree = "<group>"; };
 		C153439423DFF0140064176A /* GetPeopleListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPeopleListService.swift; sourceTree = "<group>"; };
 		C15C725F23BA18CD0069CB6E /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
+		C177AF7B23E3EDFE00E49786 /* ChangePasswordPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordPage.swift; sourceTree = "<group>"; };
+		C177AF7D23E406D000E49786 /* GenericResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericResponse.swift; sourceTree = "<group>"; };
+		C177AF7F23E406F700E49786 /* ChangePasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordService.swift; sourceTree = "<group>"; };
 		C17BBFC523BB22E600FD5A21 /* Articles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Articles.swift; sourceTree = "<group>"; };
 		C1813B6623D5BABA00450B1E /* TicketNotesListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketNotesListService.swift; sourceTree = "<group>"; };
 		C1813B6823D5BC3C00450B1E /* TaskNoteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskNoteRow.swift; sourceTree = "<group>"; };
@@ -402,6 +409,7 @@
 		C1BB7D6123BF4AE200BA410C /* TicketSaveService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketSaveService.swift; sourceTree = "<group>"; };
 		C1BB7D6323BF59F600BA410C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C1BB7D6523BF66A100BA410C /* GuestJiniSettingMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniSettingMenuItem.swift; sourceTree = "<group>"; };
+		C1C49E0823E4123F00CCAEA2 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		C1C74C3B23BA143E00FFA336 /* GuestJiniBottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniBottomBar.swift; sourceTree = "<group>"; };
 		C1C74C3D23BA146700FFA336 /* GuestJiniBottomBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniBottomBarItem.swift; sourceTree = "<group>"; };
 		C1D0000023B9D83400B93651 /* EndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoints.swift; sourceTree = "<group>"; };
@@ -485,6 +493,7 @@
 				C1504AB623CDBC6A00302EB7 /* SaveProfilePicService.swift */,
 				C1EB388A23CEFA3F0057975E /* GetProfilePicService.swift */,
 				C10CD04823CF1809001F30BB /* AppAccessRequestService.swift */,
+				C177AF7F23E406F700E49786 /* ChangePasswordService.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -602,6 +611,7 @@
 				C10CD04E23CF4A75001F30BB /* UIApplicationExtension.swift */,
 				C10CD05023CF4BF2001F30BB /* ViewExtension.swift */,
 				C194EDBA23E30D650028B53E /* KeyboardResponsiveModifier.swift */,
+				C1C49E0823E4123F00CCAEA2 /* UIImageExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -699,6 +709,7 @@
 				C145DA3C23DB0580005A7AC3 /* GroupList.swift */,
 				C145DA3E23DB0649005A7AC3 /* GroupDetailPage.swift */,
 				C145DA4023DB068B005A7AC3 /* GroupConversationPage.swift */,
+				C177AF7B23E3EDFE00E49786 /* ChangePasswordPage.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -811,6 +822,7 @@
 				C1AB8EAF23E15C2F00B7532C /* PeopleResponse.swift */,
 				C194EDAA23E2B1AA0028B53E /* GroupResponse.swift */,
 				C194EDB423E2F0340028B53E /* GroupConversationResponse.swift */,
+				C177AF7D23E406D000E49786 /* GenericResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -1164,6 +1176,7 @@
 				C10ACFFF23C30CE100C7CB70 /* UserInfo.swift in Sources */,
 				C12C4EFE23B781C200CD4B8F /* LoginService.swift in Sources */,
 				C194EDB923E3004F0028B53E /* GroupConversationListService.swift in Sources */,
+				C177AF7C23E3EDFE00E49786 /* ChangePasswordPage.swift in Sources */,
 				C1BB7D5923BF3A4000BA410C /* TicketListService.swift in Sources */,
 				C144F01223B477B100D6D218 /* CarouselImage.swift in Sources */,
 				C194EDA323E2ABB90028B53E /* GroupListService.swift in Sources */,
@@ -1224,8 +1237,10 @@
 				C14E1C2B23D9748E00FF16C6 /* GetInterestListService.swift in Sources */,
 				C10CD04923CF1809001F30BB /* AppAccessRequestService.swift in Sources */,
 				C14322D823D2253B00D7E0EA /* ForgotPasswordResponse.swift in Sources */,
+				C177AF8023E406F700E49786 /* ChangePasswordService.swift in Sources */,
 				C194EDA723E2AF900028B53E /* GroupModel.swift in Sources */,
 				C127164A23B75553001E4C99 /* GuestJiniInformationText.swift in Sources */,
+				C1C49E0923E4123F00CCAEA2 /* UIImageExtension.swift in Sources */,
 				C1C74C3C23BA143E00FFA336 /* GuestJiniBottomBar.swift in Sources */,
 				C1A73E2023B744F900E9F5B8 /* GuestJiniHeaderLarge.swift in Sources */,
 				C144F02123B481C100D6D218 /* GuestJiniErrorText.swift in Sources */,
@@ -1296,6 +1311,7 @@
 				C10CD05323CF52DF001F30BB /* FindHelpPage.swift in Sources */,
 				C14C387F23D8679D00DADF9C /* GetKBAuthorPicService.swift in Sources */,
 				C1B1E43423BE1DDD009E1E3B /* TicketUI.swift in Sources */,
+				C177AF7E23E406D000E49786 /* GenericResponse.swift in Sources */,
 				C144F02323B483CB00D6D218 /* FontExtension.swift in Sources */,
 				C1504AB323CDA90700302EB7 /* ImagePicker.swift in Sources */,
 				C129E73723BB008C009144D6 /* GuestJiniSubAction.swift in Sources */,

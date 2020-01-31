@@ -18,7 +18,7 @@ class ImageConverter {
     }
 
     static func imageToBase64(_ image: UIImage) -> String? {
-        return image.jpegData(compressionQuality: 1)?.base64EncodedString()
+        return image.resized(toWidth: 100, isOpaque: true)!.jpegData(compressionQuality: 1)?.base64EncodedString()
     }
 
 }

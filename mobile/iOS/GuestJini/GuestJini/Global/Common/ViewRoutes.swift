@@ -13,6 +13,7 @@ class ViewRoutes {
     static var FORGOT_PASSWORD_PAGE = "forgot_password_page"
     static var HOME_PAGE = "home_page"
     static var APP_ACCESS_REQUEST_PAGE = "app_access_request_page"
+    static var CHANGE_PASSWORD_PAGE = "change_pasword_page"
     
     
     static var TICKET_LIST = "ticket_list"

@@ -36,15 +36,15 @@ struct SettingsView: View {
                      GuestJiniSettingMenuItem(imageName: "gear", menuText: "Settings")
                      
                      }.padding(.horizontal)
-                     
-                     
-                     Button(action: {
-                     self.viewRouter.currentPage = ViewRoutes.HOME_PAGE
-                     }) {
-                     GuestJiniSettingMenuItem(imageName: "bag", menuText: "Change Password")
-                     
-                     }.padding(.horizontal)
                      */
+                    
+                    Button(action: {
+                        self.viewRouter.currentPage = ViewRoutes.CHANGE_PASSWORD_PAGE
+                    }) {
+                        GuestJiniSettingMenuItem(imageName: "bag", menuText: "Change Password")
+                        
+                    }.padding(.horizontal)
+                    
                     
                     Button(action: {
                         self.viewRouter.currentPage = ViewRoutes.HELP_VIEW
