@@ -6,6 +6,7 @@ import com.carmel.common.dbservice.model.AddressBook;
 import com.carmel.common.dbservice.model.User;
 import com.carmel.common.dbservice.model.UserInfo;
 import com.carmel.common.dbservice.model.UserPreference;
+import com.carmel.common.dbservice.response.GenericResponse;
 import com.carmel.common.dbservice.response.UserResponse;
 import com.carmel.common.dbservice.response.UsersResponse;
 import com.carmel.common.dbservice.services.AddressBookService;
@@ -78,12 +79,12 @@ public class UserController {
                 userResponse.setSuccess(false);
                 userResponse.setError("Duplicate user name!");
             } else {
-                 if (user.getId() == "") {
+                if (user.getId() == "") {
                     user.setPassword(passwordEncoder.encode(user.getPassword()));
                     user.setCreatedBy(userInfo.getId());
                     user.setCreationTime(new Date());
                     user.setClient(userInfo.getClient());
-                     } else {
+                } else {
                     Optional<User> optionalUser = userService.findById(user.getId());
                     user.setPassword(optionalUser.get().getPassword());
                     user.setLastModifiedBy(userInfo.getId());
@@ -92,7 +93,7 @@ public class UserController {
                 User savedUser = userService.save(user);
                 AddressBook addressBook = new AddressBook();
                 Optional<AddressBook> optionalAddressBook = addressBookService.findByUserId(savedUser.getId());
-                if(optionalAddressBook.isPresent()){
+                if (optionalAddressBook.isPresent()) {
                     addressBook = optionalAddressBook.get();
                 }
                 addressBook.setEmail1(user.getUserName());
@@ -301,7 +302,7 @@ public class UserController {
         UserInfo userInfo = userInformation.getUserInfo();
         Optional<AddressBook> optionalAddressBook = addressBookService.findByUserId(userInfo.getId());
         optionalAddressBook.ifPresent(userInfo::setAddressBook);
-        if(!optionalAddressBook.isPresent()){
+        if (!optionalAddressBook.isPresent()) {
             AddressBook addressBook = new AddressBook();
             addressBook.setEmail1(userInfo.getUserName());
             addressBook.setDisplayName(userInfo.getFullName());
@@ -349,5 +350,36 @@ public class UserController {
         mailClient.prepareAndSend(userInfo.getUserName(), "Reset password link here");
 
         return userInfo;
+    }
+
+    @RequestMapping(value = "/change-password", method = RequestMethod.POST)
+    public GenericResponse changePassword(@RequestBody Map<String, String> formData) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        GenericResponse genericResponse = new GenericResponse();
+        try {
+            Optional<User> optionalUser = userService.findById(userInfo.getId());
+            String currentPassword = formData.get("currentPassword");
+            String newPasswordPassword = formData.get("newPassword");
+            if (optionalUser.isPresent()) {
+                if (passwordEncoder.matches(currentPassword, optionalUser.get().getPassword())) {
+                    User user = optionalUser.get();
+                    user.setPassword(passwordEncoder.encode(newPasswordPassword));
+                    userService.save(user);
+                    genericResponse.setSuccess(true);
+                    genericResponse.setError("Password changed successfully");
+                } else {
+                    genericResponse.setSuccess(false);
+                    genericResponse.setError("Current password do not match");
+                }
+
+            } else {
+                genericResponse.setSuccess(false);
+                genericResponse.setError("User not found.");
+            }
+        } catch (Exception ex) {
+            genericResponse.setSuccess(false);
+            genericResponse.setError(ex.getMessage());
+        }
+        return genericResponse;
     }
 }
