@@ -13,11 +13,14 @@ struct GuestJiniHeaderLarge: View {
         GeometryReader { geometry in
             VStack{
                 VStack{
-                GuestJiniLogoImage()
-                    .padding(.vertical,25)
-                GuestJiniDescriptionText(description: "Experience like-minded co-living while you also perceive your passion and interests.")
-                    .padding(.horizontal,30)
-                    .padding(.vertical)
+                    GuestJiniLogoImage()
+                        .padding(.vertical)
+                    VStack{
+                        Text("Experience like-minded co-living while you also perceive your passion and interests.")
+                            .font(Fonts.RobotRegular)
+                            .multilineTextAlignment(.center)
+                            .lineLimit(200)
+                    }.padding()
                 }
             }   .background(Color("veryLightPink"))
             

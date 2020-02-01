@@ -11,6 +11,5 @@ class ForgotPasswordResponse: Decodable {
     public var id:String = ""
     public var fullName:String  = ""
     public var userName:String = ""
-    public var error:String = ""
     
 }

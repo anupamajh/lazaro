@@ -15,13 +15,13 @@ struct TicketList: View {
     @State var ticketSearchText:String = ""
     @State var ticketSearchCancel:Bool = false
     @State var showInternetDown:Bool = false
-      
+    
     @ObservedObject var audioPlayer = AudioPlayer()
     
     
     init(viewRouter: ViewRouter){
         self.viewRouter = viewRouter
-         self.ticketListService = TicketListService(viewRouter: viewRouter)
+        self.ticketListService = TicketListService(viewRouter: viewRouter)
         UITableView.appearance().tableFooterView = UIView()
         
         // To remove all separators including the actual ones:
@@ -78,35 +78,37 @@ struct TicketList: View {
                         .navigationBarHidden(self.ticketSearchCancel)
                         
                         /*HStack{
-                            Spacer()
-                            GuestJiniSubAction(actionText: "Popular Searches", systemImage: "chevron.down")
-                                .padding(.horizontal)
-                        }*/
+                         Spacer()
+                         GuestJiniSubAction(actionText: "Popular Searches", systemImage: "chevron.down")
+                         .padding(.horizontal)
+                         }*/
                     }
                     VStack{
                         if(self.ticketListService.fetchComplete != true){
                             ActivityIndicator(shouldAnimate: self.$shouldAnimate)
                         }
                         if(self.ticketListService.ticketList.filter{($0.ticketTitle?.lowercased().contains(self.ticketSearchText.lowercased()))! || $0.ticketNarration.lowercased().contains(self.ticketSearchText.lowercased()) || self.ticketSearchText == ""}.count == 0){
-                            VStack{
-                                HStack{
-                                    Spacer()
-                                Image("magnifying_glass_sorry")
-                                    .resizable()
-                                    .frame(width: 56, height: 56, alignment: .center)
-                                    Spacer()
+                            if(self.ticketListService.fetchComplete == true){
+                                VStack{
+                                    HStack{
+                                        Spacer()
+                                        Image("magnifying_glass_sorry")
+                                            .resizable()
+                                            .frame(width: 56, height: 56, alignment: .center)
+                                        Spacer()
+                                    }.padding()
+                                    HStack{
+                                        Spacer()
+                                        GuestJiniTitleText(title: "No Results Found")
+                                        Spacer()
+                                    }
+                                    HStack{
+                                        Spacer()
+                                        GuestJiniInformationText(information: "Sorry, we couldn’t find any content for “<search_keyword>”")
+                                        Spacer()
+                                    }
                                 }.padding()
-                                HStack{
-                                    Spacer()
-                                    GuestJiniTitleText(title: "No Results Found")
-                                    Spacer()
-                                }
-                                HStack{
-                                    Spacer()
-                                    GuestJiniInformationText(information: "Sorry, we couldn’t find any content for “<search_keyword>”")
-                                    Spacer()
-                                }
-                            }.padding()
+                            }
                             
                         }else{
                             List {
@@ -114,20 +116,20 @@ struct TicketList: View {
                                     ($0.ticketTitle?.lowercased().contains(self.ticketSearchText.lowercased()))! ||
                                         $0.ticketNarration.lowercased().contains(self.ticketSearchText.lowercased()) ||
                                         self.ticketSearchText == ""}) { ticket in
-                                    Button(action: {
-                                        self.viewRouter.primaryKey = ticket.id!
-                                        self.viewRouter.currentPage = ViewRoutes.TICKET_VIEW
-                                    }) {
-                                        TicketRow(ticket: ticket)
-                                    }
+                                            Button(action: {
+                                                self.viewRouter.primaryKey = ticket.id!
+                                                self.viewRouter.currentPage = ViewRoutes.TICKET_VIEW
+                                            }) {
+                                                TicketRow(ticket: ticket)
+                                            }
                                 }
                             }
                         }
                     }.onAppear(){
                         if(!Connectivity.isConnectedToInternet()){
-                                   self.showInternetDown = true
-                               }
-                             
+                            self.showInternetDown = true
+                        }
+                        
                     }
                 }.frame(width: geometry.size.width, height: geometry.size.height-85, alignment: .top)
                     .padding()

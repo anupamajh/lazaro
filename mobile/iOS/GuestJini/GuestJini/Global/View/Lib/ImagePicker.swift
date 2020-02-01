@@ -62,7 +62,7 @@ struct ImagePickerView : UIViewControllerRepresentable {
             
             let image = Image(uiImage: uiImage)
             parentView.model.sourceImage = uiImage
-            parentView.model.sourceImageData = uiImage.jpegData(compressionQuality: 0.7)
+            parentView.model.sourceImageData = uiImage.jpegData(compressionQuality: 0.3)
             parentView.model.pickedImagesSubject?.send(image)
             parentView.model.isPresented = false
         }

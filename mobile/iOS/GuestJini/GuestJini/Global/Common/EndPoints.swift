@@ -16,7 +16,7 @@ class EndPoints{
     
     
     static var END_POINT_URL = "http://139.59.32.238:8000"
-    static var LOCAL_END_POINT_URL = "http://192.168.0.8:8006"
+    static var LOCAL_END_POINT_URL = "http://192.168.0.8:8010"
     static var AUTHORISATION_URL = END_POINT_URL + "/auth/oauth/token"
     static var CHECK_TOKEN_URL = END_POINT_URL + "/auth/oauth/check_token"
     static var FORGOT_PASSWORD = END_POINT_URL + "/public/api/reset-password"

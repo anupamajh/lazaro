@@ -15,6 +15,7 @@ struct GuestJiniErrorText: View {
             HStack{
             Text(message)
                 .font(Fonts.RobotRegular)
+                .lineLimit(200)
                 Spacer()
             }
         }.padding(.all, 10)

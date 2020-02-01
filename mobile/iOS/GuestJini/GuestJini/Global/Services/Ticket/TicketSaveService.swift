@@ -33,8 +33,15 @@ class TicketSaveService:ObservableObject{
                     .responseData { (response) in
                         let jsonDecoder = JSONDecoder()
                         do{
-                            let parsedData =  try jsonDecoder.decode(TicketResponse.self, from: response.data!)
-                            completionHandler(parsedData)
+                            if(response.data != nil){
+                                let parsedData =  try jsonDecoder.decode(TicketResponse.self, from: response.data!)
+                                completionHandler(parsedData)
+                            }else{
+                                let parsedData = TicketResponse()
+                                parsedData.error = "Unknow error has occrred"
+                                parsedData.success = false;
+                                completionHandler(parsedData)
+                            }
                         }catch{
                             let parsedData = TicketResponse()
                             parsedData.error = "Unknow error has occrred"

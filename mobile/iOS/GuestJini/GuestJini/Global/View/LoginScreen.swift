@@ -28,7 +28,7 @@ struct LoginScreen: View {
                 VStack{
                     HStack{
                         GuestJiniHeaderLarge()
-                            .frame(width: geometry.size.width, height: geometry.size.height * 0.30, alignment: .center)
+                            .frame(width: geometry.size.width, height: geometry.size.height * 0.35, alignment: .center)
                             .background(Color("veryLightPink"))
                     }
                     VStack(alignment:.leading){
