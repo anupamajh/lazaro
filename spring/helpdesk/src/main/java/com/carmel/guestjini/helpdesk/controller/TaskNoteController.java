@@ -39,7 +39,9 @@ public class TaskNoteController {
                 taskNote.setId("");
             }
             if (taskNote.getOrgId() == null || taskNote.getOrgId().isEmpty()) {
-                taskNote.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization()!=null) {
+                    taskNote.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             taskNote.setClientId(userInfo.getClient().getClientId());
             if (taskNote.getId().equals("")) {

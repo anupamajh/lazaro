@@ -61,7 +61,8 @@ public class TaskTicketController {
                 taskTicket.setId("");
             }
             if (taskTicket.getOrgId() == null || taskTicket.getOrgId().isEmpty()) {
-                taskTicket.setOrgId(userInfo.getDefaultOrganization().getId());
+                if (userInfo.getDefaultOrganization() != null)
+                    taskTicket.setOrgId(userInfo.getDefaultOrganization().getId());
             }
             taskTicket.setRequesterId(userInfo.getId());
             if (taskTicket.getId().equals("")) {
@@ -81,7 +82,7 @@ public class TaskTicketController {
             } else {
                 TaskTicket savedTicket = taskTicketService.save(taskTicket);
                 List<TaskAttachment> taskAttachmentList = new ArrayList<>();
-                for(TaskAttachment taskAttachment:ticketRequest.getTaskAttachmentList()){
+                for (TaskAttachment taskAttachment : ticketRequest.getTaskAttachmentList()) {
                     taskAttachment.setTicketId(savedTicket.getId());
                     taskAttachmentList.add(taskAttachmentService.save(taskAttachment));
                 }
@@ -318,7 +319,9 @@ public class TaskTicketController {
             scanStream.close();
             TaskAttachment taskAttachment = new TaskAttachment();
             taskAttachment.setClientId(userInfo.getClient().getClientId());
-            taskAttachment.setOrgId(userInfo.getDefaultOrganization().getId());
+            if (userInfo.getDefaultOrganization() != null) {
+                taskAttachment.setOrgId(userInfo.getDefaultOrganization().getId());
+            }
             taskAttachment.setType(file.getContentType());
             taskAttachment.setDocTitle(file.getOriginalFilename());
             taskAttachment.setPath(filePath);
