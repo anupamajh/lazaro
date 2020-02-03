@@ -17,4 +17,6 @@ public interface GroupPeopleService {
     List<GroupPeople> findByGroupIdAndHasAcceptedInvitation(String id, int isDeleted);
 
     List<GroupPeople> findAllByGroupIdAndHasAcceptedInvitationAndUserIdIsNot(String id, int isDeleted, String userId);
+
+    List<GroupPeople> findAllByGroupId(String id);
 }

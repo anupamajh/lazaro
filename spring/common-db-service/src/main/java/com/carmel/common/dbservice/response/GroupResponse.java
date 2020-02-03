@@ -1,6 +1,7 @@
 package com.carmel.common.dbservice.response;
 
 import com.carmel.common.dbservice.model.*;
+import com.carmel.common.dbservice.model.DTO.AddressBookDTO;
 import com.carmel.common.dbservice.model.DTO.GroupDTO;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.Optional;
 public class GroupResponse {
     private GroupDTO group;
     private List<GroupDTO> groupList;
-    private List<AddressBook> groupPeople;
+    private List<AddressBookDTO> groupPeople;
     private long totalPages;
     private long totalRecords;
     private long currentRecords;
@@ -112,11 +113,11 @@ public class GroupResponse {
         });
     }
 
-    public List<AddressBook> getGroupPeople() {
+    public List<AddressBookDTO> getGroupPeople() {
         return groupPeople;
     }
 
-    public void setGroupPeople(List<AddressBook> groupPeople) {
+    public void setGroupPeople(List<AddressBookDTO> groupPeople) {
         this.groupPeople = groupPeople;
     }
 }

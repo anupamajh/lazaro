@@ -43,4 +43,9 @@ public class GroupPeopleServiceImpl implements GroupPeopleService {
     public List<GroupPeople> findAllByGroupIdAndHasAcceptedInvitationAndUserIdIsNot(String id, int isDeleted, String userId) {
         return groupPeopleRepository.findAllByGroupIdAndHasAcceptedInvitationAndUserIdIsNot(id, isDeleted, userId);
     }
+
+    @Override
+    public List<GroupPeople> findAllByGroupId(String id) {
+        return groupPeopleRepository.findAllByGroupId(id);
+    }
 }

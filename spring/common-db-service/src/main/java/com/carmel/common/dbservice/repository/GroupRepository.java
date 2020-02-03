@@ -24,4 +24,8 @@ public interface GroupRepository extends JpaRepository<Group, String> {
     Page<Group> findAllByClientIdAndIsDeleted(String clientId, int isDeleted, Pageable pageable);
 
     List<Group> findAllByClientIdAndIsDeletedAndGroupType(String clientId, int isDeleted, int groupType);
+
+    List<Group> findAllByClientIdAndIsDeletedAndGroupTypeAndGroupOwnerId(String clientId, int isDeleted, int groupType, String userId);
+
+    List<Group> findAllByClientIdAndIsDeletedAndGroupTypeAndGroupOwnerIdIsNot(String clientId, int isDeleted, int groupType, String userId);
 }

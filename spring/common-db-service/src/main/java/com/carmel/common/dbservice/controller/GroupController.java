@@ -4,6 +4,7 @@ package com.carmel.common.dbservice.controller;
 import com.carmel.common.dbservice.common.GroupType;
 import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.*;
+import com.carmel.common.dbservice.model.DTO.AddressBookDTO;
 import com.carmel.common.dbservice.model.DTO.GroupDTO;
 import com.carmel.common.dbservice.response.GroupResponse;
 import com.carmel.common.dbservice.services.*;
@@ -59,14 +60,10 @@ public class GroupController {
             if (group.getId() == null) {
                 group.setId("");
             }
-            if (group.getOrgId() == null || group.getOrgId().isEmpty()) {
-                group.setOrgId(userInfo.getDefaultOrganization().getId());
-            }
             if (group.getId().equals("")) {
                 group.setCreatedBy(userInfo.getId());
                 group.setCreationTime(new Date());
                 group.setGroupOwnerId(userInfo.getId());
-                group.setGroupType(GroupType.GROUP_TYPE_USER_GENERATED);
             } else {
                 group.setLastModifiedBy(userInfo.getId());
                 group.setLastModifiedTime(new Date());
@@ -77,7 +74,18 @@ public class GroupController {
                 groupResponse.setSuccess(false);
                 groupResponse.setError("Duplicate Group name!");
             } else {
-                groupResponse.setGroup(groupService.save(group));
+                Group savedGroup = groupService.save(group);
+                if (group.getId().equals("")) {
+                    GroupPeople groupPeople = new GroupPeople();
+                    groupPeople.setCreatedBy(userInfo.getId());
+                    groupPeople.setCreationTime(new Date());
+                    groupPeople.setUserId(userInfo.getId());
+                    groupPeople.setGroupId(savedGroup.getId());
+                    groupPeople.setHasAcceptedInvitation(1);
+                    groupPeople.setClientId(userInfo.getClient().getClientId());
+                    groupPeople = groupPeopleService.save(groupPeople);
+                }
+                groupResponse.setGroup(savedGroup);
                 groupResponse.setSuccess(true);
                 groupResponse.setError("");
             }
@@ -126,7 +134,13 @@ public class GroupController {
         logger.trace("Entering");
         GroupResponse groupResponse = new GroupResponse();
         try {
-            GroupPeople groupPeople = new GroupPeople();
+            GroupPeople groupPeople;
+            Optional<GroupPeople> optionalGroupPeople = groupPeopleService.findByUserIdAndGroupId(userInfo.getId(), formData.get("groupId"));
+            if(optionalGroupPeople.isPresent()){
+                groupPeople = optionalGroupPeople.get();
+            }else{
+                groupPeople = new GroupPeople();
+            }
             groupPeople.setCreatedBy(userInfo.getId());
             groupPeople.setCreationTime(new Date());
             groupPeople.setUserId(userInfo.getId());
@@ -154,30 +168,76 @@ public class GroupController {
         GroupResponse groupResponse = new GroupResponse();
         try {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
-            Optional<Group> optionalInterest = groupService.findById(formData.get("id"));
-            if (optionalInterest.isPresent()) {
-                Group group = optionalInterest.get();
+            Optional<Group> optionalGroup = groupService.findById(formData.get("id"));
+            if (optionalGroup.isPresent()) {
+
+                Group group = optionalGroup.get();
+                int inputGroupType = group.getGroupType();
+                if(group.getGroupOwnerId() != null) {
+                    if (group.getGroupOwnerId().equals(userInfo.getId())) {
+                        inputGroupType = 3;
+                    }
+                }
                 GroupDTO groupDTO = new GroupDTO(group);
                 if (group.getInterestCategoryId() != null && !group.getInterestCategoryId().equals("")) {
                     Optional<InterestCategory> optionalInterestCategory = interestCategoryService.findById(group.getInterestCategoryId());
                     optionalInterestCategory.ifPresent(interestCategory -> groupDTO.setInterestCategoryName(interestCategory.getName()));
                 }
-                List<GroupPeople> groupPeopleList = groupPeopleService.findAllByGroupIdAndHasAcceptedInvitationAndUserIdIsNot(group.getId(), 1, userInfo.getId());
+
+                List<AddressBook> addressBookList = addressBookService.findAllByIsDeleted(0);
+                List<GroupPeople> allGroupPeople = groupPeopleService.findAllByGroupId(formData.get("id"));
+                List<GroupPeople> groupPeopleList = groupPeopleService
+                        .findAllByGroupIdAndHasAcceptedInvitationAndUserIdIsNot(group.getId(), 1, userInfo.getId());
+                List<AddressBookDTO> addressBookDTOS = new ArrayList<>();
+
+                if (inputGroupType == 3) {
+                    addressBookList.forEach(addressBook -> {
+                        Optional<GroupPeople> optionalGroupPeople
+                                = allGroupPeople.stream()
+                                .filter(
+                                        gp -> gp.getUserId()
+                                                .equals(addressBook.getUserId())
+                                ).findFirst();
+                        AddressBookDTO addressBookDTO = new AddressBookDTO(addressBook);
+                        if (optionalGroupPeople.isPresent()) {
+                            addressBookDTO.setIsInvited(1);
+                            addressBookDTO.setHasAcceptedInvitation(optionalGroupPeople.get().getHasAcceptedInvitation());
+                            if(addressBookDTO.getUserId().equals(userInfo.getId())){
+                                addressBookDTO.setIsMe(1);
+                            }else{
+                                addressBookDTO.setIsMe(0);
+                            }
+                        } else {
+                            addressBookDTO.setIsInvited(0);
+                        }
+                        addressBookDTOS.add(addressBookDTO);
+                    });
+                } else {
+                    groupPeopleList.forEach(groupPeople -> {
+                        Optional<AddressBook> optionalAddressBook = addressBookService.findByUserId(groupPeople.getUserId());
+                        if (optionalAddressBook.isPresent()) {
+                            AddressBook addressBook = optionalAddressBook.get();
+                            addressBook.setCreationTime(groupPeople.getCreationTime());
+                            addressBookDTOS.add(new AddressBookDTO(addressBook));
+                        }
+                    });
+
+                }
+
                 Optional<GroupPeople> optionalGroupPeople = groupPeopleService.findByUserIdAndGroupId(userInfo.getId(), group.getId());
                 if (optionalGroupPeople.isPresent()) {
-                    groupDTO.setIsSubscribed(1);
-                    groupDTO.setSubscribedDate(optionalGroupPeople.get().getCreationTime());
-                }
-                List<AddressBook> addressBookList = new ArrayList<>();
-                groupPeopleList.forEach(groupPeople -> {
-                    Optional<AddressBook> optionalAddressBook = addressBookService.findByUserId(groupPeople.getUserId());
-                    if (optionalAddressBook.isPresent()) {
-                        AddressBook addressBook = optionalAddressBook.get();
-                        addressBook.setCreationTime(groupPeople.getCreationTime());
-                        addressBookList.add(addressBook);
+                    if(optionalGroupPeople.get().getHasAcceptedInvitation() == 1) {
+                        groupDTO.setIsSubscribed(1);
+                    }else{
+                        groupDTO.setIsSubscribed(0);
                     }
-                });
-                groupResponse.setGroupPeople(addressBookList);
+                    groupDTO.setIsInvited(1);
+                    groupDTO.setSubscribedDate(optionalGroupPeople.get().getCreationTime());
+                }else{
+                    groupDTO.setIsInvited(0);
+                }
+
+                groupResponse.setGroupPeople(addressBookDTOS);
                 groupResponse.setGroupDTO(groupDTO);
                 groupResponse.setSuccess(true);
                 groupResponse.setError("");
@@ -195,7 +255,33 @@ public class GroupController {
         return groupResponse;
     }
 
-    @RequestMapping(value = "/get-deleted", method = RequestMethod.POST)
+    @RequestMapping(value = "/invite", method = RequestMethod.POST)
+    public GroupResponse inviteToGroup(@RequestBody Map<String, String> formData){
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        GroupResponse groupResponse = new GroupResponse();
+        try {
+            GroupPeople groupPeople = new GroupPeople();
+            groupPeople.setCreatedBy(userInfo.getId());
+            groupPeople.setCreationTime(new Date());
+            groupPeople.setUserId(formData.get("userId"));
+            groupPeople.setGroupId(formData.get("groupId"));
+            groupPeople.setHasAcceptedInvitation(0);
+            groupPeople.setClientId(userInfo.getClient().getClientId());
+            groupPeople = groupPeopleService.save(groupPeople);
+            groupResponse.setSuccess(true);
+            groupResponse.setError("");
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            groupResponse.setSuccess(false);
+            groupResponse.setError(ex.getMessage());
+        }
+        return groupResponse;
+    }
+
+   @RequestMapping(value = "/get-deleted", method = RequestMethod.POST)
     public GroupResponse getDeleted() {
         UserInfo userInfo = userInformation.getUserInfo();
         logger.trace("Entering");
@@ -240,22 +326,52 @@ public class GroupController {
         logger.trace("Entering");
         GroupResponse groupResponse = new GroupResponse();
         try {
+            int inputGroupType = Integer.parseInt(formData.get("groupType"));
+            int groupType = 1;
+            if (inputGroupType > 1) {
+                groupType = 2;
+            }
             List<InterestCategory> interestCategoryList =
                     interestCategoryService
                             .findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(), 0);
             List<GroupPeople> groupPeopleList = groupPeopleService.findByUserId(userInfo.getId());
             List<UserInterests> userInterests = userInterestsService.findByUserId(userInfo.getId());
-
-                    groupResponse.setGroupListWithInterestCategory(groupService
-                            .findAllByClientIdAndIsDeletedAndGroupType(
-                                    userInfo.getClient().getClientId(),
-                                    0,
-                                    Integer.parseInt(formData.get("groupType"))
-                            ),
-                    interestCategoryList,
-                    groupPeopleList,
-                            userInterests
-            );
+            if (inputGroupType == 1) {
+                groupResponse.setGroupListWithInterestCategory(groupService
+                                .findAllByClientIdAndIsDeletedAndGroupType(
+                                        userInfo.getClient().getClientId(),
+                                        0,
+                                        groupType
+                                ),
+                        interestCategoryList,
+                        groupPeopleList,
+                        userInterests
+                );
+            } else if (inputGroupType == 2) {
+                groupResponse.setGroupListWithInterestCategory(groupService
+                                .findAllByClientIdAndIsDeletedAndGroupTypeAndGroupOwnerIdIsNot(
+                                        userInfo.getClient().getClientId(),
+                                        0,
+                                        groupType,
+                                        userInfo.getId()
+                                ),
+                        interestCategoryList,
+                        groupPeopleList,
+                        userInterests
+                );
+            } else if (inputGroupType == 3) {
+                groupResponse.setGroupListWithInterestCategory(groupService
+                                .findAllByClientIdAndIsDeletedAndGroupTypeAndGroupOwnerId(
+                                        userInfo.getClient().getClientId(),
+                                        0,
+                                        groupType,
+                                        userInfo.getId()
+                                ),
+                        interestCategoryList,
+                        groupPeopleList,
+                        userInterests
+                );
+            }
             groupResponse.setSuccess(true);
             groupResponse.setError("");
             logger.trace("Completed Successfully");

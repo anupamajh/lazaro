@@ -61,4 +61,15 @@ public class GroupServiceImpl implements GroupService {
     public List<Group> findAllByClientIdAndIsDeletedAndGroupType(String clientId, int isDeleted, int groupType) {
         return groupRepository.findAllByClientIdAndIsDeletedAndGroupType(clientId, isDeleted, groupType);
     }
+
+    @Override
+    public List<Group> findAllByClientIdAndIsDeletedAndGroupTypeAndGroupOwnerId(String clientId, int isDeleted, int groupType, String userId) {
+        return groupRepository.findAllByClientIdAndIsDeletedAndGroupTypeAndGroupOwnerId(clientId, isDeleted, groupType, userId);
+    }
+
+    @Override
+    public List<Group> findAllByClientIdAndIsDeletedAndGroupTypeAndGroupOwnerIdIsNot(String clientId, int isDeleted, int groupType, String userId) {
+        return groupRepository.findAllByClientIdAndIsDeletedAndGroupTypeAndGroupOwnerIdIsNot(clientId, isDeleted, groupType, userId);
+    }
+
 }

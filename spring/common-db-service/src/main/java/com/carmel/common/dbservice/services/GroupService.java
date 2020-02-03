@@ -26,4 +26,8 @@ public interface GroupService {
     Page<Group> findAll(Specification<Group> textInAllColumns, Pageable pageable);
 
     List<Group> findAllByClientIdAndIsDeletedAndGroupType(String clientId, int isDeleted, int groupType);
+
+    List<Group> findAllByClientIdAndIsDeletedAndGroupTypeAndGroupOwnerId(String clientId, int isDeleted, int groupType, String userId);
+
+    List<Group> findAllByClientIdAndIsDeletedAndGroupTypeAndGroupOwnerIdIsNot(String clientId, int isDeleted, int groupType, String userId);
 }
