@@ -31,29 +31,47 @@ struct GroupList: View {
                         }.padding(.horizontal)
                         GuestJiniTitleText(title: "GROUPS")
                         Spacer()
+                        if(self.viewRouter.groupType == GroupTypes.GROUP_TYPE_MY_GENERATED){
+                            Button(action:{
+                                self.viewRouter.currentPage = ViewRoutes.GROUP_CREATE_PAGE
+                            }){
+                                GuestJiniRoundButtonSystemImage(systemImage: "plus")
+                            }
+                        }
                     }.padding()
-                    
                     if(self.groupListService.fetchComplete == true){
                         ScrollView{
-                            ForEach(self.groupListService.groupResponse.groupList!){ group in
-                                VStack{
-                                    Button(action:{
-                                        if(group.isSubscribed != 1){
-                                            self.viewRouter.primaryKey = group.id!
-                                            self.viewRouter.currentPage = ViewRoutes.GROUP_DETAIL_PAGE
-                                        }else{
-                                            self.viewRouter.primaryKey = group.id!
-                                            self.viewRouter.currentPage = ViewRoutes.GROUP_CONVERSATION_PAGE
-                                        }
-                                    }){
-                                        GroupListSubscribedCard(
-                                            groupCategory:group.interestCategoryName!,
-                                            title: group.name!,
-                                            description: group.description!
-                                        )
-                                    }
+                            if(self.groupListService.groupResponse.groupList!.count == 0){
+                                if(self.viewRouter.groupType == 3){
+                                    VStack{
+                                        HStack{
+                                            Text("EMPTY! You have not created any groups yet.")
+                                                .foregroundColor(Color("greyishBrownThree"))
+                                                .font(Fonts.RobotRegular)
+                                            .bold()
+                                            Spacer()
+                                            
+                                        }.padding()
+                                        .background(Color("whiteThree"))
+                                    }.padding()
+                                }else{
+                                    VStack{
+                                        HStack{
+                                            Text("EMPTY! There are no groups yet.")
+                                                .foregroundColor(Color("greyishBrownThree"))
+                                                .font(Fonts.RobotRegular)
+                                            .bold()
+                                            Spacer()
+                                            
+                                        }.padding()
+                                        .background(Color("whiteThree"))
+                                    }.padding()
                                 }
-                                
+                            }else{
+                                ForEach(self.groupListService.groupResponse.groupList!){ group in
+                                    
+                                    GroupListRow(viewRouter: self.viewRouter, group: group)
+                                }
                             }
                         }
                     }else{
@@ -65,6 +83,83 @@ struct GroupList: View {
                 GuestJiniBottomBar(viewRouter: self.viewRouter)
             }.frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
                 .edgesIgnoringSafeArea(.vertical)
+        }
+    }
+}
+
+struct GroupListRow: View{
+    @ObservedObject var viewRouter: ViewRouter
+    var group:GroupModel
+    
+    var body: some View {
+        VStack{
+            Button(action:{
+                if(self.group.isSubscribed != 1){
+                    self.viewRouter.primaryKey = self.group.id!
+                    self.viewRouter.currentPage = ViewRoutes.GROUP_DETAIL_PAGE
+                    self.viewRouter.returnPage = ViewRoutes.GROUP_LIST_PAGE
+                }else{
+                    self.viewRouter.primaryKey = self.group.id!
+                    self.viewRouter.currentPage = ViewRoutes.GROUP_CONVERSATION_PAGE
+                    self.viewRouter.returnPage = ViewRoutes.GROUP_LIST_PAGE
+                }
+            }){
+                if(self.viewRouter.groupType  == 1){
+                    if(self.group.isMatchingInterest == 1 && self.group.isSubscribed != 1){
+                        GroupListMatchingGroupCard(
+                            groupCategory:self.group.interestCategoryName!,
+                            title: group.name!,
+                            description: group.description!
+                        )
+                    }
+                    
+                    if(self.group.isMatchingInterest != 1 && self.group.isSubscribed != 1){
+                        GroupListGroupCard(
+                            groupCategory:self.group.interestCategoryName!,
+                            title: group.name!,
+                            description: group.description!
+                        )
+                    }
+                    
+                    if(self.group.isSubscribed == 1){
+                        GroupListSubscribedCard(
+                            groupCategory:self.group.interestCategoryName!,
+                            title: group.name!,
+                            description: group.description!
+                        )
+                    }
+                    
+                    
+                }else if(self.viewRouter.groupType  == 2){
+                    if(self.group.isSubscribed == 1){
+                        GroupListSubscribedCard(
+                            groupCategory:"",
+                            title: group.name!,
+                            description: group.description!
+                        )
+                    }else{
+                        if(self.group.cardType == 2){
+                            GroupListInvitedGroupCard(
+                                groupCategory:"",
+                                title: group.name!,
+                                description: group.description!
+                            )
+                        }else{
+                            GroupListGroupCard(
+                                groupCategory:"",
+                                title: group.name!,
+                                description: group.description!
+                            )
+                        }
+                    }
+                }else if(self.viewRouter.groupType  == 3){
+                    GroupListSubscribedCard(
+                        groupCategory:"",
+                        title: group.name!,
+                        description: group.description!
+                    )
+                }
+            }
         }
     }
 }
@@ -158,7 +253,7 @@ struct GroupListGroupCard: View {
                 }.padding()
             }.background(Color("whiteThree"))
                 .shadow(radius: 10)
-        }.padding(.all, 25)
+        }.padding(.all)
     }
     
 }
@@ -237,7 +332,7 @@ struct GroupListMatchingGroupCard: View {
                     .shadow(radius: 10)
                 
             }
-        }.padding(.all, 25)
+        }.padding(.all)
     }
     
 }
@@ -289,7 +384,87 @@ struct GroupLisGroupCardWithInformation: View {
                     .shadow(radius: 10)
                 
             }
-        }.padding(.all, 25)
+        }.padding(.all)
+    }
+    
+}
+
+struct GroupListInvitedGroupCard: View {
+    var groupCategory:String = ""
+    var title:String = ""
+    var description:String = ""
+    var body: some View {
+        VStack{
+            HStack{
+                VStack{
+                    HStack{
+                        VStack{
+                            HStack{
+                                Text(self.groupCategory)
+                                    .font(Fonts.RobotRegular)
+                                    .bold()
+                                    .foregroundColor(Color("brownishGrey"))
+                                Spacer()
+                            }.padding(.leading)
+                                .padding(.top, 5)
+                            HStack{
+                                Text(self.title)
+                                    .font(Fonts.RobotButtonFont)
+                                    .bold()
+                                    .foregroundColor(Color("brownishGrey"))
+                                Spacer()
+                            }.padding(.leading)
+                                .padding(.top, 5)
+                            HStack{
+                                Text(self.description)
+                                    .font(Fonts.RobotRegularSmallText)
+                                    .bold()
+                                    .foregroundColor(Color("brownishGrey"))
+                                    .multilineTextAlignment(.leading)
+                                Spacer()
+                            }.padding()
+                        }
+                        VStack{
+                            Button(action:{
+                                
+                            }){
+                                GuestJiniButtonSystemImagePlain(imageName: "info.circle")
+                            }
+                        }.padding()
+                    }
+                    VStack{
+                        HStack{
+                            
+                            
+                            VStack{
+                                Divider()
+                                HStack{
+                                    Text("You have been invited to this group.")
+                                        .font(Fonts.RobotRegularSmallText)
+                                        .foregroundColor(Color("brownGrey"))
+                                    Spacer()
+                                }
+                            }.padding(.horizontal)
+                            Spacer()
+                            VStack{
+                                Image(systemName: "info")
+                                    .resizable()
+                                    .padding(.all,3)
+                            }.frame(width: 20, height: 20, alignment: .center)
+                                .foregroundColor(Color.white)
+                                .background(Color("bland"))
+                                .clipped()
+                                .clipShape(Circle())
+                                .shadow(radius: 5)
+                        }.padding()
+                        
+                    }
+                    
+                }.background(Color("whiteThree"))
+                    .shadow(radius: 10)
+                
+            }
+        }.padding(.all)
     }
     
 }

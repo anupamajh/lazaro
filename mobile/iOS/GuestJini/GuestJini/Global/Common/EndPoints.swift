@@ -16,7 +16,7 @@ class EndPoints{
     
     
     static var END_POINT_URL = "http://139.59.32.238:8000"
-    static var LOCAL_END_POINT_URL = "http://192.168.0.8:8010"
+    static var LOCAL_END_POINT_URL = "http://192.168.1.7:8006"
     static var AUTHORISATION_URL = END_POINT_URL + "/auth/oauth/token"
     static var CHECK_TOKEN_URL = END_POINT_URL + "/auth/oauth/check_token"
     static var FORGOT_PASSWORD = END_POINT_URL + "/public/api/reset-password"
@@ -40,6 +40,8 @@ class EndPoints{
     
     static var GET_GROUP_LIST_BY_TYPE = END_POINT_URL + "/common/groups/get-all-by-type"
     static var GET_GROUP_DETAILS = END_POINT_URL + "/common/groups/get"
+    static var INVITE_TO_GROUP = END_POINT_URL + "/common/groups/invite"
+    static var SAVE_GROUP = END_POINT_URL + "/common/groups/save"
     static var SUBSCRIBE_TO_GROUP = END_POINT_URL + "/common/groups/subscribe"
     static var SAVE_GROUP_CONVERSATION = END_POINT_URL + "/common/group-conversation/save"
     static var GET_GROUP_CONVERSATION = END_POINT_URL + "/common/group-conversation/get-by-group"

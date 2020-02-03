@@ -12,14 +12,17 @@ struct GroupDetailPage: View {
     @ObservedObject var viewRouter: ViewRouter
     @ObservedObject var groupDetailService:GroupDetailService
     @ObservedObject var groupSubscribeService:GroupSubscribeService
-    
+    @ObservedObject var  groupInviteService:GroupInviteService
     @State var message:String = ""
     @State var shouldAnimate:Bool = false
-    
-    init(viewRouter: ViewRouter){
+     
+     @State var shoudIgnore:Bool = false
+      
+     init(viewRouter: ViewRouter){
         self.viewRouter = viewRouter
         self.groupDetailService = GroupDetailService(viewRouter: viewRouter, groupId: viewRouter.primaryKey)
         self.groupSubscribeService = GroupSubscribeService(viewRouter: viewRouter)
+        self.groupInviteService = GroupInviteService(viewRouter: viewRouter)
         UITableView.appearance().separatorStyle = .none
     }
     
@@ -29,7 +32,7 @@ struct GroupDetailPage: View {
                 VStack{
                     HStack{
                         Button(action: {
-                            self.viewRouter.currentPage = ViewRoutes.GROUP_CONVERSATION_PAGE
+                            self.viewRouter.currentPage = self.viewRouter.returnPage
                         }) {
                             GuestJiniButtonSystemImagePlain(imageName: "arrow.left")
                             
@@ -74,7 +77,7 @@ struct GroupDetailPage: View {
                                             }
                                         }
                                         Spacer()
-                                        if(self.groupDetailService.fetchComplete && self.groupDetailService.group.isSubscribed != 1){
+                                        if(self.groupDetailService.fetchComplete && self.groupDetailService.group.isSubscribed != 1 && self.groupDetailService.group.groupType == 1){
                                             Button(action:{
                                                 self.shouldAnimate = true
                                                 self.groupSubscribeService.subscribe(groupId: self.viewRouter.primaryKey) { (response) in
@@ -139,6 +142,67 @@ struct GroupDetailPage: View {
                                                 }
                                             }
                                         }.padding()
+                                        VStack{
+                                            if(self.groupDetailService.group.isInvited == 1 && self.groupDetailService.group.isSubscribed != 1  && self.shoudIgnore == false ){
+                                                VStack{
+                                                    HStack{
+                                                        Text("Yes, I want to join the group.")
+                                                            .font(Fonts.RobotRegular)
+                                                            .bold()
+                                                            .foregroundColor(Color("greyishBrownFour"))
+                                                        Spacer()
+                                                    }
+                                                    HStack{
+                                                        Text("You can see and participate in the conversation.")
+                                                        .font(Fonts.RobotRegularSmallText)
+                                                        .foregroundColor(Color("warmGreyTwo"))
+                                                        Spacer()
+                                                    }
+                                                    HStack{
+                                                        Button(action:{
+                                                            self.shouldAnimate = true
+                                                            self.groupSubscribeService.subscribe(groupId: self.viewRouter.primaryKey) { (response) in
+                                                                self.shouldAnimate = false;
+                                                                self.groupDetailService.fetchComplete = false
+                                                                self.groupDetailService.group.isSubscribed = 1
+                                                                self.groupDetailService.reload(groupId: self.viewRouter.primaryKey)
+                                                                
+                                                            }
+                                                        }){
+                                                            GuestJiniButtonText(buttonText: "JOIN THE CONVERSATION")
+                                                        }
+                                                        Spacer()
+                                                    }.padding(.vertical)
+                                                    
+                                                }.padding()
+                                                
+                                                VStack{
+                                                    HStack{
+                                                        Text("No, I will decide later.")
+                                                            .font(Fonts.RobotRegular)
+                                                            .bold()
+                                                            .foregroundColor(Color("greyishBrownFour"))
+                                                        Spacer()
+                                                    }
+                                                    HStack{
+                                                        Text("You will not be able to see and participate in the conversation.")
+                                                            .font(Fonts.RobotRegularSmallText)
+                                                            .foregroundColor(Color("warmGreyTwo"))
+                                                        Spacer()
+                                                    }
+                                                    HStack{
+                                                        Button(action:{
+                                                            self.shoudIgnore = true
+                                                            self.groupDetailService.group.isInvited = 0
+                                                        }){
+                                                            GuestJiniRedButtonText(buttonText: "IGNORE")
+                                                        }
+                                                        Spacer()
+                                                    }.padding(.vertical)
+                                                }.padding()
+                                                
+                                            }
+                                        }
                                     }.background(Color("whiteThree"))
                                     VStack{
                                         HStack{
@@ -166,18 +230,29 @@ struct GroupDetailPage: View {
                                         }
                                         if(self.groupDetailService.fetchComplete && self.groupDetailService.group.isSubscribed == 1){
                                             GroupDetailPeopleCard(
+                                                groupInviteService: self.groupInviteService,
                                                 name: "YOU",
                                                 joinedDate: self.groupDetailService.group.subscribedDate!.convetToDateFromMySQLUTC(),
-                                                imageURL: ""
+                                                imageURL: "",
+                                                isInvited: 1,
+                                                hasAcceptedInvitation: 1
                                             )
                                         }
                                         if(self.groupDetailService.fetchComplete == true){
                                             ForEach(self.groupDetailService.groupResponse.groupPeople!){ people in
-                                                GroupDetailPeopleCard(
-                                                    name: people.displayName!,
-                                                    joinedDate: people.creationTime!.convetToDateFromMySQLUTC(),
-                                                    imageURL: (people.logoPath == nil) ? "" : people.logoPath!
-                                                )
+                                                if(people.isMe != 1){
+                                                    GroupDetailPeopleCard(
+                                                        groupInviteService: self.groupInviteService,
+                                                        name: people.displayName!,
+                                                        joinedDate: (people.creationTime == nil) ? "" : people.creationTime!.convetToDateFromMySQLUTC(),
+                                                        imageURL: (people.logoPath == nil) ? "" : people.logoPath!,
+                                                        groupType: self.viewRouter.groupType,
+                                                        isInvited: people.isInvited!,
+                                                        hasAcceptedInvitation: people.hasAcceptedInvitation!,
+                                                        groupId: self.viewRouter.primaryKey,
+                                                        userId: people.userId!
+                                                    )
+                                                }
                                             }
                                         }
                                         
@@ -201,9 +276,19 @@ struct GroupDetailPage: View {
 }
 
 struct GroupDetailPeopleCard:View{
+    var groupInviteService:GroupInviteService
     var name:String = ""
     var joinedDate:String  = ""
     var imageURL:String  = ""
+    var groupType:Int  = 0
+    @State var isInvited:Int  = 0
+   @State var hasAcceptedInvitation:Int  = 0
+    var groupId:String = ""
+    var userId: String = ""
+    
+    @State var showInvitaionProgress:Bool = false
+    @State var isRequestSuccessfull:Bool = false
+    
     var body: some View {
         VStack{
             HStack{
@@ -222,20 +307,57 @@ struct GroupDetailPeopleCard:View{
                 }
                 VStack{
                     HStack{
-                        Text(self.name)
-                            .font(Fonts.RobotRegular)
-                            .bold()
-                            .foregroundColor(Color("brownishGrey"))
-                        Spacer()
+                        VStack{
+                            HStack{
+                                Text(self.name)
+                                    .font(Fonts.RobotRegular)
+                                    .bold()
+                                    .foregroundColor(Color("brownishGrey"))
+                                Spacer()
+                            }
+                            HStack{
+                                if(self.joinedDate.trimmingCharacters(in: .whitespacesAndNewlines)  != ""){
+                                Text("Since \(self.joinedDate)")
+                                    .font(Fonts.RobotRegularSmallText)
+                                    .foregroundColor(Color("brownGrey"))
+                                }
+                                Spacer()
+                            }
+                        }
+                       
                     }
-                    HStack{
-                        Text("Since \(self.joinedDate)")
-                            .font(Fonts.RobotRegularSmallText)
-                            .foregroundColor(Color("brownGrey"))
-                        Spacer()
-                    }
-                    
                 }
+                if(groupType == 3){
+                    if(self.isInvited == 0 && self.hasAcceptedInvitation == 0){
+                        VStack{
+                            if(self.showInvitaionProgress){
+                                ActivityIndicator(shouldAnimate: .constant(true), style: .medium)
+                            }
+                            if(self.isRequestSuccessfull == false){
+                                Button(action:{
+                                    self.showInvitaionProgress = true
+                                    self.groupInviteService.inviteTogroup(groupId: self.groupId, userId: self.userId)
+                                    { (response) in
+                                        self.showInvitaionProgress = false
+                                        if(response.success){
+                                            self.isRequestSuccessfull = true
+                                            self.isInvited = 1
+                                            self.hasAcceptedInvitation = 0
+                                        }else{
+                                            self.isRequestSuccessfull = false
+                                        }
+                                    }
+                                }){
+                                    GuestJiniButtonText(buttonText: "INVITE")
+                                }
+                            }
+                        }
+                    }
+                    else if(self.isInvited == 1 && self.hasAcceptedInvitation == 0){
+                        GuestJiniButtonText(buttonText: "INVITED")
+                    }
+                }
+                
             }
             VStack{
                 Divider()

@@ -80,6 +80,7 @@ struct GroupConversationPage: View {
                                     Button(action:{
                                         self.viewRouter.primaryKey = self.viewRouter.primaryKey
                                         self.viewRouter.currentPage = ViewRoutes.GROUP_DETAIL_PAGE
+                                        self.viewRouter.returnPage = ViewRoutes.GROUP_CONVERSATION_PAGE
                                     }){
                                         GuestJiniRoundButtonSystemImage(systemImage: "info")
                                     }

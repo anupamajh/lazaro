@@ -28,7 +28,7 @@ struct PeopleListPage: View {
                 VStack{
                     HStack{
                         Button(action: {
-                            self.viewRouter.currentPage = ViewRoutes.GROUP_LANDING_PAGE
+                            self.viewRouter.currentPage = ViewRoutes.COMMUNIT_LANDING_PAGE
                         }) {
                             GuestJiniButtonSystemImagePlain(imageName: "arrow.left")
                             

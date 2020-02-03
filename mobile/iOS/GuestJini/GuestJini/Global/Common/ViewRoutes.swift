@@ -38,6 +38,7 @@ class ViewRoutes {
     static var GROUP_LIST_PAGE = "group_list_page"
     static var GROUP_DETAIL_PAGE = "group_detail_page"
     static var GROUP_CONVERSATION_PAGE = "group_conversation_page"
+    static var GROUP_CREATE_PAGE = "group_create_page"
 
     
 }

@@ -67,6 +67,8 @@ struct ContentView: View {
                 GroupConversationPage(viewRouter: viewRouter)
             }else if viewRouter.currentPage ==  ViewRoutes.CHANGE_PASSWORD_PAGE {
                 ChangePasswordPage(viewRouter: viewRouter)
+            }else if viewRouter.currentPage ==  ViewRoutes.GROUP_CREATE_PAGE {
+                CreateGroup(viewRouter: viewRouter)
             }
         }
         
