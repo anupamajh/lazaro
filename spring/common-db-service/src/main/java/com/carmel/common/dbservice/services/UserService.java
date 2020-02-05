@@ -26,4 +26,6 @@ public interface UserService {
     Page<User> findAllByClient(Pageable pageable, Client client);
 
     Page<User> findAll(Specification<User> textInAllColumns, Pageable pageable);
+
+    List<User> findAllByIdIn(List<String> userIds);
 }

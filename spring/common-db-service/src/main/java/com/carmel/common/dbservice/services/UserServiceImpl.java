@@ -58,5 +58,8 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll(textInAllColumns, pageable);
     }
 
-
+    @Override
+    public List<User> findAllByIdIn(List<String> userIds) {
+        return userRepository.findAllByIdIn(userIds);
+    }
 }

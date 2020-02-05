@@ -382,4 +382,22 @@ public class UserController {
         }
         return genericResponse;
     }
+
+    @RequestMapping(value = "/find-users-in")
+    public UsersResponse findUsersIn(@RequestBody List<String> userIds) {
+        UsersResponse usersResponse = new UsersResponse();
+        try {
+
+            List<User> userList = userService.findAllByIdIn(userIds);
+            usersResponse.setUserList(userList);
+            usersResponse.setSuccess(true);
+            usersResponse.setError("");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            usersResponse.setSuccess(false);
+            usersResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return usersResponse;
+    }
 }

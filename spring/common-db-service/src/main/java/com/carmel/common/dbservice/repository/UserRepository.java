@@ -23,4 +23,6 @@ public interface UserRepository extends JpaRepository<User, String> {
     Page<User> findAllByIsDeletedAndClient(int isDeleted, Client client, Pageable pageable);
 
     Page<User> findAll(Specification<User> textInAllColumns, Pageable pageable);
+
+    List<User> findAllByIdIn(List<String> userIds);
 }
