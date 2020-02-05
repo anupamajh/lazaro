@@ -18,6 +18,8 @@ public class TaskNoteDTO {
     private Date lastModifiedTime;
     private int isDeleted;
     private String deletedBy;
+    private String userName;
+
 
     public TaskNoteDTO() {
     }
@@ -141,5 +143,13 @@ public class TaskNoteDTO {
 
     public void setDeletedBy(String deletedBy) {
         this.deletedBy = deletedBy;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

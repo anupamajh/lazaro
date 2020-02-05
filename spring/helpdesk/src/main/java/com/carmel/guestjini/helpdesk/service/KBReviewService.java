@@ -1,6 +1,5 @@
 package com.carmel.guestjini.helpdesk.service;
 
-import com.carmel.guestjini.helpdesk.model.KB;
 import com.carmel.guestjini.helpdesk.model.KBReview;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

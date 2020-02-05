@@ -1,42 +1,32 @@
 package com.carmel.guestjini.helpdesk.response;
 
-import com.carmel.guestjini.helpdesk.model.DTO.TaskNoteDTO;
-import com.carmel.guestjini.helpdesk.model.TaskNote;
+import com.carmel.guestjini.helpdesk.model.DTO.UserDTO;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class TaskNoteResponse {
-
-    private TaskNoteDTO taskNote;
-    private List<TaskNoteDTO> taskNoteList;
+public class UserResponse {
+    private UserDTO user;
+    private List<UserDTO> userList;
     private long totalPages;
     private long totalRecords;
     private long currentRecords;
     private boolean success;
     private String error;
 
-    public TaskNoteDTO getTaskNote() {
-        return taskNote;
+    public UserDTO getUser() {
+        return user;
     }
 
-    public void setTaskNote(TaskNote taskNote) {
-        this.taskNote = new TaskNoteDTO(taskNote);
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 
-    public List<TaskNoteDTO> getTaskNoteList() {
-        return taskNoteList;
+    public List<UserDTO> getUserList() {
+        return userList;
     }
 
-    public void setTaskNoteList(List<TaskNote> taskNoteList) {
-        this.taskNoteList = new ArrayList<>();
-        taskNoteList.forEach(taskNote1 -> {
-            this.taskNoteList.add(new TaskNoteDTO(taskNote1));
-        });
-    }
-
-    public void setTaskNoteListDTO(List<TaskNoteDTO> taskNoteList) {
-        this.taskNoteList = taskNoteList;
+    public void setUserList(List<UserDTO> userList) {
+        this.userList = userList;
     }
 
     public long getTotalPages() {

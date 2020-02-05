@@ -1,10 +1,8 @@
 package com.carmel.guestjini.helpdesk.controller;
 
 import com.carmel.guestjini.helpdesk.components.UserInformation;
-import com.carmel.guestjini.helpdesk.model.KB;
 import com.carmel.guestjini.helpdesk.model.KBReview;
 import com.carmel.guestjini.helpdesk.model.Principal.UserInfo;
-import com.carmel.guestjini.helpdesk.response.KBResponse;
 import com.carmel.guestjini.helpdesk.response.KBReviewResponse;
 import com.carmel.guestjini.helpdesk.service.KBReviewService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,8 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
-
-import static com.carmel.guestjini.helpdesk.specification.KBSpecification.textInAllColumns;
 
 @RestController
 @RequestMapping(value = "/kb-review")

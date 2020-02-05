@@ -6,7 +6,6 @@ import com.carmel.guestjini.helpdesk.model.Principal.UserInfo;
 import com.carmel.guestjini.helpdesk.response.KBResponse;
 import com.carmel.guestjini.helpdesk.service.KBService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.FileInputStream;
@@ -255,7 +253,7 @@ public class KBController {
     }
 
     @PostMapping("/kb-author/pic")
-    public String kbAuthorPic(@RequestBody Map<String, String> formData) {
+    public  @ResponseBody byte[] kbAuthorPic(@RequestBody Map<String, String> formData) {
         try {
             Optional<KB> optionalKB = kbService.findById(formData.get("id"));
             if (optionalKB.isPresent()) {
@@ -266,13 +264,13 @@ public class KBController {
                     FileInputStream fileInputStreamReader = new FileInputStream(myPic);
                     byte[] bytes = new byte[(int) myPic.length()];
                     fileInputStreamReader.read(bytes);
-                    return new String(Base64.encodeBase64(bytes), "UTF-8");
+                    return bytes;// new String(Base64.encodeBase64(bytes), "UTF-8");
                 }
             }
         }catch (Exception ex){
             logger.trace(ex.getMessage());
         }
-        return "";
+        return null;
     }
 
 }
