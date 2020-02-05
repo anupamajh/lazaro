@@ -56,7 +56,7 @@ public class UserController {
             UserInfo userInfo = new UserInfo(optionalUser.get());
             userInfo.setPasswordResetLink("http://guesture.in/reset-password");
             logger.trace(userInfo.getId());
-            mailClient.sendAppAccessRequestMail(yamlConfig.getSupportEmail(), userInfo);
+            mailClient.sendAppAccessRequestMail(userName, userInfo);
             return userInfo;
         }else{
             return new UserInfo();
