@@ -14,6 +14,7 @@ class TaskNote: Codable, Identifiable, ObservableObject {
     public var userId:String? = nil
     public var ticketId:String? = nil
     public var notes:String? = nil
+    public var userName:String? = nil
     public var isRead:Int64 = 0
     public var creationTime:String? = ""
 }

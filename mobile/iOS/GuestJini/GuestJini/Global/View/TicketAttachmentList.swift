@@ -12,14 +12,14 @@ import SwiftUI
 
 struct TicketAttachmentList: View {
     @EnvironmentObject var ticketUIData: TicketUIModel
-
+    
     @ObservedObject var viewRouter: ViewRouter
     @ObservedObject var ticketAttachmentDrawerAction: TicketAttachmentDrawerAction
     @ObservedObject var audioRecorder: AudioRecorder = AudioRecorder()
     
     var uploadTicketAttachmentService:UploadTicketAttachmentService = UploadTicketAttachmentService(viewRouter: ViewRouter())
     
-   // @State var taskAttachments:[TaskAttachment] = []
+    // @State var taskAttachments:[TaskAttachment] = []
     
     @State var menuOpen: Bool = false
     @State var viewTypeIdentifier: Int = 0
@@ -45,7 +45,7 @@ struct TicketAttachmentList: View {
     init(viewRouter:ViewRouter, ticketAttachmentDrawerAction: TicketAttachmentDrawerAction) {
         self.viewRouter = viewRouter
         self.ticketAttachmentDrawerAction = ticketAttachmentDrawerAction
-       
+        
     }
     
     var body: some View {
@@ -87,9 +87,11 @@ struct TicketAttachmentList: View {
                             List {
                                 ForEach(self.ticketUIData.ticketAttachments){ attachment in
                                     VStack{
-                                    AttachmentRow(taskAttachment: attachment)
-                                        
-                                    }.padding(.vertical)
+                                        VStack{
+                                            AttachmentRow(taskAttachment: attachment)
+                                        }.padding(.vertical)
+                                    } .padding(.vertical)
+                                    
                                 }.onDelete { (indexSet) in
                                     self.ticketUIData.ticketAttachments.remove(atOffsets: indexSet)
                                 }
@@ -142,7 +144,7 @@ struct TicketAttachmentList: View {
                                 if(self.attachmentModel.sourceData != nil){
                                     self.uploadTicketAttachmentService.uploadAttachmentURL(fileURL: self.attachmentModel.sourceData, fileName: self.attachmentModel.fileName) { (response) in
                                         if(response.success == true){
-                                           self.ticketUIData.ticketAttachments.append(response.taskAttachment!)
+                                            self.ticketUIData.ticketAttachments.append(response.taskAttachment!)
                                         }
                                         self.shouldAnimate = false
                                     }
@@ -204,14 +206,14 @@ struct TicketAttachmentList: View {
                                 self.viewRouter.taskAttachment = self.ticketUIData.ticketAttachments
                                 self.viewRouter.currentPage = ViewRoutes.TICKET_UI
                             }){
-                                GuestJiniButtonText(buttonText: "DONE")
+                                GuestJiniRectangularButtonText(buttonText: "DONE")
                             }
                         }.padding()
                         
                     }.frame(width: geometry.size.width, height: geometry.size.height-85, alignment: .top)
                         .padding()
                         .onAppear(){
-                             
+                            
                     }
                     
                     Divider()
@@ -219,7 +221,7 @@ struct TicketAttachmentList: View {
                 }.frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
                     .edgesIgnoringSafeArea(.vertical)
                     .onAppear(){
-                       
+                        
                 }
                 if(self.shouldAnimate){
                     ActivityIndicator(shouldAnimate: self.$shouldAnimate)

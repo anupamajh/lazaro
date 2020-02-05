@@ -14,6 +14,7 @@ struct FindHelpPage: View {
     @State var helpSearchText:String = ""
     @State private var shouldAnimate = true
     @State var helpSearchCancel:Bool = false
+    @State var showInternetDown:Bool = false
     
     init(viewRouter:ViewRouter) {
         self.viewRouter = viewRouter
@@ -47,18 +48,18 @@ struct FindHelpPage: View {
                                     }, onCommit: {
                                         print("onCommit")
                                     }).foregroundColor(.primary)
-
+                                    
                                     Button(action: {
                                         self.helpSearchText = ""
                                     }) {
                                         Image(systemName: "xmark.circle.fill").opacity(self.helpSearchText == "" ? 0 : 1)
                                     }
                                     Button(action: {
-                                       
+                                        
                                     }) {
-                                         Image(systemName: "magnifyingglass")
+                                        Image(systemName: "magnifyingglass")
                                     }.padding(.leading)
-                                   
+                                    
                                     
                                 }
                                 .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 15))
@@ -75,25 +76,65 @@ struct FindHelpPage: View {
                             HStack{
                                 Spacer()
                                 /*GuestJiniSubAction(actionText: "Popular Searches", systemImage: "chevron.down")
-                                .padding(.horizontal)*/
+                                 .padding(.horizontal)*/
                             }
                         }
                         VStack{
                             if(self.kbListService.fetchComplete != true){
                                 ActivityIndicator(shouldAnimate: self.$shouldAnimate)
                             }
+                            if(self.kbListService.kbList.filter{
+                                ($0.authorName?.lowercased().contains(self.helpSearchText.lowercased()))! ||
+                                    ($0.topicNarration?.lowercased().contains(self.helpSearchText.lowercased()))! ||
+                                    self.helpSearchText.trimmingCharacters(in: .whitespacesAndNewlines) == ""
+                            }.count == 0){
+                                if(self.kbListService.fetchComplete == true){
+                                    VStack{
+                                        HStack{
+                                            Spacer()
+                                            Image("magnifying_glass_sorry")
+                                                .resizable()
+                                                .frame(width: 56, height: 56, alignment: .center)
+                                            Spacer()
+                                        }.padding()
+                                        HStack{
+                                            Spacer()
+                                            GuestJiniTitleText(title: "No Results Found")
+                                            Spacer()
+                                        }
+                                        HStack{
+                                            Spacer()
+                                            GuestJiniInformationText(information: "Sorry, we couldn’t find any content for “\(self.helpSearchText)”")
+                                            Spacer()
+                                        }
+                                    }.padding()
+                                }
+                            }
                             List {
-                                ForEach(self.kbListService.kbList) { kb in
+                                ForEach(
+                                    
+                                    self.kbListService.kbList.filter{
+                                        ($0.authorName?.lowercased().contains(self.helpSearchText.lowercased()))! ||
+                                            ($0.topicNarration?.lowercased().contains(self.helpSearchText.lowercased()))! ||
+                                            self.helpSearchText.trimmingCharacters(in: .whitespacesAndNewlines) == ""
+                                    }
+                                    
+                                ) { kb in
                                     Button(action: {
-                                        self.viewRouter.primaryKey = kb.id!
-                                        self.viewRouter.currentPage = ViewRoutes.HELP_ARTICLE_PAGE
+                                        if(Connectivity.isConnectedToInternet()){
+                                            self.viewRouter.primaryKey = kb.id!
+                                            self.viewRouter.currentPage = ViewRoutes.HELP_ARTICLE_PAGE
+                                        }else{
+                                            self.showInternetDown = true
+                                        }
                                     }) {
                                         KBRow(
                                             kb: kb,
                                             getKbAuthorPicService: GetKBAuthorPicService(
                                                 viewRouter: self.viewRouter,
                                                 kbId: kb.id!
-                                            )
+                                            ),
+                                            viewRouter:self.viewRouter
                                         )
                                     }
                                 }
@@ -106,8 +147,25 @@ struct FindHelpPage: View {
                     GuestJiniBottomBar(viewRouter: self.viewRouter)
                 }.frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
                     .edgesIgnoringSafeArea(.vertical)
+                GeometryReader { _ in
+                    EmptyView()
+                }
+                .background(Color.black.opacity(0.8))
+                .opacity(self.showInternetDown ? 1.0 : 0.0)
+                if(self.showInternetDown){
+                    GuestJiniAlerBox(showAlert: self.$showInternetDown, alertTitle: .constant("Oops!"), alertBody: .constant("Looks like internet connectivity is weak or not available!"))
+                }else{
+                    GuestJiniAlerBox(showAlert: self.$showInternetDown, alertTitle: .constant("Oops!"), alertBody: .constant("Looks like internet connectivity is weak or not available!")).hidden()
+                }
+            }.onAppear(){
+                self.helpSearchText = self.viewRouter.searchText
+                if(!Connectivity.isConnectedToInternet()){
+                    self.kbListService.fetchComplete = true
+                    Connectivity.cancelAllRequests()
+                    self.showInternetDown = true
+                }
             }
-                
+            
         }
     }
 }

@@ -216,11 +216,12 @@ struct HomePage: View {
                     }else{
                         GuestJiniAlerBox(showAlert: self.$showInternetDown, alertTitle: .constant("Oops!"), alertBody: .constant("Looks like internet connectivity is weak or not available!")).hidden()
                     }
-                }.frame(width: geometry.size.width, height: geometry.size.height-65, alignment: .top)
+                }.frame(width: geometry.size.width, height: geometry.size.height-85, alignment: .top)
+                    .padding()
                 Divider()
                 GuestJiniBottomBar(viewRouter: self.viewRouter)
             }.frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
-                .edgesIgnoringSafeArea(.bottom)
+                .edgesIgnoringSafeArea(.vertical)
                 .resignKeyboardOnTapGesture()
         }
     }

@@ -14,6 +14,13 @@ class CheckTokenService: ObservableObject {
     @ObservedObject var viewRouter: ViewRouter
     var loginService = LoginService()
     
+    var dataRequest:DataRequest? = nil
+    
+    func cancel() -> Void {
+        if(self.dataRequest != nil){
+            self.dataRequest?.cancel()
+        }
+    }
     init(viewRouter: ViewRouter) {
         self.viewRouter = viewRouter;
     }
@@ -28,25 +35,43 @@ class CheckTokenService: ObservableObject {
         ]
         let parameters = [
             "token" : accessToekn
-               ]
+        ]
         
-        AF.request(EndPoints.CHECK_TOKEN_URL, method: .post, parameters: parameters,headers: headers)
+        self.dataRequest =  AF.request(EndPoints.CHECK_TOKEN_URL, method: .post, parameters: parameters,headers: headers)
             .responseData { (response) in
                 let jsonDecoder = JSONDecoder()
                 var isSuccess = false
                 do{
-                    if(response.data != nil){
-                        let parsedData =  try jsonDecoder.decode(CheckTokenResponse.self, from: response.data!)
-                        if(parsedData.client_id != nil ){
-                            if(parsedData.client_id?.trimmingCharacters(in: .whitespacesAndNewlines) != ""){
-                                isSuccess = true
-                                completionHandler(isSuccess)
+                    if(Connectivity.isConnectedToInternet()){
+                        if(response.data != nil){
+                            let parsedData =  try jsonDecoder.decode(CheckTokenResponse.self, from: response.data!)
+                            if(parsedData.client_id != nil ){
+                                if(parsedData.client_id?.trimmingCharacters(in: .whitespacesAndNewlines) != ""){
+                                    isSuccess = true
+                                    completionHandler(isSuccess)
+                                }
+                            }
+                        }else{
+                            
+                        }
+                        if(!isSuccess){
+                            self.loginService.refreshToken(RefreshToken: UserDefaults.standard.string(forKey: "refresh_token")!) { (authData) in
+                                if(authData.access_token.trimmingCharacters(in: .whitespacesAndNewlines)==""){
+                                    UserDefaults.standard.set(false, forKey: "isLoggedIn")
+                                    self.viewRouter.currentPage = ViewRoutes.LOGIN_PAGE
+                                }else{
+                                    UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                                    UserDefaults.standard.set(authData.access_token, forKey: "access_token")
+                                    UserDefaults.standard.set(authData.refresh_token, forKey: "refresh_token")
+                                    UserDefaults.standard.set(authData.token_type, forKey: "token_type")
+                                    UserDefaults.standard.set(authData.expires_in, forKey: "expires_in")
+                                    completionHandler(true)
+                                }
                             }
                         }
-                    }else{
-                        
                     }
-                    if(!isSuccess){
+                }catch{
+                    if(Connectivity.isConnectedToInternet()){
                         self.loginService.refreshToken(RefreshToken: UserDefaults.standard.string(forKey: "refresh_token")!) { (authData) in
                             if(authData.access_token.trimmingCharacters(in: .whitespacesAndNewlines)==""){
                                 UserDefaults.standard.set(false, forKey: "isLoggedIn")
@@ -59,21 +84,6 @@ class CheckTokenService: ObservableObject {
                                 UserDefaults.standard.set(authData.expires_in, forKey: "expires_in")
                                 completionHandler(true)
                             }
-                        }
-                    }
-                    
-                }catch{
-                    self.loginService.refreshToken(RefreshToken: UserDefaults.standard.string(forKey: "refresh_token")!) { (authData) in
-                        if(authData.access_token.trimmingCharacters(in: .whitespacesAndNewlines)==""){
-                            UserDefaults.standard.set(false, forKey: "isLoggedIn")
-                            self.viewRouter.currentPage = ViewRoutes.LOGIN_PAGE
-                        }else{
-                            UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                            UserDefaults.standard.set(authData.access_token, forKey: "access_token")
-                            UserDefaults.standard.set(authData.refresh_token, forKey: "refresh_token")
-                            UserDefaults.standard.set(authData.token_type, forKey: "token_type")
-                            UserDefaults.standard.set(authData.expires_in, forKey: "expires_in")
-                            completionHandler(true)
                         }
                     }
                 }

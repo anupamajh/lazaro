@@ -174,6 +174,7 @@
 		C1B1E43A23BE1F1B009E1E3B /* TicketResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E43923BE1F1B009E1E3B /* TicketResponse.swift */; };
 		C1B1E43C23BEFA23009E1E3B /* GuestJiniTextArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E43B23BEFA23009E1E3B /* GuestJiniTextArea.swift */; };
 		C1B1E43E23BF0304009E1E3B /* TicketRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E43D23BF0304009E1E3B /* TicketRow.swift */; };
+		C1B686A023EA99F50093B95D /* GuestJiniAttachmentPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B6869F23EA99F50093B95D /* GuestJiniAttachmentPopUp.swift */; };
 		C1BB27F423B7578A00E8E3F9 /* OTPVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BB27F323B7578A00E8E3F9 /* OTPVerification.swift */; };
 		C1BB27F623B75A6300E8E3F9 /* GuestJiniAlerBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BB27F523B75A6300E8E3F9 /* GuestJiniAlerBox.swift */; };
 		C1BB27F823B7644000E8E3F9 /* GuestJiniHeaderSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BB27F723B7644000E8E3F9 /* GuestJiniHeaderSmall.swift */; };
@@ -196,6 +197,8 @@
 		C1D0000723B9E45000B93651 /* Converters.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D0000623B9E45000B93651 /* Converters.swift */; };
 		C1D0FFFF23B9D73700B93651 /* ViewRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D0FFFE23B9D73700B93651 /* ViewRoutes.swift */; };
 		C1D3A2BA23E587960061F5AC /* CreateGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D3A2B923E587960061F5AC /* CreateGroup.swift */; };
+		C1DC3DE423E9541200813BBD /* BottomBarButtonIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DC3DE323E9541200813BBD /* BottomBarButtonIdentifier.swift */; };
+		C1DC3DE623E9778500813BBD /* GuestJiniRectangularButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DC3DE523E9778500813BBD /* GuestJiniRectangularButtonText.swift */; };
 		C1DD878823B9EB2F00418AD8 /* GuestJiniFieldError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DD878723B9EB2F00418AD8 /* GuestJiniFieldError.swift */; };
 		C1E4C02723CB5D3100D6C578 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E4C02623CB5D3100D6C578 /* StringExtension.swift */; };
 		C1E4C02923CB793700D6C578 /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E4C02823CB793700D6C578 /* MultilineTextView.swift */; };
@@ -404,6 +407,7 @@
 		C1B1E43923BE1F1B009E1E3B /* TicketResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketResponse.swift; sourceTree = "<group>"; };
 		C1B1E43B23BEFA23009E1E3B /* GuestJiniTextArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniTextArea.swift; sourceTree = "<group>"; };
 		C1B1E43D23BF0304009E1E3B /* TicketRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketRow.swift; sourceTree = "<group>"; };
+		C1B6869F23EA99F50093B95D /* GuestJiniAttachmentPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniAttachmentPopUp.swift; sourceTree = "<group>"; };
 		C1BB27F323B7578A00E8E3F9 /* OTPVerification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVerification.swift; sourceTree = "<group>"; };
 		C1BB27F523B75A6300E8E3F9 /* GuestJiniAlerBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniAlerBox.swift; sourceTree = "<group>"; };
 		C1BB27F723B7644000E8E3F9 /* GuestJiniHeaderSmall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniHeaderSmall.swift; sourceTree = "<group>"; };
@@ -426,6 +430,8 @@
 		C1D0000623B9E45000B93651 /* Converters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converters.swift; sourceTree = "<group>"; };
 		C1D0FFFE23B9D73700B93651 /* ViewRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRoutes.swift; sourceTree = "<group>"; };
 		C1D3A2B923E587960061F5AC /* CreateGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroup.swift; sourceTree = "<group>"; };
+		C1DC3DE323E9541200813BBD /* BottomBarButtonIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarButtonIdentifier.swift; sourceTree = "<group>"; };
+		C1DC3DE523E9778500813BBD /* GuestJiniRectangularButtonText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniRectangularButtonText.swift; sourceTree = "<group>"; };
 		C1DD878723B9EB2F00418AD8 /* GuestJiniFieldError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniFieldError.swift; sourceTree = "<group>"; };
 		C1E4C02623CB5D3100D6C578 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		C1E4C02823CB793700D6C578 /* MultilineTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextView.swift; sourceTree = "<group>"; };
@@ -600,6 +606,7 @@
 				C1504AB423CDBC1B00302EB7 /* ImageConverter.swift */,
 				C194EDAC23E2B3570028B53E /* GroupTypes.swift */,
 				C112EC3723E338CE00F632E6 /* Connectivity.swift */,
+				C1DC3DE323E9541200813BBD /* BottomBarButtonIdentifier.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -799,6 +806,8 @@
 				C14C388023D86DE100DADF9C /* GuestJiniWhiteRoundButtonSystemImage.swift */,
 				C14C388223D87D8E00DADF9C /* KBReviewRow.swift */,
 				C138A9AD23E82B200002A568 /* GuestJiniRedButtonText.swift */,
+				C1DC3DE523E9778500813BBD /* GuestJiniRectangularButtonText.swift */,
+				C1B6869F23EA99F50093B95D /* GuestJiniAttachmentPopUp.swift */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -1178,6 +1187,7 @@
 				C10CD05123CF4BF2001F30BB /* ViewExtension.swift in Sources */,
 				C102721623D1880C00F2D227 /* AudioRecorderView.swift in Sources */,
 				C1B1E43C23BEFA23009E1E3B /* GuestJiniTextArea.swift in Sources */,
+				C1DC3DE623E9778500813BBD /* GuestJiniRectangularButtonText.swift in Sources */,
 				C194EDAD23E2B3570028B53E /* GroupTypes.swift in Sources */,
 				C194EDAF23E2CEEE0028B53E /* GroupDetailService.swift in Sources */,
 				C10CD04D23CF49D8001F30BB /* GuestJiniSearchView.swift in Sources */,
@@ -1262,6 +1272,7 @@
 				C1C74C3C23BA143E00FFA336 /* GuestJiniBottomBar.swift in Sources */,
 				C1A73E2023B744F900E9F5B8 /* GuestJiniHeaderLarge.swift in Sources */,
 				C144F02123B481C100D6D218 /* GuestJiniErrorText.swift in Sources */,
+				C1B686A023EA99F50093B95D /* GuestJiniAttachmentPopUp.swift in Sources */,
 				C10ACFF823BF7BDF00C7CB70 /* HelpView.swift in Sources */,
 				C17BBFC623BB22E600FD5A21 /* Articles.swift in Sources */,
 				C1AB8EB023E15C2F00B7532C /* PeopleResponse.swift in Sources */,
@@ -1332,6 +1343,7 @@
 				C1B1E43423BE1DDD009E1E3B /* TicketUI.swift in Sources */,
 				C177AF7E23E406D000E49786 /* GenericResponse.swift in Sources */,
 				C144F02323B483CB00D6D218 /* FontExtension.swift in Sources */,
+				C1DC3DE423E9541200813BBD /* BottomBarButtonIdentifier.swift in Sources */,
 				C1504AB323CDA90700302EB7 /* ImagePicker.swift in Sources */,
 				C129E73723BB008C009144D6 /* GuestJiniSubAction.swift in Sources */,
 				C1504AA623CD8AD800302EB7 /* UserPreferenceResponse.swift in Sources */,

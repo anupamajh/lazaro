@@ -27,7 +27,7 @@ struct ContentView: View {
             }else if viewRouter.currentPage ==  ViewRoutes.TICKET_LIST {
                TicketList(viewRouter: viewRouter)
             }else if viewRouter.currentPage ==  ViewRoutes.TICKET_VIEW {
-               TicketView(viewRouter: viewRouter)
+               TicketView(viewRouter: viewRouter).environmentObject(self.ticketUIData)
             }else if viewRouter.currentPage ==  ViewRoutes.FORGOT_PASSWORD_PAGE {
                ForgotPassword(viewRouter: viewRouter)
             }else if viewRouter.currentPage ==  ViewRoutes.SETTINGS_VIEW {

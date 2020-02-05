@@ -283,7 +283,7 @@ struct MyProfileView: View {
                                     Button(action:{
                                         self.viewRouter.currentPage = ViewRoutes.MY_INTERESTS_VIEW
                                     }){
-                                        GuestJiniButtonText(buttonText: "SETUP")
+                                        GuestJiniRectangularButtonText(buttonText: "SETUP")
                                     }
                                     
                                 }.padding()

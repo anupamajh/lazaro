@@ -11,7 +11,8 @@ import SwiftUI
 struct KBRow: View {
     @State var kb:KB
     @ObservedObject var getKbAuthorPicService:GetKBAuthorPicService
-    
+    @ObservedObject var viewRouter:ViewRouter
+   
     var body: some View {
         VStack{
             HStack{
@@ -24,6 +25,15 @@ struct KBRow: View {
                         
                     }.frame(width:45, height: 45)
                     .overlay(Circle().stroke(Color.white, lineWidth: 1))
+                        .onAppear(){
+                            self.getKbAuthorPicService.isLoading = true
+                            self.getKbAuthorPicService.getKbAuthorPic(kbId: self.kb.id!) { (response) in
+                                self.getKbAuthorPicService.kbAuthorPic = response;
+                                self.getKbAuthorPicService.isLoading = false
+                            }
+                    }.onDisappear(){
+                        self.getKbAuthorPicService.cancel()
+                    }
                     if(self.getKbAuthorPicService.isLoading){
                         ActivityIndicator(shouldAnimate: .constant(true), style: .medium)
                     }
@@ -63,7 +73,10 @@ struct KBRow: View {
                 .padding()
                 VStack{
                     Button(action:{
-                        
+                        if(Connectivity.isConnectedToInternet()){
+                            self.viewRouter.primaryKey = self.kb.id!
+                            self.viewRouter.currentPage = ViewRoutes.HELP_ARTICLE_PAGE
+                        }
                     }){
                         GuestJiniRoundButtonSystemImage(systemImage: "chevron.right")
                     }
@@ -77,6 +90,6 @@ struct KBRow: View {
     
     struct KBRow_Previews: PreviewProvider {
         static var previews: some View {
-            KBRow(kb: KB(),getKbAuthorPicService: GetKBAuthorPicService(viewRouter: ViewRouter(), kbId: ""))
+            KBRow(kb: KB(),getKbAuthorPicService: GetKBAuthorPicService(viewRouter: ViewRouter(), kbId: ""), viewRouter: ViewRouter())
         }
 }

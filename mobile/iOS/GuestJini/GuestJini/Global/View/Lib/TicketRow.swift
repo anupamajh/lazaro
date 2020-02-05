@@ -52,9 +52,13 @@ struct TicketRow: View {
                 Spacer()
             }.padding(.top, 15)
             HStack{
-                Text(ticket.ticketTitle!)
-                    .font(Fonts.RobotRegular)
-                    .foregroundColor(Color("greyishBrown"))
+                VStack{
+                    Text(ticket.ticketTitle!)
+                        .font(Fonts.RobotRegular)
+                        .foregroundColor(Color("greyishBrown"))
+                        .lineLimit(200)
+                        .multilineTextAlignment(.leading)
+                }
                 Spacer()
             }.padding(.bottom, 10)
             Divider()

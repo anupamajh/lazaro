@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct TicketList: View {
+   
+    @EnvironmentObject var ticketUIData: TicketUIModel
     @ObservedObject var viewRouter: ViewRouter
     @ObservedObject var ticketListService:TicketListService
     @State private var shouldAnimate = true
@@ -42,6 +44,17 @@ struct TicketList: View {
                         
                         GuestJiniTitleText(title: "MY TICKETS")
                         Spacer()
+                        VStack{
+                            Button(action: {
+                                Connectivity.cancelAllRequests()
+                                self.ticketUIData.title = ""
+                                self.ticketUIData.narration = ""
+                                self.ticketUIData.ticketAttachments = []
+                                self.viewRouter.currentPage = ViewRoutes.TICKET_UI
+                            }) {
+                                GuestJiniRoundButtonSystemImage(systemImage: "plus")
+                            }
+                        }
                     }.padding()
                     VStack{
                         HStack {
@@ -88,7 +101,7 @@ struct TicketList: View {
                             ActivityIndicator(shouldAnimate: self.$shouldAnimate)
                         }
                         if(self.ticketListService.ticketList.filter{($0.ticketTitle?.lowercased().contains(self.ticketSearchText.lowercased()))! || $0.ticketNarration.lowercased().contains(self.ticketSearchText.lowercased()) || self.ticketSearchText == ""}.count == 0){
-                            if(self.ticketListService.fetchComplete == true){
+                            if(self.ticketListService.fetchComplete == true && self.ticketListService.ticketList.count > 0){
                                 VStack{
                                     HStack{
                                         Spacer()
@@ -104,7 +117,7 @@ struct TicketList: View {
                                     }
                                     HStack{
                                         Spacer()
-                                        GuestJiniInformationText(information: "Sorry, we couldn’t find any content for “<search_keyword>”")
+                                        GuestJiniInformationText(information: "Sorry, we couldn’t find any content for “\(self.ticketSearchText)”")
                                         Spacer()
                                     }
                                 }.padding()

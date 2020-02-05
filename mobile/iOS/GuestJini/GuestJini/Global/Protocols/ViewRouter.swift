@@ -37,4 +37,5 @@ class ViewRouter: ObservableObject {
     var taskAttachment: [TaskAttachment]? = nil
     var returnPage:String = ""
     var groupType:Int = 0
+    var selectedBottomBarItem = BottomBarButtonIdentifier.BOTTOM_BAR_BUTTON_SUPPORT
 }

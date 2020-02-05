@@ -42,7 +42,7 @@ struct TaskNoteRow: View {
                 .frame(alignment: .top)
                 VStack{
                     HStack{
-                        Text("Sameer Rawat")
+                        Text(self.ticketNote.userName!)
                             .foregroundColor(Color("warmGrey"))
                             .font(Fonts.RobotSectionTitle)
                             .bold()

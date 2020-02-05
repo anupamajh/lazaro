@@ -11,12 +11,22 @@ import SwiftUI
 struct GuestJiniBottomBarItem: View {
     var systemImage: String
     var menuText:String
+    var isSelected = 0
     var body: some View {
         VStack{
-            Image(systemName: systemImage)
-            Text(menuText)
-                .font(Fonts.RobotBottomBarText)
-            .lineLimit(1)
+            if(isSelected == 0){
+                Image(systemName: systemImage)
+                    .foregroundColor(Color.black)
+                Text(menuText)
+                    .font(Fonts.RobotBottomBarText)
+                    .foregroundColor(Color.black)
+                    .lineLimit(1)
+            }else{
+                Image(systemName: systemImage)
+                Text(menuText)
+                    .font(Fonts.RobotBottomBarText)
+                    .lineLimit(1)
+            }
             
             
         }.padding()
