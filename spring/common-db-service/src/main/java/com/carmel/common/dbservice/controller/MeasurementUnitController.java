@@ -49,7 +49,9 @@ public class MeasurementUnitController {
                 measurementUnit.setId("");
             }
             if(measurementUnit.getOrgId() == null || measurementUnit.getOrgId().isEmpty()){
-                measurementUnit.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization() != null) {
+                    measurementUnit.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             if (measurementUnit.getId().equals("")) {
                 measurementUnit.setCreatedBy(userInfo.getId());

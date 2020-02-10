@@ -1,12 +1,7 @@
 package com.carmel.common.dbservice.model.DTO;
 
 import com.carmel.common.dbservice.model.AddressBook;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.sql.Blob;
 import java.util.Date;
 

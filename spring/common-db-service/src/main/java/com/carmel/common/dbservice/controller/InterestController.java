@@ -55,7 +55,9 @@ public class InterestController {
                 interest.setId("");
             }
             if(interest.getOrgId() == null || interest.getOrgId().isEmpty()){
-                interest.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization() != null) {
+                    interest.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             if (interest.getId().equals("")) {
                 interest.setCreatedBy(userInfo.getId());

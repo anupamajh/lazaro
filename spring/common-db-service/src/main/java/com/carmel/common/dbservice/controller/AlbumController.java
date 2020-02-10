@@ -48,7 +48,9 @@ public class AlbumController {
                 album.setId("");
             }
             if(album.getOrgId() == null || album.getOrgId().isEmpty()){
-                album.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization() != null) {
+                    album.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             if (album.getId().equals("")) {
                 album.setCreatedBy(userInfo.getId());

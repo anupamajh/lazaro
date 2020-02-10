@@ -48,7 +48,9 @@ public class AccountHeadController {
                 accountHead.setId("");
             }
             if(accountHead.getOrgId() == null || accountHead.getOrgId().isEmpty()){
-                accountHead.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization() != null) {
+                    accountHead.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             if (accountHead.getId().equals("")) {
                 accountHead.setCreatedBy(userInfo.getId());

@@ -1,8 +1,11 @@
 package com.carmel.common.dbservice.response;
 
-import com.carmel.common.dbservice.model.*;
 import com.carmel.common.dbservice.model.DTO.AddressBookDTO;
 import com.carmel.common.dbservice.model.DTO.GroupDTO;
+import com.carmel.common.dbservice.model.Group;
+import com.carmel.common.dbservice.model.GroupPeople;
+import com.carmel.common.dbservice.model.InterestCategory;
+import com.carmel.common.dbservice.model.UserInterests;
 
 import java.util.ArrayList;
 import java.util.List;

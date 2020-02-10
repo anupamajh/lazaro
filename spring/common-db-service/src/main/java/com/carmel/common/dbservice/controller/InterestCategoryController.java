@@ -47,7 +47,9 @@ public class InterestCategoryController {
                 interestCategory.setId("");
             }
             if(interestCategory.getOrgId() == null || interestCategory.getOrgId().isEmpty()){
-                interestCategory.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization() != null) {
+                    interestCategory.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             if (interestCategory.getId().equals("")) {
                 interestCategory.setCreatedBy(userInfo.getId());

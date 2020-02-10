@@ -4,7 +4,6 @@ import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.DTO.GroupConversationDTO;
 import com.carmel.common.dbservice.model.GroupConversation;
 import com.carmel.common.dbservice.model.UserInfo;
-import com.carmel.common.dbservice.model.UserInterests;
 import com.carmel.common.dbservice.response.GroupConversationResponse;
 import com.carmel.common.dbservice.services.GroupConversationService;
 import org.slf4j.Logger;

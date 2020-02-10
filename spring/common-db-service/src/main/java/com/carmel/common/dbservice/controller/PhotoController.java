@@ -53,7 +53,9 @@ public class PhotoController {
                 photo.setId("");
             }
             if(photo.getOrgId() == null || photo.getOrgId().isEmpty()){
-                photo.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization() != null) {
+                    photo.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             if (photo.getId().equals("")) {
                 photo.setCreatedBy(userInfo.getId());

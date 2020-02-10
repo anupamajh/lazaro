@@ -11,11 +11,10 @@ import com.carmel.common.dbservice.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -290,7 +289,11 @@ public class PeopleController {
             if (!optionalFavouritePeople.isPresent()) {
                 favouritePeople = new FavouritePeople();
                 favouritePeople.setClientId(userInfo.getClient().getClientId());
-                favouritePeople.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization() != null) {
+                    if(userInfo.getDefaultOrganization() != null) {
+                        favouritePeople.setOrgId(userInfo.getDefaultOrganization().getId());
+                    }
+                }
                 favouritePeople.setUserId(userInfo.getId());
                 favouritePeople.setOtherUserId(userId);
             } else {
@@ -310,6 +313,28 @@ public class PeopleController {
     }
 
     private UserInterestsDTO setupInterestCategory() {
+        return null;
+    }
+
+    @PostMapping(value = "/get-people-pic")
+    public @ResponseBody byte[] getPeoplePic(@RequestBody Map<String, String> formData){
+        try {
+            Optional<AddressBook> optionalAddressBook = addressBookService.findByUserId(formData.get("userId"));
+            if(optionalAddressBook.isPresent()){
+                String logoPath = optionalAddressBook.get().getLogoPath();
+                File myPic = new File(logoPath);
+                FileInputStream fileInputStreamReader = new FileInputStream(myPic);
+                byte[] bytes = new byte[(int) myPic.length()];
+                fileInputStreamReader.read(bytes);
+                return bytes;
+            }else{
+                return  null;
+            }
+
+        }catch(Exception ex){
+
+        }
+
         return null;
     }
 
