@@ -1,3 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-GuestJini/Pods-GuestJini-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/DACache/DACache.framework
 ${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework

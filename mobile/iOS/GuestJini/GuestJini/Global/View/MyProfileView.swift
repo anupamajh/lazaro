@@ -7,8 +7,7 @@
 //
 
 import SwiftUI
-
-
+import DACache
 
 struct MyProfileView: View {
     @ObservedObject var viewRouter: ViewRouter
@@ -27,6 +26,8 @@ struct MyProfileView: View {
     @State var showAction: Bool = false
     @State var showImagePicker: Bool = false
     @State var isCamera: Bool = false
+    
+    let cache = DACache.shared.primaryCache
     
     init(viewRouter: ViewRouter) {
         self.viewRouter = viewRouter
@@ -317,6 +318,7 @@ struct MyProfileView: View {
     
     func saveProfilePic(image:UIImage){
         saveProfilePicService.saveProfilePic(imageData: ImageConverter.imageToBase64(image)!) { (response) in
+            self.cache.save(key: "MYPIC", value: image.pngData() as NSData?)
             self.isAnimating = false
         }
         

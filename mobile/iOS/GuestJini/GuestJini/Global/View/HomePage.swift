@@ -17,9 +17,29 @@ struct HomePage: View {
     @ObservedObject var viewRouter: ViewRouter
     @EnvironmentObject var ticketUIData: TicketUIModel
     @State var showInternetDown:Bool = false
+    
+    @ObservedObject var saveDviceDataService:SaveDviceDataService
+    
     init(viewRouter: ViewRouter){
         self.viewRouter = viewRouter
-        
+        self.saveDviceDataService = SaveDviceDataService(viewRouter: viewRouter)
+         if(Connectivity.isConnectedToInternet()){
+             if(UserDefaults.standard.bool(forKey: "is_registered_for_push_notification") == true){
+                 let deviceToken:String = UserDefaults.standard.string(forKey: "push_token")!
+                 let deviceId:String = UserDefaults.standard.string(forKey: "device_id")!
+                 let deviceType:Int = 1
+                 
+                 let userDeviceData:UserDeviceData = UserDeviceData()
+                 userDeviceData.deviceToken = deviceToken
+                 userDeviceData.deviceType = deviceType
+                 userDeviceData.deviceIdentifier = deviceId
+                 
+                self.saveDviceDataService.saveDeviceData(userDeviceData: userDeviceData) { (response) in
+                    debugPrint(response)
+                }
+             }
+         }
+         
     }
     
     var body: some View {
@@ -33,7 +53,7 @@ struct HomePage: View {
                                 .font(Fonts.RobotPageTitle)
                                 .foregroundColor(Color("brownishGrey"))
                             Spacer()
-                        }.padding(.bottom)
+                        }.padding(.vertical)
                         VStack{
                             VStack{
                                 HStack{

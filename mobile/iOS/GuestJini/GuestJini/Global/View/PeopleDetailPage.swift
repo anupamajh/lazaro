@@ -12,6 +12,7 @@ struct PeopleDetailPage: View {
     @ObservedObject var viewRouter: ViewRouter
     @ObservedObject var getPersonDetailService:GetPersonDetailService
     @ObservedObject var personAddFavouriteService:PersonAddFavouriteService
+    @ObservedObject var getPeoplePicService:GetPeoplePicService
     
     @State var showAddFavouriteActivitiIndicater:Bool = false
     
@@ -19,6 +20,8 @@ struct PeopleDetailPage: View {
         self.viewRouter = viewRouter
         self.getPersonDetailService = GetPersonDetailService(viewRouter: viewRouter,userId: viewRouter.primaryKey)
         self.personAddFavouriteService = PersonAddFavouriteService(viewRouter: viewRouter)
+        self.getPeoplePicService = GetPeoplePicService(viewRouter: viewRouter)
+        self.getPeoplePicService.load(userId: viewRouter.primaryKey, logoPath: viewRouter.peopleLogoPath)
         UITableView.appearance().tableFooterView = UIView()
         UITableView.appearance().separatorStyle = .none
     }
@@ -43,12 +46,18 @@ struct PeopleDetailPage: View {
                             VStack{
                                 
                                 VStack(alignment: .center){
-                                    VStack{
-                                        Image(systemName: "person.fill")
-                                            .resizable()
-                                            .clipShape(Circle())
-                                            .shadow(radius: 5)
-                                    } .frame(width:50, height:50)
+                                    ZStack{
+                                        VStack{
+                                            self.getPeoplePicService.peoplePic!
+                                                .resizable()
+                                                .clipShape(Circle())
+                                                .shadow(radius: 5)
+                                        } .frame(width:50, height:50)
+                                        if(self.getPeoplePicService.isLoading){
+                                            ActivityIndicator(shouldAnimate: .constant(true), style: .medium)
+                                            
+                                        }
+                                    }
                                     VStack{
                                         HStack{
                                             if(self.getPersonDetailService.fetchComplete == true){

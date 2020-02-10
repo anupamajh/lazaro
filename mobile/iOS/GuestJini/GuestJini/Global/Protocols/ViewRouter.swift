@@ -33,6 +33,7 @@ class ViewRouter: ObservableObject {
         }
     }
     var primaryKey:String = ""
+    var peopleLogoPath:String = ""
     var searchText:String = ""
     var taskAttachment: [TaskAttachment]? = nil
     var returnPage:String = ""

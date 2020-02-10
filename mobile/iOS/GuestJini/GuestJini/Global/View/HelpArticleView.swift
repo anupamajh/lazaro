@@ -32,6 +32,7 @@ struct HelpArticleView: View {
         self.kbSaveRatingService = KBSaveRatingService(viewRouter: viewRouter)
         self.kbSaveReviewService = KBSaveReviewService(viewRouter: viewRouter)
         self.kbListReviewService = KBListReviewService(viewRouter: viewRouter,kbId: viewRouter.primaryKey)
+        self.getKbAuthorPicService.load(kbId: viewRouter.primaryKey)
         UITableView.appearance().separatorStyle = .none
     }
     

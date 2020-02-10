@@ -11,6 +11,7 @@ import SwiftUI
 struct PeopleListPage: View {
     @ObservedObject var viewRouter: ViewRouter
     @ObservedObject var getPeopleListService:GetPeopleListService
+    @ObservedObject var getPeoplePicService:GetPeoplePicService
     
     @State var peopleSearchText:String = ""
     @State var peopleSearchCancel:Bool = false
@@ -18,6 +19,7 @@ struct PeopleListPage: View {
     init(viewRouter: ViewRouter){
         self.viewRouter = viewRouter
         self.getPeopleListService = GetPeopleListService(viewRouter: viewRouter)
+        self.getPeoplePicService = GetPeoplePicService(viewRouter: viewRouter)
         UITableView.appearance().tableFooterView = UIView()
         UITableView.appearance().separatorStyle = .none
     }
@@ -28,6 +30,7 @@ struct PeopleListPage: View {
                 VStack{
                     HStack{
                         Button(action: {
+                            Connectivity.cancelAllRequests()
                             self.viewRouter.currentPage = ViewRoutes.COMMUNIT_LANDING_PAGE
                         }) {
                             GuestJiniButtonSystemImagePlain(imageName: "arrow.left")
@@ -78,12 +81,19 @@ struct PeopleListPage: View {
                                     ForEach(self.getPeopleListService.peopleResponse.personList!){ person in
                                         Button(action:{
                                             self.viewRouter.primaryKey = person.addressBook!.userId!
+                                            if(person.addressBook!.logoPath == nil){
+                                                self.viewRouter.peopleLogoPath = ""
+                                            }else{
+                                                self.viewRouter.peopleLogoPath = person.addressBook!.logoPath!
+                                            }
                                             self.viewRouter.currentPage = ViewRoutes.PEOPLE_DETAIL_PAGE
                                         }){
                                             PeopleCard(
                                                 addressBook: person.addressBook!,
                                                 peopleResponse: self.getPeopleListService.peopleResponse,
-                                                person: person)
+                                                person: person,
+                                                viewRouter:self.viewRouter,
+                                                getPeoplePicService: GetPeoplePicService(viewRouter: self.viewRouter))
                                         }
                                     }
                                     
@@ -110,16 +120,42 @@ struct PeopleCard : View {
     @State var addressBook: AddressBook
     @State var peopleResponse:PeopleResponse
     @State var person:Person
+    @ObservedObject var viewRouter: ViewRouter
+    @ObservedObject var getPeoplePicService:GetPeoplePicService
+      
+    
     var body: some View {
         VStack{
             VStack{
                 HStack{
-                    VStack{
-                        Image(systemName: "person.fill")
-                            .resizable()
-                            .clipShape(Circle())
-                            .shadow(radius: 5)
-                    } .frame(width:40, height:40)
+                    ZStack{
+                        VStack{
+                            self.getPeoplePicService.peoplePic!
+                                .resizable()
+                                .clipShape(Circle())
+                                .shadow(radius: 5)
+                        } .frame(width:40, height:40)
+                            .onAppear(){
+                                if(self.addressBook.logoPath != nil){
+                                    self.getPeoplePicService.isLoading = true
+                                    self.getPeoplePicService.getPeoplePic(
+                                        userId: self.addressBook.userId!,
+                                        logoPath: self.addressBook.logoPath!) { (response) in
+                                            self.getPeoplePicService.peoplePic = response;
+                                            self.getPeoplePicService.isLoading = false
+                                    }
+                                }else{
+                                    self.getPeoplePicService.isLoading = false
+                                    self.getPeoplePicService.peoplePic = Image(systemName: "person.fill").renderingMode(.original)
+                                }
+                        }.onDisappear(){
+                            self.getPeoplePicService.cancel()
+                        }
+                        
+                        if(self.getPeoplePicService.isLoading){
+                            ActivityIndicator(shouldAnimate: .constant(true), style: .medium)
+                        }
+                    }
                     
                     VStack{
                         HStack{
@@ -143,6 +179,7 @@ struct PeopleCard : View {
                             .foregroundColor(Color("pastelRed"))
                     }.frame(alignment:.top)
                 }.padding()
+                
                 VStack{
                     HStack{
                         if(person.isFavourite == 1){

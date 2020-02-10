@@ -23,7 +23,9 @@ class KBGetService:ObservableObject{
         self.checkTokenService = CheckTokenService(viewRouter: viewRouter)
         self.getKB(id: id) { (response) in
             self.kbResponse = response
-            self.kb = response.kb!;
+            if(response.kb != nil){
+                self.kb = response.kb!;
+            }
             self.fetchComplete = true
         }
     }

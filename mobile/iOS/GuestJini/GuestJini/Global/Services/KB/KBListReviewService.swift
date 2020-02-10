@@ -23,7 +23,9 @@ class KBListReviewService:ObservableObject{
         self.checkTokenService = CheckTokenService(viewRouter: viewRouter)
         self.getKBList(kbId: kbId) { (response) in
             self.kbReviewResponse = response
+            if(response.kbReviewList != nil){
             self.kbReviewList = response.kbReviewList!;
+            }
             self.fetchComplete = true
         }
     }

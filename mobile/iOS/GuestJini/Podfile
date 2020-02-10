@@ -6,6 +6,7 @@ target 'GuestJini' do
   use_frameworks!
   pod 'OAuthSwift', '~> 2.0.0'
   pod 'Alamofire', '~> 5.0.0-rc.3'
+  pod 'DACache'
   # Pods for GuestJini
 
   target 'GuestJiniTests' do

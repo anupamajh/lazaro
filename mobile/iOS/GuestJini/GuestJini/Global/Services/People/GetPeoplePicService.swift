@@ -1,8 +1,8 @@
 //
-//  GetKBAuthorPicService.swift
+//  GetPeoplePicService.swift
 //  GuestJini
 //
-//  Created by Prasanna Kumar Pete on 22/01/20.
+//  Created by Prasanna Kumar Pete on 10/02/20.
 //  Copyright © 2020 Prasanna Kumar Pete. All rights reserved.
 //
 
@@ -11,10 +11,10 @@ import Alamofire
 import SwiftUI
 import DACache
 
-class GetKBAuthorPicService: ObservableObject{
+class GetPeoplePicService: ObservableObject{
     @ObservedObject var viewRouter: ViewRouter
     var checkTokenService:CheckTokenService
-    @Published var kbAuthorPic:Image? = Image(systemName: "person.fill")
+    @Published var peoplePic:Image? = Image(systemName: "person.fill").renderingMode(.original)
     @Published var isLoading: Bool = true
     
     var dataRequest:DataRequest? = nil
@@ -23,18 +23,18 @@ class GetKBAuthorPicService: ObservableObject{
     let cache = DACache.shared.primaryCache
     
     
-    init(viewRouter: ViewRouter, kbId:String) {
+    init(viewRouter: ViewRouter) {
         self.viewRouter = viewRouter;
         checkTokenService = CheckTokenService(viewRouter: viewRouter)
-        /*getKbAuthorPic(kbId:kbId) { (response) in
-         self.kbAuthorPic = response
-         self.isLoading = false
-         }*/
     }
     
-    func load(kbId:String) -> Void {
-        getKbAuthorPic(kbId:kbId) { (response) in
-            self.kbAuthorPic = response
+    func load(userId:String, logoPath:String) -> Void {
+        if(logoPath.trimmingCharacters(in: .whitespacesAndNewlines) != ""){
+            getPeoplePic(userId: userId, logoPath: logoPath) { (response) in
+                self.peoplePic = response
+                self.isLoading = false
+            }
+        }else{
             self.isLoading = false
         }
     }
@@ -46,8 +46,9 @@ class GetKBAuthorPicService: ObservableObject{
         }
     }
     
-    func getKbAuthorPic(kbId:String, completionHandler: @escaping(Image)->Void) -> Void {
-        if let cachedImage = cache.load(key: "KB_" + kbId) {
+    func getPeoplePic(userId:String, logoPath:String, completionHandler: @escaping(Image)->Void) -> Void {
+        let theFileName = (logoPath as NSString).lastPathComponent
+        if let cachedImage = cache.load(key: "PEOPLE_" + theFileName) {
             completionHandler(Image(uiImage: UIImage(data: cachedImage)!).renderingMode(.original))
         }else{
             checkTokenService.CheckToken { (checkStatus) in
@@ -57,15 +58,15 @@ class GetKBAuthorPicService: ObservableObject{
                         "Accept": "application/json"
                     ]
                     
-                    let parameters = ["id" : kbId]
-                    self.dataRequest =  AF.request(EndPoints.KB_GET_AUTHOR_PIC, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: headers)
+                    let parameters = ["userId" : userId]
+                    self.dataRequest =  AF.request(EndPoints.GET_PEOPLE_PIC, method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: headers)
                         
                         .responseData { (response) in
                             self.isLoading = false
                             if(response.data != nil){
-                                self.cache.save(key: "KB_" + kbId, value: response.data as NSData?)
                                 let image = UIImage(data: response.data!)
                                 if(image != nil){
+                                    self.cache.save(key: "PEOPLE_" + theFileName, value: response.data as NSData?)
                                     completionHandler(Image(uiImage: image!).renderingMode(.original))
                                 }else{
                                     completionHandler(Image(systemName: "person.fill").renderingMode(.original))
@@ -81,3 +82,6 @@ class GetKBAuthorPicService: ObservableObject{
     }
     
 }
+
+
+

@@ -28,10 +28,12 @@ class EndPoints{
     static var GET_PROFILE_PIC_URL = END_POINT_URL + "/common/user/me/pic"
     static var GET_MY_ADDRESS_BOOK_URL = END_POINT_URL + "/common/address-book/get-my-address-book"
     static var CHANGE_PASSWORD_URL = END_POINT_URL + "/common/user/change-password"
+    static var SAVE_USER_DEVICE_DATA = END_POINT_URL + "/common/user-device-data/save"
     
     static var GET_LIST_OF_PEOPLE =  END_POINT_URL + "/common/people/get-people"
     static var GET_PERSON_DETAIL =  END_POINT_URL + "/common/people/get-person"
     static var AD_PERSON_TO_FAVOURITE =  END_POINT_URL + "/common/people/add-remove-favourite"
+    static var GET_PEOPLE_PIC = END_POINT_URL + "/common/people/get-people-pic"
     
     static var GET_INTEREST_CATEGORY_LIST_URL = END_POINT_URL + "/common/interest-category/get-all"
     static var GET_INTEREST_LIST_URL = END_POINT_URL + "/common/interest/get-all"
