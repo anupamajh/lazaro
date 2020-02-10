@@ -46,7 +46,9 @@ public class KBController {
                 kb.setId("");
             }
             if (kb.getOrgId() == null || kb.getOrgId() == "") {
-                kb.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization() != null) {
+                    kb.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             kb.setClientId(userInfo.getClient().getClientId());
             if (kb.getId().equals("")) {

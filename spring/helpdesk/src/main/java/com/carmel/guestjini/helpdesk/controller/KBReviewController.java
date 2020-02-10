@@ -44,7 +44,9 @@ public class KBReviewController {
                 kbReview.setId("");
             }
             if (kbReview.getOrgId() == null || kbReview.getOrgId() == "") {
-                kbReview.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization() != null) {
+                    kbReview.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             kbReview.setClientId(userInfo.getClient().getClientId());
             if (kbReview.getId().equals("")) {

@@ -39,7 +39,9 @@ public class KBRatingController {
                 kbRating.setId("");
             }
             if (kbRating.getOrgId() == null || kbRating.getOrgId() == "") {
-                kbRating.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization() != null) {
+                    kbRating.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             kbRating.setClientId(userInfo.getClient().getClientId());
             if (kbRating.getId().equals("")) {

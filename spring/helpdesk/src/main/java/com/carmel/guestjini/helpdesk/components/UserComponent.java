@@ -3,7 +3,6 @@ package com.carmel.guestjini.helpdesk.components;
 import com.carmel.guestjini.helpdesk.config.YAMLConfig;
 import com.carmel.guestjini.helpdesk.response.UserResponse;
 import net.minidev.json.JSONArray;
-import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

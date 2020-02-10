@@ -47,7 +47,9 @@ public class TaskTicketCategoriesController {
                 taskTicketCategories.setId("");
             }
             if (taskTicketCategories.getOrgId() == null || taskTicketCategories.getOrgId().isEmpty()) {
-                taskTicketCategories.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization() != null) {
+                    taskTicketCategories.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             if (taskTicketCategories.getId().equals("")) {
                 taskTicketCategories.setCreatedBy(userInfo.getId());

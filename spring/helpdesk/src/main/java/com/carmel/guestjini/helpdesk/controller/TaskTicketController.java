@@ -1,11 +1,13 @@
 package com.carmel.guestjini.helpdesk.controller;
 
+import com.carmel.guestjini.helpdesk.common.SearchBuilder;
 import com.carmel.guestjini.helpdesk.common.TicketStatus;
 import com.carmel.guestjini.helpdesk.components.UserInformation;
 import com.carmel.guestjini.helpdesk.config.YAMLConfig;
 import com.carmel.guestjini.helpdesk.model.Principal.UserInfo;
 import com.carmel.guestjini.helpdesk.model.TaskAttachment;
 import com.carmel.guestjini.helpdesk.model.TaskTicket;
+import com.carmel.guestjini.helpdesk.request.SearchRequest;
 import com.carmel.guestjini.helpdesk.request.TicketRequest;
 import com.carmel.guestjini.helpdesk.response.TaskAttachmentResponse;
 import com.carmel.guestjini.helpdesk.response.TaskTicketResponse;
@@ -290,6 +292,14 @@ public class TaskTicketController {
         }
         logger.trace("Exiting");
         return taskTicketResponse;
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public TaskTicketResponse search(@RequestBody SearchRequest searchRequest){
+
+        SearchBuilder.buildSearch(TaskTicket.class, searchRequest);
+
+        return null;
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)

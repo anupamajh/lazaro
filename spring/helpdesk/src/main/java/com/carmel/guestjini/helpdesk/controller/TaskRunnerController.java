@@ -47,7 +47,9 @@ public class TaskRunnerController {
                 taskRunner.setId("");
             }
             if (taskRunner.getOrgId() == null || taskRunner.getOrgId().isEmpty()) {
-                taskRunner.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization() != null) {
+                    taskRunner.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             if (taskRunner.getId().equals("")) {
                 taskRunner.setCreatedBy(userInfo.getId());
