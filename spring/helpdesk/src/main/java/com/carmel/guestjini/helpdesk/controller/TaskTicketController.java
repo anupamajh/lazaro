@@ -24,6 +24,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.validation.Valid;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -48,6 +53,9 @@ public class TaskTicketController {
 
     @Autowired
     TaskAttachmentService taskAttachmentService;
+
+    @Autowired
+    EntityManager entityManager;
 
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -295,11 +303,44 @@ public class TaskTicketController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public TaskTicketResponse search(@RequestBody SearchRequest searchRequest){
+    public TaskTicketResponse search(@RequestBody SearchRequest searchRequest) {
+        TaskTicketResponse taskTicketResponse = new TaskTicketResponse();
+        UserInfo userInfo = userInformation.getUserInfo();
+        try {
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<TaskTicket> criteriaQuery = criteriaBuilder.createQuery(TaskTicket.class);
+            Root<TaskTicket> root = criteriaQuery.from(TaskTicket.class);
+            criteriaQuery = SearchBuilder.buildSearch(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root,
+                    TaskTicket.class,
+                    searchRequest
+            );
 
-        SearchBuilder.buildSearch(TaskTicket.class, searchRequest);
+            long totalRecords = SearchBuilder.getTotalRecordCount(
+                   entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root
+            );
+             TypedQuery<TaskTicket> typedQuery = entityManager.createQuery(criteriaQuery);
 
-        return null;
+            typedQuery.setFirstResult((searchRequest.getCurrentPage() - 1) * searchRequest.getPageSize());
+            typedQuery.setMaxResults(searchRequest.getPageSize());
+            List<TaskTicket> taskTicketList = typedQuery.getResultList();
+            taskTicketResponse.setCurrentRecords(taskTicketList.size());
+            taskTicketResponse.setTotalRecords(totalRecords);
+            taskTicketResponse.setSuccess(true);
+            taskTicketResponse.setError("");
+            taskTicketResponse.setTaskTicketList(taskTicketList);
+        }catch (Exception ex){
+            logger.error(ex.getMessage(), ex);
+            taskTicketResponse.setSuccess(false);
+            taskTicketResponse.setError(ex.getMessage());
+        }
+        return taskTicketResponse;
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)

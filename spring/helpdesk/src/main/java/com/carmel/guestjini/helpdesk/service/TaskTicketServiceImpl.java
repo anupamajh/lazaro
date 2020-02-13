@@ -41,4 +41,5 @@ public class TaskTicketServiceImpl implements TaskTicketService{
     public Page<TaskTicket> findAllByIsDeletedAndRequesterId(int isDeleted, String id, Pageable pageable) {
         return taskTicketRepository.findAllByIsDeletedAndRequesterId(isDeleted, id, pageable);
     }
+
 }
