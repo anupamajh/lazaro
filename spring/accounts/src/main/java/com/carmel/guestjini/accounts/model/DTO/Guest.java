@@ -1,6 +1,5 @@
 package com.carmel.guestjini.accounts.model.DTO;
 
-import java.awt.print.Book;
 import java.util.Date;
 
 public class Guest {
@@ -19,6 +18,9 @@ public class Guest {
     private Date actualCheckIn;
     private Date actualCheckout;
     private String packageId;
+    private String packageTitle;
+    private String inventoryPath;
+    private String rentUnitLabel;
     private double rent;
     private int rentUnit;
     private String promoCode;
@@ -274,5 +276,29 @@ public class Guest {
 
     public void setDeletedTime(Date deletedTime) {
         this.deletedTime = deletedTime;
+    }
+
+    public String getPackageTitle() {
+        return packageTitle;
+    }
+
+    public void setPackageTitle(String packageTitle) {
+        this.packageTitle = packageTitle;
+    }
+
+    public String getInventoryPath() {
+        return inventoryPath;
+    }
+
+    public void setInventoryPath(String inventoryPath) {
+        this.inventoryPath = inventoryPath;
+    }
+
+    public String getRentUnitLabel() {
+        return rentUnitLabel;
+    }
+
+    public void setRentUnitLabel(String rentUnitLabel) {
+        this.rentUnitLabel = rentUnitLabel;
     }
 }

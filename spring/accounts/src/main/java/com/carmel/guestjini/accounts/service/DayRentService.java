@@ -6,5 +6,5 @@ import com.carmel.guestjini.accounts.model.DTO.Guest;
 import java.util.List;
 
 public interface DayRentService {
-    List<AccountTicket> generateInvoices(Guest guest)  throws Exception;
+    void generateInvoices(Guest guest)  throws Exception;
 }

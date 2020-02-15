@@ -1,6 +1,5 @@
 package com.carmel.guestjini.accounts.service;
 
-import com.carmel.guestjini.accounts.common.GuestStatus;
 import com.carmel.guestjini.accounts.model.AccountTicket;
 import com.carmel.guestjini.accounts.model.DTO.Guest;
 import com.carmel.guestjini.accounts.repository.AccountTicketRepository;
@@ -10,10 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class AccountTicketServiceImpl implements AccountTicketService {
@@ -63,9 +60,9 @@ public class AccountTicketServiceImpl implements AccountTicketService {
     }
 
     @Override
-    public List<AccountTicket> generateDayInvoices(Guest guest) throws Exception {
+    public void generateDayInvoices(Guest guest) throws Exception {
         try {
-            return dayRentService.generateInvoices(guest);
+            dayRentService.generateInvoices(guest);
         } catch (Exception ex) {
             throw ex;
         }

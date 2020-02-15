@@ -1,6 +1,5 @@
 package com.carmel.guestjini.accounts.response;
 
-import com.carmel.guestjini.accounts.model.DTO.AccountTicketDTO;
 import com.carmel.guestjini.accounts.model.DTO.Guest;
 
 import java.util.List;

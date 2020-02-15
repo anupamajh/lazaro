@@ -15,6 +15,7 @@ public class MonthRentServiceImpl implements MonthRentService{
 
     @Override
     public List<AccountTicket> generateInvoices(Guest guest)   throws Exception{
+
         return null;
     }
 }

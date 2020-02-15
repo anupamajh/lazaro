@@ -37,6 +37,10 @@ public class AccountTicket {
     @Length(max = 40)
     private String guestId;
 
+    @Column(name = "parent_id")
+    @Length(max = 40)
+    private String parentId;
+
     @Column(name = "account_head_id")
     @Length(max = 40)
     private String accountHeadId;
@@ -144,6 +148,14 @@ public class AccountTicket {
 
     public void setGuestId(String guestId) {
         this.guestId = guestId;
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
     }
 
     public String getAccountHeadId() {

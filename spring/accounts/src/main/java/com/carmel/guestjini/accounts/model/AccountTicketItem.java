@@ -209,7 +209,7 @@ public class AccountTicketItem {
         return taxValueIdentifier;
     }
 
-    public void setTaxValueIdentifier(int taxValueIdentifier) {
+    public void setTaxValueIdentifier(Integer taxValueIdentifier) {
         this.taxValueIdentifier = taxValueIdentifier;
     }
 

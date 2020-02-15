@@ -283,11 +283,10 @@ public class AccountTicketController {
         logger.trace("Entering");
         AccountTicketResponse accountTicketResponse = new AccountTicketResponse();
         try {
-             if(guest == null){
+            if (guest == null) {
                 throw new Exception("Guest not received");
             }
-            List<AccountTicket> accountTickets = accountTicketService.generateDayInvoices(guest);
-            accountTicketResponse.setAccountTicketList(accountTickets);;
+            accountTicketService.generateDayInvoices(guest);
             accountTicketResponse.setSuccess(true);
             accountTicketResponse.setError("");
         } catch (Exception ex) {
@@ -304,11 +303,12 @@ public class AccountTicketController {
         logger.trace("Entering");
         AccountTicketResponse accountTicketResponse = new AccountTicketResponse();
         try {
-            if(guest == null){
+            if (guest == null) {
                 throw new Exception("Guest not received");
             }
-             List<AccountTicket> accountTickets = accountTicketService.generateMonthInvoices(guest);
-            accountTicketResponse.setAccountTicketList(accountTickets);;
+            List<AccountTicket> accountTickets = accountTicketService.generateMonthInvoices(guest);
+            accountTicketResponse.setAccountTicketList(accountTickets);
+            ;
             accountTicketResponse.setSuccess(true);
             accountTicketResponse.setError("");
         } catch (Exception ex) {

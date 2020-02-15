@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +24,7 @@ public interface AccountTicketService {
 
     void deleteAll(List<AccountTicket> accountTickets);
 
-    List<AccountTicket> generateDayInvoices(Guest guest) throws  Exception;
+    void generateDayInvoices(Guest guest) throws  Exception;
 
     List<AccountTicket> generateMonthInvoices(Guest guest) throws  Exception;
 }

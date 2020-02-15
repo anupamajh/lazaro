@@ -16,4 +16,8 @@ public interface AccountTicketRepository extends JpaRepository<AccountTicket, St
     Page<AccountTicket> findAll(Specification<AccountTicket> textInAllColumns, Pageable pageable);
 
     List<AccountTicket> findAllByGuestId(String guestId);
+
+    List<AccountTicket> findAllByGuestIdAndTicketIdentifierAndTicketStatus(String id, int transactionIdentifier, int ticketStatus);
+
+    List<AccountTicket> findAllByParentId(String id);
 }

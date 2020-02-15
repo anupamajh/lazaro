@@ -11,6 +11,7 @@ public class AccountTicketDTO {
     private String orgId;
     private String bookingId;
     private String guestId;
+    private String parentId;
     private String accountHeadId;
     private int ticketIdentifier;
     private String ticketNumber;
@@ -64,6 +65,7 @@ public class AccountTicketDTO {
         this.isDeleted = accountTicket.getIsDeleted();
         this.deletedBy = accountTicket.getDeletedBy();
         this.deletedTime = accountTicket.getDeletedTime();
+        this.parentId = accountTicket.getParentId();
     }
 
     public String getId() {
@@ -104,6 +106,14 @@ public class AccountTicketDTO {
 
     public void setGuestId(String guestId) {
         this.guestId = guestId;
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
     }
 
     public String getAccountHeadId() {
