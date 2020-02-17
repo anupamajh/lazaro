@@ -153,7 +153,7 @@ public class AccountTicketItem {
         return lineNo;
     }
 
-    public void setLineNo(int lineNo) {
+    public void setLineNo(Integer lineNo) {
         this.lineNo = lineNo;
     }
 

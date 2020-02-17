@@ -86,4 +86,15 @@ public abstract class GuestConstants {
     public static final int TICKET_STATUS_ACTIVE = 1;
     public static final int TICKET_STATUS_CANCELLED = 2;
 
+    public static final int STATUS_ACTIVE = 1;
+    public static final String STATUS_ACTIVE_LABEL = "ACTIVE";
+    public static final int STATUS_DISABLED = 2;
+    public static final String STATUS_DISABLED_LABEL = "DISABLED";
+
+    public static final int RENT_CYCLE_MONTH = 1;
+    public static final String RENT_CYCLE_MONTH_LABEL = "PER MONTH";
+
+    public static final int RENT_CYCLE_DAY = 2;
+    public static final String RENT_CYCLE_DAY_LABEL = "PER DAY";
+
 }

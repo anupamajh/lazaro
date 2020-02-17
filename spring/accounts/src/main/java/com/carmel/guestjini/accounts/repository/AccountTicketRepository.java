@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Date;
 import java.util.List;
 
 public interface AccountTicketRepository extends JpaRepository<AccountTicket, String> {
@@ -20,4 +21,12 @@ public interface AccountTicketRepository extends JpaRepository<AccountTicket, St
     List<AccountTicket> findAllByGuestIdAndTicketIdentifierAndTicketStatus(String id, int transactionIdentifier, int ticketStatus);
 
     List<AccountTicket> findAllByParentId(String id);
+
+    List<AccountTicket> findAllByGuestIdAndPeriodFromAndPeriodUptoAndTicketIdentifierAndTicketStatus(
+            String guestId,
+            Date periodFrom,
+            Date periodUpto,
+            int ticketIdentifier,
+            int ticketStatus
+    );
 }

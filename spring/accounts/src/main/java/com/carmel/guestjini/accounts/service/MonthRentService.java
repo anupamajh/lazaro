@@ -6,5 +6,5 @@ import com.carmel.guestjini.accounts.model.DTO.Guest;
 import java.util.List;
 
 public interface MonthRentService {
-    List<AccountTicket> generateInvoices(Guest guest)  throws Exception;
+    List<AccountTicket> generateInvoices(int month, int year, String guestId)  throws Exception;
 }

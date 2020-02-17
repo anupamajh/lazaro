@@ -12,6 +12,7 @@ public class YAMLConfig {
     private String dbServiceURL;
     private String inventoryServiceURL;
     private String accountsServiceURL;
+    private String bookingServiceURL;
 
     public YAMLConfig(){}
 
@@ -45,5 +46,13 @@ public class YAMLConfig {
 
     public void setAccountsServiceURL(String accountsServiceURL) {
         this.accountsServiceURL = accountsServiceURL;
+    }
+
+    public String getBookingServiceURL() {
+        return bookingServiceURL;
+    }
+
+    public void setBookingServiceURL(String bookingServiceURL) {
+        this.bookingServiceURL = bookingServiceURL;
     }
 }
