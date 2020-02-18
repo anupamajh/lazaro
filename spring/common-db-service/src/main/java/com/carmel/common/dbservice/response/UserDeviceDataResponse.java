@@ -1,7 +1,5 @@
 package com.carmel.common.dbservice.response;
 
-import com.carmel.common.dbservice.model.DTO.AddressBookDTO;
-import com.carmel.common.dbservice.model.DTO.GroupDTO;
 import com.carmel.common.dbservice.model.DTO.UserDeviceDataDTO;
 import com.carmel.common.dbservice.model.UserDeviceData;
 

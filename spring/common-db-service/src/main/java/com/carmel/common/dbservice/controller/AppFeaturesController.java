@@ -2,10 +2,13 @@ package com.carmel.common.dbservice.controller;
 
 import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.AppFeatures;
+import com.carmel.common.dbservice.model.DTO.AppFeatureTreeDTO;
+import com.carmel.common.dbservice.model.Role;
+import com.carmel.common.dbservice.model.User;
 import com.carmel.common.dbservice.model.UserInfo;
-import com.carmel.common.dbservice.response.AppFeatureResponse;
 import com.carmel.common.dbservice.response.AppFeaturesResponse;
 import com.carmel.common.dbservice.services.AppFeaturesService;
+import com.carmel.common.dbservice.services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,10 +23,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.carmel.common.dbservice.specifications.AppFeatureSpecification.textInAllColumns;
 
@@ -37,14 +38,17 @@ public class AppFeaturesController {
     AppFeaturesService appFeaturesService;
 
     @Autowired
+    UserService userService;
+
+    @Autowired
     UserInformation userInformation;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public AppFeatureResponse save(@Valid @RequestBody AppFeatures appFeatures) {
+    public AppFeaturesResponse save(@Valid @RequestBody AppFeatures appFeatures) {
         UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
-        AppFeatureResponse appFeatureResponse = new AppFeatureResponse();
+        AppFeaturesResponse appFeatureResponse = new AppFeaturesResponse();
         try {
             logger.trace("Data:{}", objectMapper.writeValueAsString(appFeatures));
             if (appFeatures.getParent() != null) {
@@ -83,11 +87,11 @@ public class AppFeaturesController {
     }
 
     @RequestMapping(value = "/trash", method = RequestMethod.POST)
-    public AppFeatureResponse moveToTrash(@RequestBody Map<String, String> formData) {
+    public AppFeaturesResponse moveToTrash(@RequestBody Map<String, String> formData) {
         ObjectMapper objectMapper = new ObjectMapper();
         UserInfo userInfo = userInformation.getUserInfo();
         logger.trace("Entering");
-        AppFeatureResponse appFeatureResponse = new AppFeatureResponse();
+        AppFeaturesResponse appFeatureResponse = new AppFeaturesResponse();
         try {
             Optional<AppFeatures> optionalAppFeature = appFeaturesService.findById(formData.get("id"));
             if (optionalAppFeature != null) {
@@ -113,10 +117,10 @@ public class AppFeaturesController {
     }
 
     @RequestMapping(value = "/get", method = RequestMethod.POST)
-    public AppFeatureResponse get(@RequestBody Map<String, String> formData) {
+    public AppFeaturesResponse get(@RequestBody Map<String, String> formData) {
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
-        AppFeatureResponse appFeatureResponse = new AppFeatureResponse();
+        AppFeaturesResponse appFeatureResponse = new AppFeaturesResponse();
         try {
             Optional<AppFeatures> optionalAppFeature = appFeaturesService.findById(formData.get("id"));
             if (optionalAppFeature != null) {
@@ -229,6 +233,50 @@ public class AppFeaturesController {
             appFeaturesResponse.setError(ex.getMessage());
         }
         logger.trace("Exiting");
+        return appFeaturesResponse;
+    }
+
+    @RequestMapping(value = "/get-deep-app-features", method = RequestMethod.POST)
+    public AppFeaturesResponse getDeepAppFeatures(Map<String, String> formData) {
+        List<AppFeatureTreeDTO> treeData;
+        AppFeaturesResponse appFeaturesResponse = new AppFeaturesResponse();
+        try {
+            String parentId = formData.get("parentId");
+            treeData = appFeaturesService.getTreeData(parentId);
+            appFeaturesResponse.setTreeData(treeData);
+            appFeaturesResponse.setSuccess(true);
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            appFeaturesResponse.setSuccess(false);
+            appFeaturesResponse.setError(ex.getMessage());
+        }
+        return appFeaturesResponse;
+    }
+
+    @RequestMapping(value = "/get-user-app-features", method = RequestMethod.POST)
+    public AppFeaturesResponse getUserAppFeatures() {
+        UserInfo userInfo = userInformation.getUserInfo();
+        logger.trace("Entering");
+        AppFeaturesResponse appFeaturesResponse = new AppFeaturesResponse();
+        try {
+            Optional<User> optionalUser = userService.findById(userInfo.getId());
+            optionalUser.orElseThrow(() ->
+                new Exception("User record not found")
+            );
+            List<Role> roles = optionalUser.get().getRoles();
+            List<String> ids = new ArrayList<>();
+            roles.forEach(role -> {
+                ids.addAll(role.getAppFeatures().stream().map(AppFeatures::getId).collect(Collectors.toList()));
+            });
+            List<AppFeatures> appFeaturesList =  appFeaturesService.findAllByIdInAndIsDeleted(ids, 0);
+            appFeaturesResponse.setSimpleAppFeaturesList(appFeaturesList);
+            appFeaturesResponse.setSuccess(true);
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            appFeaturesResponse.setSuccess(false);
+            appFeaturesResponse.setError(ex.getMessage());
+        }
         return appFeaturesResponse;
     }
 

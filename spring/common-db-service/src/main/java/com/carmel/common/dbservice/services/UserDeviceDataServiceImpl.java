@@ -2,7 +2,6 @@ package com.carmel.common.dbservice.services;
 
 import com.carmel.common.dbservice.model.UserDeviceData;
 import com.carmel.common.dbservice.repository.UserDeviceDataRepository;
-import com.carmel.common.dbservice.response.UserDeviceDataResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

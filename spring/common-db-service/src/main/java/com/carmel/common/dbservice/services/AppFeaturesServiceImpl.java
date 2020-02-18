@@ -1,6 +1,7 @@
 package com.carmel.common.dbservice.services;
 
 import com.carmel.common.dbservice.model.AppFeatures;
+import com.carmel.common.dbservice.model.DTO.AppFeatureTreeDTO;
 import com.carmel.common.dbservice.repository.AppFeaturesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,5 +62,27 @@ public class AppFeaturesServiceImpl implements AppFeaturesService{
     @Override
     public Page<AppFeatures> findAll(Specification<AppFeatures> textInAllColumns, Pageable pageable) {
         return appFeaturesRepository.findAll(textInAllColumns, pageable);
+    }
+
+    @Override
+    public List<AppFeatureTreeDTO> getTreeData(String parentId) {
+        List<AppFeatureTreeDTO> treeData = new ArrayList<>();
+        return generateTree(parentId, treeData);
+    }
+
+    private List<AppFeatureTreeDTO> generateTree(String parentId, List<AppFeatureTreeDTO> treeData){
+        List<AppFeatures> appFeaturesList = appFeaturesRepository.findAllByParentIdIs(parentId);
+        appFeaturesList.forEach(appFeatures -> {
+            AppFeatureTreeDTO appFeatureTreeDTO = new AppFeatureTreeDTO(appFeatures);
+            List<AppFeatureTreeDTO> treeDTOS = generateTree(appFeatureTreeDTO.getId(), new ArrayList<>());
+            appFeatureTreeDTO.setChildren(treeDTOS);
+            treeData.add(appFeatureTreeDTO);
+        });
+        return treeData;
+    }
+
+    @Override
+    public List<AppFeatures> findAllByIdInAndIsDeleted(List<String> ids, int isDeleted) {
+        return appFeaturesRepository.findAllByIdInAndIsDeleted(ids, isDeleted);
     }
 }

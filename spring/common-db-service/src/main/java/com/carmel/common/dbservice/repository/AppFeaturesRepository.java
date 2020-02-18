@@ -24,4 +24,8 @@ public interface AppFeaturesRepository extends JpaRepository<AppFeatures, String
     Page<AppFeatures> findAllByIsDeleted(int isDeleted, Pageable pageable);
 
     Page<AppFeatures> findAll(Specification<AppFeatures> textInAllColumns, Pageable pageable);
+
+    List<AppFeatures> findAllByParentIdIs(String parentId);
+
+    List<AppFeatures> findAllByIdInAndIsDeleted(List<String> ids, int isDeleted);
 }
