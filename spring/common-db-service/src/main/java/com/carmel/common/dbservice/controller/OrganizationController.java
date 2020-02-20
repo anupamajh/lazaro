@@ -51,7 +51,6 @@ public class OrganizationController {
                 Optional<Organization> optionalOrganization =
                         organizationService.findById(organization.getParent().getId());
                 organization.setParent(optionalOrganization.get());
-
             }
             if (checkDuplicate(organization)) {
                 organizationResponse.setOrganization(organization);
