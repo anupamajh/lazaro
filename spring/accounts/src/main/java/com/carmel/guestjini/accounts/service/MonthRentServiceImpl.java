@@ -1,7 +1,7 @@
 package com.carmel.guestjini.accounts.service;
 
-import com.carmel.guestjini.accounts.common.DateUtil;
 import com.carmel.guestjini.accounts.common.GuestConstants;
+import com.carmel.guestjini.accounts.common.SearchBuilder;
 import com.carmel.guestjini.accounts.components.BookingAdditionalChargeService;
 import com.carmel.guestjini.accounts.components.GuestService;
 import com.carmel.guestjini.accounts.components.UserInformation;
@@ -11,11 +11,20 @@ import com.carmel.guestjini.accounts.model.DTO.BookingAdditionalCharge;
 import com.carmel.guestjini.accounts.model.DTO.Guest;
 import com.carmel.guestjini.accounts.model.Principal.UserInfo;
 import com.carmel.guestjini.accounts.repository.AccountTicketRepository;
+import com.carmel.guestjini.accounts.request.SearchCriteria;
+import com.carmel.guestjini.accounts.request.SearchRequest;
+import com.carmel.guestjini.accounts.request.SearchUnit;
 import com.carmel.guestjini.accounts.response.BookingAdditionalChargeResponse;
 import com.carmel.guestjini.accounts.response.GuestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.*;
 
 @Service
@@ -35,6 +44,9 @@ public class MonthRentServiceImpl implements MonthRentService {
     @Autowired
     UserInformation userInformation;
 
+    @Autowired
+    EntityManager entityManager;
+
 
     private int month;
     private int year;
@@ -51,6 +63,7 @@ public class MonthRentServiceImpl implements MonthRentService {
 
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public List<AccountTicket> generateInvoices(int month, int year, String guestId) throws Exception {
         this.month = month;
         this.year = year;
@@ -59,6 +72,61 @@ public class MonthRentServiceImpl implements MonthRentService {
         this.periodFrom = period.get("start");
         this.periodUpto = period.get("end");
         if (guestId.equals(null)) {
+            SearchUnit searchUnit = new SearchUnit();
+            searchUnit.setOperator("between");
+            searchUnit.setValue(periodFrom.toString());
+            searchUnit.setValue1(periodUpto.toString());
+            List<SearchUnit> searchUnits = new ArrayList<>();
+            searchUnits.add(searchUnit);
+            SearchCriteria searchCriteria = new SearchCriteria();
+            searchCriteria.setCondition("and");
+            searchCriteria.setSearchUnitCondition("and");
+            searchCriteria.setSearchUnits(searchUnits);
+            List<SearchCriteria> searchCriteriaList = new ArrayList<>();
+            searchCriteriaList.add(searchCriteria);
+            SearchRequest searchRequest = new SearchRequest();
+            searchRequest.setSearchCriteria(searchCriteriaList);
+            searchRequest.setCurrentPage(0);
+            searchRequest.setPageSize(100000);
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<Guest> criteriaQuery = criteriaBuilder.createQuery(Guest.class);
+            Root<Guest> root = criteriaQuery.from(Guest.class);
+            criteriaQuery = SearchBuilder.buildSearch(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root,
+                    Guest.class,
+                    searchRequest
+            );
+            TypedQuery<Guest> typedQuery = entityManager.createQuery(criteriaQuery);
+            List<Guest> guestList = typedQuery.getResultList();
+            guestList.forEach(guest1 -> {
+                this.isFirstInvoice = false;
+                this.grossDiscount = 0.0;
+                this.grossDiscount = 0.0;
+                this.packageChargesRecurring = new ArrayList<>();
+                this.packageChargesOneTime = new ArrayList<>();
+                this.guestId = guest1.getId();
+                try {
+                    this._getGuest();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if (this.guest.getRentUnit() == GuestConstants.RENT_CYCLE_MONTH) {
+                    try {
+                        this._computeRent();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        this._saveGeneratedInvoice();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
 
         } else {
             this._getGuest();
@@ -168,7 +236,7 @@ public class MonthRentServiceImpl implements MonthRentService {
         }
     }
 
-    private AccountTicket _updateGeneratedRentInvoice(AccountTicket accountTicket) throws Exception{
+    private AccountTicket _updateGeneratedRentInvoice(AccountTicket accountTicket) throws Exception {
         try {
             String oldTicketId = accountTicket.getId();
 
