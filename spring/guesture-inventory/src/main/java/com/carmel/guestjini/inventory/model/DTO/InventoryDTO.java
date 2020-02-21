@@ -53,9 +53,11 @@ public class InventoryDTO {
             });
         }
         this.amenities = new ArrayList<>();
-        inventory.getAmenities().forEach(amenity -> {
-            this.amenities.add(new AmenityDTO(amenity));
-        });
+        if(inventory.getAmenities()!=null) {
+            inventory.getAmenities().forEach(amenity -> {
+                this.amenities.add(new AmenityDTO(amenity));
+            });
+        }
     }
 
     public String getId() {

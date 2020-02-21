@@ -57,7 +57,9 @@ public class PackageController {
                 aPackage.setId("");
             }
             if(aPackage.getOrgId() == null || aPackage.getOrgId().isEmpty()){
-                aPackage.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization() != null) {
+                    aPackage.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             if (aPackage.getId().equals("")) {
                 aPackage.setCreatedBy(userInfo.getId());

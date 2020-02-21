@@ -48,7 +48,9 @@ public class DocumentTemplateController {
                 documentTemplate.setId("");
             }
             if(documentTemplate.getOrgId() == null || documentTemplate.getOrgId().isEmpty()){
-                documentTemplate.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization() != null) {
+                    documentTemplate.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             if (documentTemplate.getId().equals("")) {
                 documentTemplate.setCreatedBy(userInfo.getId());

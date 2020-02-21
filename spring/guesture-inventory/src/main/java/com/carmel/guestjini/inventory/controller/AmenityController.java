@@ -63,7 +63,9 @@ public class AmenityController {
                 amenity.setId("");
             }
             if(amenity.getOrgId() == null || amenity.getOrgId().isEmpty()){
-                amenity.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization() != null) {
+                    amenity.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             if (amenity.getId().equals("")) {
                 amenity.setCreatedBy(userInfo.getId());

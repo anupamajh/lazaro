@@ -50,7 +50,9 @@ public class InventoryController {
         }
 
         if (inventory.getOrgId() == null || inventory.getOrgId().isEmpty()) {
-            inventory.setOrgId(userInfo.getDefaultOrganization().getId());
+            if(userInfo.getDefaultOrganization() != null) {
+                inventory.setOrgId(userInfo.getDefaultOrganization().getId());
+            }
         }
 
         try {
@@ -72,7 +74,7 @@ public class InventoryController {
                     inventory.setCreationTime(new Date());
                     inventory.setInventoryLocation(null);
                     savedInventory = inventoryService.save(inventory);
-                    inventoryLocation.setInventory(inventory);
+                    inventoryLocation.setInventory(savedInventory);
                     savedInventory.setInventoryLocation(inventoryLocation);
                     inventoryResponse.setInventory(inventoryService.save(savedInventory));
                 } else {

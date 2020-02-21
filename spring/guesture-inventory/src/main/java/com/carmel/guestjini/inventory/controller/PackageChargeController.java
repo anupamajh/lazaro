@@ -47,7 +47,9 @@ public class PackageChargeController {
                 packageCharge.setId("");
             }
             if(packageCharge.getOrgId() == null || packageCharge.getOrgId().isEmpty()){
-                packageCharge.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization() != null) {
+                    packageCharge.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             if (packageCharge.getId().equals("")) {
                 packageCharge.setCreatedBy(userInfo.getId());
