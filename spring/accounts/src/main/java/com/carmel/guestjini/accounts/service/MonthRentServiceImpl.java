@@ -335,7 +335,9 @@ public class MonthRentServiceImpl implements MonthRentService {
             UserInfo userInfo = userInformation.getUserInfo();
             accountTicket.setClientId(userInfo.getClient().getClientId());
             if (userInfo.getDefaultOrganization() != null) {
-                accountTicket.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization()!=null) {
+                    accountTicket.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             accountTicket.setParentId(ticketId);
             accountTicket.setTicketIdentifier(GuestConstants.TRANSACTION_IDENTIFIER_DEBIT_NOTE);
@@ -367,7 +369,9 @@ public class MonthRentServiceImpl implements MonthRentService {
             UserInfo userInfo = userInformation.getUserInfo();
             accountTicket.setClientId(userInfo.getClient().getClientId());
             if (userInfo.getDefaultOrganization() != null) {
-                accountTicket.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization()!=null) {
+                    accountTicket.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             accountTicket.setParentId(ticketId);
             accountTicket.setTicketIdentifier(GuestConstants.TRANSACTION_IDENTIFIER_BILL);

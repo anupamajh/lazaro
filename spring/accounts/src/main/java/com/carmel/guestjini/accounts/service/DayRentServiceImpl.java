@@ -167,7 +167,9 @@ public class DayRentServiceImpl implements DayRentService {
         bill = new AccountTicket();
         bill.setClientId(userInfo.getClient().getClientId());
         if (userInfo.getDefaultOrganization() != null) {
-            bill.setOrgId(userInfo.getDefaultOrganization().getId());
+            if(userInfo.getDefaultOrganization()!=null) {
+                bill.setOrgId(userInfo.getDefaultOrganization().getId());
+            }
         }
         bill.setTicketIdentifier(GuestConstants.TRANSACTION_IDENTIFIER_BILL);
         bill.setTicketNumber(String.valueOf(System.nanoTime()));
@@ -202,7 +204,9 @@ public class DayRentServiceImpl implements DayRentService {
         debitNote = new AccountTicket();
         debitNote.setClientId(userInfo.getClient().getClientId());
         if (userInfo.getDefaultOrganization() != null) {
-            debitNote.setOrgId(userInfo.getDefaultOrganization().getId());
+            if(userInfo.getDefaultOrganization()!=null) {
+                debitNote.setOrgId(userInfo.getDefaultOrganization().getId());
+            }
         }
         debitNote.setTicketIdentifier(GuestConstants.TRANSACTION_IDENTIFIER_DEBIT_NOTE);
         debitNote.setTicketNumber(String.valueOf(System.nanoTime()));
@@ -242,7 +246,9 @@ public class DayRentServiceImpl implements DayRentService {
         accountTicket = new AccountTicket();
         accountTicket.setClientId(userInfo.getClient().getClientId());
         if (userInfo.getDefaultOrganization() != null) {
-            accountTicket.setOrgId(userInfo.getDefaultOrganization().getId());
+            if(userInfo.getDefaultOrganization()!=null) {
+                accountTicket.setOrgId(userInfo.getDefaultOrganization().getId());
+            }
         }
         accountTicket.setTicketIdentifier(GuestConstants.TRANSACTION_IDENTIFIER_RENT_INVOICE);
         accountTicket.setTicketNumber(String.valueOf(System.nanoTime()));

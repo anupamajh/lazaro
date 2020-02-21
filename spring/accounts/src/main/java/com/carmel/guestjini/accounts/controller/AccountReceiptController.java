@@ -48,7 +48,9 @@ public class AccountReceiptController {
                 accountReceipts.setId("");
             }
             if (accountReceipts.getOrgId() == null || accountReceipts.getOrgId().isEmpty()) {
-                accountReceipts.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization()!=null) {
+                    accountReceipts.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             if (accountReceipts.getId().equals("")) {
                 accountReceipts.setCreatedBy(userInfo.getId());

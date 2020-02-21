@@ -51,7 +51,9 @@ public class AccountTicketController {
                 accountTicket.setId("");
             }
             if (accountTicket.getOrgId() == null || accountTicket.getOrgId().isEmpty()) {
-                accountTicket.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization()!=null) {
+                    accountTicket.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             if (accountTicket.getId().equals("")) {
                 accountTicket.setCreatedBy(userInfo.getId());
