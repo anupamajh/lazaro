@@ -36,9 +36,6 @@ public class User implements Serializable {
         this.userName = guest.getEmail();
         this.phone = guest.getPhone();
         this.isOperator = 0;
-        Organization organization = new Organization();
-        organization.setId(guest.getOrgId());
-        this.defaultOrganization = organization;
         Client client = new Client();
         client.setClientId(guest.getClientId());
         this.client = client;

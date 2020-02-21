@@ -48,7 +48,9 @@ public class BookingSourceController {
                 bookingSource.setId("");
             }
             if(bookingSource.getOrgId() == null || bookingSource.getOrgId().isEmpty()){
-                bookingSource.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization()!=null) {
+                    bookingSource.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             if (bookingSource.getId().equals("")) {
                 bookingSource.setCreatedBy(userInfo.getId());

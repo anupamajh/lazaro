@@ -1,6 +1,7 @@
 package com.carmel.guestjini.booking.controller;
 
 import com.carmel.guestjini.booking.common.BookingStatus;
+import com.carmel.guestjini.booking.common.DateUtil;
 import com.carmel.guestjini.booking.components.AccountReceiptsService;
 import com.carmel.guestjini.booking.components.InventoryService;
 import com.carmel.guestjini.booking.components.PackageService;
@@ -76,7 +77,9 @@ public class BookingController {
                 booking.setInventoryId("");
             }
             if (booking.getOrgId() == null || booking.getOrgId().isEmpty()) {
-                booking.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization()!=null) {
+                    booking.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             if (booking.getId().equals("")) {
                 booking.setCreatedBy(userInfo.getId());
@@ -465,6 +468,8 @@ public class BookingController {
                 }
                 String packageId = booking.getPackageId();
                 booking.setPackageId(null);
+                booking.setRent(0.0);
+                booking.setRentUnit(0);
                 bookingResponse.setBooking(bookingService.save(booking));
                 List<BookingAdditionalCharge> bookingAdditionalCharges = bookingAdditionalChargeService.findAllByPackageId(packageId);
                 bookingAdditionalChargeService.deleteAll(bookingAdditionalCharges);
@@ -508,13 +513,17 @@ public class BookingController {
                 }
                 Package aPackage = packageService.getPackage(packageId);
                 booking.setPackageId(aPackage.getId());
+                booking.setRent(aPackage.getRent());
+                booking.setRentUnit(aPackage.getRentCycle());
                 booking.setLastModifiedBy(userInfo.getId());
                 booking.setLastModifiedTime(new Date());
                 bookingResponse.setBooking(bookingService.save(booking));
                 BookingAdditionalCharge bookingAdditionalCharge;
                 for (PackageCharge packageCharge : aPackage.getPackageCharges()) {
                     bookingAdditionalCharge = new BookingAdditionalCharge(booking, packageCharge);
-                    bookingAdditionalCharge.setOrgId(userInfo.getDefaultOrganization().getId());
+                    if(userInfo.getDefaultOrganization()!=null) {
+                        bookingAdditionalCharge.setOrgId(userInfo.getDefaultOrganization().getId());
+                    }
                     bookingAdditionalCharge.setCreatedBy(userInfo.getId());
                     bookingAdditionalCharge.setCreationTime(new Date());
                     bookingAdditionalCharge.setClientId(userInfo.getClient().getClientId());
@@ -543,7 +552,7 @@ public class BookingController {
         BookingResponse bookingResponse = new BookingResponse();
         try {
             String bookingId = formData.get("bookingId") == null ? null : String.valueOf(formData.get("bookingId"));
-            Date actualCheckInDate = formData.get("actual_checkin") != null ? new Date(formData.get("actual_checkin")) : null;
+            Date actualCheckInDate = formData.get("actual_checkin") != null ? DateUtil.convertToDate(formData.get("actual_checkin")) : null;
             if (bookingId == null) {
                 throw new Exception("Booking ID not received");
             }

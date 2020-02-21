@@ -54,7 +54,9 @@ public class BookingAdditionalChargeController {
                 bookingAdditionalCharge.setId("");
             }
             if (bookingAdditionalCharge.getOrgId() == null || bookingAdditionalCharge.getOrgId().isEmpty()) {
-                bookingAdditionalCharge.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization()!=null) {
+                    bookingAdditionalCharge.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             if (bookingAdditionalCharge.getId().equals("")) {
                 bookingAdditionalCharge.setCreatedBy(userInfo.getId());
@@ -278,6 +280,32 @@ public class BookingAdditionalChargeController {
             logger.error(ex.getMessage(), ex);
             logger.error(ex.getMessage(), ex);
             bookingAdditionalChargeResponse.setSuccess(false);
+            bookingAdditionalChargeResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return bookingAdditionalChargeResponse;
+    }
+
+    @RequestMapping(value = "/get-additional-charges-by-type", method = RequestMethod.POST)
+    public BookingAdditionalChargeResponse getAdditionalChargesByType(@RequestBody Map<String, String> formData){
+        UserInfo userInfo = userInformation.getUserInfo();
+        logger.trace("Entering");
+        BookingAdditionalChargeResponse bookingAdditionalChargeResponse = new BookingAdditionalChargeResponse();
+        try {
+            String bookingId = formData.get("bookingId") == null ? null : String.valueOf(formData.get("bookingId"));
+            int billingCycle = formData.get("billingCycle") == null ? 0 : Integer.parseInt(formData.get("billingCycle"));
+            Optional<Booking> optionalBooking = bookingService.findById(bookingId);
+            optionalBooking.orElseThrow(()-> new Exception("Booking not found!!"));
+            Booking booking = optionalBooking.get();
+            bookingAdditionalChargeResponse.setBookingAdditionalChargeList(
+                    bookingAdditionalChargeService.findAllByIsDeletedAndClientIdAndBookingAndBillingCycle(0,
+                            userInfo.getClient().getClientId(),booking, billingCycle));
+            bookingAdditionalChargeResponse.setSuccess(true);
+            bookingAdditionalChargeResponse.setError("");
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            bookingAdditionalChargeResponse.setSuccess(true);
             bookingAdditionalChargeResponse.setError(ex.getMessage());
         }
         logger.trace("Exiting");

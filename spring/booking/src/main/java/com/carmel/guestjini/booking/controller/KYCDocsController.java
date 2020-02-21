@@ -52,7 +52,9 @@ public class KYCDocsController {
                 kycDocs.setId("");
             }
             if (kycDocs.getOrgId() == null || kycDocs.getOrgId().isEmpty()) {
-                kycDocs.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization()!=null) {
+                    kycDocs.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             if (kycDocs.getId().equals("")) {
                 kycDocs.setCreatedBy(userInfo.getId());

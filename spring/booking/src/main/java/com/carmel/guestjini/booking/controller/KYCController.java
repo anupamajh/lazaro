@@ -53,7 +53,9 @@ public class KYCController {
                 kyc.setId("");
             }
             if (kyc.getOrgId() == null || kyc.getOrgId().isEmpty()) {
-                kyc.setOrgId(userInfo.getDefaultOrganization().getId());
+                if(userInfo.getDefaultOrganization()!=null) {
+                    kyc.setOrgId(userInfo.getDefaultOrganization().getId());
+                }
             }
             if (kyc.getId().equals("")) {
                 kyc.setCreatedBy(userInfo.getId());

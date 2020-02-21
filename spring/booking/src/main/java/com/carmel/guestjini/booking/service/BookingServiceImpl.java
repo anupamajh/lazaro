@@ -177,7 +177,9 @@ public class BookingServiceImpl implements BookingService {
             user.setPassword("");
             UserResponse userResponse = userService.saveUser(user);
             if (!userResponse.isSuccess()) {
-                throw new Exception(userResponse.getError());
+                if(!userResponse.getError().contains("Duplicate")) {
+                    throw new Exception(userResponse.getError());
+                }
             }
             return guest;
         } catch (Exception ex) {
