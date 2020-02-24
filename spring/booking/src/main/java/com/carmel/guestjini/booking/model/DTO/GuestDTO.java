@@ -36,6 +36,8 @@ public class GuestDTO {
     private int isDeleted;
     private String deletedBy;
     private Date deletedTime;
+    private String packageTitle;
+    private String inventoryPath;
 
     public GuestDTO() {
     }
@@ -311,5 +313,21 @@ public class GuestDTO {
 
     public void setDeletedTime(Date deletedTime) {
         this.deletedTime = deletedTime;
+    }
+
+    public String getPackageTitle() {
+        return packageTitle;
+    }
+
+    public void setPackageTitle(String packageTitle) {
+        this.packageTitle = packageTitle;
+    }
+
+    public String getInventoryPath() {
+        return inventoryPath;
+    }
+
+    public void setInventoryPath(String inventoryPath) {
+        this.inventoryPath = inventoryPath;
     }
 }

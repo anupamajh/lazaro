@@ -16,6 +16,7 @@ public class DateUtil {
             add(new SimpleDateFormat("dd.M.yyyy hh:mm:ss a"));
             add(new SimpleDateFormat("dd.MMM.yyyy"));
             add(new SimpleDateFormat("dd-MMM-yyyy"));
+            add(new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy"));
         }
     };
 
