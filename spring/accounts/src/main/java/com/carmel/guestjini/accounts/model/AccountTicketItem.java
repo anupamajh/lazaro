@@ -63,7 +63,7 @@ public class AccountTicketItem {
     private Double taxValue;
 
     @Column(name = "tax_value_identifier")
-    private  int taxValueIdentifier;
+    private  Integer taxValueIdentifier;
 
     @Column(name = "item_total")
     private Double itemTotal;

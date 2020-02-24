@@ -27,10 +27,30 @@ public class GuestService {
         headers.set("Authorization", "Bearer "+ oAuth2AuthenticationDetails.getTokenValue());
         headers.setContentType(MediaType.APPLICATION_JSON);
         JSONObject postData = new JSONObject();
-        postData.put("guestId",guestId);
+        postData.put("id",guestId);
         HttpEntity<String> entity = new HttpEntity<>(postData.toJSONString(), headers);
         ResponseEntity<GuestResponse> result =restTemplate.exchange(
-                yamlConfig.getBookingServiceURL() + "/guest/gete",
+                yamlConfig.getBookingServiceURL() + "/guest/get",
+                HttpMethod.POST,
+                entity,
+                GuestResponse.class
+        );
+        return result.getBody();
+    }
+
+    public GuestResponse getGuestWithinPeriod(int month, int year){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        OAuth2AuthenticationDetails oAuth2AuthenticationDetails = (OAuth2AuthenticationDetails) auth.getDetails();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", "Bearer "+ oAuth2AuthenticationDetails.getTokenValue());
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        JSONObject postData = new JSONObject();
+        postData.put("month",month);
+        postData.put("year",year);
+        HttpEntity<String> entity = new HttpEntity<>(postData.toJSONString(), headers);
+        ResponseEntity<GuestResponse> result =restTemplate.exchange(
+                yamlConfig.getBookingServiceURL() + "/guest/get-guest-in-period",
                 HttpMethod.POST,
                 entity,
                 GuestResponse.class

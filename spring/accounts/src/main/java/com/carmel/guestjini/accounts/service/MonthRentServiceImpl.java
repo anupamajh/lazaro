@@ -71,37 +71,9 @@ public class MonthRentServiceImpl implements MonthRentService {
         HashMap<String, Date> period = this._getRentPeriod();
         this.periodFrom = period.get("start");
         this.periodUpto = period.get("end");
-        if (guestId.equals(null)) {
-            SearchUnit searchUnit = new SearchUnit();
-            searchUnit.setOperator("between");
-            searchUnit.setValue(periodFrom.toString());
-            searchUnit.setValue1(periodUpto.toString());
-            List<SearchUnit> searchUnits = new ArrayList<>();
-            searchUnits.add(searchUnit);
-            SearchCriteria searchCriteria = new SearchCriteria();
-            searchCriteria.setCondition("and");
-            searchCriteria.setSearchUnitCondition("and");
-            searchCriteria.setSearchUnits(searchUnits);
-            List<SearchCriteria> searchCriteriaList = new ArrayList<>();
-            searchCriteriaList.add(searchCriteria);
-            SearchRequest searchRequest = new SearchRequest();
-            searchRequest.setSearchCriteria(searchCriteriaList);
-            searchRequest.setCurrentPage(0);
-            searchRequest.setPageSize(100000);
-            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-            CriteriaQuery<Guest> criteriaQuery = criteriaBuilder.createQuery(Guest.class);
-            Root<Guest> root = criteriaQuery.from(Guest.class);
-            criteriaQuery = SearchBuilder.buildSearch(
-                    entityManager,
-                    criteriaBuilder,
-                    criteriaQuery,
-                    root,
-                    Guest.class,
-                    searchRequest
-            );
-            TypedQuery<Guest> typedQuery = entityManager.createQuery(criteriaQuery);
-            List<Guest> guestList = typedQuery.getResultList();
-            guestList.forEach(guest1 -> {
+        if (guestId == null) {
+            GuestResponse guestResponse = guestService.getGuestWithinPeriod(this.month, this.year);
+            guestResponse.getGuestList().forEach(guest1 -> {
                 this.isFirstInvoice = false;
                 this.grossDiscount = 0.0;
                 this.grossDiscount = 0.0;
@@ -335,7 +307,7 @@ public class MonthRentServiceImpl implements MonthRentService {
             UserInfo userInfo = userInformation.getUserInfo();
             accountTicket.setClientId(userInfo.getClient().getClientId());
             if (userInfo.getDefaultOrganization() != null) {
-                if(userInfo.getDefaultOrganization()!=null) {
+                if (userInfo.getDefaultOrganization() != null) {
                     accountTicket.setOrgId(userInfo.getDefaultOrganization().getId());
                 }
             }
@@ -369,7 +341,7 @@ public class MonthRentServiceImpl implements MonthRentService {
             UserInfo userInfo = userInformation.getUserInfo();
             accountTicket.setClientId(userInfo.getClient().getClientId());
             if (userInfo.getDefaultOrganization() != null) {
-                if(userInfo.getDefaultOrganization()!=null) {
+                if (userInfo.getDefaultOrganization() != null) {
                     accountTicket.setOrgId(userInfo.getDefaultOrganization().getId());
                 }
             }
@@ -551,7 +523,7 @@ public class MonthRentServiceImpl implements MonthRentService {
             calendar.setTime(this.periodFrom);
             Calendar calendarScheduledCheckin = Calendar.getInstance();
             calendarScheduledCheckin.setTime(this.periodUpto);
-            return (this.guest.getScheduledCheckout().before(this.periodUpto) && this.guest.getScheduledCheckout().after(this.periodFrom));
+            return (this.guest.getScheduledCheckIn().before(this.periodFrom) && this.guest.getScheduledCheckout().after(this.periodFrom));
         } catch (Exception ex) {
             throw ex;
         }

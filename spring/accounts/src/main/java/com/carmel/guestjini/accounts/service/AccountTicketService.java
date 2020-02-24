@@ -26,5 +26,5 @@ public interface AccountTicketService {
 
     void generateDayInvoices(Guest guest) throws  Exception;
 
-    List<AccountTicket> generateMonthInvoices(Guest guest) throws  Exception;
+    void generateMonthInvoices(String guestId, int month, int year) throws  Exception;
 }

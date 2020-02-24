@@ -29,10 +29,10 @@ public class BookingAdditionalChargeService {
         headers.set("Authorization", "Bearer "+ oAuth2AuthenticationDetails.getTokenValue());
         headers.setContentType(MediaType.APPLICATION_JSON);
         JSONObject postData = new JSONObject();
-        postData.put("bookingId", guest.getBooking());
+        postData.put("bookingId", guest.getBooking().getId());
         postData.put("billingCycle", "2");
         HttpEntity<String> entity = new HttpEntity<>(postData.toJSONString(), headers);
-        ResponseEntity<BookingAdditionalChargeResponse> result =restTemplate.exchange(yamlConfig.getInventoryServiceURL() + "/booking-additional-charges/get-additional-charges-by-type", HttpMethod.POST, entity, BookingAdditionalChargeResponse.class);
+        ResponseEntity<BookingAdditionalChargeResponse> result =restTemplate.exchange(yamlConfig.getBookingServiceURL() + "/booking-additional-charges/get-additional-charges-by-type", HttpMethod.POST, entity, BookingAdditionalChargeResponse.class);
         return result.getBody();
     }
 
@@ -44,10 +44,10 @@ public class BookingAdditionalChargeService {
         headers.set("Authorization", "Bearer "+ oAuth2AuthenticationDetails.getTokenValue());
         headers.setContentType(MediaType.APPLICATION_JSON);
         JSONObject postData = new JSONObject();
-        postData.put("bookingId", guest.getBooking());
+        postData.put("bookingId", guest.getBooking().getId());
         postData.put("billingCycle", "1");
         HttpEntity<String> entity = new HttpEntity<>(postData.toJSONString(), headers);
-        ResponseEntity<BookingAdditionalChargeResponse> result =restTemplate.exchange(yamlConfig.getInventoryServiceURL() + "/booking-additional-charges/get-additional-charges-by-type", HttpMethod.POST, entity, BookingAdditionalChargeResponse.class);
+        ResponseEntity<BookingAdditionalChargeResponse> result =restTemplate.exchange(yamlConfig.getBookingServiceURL() + "/booking-additional-charges/get-additional-charges-by-type", HttpMethod.POST, entity, BookingAdditionalChargeResponse.class);
         return result.getBody();
     }
 

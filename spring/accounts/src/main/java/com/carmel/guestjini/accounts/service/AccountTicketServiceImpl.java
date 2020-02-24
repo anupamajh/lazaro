@@ -69,10 +69,9 @@ public class AccountTicketServiceImpl implements AccountTicketService {
     }
 
     @Override
-    public List<AccountTicket> generateMonthInvoices(Guest guest) throws Exception {
+    public void generateMonthInvoices(String guestId, int month, int year) throws Exception {
         try {
-            return null;
-            //return monthRentService.generateInvoices(guest);
+            monthRentService.generateInvoices(month,year,guestId);
         } catch (Exception ex) {
             throw ex;
         }

@@ -22,10 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static com.carmel.guestjini.accounts.specification.AccountTicketSpecification.textInAllColumns;
 
@@ -301,16 +298,15 @@ public class AccountTicketController {
 
     @RequestMapping(value = "/generate-month-invoices")
     @Transactional(rollbackFor = Exception.class)
-    public AccountTicketResponse generateMonthInvoices(@RequestBody Guest guest) {
+    public AccountTicketResponse generateMonthInvoices(@RequestBody HashMap<String, String> formData) {
         logger.trace("Entering");
         AccountTicketResponse accountTicketResponse = new AccountTicketResponse();
         try {
-            if (guest == null) {
-                throw new Exception("Guest not received");
-            }
-            List<AccountTicket> accountTickets = accountTicketService.generateMonthInvoices(guest);
-            accountTicketResponse.setAccountTicketList(accountTickets);
-            ;
+            String guestId = formData.get("guestId");
+            int month = (formData.get("month") == null)? 0 : Integer.parseInt(formData.get("month"));
+            int year = (formData.get("year") == null)? 0 : Integer.parseInt(formData.get("year"));
+             accountTicketService.generateMonthInvoices(guestId, month, year);
+           // accountTicketResponse.setAccountTicketList(accountTickets);
             accountTicketResponse.setSuccess(true);
             accountTicketResponse.setError("");
         } catch (Exception ex) {
