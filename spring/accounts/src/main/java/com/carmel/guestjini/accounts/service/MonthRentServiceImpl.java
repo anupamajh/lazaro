@@ -65,6 +65,9 @@ public class MonthRentServiceImpl implements MonthRentService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public List<AccountTicket> generateInvoices(int month, int year, String guestId) throws Exception {
+        if (month != 0) {
+            month -= 1;
+        }
         this.month = month;
         this.year = year;
         this.guestId = guestId;
@@ -120,16 +123,17 @@ public class MonthRentServiceImpl implements MonthRentService {
             this.isFirstInvoice = this._isCheckedInThisMonth();
             if (this.isFirstInvoice == true) {
                 Calendar calendar = Calendar.getInstance();
+                calendar.setTime(this.guest.getScheduledCheckIn());
                 int guestDays = 0;
                 int scheduledCheckin = calendar.get(Calendar.DAY_OF_MONTH);
                 if (scheduledCheckin == 1) {
                     guestDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
                 } else {
                     int lastDayOfMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-                    guestDays = (int) (Math.floor(lastDayOfMonth - scheduledCheckin) / (60 * 60 * 24));
+                    guestDays = (int) (lastDayOfMonth - scheduledCheckin);
                 }
                 int scheduledCheckInMonthDays = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-                this.grossRent = Math.floor(((this.guest.getRent() * guestDays) / scheduledCheckInMonthDays));
+                this.grossRent = Math.floor(((this.guest.getRent() * guestDays) / scheduledCheckInMonthDays) * 100) / 100;
                 this.grossDiscount = this._getDiscount();
             } else if (this._isStayedInThisMonth()) {
                 this.grossRent = this.guest.getRent();
@@ -183,9 +187,11 @@ public class MonthRentServiceImpl implements MonthRentService {
             if (accountTicket == null) {
                 accountTicket = this._createGeneratedRentInvoice();
                 this.reTotal(accountTicket);
+                accountTicketRepository.save(accountTicket);
             } else {
                 accountTicket = this._updateGeneratedRentInvoice(accountTicket);
                 this.reTotal(accountTicket);
+                accountTicketRepository.save(accountTicket);
             }
 
 
@@ -286,18 +292,18 @@ public class MonthRentServiceImpl implements MonthRentService {
         try {
             AccountTicketItem accountTicketItem = new AccountTicketItem();
             accountTicketItem.setTicketId(ticketId);
-            accountTicketItem.setLineNo(null);
+            accountTicketItem.setLineNo(0);
             accountTicketItem.setItemNarration(bookingAdditionalCharge.getTitle());
             accountTicketItem.setRate(bookingAdditionalCharge.getAmount());
             accountTicketItem.setQty(1.0);
             accountTicketItem.setQtyUnit(null);
             accountTicketItem.setSubTotal(bookingAdditionalCharge.getAmount());
             accountTicketItem.setTaxValue(0.0);
-            accountTicketItem.setTaxValueIdentifier(null);
+            accountTicketItem.setTaxValueIdentifier(0);
             accountTicketItem.setItemTotal(bookingAdditionalCharge.getAmount());
             accountTicketItemService.save(accountTicketItem);
         } catch (Exception ex) {
-
+            throw ex;
         }
     }
 

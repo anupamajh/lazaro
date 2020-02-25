@@ -42,7 +42,7 @@ public class AccountTicketItem {
 
     @Column(name = "line_no")
     @NotNull(message = "Line number cannot be null")
-    private int lineNo;
+    private Integer lineNo;
 
     @Column(name = "item_narration")
     private String itemNarration;
