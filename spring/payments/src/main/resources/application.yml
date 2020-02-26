@@ -1,6 +1,23 @@
 server:
   port: 8012
 
+spring:
+  application:
+    name: guesture-payment-service
+  datasource:
+    url: jdbc:mysql://139.59.32.238:3306/spring_dev?createDatabaseIfNotExist=true&useSSL=false
+    username: jacksparrow
+    password: TH_12rthahalli
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: true
+    database: mysql
+
 paytm.payment:
   sandbox:
     merchantId: IrinaH93005971299457
@@ -17,9 +34,6 @@ paytm.payment:
       INDUSTRY_TYPE_ID: ${paytm.payment.sandbox.industrytypeid}
       WEBSITE: ${paytm.payment.sandbox.website}
       CALLBACK_URL: ${paytm.payment.sandbox.callbackUrl}
-spring:
-  application:
-    name: guesture-payment-service
 
 eureka:
   client:

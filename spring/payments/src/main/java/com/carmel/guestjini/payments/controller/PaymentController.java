@@ -1,6 +1,8 @@
 package com.carmel.guestjini.payments.controller;
 
 import com.carmel.guestjini.payments.config.PaytmDetails;
+import com.carmel.guestjini.payments.model.PaymentStatus;
+import com.carmel.guestjini.payments.service.PaymentStatusService;
 import com.paytm.pg.merchant.CheckSumServiceHelper;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.TreeMap;
 
 @Controller
@@ -27,6 +30,9 @@ public class PaymentController {
 
     @Autowired
     private Environment env;
+
+    @Autowired
+    PaymentStatusService paymentStatusService;
 
     @GetMapping("/")
     public String home() {
@@ -48,6 +54,11 @@ public class PaymentController {
         parameters.put("CUST_ID", customerId);
         String checkSum = getCheckSum(parameters);
         parameters.put("CHECKSUMHASH", checkSum);
+        PaymentStatus paymentStatus = new PaymentStatus();
+        paymentStatus.setId(orderId);
+        paymentStatus.setCustomerId(customerId);
+        paymentStatus.setOrderId(orderId);
+        paymentStatusService.save(paymentStatus);
         modelAndView.addAllObjects(parameters);
         return modelAndView;
     }
@@ -75,7 +86,7 @@ public class PaymentController {
         postData.put("ORDERID", orderId);
         postData.put("CHECKSUMHASH", checkSum);
         HttpEntity<String> entity = new HttpEntity<>(postData.toString(), headers);
-        ResponseEntity<JSONObject> result = restTemplate.exchange(uri, HttpMethod.POST, entity, JSONObject.class);
+        ResponseEntity<String> result = restTemplate.exchange(uri, HttpMethod.POST, entity, String.class);
 
         System.out.println(result);
         return "check-status-result";
@@ -92,6 +103,7 @@ public class PaymentController {
             paytmChecksum = mapData.get("CHECKSUMHASH")[0];
         }
         String result;
+        Optional<PaymentStatus> optionalPaymentStatus = paymentStatusService.findById(parameters.get("ORDERID"));
 
         boolean isValideChecksum = false;
         System.out.println("RESULT : " + parameters.toString());
@@ -107,11 +119,41 @@ public class PaymentController {
                 result = "Checksum mismatched";
             }
         } catch (Exception e) {
+            if(optionalPaymentStatus.isPresent()){
+                PaymentStatus paymentStatus = optionalPaymentStatus.get();
+                paymentStatus.setBankName(parameters.get("BANKNAME"));
+                paymentStatus.setBankTxnId(parameters.get("BANKTXNID"));
+                paymentStatus.setCurrency(parameters.get("CURRENCY"));
+                paymentStatus.setGateway(parameters.get("GATEWAYNAME"));
+                paymentStatus.setMid(parameters.get("MID"));
+                paymentStatus.setPaymentMode(parameters.get("PAYMENTMODE"));
+                paymentStatus.setRespCode(parameters.get("RESPCODE"));
+                paymentStatus.setRespMsg(parameters.get("RESPMSG"));
+                paymentStatus.setStatus(parameters.get("STATUS")); paymentStatus.setIsComplete(1);
+                paymentStatusService.save(paymentStatus);
+            }
             result = e.toString();
         }
         model.addAttribute("result", result);
         parameters.remove("CHECKSUMHASH");
         model.addAttribute("parameters", parameters);
+        if(optionalPaymentStatus.isPresent()){
+            PaymentStatus paymentStatus = optionalPaymentStatus.get();
+            paymentStatus.setBankName(parameters.get("BANKNAME"));
+            paymentStatus.setBankTxnId(parameters.get("BANKTXNID"));
+            paymentStatus.setCurrency(parameters.get("CURRENCY"));
+            paymentStatus.setGateway(parameters.get("GATEWAYNAME"));
+            paymentStatus.setMid(parameters.get("MID"));
+            paymentStatus.setPaymentMode(parameters.get("PAYMENTMODE"));
+            paymentStatus.setRespCode(parameters.get("RESPCODE"));
+            paymentStatus.setRespMsg(parameters.get("RESPMSG"));
+            paymentStatus.setStatus(parameters.get("STATUS"));
+            paymentStatus.setTxnAmount(parameters.get("TXNAMOUNT"));
+            paymentStatus.setTxnDate(parameters.get("TXNDATE"));
+            paymentStatus.setTxnId(parameters.get("TXNID"));
+            paymentStatus.setIsComplete(1);
+            paymentStatusService.save(paymentStatus);
+        }
         return "pgresponse";
     }
 
