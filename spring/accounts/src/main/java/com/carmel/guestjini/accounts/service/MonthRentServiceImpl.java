@@ -1,7 +1,6 @@
 package com.carmel.guestjini.accounts.service;
 
 import com.carmel.guestjini.accounts.common.GuestConstants;
-import com.carmel.guestjini.accounts.common.SearchBuilder;
 import com.carmel.guestjini.accounts.components.BookingAdditionalChargeService;
 import com.carmel.guestjini.accounts.components.GuestService;
 import com.carmel.guestjini.accounts.components.UserInformation;
@@ -11,9 +10,6 @@ import com.carmel.guestjini.accounts.model.DTO.BookingAdditionalCharge;
 import com.carmel.guestjini.accounts.model.DTO.Guest;
 import com.carmel.guestjini.accounts.model.Principal.UserInfo;
 import com.carmel.guestjini.accounts.repository.AccountTicketRepository;
-import com.carmel.guestjini.accounts.request.SearchCriteria;
-import com.carmel.guestjini.accounts.request.SearchRequest;
-import com.carmel.guestjini.accounts.request.SearchUnit;
 import com.carmel.guestjini.accounts.response.BookingAdditionalChargeResponse;
 import com.carmel.guestjini.accounts.response.GuestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.util.*;
 
 @Service

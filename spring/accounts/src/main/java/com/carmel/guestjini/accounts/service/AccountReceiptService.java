@@ -18,4 +18,6 @@ public interface AccountReceiptService {
     Page<AccountReceipts> findAllByIsDeletedAndBookingId(int isDeleted, String bookingId, Pageable pageable);
 
     Page<AccountReceipts> findAll(Specification<AccountReceipts> textInAllColumns, Pageable pageable);
+
+    List<AccountReceipts> findAllByBookingIdAndReceiptStatusAndIsDeleted(String id, int receiptStatus, int isDeleted);
 }

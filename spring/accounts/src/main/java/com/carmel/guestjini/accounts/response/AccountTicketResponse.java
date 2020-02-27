@@ -2,6 +2,7 @@ package com.carmel.guestjini.accounts.response;
 
 import com.carmel.guestjini.accounts.model.AccountTicket;
 import com.carmel.guestjini.accounts.model.DTO.AccountTicketDTO;
+import com.carmel.guestjini.accounts.model.DTO.TransactionData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 public class AccountTicketResponse {
     private AccountTicketDTO accountTicket;
     private List<AccountTicketDTO> accountTicketList;
+    private List<TransactionData> ledger;
     private long totalPages;
     private long totalRecords;
     private long currentRecords;
@@ -32,6 +34,14 @@ public class AccountTicketResponse {
         accountTicketList.forEach(accountTicket1 -> {
             this.accountTicketList.add(new AccountTicketDTO(accountTicket1));
         });
+    }
+
+    public List<TransactionData> getLedger() {
+        return ledger;
+    }
+
+    public void setLedger(List<TransactionData> ledger) {
+        this.ledger = ledger;
     }
 
     public long getTotalPages() {

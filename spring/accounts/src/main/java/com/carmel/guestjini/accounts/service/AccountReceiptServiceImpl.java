@@ -40,4 +40,9 @@ public class AccountReceiptServiceImpl implements AccountReceiptService{
     public Page<AccountReceipts> findAll(Specification<AccountReceipts> textInAllColumns, Pageable pageable) {
         return accountReceiptRepository.findAll(textInAllColumns, pageable);
     }
+
+    @Override
+    public List<AccountReceipts> findAllByBookingIdAndReceiptStatusAndIsDeleted(String id, int receiptStatus, int isDeleted) {
+        return accountReceiptRepository.findAllByBookingIdAndReceiptStatusAndIsDeleted(id, receiptStatus, isDeleted);
+    }
 }

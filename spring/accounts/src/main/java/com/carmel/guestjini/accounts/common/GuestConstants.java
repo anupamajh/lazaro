@@ -97,4 +97,7 @@ public abstract class GuestConstants {
     public static final int RENT_CYCLE_DAY = 2;
     public static final String RENT_CYCLE_DAY_LABEL = "PER DAY";
 
+    public static final int RECEIPT_STATUS_ACTIVE     = 1;
+    public static final int RECEIPT_STATUS_CANCELLED  = 2;
+
 }

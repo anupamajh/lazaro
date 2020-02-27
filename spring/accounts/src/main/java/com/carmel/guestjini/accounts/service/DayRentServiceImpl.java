@@ -46,10 +46,54 @@ public class DayRentServiceImpl implements DayRentService {
     @Autowired
     BookingAdditionalChargeService bookingAdditionalChargeService;
 
+
+    @Override
+    public List<AccountTicket> getGuestTickets(Guest guest, int ticketIdentifier) {
+        List<AccountTicket> result = new ArrayList<>();
+        try {
+            this._computeRent(guest);
+            switch (ticketIdentifier) {
+                case GuestConstants.TRANSACTION_IDENTIFIER_RENT_INVOICE: {
+                    result = accountTicketRepository
+                            .findAllByGuestIdAndTicketIdentifierAndTicketStatus(
+                                    guest.getId(),
+                                    GuestConstants.TRANSACTION_IDENTIFIER_RENT_INVOICE,
+                                    GuestConstants.TICKET_STATUS_ACTIVE
+                            );
+                }
+                break;
+                case GuestConstants.TRANSACTION_IDENTIFIER_BILL: {
+                    result = accountTicketRepository
+                            .findAllByGuestIdAndTicketIdentifierAndTicketStatus(
+                                    guest.getId(),
+                                    GuestConstants.TRANSACTION_IDENTIFIER_BILL,
+                                    GuestConstants.TICKET_STATUS_ACTIVE
+                            );
+                }
+                break;
+                case GuestConstants.TRANSACTION_IDENTIFIER_DEBIT_NOTE: {
+                    result = accountTicketRepository
+                            .findAllByGuestIdAndTicketIdentifierAndTicketStatus(
+                                    guest.getId(),
+                                    GuestConstants.TRANSACTION_IDENTIFIER_DEBIT_NOTE,
+                                    GuestConstants.TICKET_STATUS_ACTIVE
+                            );
+                }
+                break;
+            }
+        } catch (Exception ex) {
+
+        }
+        return result;
+    }
+
     @Override
     public void generateInvoices(Guest guest) throws Exception {
         this._computeRent(guest);
         this._saveTransaction(guest);
+        this.rentItems = new ArrayList<>();
+        this.debitNoteItems = new ArrayList<>();
+        this.billItems = new ArrayList<>();
     }
 
     private void _saveTransaction(Guest guest) {
@@ -138,9 +182,6 @@ public class DayRentServiceImpl implements DayRentService {
                 this.finalRecurringDiscount += recurringDiscount;
             }
             this._prepareTransactions(guest, startDate, endDate);
-            this.rentItems = new ArrayList<>();
-            this.debitNoteItems = new ArrayList<>();
-            this.billItems = new ArrayList<>();
         } catch (Exception ex) {
             throw ex;
         }
@@ -167,7 +208,7 @@ public class DayRentServiceImpl implements DayRentService {
         bill = new AccountTicket();
         bill.setClientId(userInfo.getClient().getClientId());
         if (userInfo.getDefaultOrganization() != null) {
-            if(userInfo.getDefaultOrganization()!=null) {
+            if (userInfo.getDefaultOrganization() != null) {
                 bill.setOrgId(userInfo.getDefaultOrganization().getId());
             }
         }
@@ -204,7 +245,7 @@ public class DayRentServiceImpl implements DayRentService {
         debitNote = new AccountTicket();
         debitNote.setClientId(userInfo.getClient().getClientId());
         if (userInfo.getDefaultOrganization() != null) {
-            if(userInfo.getDefaultOrganization()!=null) {
+            if (userInfo.getDefaultOrganization() != null) {
                 debitNote.setOrgId(userInfo.getDefaultOrganization().getId());
             }
         }
@@ -246,7 +287,7 @@ public class DayRentServiceImpl implements DayRentService {
         accountTicket = new AccountTicket();
         accountTicket.setClientId(userInfo.getClient().getClientId());
         if (userInfo.getDefaultOrganization() != null) {
-            if(userInfo.getDefaultOrganization()!=null) {
+            if (userInfo.getDefaultOrganization() != null) {
                 accountTicket.setOrgId(userInfo.getDefaultOrganization().getId());
             }
         }

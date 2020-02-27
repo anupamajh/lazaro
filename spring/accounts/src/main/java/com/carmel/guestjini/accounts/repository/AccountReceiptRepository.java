@@ -14,4 +14,6 @@ public interface AccountReceiptRepository extends JpaRepository<AccountReceipts,
     Page<AccountReceipts> findAll(Specification<AccountReceipts> textInAllColumns, Pageable pageable);
 
     Page<AccountReceipts> findAllByIsDeletedAndBookingId(int isDeleted, String bookingId, Pageable pageable);
+
+    List<AccountReceipts> findAllByBookingIdAndReceiptStatusAndIsDeleted(String id, int receiptStatus, int isDeleted);
 }

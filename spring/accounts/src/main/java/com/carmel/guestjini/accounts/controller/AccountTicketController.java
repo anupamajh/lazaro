@@ -4,9 +4,11 @@ import com.carmel.guestjini.accounts.common.AccountTicketStatus;
 import com.carmel.guestjini.accounts.components.UserInformation;
 import com.carmel.guestjini.accounts.model.AccountTicket;
 import com.carmel.guestjini.accounts.model.DTO.Guest;
+import com.carmel.guestjini.accounts.model.DTO.TransactionData;
 import com.carmel.guestjini.accounts.model.Principal.UserInfo;
 import com.carmel.guestjini.accounts.response.AccountTicketResponse;
 import com.carmel.guestjini.accounts.service.AccountTicketService;
+import com.carmel.guestjini.accounts.service.GuestLedgerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +39,9 @@ public class AccountTicketController {
     @Autowired
     AccountTicketService accountTicketService;
 
+    @Autowired
+    GuestLedgerService guestLedgerService;
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public AccountTicketResponse save(@Valid @RequestBody AccountTicket accountTicket) {
         UserInfo userInfo = userInformation.getUserInfo();
@@ -48,7 +53,7 @@ public class AccountTicketController {
                 accountTicket.setId("");
             }
             if (accountTicket.getOrgId() == null || accountTicket.getOrgId().isEmpty()) {
-                if(userInfo.getDefaultOrganization()!=null) {
+                if (userInfo.getDefaultOrganization() != null) {
                     accountTicket.setOrgId(userInfo.getDefaultOrganization().getId());
                 }
             }
@@ -303,12 +308,30 @@ public class AccountTicketController {
         AccountTicketResponse accountTicketResponse = new AccountTicketResponse();
         try {
             String guestId = formData.get("guestId");
-            int month = (formData.get("month") == null)? 0 : Integer.parseInt(formData.get("month"));
-            int year = (formData.get("year") == null)? 0 : Integer.parseInt(formData.get("year"));
-             accountTicketService.generateMonthInvoices(guestId, month, year);
-           // accountTicketResponse.setAccountTicketList(accountTickets);
+            int month = (formData.get("month") == null) ? 0 : Integer.parseInt(formData.get("month"));
+            int year = (formData.get("year") == null) ? 0 : Integer.parseInt(formData.get("year"));
+            accountTicketService.generateMonthInvoices(guestId, month, year);
+            // accountTicketResponse.setAccountTicketList(accountTickets);
             accountTicketResponse.setSuccess(true);
             accountTicketResponse.setError("");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            accountTicketResponse.setSuccess(false);
+            accountTicketResponse.setError(ex.getMessage());
+        }
+        return accountTicketResponse;
+    }
+
+    @RequestMapping(value = "/get-guest-ledger", method = RequestMethod.POST)
+    public AccountTicketResponse getGuestLedger(@RequestBody Map<String, String> formData) {
+        logger.trace("Entering");
+        AccountTicketResponse accountTicketResponse = new AccountTicketResponse();
+        try {
+
+            String guestId = formData.get("guestId");
+
+            List<TransactionData> accountTickets = guestLedgerService.getGuestLedger(guestId);
+            accountTicketResponse.setLedger(accountTickets);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             accountTicketResponse.setSuccess(false);
