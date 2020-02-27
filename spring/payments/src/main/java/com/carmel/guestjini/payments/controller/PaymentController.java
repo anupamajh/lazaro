@@ -135,9 +135,7 @@ public class PaymentController {
             result = e.toString();
         }
         model.addAttribute("result", result);
-        parameters.remove("CHECKSUMHASH");
-        model.addAttribute("parameters", parameters);
-        if(optionalPaymentStatus.isPresent()){
+         if(optionalPaymentStatus.isPresent()){
             PaymentStatus paymentStatus = optionalPaymentStatus.get();
             paymentStatus.setBankName(parameters.get("BANKNAME"));
             paymentStatus.setBankTxnId(parameters.get("BANKTXNID"));
@@ -154,6 +152,10 @@ public class PaymentController {
             paymentStatus.setIsComplete(1);
             paymentStatusService.save(paymentStatus);
         }
+        parameters.remove("CHECKSUMHASH");
+        parameters.remove("MID");
+        model.addAttribute("parameters", parameters);
+
         return "pgresponse";
     }
 
