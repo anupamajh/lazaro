@@ -10,5 +10,5 @@ public interface GuestRepository extends JpaRepository<Guest, String> {
 
     Optional<Guest> findByBooking(Booking booking);
 
-    Optional<Guest> finByEmail(String email);
+    Optional<Guest> findByEmail(String email);
 }

@@ -98,15 +98,15 @@ public class GuestController {
         return guestResponse;
     }
 
-    @RequestMapping(value = "/get-by-user-id", method = RequestMethod.POST)
-    public GuestResponse getGuestByUserId(@RequestBody  Map<String, String> formData){
+    @RequestMapping(value = "/get-by-email", method = RequestMethod.POST)
+    public GuestResponse getGuestByEmail(@RequestBody  Map<String, String> formData){
 
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         GuestResponse guestResponse = new GuestResponse();
         try {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
-            Optional<Guest> optionalGuest = guestService.findByUserId(formData.get("userId"));
+            Optional<Guest> optionalGuest = guestService.findByEmail(formData.get("email"));
             if (optionalGuest.isPresent()) {
                 Guest guest = optionalGuest.get();
                 guestResponse.setSuccess(true);
