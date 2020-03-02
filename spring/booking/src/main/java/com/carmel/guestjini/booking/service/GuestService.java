@@ -15,4 +15,6 @@ public interface GuestService {
     Optional<Guest> findById(String guestId);
 
     Guest doCheckout(Guest guest, Date actualCheckout) throws Exception;
+
+    Optional<Guest> findByEmail(String email);
 }

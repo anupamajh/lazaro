@@ -84,4 +84,9 @@ public class GuestServiceImpl implements GuestService {
             throw ex;
         }
     }
+
+    @Override
+    public Optional<Guest> findByEmail(String email) {
+        return guestRepository.finByEmail(email);
+    }
 }

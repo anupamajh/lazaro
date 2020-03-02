@@ -98,6 +98,34 @@ public class GuestController {
         return guestResponse;
     }
 
+    @RequestMapping(value = "/get-by-user-id", method = RequestMethod.POST)
+    public GuestResponse getGuestByUserId(@RequestBody  Map<String, String> formData){
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        GuestResponse guestResponse = new GuestResponse();
+        try {
+            logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
+            Optional<Guest> optionalGuest = guestService.findByUserId(formData.get("userId"));
+            if (optionalGuest.isPresent()) {
+                Guest guest = optionalGuest.get();
+                guestResponse.setSuccess(true);
+                guestResponse.setError("");
+                guestResponse.setGuest(guest);
+            } else {
+                guestResponse.setSuccess(false);
+                guestResponse.setError("Error occurred while Fetching Guest!! Please try after sometime");
+            }
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            guestResponse.setSuccess(false);
+            guestResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return guestResponse;
+    }
+
 
     @RequestMapping(value = "/get-guest-in-period", method = RequestMethod.POST)
     public GuestResponse getGuestsInPeriod(@RequestBody  Map<String, String> formData) {
