@@ -69,6 +69,12 @@ struct ContentView: View {
                 ChangePasswordPage(viewRouter: viewRouter)
             }else if viewRouter.currentPage ==  ViewRoutes.GROUP_CREATE_PAGE {
                 CreateGroup(viewRouter: viewRouter)
+            }else if(viewRouter.currentPage == ViewRoutes.ACCOUNTS_LANDING_PAGE){
+                AccountsLandingPage(viewRouter: viewRouter)
+            }else if(viewRouter.currentPage == ViewRoutes.RENT_INVOICE_LIST_PAGE){
+                RentInvoiceList(viewRouter: viewRouter)
+            }else if(viewRouter.currentPage == ViewRoutes.RENT_INVOICE_DETAIL_PAGE){
+                RentInvoiceDetailPage(viewRouter: viewRouter)
             }
         }
         

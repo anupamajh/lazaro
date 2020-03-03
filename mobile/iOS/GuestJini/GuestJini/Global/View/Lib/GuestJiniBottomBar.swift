@@ -40,6 +40,17 @@ struct GuestJiniBottomBar: View {
                     }
                 }.padding(.horizontal)
                 Button(action: {
+                    self.viewRouter.selectedBottomBarItem = BottomBarButtonIdentifier.BOTTOM_BAR_BUTTON_ACCOUNTS
+                    self.viewRouter.currentPage = ViewRoutes.ACCOUNTS_LANDING_PAGE
+                }) {
+                    if(self.viewRouter.selectedBottomBarItem == BottomBarButtonIdentifier.BOTTOM_BAR_BUTTON_ACCOUNTS){
+                        GuestJiniBottomBarItem(systemImage: "doc.text", menuText: "Accounts",isSelected: 1)
+                    }else{
+                        GuestJiniBottomBarItem(systemImage: "doc.text", menuText: "Accounts",isSelected: 0)
+                        
+                    }
+                }.padding(.horizontal)
+                Button(action: {
                     self.viewRouter.selectedBottomBarItem = BottomBarButtonIdentifier.BOTTOM_BAR_BUTTON_SETTINGS
                     self.viewRouter.currentPage = ViewRoutes.SETTINGS_VIEW
                 }) {

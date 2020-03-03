@@ -35,6 +35,10 @@
 		C10CD05123CF4BF2001F30BB /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10CD05023CF4BF2001F30BB /* ViewExtension.swift */; };
 		C10CD05323CF52DF001F30BB /* FindHelpPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10CD05223CF52DF001F30BB /* FindHelpPage.swift */; };
 		C112EC3823E338CE00F632E6 /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C112EC3723E338CE00F632E6 /* Connectivity.swift */; };
+		C11C2CEC240E25890058521E /* AccountTicketItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11C2CEB240E25890058521E /* AccountTicketItem.swift */; };
+		C11C2CEF240E2B920058521E /* GetMyRentInvoicesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11C2CEE240E2B920058521E /* GetMyRentInvoicesService.swift */; };
+		C1250C03240E3B1C00E025F3 /* RentInvoiceDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1250C02240E3B1C00E025F3 /* RentInvoiceDetailPage.swift */; };
+		C1250C05240E3D7300E025F3 /* GetRentInvoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1250C04240E3D7300E025F3 /* GetRentInvoice.swift */; };
 		C12523ED23CEDE4C00ADCE17 /* UserPreferenceUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12523EC23CEDE4C00ADCE17 /* UserPreferenceUIModel.swift */; };
 		C12523EF23CEE4C700ADCE17 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12523EE23CEE4C700ADCE17 /* DateExtension.swift */; };
 		C127164423B74F9D001E4C99 /* GuestJiniHyperlinkButtonText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C127164323B74F9D001E4C99 /* GuestJiniHyperlinkButtonText.swift */; };
@@ -131,6 +135,10 @@
 		C18CF00F23D085EB00B3E2BB /* PlayerUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18CF00E23D085EB00B3E2BB /* PlayerUIView.swift */; };
 		C18CF01123D096BE00B3E2BB /* TicketAttachmentDrawerAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18CF01023D096BE00B3E2BB /* TicketAttachmentDrawerAction.swift */; };
 		C1903E6523B73B2B00AD8F63 /* GuestJiniImageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1903E6423B73B2B00AD8F63 /* GuestJiniImageCard.swift */; };
+		C1921AFE240CE2E000D43552 /* AccountsLandingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1921AFD240CE2E000D43552 /* AccountsLandingPage.swift */; };
+		C1921B00240CE88100D43552 /* RentInvoiceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1921AFF240CE88100D43552 /* RentInvoiceList.swift */; };
+		C1921B02240CF6CE00D43552 /* AccountTicket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1921B01240CF6CE00D43552 /* AccountTicket.swift */; };
+		C1921B04240CF80D00D43552 /* AccountTicketResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1921B03240CF80D00D43552 /* AccountTicketResponse.swift */; };
 		C194EDA323E2ABB90028B53E /* GroupListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C194EDA223E2ABB80028B53E /* GroupListService.swift */; };
 		C194EDA723E2AF900028B53E /* GroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C194EDA623E2AF900028B53E /* GroupModel.swift */; };
 		C194EDA923E2AF9B0028B53E /* GroupPeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = C194EDA823E2AF9B0028B53E /* GroupPeople.swift */; };
@@ -266,6 +274,10 @@
 		C10CD05023CF4BF2001F30BB /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		C10CD05223CF52DF001F30BB /* FindHelpPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindHelpPage.swift; sourceTree = "<group>"; };
 		C112EC3723E338CE00F632E6 /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
+		C11C2CEB240E25890058521E /* AccountTicketItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTicketItem.swift; sourceTree = "<group>"; };
+		C11C2CEE240E2B920058521E /* GetMyRentInvoicesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyRentInvoicesService.swift; sourceTree = "<group>"; };
+		C1250C02240E3B1C00E025F3 /* RentInvoiceDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentInvoiceDetailPage.swift; sourceTree = "<group>"; };
+		C1250C04240E3D7300E025F3 /* GetRentInvoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRentInvoice.swift; sourceTree = "<group>"; };
 		C12523EC23CEDE4C00ADCE17 /* UserPreferenceUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferenceUIModel.swift; sourceTree = "<group>"; };
 		C12523EE23CEE4C700ADCE17 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		C127164323B74F9D001E4C99 /* GuestJiniHyperlinkButtonText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniHyperlinkButtonText.swift; sourceTree = "<group>"; };
@@ -368,6 +380,10 @@
 		C18CF00E23D085EB00B3E2BB /* PlayerUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerUIView.swift; sourceTree = "<group>"; };
 		C18CF01023D096BE00B3E2BB /* TicketAttachmentDrawerAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketAttachmentDrawerAction.swift; sourceTree = "<group>"; };
 		C1903E6423B73B2B00AD8F63 /* GuestJiniImageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniImageCard.swift; sourceTree = "<group>"; };
+		C1921AFD240CE2E000D43552 /* AccountsLandingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsLandingPage.swift; sourceTree = "<group>"; };
+		C1921AFF240CE88100D43552 /* RentInvoiceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentInvoiceList.swift; sourceTree = "<group>"; };
+		C1921B01240CF6CE00D43552 /* AccountTicket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTicket.swift; sourceTree = "<group>"; };
+		C1921B03240CF80D00D43552 /* AccountTicketResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTicketResponse.swift; sourceTree = "<group>"; };
 		C194EDA223E2ABB80028B53E /* GroupListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListService.swift; sourceTree = "<group>"; };
 		C194EDA623E2AF900028B53E /* GroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupModel.swift; sourceTree = "<group>"; };
 		C194EDA823E2AF9B0028B53E /* GroupPeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPeople.swift; sourceTree = "<group>"; };
@@ -524,6 +540,15 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		C11C2CED240E2B750058521E /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				C11C2CEE240E2B920058521E /* GetMyRentInvoicesService.swift */,
+				C1250C04240E3D7300E025F3 /* GetRentInvoice.swift */,
+			);
+			path = Accounts;
+			sourceTree = "<group>";
+		};
 		C12EF59B23B223DD0024C22C = {
 			isa = PBXGroup;
 			children = (
@@ -674,6 +699,8 @@
 				C194EDB223E2EFA30028B53E /* GroupConversation.swift */,
 				C138A9A923E809F10002A568 /* AddressBookDTO.swift */,
 				C101B53123EEBC5E00498B2D /* UserDeviceData.swift */,
+				C1921B01240CF6CE00D43552 /* AccountTicket.swift */,
+				C11C2CEB240E25890058521E /* AccountTicketItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -693,6 +720,7 @@
 		C12EF5E123B225040024C22C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C11C2CED240E2B750058521E /* Accounts */,
 				C194EDA123E2AB950028B53E /* Group */,
 				C153439323DFF0000064176A /* People */,
 				C14E1C2723D9735600FF16C6 /* Interest */,
@@ -741,6 +769,9 @@
 				C145DA4023DB068B005A7AC3 /* GroupConversationPage.swift */,
 				C177AF7B23E3EDFE00E49786 /* ChangePasswordPage.swift */,
 				C1D3A2B923E587960061F5AC /* CreateGroup.swift */,
+				C1921AFD240CE2E000D43552 /* AccountsLandingPage.swift */,
+				C1921AFF240CE88100D43552 /* RentInvoiceList.swift */,
+				C1250C02240E3B1C00E025F3 /* RentInvoiceDetailPage.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -858,6 +889,7 @@
 				C194EDB423E2F0340028B53E /* GroupConversationResponse.swift */,
 				C177AF7D23E406D000E49786 /* GenericResponse.swift */,
 				C101B53323EEBCC200498B2D /* UserDeviceDataResponse.swift */,
+				C1921B03240CF80D00D43552 /* AccountTicketResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -1203,6 +1235,7 @@
 				C1B1E43C23BEFA23009E1E3B /* GuestJiniTextArea.swift in Sources */,
 				C1DC3DE623E9778500813BBD /* GuestJiniRectangularButtonText.swift in Sources */,
 				C194EDAD23E2B3570028B53E /* GroupTypes.swift in Sources */,
+				C1921B04240CF80D00D43552 /* AccountTicketResponse.swift in Sources */,
 				C194EDAF23E2CEEE0028B53E /* GroupDetailService.swift in Sources */,
 				C10CD04D23CF49D8001F30BB /* GuestJiniSearchView.swift in Sources */,
 				C102721023D1852300F2D227 /* AudioPlayer.swift in Sources */,
@@ -1210,6 +1243,7 @@
 				C1BB27F623B75A6300E8E3F9 /* GuestJiniAlerBox.swift in Sources */,
 				C18CF00D23D085CA00B3E2BB /* PlayerView.swift in Sources */,
 				C1AB8EB423E1835700B7532C /* PersonAddFavouriteService.swift in Sources */,
+				C1250C05240E3D7300E025F3 /* GetRentInvoice.swift in Sources */,
 				C144F01723B4812600D6D218 /* GuestJiniButtonText.swift in Sources */,
 				C1EF106923E1A6AB00103689 /* Person.swift in Sources */,
 				C10ACFFF23C30CE100C7CB70 /* UserInfo.swift in Sources */,
@@ -1268,6 +1302,7 @@
 				C1BB7D5E23BF3F1F00BA410C /* TicketGetService.swift in Sources */,
 				C1BB27FA23B764A200E8E3F9 /* AppAccessRequest.swift in Sources */,
 				C1AF8A3623D5B02E00041662 /* TaskNotesResponse.swift in Sources */,
+				C1921B02240CF6CE00D43552 /* AccountTicket.swift in Sources */,
 				C14C387323D854CE00DADF9C /* KBGetService.swift in Sources */,
 				C1504AA223CD89C700302EB7 /* UserPreferenceType.swift in Sources */,
 				C1B1E43A23BE1F1B009E1E3B /* TicketResponse.swift in Sources */,
@@ -1279,6 +1314,7 @@
 				C10CD04923CF1809001F30BB /* AppAccessRequestService.swift in Sources */,
 				C138A9AC23E818B20002A568 /* GroupInviteService.swift in Sources */,
 				C14322D823D2253B00D7E0EA /* ForgotPasswordResponse.swift in Sources */,
+				C1250C03240E3B1C00E025F3 /* RentInvoiceDetailPage.swift in Sources */,
 				C177AF8023E406F700E49786 /* ChangePasswordService.swift in Sources */,
 				C194EDA723E2AF900028B53E /* GroupModel.swift in Sources */,
 				C127164A23B75553001E4C99 /* GuestJiniInformationText.swift in Sources */,
@@ -1297,6 +1333,7 @@
 				C1504AA823CD8B2800302EB7 /* SaveUserPreferenceService.swift in Sources */,
 				C1E4C02723CB5D3100D6C578 /* StringExtension.swift in Sources */,
 				C1BB27FE23B7728000E8E3F9 /* ViewRouter.swift in Sources */,
+				C11C2CEC240E25890058521E /* AccountTicketItem.swift in Sources */,
 				C144F01B23B4816E00D6D218 /* GuestJiniLogoImage.swift in Sources */,
 				C102721E23D1A7CC00F2D227 /* UploadTicketAttachmentService.swift in Sources */,
 				C1D0000123B9D83400B93651 /* EndPoints.swift in Sources */,
@@ -1305,6 +1342,7 @@
 				C102721A23D19CC700F2D227 /* FilePickerView.swift in Sources */,
 				C1EB388B23CEFA3F0057975E /* GetProfilePicService.swift in Sources */,
 				C14E1C2023D968FB00FF16C6 /* Interest.swift in Sources */,
+				C1921B00240CE88100D43552 /* RentInvoiceList.swift in Sources */,
 				C14C386B23D8421500DADF9C /* KBRating.swift in Sources */,
 				C145DA4123DB068B005A7AC3 /* GroupConversationPage.swift in Sources */,
 				C194EDB523E2F0340028B53E /* GroupConversationResponse.swift in Sources */,
@@ -1356,9 +1394,11 @@
 				C1C74C3E23BA146700FFA336 /* GuestJiniBottomBarItem.swift in Sources */,
 				C10CD05323CF52DF001F30BB /* FindHelpPage.swift in Sources */,
 				C14C387F23D8679D00DADF9C /* GetKBAuthorPicService.swift in Sources */,
+				C11C2CEF240E2B920058521E /* GetMyRentInvoicesService.swift in Sources */,
 				C1B1E43423BE1DDD009E1E3B /* TicketUI.swift in Sources */,
 				C177AF7E23E406D000E49786 /* GenericResponse.swift in Sources */,
 				C144F02323B483CB00D6D218 /* FontExtension.swift in Sources */,
+				C1921AFE240CE2E000D43552 /* AccountsLandingPage.swift in Sources */,
 				C1DC3DE423E9541200813BBD /* BottomBarButtonIdentifier.swift in Sources */,
 				C1504AB323CDA90700302EB7 /* ImagePicker.swift in Sources */,
 				C129E73723BB008C009144D6 /* GuestJiniSubAction.swift in Sources */,

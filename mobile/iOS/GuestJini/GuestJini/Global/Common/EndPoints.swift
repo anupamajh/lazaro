@@ -69,6 +69,11 @@ class EndPoints{
     static var TASK_NOTES_SAVE_URL = END_POINT_URL + "/helpdesk/task-ticket-notes/save"
     static var TASK_NOTES_GET_BY_TICKET_URL = END_POINT_URL + "/helpdesk/task-ticket-notes/get-ticket-notes"
     
+    
+    static var ACCOUNT_GET_MY_RENT_INVOICES = END_POINT_URL + "/accounts/account-tickets/get-my-rent-invoice"
+    static var ACCOUNT_GET_RENT_INVOICE = END_POINT_URL + "/accounts/account-tickets/get"
+    
+    
     static let monitor = NWPathMonitor()
     
     static func checkInterwebs() -> Bool {

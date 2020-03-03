@@ -11,5 +11,6 @@ class BottomBarButtonIdentifier{
     static var BOTTOM_BAR_BUTTON_SUPPORT = 1
     static var BOTTOM_BAR_BUTTON_COMMUNITY = 2
     static var BOTTOM_BAR_BUTTON_SETTINGS = 3
+    static var BOTTOM_BAR_BUTTON_ACCOUNTS = 4
 
 }

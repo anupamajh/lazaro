@@ -40,5 +40,8 @@ class ViewRoutes {
     static var GROUP_CONVERSATION_PAGE = "group_conversation_page"
     static var GROUP_CREATE_PAGE = "group_create_page"
 
-    
+    static var ACCOUNTS_LANDING_PAGE = "accounts_landing_page"
+    static var RENT_INVOICE_LIST_PAGE = "rent_invoice_list_page"
+    static var RENT_INVOICE_DETAIL_PAGE  = "rent_invoice_detail_page"
+
 }
