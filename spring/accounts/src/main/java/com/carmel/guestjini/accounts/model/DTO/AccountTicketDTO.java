@@ -1,9 +1,12 @@
 package com.carmel.guestjini.accounts.model.DTO;
 
 import com.carmel.guestjini.accounts.model.AccountTicket;
+import com.carmel.guestjini.accounts.model.AccountTicketItem;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class AccountTicketDTO {
     private String id;
@@ -35,6 +38,7 @@ public class AccountTicketDTO {
     private int isDeleted;
     private String deletedBy;
     private Date deletedTime;
+    private List<AccountTicketItemDTO> accountTicketItems;
 
     public AccountTicketDTO() {
     }
@@ -274,5 +278,16 @@ public class AccountTicketDTO {
 
     public void setDeletedTime(Date deletedTime) {
         this.deletedTime = deletedTime;
+    }
+
+    public List<AccountTicketItemDTO> getAccountTicketItems() {
+        return accountTicketItems;
+    }
+
+    public void setAccountTicketItems(List<AccountTicketItem> accountTicketItems) {
+        this.accountTicketItems = new ArrayList<>();
+        accountTicketItems.forEach(accountTicketItem -> {
+            this.accountTicketItems.add(new AccountTicketItemDTO(accountTicketItem));
+        });
     }
 }

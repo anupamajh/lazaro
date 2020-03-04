@@ -1,12 +1,19 @@
 package com.carmel.guestjini.accounts.controller;
 
 import com.carmel.guestjini.accounts.common.AccountTicketStatus;
+import com.carmel.guestjini.accounts.common.GuestConstants;
+import com.carmel.guestjini.accounts.components.GuestService;
 import com.carmel.guestjini.accounts.components.UserInformation;
 import com.carmel.guestjini.accounts.model.AccountTicket;
+import com.carmel.guestjini.accounts.model.AccountTicketItem;
+import com.carmel.guestjini.accounts.model.DTO.AccountTicketDTO;
+import com.carmel.guestjini.accounts.model.DTO.AccountTicketItemDTO;
 import com.carmel.guestjini.accounts.model.DTO.Guest;
 import com.carmel.guestjini.accounts.model.DTO.TransactionData;
 import com.carmel.guestjini.accounts.model.Principal.UserInfo;
 import com.carmel.guestjini.accounts.response.AccountTicketResponse;
+import com.carmel.guestjini.accounts.response.GuestResponse;
+import com.carmel.guestjini.accounts.service.AccountTicketItemService;
 import com.carmel.guestjini.accounts.service.AccountTicketService;
 import com.carmel.guestjini.accounts.service.GuestLedgerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -40,7 +47,13 @@ public class AccountTicketController {
     AccountTicketService accountTicketService;
 
     @Autowired
+    AccountTicketItemService accountTicketItemService;
+
+    @Autowired
     GuestLedgerService guestLedgerService;
+
+    @Autowired
+    GuestService guestService;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public AccountTicketResponse save(@Valid @RequestBody AccountTicket accountTicket) {
@@ -124,9 +137,12 @@ public class AccountTicketController {
             Optional<AccountTicket> optionalAccountTicket = accountTicketService.findById(formData.get("id"));
             if (optionalAccountTicket.isPresent()) {
                 AccountTicket accountTicket = optionalAccountTicket.get();
+                List<AccountTicketItem>  accountTicketItems = this._getTicketItems(accountTicket.getId());
+                AccountTicketDTO accountTicketDTO = new AccountTicketDTO(accountTicket);
+                accountTicketDTO.setAccountTicketItems(accountTicketItems);
                 accountTicketResponse.setSuccess(true);
                 accountTicketResponse.setError("");
-                accountTicketResponse.setAccountTicket(accountTicket);
+                accountTicketResponse.setAccountTicketDTO(accountTicketDTO);
             } else {
                 accountTicketResponse.setSuccess(false);
                 accountTicketResponse.setError("Error occurred while Fetching accountTicket!! Please try after sometime");
@@ -338,5 +354,54 @@ public class AccountTicketController {
             accountTicketResponse.setError(ex.getMessage());
         }
         return accountTicketResponse;
+    }
+
+    @RequestMapping(value = "/get-my-rent-invoice", method = RequestMethod.POST)
+    public AccountTicketResponse getMyRentInvoice() {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        AccountTicketResponse accountTicketResponse = new AccountTicketResponse();
+        try {
+            GuestResponse guestResponse = guestService.getGuestByEmail(userInfo.getUserName());
+            if (guestResponse.isSuccess()) {
+                if (guestResponse.getGuest() != null) {
+
+                    List<AccountTicket> accountTickets = accountTicketService
+                            .findAllByGuestIdAndTicketIdentifierAndTicketStatus
+                                    (
+                                            guestResponse.getGuest().getId(),
+                                            GuestConstants.TRANSACTION_IDENTIFIER_RENT_INVOICE,
+                                            GuestConstants.TICKET_STATUS_ACTIVE
+                                    );
+
+                    List<AccountTicketDTO> retValue = new ArrayList<>();
+                    accountTickets.forEach(accountTicket -> {
+                        List<AccountTicketItem> accountTicketItems = this._getTicketItems(accountTicket.getId());
+                        AccountTicketDTO accountTicketDTO = new AccountTicketDTO(accountTicket);
+                        accountTicketDTO.setAccountTicketItems(accountTicketItems);
+                        retValue.add(accountTicketDTO);
+                    });
+                    accountTicketResponse.setAccountTicketListDTO(retValue);
+                    accountTicketResponse.setSuccess(true);
+                    accountTicketResponse.setError("");
+                } else {
+                    throw new Exception("Guest not found");
+                }
+            } else {
+                throw new Exception("Guest not found");
+            }
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            logger.error(ex.getMessage(), ex);
+            accountTicketResponse.setSuccess(false);
+            accountTicketResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return accountTicketResponse;
+    }
+
+    private List<AccountTicketItem> _getTicketItems(String  ticketId){
+        return accountTicketItemService.findAllByTicketId(ticketId);
     }
 }

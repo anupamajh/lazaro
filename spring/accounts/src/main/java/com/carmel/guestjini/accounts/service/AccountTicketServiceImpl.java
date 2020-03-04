@@ -76,4 +76,9 @@ public class AccountTicketServiceImpl implements AccountTicketService {
             throw ex;
         }
     }
+
+    @Override
+    public List<AccountTicket> findAllByGuestIdAndTicketIdentifierAndTicketStatus(String id, int transactionIdentifier, int ticketStatus) {
+        return accountTicketRepository.findAllByGuestIdAndTicketIdentifierAndTicketStatus(id, transactionIdentifier, ticketStatus);
+    }
 }

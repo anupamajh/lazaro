@@ -52,6 +52,7 @@ public class DayRentServiceImpl implements DayRentService {
         List<AccountTicket> result = new ArrayList<>();
         try {
             this._computeRent(guest);
+            this._saveTransaction(guest);
             switch (ticketIdentifier) {
                 case GuestConstants.TRANSACTION_IDENTIFIER_RENT_INVOICE: {
                     result = accountTicketRepository

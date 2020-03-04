@@ -205,7 +205,7 @@ public class AccountTicketItem {
         this.taxValue = taxValue;
     }
 
-    public int getTaxValueIdentifier() {
+    public Integer getTaxValueIdentifier() {
         return taxValueIdentifier;
     }
 

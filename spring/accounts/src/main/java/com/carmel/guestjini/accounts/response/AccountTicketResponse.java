@@ -25,6 +25,10 @@ public class AccountTicketResponse {
         this.accountTicket = new AccountTicketDTO(accountTicket);
     }
 
+    public void setAccountTicketDTO(AccountTicketDTO accountTicketDTO) {
+        this.accountTicket = (accountTicketDTO);
+    }
+
     public List<AccountTicketDTO> getAccountTicketList() {
         return accountTicketList;
     }
@@ -83,4 +87,9 @@ public class AccountTicketResponse {
     public void setError(String error) {
         this.error = error;
     }
+
+    public void setAccountTicketListDTO(List<AccountTicketDTO> accountTicketList) {
+        this.accountTicketList = accountTicketList;
+    }
+
 }

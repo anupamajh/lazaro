@@ -1,5 +1,7 @@
 package com.carmel.guestjini.accounts.model.DTO;
 
+import com.carmel.guestjini.accounts.model.AccountTicketItem;
+
 import java.util.Date;
 
 public class AccountTicketItemDTO {
@@ -16,7 +18,7 @@ public class AccountTicketItemDTO {
     private String qtyUnit;
     private Double subTotal;
     private Double taxValue;
-    private  int taxValueIdentifier;
+    private  Integer taxValueIdentifier;
     private Double itemTotal;
     private int hasVoucher;
     private String voucherId;
@@ -28,6 +30,37 @@ public class AccountTicketItemDTO {
     private int isDeleted;
     private String deletedBy;
     private Date deletedTime;
+
+    public AccountTicketItemDTO() {
+    }
+
+    public AccountTicketItemDTO(AccountTicketItem accountTicketItem) {
+        this.id = accountTicketItem.getId();
+        this.clientId = accountTicketItem.getClientId();
+        this.orgId = accountTicketItem.getOrgId();
+        this.bookingId = accountTicketItem.getBookingId();
+        this.guestId = accountTicketItem.getGuestId();
+        this.ticketId = accountTicketItem.getTicketId();
+        this.lineNo = accountTicketItem.getLineNo();
+        this.itemNarration = accountTicketItem.getItemNarration();
+        this.rate = accountTicketItem.getRate();
+        this.qty = accountTicketItem.getQty();
+        this.qtyUnit = accountTicketItem.getQtyUnit();
+        this.subTotal = accountTicketItem.getSubTotal();
+        this.taxValue = accountTicketItem.getTaxValue();
+        this.taxValueIdentifier = accountTicketItem.getTaxValueIdentifier() == null ? 0 : accountTicketItem.getTaxValueIdentifier();
+        this.itemTotal = accountTicketItem.getItemTotal();
+        this.hasVoucher = accountTicketItem.getHasVoucher();
+        this.voucherId = accountTicketItem.getVoucherId();
+        this.amountUsed = accountTicketItem.getAmountUsed();
+        this.createdBy = accountTicketItem.getCreatedBy();
+        this.creationTime = accountTicketItem.getCreationTime();
+        this.lastModifiedBy = accountTicketItem.getLastModifiedBy();
+        this.lastModifiedTime = accountTicketItem.getLastModifiedTime();
+        this.isDeleted = accountTicketItem.getIsDeleted();
+        this.deletedBy = accountTicketItem.getDeletedBy();
+        this.deletedTime = accountTicketItem.getDeletedTime();
+    }
 
     public String getId() {
         return id;

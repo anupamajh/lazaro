@@ -38,6 +38,25 @@ public class GuestService {
         return result.getBody();
     }
 
+    public GuestResponse getGuestByEmail(String email){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        OAuth2AuthenticationDetails oAuth2AuthenticationDetails = (OAuth2AuthenticationDetails) auth.getDetails();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", "Bearer "+ oAuth2AuthenticationDetails.getTokenValue());
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        JSONObject postData = new JSONObject();
+        postData.put("email",email);
+        HttpEntity<String> entity = new HttpEntity<>(postData.toJSONString(), headers);
+        ResponseEntity<GuestResponse> result =restTemplate.exchange(
+                yamlConfig.getBookingServiceURL() + "/guest/get-by-email",
+                HttpMethod.POST,
+                entity,
+                GuestResponse.class
+        );
+        return result.getBody();
+    }
+
     public GuestResponse getGuestWithinPeriod(int month, int year){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         OAuth2AuthenticationDetails oAuth2AuthenticationDetails = (OAuth2AuthenticationDetails) auth.getDetails();

@@ -1,6 +1,7 @@
 package com.carmel.guestjini.accounts.service;
 
 import com.carmel.guestjini.accounts.model.AccountTicket;
+import com.carmel.guestjini.accounts.model.AccountTicketItem;
 import com.carmel.guestjini.accounts.model.DTO.Guest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,4 +28,6 @@ public interface AccountTicketService {
     void generateDayInvoices(Guest guest) throws  Exception;
 
     void generateMonthInvoices(String guestId, int month, int year) throws  Exception;
+
+    List<AccountTicket> findAllByGuestIdAndTicketIdentifierAndTicketStatus(String id, int transactionIdentifier, int ticketStatus);
 }
