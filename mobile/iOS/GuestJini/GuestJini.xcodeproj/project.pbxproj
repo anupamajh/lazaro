@@ -216,6 +216,7 @@
 		C1E4F9C823E58FBF0079FCF3 /* CreateGroupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E4F9C723E58FBF0079FCF3 /* CreateGroupService.swift */; };
 		C1E9E59223B740A300EB812F /* GuestJiniButtonSystemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E9E59123B740A300EB812F /* GuestJiniButtonSystemImage.swift */; };
 		C1EB388B23CEFA3F0057975E /* GetProfilePicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EB388A23CEFA3F0057975E /* GetProfilePicService.swift */; };
+		C1EEB3C7240F8A8B00F39BD3 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EEB3C6240F8A8B00F39BD3 /* PaymentView.swift */; };
 		C1EF106923E1A6AB00103689 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EF106823E1A6AB00103689 /* Person.swift */; };
 		C1F6D58C23F1208D00BF2407 /* GetPeoplePicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F6D58B23F1208D00BF2407 /* GetPeoplePicService.swift */; };
 		C1F787A923BF700800FF9B85 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F787A823BF700800FF9B85 /* MyProfileView.swift */; };
@@ -461,6 +462,8 @@
 		C1E4F9C723E58FBF0079FCF3 /* CreateGroupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupService.swift; sourceTree = "<group>"; };
 		C1E9E59123B740A300EB812F /* GuestJiniButtonSystemImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestJiniButtonSystemImage.swift; sourceTree = "<group>"; };
 		C1EB388A23CEFA3F0057975E /* GetProfilePicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfilePicService.swift; sourceTree = "<group>"; };
+		C1EEB3C4240F888000F39BD3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C1EEB3C6240F8A8B00F39BD3 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		C1EF106823E1A6AB00103689 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		C1F3467823ED332C000F1FD5 /* GuestJiniRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GuestJiniRelease.entitlements; sourceTree = "<group>"; };
 		C1F6D58B23F1208D00BF2407 /* GetPeoplePicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPeoplePicService.swift; sourceTree = "<group>"; };
@@ -516,6 +519,7 @@
 		914AC77A243CB8224257532E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C1EEB3C4240F888000F39BD3 /* SystemConfiguration.framework */,
 				E805B33AF2C01FF6F11E5CA6 /* Pods_GuestJini.framework */,
 				C6AFC97278410F79AF19B3D0 /* Pods_GuestJini_GuestJiniUITests.framework */,
 				12EDB7E46FA5CA1E3AEAE956 /* Pods_GuestJiniTests.framework */,
@@ -772,6 +776,7 @@
 				C1921AFD240CE2E000D43552 /* AccountsLandingPage.swift */,
 				C1921AFF240CE88100D43552 /* RentInvoiceList.swift */,
 				C1250C02240E3B1C00E025F3 /* RentInvoiceDetailPage.swift */,
+				C1EEB3C6240F8A8B00F39BD3 /* PaymentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1290,6 +1295,7 @@
 				C18CF00923D065EF00B3E2BB /* TicketAttachmentDrawerMenu.swift in Sources */,
 				C14C388123D86DE100DADF9C /* GuestJiniWhiteRoundButtonSystemImage.swift in Sources */,
 				C145DA3B23DAF8C0005A7AC3 /* GroupLandingPage.swift in Sources */,
+				C1EEB3C7240F8A8B00F39BD3 /* PaymentView.swift in Sources */,
 				C18CF00F23D085EB00B3E2BB /* PlayerUIView.swift in Sources */,
 				C144F01923B4814B00D6D218 /* GuestJiniRoundButtonText.swift in Sources */,
 				C1BB7D5B23BF3D7000BA410C /* ActivityIndicator.swift in Sources */,
@@ -1584,6 +1590,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"GuestJini/Preview Content\"";
 				DEVELOPMENT_TEAM = 9UEK3YG88G;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = GuestJini/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1610,6 +1620,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"GuestJini/Preview Content\"";
 				DEVELOPMENT_TEAM = 9UEK3YG88G;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = GuestJini/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (

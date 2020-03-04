@@ -24,6 +24,19 @@ extension String{
         return dateFormatter.string(from:localDate!)
     }
     
+    func convetToDateFromISOLUTC()->String{
+        let input:String = self
+        if(self.trimmingCharacters(in: .whitespacesAndNewlines) == ""){
+             return ""
+         }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        let localDate = dateFormatter.date(from: input)
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.dateFormat = "dd MMM yyyy"
+        return dateFormatter.string(from:localDate!)
+    }
     func convetToDateFromMySQL()->String{
         let input:String = self
         if(self.trimmingCharacters(in: .whitespacesAndNewlines) == ""){

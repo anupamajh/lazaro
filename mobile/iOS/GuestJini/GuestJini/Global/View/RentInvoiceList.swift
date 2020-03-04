@@ -74,17 +74,23 @@ struct AccountTicketListRow: View{
         VStack{
             HStack{
                 VStack{
-                    Text(accountTicket.ticketDate!.convetToDateFromMySQLUTC())
+                    HStack{
+                    Text(accountTicket.ticketDate!.convetToDateFromISOLUTC())
                         .font(Fonts.RobotRegular)
                         .bold()
                         .foregroundColor(Color("greyishBrownFour"))
+                        Spacer()
+                    }
+                    HStack{
                     Text(accountTicket.ticketNumber!)
                         .font(Fonts.RobotRegularSmallText)
                         .foregroundColor(Color("brownishGrey"))
+                        Spacer()
+                    }
                 }
                 Spacer()
                 VStack{
-                    Text( "Rs. \(accountTicket.netTotal!)")
+                    Text( "Rs. \(String(format:"%.2f", accountTicket.netTotal!))")
                     .font(Fonts.RobotRegular)
                     .bold()
                     .foregroundColor(Color("greyishBrownFour"))

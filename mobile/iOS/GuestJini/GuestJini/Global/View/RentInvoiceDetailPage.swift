@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-
 struct RentInvoiceDetailPage: View {
     @ObservedObject var viewRouter: ViewRouter
     @ObservedObject var getRentInvoice:GetRentInvoice
@@ -23,51 +22,88 @@ struct RentInvoiceDetailPage: View {
                 VStack{
                     HStack{
                         Button(action: {
-                            self.viewRouter.currentPage = ViewRoutes.ACCOUNTS_LANDING_PAGE
+                            self.viewRouter.currentPage = ViewRoutes.RENT_INVOICE_LIST_PAGE
                         }) {
                             GuestJiniButtonSystemImagePlain(imageName: "arrow.left")
                             
                         }.padding(.horizontal)
                         GuestJiniTitleText(title: "RENT INVOICE")
                         Spacer()
-                        ZStack{
-                            VStack{
-                                Text("Hello")
-                            }
-                        }
                     }.padding()
                     VStack{
-                        VStack{
-                            HStack{
-                                Text("05 Jul 2019")
-                                Spacer()
-                            }
-                            HStack{
-                                Text("Ticket Number")
-                                Spacer()
-                            }
+                        if(self.getRentInvoice.fetchComplete == true){
+                            VStack{
+                                VStack{
+                                    HStack{
+                                        Text(self.getRentInvoice.accountTicket.ticketDate!.convetToDateFromISOLUTC())
+                                            .font(Fonts.RobotRegular)
+                                            .bold()
+                                            .foregroundColor(Color("greyishBrownFour"))
+                                        Spacer()
+                                    }
+                                    HStack{
+                                        Text(self.getRentInvoice.accountTicket.ticketNumber!)
+                                            .font(Fonts.RobotRegularSmallText)
+                                            .foregroundColor(Color("brownishGrey"))
+                                        Spacer()
+                                    }
+                                    
+                                    HStack{
+                                        Text(self.getRentInvoice.accountTicket.ticketNarration!)
+                                            .font(Fonts.RobotRegularSmallText)
+                                            .foregroundColor(Color("brownishGrey"))
+                                            .multilineTextAlignment(.leading)
+                                            .lineLimit(500)
+                                        Spacer()
+                                    }
+                                    
+                                    HStack{
+                                        Text("Total Amount  Rs. \(String(format:"%.2f", self.getRentInvoice.accountTicket.netTotal!))")
+                                            .font(Fonts.RobotRegular)
+                                            .bold()
+                                            .foregroundColor(Color("greyishBrownFour"))
+                                        Spacer()
+                                    }
+                                }.padding()
+                            }.overlay(RoundedRectangle(cornerRadius: 8).stroke(Color("brownishGrey"),lineWidth: 1))
                             
-                            HStack{
-                                Text("Narration")
-                                Spacer()
+                            if(self.getRentInvoice.accountTicket.accountTicketItems!.count > 0){
+                                VStack{
+                                    VStack{
+                                        VStack{
+                                            HStack{
+                                                Text("More Details")
+                                                    .font(Fonts.RobotRegular)
+                                                    .bold()
+                                                    .foregroundColor(Color("greyishBrownFour"))
+                                                Spacer()
+                                            }
+                                            ForEach(self.getRentInvoice.accountTicket.accountTicketItems!){ accountTicketItem in
+                                                 HStack{
+                                                    Text(accountTicketItem.itemNarration!)
+                                                        .font(Fonts.RobotRegularSmallText)
+                                                        .foregroundColor(Color("brownishGrey"))
+                                                    Spacer()
+                                                    Text("Rs. \(String(format:"%.2f", accountTicketItem.itemTotal!))")
+                                                        .font(Fonts.RobotRegularSmallText)
+                                                        .foregroundColor(Color("brownishGrey"))
+                                                }.padding()
+                                            }
+                                        }
+                                    }.padding()
+                                }.overlay(RoundedRectangle(cornerRadius: 8).stroke(Color("brownishGrey"),lineWidth: 1))
+                                    .padding(.top, 50)
                             }
+                            Button(action:{
+                                self.viewRouter.currentPage = ViewRoutes.PAYTM_PAYMENT_SCREEN
+                                self.viewRouter.transactionAMount =  self.getRentInvoice.accountTicket.netTotal!
+                            }){
+                                GuestJiniRectangularButtonText(buttonText: "PAY NOW")
+                            }.padding(.top, 50)
                             
-                            HStack{
-                                Text("Total AMount")
-                                Spacer()
-                            }
                         }
-                    }
+                    }.padding()
                     
-                    VStack{
-                        HStack{
-                            Text("More Details")
-                            Spacer()
-                        }
-//                        VStack{
-//                            ForEach(
-//                        }
-                    }
                     
                     
                 }.frame(width: geometry.size.width, height: geometry.size.height-85, alignment: .top)
@@ -79,3 +115,4 @@ struct RentInvoiceDetailPage: View {
         }
     }
 }
+

@@ -43,5 +43,7 @@ class ViewRoutes {
     static var ACCOUNTS_LANDING_PAGE = "accounts_landing_page"
     static var RENT_INVOICE_LIST_PAGE = "rent_invoice_list_page"
     static var RENT_INVOICE_DETAIL_PAGE  = "rent_invoice_detail_page"
+    
+    static var PAYTM_PAYMENT_SCREEN  = "paytm_payment_screen"
 
 }

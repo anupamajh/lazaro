@@ -75,6 +75,8 @@ struct ContentView: View {
                 RentInvoiceList(viewRouter: viewRouter)
             }else if(viewRouter.currentPage == ViewRoutes.RENT_INVOICE_DETAIL_PAGE){
                 RentInvoiceDetailPage(viewRouter: viewRouter)
+            }else if(viewRouter.currentPage == ViewRoutes.PAYTM_PAYMENT_SCREEN){
+                PaymentView(viewRouter: viewRouter)
             }
         }
         
