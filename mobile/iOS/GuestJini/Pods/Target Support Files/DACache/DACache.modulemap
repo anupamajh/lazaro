@@ -1,0 +1,6 @@
+framework module DACache {
+  umbrella header "DACache-umbrella.h"
+
+  export *
+  module * { export * }
+}

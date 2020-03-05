@@ -23,32 +23,32 @@ struct AccountsLandingPage: View {
                         }
                     }
                     
-                    VStack{
-                        Button(action:{
-                            
-                        })
-                        {
-                            AccountsLandingPageCard(title: "RECEIPTS", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies quis")
-                        }
-                    }
-                    
-                    VStack{
-                        Button(action:{
-                            
-                        })
-                        {
-                            AccountsLandingPageCard(title: "LEDGER", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies quis")
-                        }
-                    }
-                    
-                    VStack{
-                        Button(action:{
-                            
-                        })
-                        {
-                            AccountsLandingPageCard(title: "BILLS", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies quis")
-                        }
-                    }
+//                    VStack{
+//                        Button(action:{
+//                            
+//                        })
+//                        {
+//                            AccountsLandingPageCard(title: "RECEIPTS", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies quis")
+//                        }
+//                    }
+//                    
+//                    VStack{
+//                        Button(action:{
+//                            
+//                        })
+//                        {
+//                            AccountsLandingPageCard(title: "LEDGER", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies quis")
+//                        }
+//                    }
+//                    
+//                    VStack{
+//                        Button(action:{
+//                            
+//                        })
+//                        {
+//                            AccountsLandingPageCard(title: "BILLS", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies quis")
+//                        }
+//                    }
                 }.frame(width: geometry.size.width, height: geometry.size.height-85, alignment: .top)
                     .padding()
                 Divider()
