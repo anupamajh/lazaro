@@ -9,6 +9,7 @@ public class CRMUserAttributes {
     private String phone_mobile;
     private String phone_work;
     private String phone_other;
+    private String email1;
 
     public String getUser_name() {
         return user_name;
@@ -64,5 +65,13 @@ public class CRMUserAttributes {
 
     public void setPhone_other(String phone_other) {
         this.phone_other = phone_other;
+    }
+
+    public String getEmail1() {
+        return email1;
+    }
+
+    public void setEmail1(String email1) {
+        this.email1 = email1;
     }
 }

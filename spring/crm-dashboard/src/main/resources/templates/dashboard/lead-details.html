@@ -48,6 +48,10 @@
     <link th:href="@{/assets/css/plugins.min.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/assets/css/responsive.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/assets/css/theme-color.css}" rel="stylesheet" type="text/css"/>
+    <script>
+        var agentId = "[[${agentId}]]"
+        var leadId = "[[${leadId}]]"
+    </script>
 
 </head>
 <body>
@@ -59,101 +63,57 @@
                 <div class="col-sm-12">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h1>Total Leads [[${totalLeads}]]</h1>
+                            <h2>[[${lead.attributes.full_name}]]</h2>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-4">
-                            <div class="row">
-                                <div class="col-sm-9">
-                                    <h5><b>Active Leads : </b></h5>
-                                </div>
-                                <div class="col-sm-3">
-                                    <h5><b>[[${totalActiveLeads}]]</b></h5>
-                                </div>
-                            </div>
-                            <div class="row" th:each="agent:${agentData}">
-                                <div class="col-sm-9" style="cursor: pointer;font-size: 17px">
-                                    <a style="text-decoration: none"
-                                       th:href="@{'/agent-activities/' + ${agent.agentId}}"
-                                       th:text="${agent.agentName}"></a>
-                                </div>
-                                <div class="col-sm-3" style="cursor: pointer;font-size: 17px">
-                                    <a style="text-decoration: none" th:href="@{'/lead-data/' + ${agent.agentId}}"
-                                       th:text="${agent.leadCount}"></a>
-                                </div>
-                            </div>
+                        <div class="col-sm-12">
+                            <span>[[${lead.attributes.phone_mobile}]]</span>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="row">
-                                <div class="col-sm-9">
-                                    <h5><b>Inactive Leads:</b></h5>
-                                </div>
-                                <div class="col-sm-3">
-                                    <h5><b>[[${totalInactiveLeads}]]</b></h5>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-9">
-                                    <span>Lost No Product Fit:  </span>
-                                </div>
-                                <div class="col-sm-3">
-                                     <a style="text-decoration: none" th:href="@{'/lead-data-by-status/2' }"
-                                       th:text="${totalNoProductFit}"></a>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-9">
-                                    <span>Lost Location: </span>
-                                </div>
-                                <div class="col-sm-3">
-                                    <a style="text-decoration: none" th:href="@{'/lead-data-by-status/3' }"
-                                       th:text="${totalLostLocation}"></a>
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-9">
-                                    <span>Lost Budget: </span>
-                                </div>
-                                <div class="col-sm-3">
-                                    <a style="text-decoration: none" th:href="@{'/lead-data-by-status/4' }"
-                                       th:text="${totalLostBudget}"></a>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-9">
-                                    <span>Lost Other: </span>
-                                </div>
-                                <div class="col-sm-3">
-                                    <a style="text-decoration: none" th:href="@{'/lead-data-by-status/5' }"
-                                                         th:text="${totalLostOther}"></a>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-9">
-                                    <span>Lost Dead: </span>
-                                </div>
-                                <div class="col-sm-3">
-                                    <a style="text-decoration: none" th:href="@{'/lead-data-by-status/6' }"
-                                       th:text="${totalLostDead}"></a>
-                                </div>
-                            </div>
-
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <span>[[${lead.attributes.date_entered}]]</span>
                         </div>
-                        <div class="col-sm-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <span>Source: [[${lead.attributes.lead_source}]]</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3>Activity</h3>
+                        </div>
+                    </div>
+
+                    <div class="row" th:each="task:${tasks}">
+                        <div class="col-sm-4" style="border-bottom: 1px solid grey;border-right: 1px solid grey">
+                            <span>[[${task.attributes.date_entered}]]</span>
+                        </div>
+                        <div class="col-sm-8" style="border-bottom: 1px solid grey;">
                             <div class="row">
-                                <div class="col-sm-9">
-                                    <h5><b>Converted Leads:</b> </h5>
+                                <div class="col-sm-12">
+                                    <span><b>[[${task.attributes.name}]]</b></span>
                                 </div>
-                                <div class="col-sm-3">
-                                    <a style="text-decoration: none" th:href="@{'/lead-data-by-status/1' }"
-                                       th:text="${totalConvertedLeads}"></a>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <span style="font-size: medium">[[${task.attributes.date_due}]]</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <span style="font-size: medium">[[${task.attributes.status}]]</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <span style="font-size: 11px;">[[${task.attributes.description}]]</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

@@ -50,11 +50,11 @@ function getPagedLeads(resetParams) {
         totalRowsCount = 0;
     }
     $.ajax({
-        url: '/get-leads',
+        url: '/get-leads-by-status',
         type: 'GET',
         data: {
             page: pageNumber
-            ,agentId: agentId
+            ,status: status
             , pageLimit: pageLimit
             , sort: (sortField)
             , sortOrder: (sortOrder)

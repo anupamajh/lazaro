@@ -1,6 +1,7 @@
 package com.carmel.guesture.crmdashboard.components;
 
 import com.carmel.guesture.crmdashboard.models.CRMLead;
+import com.carmel.guesture.crmdashboard.response.CRMLeadResponse;
 import com.carmel.guesture.crmdashboard.response.CRMLeadsResponse;
 import com.carmel.guesture.crmdashboard.response.CRMUsersResponse;
 import com.google.gson.JsonObject;
@@ -177,5 +178,25 @@ public class CRMLeadsService {
         CRMLeadsResponse crmLeadsResponse = restTemplate.getForObject(url,
                 CRMLeadsResponse.class);
         return crmLeadsResponse;
+    }
+
+    public CRMLeadResponse getLeadById(String leadId){
+        String url = carmelConfig.getCrmURL();
+        url += "/Leads/" + leadId;
+        CRMLeadResponse crmLeadResponse = restTemplate.getForObject(url,
+                CRMLeadResponse.class);
+        return crmLeadResponse;
+    }
+
+    public List<CRMLead>  getLeadsByStatus(String status) {
+        String url = carmelConfig.getCrmURL();
+        url += "/Leads?filter[operator]=and" +
+                "&filter[operator]=and" +
+                "&filter[status][eq]=" +
+                status +
+                "&page[number]=1&page[size]=800";
+        CRMLeadsResponse crmLeadsResponse = restTemplate.getForObject(url,
+                CRMLeadsResponse.class);
+        return crmLeadsResponse.getData();
     }
 }

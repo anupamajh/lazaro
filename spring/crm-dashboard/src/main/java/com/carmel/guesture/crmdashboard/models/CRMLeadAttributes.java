@@ -1,5 +1,7 @@
 package com.carmel.guesture.crmdashboard.models;
 
+import com.carmel.guesture.crmdashboard.common.DateUtil;
+
 import java.util.Date;
 
 public class CRMLeadAttributes {
@@ -236,16 +238,16 @@ public class CRMLeadAttributes {
         this.received_phone_number_c = received_phone_number_c;
     }
 
-    public Date getDate_entered() {
-        return date_entered;
+    public String getDate_entered() {
+        return DateUtil.getFormattedDate("", date_entered);
     }
 
     public void setDate_entered(Date date_entered) {
         this.date_entered = date_entered;
     }
 
-    public Date getDate_modified() {
-        return date_modified;
+    public String  getDate_modified() {
+        return DateUtil.getFormattedDate("", date_modified);
     }
 
     public void setDate_modified(Date date_modified) {
