@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Controller
@@ -111,9 +112,26 @@ public class DashboardController {
         return "dashboard/lead-details";
     }
 
-    @RequestMapping(value = "/agent-activities/{agentId}", method = RequestMethod.GET)
-    public String agentActivities(Model model, @PathVariable(name = "agentId", required = false) String agentId) {
-        CRMTasksResponse crmTasksResponse = crmTasksService.getAgentsTasks(agentId);
+    @RequestMapping(value = {"/agent-activities/{agentId}/{year}/{month}", "/agent-activities/{agentId}"}, method = RequestMethod.GET)
+    public String agentActivities(Model model,
+                                  @PathVariable(name = "agentId", required = false) String agentId,
+                                  @PathVariable(name = "year", required = false) Integer year,
+                                  @PathVariable(name = "month", required = false) Integer month
+    ) {
+        LocalDate currentDate = LocalDate.now();
+        int currentYear = currentDate.getYear();
+        int currentMonth = currentDate.getMonth().getValue();
+        List<String> yearList = new ArrayList<>();
+        for (int i = currentYear - 5; i <= currentYear; i++) {
+            yearList.add(String.valueOf(i));
+        }
+        if(year != null){
+            currentYear = year;
+        }
+        if(month != null){
+            currentMonth = month;
+        }
+        CRMTasksResponse crmTasksResponse = crmTasksService.getAgentsTasks(agentId, currentYear, currentMonth);
         CRMUserResponse crmUserResponse = crmUserService.getCRMUserById(agentId);
         List<CRMTasks> crmTasks = crmTasksResponse.getData();
         Comparator<CRMTasks> comparatorByCreatedDate = new Comparator<CRMTasks>() {
@@ -124,23 +142,25 @@ public class DashboardController {
         };
         HashMap<String, List<CRMTasks>> sortedLeadData = new HashMap<>();
         crmTasks.sort(comparatorByCreatedDate.reversed());
-
         model.addAttribute("agent", crmUserResponse.getData());
         model.addAttribute("agentId", agentId);
         model.addAttribute("tasks", crmTasks);
+        model.addAttribute("year", currentYear);
+        model.addAttribute("yearList", yearList);
+        model.addAttribute("month", currentMonth);
         return "dashboard/agent-activities";
     }
 
     @RequestMapping(value = "/lead-data-by-status/{status}", method = RequestMethod.GET)
-    public String leadList(Model model,  @PathVariable(name = "status", required = false) int status) {
+    public String leadList(Model model, @PathVariable(name = "status", required = false) int status) {
         model.addAttribute("status", status);
         return "dashboard/lead-data-by-status";
     }
 
     @RequestMapping(value = "/get-leads-by-status", method = RequestMethod.GET)
-     public @ResponseBody
+    public @ResponseBody
     CRMLeadsResponse getLeadsByStatus(
-                @RequestParam(name = "status", required = false) int status
+            @RequestParam(name = "status", required = false) int status
     ) {
         String statusText = "";
         switch (status) {
