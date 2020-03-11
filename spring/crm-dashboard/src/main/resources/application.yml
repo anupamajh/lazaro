@@ -42,3 +42,6 @@ olive-crm:
   crmAuthURL: http://crm.olive-suite.com/Api/access_token
   leadSyncInterval: 30000
   activitySyncInterval: 4000
+security:
+  headers:
+    frame: off
