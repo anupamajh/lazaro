@@ -1,0 +1,44 @@
+server:
+  port: 8101
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+spring:
+  application:
+    name: crm-dashboard-service
+logging:
+  level:
+    root: info
+    com:
+      carmel:
+        guesture:
+          crmdashboard: trace
+  pattern:
+    console: '%d{"yyyy/MM/dd HH:mm:ss,SSS"} [%p] [%t] %M\(%F:%L\) - %msg%n'
+  file:
+    path: '/var/log/carmel/'
+    max-size: 5MB
+    clean-history-on-start: false
+    name: '/var/log/carmel/crm-dashboard-service.log'
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://139.59.32.238:8001/eureka/
+olive-crm:
+  baseUrl: http://localhost:8080
+  oauth2:
+    client:
+      grantType: client_credentials
+      clientId: 532edc05-e070-5277-8c19-5d91fa453879
+      clientSecret: P@ssw0rd
+      accessTokenUri: http://crm.olive-suite.com/Api/access_token
+  crmURL: http://crm.olive-suite.com/Api/V8/module
+  crmClientId: 532edc05-e070-5277-8c19-5d91fa453879
+  crmClientSecrete: P@ssw0rd
+  crmAuthURL: http://crm.olive-suite.com/Api/access_token
+  leadSyncInterval: 30000
+  activitySyncInterval: 4000
