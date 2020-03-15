@@ -102,6 +102,7 @@ public class PersonController {
                 });
                 tempPhoned.setAgents(agentList);
             }
+            tempPhoned.setIsSynced(0);
             tempPhoned.setId(null);
             phonedResponse.setPhoned(phonedService.save(tempPhoned));
             phonedResponse.setSuccess(true);
@@ -126,6 +127,7 @@ public class PersonController {
             logger.trace("Data:{}", objectMapper.writeValueAsString(websiteRequest));
             Website tempWebsite = website;
             tempWebsite.setCupidId(website.getCupidId());
+            tempWebsite.setIsSynced(0);
             websiteResponse.setWebsite(websiteService.save(tempWebsite));
             websiteResponse.setSuccess(true);
             websiteResponse.setError("");

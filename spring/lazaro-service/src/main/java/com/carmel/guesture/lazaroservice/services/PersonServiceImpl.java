@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonServiceImpl implements PersonService{
@@ -26,5 +27,15 @@ public class PersonServiceImpl implements PersonService{
     @Override
     public List<Person> findAllBySyncStatusIsNot(int isSynced) {
         return personRepository.findAllByIsSyncedIsNot(isSynced);
+    }
+
+    @Override
+    public List<Person> findAllBySuiteId(String suiteId) {
+        return personRepository.findAllBySuiteId(suiteId);
+    }
+
+    @Override
+    public Optional<Person> findByCupidId(String cupidId) {
+        return personRepository.findByCupidId(cupidId);
     }
 }
