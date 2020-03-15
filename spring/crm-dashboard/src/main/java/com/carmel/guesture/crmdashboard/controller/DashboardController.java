@@ -72,6 +72,10 @@ public class DashboardController {
         return "dashboard/lead-data";
     }
 
+    @RequestMapping(value = "/all-leads", method = RequestMethod.GET)
+    public String allLeads(){
+        return "dashboard/all-leads";
+    }
     @RequestMapping(value = "/get-leads", method = RequestMethod.GET)
     public @ResponseBody
     CRMLeadsResponse getLeadsByAgent(
@@ -155,6 +159,22 @@ public class DashboardController {
     public String leadList(Model model, @PathVariable(name = "status", required = false) int status) {
         model.addAttribute("status", status);
         return "dashboard/lead-data-by-status";
+    }
+
+    @RequestMapping(value = "/get-paged-leads", method = RequestMethod.GET)
+    public @ResponseBody
+    CRMLeadsResponse getPagedLeads(
+            @RequestParam(name = "page", required = false) int page
+    ) {
+        CRMLeadsResponse crmLeadsResponse = new CRMLeadsResponse();
+        crmLeadsResponse.setSuccess(false);
+        try {
+            crmLeadsResponse = crmLeadsService.getAllLeads(page);
+            crmLeadsResponse.setSuccess(true);
+        } catch (Exception ex) {
+            crmLeadsResponse.setSuccess(false);
+        }
+        return crmLeadsResponse;
     }
 
     @RequestMapping(value = "/get-leads-by-status", method = RequestMethod.GET)

@@ -9,7 +9,11 @@ import java.util.List;
 public class CRMLeadsResponse {
 
     private boolean success;
+    private long totalRecords;
+    private long totalPages;
+
     private List<CRMLead> data;
+
 
     public List<CRMLead> getData() {
         return data;
@@ -25,5 +29,21 @@ public class CRMLeadsResponse {
 
     public void setSuccess(boolean success) {
         this.success = success;
+    }
+
+    public long getTotalRecords() {
+        return totalRecords;
+    }
+
+    public void setTotalRecords(long totalRecords) {
+        this.totalRecords = totalRecords;
+    }
+
+    public long getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(long totalPages) {
+        this.totalPages = totalPages;
     }
 }

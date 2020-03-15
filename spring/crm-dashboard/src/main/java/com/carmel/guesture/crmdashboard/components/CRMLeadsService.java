@@ -3,7 +3,7 @@ package com.carmel.guesture.crmdashboard.components;
 import com.carmel.guesture.crmdashboard.models.CRMLead;
 import com.carmel.guesture.crmdashboard.response.CRMLeadResponse;
 import com.carmel.guesture.crmdashboard.response.CRMLeadsResponse;
-import com.carmel.guesture.crmdashboard.response.CRMUsersResponse;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.slf4j.Logger;
@@ -146,21 +146,21 @@ public class CRMLeadsService {
         List<CRMLead> crmLeadList = new ArrayList<>();
         CRMLeadsResponse leadsResponse = this.getAgentLeadsByStatus(agentId, "");
         crmLeadList.addAll(leadsResponse.getData());
-        leadsResponse = this.getAgentLeadsByStatus(agentId,  "New");
+        leadsResponse = this.getAgentLeadsByStatus(agentId, "New");
         crmLeadList.addAll(leadsResponse.getData());
-        leadsResponse = this.getAgentLeadsByStatus(agentId,  "Assigned");
+        leadsResponse = this.getAgentLeadsByStatus(agentId, "Assigned");
         crmLeadList.addAll(leadsResponse.getData());
-        leadsResponse = this.getAgentLeadsByStatus(agentId,  "Following Up");
+        leadsResponse = this.getAgentLeadsByStatus(agentId, "Following Up");
         crmLeadList.addAll(leadsResponse.getData());
         leadsResponse = this.getAgentLeadsByStatus(agentId, "Recycled");
         crmLeadList.addAll(leadsResponse.getData());
-        leadsResponse = this.getAgentLeadsByStatus(agentId,  "Requested Call Back");
+        leadsResponse = this.getAgentLeadsByStatus(agentId, "Requested Call Back");
         crmLeadList.addAll(leadsResponse.getData());
         leadsResponse = this.getAgentLeadsByStatus(agentId, "Site Visit Scheduled");
         crmLeadList.addAll(leadsResponse.getData());
-        leadsResponse = this.getAgentLeadsByStatus(agentId,  "Coordinate Booking");
+        leadsResponse = this.getAgentLeadsByStatus(agentId, "Coordinate Booking");
         crmLeadList.addAll(leadsResponse.getData());
-        leadsResponse = this.getAgentLeadsByStatus(agentId,  "Missed Call");
+        leadsResponse = this.getAgentLeadsByStatus(agentId, "Missed Call");
         crmLeadList.addAll(leadsResponse.getData());
         return crmLeadList;
 
@@ -180,7 +180,7 @@ public class CRMLeadsService {
         return crmLeadsResponse;
     }
 
-    public CRMLeadResponse getLeadById(String leadId){
+    public CRMLeadResponse getLeadById(String leadId) {
         String url = carmelConfig.getCrmURL();
         url += "/Leads/" + leadId;
         CRMLeadResponse crmLeadResponse = restTemplate.getForObject(url,
@@ -188,7 +188,7 @@ public class CRMLeadsService {
         return crmLeadResponse;
     }
 
-    public List<CRMLead>  getLeadsByStatus(String status) {
+    public List<CRMLead> getLeadsByStatus(String status) {
         String url = carmelConfig.getCrmURL();
         url += "/Leads?filter[operator]=and" +
                 "&filter[operator]=and" +
@@ -198,5 +198,34 @@ public class CRMLeadsService {
         CRMLeadsResponse crmLeadsResponse = restTemplate.getForObject(url,
                 CRMLeadsResponse.class);
         return crmLeadsResponse.getData();
+    }
+
+    public CRMLeadsResponse getAllLeads(int pageNumber) {
+        if(pageNumber == 0){
+            pageNumber = 1;
+        }
+        CRMLeadsResponse crmLeadsResponse = new CRMLeadsResponse();
+        crmLeadsResponse.setTotalRecords(0);
+        crmLeadsResponse.setTotalPages(0);
+        try {
+            String url = carmelConfig.getCrmURL();
+            url += "/Leads?page[number]=" + String.valueOf(pageNumber) +
+                    "&page[size]=20&sort=-date_entered";
+            String responseData = restTemplate.getForObject(url,
+                    String.class);
+            JsonObject jsonObject = new JsonParser().parse(responseData).getAsJsonObject();
+            Gson gson = new Gson();
+            crmLeadsResponse = gson.fromJson(responseData, CRMLeadsResponse.class);
+            if (jsonObject.has("meta")) {
+                JsonObject metaObject = jsonObject.getAsJsonObject("meta");
+                if (metaObject.has("total-pages")) {
+                    crmLeadsResponse.setTotalPages(metaObject.get("total-pages").getAsLong());
+                }
+                crmLeadsResponse.setTotalRecords(20 * crmLeadsResponse.getTotalPages());
+            }
+        } catch (Exception ex) {
+            logger.error(ex.toString());
+        }
+        return crmLeadsResponse;
     }
 }
