@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/login-screen.css}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap" rel="stylesheet">
+    <title>Screen-4</title>
+</head>
+
+<body>
+<div class="parent">
+    <div class="container">
+        <div>
+            <img class="logo" src="images/product-logo.png" alt="Guesture">
+            <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.</p>
+        </div>
+        <div class="loginTop">
+            <p class="login">Login</p>
+        </div>
+        <div id="invalid" class="credentials" style="display: none;">
+            <p class="invalid">
+                Invalid login credentials
+            </p>
+        </div>
+        <form name="form-login" th:action="@{/login}" method="post">
+            <div class="inputTop">
+                <input type="text" name="username"  id="username" class="inputTxt" placeholder="Email or Mobile Number">
+                <p class="error" style="display: none;"> This field is required</p>
+            </div>
+            <div class="passwordPart">
+                <div class="password" id="pswdBorder">
+                    <div class="psdLeft">
+                        <input type="password" name="password" id="password" class="text" placeholder="Password">
+                    </div>
+                    <div class="psdRight">
+                        <img class="hideIcon" id="hide" onclick="showPswd('password','hide')" src="images/eye.png"
+                             alt="unclick">
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <p class="error" style="display: none;"> This field is required</p>
+            </div>
+            <div class="forgotTop" id="forgot">
+                <span class="forgot" onclick="nextNav('../HTML/lonin-screen-6.html')">Forgot password?</span>
+            </div>
+            <div class="btnTop">
+                <button class="loginBtn" type="submit" >Login
+                </button>
+            </div>
+        </form>
+        <div class="accountTop">
+            <span class="account">Don’t have an account yet?</span>
+            <span class="newOne" onclick="nextNav('../HTML/lonin-screen-11.html')">Get one now.</span>
+        </div>
+    </div>
+</div>
+<script src="js/login-screen.js"></script>
+</body>
+
+</html>
