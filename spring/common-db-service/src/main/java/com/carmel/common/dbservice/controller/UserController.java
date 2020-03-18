@@ -113,6 +113,59 @@ public class UserController {
         return userResponse;
     }
 
+    @RequestMapping(value = "/guest-sign-up", method = RequestMethod.POST)
+    public UserResponse guestSignUp(@Valid @RequestBody User user) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        UserResponse userResponse = new UserResponse();
+        try {
+            if (user.getId() == null) {
+                user.setId("");
+            }
+            user.setClient(userInfo.getClient());
+            logger.trace("Data:{}", objectMapper.writeValueAsString(user));
+            User duplicateUser = getDuplicate(user);
+            if (duplicateUser != null) {
+                userResponse.setUser(duplicateUser);
+                userResponse.setSuccess(true);
+                userResponse.setError("Duplicate user name!");
+            } else {
+                if (user.getId() == "") {
+                    user.setPassword(passwordEncoder.encode(user.getPassword()));
+                    user.setCreatedBy(userInfo.getId());
+                    user.setCreationTime(new Date());
+                    user.setClient(userInfo.getClient());
+                } else {
+                    Optional<User> optionalUser = userService.findById(user.getId());
+                    user.setPassword(optionalUser.get().getPassword());
+                    user.setLastModifiedBy(userInfo.getId());
+                    user.setLastModifiedTime(new Date());
+                }
+                User savedUser = userService.save(user);
+                AddressBook addressBook = new AddressBook();
+                Optional<AddressBook> optionalAddressBook = addressBookService.findByUserId(savedUser.getId());
+                if (optionalAddressBook.isPresent()) {
+                    addressBook = optionalAddressBook.get();
+                }
+                addressBook.setEmail1(user.getUserName());
+                addressBook.setDisplayName(user.getFullName());
+                addressBook.setUserId(savedUser.getId());
+                addressBookService.save(addressBook);
+                userResponse.setUser(savedUser);
+                userResponse.setSuccess(true);
+                userResponse.setError("");
+            }
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            userResponse.setSuccess(false);
+            userResponse.setError(ex.getMessage());
+        }
+        return userResponse;
+    }
+
+
     @RequestMapping(value = "/trash", method = RequestMethod.POST)
     public UserResponse moveToTrash(@RequestBody Map<String, String> formData) {
         UserInfo userInfo = userInformation.getUserInfo();
@@ -283,6 +336,23 @@ public class UserController {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public User getDuplicate(User user) {
+        List<User> userList;
+        if (user.getId() == null) {
+            user.setId("");
+        }
+        if (user.getId().isEmpty()) {
+            userList = userService.findAllByUserName(user.getUserName());
+        } else {
+            userList = userService.findAllByUserNameAndIdIsNot(user.getUserName(), user.getId());
+        }
+        if (userList.size() > 0) {
+            return userList.get(0);
+        } else {
+            return null;
         }
     }
 

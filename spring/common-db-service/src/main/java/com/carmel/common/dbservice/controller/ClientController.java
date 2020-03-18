@@ -66,7 +66,7 @@ public class ClientController {
                 clientDetails.setCreatedBy(userInfo.getId());
                 clientDetails.setCreationTime(new Date());
                 Client savedClient;
-                if (client.getClientId() == "") {
+                if (client.getClientId().equals("")) {
                     client.setClientDetails(null);
                     client.setClientSecrete(passwordEncoder.encode(client.getClientSecrete()));
                     savedClient = clientService.save(client);
