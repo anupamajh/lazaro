@@ -104,6 +104,13 @@ public class Inventory {
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Amenity> amenities;
 
+    @OneToOne(fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            mappedBy = "inventory")
+    private InventoryAttributes inventoryAttributes;
+
+
+
     public String getId() {
         return id;
     }
@@ -238,5 +245,13 @@ public class Inventory {
 
     public void setAmenities(List<Amenity> amenities) {
         this.amenities = amenities;
+    }
+
+    public InventoryAttributes getInventoryAttributes() {
+        return inventoryAttributes;
+    }
+
+    public void setInventoryAttributes(InventoryAttributes inventoryAttributes) {
+        this.inventoryAttributes = inventoryAttributes;
     }
 }

@@ -2,6 +2,7 @@ package com.carmel.guestjini.inventory.model.DTO;
 
 import com.carmel.guestjini.inventory.model.Amenity;
 import com.carmel.guestjini.inventory.model.Inventory;
+import com.carmel.guestjini.inventory.model.InventoryAttributes;
 import com.carmel.guestjini.inventory.model.InventoryType;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class InventoryDTO {
     private List<InventoryDTO> childrens = new ArrayList<>();
     private InventoryTypeDTO inventoryType;
     private InventoryLocationDTO inventoryLocation;
+    private InventoryAttributesDTO inventoryAttributes;
     private List<PackageDTO> packages;
     private List<AmenityDTO> amenities;
 
@@ -58,6 +60,8 @@ public class InventoryDTO {
                 this.amenities.add(new AmenityDTO(amenity));
             });
         }
+        this.inventoryAttributes = new InventoryAttributesDTO(inventory.getInventoryAttributes());
+
     }
 
     public String getId() {
@@ -201,5 +205,13 @@ public class InventoryDTO {
         amenities.forEach(amenity -> {
             this.amenities.add(new AmenityDTO(amenity));
         });
+    }
+
+    public InventoryAttributesDTO getInventoryAttributes() {
+        return inventoryAttributes;
+    }
+
+    public void setInventoryAttributes(InventoryAttributesDTO inventoryAttributes) {
+        this.inventoryAttributes = inventoryAttributes;
     }
 }
