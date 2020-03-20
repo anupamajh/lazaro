@@ -1,5 +1,6 @@
 package com.carmel.guestjini.inventory.controller;
 
+import com.carmel.guestjini.inventory.common.PackageConstants;
 import com.carmel.guestjini.inventory.components.UserInformation;
 import com.carmel.guestjini.inventory.model.Package;
 import com.carmel.guestjini.inventory.model.PackageCharge;
@@ -45,6 +46,9 @@ public class PackageController {
 
     @Autowired
     AmenityService amenityService;
+
+    @Autowired
+    PackageConstants packageConstants;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public PackageResponse save(@Valid @RequestBody Package aPackage) {
@@ -258,6 +262,43 @@ public class PackageController {
             logger.trace("Completed Successfully");
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
+            logger.error(ex.getMessage(), ex);
+            packageResponse.setSuccess(false);
+            packageResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return packageResponse;
+    }
+
+    @RequestMapping(value = "/find-package-by-name", method = RequestMethod.POST)
+    public PackageResponse findPackageByName(@RequestBody Map<String, String> formData){
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        String id = "";
+        if(packageConstants
+                .getPackageConstants()
+                .containsKey(formData.get("packageName"))
+        ){
+            id = packageConstants
+                    .getPackageConstants().get(formData.get("packageName"));
+        }
+         PackageResponse packageResponse = new PackageResponse();
+        try {
+            if(id.trim().equals("")){
+                throw new Exception("Unable to find package with name " + formData.get("packageName"));
+            }
+            Optional<Package> optionalPackage = packageService.findById(id);
+            if (optionalPackage.isPresent()) {
+                Package aPackage = optionalPackage.get();
+                packageResponse.setSuccess(true);
+                packageResponse.setError("");
+                packageResponse.setPackage(aPackage);
+            } else {
+                packageResponse.setSuccess(false);
+                packageResponse.setError("Error occurred while Fetching inventory!! Please try after sometime");
+            }
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             packageResponse.setSuccess(false);
             packageResponse.setError(ex.getMessage());

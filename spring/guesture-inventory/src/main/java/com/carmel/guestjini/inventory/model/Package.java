@@ -53,6 +53,12 @@ public class Package {
     @Column(name = "status")
     private int packageStatus;
 
+    @Column(name = "stay_length")
+    private int stayLength;
+
+    @Column(name = "stay_length_unit")
+    private int stayLengthUnit;
+
     @Column(name = "created_by")
     @Length(max = 40)
     private String createdBy;
@@ -157,6 +163,22 @@ public class Package {
 
     public void setPackageStatus(int packageStatus) {
         this.packageStatus = packageStatus;
+    }
+
+    public int getStayLength() {
+        return stayLength;
+    }
+
+    public void setStayLength(int stayLength) {
+        this.stayLength = stayLength;
+    }
+
+    public int getStayLengthUnit() {
+        return stayLengthUnit;
+    }
+
+    public void setStayLengthUnit(int stayLengthUnit) {
+        this.stayLengthUnit = stayLengthUnit;
     }
 
     public String getCreatedBy() {

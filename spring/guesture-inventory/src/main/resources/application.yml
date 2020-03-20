@@ -52,3 +52,6 @@ security:
 carmel:
   userInfoURL: http://common-db-service/user/me
   dbServiceURL: http://common-db-service
+  packageConstants:
+    solo: 86c41392-4b0f-401e-88cb-4185b229721a
+    solo2d: d4174b0e-1590-432c-ac94-d36f7cbd5f45
