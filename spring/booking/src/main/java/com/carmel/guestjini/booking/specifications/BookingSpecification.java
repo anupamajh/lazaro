@@ -17,6 +17,14 @@ public class BookingSpecification {
                 .and(checkInventoryAvailabilityOnReferenceNumber(bookingReference));
     }
 
+    public static Specification<Booking> checkInventoryAvailability(List<String> inventoryId, Date checkInDate, Date checkoutDate) {
+        return Specification
+                .where(checkInventoryAvailabilityOnInventory(inventoryId))
+                .and(checkInventoryAvailabilityOnDate(checkInDate, checkoutDate));
+    }
+
+
+
     public static Specification<Booking> checkInventoryAvailabilityOnDate(Date checkInDate, Date checkoutDate) {
         return (root, query, builder) -> builder.or(
                 builder.greaterThanOrEqualTo(root.get("checkInTime"), checkInDate),

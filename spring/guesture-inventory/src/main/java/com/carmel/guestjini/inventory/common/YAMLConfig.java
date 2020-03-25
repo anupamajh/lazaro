@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class YAMLConfig {
     private String userInfoURL;
     private String dbServiceURL;
+    private String bookingServiceURL;
 
     public YAMLConfig(){}
 
@@ -36,5 +37,13 @@ public class YAMLConfig {
 
     public void setDbServiceURL(String dbServiceURL) {
         this.dbServiceURL = dbServiceURL;
+    }
+
+    public String getBookingServiceURL() {
+        return bookingServiceURL;
+    }
+
+    public void setBookingServiceURL(String bookingServiceURL) {
+        this.bookingServiceURL = bookingServiceURL;
     }
 }

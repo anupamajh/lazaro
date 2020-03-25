@@ -65,7 +65,6 @@ public class BookingController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public BookingResponse save(@Valid @RequestBody Booking booking) {
-        UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         BookingResponse bookingResponse = new BookingResponse();
@@ -76,20 +75,20 @@ public class BookingController {
             if (booking.getInventoryId() == null) {
                 booking.setInventoryId("");
             }
-            if (booking.getOrgId() == null || booking.getOrgId().isEmpty()) {
-                if(userInfo.getDefaultOrganization()!=null) {
-                    booking.setOrgId(userInfo.getDefaultOrganization().getId());
-                }
-            }
-            if (booking.getId().equals("")) {
-                booking.setCreatedBy(userInfo.getId());
-                booking.setCreationTime(new Date());
-
-            } else {
-                booking.setLastModifiedBy(userInfo.getId());
-                booking.setLastModifiedTime(new Date());
-            }
-            booking.setClientId(userInfo.getClient().getClientId());
+//            if (booking.getOrgId() == null || booking.getOrgId().isEmpty()) {
+//                if(userInfo.getDefaultOrganization()!=null) {
+//                    booking.setOrgId(userInfo.getDefaultOrganization().getId());
+//                }
+//            }
+//            if (booking.getId().equals("")) {
+//                booking.setCreatedBy(userInfo.getId());
+//                booking.setCreationTime(new Date());
+//
+//            } else {
+//                booking.setLastModifiedBy(userInfo.getId());
+//                booking.setLastModifiedTime(new Date());
+//            }
+//            booking.setClientId(userInfo.getClient().getClientId());
             Booking existingBooking;
             if (booking.getId() != "") {
                 Optional<Booking> optionalBooking = bookingService.findById(booking.getId());
@@ -161,6 +160,44 @@ public class BookingController {
             } else {
                 throw new Exception("Booking not found!!!");
             }
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            bookingResponse.setSuccess(false);
+            bookingResponse.setError(ex.getMessage());
+        }
+        return bookingResponse;
+    }
+
+    @RequestMapping(value = "/get-available-inventory", method = RequestMethod.POST)
+    public BookingResponse getAvailableInventroy(@RequestBody Map<String, String> formData) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        BookingResponse bookingResponse = new BookingResponse();
+        try {
+            String inventoryId = formData.get("inventoryId") == null ? null : String.valueOf(formData.get("inventoryId"));
+            String strCheckInDate = formData.get("checkInDate") == null ? null : String.valueOf(formData.get("checkInDate"));
+            String strCheckoutDate = formData.get("checkOutDate") == null ? null : String.valueOf(formData.get("checkOutDate"));
+
+            Date checkInDate = DateUtil.convertToDate(strCheckInDate);
+            Date checkOutDate = DateUtil.convertToDate(strCheckoutDate);
+
+            if (inventoryId == null) {
+                throw new Exception("Inventory Id not received");
+            }
+
+            String parentIds = inventoryService.getParentIds(inventoryId);
+            List<String> inventoryIds = Arrays.asList(parentIds.split("\\s*,\\s*"));
+            List<Booking> bookings = bookingService.findAll(
+                    checkInventoryAvailability(inventoryIds, checkInDate,
+                           checkOutDate));
+            if (bookings.size() > 0) {
+                throw new Exception("Selected inventory not available for booking, Please select some other inventory");
+            }else{
+                bookingResponse.setInventoryId(inventoryId);
+                bookingResponse.setSuccess(true);
+            }
+
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             bookingResponse.setSuccess(false);
@@ -521,7 +558,7 @@ public class BookingController {
                 BookingAdditionalCharge bookingAdditionalCharge;
                 for (PackageCharge packageCharge : aPackage.getPackageCharges()) {
                     bookingAdditionalCharge = new BookingAdditionalCharge(booking, packageCharge);
-                    if(userInfo.getDefaultOrganization()!=null) {
+                    if (userInfo.getDefaultOrganization() != null) {
                         bookingAdditionalCharge.setOrgId(userInfo.getDefaultOrganization().getId());
                     }
                     bookingAdditionalCharge.setCreatedBy(userInfo.getId());

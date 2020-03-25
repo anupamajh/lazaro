@@ -110,4 +110,9 @@ public class InventoryServiceImpl implements InventoryService {
         }
         return newList;
     }
+
+    @Override
+    public List<Inventory> findAll(Specification<Inventory> filterInventoryByPackage) {
+        return inventoryRepository.findAll(filterInventoryByPackage);
+    }
 }

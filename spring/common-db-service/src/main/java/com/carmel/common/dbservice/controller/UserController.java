@@ -116,6 +116,7 @@ public class UserController {
     @RequestMapping(value = "/guest-sign-up", method = RequestMethod.POST)
     public UserResponse guestSignUp(@Valid @RequestBody User user) {
         UserInfo userInfo = userInformation.getUserInfo();
+        user.setUserName(user.getPhone());
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         UserResponse userResponse = new UserResponse();

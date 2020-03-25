@@ -1,12 +1,17 @@
 package com.carmel.guestjini.inventory.controller;
 
+import com.carmel.guestjini.inventory.common.PackageConstants;
+import com.carmel.guestjini.inventory.components.BookingService;
 import com.carmel.guestjini.inventory.components.UserInformation;
 import com.carmel.guestjini.inventory.model.Inventory;
 import com.carmel.guestjini.inventory.model.InventoryLocation;
 import com.carmel.guestjini.inventory.model.Principal.UserInfo;
+import com.carmel.guestjini.inventory.request.PaymentRequest;
+import com.carmel.guestjini.inventory.response.BookingResponse;
 import com.carmel.guestjini.inventory.response.InventoryResponse;
 import com.carmel.guestjini.inventory.services.InventoryLocationService;
 import com.carmel.guestjini.inventory.services.InventoryService;
+import com.carmel.guestjini.inventory.services.PackageService;
 import com.carmel.guestjini.inventory.specifications.InventorySpecification;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -24,6 +29,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.*;
 
+import static com.carmel.guestjini.inventory.specifications.InventorySpecification.filterInventoryByAvailability;
+import static com.carmel.guestjini.inventory.specifications.InventorySpecification.filterInventoryByPackage;
+
 
 @RestController
 @RequestMapping(value = "/inventory")
@@ -39,6 +47,15 @@ public class InventoryController {
     @Autowired
     UserInformation userInformation;
 
+    @Autowired
+    PackageService packageService;
+
+    @Autowired
+    PackageConstants packageConstants;
+
+    @Autowired
+    BookingService bookingService;
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public InventoryResponse save(@Valid @RequestBody Inventory inventory) {
         UserInfo userInfo = userInformation.getUserInfo();
@@ -50,7 +67,7 @@ public class InventoryController {
         }
 
         if (inventory.getOrgId() == null || inventory.getOrgId().isEmpty()) {
-            if(userInfo.getDefaultOrganization() != null) {
+            if (userInfo.getDefaultOrganization() != null) {
                 inventory.setOrgId(userInfo.getDefaultOrganization().getId());
             }
         }
@@ -280,7 +297,7 @@ public class InventoryController {
         String parentIds = "";
         String delim = "";
         for (Inventory inventory : parents) {
-            parentIds += delim  + inventory.getId();
+            parentIds += delim + inventory.getId();
             delim = ",";
         }
         return parentIds;
@@ -294,6 +311,67 @@ public class InventoryController {
             }
         }
         return newList;
+    }
+
+    @RequestMapping(value = "/get-suitable-inventory")
+    public InventoryResponse checkInventoryAvailability(@RequestBody PaymentRequest paymentRequest) {
+        InventoryResponse inventoryResponse = new InventoryResponse();
+        try {
+            String packageName = paymentRequest.getStayPackage();
+            String strCheckInDate = paymentRequest.getCheckInDate();
+            String strCheckoutDate = paymentRequest.getCheckOutDate();
+            String packageId = "";
+            if (packageConstants
+                    .getPackageConstants()
+                    .containsKey(packageName)
+            ) {
+                packageId = packageConstants
+                        .getPackageConstants().get(packageName);
+            }
+
+            if (packageId.trim().equals("")) {
+                throw new Exception("Package not found");
+            }
+            List<Inventory> inventories = inventoryService.findAll(filterInventoryByAvailability(
+                    packageId,
+                    paymentRequest.getHasBalcony(),
+                    paymentRequest.getHasBathRoom()
+            ));
+            String selectedInventoryId = "";
+            Boolean hasInventory = false;
+            for (Inventory inventory : inventories) {
+                BookingResponse bookingResponse = bookingService.getInventoryAvailability(
+                        inventory.getId(),
+                        strCheckInDate,
+                        strCheckoutDate
+                );
+                if(bookingResponse.isSuccess()){
+                    selectedInventoryId = bookingResponse.getInventoryId();
+                    hasInventory = true;
+                    break;
+                }
+            }
+            if(hasInventory){
+                Optional<Inventory> optionalInventory = inventoryService.findById(selectedInventoryId);
+                if(optionalInventory.isPresent()) {
+                    inventoryResponse.setInventory(optionalInventory.get());
+                    inventoryResponse.setSuccess(true);
+                }else{
+                    inventoryResponse.setSuccess(false);
+                    inventoryResponse.setError("Inventory is not available");
+                }
+            }else{
+                inventoryResponse.setSuccess(false);
+                inventoryResponse.setError("Inventory is not available");
+            }
+
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            inventoryResponse.setSuccess(false);
+            inventoryResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return inventoryResponse;
     }
 
 }

@@ -1,16 +1,14 @@
-package com.carmel.guestjini.booking.response;
+package com.carmel.guestjini.inventory.response;
 
-import com.carmel.guestjini.booking.model.Booking;
-import com.carmel.guestjini.booking.model.DTO.BookingDTO;
-import com.carmel.guestjini.booking.model.DTO.GuestDTO;
-import com.carmel.guestjini.booking.model.Guest;
+
+
+import com.carmel.guestjini.inventory.model.DTO.BookingDTO;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BookingResponse {
     private BookingDTO booking;
-    private GuestDTO guest;
     private List<BookingDTO> bookingList;
     private long totalPages;
     private long totalRecords;
@@ -23,19 +21,16 @@ public class BookingResponse {
         return booking;
     }
 
-    public void setBooking(Booking booking) {
-        this.booking = new BookingDTO(booking);
+    public void setBooking(BookingDTO booking) {
+        this.booking = (booking);
     }
 
     public List<BookingDTO> getBookingList() {
         return bookingList;
     }
 
-    public void setBookingList(List<Booking> bookingList) {
-        this.bookingList = new ArrayList<>();
-        bookingList.forEach(booking1 -> {
-            this.bookingList.add(new BookingDTO(booking1));
-        });
+    public void setBookingList(List<BookingDTO> bookingList) {
+        this.bookingList = bookingList;
     }
 
     public long getTotalPages() {
@@ -76,14 +71,6 @@ public class BookingResponse {
 
     public void setError(String error) {
         this.error = error;
-    }
-
-    public GuestDTO getGuest() {
-        return guest;
-    }
-
-    public void setGuest(Guest guest) {
-        this.guest = new GuestDTO(guest);
     }
 
     public String getInventoryId() {

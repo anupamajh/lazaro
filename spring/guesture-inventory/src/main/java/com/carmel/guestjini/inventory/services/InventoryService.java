@@ -24,4 +24,6 @@ public interface InventoryService {
     Page<Inventory> findAll(Specification<Inventory> textInAllColumns, Pageable pageable);
 
     List<Inventory> getAllParents(String id);
+
+    List<Inventory> findAll(Specification<Inventory> filterInventoryByPackage);
 }

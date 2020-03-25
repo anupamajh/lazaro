@@ -52,6 +52,11 @@ security:
 carmel:
   userInfoURL: http://common-db-service/user/me
   dbServiceURL: http://common-db-service
+  accountsServiceURL: http://guesture-accounts-service
+  bookingServiceURL: http://guesture-booking-service
+  helpdeskServiceURL: http://guesture-helpdesk-service
+  paymentServiceURL: http://guesture-payment-service
+  inventoryServiceURL: http://guesture-inventory-service
   packageConstants:
-    solo: 86c41392-4b0f-401e-88cb-4185b229721a
+    solo: 7ae0a514-b2df-4ae1-8799-947d789a4c2f
     solo2d: d4174b0e-1590-432c-ac94-d36f7cbd5f45

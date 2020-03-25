@@ -16,9 +16,11 @@ public class DateUtil {
             add(new SimpleDateFormat("dd.M.yyyy hh:mm:ss a"));
             add(new SimpleDateFormat("dd.MMM.yyyy"));
             add(new SimpleDateFormat("dd-MMM-yyyy"));
+            add(new SimpleDateFormat("dd/M/yyyy"));
             add(new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy"));
         }
     };
+
 
     public static Date convertToDate(String input) {
         Date date = null;
