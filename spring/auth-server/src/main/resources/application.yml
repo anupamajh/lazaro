@@ -17,6 +17,8 @@ spring:
     database: mysql
   application:
     name: auth-service
+  thymeleaf:
+    cache: false
 logging:
   level:
     root: info
@@ -45,3 +47,6 @@ eureka:
     fetch-registry: true
     serviceUrl:
       defaultZone: http://139.59.32.238:8001/eureka/
+
+carmel:
+  guestureRedirectURL : http://localost:8100

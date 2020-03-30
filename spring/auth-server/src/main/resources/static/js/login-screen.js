@@ -1,5 +1,5 @@
 function nextNav(dest) {
-    location.href = dest;
+    document.location.href = baseURL + dest;
 
 }
 

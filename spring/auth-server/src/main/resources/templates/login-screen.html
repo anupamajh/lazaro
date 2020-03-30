@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/login-screen.css}">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap" rel="stylesheet">
-    <title>Screen-4</title>
+    <title>Guesture:Login</title>
+
 </head>
 
 <body>
@@ -25,7 +26,7 @@
         </div>
         <form name="form-login" th:action="@{/login}" method="post">
             <div class="inputTop">
-                <input type="text" name="username"  id="username" class="inputTxt" placeholder="Email or Mobile Number">
+                <input type="text" name="username" id="username" class="inputTxt" placeholder="Email or Mobile Number">
                 <p class="error" style="display: none;"> This field is required</p>
             </div>
             <div class="passwordPart">
@@ -42,19 +43,22 @@
                 <p class="error" style="display: none;"> This field is required</p>
             </div>
             <div class="forgotTop" id="forgot">
-                <span class="forgot" onclick="nextNav('../HTML/lonin-screen-6.html')">Forgot password?</span>
+                <span class="forgot" onclick="nextNav('/user/forgot-password')">Forgot password?</span>
             </div>
             <div class="btnTop">
-                <button class="loginBtn" type="submit" >Login
+                <button class="loginBtn" type="submit">Login
                 </button>
             </div>
         </form>
         <div class="accountTop">
             <span class="account">Don’t have an account yet?</span>
-            <span class="newOne" onclick="nextNav('../HTML/lonin-screen-11.html')">Get one now.</span>
+            <span class="newOne" onclick="nextNav('/user/app-access-request')">Get one now.</span>
         </div>
     </div>
 </div>
+<script th:inline="javascript">
+    var baseURL = [[${baseURL}]];
+</script>
 <script src="js/login-screen.js"></script>
 </body>
 
