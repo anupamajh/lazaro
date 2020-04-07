@@ -1,5 +1,6 @@
 package com.carmel.guestjini.payments.controller;
 
+import com.carmel.guestjini.payments.components.MailClient;
 import com.carmel.guestjini.payments.config.PaytmDetails;
 import com.carmel.guestjini.payments.model.PaymentStatus;
 import com.carmel.guestjini.payments.service.PaymentStatusService;
@@ -34,6 +35,9 @@ public class PaymentController {
     @Autowired
     PaymentStatusService paymentStatusService;
 
+    @Autowired
+    MailClient mailClient;
+
     @GetMapping("/")
     public String home() {
         return "home";
@@ -58,6 +62,7 @@ public class PaymentController {
         paymentStatus.setId(orderId);
         paymentStatus.setCustomerId(customerId);
         paymentStatus.setOrderId(orderId);
+        paymentStatus.setEmail(email);
         paymentStatusService.save(paymentStatus);
         modelAndView.addAllObjects(parameters);
         return modelAndView;
@@ -112,6 +117,21 @@ public class PaymentController {
             if (isValideChecksum && parameters.containsKey("RESPCODE")) {
                 if (parameters.get("RESPCODE").equals("01")) {
                     result = "Payment Successful";
+                    TreeMap<String, String> newParamaters = new TreeMap<>();
+                    newParamaters.put("MID", paytmDetails.getMerchantId());
+                    newParamaters.put("ORDERID", parameters.get("ORDERID"));
+                    String checkSum = getCheckSum(parameters);
+                    newParamaters.put("CHECKSUMHASH", checkSum);
+                    final String uri = paytmDetails.getPaytmStatusUrl();
+                    RestTemplate restTemplate = new RestTemplate();
+                    HttpHeaders headers = new HttpHeaders();
+                    headers.setContentType(MediaType.APPLICATION_JSON);
+                    JSONObject postData = new JSONObject();
+                    postData.put("MID", paytmDetails.getMerchantId());
+                    postData.put("ORDERID", newParamaters.get("ORDERID"));
+                    postData.put("CHECKSUMHASH", checkSum);
+                    HttpEntity<String> entity = new HttpEntity<>(postData.toString(), headers);
+                    ResponseEntity<String> result1 = restTemplate.exchange(uri, HttpMethod.POST, entity, String.class);
                 } else {
                     result = "Payment Failed";
                 }
@@ -155,7 +175,7 @@ public class PaymentController {
         parameters.remove("CHECKSUMHASH");
         parameters.remove("MID");
         model.addAttribute("parameters", parameters);
-
+        mailClient.sendPaymentResponse(optionalPaymentStatus.get().getEmail(),parameters);
         return "pgresponse";
     }
 

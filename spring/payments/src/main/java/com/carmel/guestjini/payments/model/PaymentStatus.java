@@ -18,6 +18,9 @@ public class PaymentStatus {
     @Column(name = "customer_id", columnDefinition = "TEXT")
     private String customerId;
 
+    @Column(name = "email", columnDefinition = "TEXT")
+    private String email;
+
     @Column(name = "bank_name", columnDefinition = "TEXT")
     private String bankName;
 
@@ -74,6 +77,14 @@ public class PaymentStatus {
 
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getBankName() {

@@ -17,7 +17,20 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5Dialect
     generate-ddl: true
     database: mysql
-
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: amazon@carmelsolutions.net
+    password: P@ssw0rd
+    properties:
+      mail:
+        smtp:
+          auth: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+          starttls:
+            enable: true
 paytm.payment:
   sandbox:
     merchantId: IrinaH93005971299457

@@ -9,31 +9,36 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-<form method="post" action="/pgredirect">
+<form method="post" id="payment-form" action="/pgredirect">
     <div class="container register">
         <div class="row">
-              <div class="col-md-9 register-right">
+            <div class="col-md-9 register-right">
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <h3 class="register-heading">PayTM Payment</h3>
+
                         <div class="row register-form">
                             <div class="col-md-10">
                                 <div class="form-group">
+                                    <img th:src="@{product-logo.png}" class="column-resize-line">
+                                </div>
+                                <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Mobile Number" value=""
-                                           name="CUST_ID"/>
+                                           name="CUST_ID" id="CUST_ID"/>
                                 </div>
 
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Email" value=""
-                                           name="EMAIL"/>
+                                           name="EMAIL" id="EMAIL"/>
                                 </div>
 
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Amount" value=""
-                                           name="TXN_AMOUNT"/>
+                                           name="TXN_AMOUNT" id="TXN_AMOUNT"/>
                                 </div>
                                 <!--  <input type="submit" class="btnRegister"  value="Pay with Paytm"/>   -->
-                                <button type="submit" class="btnRegister" style="align : center">Pay with Paytm</button>
+                                <button type="button" id="btnRegister" class="btnRegister" style="align : center">Pay
+                                    with Paytm
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -43,5 +48,34 @@
         </div>
     </div>
 </form>
+<script>
+    $(document).ready(function () {
+        $("#btnRegister").on("click", function () {
+            var strError = "";
+            var strDelim = "";
+            var hasError = false;
+            if($.trim($("#CUST_ID").val()) === ""){
+                hasError = true;
+                strError += strDelim +  "Mobile number is required";
+                strDelim = "\n";
+            }
+            if($.trim($("#EMAIL").val()) === ""){
+                hasError = true;
+                strError += strDelim +  "Email is required";
+                strDelim = "\n";
+            }
+            if($.trim($("#TXN_AMOUNT").val()) === ""){
+                hasError = true;
+                strError += strDelim +  "Amount is required";
+                strDelim = "\n";
+            }
+            if(hasError){
+                alert(strError);
+            }else{
+                $("#payment-form").submit();
+            }
+        });
+    });
+</script>
 </body>
 </html>
