@@ -1,6 +1,7 @@
 package com.carmel.guestjini.payments.components;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -17,6 +18,10 @@ public class MailClient {
     MailContentBuilder mailContentBuilder;
 
     @Autowired
+    private Environment env;
+
+
+    @Autowired
     public MailClient(JavaMailSender mailSender) {
         this.mailSender = mailSender;
     }
@@ -26,6 +31,7 @@ public class MailClient {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setFrom("no-reply@carmelsolutions.net");
             messageHelper.setTo(recipient);
+            messageHelper.setCc(env.getProperty("carmel.support-email"));
             messageHelper.setSubject("Guesture :: Payment reciept");
             String content = mailContentBuilder.buildWithParameters(paramaters);
             messageHelper.setText(content, true);

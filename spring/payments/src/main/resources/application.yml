@@ -54,3 +54,5 @@ eureka:
     fetch-registry: true
     serviceUrl:
       defaultZone: http://139.59.32.238:8001/eureka/
+carmel:
+  support-email: prasanna.pete@gmail.com
