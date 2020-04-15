@@ -1,2 +1,2 @@
-include ':presentation', ':models', ':data-layer', ':domain'
+include ':app'
 rootProject.name='GuestJini'

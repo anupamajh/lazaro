@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/alertDailogBoxLayout"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dailogbox"
+    android:elevation="20dp">
+
+
+    <TextView
+        android:id="@+id/alertBoxTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="44dp"
+        android:letterSpacing="0.1"
+        android:text="@string/alert_title"
+        android:textColor="@color/colorSummerSky"
+        android:textSize="12sp"
+        app:fontFamily="@font/roboto_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/alertBoxMessage"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="12dp"
+        android:letterSpacing="0.1"
+        android:text="@string/alert_message"
+        android:textColor="@color/colorSuvaGray"
+        android:textSize="10sp"
+        android:lineSpacingExtra="2dp"
+        app:fontFamily="@font/roboto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alertBoxTitle" />
+
+    <ImageView
+        android:id="@+id/doneButton"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:contentDescription="@string/done"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alertBoxMessage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

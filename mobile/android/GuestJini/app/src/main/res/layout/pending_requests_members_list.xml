@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp">
+
+        <RelativeLayout
+            android:id="@+id/pendingRequestsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingBottom="20dp">
+
+
+            <RelativeLayout
+                android:id="@+id/profileLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_toStartOf="@+id/inviteSentLayout">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profilePicture"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="19dp"
+                    android:src="@drawable/profile_image"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="16dp" />
+
+                <TextView
+                    android:id="@+id/profileName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_toEndOf="@+id/profilePicture"
+                    android:letterSpacing="0.06"
+                    android:text="@string/people_name"
+                    android:textColor="@color/colorDimGray"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/roboto"
+                    app:layout_constraintStart_toEndOf="@+id/profilePicture"
+                    tools:layout_editor_absoluteY="20dp" />
+
+                <TextView
+                    android:id="@+id/profileGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_below="@+id/profileName"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_toEndOf="@+id/profilePicture"
+                    android:letterSpacing="0.06"
+                    android:text="@string/people_gender"
+                    android:textColor="@color/colorSuvaGray"
+                    android:textSize="11sp"
+                    app:fontFamily="@font/roboto"
+                    app:layout_constraintStart_toEndOf="@+id/profilePicture"
+                    app:layout_constraintTop_toBottomOf="@+id/profileName" />
+
+                <TextView
+                    android:id="@+id/profileAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/profileName"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_toEndOf="@+id/profileGender"
+                    android:letterSpacing="0.06"
+                    android:text="@string/people_age"
+                    android:textColor="@color/colorSuvaGray"
+                    android:textSize="10sp"
+                    android:visibility="gone"
+                    app:fontFamily="@font/roboto"
+                    app:layout_constraintStart_toEndOf="@+id/profilePicture"
+                    app:layout_constraintTop_toBottomOf="@+id/profileName" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/inviteSentLayout"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="22dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/invitationSentMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:letterSpacing="0.06"
+                    android:text="@string/invitation_sent_message"
+                    android:textColor="@color/colorDimGray"
+                    android:textSize="11sp"
+                    app:fontFamily="@font/roboto"
+                    tools:layout_editor_absoluteY="20dp" />
+
+                <TextView
+                    android:id="@+id/invitationSentDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/invitationSentMessage"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:letterSpacing="0.06"
+                    android:text="@string/invitation_sent_date"
+                    android:textColor="@color/colorDarkGray"
+                    android:textSize="11sp"
+                    app:fontFamily="@font/roboto"
+                    app:layout_constraintTop_toBottomOf="@+id/invitationSentMessage" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

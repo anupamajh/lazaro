@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/placeOfOriginDailogLayout"
+    android:layout_width="340dp"
+    android:layout_height="338dp"
+    android:background="@drawable/dailogbox"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <TextView
+        android:id="@+id/originTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/roboto_medium"
+        android:letterSpacing="0.1"
+        android:text="@string/place_of_origin"
+        android:textColor="@color/colorSummerSky"
+        android:textSize="12sp"
+        app:fontFamily="@font/roboto_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/originLargeDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto"
+        android:letterSpacing="0.06"
+        android:lineSpacingExtra="3dp"
+        android:text="@string/origin_large_text"
+        android:textColor="@color/colorSuvaGray"
+        android:textSize="10sp"
+        app:fontFamily="@font/roboto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/originTitle" />
+
+    <EditText
+        android:id="@+id/originEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/edit_textbox"
+        android:elevation="3dp"
+        android:ems="10"
+        android:fontFamily="@font/roboto"
+        android:hint="@string/location"
+        android:inputType="textPersonName"
+        android:padding="18dp"
+        android:textColor="@color/colorSuvaGray"
+        android:textSize="12sp"
+        android:letterSpacing="0.05"
+        android:autofillHints="@string/location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/originLargeDescription" />
+
+    <ImageView
+        android:id="@+id/originDoneButton"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="146dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="146dp"
+        android:src="@drawable/done_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/originEditText" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<shape xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:shape="line">-->
+<!--    <solid android:color="@color/colorPinkSwan"></solid>-->
+<!--    <stroke android:color="@color/colorPinkSwan"-->
+<!--        android:width="2dp"-->
+<!--        android:dashGap="2dp"-->
+<!--        android:dashWidth="7dp"></stroke>-->
+<!--</shape>-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- Border -->
+    <item>
+        <shape>
+            <solid android:color="@color/colorPinkSwan"></solid>
+            <stroke android:color="@color/colorPinkSwan"
+                android:width="5dp"
+                android:dashGap="4dp"
+                android:dashWidth="6dp"></stroke>
+        </shape>
+    </item>
+    <!-- Body -->
+    <item android:left="2dp">
+        <shape>
+            <solid android:color="#ffffff"></solid>
+
+        </shape>
+    </item>
+</layer-list>

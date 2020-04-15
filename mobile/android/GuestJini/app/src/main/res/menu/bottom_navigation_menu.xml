@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/suppotIcon"
+        android:icon="@drawable/support_icon_xhdpi"
+        android:title="@string/support"></item>
+    <item android:id="@+id/communityIcon"
+        android:icon="@drawable/community_icon_xhdpi"
+        android:title="@string/community"></item>
+    <item android:id="@+id/accountsIcon"
+        android:icon="@drawable/accounts_icon_xhdpi"
+        android:title="@string/accounts"></item>
+    <item android:id="@+id/rewardsIcon"
+        android:icon="@drawable/rewards_icon_xhdpi"
+        android:title="@string/rewards"></item>
+    <item android:id="@+id/settingsIcon"
+        android:icon="@drawable/settings_icon_xhdpi"
+        android:title="@string/settings"></item>
+</menu>

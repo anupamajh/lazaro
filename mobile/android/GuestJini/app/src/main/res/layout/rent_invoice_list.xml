@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="25dp">
+
+    <TextView
+        android:id="@+id/rentInvoiceDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/rent_invoice_date"
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="@color/colorZambezi1"
+        android:textSize="12sp"
+        android:letterSpacing="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/rentInvoiceNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/rent_invoice_no"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/colorDimGray"
+        android:textSize="10sp"
+        android:letterSpacing="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rentInvoiceDate" />
+
+    <TextView
+        android:id="@+id/rentInvoiceAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/rent_invoice_amount"
+        android:fontFamily="@font/roboto_medium"
+        android:letterSpacing="0.05"
+        android:textColor="@color/colorZambezi1"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toStartOf="@+id/rightNavigationIcon"
+        app:layout_constraintStart_toEndOf="@+id/rentInvoiceDate"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/rightNavigationIcon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/navigation_icon_xhdpi" />
+</androidx.constraintlayout.widget.ConstraintLayout>

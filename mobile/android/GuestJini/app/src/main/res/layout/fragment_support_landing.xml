@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".Support.SupportLandingFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/subLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bodyContent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/colorWhite"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/colorWhite"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorWhite">
+
+                        <TextView
+                            android:id="@+id/help_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="52dp"
+                            android:gravity="center"
+                            android:letterSpacing="0.15"
+                            android:text="@string/help_title"
+                            android:textColor="@color/colorDimGray"
+                            android:textSize="@dimen/hepl_title_size"
+                            app:fontFamily="@font/roboto_light"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"></TextView>
+
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/findHelpCardView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="28dp"
+                            android:layout_marginEnd="24dp"
+                            app:cardBackgroundColor="@color/colorWhisper1"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="5dp"
+                            app:cardUseCompatPadding="true"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/help_title">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingBottom="38dp">
+
+                                <TextView
+                                    android:id="@+id/textView3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="32dp"
+                                    android:layout_marginTop="34dp"
+                                    android:fontFamily="@font/roboto_medium"
+                                    android:letterSpacing="0.05"
+                                    android:text="@string/find_help"
+                                    android:textColor="@color/colorCharcoal"
+                                    android:textSize="@dimen/find_help_textsize"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"></TextView>
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/searchLayout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="32dp"
+                                    android:layout_marginTop="20dp"
+                                    android:layout_marginEnd="32dp"
+                                    android:background="@drawable/search"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.0"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+                                    <EditText
+                                        android:id="@+id/search"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="20dp"
+                                        android:background="@color/colorWhite"
+                                        android:ems="18"
+                                        android:hint="@string/search"
+                                        android:inputType="text"
+                                        android:letterSpacing="0.07"
+                                        android:paddingTop="2dp"
+                                        android:paddingBottom="2dp"
+                                        android:textColorHint="@color/colorSuvaGray"
+                                        android:textSize="10sp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"></EditText>
+
+                                    <ImageView
+                                        android:id="@+id/searchIcon"
+                                        android:layout_width="17dp"
+                                        android:layout_height="17dp"
+                                        android:layout_marginTop="9dp"
+                                        android:layout_marginEnd="12dp"
+                                        android:layout_marginBottom="9dp"
+                                        android:src="@drawable/search_icon_xxhdpi"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent">
+
+                                    </ImageView>
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/popularSearches"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="6dp"
+                                    android:layout_marginEnd="36dp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/searchLayout">
+
+                                    <TextView
+                                        android:id="@+id/popularSearchTilte"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="8dp"
+                                        android:letterSpacing="0.03"
+                                        android:text="@string/Popular_Searches"
+                                        android:textColor="@color/colorSuvaGray"
+                                        android:textSize="10sp"
+                                        app:layout_constraintEnd_toStartOf="@+id/populerSearchDropDown"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <ImageView
+                                        android:id="@+id/populerSearchDropDown"
+                                        android:layout_width="9dp"
+                                        android:layout_height="9dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:src="@drawable/drop_down_icon_xhdpi"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <TextView
+                                    android:id="@+id/exploreTitle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="32dp"
+                                    android:layout_marginTop="54dp"
+                                    android:fontFamily="@font/roboto_medium"
+                                    android:letterSpacing="0.06"
+                                    android:text="@string/Explore"
+                                    android:textColor="@color/colorCharcoal"
+                                    android:textSize="12sp"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/searchLayout" />
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/exploreTitle">
+
+                                    <TextView
+                                        android:id="@+id/exploreDescription"
+                                        android:layout_width="227dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="32dp"
+                                        android:layout_marginTop="8dp"
+                                        android:letterSpacing="0.04"
+                                        android:text="@string/explore_description"
+                                        android:textColor="@color/colorSuvaGray"
+                                        android:textSize="12sp"
+                                        app:fontFamily="@font/roboto"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                        android:id="@+id/exploreNavigationIcon"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="20dp"
+                                        android:layout_marginTop="2dp"
+                                        app:backgroundTint="@color/colorSummerSky"
+                                        app:fabCustomSize="26dp"
+                                        app:layout_constraintStart_toEndOf="@+id/exploreDescription"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:maxImageSize="16dp"
+                                        app:srcCompat="@drawable/ic_navigate_next_black_24dp"
+                                        app:tint="@color/colorWhite">
+
+                                    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </androidx.cardview.widget.CardView>
+
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/ticketsLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="24dp"
+                            app:cardBackgroundColor="@color/colorWhisper1"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="5dp"
+                            app:cardUseCompatPadding="true"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/findHelpCardView">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:paddingBottom="2dp">
+
+                                <TextView
+                                    android:id="@+id/tickestsTitle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="32dp"
+                                    android:layout_marginTop="32dp"
+                                    android:fontFamily="@font/roboto_medium"
+                                    android:letterSpacing="0.05"
+                                    android:text="@string/tickets"
+                                    android:textColor="@color/colorCharcoal"
+                                    android:textSize="@dimen/find_help_textsize"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"></TextView>
+
+
+                                <TextView
+                                    android:id="@+id/tickestsDescription"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="32dp"
+                                    android:layout_marginTop="17dp"
+                                    android:layout_marginEnd="70dp"
+                                    android:letterSpacing="0.04"
+                                    android:text="@string/tickets_description"
+                                    android:textColor="@color/colorSuvaGray"
+                                    android:textSize="12sp"
+                                    app:fontFamily="@font/roboto"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/tickestsTitle" />
+
+                                <View
+                                    android:id="@+id/view2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginTop="16dp"
+                                    android:layout_marginEnd="80dp"
+                                    android:background="#CCCCCC"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.0"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/createTicket" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/createTicket"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="46dp"
+                                    android:layout_marginStart="32dp"
+                                    android:layout_marginTop="16dp"
+                                    android:backgroundTint="@color/colorSummerSky"
+                                    android:fontFamily="@font/roboto_bold"
+                                    android:text="@string/create_tickets"
+                                    android:textSize="10sp"
+                                    app:cornerRadius="@dimen/change_password_radius"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/tickestsDescription">
+
+                                </com.google.android.material.button.MaterialButton>
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/gotoTicketsLayout"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="16dp"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/view2">
+
+                                    <TextView
+                                        android:id="@+id/textView10"
+                                        android:layout_width="6dp"
+                                        android:layout_height="6dp"
+                                        android:layout_marginTop="10dp"
+                                        android:background="@drawable/red_small_circle"
+                                        app:layout_constraintStart_toEndOf="@+id/textView6"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <TextView
+                                        android:id="@+id/textView6"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="32dp"
+                                        android:layout_marginTop="12dp"
+                                        android:fontFamily="@font/roboto_medium"
+                                        android:letterSpacing="0.03"
+                                        android:text="@string/goto_your_tickets"
+                                        android:textColor="@color/colorCharcoal"
+                                        android:textSize="12sp"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:id="@+id/gotoTicketsIcon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginTop="2dp"
+                                    app:backgroundTint="@color/colorSummerSky"
+                                    app:fabCustomSize="26dp"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/gotoTicketsLayout"
+                                    app:maxImageSize="16dp"
+                                    app:srcCompat="@drawable/ic_navigate_next_black_24dp"
+                                    app:tint="@color/colorWhite">
+
+                                </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="24dp"
+                            android:layout_marginBottom="26dp"
+                            app:cardBackgroundColor="#EEEEEE"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="5dp"
+                            app:cardUseCompatPadding="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/ticketsLayout">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/phoneLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingBottom="38dp">
+
+                                <TextView
+                                    android:id="@+id/loremText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="32dp"
+                                    android:layout_marginTop="30dp"
+                                    android:layout_marginEnd="32dp"
+                                    android:letterSpacing="0.04"
+                                    android:lineSpacingExtra="3dp"
+                                    android:text="@string/explore_description"
+                                    android:textColor="@color/colorSuvaGray"
+                                    android:textSize="12sp"
+                                    app:fontFamily="@font/roboto"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/constraintLayout8"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="16dp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/loremText">
+
+                                    <ImageView
+                                        android:id="@+id/callIcon"
+                                        android:layout_width="16dp"
+                                        android:layout_height="16dp"
+                                        android:layout_marginStart="32dp"
+                                        android:layout_marginTop="10dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:src="@drawable/call_icon_xhdpi"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <TextView
+                                        android:id="@+id/phoneNumber"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="16dp"
+                                        android:layout_marginTop="8dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:letterSpacing="0.05"
+                                        android:text="@string/phone_number"
+                                        android:textColor="@color/colorNightRider"
+                                        android:textSize="14sp"
+                                        app:fontFamily="@font/roboto_black"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toEndOf="@+id/callIcon"
+                                        app:layout_constraintTop_toTopOf="parent" />
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <TextView
+                                    android:id="@+id/callDateAndTime"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="32dp"
+                                    android:layout_marginTop="8dp"
+                                    android:letterSpacing="0.03"
+                                    android:text="@string/call_details"
+                                    android:textColor="@color/colorDimGray"
+                                    android:textSize="12sp"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/horizontal_line"
+            app:layout_constraintBottom_toTopOf="@id/constraintLayout10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bodyContent"></View>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout10"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bodyContent">
+
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigationView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                app:itemIconTint="@drawable/item_selected"
+                app:itemTextColor="@drawable/item_selected"
+                app:labelVisibilityMode="labeled"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:menu="@menu/bottom_navigation_menu" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

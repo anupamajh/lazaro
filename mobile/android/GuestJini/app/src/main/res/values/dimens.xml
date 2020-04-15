@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="hepl_title_size">24sp</dimen>
+    <dimen name="find_help_textsize">12sp</dimen>
+    <dimen name="editfileds_corners_radius">12dp</dimen>
+    <dimen name="login_button_corners_radius">18dp</dimen>
+    <dimen name="username_textsize">12sp</dimen>
+    <dimen name="margin">10dp</dimen>
+    <dimen name="otpbox_radius">7dp</dimen>
+    <dimen name="change_password_radius">4dp</dimen>
+    <dimen name="submit_button_radius">4dp</dimen>
+    <dimen name="attach_files_radius">13dp</dimen>
+</resources>
