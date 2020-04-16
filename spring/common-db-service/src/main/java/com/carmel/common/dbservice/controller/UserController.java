@@ -423,6 +423,30 @@ public class UserController {
         return userInfo;
     }
 
+    @RequestMapping(value = "/activate-account")
+    public UserResponse activateAccount(@RequestBody Map<String, String> formData) {
+        UserResponse userResponse = new UserResponse();
+        try {
+            Optional<User> optionalUser = userService.findById(formData.get("id"));
+            if(optionalUser.isPresent()){
+                User user = optionalUser.get();
+                user.setPassword(passwordEncoder.encode(formData.get("password")));
+                user.setAccountStatus(2);
+                User savedUser = userService.save(user);
+                userResponse.setUser(savedUser);;
+                userResponse.setSuccess(true);
+            }else{
+                throw new Exception("User not found");
+            }
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            userResponse.setSuccess(false);
+            userResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return userResponse;
+    }
+
     @RequestMapping(value = "/change-password", method = RequestMethod.POST)
     public GenericResponse changePassword(@RequestBody Map<String, String> formData) {
         UserInfo userInfo = userInformation.getUserInfo();
