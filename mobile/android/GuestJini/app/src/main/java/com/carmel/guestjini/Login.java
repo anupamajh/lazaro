@@ -87,11 +87,14 @@ public class Login extends AppCompatActivity {
                         emailErrorField.setVisibility(View.GONE);
                         email.setBackgroundResource(R.drawable.edit_textbox);
                         passwordLayout.setBackgroundResource(R.drawable.edit_textbox);
-                    }else if (password.getText().toString().trim().length()<8){
+                        /*
+                        else if (password.getText().toString().trim().length()<8){
                         passwordErrorField.setVisibility(View.GONE);
                         invalidCredentials.setVisibility(View.VISIBLE);
                         email.setBackgroundResource(R.drawable.edit_textbox);
                         passwordLayout.setBackgroundResource(R.drawable.edit_textbox);
+                    }
+                         */
                     }else {
                         //TODO: Implement login call
                         Retrofit retrofit = new Retrofit.Builder()

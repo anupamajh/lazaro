@@ -91,7 +91,7 @@
 
                               android:layout_alignParentEnd="true"
                               android:layout_marginTop="50dp"
-                              android:src="@drawable/profile_image"
+                              android:src="@drawable/default_profile_pic"
                               app:layout_constraintEnd_toEndOf="parent"
                               app:layout_constraintStart_toStartOf="parent"
                               app:layout_constraintTop_toTopOf="parent"></de.hdodenhof.circleimageview.CircleImageView>
@@ -436,6 +436,19 @@
                               android:src="@drawable/edit_icon_xhdpi"
                               app:layout_constraintStart_toStartOf="parent"
                               app:layout_constraintTop_toBottomOf="@+id/yourPlaceOfOriginText" />
+                          <TextView
+                              android:id="@+id/txtPlaceOfOrigin"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_marginStart="32dp"
+                              android:layout_marginTop="24dp"
+                              android:text=""
+                              android:textColor="@color/colorDimGray"
+                              android:textSize="12sp"
+                              app:fontFamily="@font/roboto"
+                              app:layout_constraintTop_toBottomOf="@id/yourPlaceOfOriginText"
+                              app:layout_constraintStart_toStartOf="@id/editIcon"
+                              app:layout_constraintEnd_toStartOf="@id/yourPlaceToggleIcon" />
 
                           <View
                               android:id="@+id/yourPlaceOfOriginDivider"
@@ -517,12 +530,13 @@
                   android:background="@drawable/horizontal_line"
                   app:layout_constraintBottom_toTopOf="@id/constraintLayout10"
                   app:layout_constraintEnd_toEndOf="parent"
-                  app:layout_constraintStart_toStartOf="parent"></View>
+                  app:layout_constraintStart_toStartOf="parent" />
 
               <androidx.constraintlayout.widget.ConstraintLayout
                   android:id="@+id/constraintLayout10"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
+                  android:layout_gravity="bottom"
                   app:layout_constraintBottom_toBottomOf="parent"
                   app:layout_constraintEnd_toEndOf="parent"
                   app:layout_constraintStart_toStartOf="parent">
@@ -531,7 +545,7 @@
                   <com.google.android.material.bottomnavigation.BottomNavigationView
                       android:id="@+id/bottomNavigationView"
                       android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
+                      android:layout_height="1dp"
                       android:layout_gravity="bottom"
                       app:itemIconTint="@drawable/item_selected"
                       app:itemTextColor="@drawable/item_selected"
@@ -539,8 +553,7 @@
                       app:layout_constraintBottom_toBottomOf="parent"
                       app:layout_constraintEnd_toEndOf="parent"
                       app:layout_constraintStart_toStartOf="parent"
-                      app:layout_constraintTop_toTopOf="parent"
-                      app:menu="@menu/bottom_navigation_menu" />
+                      app:layout_constraintTop_toTopOf="parent" />
               </androidx.constraintlayout.widget.ConstraintLayout>
 
           </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,8 +8,12 @@ import android.os.Bundle;
 
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Settings.SettingsLandingFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class SettingsActivity extends AppCompatActivity {
+
+    private BottomNavigationView bottomNavigationView;
+    private long ACTIVITY_ID = R.id.suppotIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
