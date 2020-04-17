@@ -170,6 +170,10 @@ public class MyTicketsRecyclerViewFragment extends Fragment implements TicketAda
         myTicketsServiceCall.enqueue(new Callback<TicketResponse>() {
             @Override
             public void onResponse(Call<TicketResponse> call, Response<TicketResponse> response) {
+                boolean hasError = true;
+                if(hasError){
+
+                }
                 //TODO: Set fetched TicketResponse.taskTicketList to RecyclerViewAdapter and reload the table to reflect the data
             }
 
@@ -178,60 +182,6 @@ public class MyTicketsRecyclerViewFragment extends Fragment implements TicketAda
                 //TODo: Display appropriate error message and Handle the error
             }
         });
-
-        myTicketsModelsList.add(new MyTicketsModel(
-                "OPEN",
-                "09:15 AM",
-                "Elevator is not working most of the time.",
-                "Ticket #",
-                "TT/AV/004/2016",
-                "Clock",
-                "05:48",
-                R.drawable.notification_xxhdpi,
-                "delete",
-                MyTicketsModel.ONE_TYPE
-
-        ));
-
-        myTicketsModelsList.add(new MyTicketsModel(
-                "DRAFT",
-                "25 July 2019 11:47 AM",
-                "Lorem ipsum dolor sit amet, consectetur.",
-                "Ticket #",
-                "TT/AV/004/2016",
-                null,
-                null,
-                0,
-                "delete",
-                MyTicketsModel.TWO_TYPE
-
-        ));
-        myTicketsModelsList.add(new MyTicketsModel(
-                "CLOSED",
-                "25 July 2019 11:47 AM",
-                "Lorem ipsum dolor sit amet, consectetur.",
-                "Ticket #",
-                "TT/AV/003/2016",
-                "Clock",
-                "2 Days 05:48",
-                0,
-                "delete",
-                MyTicketsModel.ONE_TYPE
-
-        ));
-        myTicketsModelsList.add(new MyTicketsModel(
-                "OPEN",
-                "24 July 2019 11:47 AM",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                "Ticket #",
-                "TT/AV/002/2016",
-                "Clock",
-                "3 Days 05:48",
-                0,
-                "delete",
-                MyTicketsModel.ONE_TYPE
-        ));
-
 
         openCheckBox.setOnClickListener(new View.OnClickListener() {
             private boolean flag = true;
