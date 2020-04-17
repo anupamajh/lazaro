@@ -311,7 +311,7 @@ public class MyProfileFragment extends Fragment {
                     }
                 }catch (Exception ex){
                     boolean hasError = false;
-                    //TODO: Show Error ALert
+                    //TODO: Show Error alert
                 }
             }
 
