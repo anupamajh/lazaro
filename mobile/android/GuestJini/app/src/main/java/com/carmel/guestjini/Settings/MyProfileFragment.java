@@ -1,10 +1,14 @@
 package com.carmel.guestjini.Settings;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.core.view.GravityCompat;
@@ -266,14 +270,14 @@ public class MyProfileFragment extends Fragment {
                     }
                 } catch (
                         Exception ex) {
-                    //TODO: Display Error dialog
+                    showDialog(false, "There was an error fetching user profile, Please try after sometime");
                 }
             }
 
             @Override
             public void onFailure(Call<UserInfo> call, Throwable t) {
                 boolean hasError = false;
-                //TODO: Display Error dialog
+                showDialog(false, "There was an error fetching user profile, Please try after sometime");
             }
         });
 
@@ -311,17 +315,49 @@ public class MyProfileFragment extends Fragment {
                     }
                 }catch (Exception ex){
                     boolean hasError = false;
-                    //TODO: Show Error alert
+                    showDialog(false, "There was an error fetching user profile pic, Please try after sometime");
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 boolean hasError = false;
-                //TODO: Show Error ALert
+                showDialog(false, "There was an error fetching user profile pic, Please try after sometime");
             }
         });
     }
 
+    private void showDialog(boolean isSuccess, String message) {
+        final Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.alert_dailogbox);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView alertDailogTitle = (TextView) dialog.findViewById(R.id.alertDailogTitle);
+        if (isSuccess) {
+            alertDailogTitle.setText(getText(R.string.success));
+        } else {
+            alertDailogTitle.setText(getText(R.string.failed));
+            alertDailogTitle.setTextColor(Color.parseColor("#E65959"));
+        }
+        TextView alertDailogMessage = (TextView) dialog.findViewById(R.id.alertDailogDescription);
+        alertDailogMessage.setText(message);
+        FloatingActionButton doneButton = (FloatingActionButton) dialog.findViewById(R.id.done_button);
+        if (isSuccess) {
+            doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
+                    .parseColor("#32BDD2")));
+        } else {
+            doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
+                    .parseColor("#E65959")));
+        }
+
+
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
 
 }
