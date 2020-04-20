@@ -18,12 +18,14 @@ public class DateUtil {
             add(new SimpleDateFormat("dd-MMM-yyyy"));
             add(new SimpleDateFormat("dd/M/yyyy"));
             add(new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy"));
+            add(new SimpleDateFormat("yyyyy-MM-dd'T'HH:mm:ss.SSSZZZ"));
+
         }
     };
 
     public static Date convertToDate(String input) {
         Date date = null;
-        if(null == input) {
+        if (null == input) {
             return null;
         }
         for (SimpleDateFormat format : dateFormats) {
@@ -39,5 +41,15 @@ public class DateUtil {
         }
 
         return date;
+    }
+
+    public static String getFormattedDate(Date dt) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            return dateFormat.format(dt);
+        } catch (Exception e) {
+
+        }
+        return "";
     }
 }

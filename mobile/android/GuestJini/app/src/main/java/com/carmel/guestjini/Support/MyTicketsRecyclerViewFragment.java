@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import com.carmel.guestjini.Common.EndPoints;
 import com.carmel.guestjini.Components.OkHttpClientInstance;
+import com.carmel.guestjini.Models.Ticket.Ticket;
 import com.carmel.guestjini.Models.Ticket.TicketResponse;
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Services.Authentication.AuthService;
@@ -39,6 +40,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Adapter.TicketAdapter;
 import Model.MyTicketsModel;
@@ -62,7 +64,7 @@ public class MyTicketsRecyclerViewFragment extends Fragment implements TicketAda
     ConstraintLayout clearAllLayout, ascendingLayout, todayLayout, yesterdayLayout;
     TextView ascending, clearAll, clearDescription;
     LinearLayout openLayout;
-    public ArrayList<MyTicketsModel> myTicketsModelsList = new ArrayList<>();
+    public ArrayList<Ticket> tickets = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -142,12 +144,9 @@ public class MyTicketsRecyclerViewFragment extends Fragment implements TicketAda
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         ticketsRecyclerView.setLayoutManager(linearLayoutManager);
         ticketsRecyclerView.setHasFixedSize(true);
-        final TicketAdapter ticketAdapter = new TicketAdapter(myTicketsModelsList, this);
+        final TicketAdapter ticketAdapter = new TicketAdapter(tickets, this);
         ticketAdapter.setHasStableIds(true);
         ticketsRecyclerView.setAdapter(ticketAdapter);
-
-        //TODO: Fetch Tickets
-
         AuthServiceHolder authServiceHolder = new AuthServiceHolder();
         SharedPreferences preferences = getContext().getSharedPreferences("GuestJini", Context.MODE_PRIVATE);
         String accessToken = preferences.getString("access_token", "");
@@ -171,10 +170,12 @@ public class MyTicketsRecyclerViewFragment extends Fragment implements TicketAda
             @Override
             public void onResponse(Call<TicketResponse> call, Response<TicketResponse> response) {
                 boolean hasError = true;
-                if(hasError){
-
+                TicketResponse ticketResponse = response.body();
+                if (ticketResponse.isSuccess()) {
+                    ticketAdapter.updateData(ticketResponse.getTaskTicketList());
+                } else {
+                    //TODo: Display appropriate error message and Handle the error
                 }
-                //TODO: Set fetched TicketResponse.taskTicketList to RecyclerViewAdapter and reload the table to reflect the data
             }
 
             @Override
@@ -239,38 +240,34 @@ public class MyTicketsRecyclerViewFragment extends Fragment implements TicketAda
 
     @Override
     public void onItemClick(int position) {
-        myTicketsModelsList.get(position);
+        tickets.get(position);
         MyTicketDetailsFragment myTicketDetailsFragment = new MyTicketDetailsFragment();
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.SuppotPlaceHolder, myTicketDetailsFragment);
         fragmentTransaction.commit();
-
         Bundle bundle = new Bundle();
-        bundle.putString("ticket_name", myTicketsModelsList.get(position).getTicketsName());
-        bundle.putString("ticket_status", myTicketsModelsList.get(position).getTicketsStatus());
-        bundle.putString("ticket_dateAndTime", myTicketsModelsList.get(position).getTicketsDateAndTime());
-        bundle.putString("ticket_value", myTicketsModelsList.get(position).getTicketsValue());
+        bundle.putString("ticketId", tickets.get(position).getId());
         myTicketDetailsFragment.setArguments(bundle);
 
     }
 
     @Override
     public void onClick(int position, String name) {
-        myTicketsModelsList.get(position);
+        tickets.get(position);
         MyTicketDetailsFragment myTicketDetailsFragment = new MyTicketDetailsFragment();
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.SuppotPlaceHolder, myTicketDetailsFragment);
         fragmentTransaction.commit();
 
-        Bundle bundle = new Bundle();
-        bundle.putString("ticket_status", myTicketsModelsList.get(position).getTicketsStatus());
-        bundle.putString("ticket_name", myTicketsModelsList.get(position).getTicketsName());
-        bundle.putString("ticket_status", myTicketsModelsList.get(position).getTicketsStatus());
-        bundle.putString("ticket_dateAndTime", myTicketsModelsList.get(position).getTicketsDateAndTime());
-        bundle.putString("ticket_value", myTicketsModelsList.get(position).getTicketsValue());
-        myTicketDetailsFragment.setArguments(bundle);
+//        Bundle bundle = new Bundle();
+//        bundle.putString("ticket_status", myTicketsModelsList.get(position).getTicketsStatus());
+//        bundle.putString("ticket_name", myTicketsModelsList.get(position).getTicketsName());
+//        bundle.putString("ticket_status", myTicketsModelsList.get(position).getTicketsStatus());
+//        bundle.putString("ticket_dateAndTime", myTicketsModelsList.get(position).getTicketsDateAndTime());
+//        bundle.putString("ticket_value", myTicketsModelsList.get(position).getTicketsValue());
+//        myTicketDetailsFragment.setArguments(bundle);
 
     }
 

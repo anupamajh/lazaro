@@ -12,9 +12,19 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.carmel.guestjini.Common.AgeCalculator;
+import com.carmel.guestjini.Common.DateUtil;
+import com.carmel.guestjini.Models.Ticket.Ticket;
 import com.carmel.guestjini.R;
 
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import Model.MyTicketsModel;
 
@@ -22,19 +32,19 @@ import static Model.MyTicketsModel.ONE_TYPE;
 import static Model.MyTicketsModel.TWO_TYPE;
 
 public class TicketAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private ArrayList<MyTicketsModel> myTicketsModels;
+    private ArrayList<Ticket> tickets;
     private Context context;
     private TicketAdapter.OnItemClickListener onItemClickListener;
 
-    public TicketAdapter(ArrayList<MyTicketsModel> myTicketsModelsList,OnItemClickListener onItemClickListener) {
-        this.myTicketsModels = myTicketsModelsList;
+    public TicketAdapter(ArrayList<Ticket> tickets,OnItemClickListener onItemClickListener) {
+        this.tickets = tickets;
         this.onItemClickListener=onItemClickListener;
     }
     @Override
     public int getItemViewType(int position) {
-        MyTicketsModel myTicketsModel=myTicketsModels.get(position);
-        if(myTicketsModel!=null){
-            return myTicketsModel.getViewType();
+        Ticket ticket=tickets.get(position);
+        if(ticket!=null){
+            //TODO: return ticket.getViewType();
         }
         return 0;
     }
@@ -42,45 +52,65 @@ public class TicketAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        switch (viewType){
-            case ONE_TYPE:
-                view= LayoutInflater.from(parent.getContext()).inflate(R.layout.my_tickets_list,parent,false);
-                return new OneViewHolder(view,onItemClickListener);
-
-            case TWO_TYPE:
-                view=LayoutInflater.from(parent.getContext()).inflate(R.layout.draft_list,parent,false);
-                return new TwoViewHolder(view,onItemClickListener);
-        }
-        return null;
+        view= LayoutInflater.from(parent.getContext()).inflate(R.layout.my_tickets_list,parent,false);
+        return new OneViewHolder(view,onItemClickListener);
+//
+//        switch (viewType){
+//            case ONE_TYPE:
+//                view= LayoutInflater.from(parent.getContext()).inflate(R.layout.my_tickets_list,parent,false);
+//                return new OneViewHolder(view,onItemClickListener);
+//
+//            case TWO_TYPE:
+//                view=LayoutInflater.from(parent.getContext()).inflate(R.layout.draft_list,parent,false);
+//                return new TwoViewHolder(view,onItemClickListener);
+//        }
+//        return null;
     }
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
-        MyTicketsModel myTicketsModel =myTicketsModels.get(position);
-       switch (myTicketsModel.getViewType()){
-           case ONE_TYPE:
-               ((OneViewHolder)holder).ticketsStatus.setText(myTicketsModel.getTicketsStatus());
-               ((OneViewHolder)holder).ticketsDate.setText(myTicketsModel.getTicketsDateAndTime());
-               ((OneViewHolder)holder).ticketsName.setText(myTicketsModel.getTicketsName());
-               ((OneViewHolder)holder).ticketsNo.setText(myTicketsModel.getTicketsNo());
-               ((OneViewHolder)holder).ticketsValue.setText(myTicketsModel.getTicketsValue());
-               ((OneViewHolder)holder).clock.setText(myTicketsModel.getClock());
-               ((OneViewHolder)holder).ticketsTime.setText(myTicketsModel.getTicketsTime());
-               ((OneViewHolder)holder).notification.setImageResource(myTicketsModel.getNotificationIcon());
+        Ticket ticket =tickets.get(position);
+        String strTicketStatus = "OPEN";
+        switch (ticket.getTicketStatus()){
+            case 3:
+            {
+                strTicketStatus = "OPEN";
+            }
+            break;
+            case 2:
+            {
+                strTicketStatus = "STARTED";
+            }
+            break;
+            case 1:
+            {
+                strTicketStatus = "CLOSED";
+            }
+            break;
+            default:
+            {
+                strTicketStatus = "NEW";
+            }
+            break;
 
-                break;
-           case TWO_TYPE:
-               ((TwoViewHolder)holder).ticketsStatus.setText(myTicketsModel.getTicketsStatus());
-               ((TwoViewHolder)holder).ticketsDate.setText(myTicketsModel.getTicketsDateAndTime());
-               ((TwoViewHolder)holder).ticketsName.setText(myTicketsModel.getTicketsName());
-               ((TwoViewHolder)holder).ticketDelete.setText(myTicketsModel.getDelete());
-                break;
-       }
+        }
+        ((OneViewHolder)holder).ticketsStatus.setText(strTicketStatus);
+        Date creationDate = DateUtil.convertToDate(ticket.getCreationTime());
+        LocalDate localCreationDate = Instant.ofEpochMilli(creationDate.getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+        Date today = new Date();
+        LocalDate localeToday = Instant.ofEpochMilli(today.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+        ((OneViewHolder)holder).ticketsDate.setText(DateUtil.getFormattedDate(creationDate));
+        ((OneViewHolder)holder).ticketsName.setText(ticket.getTicketTitle());
+        ((OneViewHolder)holder).ticketsValue.setText(ticket.getTicketNo());
+        ((OneViewHolder)holder).ticketsTime.setText(String.valueOf(AgeCalculator.calculateDateLapse(localCreationDate, localeToday)));
+        //   TODO:    switch (myTicketsModel.getViewType())
     }
 
     @Override
     public int getItemCount() {
-        return myTicketsModels.size();
+        return tickets.size();
     }
 
     class OneViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -133,5 +163,10 @@ public class TicketAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         void onItemClick(int position);
         void onClick(int position,String name);
         void onclickDraft(int position);
+    }
+
+    public void updateData(List<Ticket> ticketList){
+        this.tickets.addAll(ticketList);
+        notifyDataSetChanged();;
     }
 }
