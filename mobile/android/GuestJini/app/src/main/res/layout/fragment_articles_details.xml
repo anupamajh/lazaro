@@ -129,6 +129,7 @@
 
                 <VideoView
                     android:id="@+id/videoView"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="190dp"
                     android:layout_marginStart="32dp"
@@ -142,6 +143,7 @@
                 </VideoView>
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/textView8"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -158,6 +160,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/videoView" />
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:id="@+id/linearLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -182,6 +185,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/textView9"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -198,6 +202,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
                     <RelativeLayout
+                        android:visibility="gone"
                         android:id="@+id/pdfLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -446,7 +451,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:menu="@menu/bottom_navigation_menu" />
+            app:menu="@menu/bottom_navigation_menu"
+            android:visibility="gone"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

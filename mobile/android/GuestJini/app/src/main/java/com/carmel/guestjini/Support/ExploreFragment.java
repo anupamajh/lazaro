@@ -2,6 +2,8 @@ package com.carmel.guestjini.Support;
 
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -24,80 +26,95 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.carmel.guestjini.Common.EndPoints;
+import com.carmel.guestjini.Components.OkHttpClientInstance;
+import com.carmel.guestjini.Models.Ticket.KB;
+import com.carmel.guestjini.Models.Ticket.KBResponse;
 import com.carmel.guestjini.R;
+import com.carmel.guestjini.Services.Authentication.AuthService;
+import com.carmel.guestjini.Services.Authentication.AuthServiceHolder;
+import com.carmel.guestjini.Services.Ticket.KBService;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 
 import Adapter.ExploreTicketsAdapter;
 import Model.TicketsModel;
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class ExploreFragment extends Fragment implements ExploreTicketsAdapter.OnItemClickListener{
+public class ExploreFragment extends Fragment implements ExploreTicketsAdapter.OnItemClickListener {
     private RecyclerView recyclerView;
-    private ArrayList<TicketsModel> ticketsModelsList=new ArrayList<>();
+    private ArrayList<KB> kbArrayList = new ArrayList<>();
     private ImageView backArrow;
     private MaterialButton exploreFilterIcon;
-    private TextView showingCategories,clearFilter,articlesDetails,showing,dialogClearFilter,elevators;
+    private TextView showingCategories, clearFilter, articlesDetails, showing, dialogClearFilter, elevators;
     private LinearLayout elevatorLayout;
     private ConstraintLayout filterPopup;
+    private ExploreTicketsAdapter exploreTicketsAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View rootView=inflater.inflate(R.layout.fragment_explore, container, false);
-        recyclerView=rootView.findViewById(R.id.recyclerView);
-        backArrow=rootView.findViewById(R.id.leftArrowMark);
-        exploreFilterIcon=rootView.findViewById(R.id.exploreFilterIcon);
-        showingCategories=rootView.findViewById(R.id.showingCategories);
-        clearFilter=rootView.findViewById(R.id.clearFilter);
-        elevatorLayout=rootView.findViewById(R.id.elevatorLayout);
-        showing=rootView.findViewById(R.id.showing);
-        filterPopup=rootView.findViewById(R.id.filterPopup);
-        dialogClearFilter=rootView.findViewById(R.id.clearFilterId);
+        final View rootView = inflater.inflate(R.layout.fragment_explore, container, false);
+        recyclerView = rootView.findViewById(R.id.recyclerView);
+        backArrow = rootView.findViewById(R.id.leftArrowMark);
+        exploreFilterIcon = rootView.findViewById(R.id.exploreFilterIcon);
+        showingCategories = rootView.findViewById(R.id.showingCategories);
+        clearFilter = rootView.findViewById(R.id.clearFilter);
+        elevatorLayout = rootView.findViewById(R.id.elevatorLayout);
+        showing = rootView.findViewById(R.id.showing);
+        filterPopup = rootView.findViewById(R.id.filterPopup);
+        dialogClearFilter = rootView.findViewById(R.id.clearFilterId);
         elevators = (TextView) rootView.findViewById(R.id.elevators);
-        articlesDetails=(TextView) rootView.findViewById(R.id.articlesDetails);
+        articlesDetails = (TextView) rootView.findViewById(R.id.articlesDetails);
 
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),LinearLayoutManager.VERTICAL));
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        ExploreTicketsAdapter exploreTicketsAdapter=new ExploreTicketsAdapter(rootView.getContext(),ticketsModelsList,this);
+        exploreTicketsAdapter = new ExploreTicketsAdapter(rootView.getContext(), kbArrayList, this);
         recyclerView.setAdapter(exploreTicketsAdapter);
         recyclerView.setHasFixedSize(true);
 
-        TicketsModel ticketsModel=new TicketsModel();
-        ticketsModel.setTicketsName("Elevator is not working?");
-        ticketsModel.setTicketsAuthorName("Author - John Doe");
-        ticketsModel.setTicketsDate("10 Jan 2019");
-        ticketsModel.setTicketsDescription("Lorem ipsum dolor sit amet consectetur adipiscing elit sodales.");
-        ticketsModel.setNavigationIcon(R.drawable.ic_navigate_next_black_24dp);
-        ticketsModelsList.add(ticketsModel);
-
-
-        ticketsModel=new TicketsModel();
-        ticketsModel.setTicketsName("Coffee machine is not working?");
-        ticketsModel.setTicketsAuthorName("Author - Jaret Quartz");
-        ticketsModel.setTicketsDate("03 Jan 2019");
-        ticketsModel.setTicketsDescription("Lorem ipsum dolor sit amet consectetur adipiscing elit sodales.");
-        ticketsModel.setNavigationIcon(R.drawable.ic_navigate_next_black_24dp);
-        ticketsModelsList.add(ticketsModel);
-
-
-        ticketsModel=new TicketsModel();
-        ticketsModel.setTicketsName("What is the speed of Wifi?");
-        ticketsModel.setTicketsAuthorName("Author - John Doe");
-        ticketsModel.setTicketsDate("29 Dec 2018");
-        ticketsModel.setTicketsDescription("Lorem ipsum dolor sit amet consectetur adipiscing elit sodales.");
-        ticketsModel.setNavigationIcon(R.drawable.ic_navigate_next_black_24dp);
-        ticketsModelsList.add(ticketsModel);
+//        TicketsModel ticketsModel=new TicketsModel();
+//        ticketsModel.setTicketsName("Elevator is not working?");
+//        ticketsModel.setTicketsAuthorName("Author - John Doe");
+//        ticketsModel.setTicketsDate("10 Jan 2019");
+//        ticketsModel.setTicketsDescription("Lorem ipsum dolor sit amet consectetur adipiscing elit sodales.");
+//        ticketsModel.setNavigationIcon(R.drawable.ic_navigate_next_black_24dp);
+//        ticketsModelsList.add(ticketsModel);
+//
+//
+//        ticketsModel=new TicketsModel();
+//        ticketsModel.setTicketsName("Coffee machine is not working?");
+//        ticketsModel.setTicketsAuthorName("Author - Jaret Quartz");
+//        ticketsModel.setTicketsDate("03 Jan 2019");
+//        ticketsModel.setTicketsDescription("Lorem ipsum dolor sit amet consectetur adipiscing elit sodales.");
+//        ticketsModel.setNavigationIcon(R.drawable.ic_navigate_next_black_24dp);
+//        ticketsModelsList.add(ticketsModel);
+//
+//
+//        ticketsModel=new TicketsModel();
+//        ticketsModel.setTicketsName("What is the speed of Wifi?");
+//        ticketsModel.setTicketsAuthorName("Author - John Doe");
+//        ticketsModel.setTicketsDate("29 Dec 2018");
+//        ticketsModel.setTicketsDescription("Lorem ipsum dolor sit amet consectetur adipiscing elit sodales.");
+//        ticketsModel.setNavigationIcon(R.drawable.ic_navigate_next_black_24dp);
+//        ticketsModelsList.add(ticketsModel);
 
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SupportLandingFragment supportLandingFragment=new SupportLandingFragment();
-                FragmentManager fragmentManager=getFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.SuppotPlaceHolder,supportLandingFragment);
+                SupportLandingFragment supportLandingFragment = new SupportLandingFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.SuppotPlaceHolder, supportLandingFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
@@ -204,24 +221,67 @@ public class ExploreFragment extends Fragment implements ExploreTicketsAdapter.O
 //            }
 //        });
 
+        this.getKbList();
+
         return rootView;
     }
 
     @Override
     public void onItemClick(int position) {
-        ticketsModelsList.get(position);
-        ArticlesDetailsFragment articlesDetailsFragment=new ArticlesDetailsFragment();
-        FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.SuppotPlaceHolder,articlesDetailsFragment);
+        ArticlesDetailsFragment articlesDetailsFragment = new ArticlesDetailsFragment();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.SuppotPlaceHolder, articlesDetailsFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
-
         Bundle bundle = new Bundle();
-        bundle.putString("ticket_name", ticketsModelsList.get(position).getTicketsName());
-        bundle.putString("ticket_author_name",ticketsModelsList.get(position).getTicketsAuthorName());
-        bundle.putString("ticket_date",ticketsModelsList.get(position).getTicketsDate());
+        bundle.putString("kbId", kbArrayList.get(position).getId());
         articlesDetailsFragment.setArguments(bundle);
+    }
+
+    private void getKbList() {
+        try {
+            AuthServiceHolder authServiceHolder = new AuthServiceHolder();
+            SharedPreferences preferences = getContext().getSharedPreferences("GuestJini", Context.MODE_PRIVATE);
+            String accessToken = preferences.getString("access_token", "");
+            OkHttpClient okHttpClient = new OkHttpClientInstance.Builder(getActivity(), authServiceHolder)
+                    .addHeader("Authorization", accessToken)
+                    .build();
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(EndPoints.END_POINT_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .client(okHttpClient)
+                    .build();
+            AuthService authService = retrofit.create(AuthService.class);
+            authServiceHolder.set(authService);
+            KBService kbService = retrofit.create(KBService.class);
+            Call<KBResponse> kbResponseCall = kbService.getAll();
+            kbResponseCall.enqueue(new Callback<KBResponse>() {
+                @Override
+                public void onResponse(Call<KBResponse> call, Response<KBResponse> response) {
+                    try {
+                        KBResponse kbResponse = response.body();
+                        if (kbResponse.getSuccess()) {
+                            exploreTicketsAdapter.update(kbResponse.getKbList());
+                            kbArrayList = new ArrayList<>();
+                            kbArrayList.addAll(kbResponse.getKbList());
+                        } else {
+                            //TODO: Show appropriate alert
+                        }
+                    } catch (Exception ex) {
+                        //TODO: Show appropriate alert
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<KBResponse> call, Throwable t) {
+                    //TODO: Show appropriate alert
+                }
+            });
+        } catch (Exception ex) {
+            //TODO: Show appropriate message
+        }
+
     }
 }
 

@@ -11,21 +11,23 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.carmel.guestjini.Models.Ticket.KB;
 import com.carmel.guestjini.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Model.TicketsModel;
 
 
 public class ExploreTicketsAdapter extends RecyclerView.Adapter<ExploreTicketsAdapter.ViewHolder> {
     private Context context;
-   private ArrayList<TicketsModel> ticketsModelArrayList;
+   private ArrayList<KB> kbArrayList;
     private OnItemClickListener onItemClickListener;
-    public ExploreTicketsAdapter(Context context, ArrayList<TicketsModel> ticketsModelsList,OnItemClickListener onItemClickListener) {
+    public ExploreTicketsAdapter(Context context, ArrayList<KB> kbArrayList,OnItemClickListener onItemClickListener) {
         this.context=context;
-        this.ticketsModelArrayList=ticketsModelsList;
+        this.kbArrayList=kbArrayList;
         this.onItemClickListener=onItemClickListener;
 
     }
@@ -40,18 +42,24 @@ public class ExploreTicketsAdapter extends RecyclerView.Adapter<ExploreTicketsAd
 
     @Override
     public void onBindViewHolder(@NonNull ExploreTicketsAdapter.ViewHolder holder, int position) {
-        final TicketsModel ticketsModel=this.ticketsModelArrayList.get(position);
-        holder.ticketsName.setText(String.valueOf(ticketsModel.getTicketsName()));
-        holder.ticketsDate.setText(String.valueOf(ticketsModel.getTicketsDate()));
-        holder.ticketsAuthorName.setText(String.valueOf(ticketsModel.getTicketsAuthorName()));
-        holder.ticketsDescription.setText(String.valueOf(ticketsModel.getTicketsDescription()));
-        holder.navigationIcon.setImageResource(ticketsModel.getNavigationIcon());
+        final KB kb=this.kbArrayList.get(position);
+        holder.ticketsName.setText(String.valueOf(kb.getTopicTitle()));
+        holder.ticketsDate.setText(String.valueOf(kb.getCreationTime()));
+        holder.ticketsAuthorName.setText(String.valueOf(kb.getAuthorName()));
+        holder.ticketsDescription.setText(String.valueOf(kb.getTopicNarration()));
+        //TODO: holder.navigationIcon.setImageResource(ticketsModel.getNavigationIcon());
     }
 
 
     @Override
     public int getItemCount() {
-        return ticketsModelArrayList.size();
+        return kbArrayList.size();
+    }
+
+    public void update(List<KB> kbList) {
+        this.kbArrayList = new ArrayList<>();
+        this.kbArrayList.addAll(kbList);
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{

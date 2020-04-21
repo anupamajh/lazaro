@@ -315,8 +315,7 @@ public class MyTicketDetailsFragment extends Fragment {
             Map<String, String> requestData = new HashMap<>();
             requestData.put("ticketId", ticketId);
             Call<TaskNotesResponse> taskNotesResponseCall = taskNoteService.getAll(requestData);
-            //TODO: Check why notes are not showing up
-            taskNotesResponseCall.enqueue(new Callback<TaskNotesResponse>() {
+             taskNotesResponseCall.enqueue(new Callback<TaskNotesResponse>() {
                 @Override
                 public void onResponse(Call<TaskNotesResponse> call, Response<TaskNotesResponse> response) {
                     try {
@@ -373,6 +372,7 @@ public class MyTicketDetailsFragment extends Fragment {
                         TaskNotesResponse taskNotesResponse = response.body();
                         if (taskNotesResponse.isSuccess()) {
                             //TODO: Show appropriate alert
+                            getTicketNotes(ticketId);
                         } else {
                             //TODO: Show appropriate alert
                         }
