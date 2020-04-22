@@ -2,11 +2,11 @@ package Model;
 
 public class BillDetailsModel {
     private String itemsName;
-    private int itemsRate;
-    private int itemsQuantity;
-    private int itemsAmount;
+    private Double itemsRate;
+    private Double itemsQuantity;
+    private Double itemsAmount;
 
-    public BillDetailsModel(String itemsName, int itemsRate, int itemsQuantity, int itemsAmount) {
+    public BillDetailsModel(String itemsName, Double itemsRate, Double itemsQuantity, Double itemsAmount) {
         this.itemsName = itemsName;
         this.itemsRate = itemsRate;
         this.itemsQuantity = itemsQuantity;
@@ -21,27 +21,27 @@ public class BillDetailsModel {
         this.itemsName = itemsName;
     }
 
-    public int getItemsRate() {
+    public Double getItemsRate() {
         return itemsRate;
     }
 
-    public void setItemsRate(int itemsRate) {
+    public void setItemsRate(Double itemsRate) {
         this.itemsRate = itemsRate;
     }
 
-    public int getItemsQuantity() {
+    public Double getItemsQuantity() {
         return itemsQuantity;
     }
 
-    public void setItemsQuantity(int itemsQuantity) {
+    public void setItemsQuantity(Double itemsQuantity) {
         this.itemsQuantity = itemsQuantity;
     }
 
-    public int getItemsAmount() {
+    public Double getItemsAmount() {
         return itemsAmount;
     }
 
-    public void setItemsAmount(int itemsAmount) {
+    public void setItemsAmount(Double itemsAmount) {
         this.itemsAmount = itemsAmount;
     }
 }

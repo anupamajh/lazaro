@@ -3,10 +3,9 @@
     package="com.carmel.guestjini">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
 
     <application
         android:allowBackup="true"
@@ -17,31 +16,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme1"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AccountsActivity">
-
-        </activity>
-
-        <activity android:name=".ProfileActivity" >
-
-        </activity>
-
+        <activity android:name=".WebView"></activity>
+        <activity android:name=".AccountsActivity"></activity>
+        <activity android:name=".ProfileActivity"></activity>
         <activity android:name=".MyGroupsActivity" />
         <activity android:name=".CommunityGroupsActivity" />
         <activity android:name=".InterestGroupsActivity" />
         <activity android:name=".GroupsActivity" />
         <activity android:name=".PeopleActivity" />
-
-        <activity android:name=".CommunityActivity">
-        </activity>
-        <activity android:name=".SupportActivity">
-        </activity>
-        <activity android:name=".SettingsActivity">
-        </activity>
-        <activity android:name=".Login">
-        </activity>
+        <activity android:name=".CommunityActivity"></activity>
+        <activity android:name=".SupportActivity"></activity>
+        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".Login"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

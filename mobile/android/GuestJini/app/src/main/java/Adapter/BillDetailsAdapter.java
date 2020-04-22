@@ -34,15 +34,20 @@ public class BillDetailsAdapter extends RecyclerView.Adapter<BillDetailsAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         BillDetailsModel billDetailsModel=billsDetailsList.get(position);
         holder.itemsName.setText(billDetailsModel.getItemsName());
-        holder.itemsRate.setText(Integer.toString(billDetailsModel.getItemsRate()));
-        holder.itemsQuantity.setText(Integer.toString(billDetailsModel.getItemsQuantity()));
-        holder.itemsAmount.setText(Integer.toString(billDetailsModel.getItemsAmount()));
+        holder.itemsRate.setText(String.valueOf(billDetailsModel.getItemsRate()));
+        holder.itemsQuantity.setText(String.valueOf(billDetailsModel.getItemsQuantity()));
+        holder.itemsAmount.setText(String.valueOf(billDetailsModel.getItemsAmount()));
 
     }
 
     @Override
     public int getItemCount() {
         return billsDetailsList.size();
+    }
+
+    public void update(ArrayList<BillDetailsModel> billsDetailsArrayList) {
+        billsDetailsList = billsDetailsArrayList;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

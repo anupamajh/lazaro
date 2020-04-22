@@ -38,9 +38,9 @@ public class AccountsFragment extends Fragment implements AccountsAdapter.OnItem
         accountsRecyclerView.setAdapter(accountsAdapter);
 
         accountsArrayList.add(new AccountsModel("RENT INVOICE","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies quis"));
-        accountsArrayList.add(new AccountsModel("RECEIPTS","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies quis"));
-        accountsArrayList.add(new AccountsModel("LEDGER","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies quis"));
-        accountsArrayList.add(new AccountsModel("BILLS","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies quis"));
+//        accountsArrayList.add(new AccountsModel("RECEIPTS","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies quis"));
+//        accountsArrayList.add(new AccountsModel("LEDGER","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies quis"));
+//        accountsArrayList.add(new AccountsModel("BILLS","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies quis"));
 
         return rootView;
     }

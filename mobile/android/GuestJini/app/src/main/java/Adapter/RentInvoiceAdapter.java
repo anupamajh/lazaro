@@ -10,18 +10,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.carmel.guestjini.Models.Accounts.AccountTicket;
 import com.carmel.guestjini.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Model.RentInvoiceModel;
 
 public class RentInvoiceAdapter extends RecyclerView.Adapter<RentInvoiceAdapter.ViewHolder> {
 
     private Context context;
-    private ArrayList<RentInvoiceModel> rentInvoiceList;
+    private ArrayList<AccountTicket> rentInvoiceList;
     private OnItemClickListener onItemClickListener;
-    public RentInvoiceAdapter(Context context, ArrayList<RentInvoiceModel> rentInvoiceList,OnItemClickListener onItemClickListener) {
+    public RentInvoiceAdapter(Context context, ArrayList<AccountTicket> rentInvoiceList,OnItemClickListener onItemClickListener) {
         this.context = context;
         this.rentInvoiceList = rentInvoiceList;
         this.onItemClickListener=onItemClickListener;
@@ -36,16 +38,22 @@ public class RentInvoiceAdapter extends RecyclerView.Adapter<RentInvoiceAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        RentInvoiceModel rentInvoiceModel=rentInvoiceList.get(position);
-        holder.rentInvoiceDate.setText(rentInvoiceModel.getRentInvoiceDate());
-        holder.rentInvoiceNo.setText(rentInvoiceModel.getRentInvoiceNo());
-        holder.rentInvoiceAmount.setText(rentInvoiceModel.getRentInvoiceAmount());
-        holder.rightNavigationIcon.setImageResource(rentInvoiceModel.getRightNavigationIcon());
+        AccountTicket accountTicket=rentInvoiceList.get(position);
+        holder.rentInvoiceDate.setText(accountTicket.getCreationTime());//TODO: Format Date
+        holder.rentInvoiceNo.setText(accountTicket.getTicketNumber());
+        holder.rentInvoiceAmount.setText(String.valueOf(accountTicket.getNetTotal()));
+        holder.rightNavigationIcon.setImageResource(R.drawable.navigation_icon_xhdpi);
     }
 
     @Override
     public int getItemCount() {
         return rentInvoiceList.size();
+    }
+
+    public void update(List<AccountTicket> accountTicketList) {
+        rentInvoiceList = new ArrayList<>();
+        rentInvoiceList.addAll(accountTicketList);
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{

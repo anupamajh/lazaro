@@ -1,6 +1,8 @@
 package com.carmel.guestjini.Accounts;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -20,55 +22,78 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.carmel.guestjini.Common.EndPoints;
+import com.carmel.guestjini.Components.OkHttpClientInstance;
+import com.carmel.guestjini.Models.Accounts.AccountTicket;
+import com.carmel.guestjini.Models.Accounts.AccountTicketResponse;
 import com.carmel.guestjini.R;
+import com.carmel.guestjini.Services.Accounts.AccountTicketService;
+import com.carmel.guestjini.Services.Authentication.AuthService;
+import com.carmel.guestjini.Services.Authentication.AuthServiceHolder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import Adapter.BillDetailsAdapter;
 import Model.BillDetailsModel;
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class RentInvoiceDetailsFragment extends Fragment{
-    private ArrayList<BillDetailsModel> billsDetailsArrayList=new ArrayList<>();
-    String AccountsTitle,RentInvoiceDate,RentInvoiceNo,RentInvoiceAmount,Amount,ReceiptsDate,ReceiptsAmount,BillsDate,BillsNo,ProductAmount,ProductName;
-    private TextView rentInvoiceDate,rentInvoiceNo,rentInvoiceAmount,accountsTitle,receiptsDate,receiptsAmount,billsDate,billsNo,productAmount,productName;
-    private RelativeLayout moreDetailsLayout,transactionSuccessfulLayout,billsDetailsLayout;
+public class RentInvoiceDetailsFragment extends Fragment {
+    private ArrayList<BillDetailsModel> billsDetailsArrayList = new ArrayList<>();
+    String AccountsTitle, RentInvoiceDate, RentInvoiceNo, RentInvoiceAmount, Amount, ReceiptsDate, ReceiptsAmount, BillsDate, BillsNo, ProductAmount, ProductName;
+    private TextView rentInvoiceDate, rentInvoiceNo, rentInvoiceAmount, accountsTitle, receiptsDate, receiptsAmount, billsDate, billsNo, productAmount, productName, txtNarration;
+    private RelativeLayout moreDetailsLayout, transactionSuccessfulLayout, billsDetailsLayout;
     private ScrollView rentInvoiceDetails;
-    private ImageView dropDownIcon,backArrow;
+    private ImageView dropDownIcon, backArrow;
     private Button payNowButton;
     private RecyclerView billsDetailsRecyclerView;
-    private ConstraintLayout receiptsDetailsLayout,moreDetailsHeader;
+    private ConstraintLayout receiptsDetailsLayout, moreDetailsHeader;
+
+    String accountTicketId = "";
+    BillDetailsAdapter billsDetailsAdapter;
+    AccountTicket accountTicket;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView= inflater.inflate(R.layout.fragment_rent_invoice_details, container, false);
-        rentInvoiceDate=rootView.findViewById(R.id.rentDate);
-        rentInvoiceNo=rootView.findViewById(R.id.rentNo);
-        rentInvoiceAmount=rootView.findViewById(R.id.totalAmount);
-        moreDetailsHeader=rootView.findViewById(R.id.moreDetailsHeader);
-        moreDetailsLayout=rootView.findViewById(R.id.moreDetailsLayout);
-        dropDownIcon=rootView.findViewById(R.id.dropDownIcon);
-        accountsTitle=rootView.findViewById(R.id.accountsHeaderTitle);
-        backArrow=rootView.findViewById(R.id.backArrow);
-        payNowButton=rootView.findViewById(R.id.payNowButton);
-        transactionSuccessfulLayout=rootView.findViewById(R.id.transactionSuccessfulLayout);
-        receiptsDetailsLayout=rootView.findViewById(R.id.receiptsDetailsLayout);
-        receiptsDate=rootView.findViewById(R.id.receiptsDateValue);
-        receiptsAmount=rootView.findViewById(R.id.amountValue);
-        rentInvoiceDetails=rootView.findViewById(R.id.rentInvoiceDetails);
-        billsDetailsLayout=rootView.findViewById(R.id.billsDetailsLayout);
-        billsDate=rootView.findViewById(R.id.billsDate);
-        billsNo=rootView.findViewById(R.id.billsNo);
+        View rootView = inflater.inflate(R.layout.fragment_rent_invoice_details, container, false);
+        rentInvoiceDate = rootView.findViewById(R.id.rentDate);
+        rentInvoiceNo = rootView.findViewById(R.id.rentNo);
+        txtNarration = rootView.findViewById(R.id.towardsRent);
+        rentInvoiceAmount = rootView.findViewById(R.id.totalAmount);
+        moreDetailsHeader = rootView.findViewById(R.id.moreDetailsHeader);
+        moreDetailsLayout = rootView.findViewById(R.id.moreDetailsLayout);
+        dropDownIcon = rootView.findViewById(R.id.dropDownIcon);
+        accountsTitle = rootView.findViewById(R.id.accountsHeaderTitle);
+        backArrow = rootView.findViewById(R.id.backArrow);
+        payNowButton = rootView.findViewById(R.id.payNowButton);
+        transactionSuccessfulLayout = rootView.findViewById(R.id.transactionSuccessfulLayout);
+        receiptsDetailsLayout = rootView.findViewById(R.id.receiptsDetailsLayout);
+        receiptsDate = rootView.findViewById(R.id.receiptsDateValue);
+        receiptsAmount = rootView.findViewById(R.id.amountValue);
+        rentInvoiceDetails = rootView.findViewById(R.id.rentInvoiceDetails);
+        billsDetailsLayout = rootView.findViewById(R.id.billsDetailsLayout);
+        billsDate = rootView.findViewById(R.id.billsDate);
+        billsNo = rootView.findViewById(R.id.billsNo);
 
-        billsDetailsRecyclerView=rootView.findViewById(R.id.billsDetailsRecyclerView);
+        billsDetailsRecyclerView = rootView.findViewById(R.id.billsDetailsRecyclerView);
 
-        final Bundle bundle=getArguments();
-        if(bundle!=null){
-            RentInvoiceDate=bundle.getString("RentInvoiceDate");
-            RentInvoiceNo=bundle.getString("RentInvoiceNo");
-            RentInvoiceAmount=bundle.getString("RentInvoiceAmount");
-            AccountsTitle=bundle.getString("AccountsTitle");
+        final Bundle bundle = getArguments();
+        if (bundle != null) {
+            accountTicketId = bundle.getString("accountTicketId");
+            getAccountTicket(accountTicketId);
+            RentInvoiceDate = bundle.getString("RentInvoiceDate");
+            RentInvoiceNo = bundle.getString("RentInvoiceNo");
+            RentInvoiceAmount = bundle.getString("RentInvoiceAmount");
+            AccountsTitle = bundle.getString("AccountsTitle");
 
             rentInvoiceDate.setText(RentInvoiceDate);
             rentInvoiceNo.setText(RentInvoiceNo);
@@ -76,39 +101,39 @@ public class RentInvoiceDetailsFragment extends Fragment{
             accountsTitle.setText(AccountsTitle);
         }
 
-        final Bundle bundle1=getArguments();
-        if(bundle1!=null){
-            ReceiptsDate=bundle1.getString("ReceiptsDate");
-            ReceiptsAmount=bundle1.getString("ReceiptsAmount");
-            AccountsTitle=bundle1.getString("AccountsTitle");
+        final Bundle bundle1 = getArguments();
+        if (bundle1 != null) {
+            ReceiptsDate = bundle1.getString("ReceiptsDate");
+            ReceiptsAmount = bundle1.getString("ReceiptsAmount");
+            AccountsTitle = bundle1.getString("AccountsTitle");
 
             receiptsDate.setText(ReceiptsDate);
             receiptsAmount.setText(ReceiptsAmount);
             accountsTitle.setText(AccountsTitle);
         }
 
-        final Bundle bundle2=getArguments();
-        if(bundle2!=null){
-            BillsDate=bundle2.getString("BillsDate");
-            BillsNo=bundle2.getString("BillsNo");
-            AccountsTitle=bundle2.getString("AccountsTitle");
+        final Bundle bundle2 = getArguments();
+        if (bundle2 != null) {
+            BillsDate = bundle2.getString("BillsDate");
+            BillsNo = bundle2.getString("BillsNo");
+            AccountsTitle = bundle2.getString("AccountsTitle");
 
             billsDate.setText(BillsDate);
             billsNo.setText(BillsNo);
             accountsTitle.setText(AccountsTitle);
         }
 
-        if (AccountsTitle.equals("RECEIPTS")){
+        if (AccountsTitle.equals("RECEIPTS")) {
             receiptsDetailsLayout.setVisibility(View.VISIBLE);
             rentInvoiceDetails.setVisibility(View.GONE);
             billsDetailsLayout.setVisibility(View.GONE);
         }
-        if (AccountsTitle.equals("LEDGER")){
+        if (AccountsTitle.equals("LEDGER")) {
             receiptsDetailsLayout.setVisibility(View.GONE);
             rentInvoiceDetails.setVisibility(View.GONE);
             billsDetailsLayout.setVisibility(View.VISIBLE);
         }
-        if (AccountsTitle.equals("BILLS")){
+        if (AccountsTitle.equals("BILLS")) {
             receiptsDetailsLayout.setVisibility(View.GONE);
             rentInvoiceDetails.setVisibility(View.GONE);
             billsDetailsLayout.setVisibility(View.VISIBLE);
@@ -125,10 +150,10 @@ public class RentInvoiceDetailsFragment extends Fragment{
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AccountsDetailsFragment accountsDetailsFragment=new AccountsDetailsFragment();
-                FragmentManager fragmentManager=getFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.AccountsPlaceHolder,accountsDetailsFragment);
+                AccountsDetailsFragment accountsDetailsFragment = new AccountsDetailsFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.AccountsPlaceHolder, accountsDetailsFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
@@ -136,13 +161,14 @@ public class RentInvoiceDetailsFragment extends Fragment{
 
         moreDetailsHeader.setOnClickListener(new View.OnClickListener() {
             private boolean flag = true;
+
             @Override
             public void onClick(View v) {
-                if(flag) {
+                if (flag) {
                     flag = false;
                     dropDownIcon.setImageResource(R.drawable.drop_down_icon_xhdpi);
                     moreDetailsLayout.setVisibility(View.GONE);
-                }else{
+                } else {
                     flag = true;
                     dropDownIcon.setImageResource(R.drawable.drop_up_icon);
                     moreDetailsLayout.setVisibility(View.VISIBLE);
@@ -154,26 +180,94 @@ public class RentInvoiceDetailsFragment extends Fragment{
         payNowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PaymentOptionsFragment paymentOptionsFragment=new PaymentOptionsFragment();
-                FragmentManager fragmentManager=getFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.AccountsPlaceHolder,paymentOptionsFragment);
+                Bundle bundle = new Bundle();
+                bundle.putString("CUST_ID", accountTicket.getGuestId());
+                bundle.putString("EMAIL", "prasanna.pete@gmail.com");
+                bundle.putString("TXN_AMOUNT", String.valueOf(accountTicket.getNetTotal()));
+                PaymentOptionsFragment paymentOptionsFragment = new PaymentOptionsFragment();
+                paymentOptionsFragment.setArguments(bundle);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.AccountsPlaceHolder, paymentOptionsFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });
 
 
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         billsDetailsRecyclerView.setLayoutManager(linearLayoutManager);
         billsDetailsRecyclerView.setHasFixedSize(true);
         billsDetailsRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
-        BillDetailsAdapter billsDetailsAdapter=new BillDetailsAdapter(getContext(),billsDetailsArrayList);
+        billsDetailsAdapter = new BillDetailsAdapter(getContext(), billsDetailsArrayList);
         billsDetailsRecyclerView.setAdapter(billsDetailsAdapter);
 
-        billsDetailsArrayList.add(new BillDetailsModel("Water Bottle",100,1,110));
-        billsDetailsArrayList.add(new BillDetailsModel("Water Bottle",100,1,110));
+//        billsDetailsArrayList.add(new BillDetailsModel("Water Bottle", 100, 1, 110));
+//        billsDetailsArrayList.add(new BillDetailsModel("Water Bottle", 100, 1, 110));
         return rootView;
+    }
+
+    private void getAccountTicket(String accountTicketId) {
+        try {
+            AuthServiceHolder authServiceHolder = new AuthServiceHolder();
+            SharedPreferences preferences = getContext().getSharedPreferences("GuestJini", Context.MODE_PRIVATE);
+            String accessToken = preferences.getString("access_token", "");
+            OkHttpClient okHttpClient = new OkHttpClientInstance.Builder(getActivity(), authServiceHolder)
+                    .addHeader("Authorization", accessToken)
+                    .build();
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(EndPoints.END_POINT_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .client(okHttpClient)
+                    .build();
+            AuthService authService = retrofit.create(AuthService.class);
+            authServiceHolder.set(authService);
+            Map<String, String> postData = new HashMap<>();
+            postData.put("id", accountTicketId);
+            AccountTicketService accountTicketService = retrofit.create(AccountTicketService.class);
+            Call<AccountTicketResponse> accountTicketResponseCall = accountTicketService.getRentInvoice(postData);
+            accountTicketResponseCall.enqueue(new Callback<AccountTicketResponse>() {
+                @Override
+                public void onResponse(Call<AccountTicketResponse> call, Response<AccountTicketResponse> response) {
+                    try {
+                        AccountTicketResponse accountTicketResponse = response.body();
+                        if (accountTicketResponse.getSuccess()) {
+                            accountTicket = accountTicketResponse.getAccountTicket();
+                            //TODO: FOrmat date
+                            rentInvoiceDate.setText(accountTicket.getCreationTime());
+                            rentInvoiceNo.setText(accountTicket.getTicketNumber());
+                            txtNarration.setText(accountTicket.getTicketNarration());
+                            rentInvoiceAmount.setText(String.valueOf(accountTicket.getNetTotal()));
+                            billsDetailsArrayList = new ArrayList<>();
+                            accountTicket.getAccountTicketItems().forEach(accountTicketItem -> {
+                                billsDetailsArrayList.add(
+                                        new BillDetailsModel(
+                                                accountTicketItem.getItemNarration(),
+                                                accountTicketItem.getRate(),
+                                                accountTicketItem.getQty(),
+                                                accountTicketItem.getItemTotal())
+                                );
+
+                            });
+                            billsDetailsAdapter.update(billsDetailsArrayList);
+
+                        } else {
+                            //TODO: Show appropriate alert message;
+                        }
+                    } catch (Exception ex) {
+                        //TODO: Show appropriate alert message;
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<AccountTicketResponse> call, Throwable t) {
+                    //TODO: Show appropriate alert message;
+                }
+            });
+        } catch (Exception ex) {
+            //TODO: Show appropriate alert message;
+        }
     }
 
 }

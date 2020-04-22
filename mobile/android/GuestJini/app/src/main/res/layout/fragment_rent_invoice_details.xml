@@ -116,6 +116,7 @@
                         android:text="@string/package_label"
                         android:textColor="@color/colorDimGray"
                         android:textSize="11sp"
+                        android:visibility="gone"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/towardsRent" />
 
@@ -129,6 +130,7 @@
                         android:letterSpacing="0.05"
                         android:text="@string/package_Name"
                         android:textColor="@color/colorDimGray"
+                        android:visibility="gone"
                         android:textSize="11sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/packageLabel"
@@ -186,6 +188,7 @@
                         android:letterSpacing="0.05"
                         android:text="@string/rentAddress"
                         android:textColor="@color/colorDimGray"
+                        android:visibility="gone"
                         android:textSize="10sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -204,6 +207,7 @@
                 android:layout_marginEnd="32dp"
                 android:backgroundTint="@color/colorWhite"
                 app:cardCornerRadius="10sp"
+                android:visibility="gone"
                 app:strokeColor="@color/colorVeryLightGray"
                 app:strokeWidth="0.7dp">
 
@@ -229,14 +233,13 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentStart="true"
                             android:layout_alignParentTop="true"
-                            android:layout_marginStart="0dp"
-                            android:layout_marginTop="0dp"
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_medium"
                             android:letterSpacing="0.05"
                             android:text="@string/more_details"
                             android:textColor="@color/colorZambezi"
                             android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
