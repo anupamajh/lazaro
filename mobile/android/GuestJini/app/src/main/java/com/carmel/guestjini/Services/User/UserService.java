@@ -1,7 +1,10 @@
 package com.carmel.guestjini.Services.User;
 
 import com.carmel.guestjini.Common.EndPoints;
+import com.carmel.guestjini.ForgotPassword;
 import com.carmel.guestjini.Models.GenericResponse;
+import com.carmel.guestjini.Models.User.AppAccessRequestResponse;
+import com.carmel.guestjini.Models.User.ForgotPasswordResponse;
 import com.carmel.guestjini.Models.User.UserInfo;
 
 import java.util.Map;
@@ -25,6 +28,14 @@ public interface UserService {
     Call<GenericResponse> changePassword(
             @Body Map<String, String> requestData
     );
+
+    @POST("/public/api/reset-password")
+    Call<ForgotPasswordResponse> restPassword(
+            @Body Map<String, String> postData);
+
+    @POST("/public/api/app-access-request")
+    Call<AppAccessRequestResponse> appAccessRequest(
+            @Body Map<String, String> postData);
 
 
 }

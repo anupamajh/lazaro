@@ -15,9 +15,22 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.carmel.guestjini.Common.EndPoints;
+import com.carmel.guestjini.Models.User.AppAccessRequestResponse;
+import com.carmel.guestjini.Models.User.ForgotPasswordResponse;
+import com.carmel.guestjini.Services.User.UserService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AppAccessRequest extends AppCompatActivity {
     TextView emailErrorField,mobileNumberErrorField,invalidCredentials;
@@ -74,29 +87,40 @@ public class AppAccessRequest extends AppCompatActivity {
                         email.setBackgroundResource(R.drawable.edit_textbox);
                         mobileNumberErrorField.setBackgroundResource(R.drawable.edit_textbox);
                     }else {
-                        final Dialog dialog = new Dialog(context);
-                        dialog.setContentView(R.layout.alert_dailogbox);
-                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        try {
+                            Retrofit retrofit = new Retrofit.Builder()
+                                    .baseUrl(EndPoints.END_POINT_URL)
+                                    .addConverterFactory(GsonConverterFactory.create())
+                                    .build();
+                            UserService userService = retrofit.create(UserService.class);
+                            Map<String, String> postData = new HashMap<>();
+                            postData.put("email",email.getText().toString().trim());
+                            postData.put("mobile",mobileNumber.getText().toString().trim());
+                            Call<AppAccessRequestResponse> appAccessRequestCall = userService.appAccessRequest(postData);
+                            appAccessRequestCall.enqueue(new Callback<AppAccessRequestResponse>() {
+                                @Override
+                                public void onResponse(Call<AppAccessRequestResponse> call, Response<AppAccessRequestResponse> response) {
+                                    try{
+                                        AppAccessRequestResponse appAccessRequestResponse = response.body();
+                                        if(appAccessRequestResponse.getUserName() != null){
+                                            //TODO: Show appropriate alert
+                                        }else{
+                                            //TODO: Show appropriate alert
+                                        }
+                                    }catch (Exception ex){
+                                        //TODO: Show appropriate alert
+                                    }
 
-                        TextView alertDailogTitle = (TextView) dialog.findViewById(R.id.alertDailogTitle);
-                        alertDailogTitle.setText(getText(R.string.app_access_request));
+                                }
 
-                        TextView alertDailogMessage = (TextView) dialog.findViewById(R.id.alertDailogDescription);
-                        alertDailogMessage.setText(getText(R.string.app_access_request_dialog_description));
-
-                        FloatingActionButton doneButton = (FloatingActionButton) dialog.findViewById(R.id.done_button);
-                        doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
-                                .parseColor("#32BDD2")));
-                        doneButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                dialog.dismiss();
-                                Intent intent = new Intent(getApplicationContext(), Login.class);
-                                startActivity(intent);
-                            }
-                        });
-
-                        dialog.show();
+                                @Override
+                                public void onFailure(Call<AppAccessRequestResponse> call, Throwable t) {
+                                    //TODO: Show appropriate alert
+                                }
+                            });
+                        }catch (Exception ex){
+                            //TODO: Show appropriate alert
+                        }
                     }
                 }
             }

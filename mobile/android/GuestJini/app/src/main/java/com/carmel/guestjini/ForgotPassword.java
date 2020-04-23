@@ -15,9 +15,21 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.carmel.guestjini.Common.EndPoints;
+import com.carmel.guestjini.Models.User.ForgotPasswordResponse;
+import com.carmel.guestjini.Services.User.UserService;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ForgotPassword extends AppCompatActivity {
     TextView emailErrorField,getOneNow,forgotPasswordErrorMessage;
@@ -54,30 +66,39 @@ public class ForgotPassword extends AppCompatActivity {
                     email.setBackgroundResource(R.drawable.edit_textbox);
                 }
                 else{
-                    final Dialog dialog=new Dialog(context);
-                    dialog.setContentView(R.layout.alert_dailogbox);
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    try {
+                        Retrofit retrofit = new Retrofit.Builder()
+                                .baseUrl(EndPoints.END_POINT_URL)
+                                .addConverterFactory(GsonConverterFactory.create())
+                                .build();
+                        UserService userService = retrofit.create(UserService.class);
+                        Map<String, String> postData = new HashMap<>();
+                        postData.put("user_name",email.getText().toString().trim());
+                        Call<ForgotPasswordResponse> forgotPasswordResponseCall = userService.restPassword(postData);
+                        forgotPasswordResponseCall.enqueue(new Callback<ForgotPasswordResponse>() {
+                            @Override
+                            public void onResponse(Call<ForgotPasswordResponse> call, Response<ForgotPasswordResponse> response) {
+                                try{
+                                    ForgotPasswordResponse forgotPasswordResponse = response.body();
+                                    if(forgotPasswordResponse.getUserName() != null){
+                                        //TODO: Show appropriate alert
+                                    }else{
+                                        //TODO: Show appropriate alert
+                                    }
+                                }catch (Exception ex){
+                                    //TODO: Show appropriate alert
+                                }
 
-                    TextView alertDailogTitle = (TextView) dialog.findViewById(R.id.alertDailogTitle);
-                    alertDailogTitle.setText(getText(R.string.otp_success_title));
+                            }
 
-                    TextView alertDailogMessage = (TextView) dialog.findViewById(R.id.alertDailogDescription);
-                    alertDailogMessage.setText(getText(R.string.forgot_password_dialog_description));
-
-                    FloatingActionButton doneButton= (FloatingActionButton) dialog.findViewById(R.id.done_button);
-                    doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
-                            .parseColor("#32BDD2")));
-                    doneButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                            Intent intent=new Intent(getApplicationContext(), ForgotPasswordOTPValidation.class);
-                            startActivity(intent);
-                        }
-                    });
-
-                    dialog.show();
-
+                            @Override
+                            public void onFailure(Call<ForgotPasswordResponse> call, Throwable t) {
+                                //TODO: Show appropriate alert
+                            }
+                        });
+                    }catch (Exception ex){
+                        //TODO: Show appropriate alert
+                    }
                 }
             }
         });
