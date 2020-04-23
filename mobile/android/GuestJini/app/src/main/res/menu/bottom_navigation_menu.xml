@@ -4,12 +4,14 @@
         android:icon="@drawable/support_icon_xhdpi"
         android:title="@string/support"></item>
     <item android:id="@+id/communityIcon"
+        android:visible="false"
         android:icon="@drawable/community_icon_xhdpi"
         android:title="@string/community"></item>
     <item android:id="@+id/accountsIcon"
         android:icon="@drawable/accounts_icon_xhdpi"
         android:title="@string/accounts"></item>
     <item android:id="@+id/rewardsIcon"
+        android:visible="false"
         android:icon="@drawable/rewards_icon_xhdpi"
         android:title="@string/rewards"></item>
     <item android:id="@+id/settingsIcon"

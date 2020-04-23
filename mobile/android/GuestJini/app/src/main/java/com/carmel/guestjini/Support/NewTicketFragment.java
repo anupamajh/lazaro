@@ -1,6 +1,7 @@
 package com.carmel.guestjini.Support;
 
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -55,12 +56,18 @@ public class NewTicketFragment extends Fragment {
     MaterialCardView attachmentsCardView;
     ImageView leftArrow;
 
+    AlertDialog progressDialog;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_new_ticket, container, false);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setCancelable(false); // if you want user to wait for some process to finish,
+        builder.setView(R.layout.layout_loading_dialog);
+        progressDialog = builder.create();
         submitButton = rootView.findViewById(R.id.newTicketSubmitButton);
         subjectEditText = rootView.findViewById(R.id.subjectEditText);
         complaintEditText = rootView.findViewById(R.id.complaintEditText);
@@ -86,6 +93,7 @@ public class NewTicketFragment extends Fragment {
                     subjectErrorField.setVisibility(View.VISIBLE);
                     subjectEditText.setBackgroundResource(R.drawable.subject_red_editbox);
                 } else {
+                    progressDialog.show();
                     AuthServiceHolder authServiceHolder = new AuthServiceHolder();
                     SharedPreferences preferences = getContext().getSharedPreferences("GuestJini", Context.MODE_PRIVATE);
                     String accessToken = preferences.getString("access_token", "");
@@ -113,6 +121,7 @@ public class NewTicketFragment extends Fragment {
                     ticketSaveCall.enqueue(new Callback<TicketResponse>() {
                         @Override
                         public void onResponse(Call<TicketResponse> call, Response<TicketResponse> response) {
+                            progressDialog.dismiss();
                             if(response.isSuccessful()){
                                 TicketResponse ticketResponse = response.body();
                                 if(ticketResponse.isSuccess()){
@@ -125,6 +134,7 @@ public class NewTicketFragment extends Fragment {
 
                         @Override
                         public void onFailure(Call<TicketResponse> call, Throwable t) {
+                            progressDialog.dismiss();
                             showTicketSuccessDialog(false);
                         }
                     });

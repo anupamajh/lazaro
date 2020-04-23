@@ -2,6 +2,7 @@ package com.carmel.guestjini.Settings;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -57,6 +58,14 @@ ConstraintLayout changePasswordLayout,myProfileLayout,logOutLayout;
         logOutLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences preferences = getActivity().getSharedPreferences("GuestJini", Context.MODE_PRIVATE);
+                final SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("isLoggedIn", false);
+                editor.putString("access_token", "");
+                editor.putString("refresh_token", "");
+                editor.putString("token_type", "");
+                editor.putLong("expires_in", 0);
+                editor.apply();
                 Intent intent=new Intent(getContext(), Login.class);
                 startActivity(intent);
                 Toast toast=new Toast(getContext());

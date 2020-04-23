@@ -1,8 +1,13 @@
 package com.carmel.guestjini.Accounts;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -30,6 +35,7 @@ import com.carmel.guestjini.R;
 import com.carmel.guestjini.Services.Accounts.AccountTicketService;
 import com.carmel.guestjini.Services.Authentication.AuthService;
 import com.carmel.guestjini.Services.Authentication.AuthServiceHolder;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,12 +65,17 @@ public class RentInvoiceDetailsFragment extends Fragment {
     String accountTicketId = "";
     BillDetailsAdapter billsDetailsAdapter;
     AccountTicket accountTicket;
+    AlertDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_rent_invoice_details, container, false);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setCancelable(false); // if you want user to wait for some process to finish,
+        builder.setView(R.layout.layout_loading_dialog);
+        progressDialog = builder.create();
         rentInvoiceDate = rootView.findViewById(R.id.rentDate);
         rentInvoiceNo = rootView.findViewById(R.id.rentNo);
         txtNarration = rootView.findViewById(R.id.towardsRent);
@@ -181,6 +192,7 @@ public class RentInvoiceDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
+                bundle.putString("accountTicketId", accountTicket.getId());
                 bundle.putString("CUST_ID", accountTicket.getGuestId());
                 bundle.putString("EMAIL", "prasanna.pete@gmail.com");
                 bundle.putString("TXN_AMOUNT", String.valueOf(accountTicket.getNetTotal()));
@@ -209,6 +221,7 @@ public class RentInvoiceDetailsFragment extends Fragment {
 
     private void getAccountTicket(String accountTicketId) {
         try {
+            progressDialog.show();
             AuthServiceHolder authServiceHolder = new AuthServiceHolder();
             SharedPreferences preferences = getContext().getSharedPreferences("GuestJini", Context.MODE_PRIVATE);
             String accessToken = preferences.getString("access_token", "");
@@ -230,6 +243,7 @@ public class RentInvoiceDetailsFragment extends Fragment {
                 @Override
                 public void onResponse(Call<AccountTicketResponse> call, Response<AccountTicketResponse> response) {
                     try {
+                        progressDialog.dismiss();
                         AccountTicketResponse accountTicketResponse = response.body();
                         if (accountTicketResponse.getSuccess()) {
                             accountTicket = accountTicketResponse.getAccountTicket();
@@ -250,24 +264,55 @@ public class RentInvoiceDetailsFragment extends Fragment {
 
                             });
                             billsDetailsAdapter.update(billsDetailsArrayList);
-
                         } else {
-                            //TODO: Show appropriate alert message;
+                            showDialog(false, "There was problem fetching invoice! Please Try after sometime");
                         }
                     } catch (Exception ex) {
-                        //TODO: Show appropriate alert message;
+                        showDialog(false, "There was problem fetching invoice! Please Try after sometime");
                     }
-
                 }
 
                 @Override
                 public void onFailure(Call<AccountTicketResponse> call, Throwable t) {
-                    //TODO: Show appropriate alert message;
+                    progressDialog.dismiss();
+                    showDialog(false, "There was problem fetching invoice! Please Try after sometime");
                 }
             });
         } catch (Exception ex) {
-            //TODO: Show appropriate alert message;
+            progressDialog.dismiss();
+            showDialog(false, "There was problem fetching invoice! Please Try after sometime");
         }
     }
+    private void showDialog(boolean isSuccess, String message) {
+        final Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.alert_dailogbox);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+        TextView alertDailogTitle = (TextView) dialog.findViewById(R.id.alertDailogTitle);
+        if (isSuccess) {
+            alertDailogTitle.setText(getText(R.string.success));
+        } else {
+            alertDailogTitle.setText(getText(R.string.failed));
+            alertDailogTitle.setTextColor(Color.parseColor("#E65959"));
+        }
+        TextView alertDailogMessage = (TextView) dialog.findViewById(R.id.alertDailogDescription);
+        alertDailogMessage.setText(message);
+        FloatingActionButton doneButton = (FloatingActionButton) dialog.findViewById(R.id.done_button);
+        if (isSuccess) {
+            doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
+                    .parseColor("#32BDD2")));
+        } else {
+            doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
+                    .parseColor("#E65959")));
+        }
+
+
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
 }

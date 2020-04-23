@@ -1,8 +1,13 @@
 package com.carmel.guestjini.Accounts;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -27,6 +32,7 @@ import com.carmel.guestjini.R;
 import com.carmel.guestjini.Services.Accounts.AccountTicketService;
 import com.carmel.guestjini.Services.Authentication.AuthService;
 import com.carmel.guestjini.Services.Authentication.AuthServiceHolder;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -58,12 +64,17 @@ public class AccountsDetailsFragment extends Fragment implements RentInvoiceAdap
     private RelativeLayout rentInvoiceListLayout, receiptsListLayout, ledgerMainLayout, billMainLayout;
 
     RentInvoiceAdapter rentInvoiceAdapter;
+    AlertDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_accounts_details, container, false);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setCancelable(false); // if you want user to wait for some process to finish,
+        builder.setView(R.layout.layout_loading_dialog);
+        progressDialog = builder.create();
         rentInvoiceRecyclerView = rootView.findViewById(R.id.rentInvoiceRecyclerView);
         receiptsRecyclerView = rootView.findViewById(R.id.receiptsRecyclerView);
         ledgerRecyclerView = rootView.findViewById(R.id.ledgerRecyclerView);
@@ -92,6 +103,9 @@ public class AccountsDetailsFragment extends Fragment implements RentInvoiceAdap
         if (bundle != null) {
             AccountsTitle = bundle.getString("AccountsTitle");
             accountsTitle.setText(AccountsTitle);
+            if(AccountsTitle.equals(null)){
+                AccountsTitle = "RENT INVOICE";
+            }
         }
         if (AccountsTitle.equals("RENT INVOICE")) {
             rentInvoiceListLayout.setVisibility(View.VISIBLE);
@@ -239,6 +253,7 @@ public class AccountsDetailsFragment extends Fragment implements RentInvoiceAdap
 
     private void getMyRentInvoices() {
         try {
+            progressDialog.show();
             AuthServiceHolder authServiceHolder = new AuthServiceHolder();
             SharedPreferences preferences = getContext().getSharedPreferences("GuestJini", Context.MODE_PRIVATE);
             String accessToken = preferences.getString("access_token", "");
@@ -258,25 +273,60 @@ public class AccountsDetailsFragment extends Fragment implements RentInvoiceAdap
             accountTicketResponseCall.enqueue(new Callback<AccountTicketResponse>() {
                 @Override
                 public void onResponse(Call<AccountTicketResponse> call, Response<AccountTicketResponse> response) {
+                    progressDialog.dismiss();
                     AccountTicketResponse accountTicketResponse = response.body();
                     if(accountTicketResponse.getSuccess()){
                         rentInvoiceArrayList = new ArrayList<>();
                         rentInvoiceArrayList.addAll(accountTicketResponse.getAccountTicketList());
                         rentInvoiceAdapter.update(accountTicketResponse.getAccountTicketList());
-
                     }else{
-                        //TODo: Display appropriate error message and Handle the error
+                        showDialog(false,"There was a problem fetching rent invoices! Please try after sometime");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<AccountTicketResponse> call, Throwable t) {
-                    //TODo: Display appropriate error message and Handle the error
+                    progressDialog.dismiss();
+                    showDialog(false,"There was a problem fetching rent invoices! Please try after sometime");
                 }
             });
         }catch (Exception ex){
-            //TODo: Display appropriate error message and Handle the error
+            progressDialog.dismiss();
+            showDialog(false,"There was a problem fetching rent invoices! Please try after sometime");
         }
 
+    }
+
+    private void showDialog(boolean isSuccess, String message) {
+        final Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.alert_dailogbox);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView alertDailogTitle = (TextView) dialog.findViewById(R.id.alertDailogTitle);
+        if (isSuccess) {
+            alertDailogTitle.setText(getText(R.string.success));
+        } else {
+            alertDailogTitle.setText(getText(R.string.failed));
+            alertDailogTitle.setTextColor(Color.parseColor("#E65959"));
+        }
+        TextView alertDailogMessage = (TextView) dialog.findViewById(R.id.alertDailogDescription);
+        alertDailogMessage.setText(message);
+        FloatingActionButton doneButton = (FloatingActionButton) dialog.findViewById(R.id.done_button);
+        if (isSuccess) {
+            doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
+                    .parseColor("#32BDD2")));
+        } else {
+            doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
+                    .parseColor("#E65959")));
+        }
+
+
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }

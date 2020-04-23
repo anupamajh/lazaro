@@ -1,10 +1,13 @@
 package com.carmel.guestjini.Support;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -65,12 +68,17 @@ public class MyTicketsRecyclerViewFragment extends Fragment implements TicketAda
     TextView ascending, clearAll, clearDescription;
     LinearLayout openLayout;
     public ArrayList<Ticket> tickets = new ArrayList<>();
+    AlertDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_my_tickets_recycler_view, container, false);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setCancelable(false); // if you want user to wait for some process to finish,
+        builder.setView(R.layout.layout_loading_dialog);
+        progressDialog = builder.create();
         ticketsRecyclerView = rootView.findViewById(R.id.myTicketsRecyclerView);
         drawerLayout = rootView.findViewById(R.id.drawerLayout);
         ticketsFilterIcon = rootView.findViewById(R.id.filterIcon);
@@ -140,7 +148,7 @@ public class MyTicketsRecyclerViewFragment extends Fragment implements TicketAda
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
-
+        progressDialog.show();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         ticketsRecyclerView.setLayoutManager(linearLayoutManager);
         ticketsRecyclerView.setHasFixedSize(true);
@@ -169,18 +177,20 @@ public class MyTicketsRecyclerViewFragment extends Fragment implements TicketAda
         myTicketsServiceCall.enqueue(new Callback<TicketResponse>() {
             @Override
             public void onResponse(Call<TicketResponse> call, Response<TicketResponse> response) {
+                progressDialog.dismiss();
                 boolean hasError = true;
                 TicketResponse ticketResponse = response.body();
                 if (ticketResponse.isSuccess()) {
                     ticketAdapter.updateData(ticketResponse.getTaskTicketList());
                 } else {
-                    //TODo: Display appropriate error message and Handle the error
+                    showDialog(false,"There was a problem fetching tickets! Please try after sometime");
                 }
             }
 
             @Override
             public void onFailure(Call<TicketResponse> call, Throwable t) {
-                //TODo: Display appropriate error message and Handle the error
+                progressDialog.dismiss();
+                showDialog(false,"There was a problem fetching tickets! Please try after sometime");
             }
         });
 
@@ -279,5 +289,38 @@ public class MyTicketsRecyclerViewFragment extends Fragment implements TicketAda
         fragmentTransaction.replace(R.id.SuppotPlaceHolder, draftViewFragment);
         fragmentTransaction.commit();
 
+    }
+
+    private void showDialog(boolean isSuccess, String message) {
+        final Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.alert_dailogbox);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView alertDailogTitle = (TextView) dialog.findViewById(R.id.alertDailogTitle);
+        if (isSuccess) {
+            alertDailogTitle.setText(getText(R.string.success));
+        } else {
+            alertDailogTitle.setText(getText(R.string.failed));
+            alertDailogTitle.setTextColor(Color.parseColor("#E65959"));
+        }
+        TextView alertDailogMessage = (TextView) dialog.findViewById(R.id.alertDailogDescription);
+        alertDailogMessage.setText(message);
+        FloatingActionButton doneButton = (FloatingActionButton) dialog.findViewById(R.id.done_button);
+        if (isSuccess) {
+            doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
+                    .parseColor("#32BDD2")));
+        } else {
+            doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
+                    .parseColor("#E65959")));
+        }
+
+
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }

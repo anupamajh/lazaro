@@ -1,8 +1,13 @@
 package com.carmel.guestjini.Support;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -59,12 +64,17 @@ public class FindHelpFragment extends Fragment implements ExploreTicketsAdapter.
     private FloatingActionButton gotoTicketsIcon;
     String popularSearch;
     private ExploreTicketsAdapter exploreTicketsAdapter;
+    AlertDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_find_help, container, false);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setCancelable(false); // if you want user to wait for some process to finish,
+        builder.setView(R.layout.layout_loading_dialog);
+        progressDialog = builder.create();
         burgerMenu = rootView.findViewById(R.id.burgerMenu);
         drawerLayout = rootView.findViewById(R.id.findHelpDrawerLayout);
         leftArrowMark = rootView.findViewById(R.id.leftArrowMark);
@@ -189,6 +199,7 @@ public class FindHelpFragment extends Fragment implements ExploreTicketsAdapter.
 
     private void getKbList() {
         try {
+            progressDialog.show();
             AuthServiceHolder authServiceHolder = new AuthServiceHolder();
             SharedPreferences preferences = getContext().getSharedPreferences("GuestJini", Context.MODE_PRIVATE);
             String accessToken = preferences.getString("access_token", "");
@@ -208,25 +219,61 @@ public class FindHelpFragment extends Fragment implements ExploreTicketsAdapter.
                 @Override
                 public void onResponse(Call<KBResponse> call, Response<KBResponse> response) {
                     try {
+                        progressDialog.dismiss();
                         KBResponse kbResponse = response.body();
                         if (kbResponse.getSuccess()) {
                             exploreTicketsAdapter.update(kbResponse.getKbList());
                         } else {
-                            //TODO: Show appropriate alert
+                            showDialog(false,"There was a problem fetching articles! Please try after sometime");
                         }
                     } catch (Exception ex) {
-                        //TODO: Show appropriate alert
+                        showDialog(false,"There was a problem fetching articles! Please try after sometime");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<KBResponse> call, Throwable t) {
-                    //TODO: Show appropriate alert
+                    progressDialog.dismiss();
+                    showDialog(false,"There was a problem fetching articles! Please try after sometime");
                 }
             });
         } catch (Exception ex) {
-            //TODO: Show appropriate message
+            progressDialog.dismiss();
+            showDialog(false,"There was a problem fetching articles! Please try after sometime");
         }
 
+    }
+
+    private void showDialog(boolean isSuccess, String message) {
+        final Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.alert_dailogbox);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView alertDailogTitle = (TextView) dialog.findViewById(R.id.alertDailogTitle);
+        if (isSuccess) {
+            alertDailogTitle.setText(getText(R.string.success));
+        } else {
+            alertDailogTitle.setText(getText(R.string.failed));
+            alertDailogTitle.setTextColor(Color.parseColor("#E65959"));
+        }
+        TextView alertDailogMessage = (TextView) dialog.findViewById(R.id.alertDailogDescription);
+        alertDailogMessage.setText(message);
+        FloatingActionButton doneButton = (FloatingActionButton) dialog.findViewById(R.id.done_button);
+        if (isSuccess) {
+            doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
+                    .parseColor("#32BDD2")));
+        } else {
+            doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
+                    .parseColor("#E65959")));
+        }
+
+
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }
