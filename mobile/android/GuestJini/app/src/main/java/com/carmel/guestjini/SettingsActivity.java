@@ -62,7 +62,8 @@ public class SettingsActivity extends AppCompatActivity {
 
                 return true;
             }
-        });SettingsLandingFragment settingsLandingFragment=new SettingsLandingFragment();
+        });
+        SettingsLandingFragment settingsLandingFragment=new SettingsLandingFragment();
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.SettingsPlaceHolder,settingsLandingFragment);

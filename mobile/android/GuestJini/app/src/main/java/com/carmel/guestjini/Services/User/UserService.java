@@ -37,5 +37,11 @@ public interface UserService {
     Call<AppAccessRequestResponse> appAccessRequest(
             @Body Map<String, String> postData);
 
+    @POST("/common/address-book/save-profile-pic")
+    Call<UserInfo> saveProfilePic
+            (
+                    @Body Map<String, String> postData
+            );
+
 
 }
