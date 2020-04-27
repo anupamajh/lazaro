@@ -15,15 +15,15 @@ import retrofit2.http.POST;
 public interface TicketService {
     String BASE_URL = EndPoints.END_POINT_URL;
 
-    @POST("/helpdesk/task-ticket/save")
+    @POST("/guest-jini/task-ticket/save")
     Call<TicketResponse> saveTicket(
             @Body TicketRequest ticketRequest
     );
 
-    @POST("/helpdesk/task-ticket/get-all")
+    @POST("/guest-jini/task-ticket/get-all")
     Call<TicketResponse>  getAll();
 
-    @POST("/helpdesk/task-ticket/get")
+    @POST("/guest-jini/task-ticket/get")
     Call<TicketResponse>  get(
             @Body Map<String, String> requestData
     );

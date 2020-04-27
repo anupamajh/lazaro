@@ -58,6 +58,8 @@ public class NewTicketFragment extends Fragment {
 
     AlertDialog progressDialog;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

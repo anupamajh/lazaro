@@ -159,7 +159,7 @@ public class MyTicketsRecyclerViewFragment extends Fragment implements TicketAda
         SharedPreferences preferences = getContext().getSharedPreferences("GuestJini", Context.MODE_PRIVATE);
         String accessToken = preferences.getString("access_token", "");
         OkHttpClient okHttpClient = new OkHttpClientInstance.Builder(getActivity(), authServiceHolder)
-                .addHeader("Authorization", accessToken)
+                .addHeader("Authorization", "Bearer " + accessToken)
                 .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(EndPoints.END_POINT_URL)

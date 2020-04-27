@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">GuestJini</string>
     <!--    Login Screens-->
-    <string name="guesture_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.</string>
+    <string name="guesture_description">Experience like-minded co-living while you also perceive your passion and interests.</string>
     <string name="page_title">Login</string>
     <string name="email_or_mobilenumber">Email or Mobile Number</string>
     <string name="error_field">This field is required</string>
@@ -30,7 +30,7 @@
     <string name="email">Email</string>
     <string name="mobile_number">Mobile Number</string>
     <string name="app_access_request_dialog_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim felis et magna mattis finibus.</string>
-    <string name="app_access_request_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim felis et magna</string>
+    <string name="app_access_request_description">Experience like-minded co-living while you also perceive your passion and interests.</string>
 
     <!--    Settings Screens-->
     <string name="my_profile">My Profile</string>
@@ -71,7 +71,7 @@
     <string name="Popular_Searches">Popular Searches</string>
     <string name="resultFound">03 Results found.</string>
     <string name="Explore">Explore</string>
-    <string name="explore_description">Lorem ipsum dolor sit amet consectetur adipiscing elit sodales primis, mollis viverra.</string>
+    <string name="explore_description">Experience like-minded co-living while you also perceive your passion and interests.</string>
     <string name="tickets">TICKETS</string>
     <string name="tickets_description">You can submit your complaint, track progress and communicate with our team.</string>
     <string name="create_tickets">CREATE TICKET</string>

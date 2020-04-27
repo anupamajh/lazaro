@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.carmel.guestjini.R;
@@ -35,21 +36,65 @@ public class AttachFilesFragment extends Fragment {
     private MaterialButton attachFiles;
     private DrawerLayout attachDrawerLayout;
     private RecyclerView attachFilesRecyclerView;
-    private ArrayList<AttachFilesModel> attachFilesModelArrayList=new ArrayList<>();
+    private ArrayList<AttachFilesModel> attachFilesModelArrayList = new ArrayList<>();
     private MaterialButton doneButoon;
     private ImageView backArrow;
     private ConstraintLayout recyclerViewLayout;
+
+    RelativeLayout cameraLayout;
+    RelativeLayout galleryLayout;
+    RelativeLayout videoCamLayout;
+    RelativeLayout voiceLayout;
+    RelativeLayout folderLayout;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView= inflater.inflate(R.layout.fragment_attach_files, container, false);
-        attachFiles=rootView.findViewById(R.id.attachFiles);
-        attachDrawerLayout=rootView.findViewById(R.id.attachFilesDrawerLayout);
-        attachFilesRecyclerView=rootView.findViewById(R.id.attachFilesRecyclerView);
-        backArrow=rootView.findViewById(R.id.leftArrowMark);
-        recyclerViewLayout=rootView.findViewById(R.id.recyclerViewLayout);
-        doneButoon=rootView.findViewById(R.id.done);
+        View rootView = inflater.inflate(R.layout.fragment_attach_files, container, false);
+        attachFiles = rootView.findViewById(R.id.attachFiles);
+        attachDrawerLayout = rootView.findViewById(R.id.attachFilesDrawerLayout);
+        attachFilesRecyclerView = rootView.findViewById(R.id.attachFilesRecyclerView);
+        backArrow = rootView.findViewById(R.id.leftArrowMark);
+        recyclerViewLayout = rootView.findViewById(R.id.recyclerViewLayout);
+        doneButoon = rootView.findViewById(R.id.done);
+        cameraLayout = rootView.findViewById(R.id.cameraLayout);
+        galleryLayout = rootView.findViewById(R.id.galleryLayout);
+        videoCamLayout = rootView.findViewById(R.id.videoCamLayout);
+        voiceLayout = rootView.findViewById(R.id.voiceLayout);
+        folderLayout = rootView.findViewById(R.id.folderLayout);
+
+        cameraLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        galleryLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        videoCamLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        voiceLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        folderLayout .setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         attachFiles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,31 +106,31 @@ public class AttachFilesFragment extends Fragment {
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewTicketFragment newTicketFragment=new NewTicketFragment();
-                FragmentManager fragmentManager=getFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.SuppotPlaceHolder,newTicketFragment);
+                NewTicketFragment newTicketFragment = new NewTicketFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.SuppotPlaceHolder, newTicketFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });
 
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         attachFilesRecyclerView.setLayoutManager(linearLayoutManager);
-        AttachFilesAdapter attachFilesAdapter=new AttachFilesAdapter(rootView.getContext(),attachFilesModelArrayList);
+        AttachFilesAdapter attachFilesAdapter = new AttachFilesAdapter(rootView.getContext(), attachFilesModelArrayList);
         attachFilesRecyclerView.setAdapter(attachFilesAdapter);
 
-        AttachFilesModel attachFilesModel=new AttachFilesModel();
+        AttachFilesModel attachFilesModel = new AttachFilesModel();
         attachFilesModel.setAttachFilesName("screenshot_2018-06-18-52-668.jpg");
         attachFilesModel.setAttachFilesSize("578 KB");
         attachFilesModelArrayList.add(attachFilesModel);
 
-        attachFilesModel=new AttachFilesModel();
+        attachFilesModel = new AttachFilesModel();
         attachFilesModel.setAttachFilesName("screenshot_2018-06-18-52-688.jpg");
         attachFilesModel.setAttachFilesSize("719 KB");
         attachFilesModelArrayList.add(attachFilesModel);
 
-        attachFilesModel=new AttachFilesModel();
+        attachFilesModel = new AttachFilesModel();
         attachFilesModel.setAttachFilesName("screenshot_2018-06-18-52-668.jpg");
         attachFilesModel.setAttachFilesSize("278 KB");
         attachFilesModelArrayList.add(attachFilesModel);
@@ -94,7 +139,7 @@ public class AttachFilesFragment extends Fragment {
         doneButoon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Dialog dialog=new Dialog(getContext());
+                final Dialog dialog = new Dialog(getContext());
                 dialog.setContentView(R.layout.alert_dailogbox);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -105,7 +150,7 @@ public class AttachFilesFragment extends Fragment {
                 TextView alertDailogMessage = (TextView) dialog.findViewById(R.id.alertDailogDescription);
                 alertDailogMessage.setText("Please attach a file to continue.");
 
-                FloatingActionButton doneButton= (FloatingActionButton) dialog.findViewById(R.id.done_button);
+                FloatingActionButton doneButton = (FloatingActionButton) dialog.findViewById(R.id.done_button);
                 doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
                         .parseColor("#E65959")));
                 doneButton.setOnClickListener(new View.OnClickListener() {
