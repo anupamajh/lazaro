@@ -66,6 +66,7 @@ public class BookingController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public BookingResponse save(@Valid @RequestBody Booking booking) {
+        UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         BookingResponse bookingResponse = new BookingResponse();
@@ -89,7 +90,7 @@ public class BookingController {
 //                booking.setLastModifiedBy(userInfo.getId());
 //                booking.setLastModifiedTime(new Date());
 //            }
-//            booking.setClientId(userInfo.getClient().getClientId());
+            booking.setClientId(userInfo.getClient().getClientId());
             Booking existingBooking;
             if (booking.getId() != "") {
                 Optional<Booking> optionalBooking = bookingService.findById(booking.getId());

@@ -1,8 +1,6 @@
 package com.carmel.guestjini.service.model.Principal;
 
 
-import org.springframework.security.oauth2.provider.ClientDetails;
-
 public class Client {
     private String clientId;
     private String webServerRedirectURL;

@@ -129,10 +129,10 @@ public class GuestServiceImpl implements GuestService {
                 throw new Exception("Guest not found");
             }
             guestResponse.setSuccess(true);
+            return guestResponse;
         } catch (Exception ex) {
             throw ex;
         }
-        return null;
     }
 
     @Override

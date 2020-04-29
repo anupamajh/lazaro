@@ -303,6 +303,7 @@ public class AccountTicketController {
         logger.trace("Entering");
         AccountTicketResponse accountTicketResponse = new AccountTicketResponse();
         try {
+            //TODO: Get Guest from database
             if (guest == null) {
                 throw new Exception("Guest not received");
             }

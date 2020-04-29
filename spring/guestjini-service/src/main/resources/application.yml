@@ -2,10 +2,15 @@
 server:
   port: 8020
 spring:
+#  datasource:
+#    url: jdbc:mysql://139.59.32.238:3306/spring_dev?createDatabaseIfNotExist=true&useSSL=false
+#    username: jacksparrow
+#    password: TH_12rthahalli
+#    driver-class-name: com.mysql.cj.jdbc.Driver
   datasource:
-    url: jdbc:mysql://139.59.32.238:3306/spring_dev?createDatabaseIfNotExist=true&useSSL=false
+    url: jdbc:mysql://68.183.246.143:3306/guestjini?createDatabaseIfNotExist=true&useSSL=false
     username: jacksparrow
-    password: TH_12rthahalli
+    password: c@rmel@p1rat3s@hub11
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -47,12 +52,12 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://139.59.32.238:8001/eureka/
+      defaultZone: http://68.183.246.143:8001/eureka/
 
 security:
   oauth2:
     resource:
-      token-info-uri: http://139.59.32.238:8005/oauth/check_token
+      token-info-uri: http://68.183.246.143:8000/auth/oauth/check_token
     client:
       client-id: 21e43c55-28ef-478a-ae65-dc896e5eaa34
       client-secret: P@ssw0rd
@@ -66,5 +71,20 @@ carmel:
   paymentServiceURL: http://guesture-payment-service
   inventoryServiceURL: http://guesture-inventory-service
   packageConstants:
-    solo: 7ae0a514-b2df-4ae1-8799-947d789a4c2f
-    solo2d: d4174b0e-1590-432c-ac94-d36f7cbd5f45
+    solo: c2c81dca-029a-4bad-ba22-064de303a2b1
+    solo-ab: e08f9c6c-a7a5-4f37-863e-89e46cac460a
+    solo-ab-bal: 3f444cb2-e50d-4d77-b36f-437cf31f8560
+    buddy-av: 74df04e3-74bc-4df3-bee0-fdf9cf295f61
+    buddy-av-ab: acf578d1-ed0e-4f73-b2d8-53ed72cea846
+    buddy-av-ab-bal: b838a75f-683a-4d41-bd7e-751bab8c044f
+    buddy-dw: db86c15d-0cf6-4863-8d16-0e378cd1d3fb
+    buddy-dw-ab: 8dc5bbd8-fdb0-4b8d-a98a-82a9377b2441
+    buddy-dw-ab-bal: 6040edcf-a768-4bb7-aa56-d7157325c496
+    trio: a6ea4896-1323-4d54-9968-73778f64be80
+    trio-ab: ea3c81c2-e5b4-4a46-8e80-c5056de8e0f5
+  propertyConstants:
+    av: dd019bb3-be78-48e9-9039-70281031c719
+  allowedPropertyTypes:
+    pods: 600
+    rooms: 500
+
