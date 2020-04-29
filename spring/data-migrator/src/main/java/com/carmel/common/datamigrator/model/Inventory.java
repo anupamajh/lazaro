@@ -111,8 +111,13 @@ public class Inventory {
         this.orgId = inventoryGroup.getOrgId();
         this.title = inventoryGroup.getTitle();
         this.isDeleted = inventoryGroup.getIsDeleted();
+        InventoryType inventoryType = new InventoryType();
+        inventoryType.setId(String.valueOf(inventoryGroup.getInventoryTypeId()));
+        this.setInventoryType(inventoryType);
     }
 
+    public Inventory() {
+    }
 
     public String getId() {
         return id;

@@ -72,7 +72,7 @@ public class Package {
     private Date lastModifiedTime;
 
     @Column(name = "is_deleted")
-    private int isDeleted;
+    private Integer isDeleted;
 
     @Column(name = "deleted_by")
     @Length(max = 40)
@@ -211,11 +211,11 @@ public class Package {
         this.lastModifiedTime = lastModifiedTime;
     }
 
-    public int getIsDeleted() {
+    public Integer getIsDeleted() {
         return isDeleted;
     }
 
-    public void setIsDeleted(int isDeleted) {
+    public void setIsDeleted(Integer isDeleted) {
         this.isDeleted = isDeleted;
     }
 
