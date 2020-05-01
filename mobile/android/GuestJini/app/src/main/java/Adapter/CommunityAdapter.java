@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.carmel.guestjini.CommunityActivity;
+import com.carmel.guestjini.Delegates.CommunityMainNavigationListener;
 import com.carmel.guestjini.GroupsActivity;
 import com.carmel.guestjini.PeopleActivity;
 import com.carmel.guestjini.ProfileActivity;
@@ -23,6 +24,12 @@ import Model.CommunityModel;
 
 public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.ViewHolder> {
     private Context context;
+    private CommunityMainNavigationListener communityMainNavigationListener;
+
+    public void setCommunityMainNavigationListener(CommunityMainNavigationListener communityMainNavigationListener) {
+        this.communityMainNavigationListener = communityMainNavigationListener;
+    }
+
     private ArrayList<CommunityModel> communityModels;
     public CommunityAdapter(Context context, ArrayList<CommunityModel> communityModelArrayList) {
         this.context=context;
@@ -67,10 +74,12 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
             final Intent intent;
             switch (getAdapterPosition()){
                 case 0:
-                    intent =  new Intent(context, ProfileActivity.class);
+                    communityMainNavigationListener.onClickNavigation(1);
+                    //intent =  new Intent(context, ProfileActivity.class);
                     break;
                 case 1:
-                    intent =  new Intent(context, PeopleActivity.class);
+                    communityMainNavigationListener.onClickNavigation(2);
+                    //intent =  new Intent(context, PeopleActivity.class);
                     break;
                 case 2:
                     intent =  new Intent(context, GroupsActivity.class);
@@ -79,7 +88,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
                     intent =  new Intent(context, CommunityActivity.class);
                     break;
             }
-            context.startActivity(intent);
+//            context.startActivity(intent);
         }
     }
   }

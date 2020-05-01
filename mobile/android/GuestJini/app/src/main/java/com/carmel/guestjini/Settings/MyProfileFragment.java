@@ -42,6 +42,7 @@ import android.widget.TextView;
 import com.carmel.guestjini.Common.AgeCalculator;
 import com.carmel.guestjini.Common.DateUtil;
 import com.carmel.guestjini.Common.EndPoints;
+import com.carmel.guestjini.CommunityActivity;
 import com.carmel.guestjini.Components.OkHttpClientInstance;
 import com.carmel.guestjini.Models.User.UserInfo;
 import com.carmel.guestjini.R;
@@ -167,11 +168,23 @@ public class MyProfileFragment extends Fragment implements ActivityCompat.OnRequ
         backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SettingsLandingFragment settingsLandingFragment = new SettingsLandingFragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.SettingsPlaceHolder, settingsLandingFragment);
-                fragmentTransaction.commit();
+                int back = 0;
+                final Bundle bundle = getArguments();
+                if (bundle != null) {
+                    if (bundle.containsKey("back_constant")) {
+                        back = bundle.getInt("back_constant");
+                    }
+                }
+                if (back == 0) {
+                    SettingsLandingFragment settingsLandingFragment = new SettingsLandingFragment();
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.SettingsPlaceHolder, settingsLandingFragment);
+                    fragmentTransaction.commit();
+                }else if(back == 1){
+                    Intent intent = new Intent(getContext(), CommunityActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         profileToggleButton.setOnClickListener(new View.OnClickListener() {
@@ -296,8 +309,8 @@ public class MyProfileFragment extends Fragment implements ActivityCompat.OnRequ
 
             }
             //}
-        }else if(requestCode == 200){
-            if(resultCode == RESULT_OK){
+        } else if (requestCode == 200) {
+            if (resultCode == RESULT_OK) {
                 profileIcon.setImageURI(data.getData());
                 try {
                     BitmapDrawable bitmapDrawable = ((BitmapDrawable) profileIcon.getDrawable());

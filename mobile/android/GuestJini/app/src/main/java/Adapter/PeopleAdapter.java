@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.carmel.guestjini.Models.User.Person;
 import com.carmel.guestjini.R;
 
 import java.util.ArrayList;
@@ -17,10 +18,10 @@ import Model.PeopleModel;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.ViewHolder> {
-    private ArrayList<PeopleModel> peopleModels;
+    private ArrayList<Person> personArrayList;
     private OnItemClickListener onItemClickListener;
-    public PeopleAdapter(ArrayList<PeopleModel> peopleModelArrayList,OnItemClickListener onItemClickListener) {
-        this.peopleModels=peopleModelArrayList;
+    public PeopleAdapter(ArrayList<Person> personArrayList,OnItemClickListener onItemClickListener) {
+        this.personArrayList=personArrayList;
         this.onItemClickListener=onItemClickListener;
     }
 
@@ -34,24 +35,25 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull PeopleAdapter.ViewHolder holder, int position) {
-        PeopleModel peopleModel=this.peopleModels.get(position);
-        holder.addPeopleName.setText(String.valueOf(peopleModel.getAddPeopleName()));
-        holder.addPeopleGender.setText(String.valueOf(peopleModel.getAddPeopleGender()));
-        holder.peopleProfileImage.setImageResource(peopleModel.getProfilePicture());
-        holder.favouritesIcon.setImageResource(peopleModel.getFavouritesIcon());
-        holder.compatibilityCount.setText(peopleModel.getCompatibilityCount());
-        holder.notificationIndicator.setBackgroundResource(peopleModel.getNotificationIndicator());
+        Person person=this.personArrayList.get(position);
+        holder.addPeopleName.setText(String.valueOf(person.getAddressBook().getDisplayName()));
+        holder.addPeopleGender.setVisibility(View.GONE);
+        //holder.addPeopleGender.setText(String.valueOf(person..getAddPeopleGender()));
+        //holder.peopleProfileImage.setImageResource(person.getProfilePicture());//TODO: Load Persons Profile pic
+        //holder.favouritesIcon.setImageResource(peopleModel.getFavouritesIcon()); //TODO: Set favourite based on
+//        holder.compatibilityCount.setText(person.getUserInterestsList().size());
+        //holder.notificationIndicator.setBackgroundResource(peopleModel.getNotificationIndicator());
 
 
     }
 
     @Override
     public int getItemCount() {
-        return peopleModels.size();
+        return personArrayList.size();
     }
 
-    public void filterList(ArrayList<PeopleModel> filterList) {
-        peopleModels = filterList;
+    public void filterList(ArrayList<Person> filterList) {
+        personArrayList = filterList;
         notifyDataSetChanged();
     }
 
@@ -84,6 +86,7 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.ViewHolder
             onClickListener.onItemClick(getAdapterPosition());
         }
     }
+
     public interface OnItemClickListener {
         void onItemClick(int position);
     }

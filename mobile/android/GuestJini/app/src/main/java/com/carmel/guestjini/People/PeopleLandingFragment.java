@@ -1,7 +1,11 @@
 package com.carmel.guestjini.People;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -26,88 +30,107 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.carmel.guestjini.Common.EndPoints;
 import com.carmel.guestjini.CommunityActivity;
+import com.carmel.guestjini.Components.OkHttpClientInstance;
+import com.carmel.guestjini.Models.User.PeopleResponse;
+import com.carmel.guestjini.Models.User.Person;
 import com.carmel.guestjini.R;
+import com.carmel.guestjini.Services.Authentication.AuthService;
+import com.carmel.guestjini.Services.Authentication.AuthServiceHolder;
+import com.carmel.guestjini.Services.User.PeopleService;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
 import Adapter.PeopleAdapter;
 import Model.PeopleModel;
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PeopleLandingFragment extends Fragment implements PeopleAdapter.OnItemClickListener {
     private RecyclerView peopleRecylerView;
-    private ImageView filterIcon,backArrow;
+    private ImageView filterIcon, backArrow;
     private RelativeLayout filterPopup;
     private EditText search;
-    private ArrayList<PeopleModel> peopleModelArrayList=new ArrayList<>();
-    private TextView showingYourFavourites,searchResultCount;
-    private ConstraintLayout searchLayout,noResultFoundLayout,recyclerViewLayout;
+    private ArrayList<Person> personArrayList = new ArrayList<>();
+    private TextView showingYourFavourites, searchResultCount;
+    private ConstraintLayout searchLayout, noResultFoundLayout, recyclerViewLayout;
     private PeopleAdapter peopleAdapter;
+
+    AlertDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView= inflater.inflate(R.layout.fragment_people_landing, container, false);
-        peopleRecylerView=rootView.findViewById(R.id.peopleRecyclerView);
-        searchLayout=rootView.findViewById(R.id.searchLayout);
-        noResultFoundLayout=rootView.findViewById(R.id.noResultFoundLayout);
-        recyclerViewLayout=rootView.findViewById(R.id.recyclerViewLayout);
-        filterIcon=rootView.findViewById(R.id.filterIcon);
-        filterPopup=rootView.findViewById(R.id.filterPopup);
-        backArrow=rootView.findViewById(R.id.backArrow);
-        showingYourFavourites=rootView.findViewById(R.id.showingYourFavourites);
-        search=rootView.findViewById(R.id.search);
-        searchResultCount=rootView.findViewById(R.id.searchResultCount);
+        View rootView = inflater.inflate(R.layout.fragment_people_landing, container, false);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setCancelable(false); // if you want user to wait for some process to finish,
+        builder.setView(R.layout.layout_loading_dialog);
+        progressDialog = builder.create();
+        peopleRecylerView = rootView.findViewById(R.id.peopleRecyclerView);
+        searchLayout = rootView.findViewById(R.id.searchLayout);
+        noResultFoundLayout = rootView.findViewById(R.id.noResultFoundLayout);
+        recyclerViewLayout = rootView.findViewById(R.id.recyclerViewLayout);
+        filterIcon = rootView.findViewById(R.id.filterIcon);
+        filterPopup = rootView.findViewById(R.id.filterPopup);
+        backArrow = rootView.findViewById(R.id.backArrow);
+        showingYourFavourites = rootView.findViewById(R.id.showingYourFavourites);
+        search = rootView.findViewById(R.id.search);
+        searchResultCount = rootView.findViewById(R.id.searchResultCount);
 
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         peopleRecylerView.setLayoutManager(linearLayoutManager);
         peopleRecylerView.setHasFixedSize(true);
-        peopleAdapter=new PeopleAdapter(peopleModelArrayList,this);
+        peopleAdapter = new PeopleAdapter(personArrayList, this);
         peopleRecylerView.setAdapter(peopleAdapter);
-
-        PeopleModel peopleModel=new PeopleModel();
-        peopleModel.setAddPeopleName("John Doe");
-        peopleModel.setAddPeopleGender("Male");
-        peopleModel.setCompatibilityCount("12/12");
-        peopleModel.setNotificationIndicator(R.drawable.red_small_circle);
-        peopleModel.setProfilePicture(R.drawable.profile_image);
-        peopleModelArrayList.add(peopleModel);
-
-        peopleModel=new PeopleModel();
-        peopleModel.setAddPeopleName("Peter Law");
-        peopleModel.setAddPeopleGender("Male");
-        peopleModel.setCompatibilityCount("08/12");
-        peopleModel.setProfilePicture(R.drawable.profile_image);
-        peopleModelArrayList.add(peopleModel);
-
-        peopleModel=new PeopleModel();
-        peopleModel.setAddPeopleName("Luke Ray");
-        peopleModel.setCompatibilityCount("05/12");
-        peopleModel.setProfilePicture(R.drawable.profile_image);
-        peopleModelArrayList.add(peopleModel);
-
-        peopleModel=new PeopleModel();
-        peopleModel.setAddPeopleName("Daisy Lake");
-        peopleModel.setAddPeopleGender("Female");
-        peopleModel.setCompatibilityCount("02/12");
-        peopleModel.setProfilePicture(R.drawable.profile_image);
-        peopleModelArrayList.add(peopleModel);
-
-        peopleModel=new PeopleModel();
-        peopleModel.setAddPeopleName("Jeret Quartz");
-        peopleModel.setAddPeopleGender("Female");
-        peopleModel.setCompatibilityCount("01/12");
-        peopleModel.setProfilePicture(R.drawable.profile_image);
-        peopleModelArrayList.add(peopleModel);
-
-        peopleModel=new PeopleModel();
-        peopleModel.setAddPeopleName("Dan Quartz");
-        peopleModel.setAddPeopleGender("Male");
-        peopleModel.setCompatibilityCount("00/12");
-        peopleModel.setProfilePicture(R.drawable.profile_image);
-        peopleModelArrayList.add(peopleModel);
-
+        loadPeopleList();
+//        PeopleModel peopleModel=new PeopleModel();
+//        peopleModel.setAddPeopleName("John Doe");
+//        peopleModel.setAddPeopleGender("Male");
+//        peopleModel.setCompatibilityCount("12/12");
+//        peopleModel.setNotificationIndicator(R.drawable.red_small_circle);
+//        peopleModel.setProfilePicture(R.drawable.profile_image);
+//        peopleModelArrayList.add(peopleModel);
+//
+//        peopleModel=new PeopleModel();
+//        peopleModel.setAddPeopleName("Peter Law");
+//        peopleModel.setAddPeopleGender("Male");
+//        peopleModel.setCompatibilityCount("08/12");
+//        peopleModel.setProfilePicture(R.drawable.profile_image);
+//        peopleModelArrayList.add(peopleModel);
+//
+//        peopleModel=new PeopleModel();
+//        peopleModel.setAddPeopleName("Luke Ray");
+//        peopleModel.setCompatibilityCount("05/12");
+//        peopleModel.setProfilePicture(R.drawable.profile_image);
+//        peopleModelArrayList.add(peopleModel);
+//
+//        peopleModel=new PeopleModel();
+//        peopleModel.setAddPeopleName("Daisy Lake");
+//        peopleModel.setAddPeopleGender("Female");
+//        peopleModel.setCompatibilityCount("02/12");
+//        peopleModel.setProfilePicture(R.drawable.profile_image);
+//        peopleModelArrayList.add(peopleModel);
+//
+//        peopleModel=new PeopleModel();
+//        peopleModel.setAddPeopleName("Jeret Quartz");
+//        peopleModel.setAddPeopleGender("Female");
+//        peopleModel.setCompatibilityCount("01/12");
+//        peopleModel.setProfilePicture(R.drawable.profile_image);
+//        peopleModelArrayList.add(peopleModel);
+//
+//        peopleModel=new PeopleModel();
+//        peopleModel.setAddPeopleName("Dan Quartz");
+//        peopleModel.setAddPeopleGender("Male");
+//        peopleModel.setCompatibilityCount("00/12");
+//        peopleModel.setProfilePicture(R.drawable.profile_image);
+//        peopleModelArrayList.add(peopleModel);
 
 
 //        search.addTextChangedListener(new TextWatcher() {
@@ -128,16 +151,17 @@ public class PeopleLandingFragment extends Fragment implements PeopleAdapter.OnI
 //        });
 
         searchLayout.setOnClickListener(new View.OnClickListener() {
-            private boolean flag=true;
+            private boolean flag = true;
+
             @Override
             public void onClick(View v) {
-                if(flag) {
-                    flag=false;
+                if (flag) {
+                    flag = false;
                     noResultFoundLayout.setVisibility(View.VISIBLE);
                     recyclerViewLayout.setVisibility(View.GONE);
                     search.setText("John");
-                }else {
-                    flag=true;
+                } else {
+                    flag = true;
                     searchResultCount.setVisibility(View.VISIBLE);
                 }
 
@@ -145,6 +169,7 @@ public class PeopleLandingFragment extends Fragment implements PeopleAdapter.OnI
         });
         filterIcon.setOnClickListener(new View.OnClickListener() {
             private boolean flag = true;
+
             @Override
             public void onClick(View v) {
                 if (flag) {
@@ -231,7 +256,7 @@ public class PeopleLandingFragment extends Fragment implements PeopleAdapter.OnI
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(), CommunityActivity.class);
+                Intent intent = new Intent(getContext(), CommunityActivity.class);
                 startActivity(intent);
             }
         });
@@ -250,16 +275,92 @@ public class PeopleLandingFragment extends Fragment implements PeopleAdapter.OnI
 
     @Override
     public void onItemClick(int position) {
-        PeopleDetailsFragment peopleDetailsFragment=new PeopleDetailsFragment();
-        FragmentManager fragmentManager=getFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.peoplePlaceHolder,peopleDetailsFragment);
+        PeopleDetailsFragment peopleDetailsFragment = new PeopleDetailsFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.CommunityPlaceHolder, peopleDetailsFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
-        Bundle bundle=new Bundle();
-        bundle.putString("profile name",peopleModelArrayList.get(position).getAddPeopleName());
-        bundle.putString("profile gender",peopleModelArrayList.get(position).getAddPeopleGender());
+        Bundle bundle = new Bundle();
+        bundle.putString("personId",personArrayList.get(position).getAddressBook().getUserId());
         peopleDetailsFragment.setArguments(bundle);
+    }
+
+    private void loadPeopleList() {
+        progressDialog.show();
+        AuthServiceHolder authServiceHolder = new AuthServiceHolder();
+        SharedPreferences preferences = getContext().getSharedPreferences("GuestJini", Context.MODE_PRIVATE);
+        String accessToken = preferences.getString("access_token", "");
+        OkHttpClient okHttpClient = new OkHttpClientInstance.Builder(getActivity(), authServiceHolder)
+                .addHeader("Authorization", "Bearer " + accessToken)
+                .build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(EndPoints.END_POINT_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
+                .build();
+        AuthService authService = retrofit.create(AuthService.class);
+        authServiceHolder.set(authService);
+
+        PeopleService peopleService = retrofit.create(PeopleService.class);
+        Call<PeopleResponse> peopleResponseCall = peopleService.getPeopleList();
+        peopleResponseCall.enqueue(new Callback<PeopleResponse>() {
+            @Override
+            public void onResponse(Call<PeopleResponse> call, Response<PeopleResponse> response) {
+                progressDialog.dismiss();
+                try {
+                    PeopleResponse peopleResponse = response.body();
+                    if (peopleResponse.isSuccess()) {
+                        personArrayList = new ArrayList<>();
+                        personArrayList.addAll(peopleResponse.getPersonList());
+                        peopleAdapter.filterList(personArrayList);
+                    } else {
+                        showDialog(false, "There was a problem fetching people list! Please try after sometime");
+                    }
+                } catch (Exception ex) {
+                    showDialog(false, "There was a problem fetching people list! Please try after sometime");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PeopleResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                showDialog(false, "There was a problem fetching people list! Please try after sometime");
+            }
+        });
+    }
+
+    private void showDialog(boolean isSuccess, String message) {
+        final Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.alert_dailogbox);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView alertDailogTitle = (TextView) dialog.findViewById(R.id.alertDailogTitle);
+        if (isSuccess) {
+            alertDailogTitle.setText(getText(R.string.success));
+        } else {
+            alertDailogTitle.setText(getText(R.string.failed));
+            alertDailogTitle.setTextColor(Color.parseColor("#E65959"));
+        }
+        TextView alertDailogMessage = (TextView) dialog.findViewById(R.id.alertDailogDescription);
+        alertDailogMessage.setText(message);
+        FloatingActionButton doneButton = (FloatingActionButton) dialog.findViewById(R.id.done_button);
+        if (isSuccess) {
+            doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
+                    .parseColor("#32BDD2")));
+        } else {
+            doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
+                    .parseColor("#E65959")));
+        }
+
+
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }
