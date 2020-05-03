@@ -37,7 +37,7 @@ public class UserService {
             JSONObject postData = (JSONObject) parser.parse(postJsonString);
             HttpEntity<String> entity = new HttpEntity<>(postData.toJSONString(), headers);
             ResponseEntity<UserResponse> result =
-                    restTemplate.exchange(carmelConfig.getDbServiceURL() + "/user/save",
+                    restTemplate.exchange(carmelConfig.getDbServiceURL() + "/user/guest-sign-up",
                             HttpMethod.POST, entity, UserResponse.class);
             return result.getBody();
         } catch (Exception ex) {

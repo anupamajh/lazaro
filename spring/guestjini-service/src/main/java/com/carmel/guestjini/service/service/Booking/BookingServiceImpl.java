@@ -7,7 +7,6 @@ import com.carmel.guestjini.service.common.Booking.TransactionIdentifier;
 import com.carmel.guestjini.service.common.Inventory.BillingCycle;
 import com.carmel.guestjini.service.common.Inventory.ChargeMethod;
 import com.carmel.guestjini.service.components.UserService;
-import com.carmel.guestjini.service.model.Accounts.AccountTicket;
 import com.carmel.guestjini.service.model.Booking.Booking;
 import com.carmel.guestjini.service.model.Booking.BookingAdditionalCharge;
 import com.carmel.guestjini.service.model.Booking.Guest;

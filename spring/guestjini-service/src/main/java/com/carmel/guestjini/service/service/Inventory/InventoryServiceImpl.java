@@ -128,4 +128,9 @@ public class InventoryServiceImpl implements InventoryService {
     public List<Inventory> findAll(Specification<Inventory> filterInventoryByPackage) {
         return inventoryRepository.findAll(filterInventoryByPackage);
     }
+
+    @Override
+    public List<Inventory> findAllByParentIdAndIsDeleted(String parentId, int isDeleted) {
+        return inventoryRepository.findAllByParentIdAndIsDeleted(parentId, isDeleted);
+    }
 }

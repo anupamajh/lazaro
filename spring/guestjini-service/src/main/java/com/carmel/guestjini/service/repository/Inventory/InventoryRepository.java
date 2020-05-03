@@ -20,4 +20,6 @@ public interface InventoryRepository extends JpaRepository<Inventory, String> {
     Page<Inventory> findAll(Specification<Inventory> textInAllColumns, Pageable pageable);
 
     List<Inventory> findAll(Specification<Inventory> filterInventoryByPackage);
+
+    List<Inventory> findAllByParentIdAndIsDeleted(String parentId, int isDeleted);
 }

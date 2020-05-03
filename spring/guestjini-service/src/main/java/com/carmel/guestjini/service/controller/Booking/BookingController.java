@@ -620,15 +620,19 @@ public class BookingController {
         try {
             String bookingId = formData.get("bookingId") == null ? null : String.valueOf(formData.get("bookingId"));
             Date actualCheckInDate = formData.get("actual_checkin") != null ? DateUtil.convertToDate(formData.get("actual_checkin")) : null;
-            if (bookingId == null) {
+             if (bookingId == null) {
                 throw new Exception("Booking ID not received");
             }
             Optional<Booking> optionalBooking = bookingService.findById(bookingId);
             if (optionalBooking.isPresent()) {
                 Booking booking = optionalBooking.get();
+                if(actualCheckInDate == null){
+                    actualCheckInDate = booking.getCheckInTime();
+                }
+
                 booking.setLastModifiedBy(userInfo.getId());
                 booking.setLastModifiedTime(new Date());
-                Guest guest = bookingService.doCheckIn(booking, actualCheckInDate);
+                Guest guest = bookingService.doCheckIn(booking, booking.getCheckInTime());
                 bookingResponse.setBooking(booking);
                 bookingResponse.setGuest(guest);
                 bookingResponse.setSuccess(true);

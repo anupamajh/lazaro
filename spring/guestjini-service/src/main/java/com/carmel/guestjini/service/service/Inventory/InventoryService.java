@@ -28,4 +28,6 @@ public interface InventoryService {
     List<Inventory> findAll(Specification<Inventory> filterInventoryByPackage);
 
     String getParentIds(String inventoryId);
+
+    List<Inventory> findAllByParentIdAndIsDeleted(String parentId, int isDeleted);
 }

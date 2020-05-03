@@ -8,7 +8,6 @@ import com.carmel.guestjini.service.model.Inventory.Inventory;
 import com.carmel.guestjini.service.model.Inventory.InventoryLocation;
 import com.carmel.guestjini.service.model.Principal.UserInfo;
 import com.carmel.guestjini.service.request.Inventory.PaymentRequest;
-import com.carmel.guestjini.service.response.Booking.BookingResponse;
 import com.carmel.guestjini.service.response.Inventory.InventoryResponse;
 import com.carmel.guestjini.service.service.Booking.BookingService;
 import com.carmel.guestjini.service.service.Inventory.InventoryLocationService;

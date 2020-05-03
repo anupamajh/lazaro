@@ -5,7 +5,6 @@ import com.carmel.guestjini.service.common.Booking.GuestStatus;
 import com.carmel.guestjini.service.components.UserInformation;
 import com.carmel.guestjini.service.model.Accounts.AccountTicket;
 import com.carmel.guestjini.service.model.Accounts.AccountTicketItem;
-import com.carmel.guestjini.service.model.Booking.BookingAdditionalCharge;
 import com.carmel.guestjini.service.model.DTO.Booking.BookingAdditionalChargeDTO;
 import com.carmel.guestjini.service.model.DTO.Booking.GuestDTO;
 import com.carmel.guestjini.service.model.Principal.UserInfo;

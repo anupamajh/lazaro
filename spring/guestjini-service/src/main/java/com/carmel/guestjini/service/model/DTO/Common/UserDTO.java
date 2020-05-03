@@ -1,7 +1,6 @@
 package com.carmel.guestjini.service.model.DTO.Common;
 
 import com.carmel.guestjini.service.model.Booking.Guest;
-import com.carmel.guestjini.service.model.DTO.Booking.GuestDTO;
 import com.carmel.guestjini.service.model.Principal.Client;
 import com.carmel.guestjini.service.model.Principal.Organization;
 
