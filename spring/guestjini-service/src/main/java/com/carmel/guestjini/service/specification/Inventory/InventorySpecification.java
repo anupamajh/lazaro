@@ -46,7 +46,6 @@ public class InventorySpecification {
             int hasBalcony,
             int hasBathRoom
     ) {
-
         return (root, query, builder) -> {
             Join<Inventory, InventoryAttributes> inventoryInventoryAttributesJoin = root.join("inventoryAttributes");
             return builder.and(

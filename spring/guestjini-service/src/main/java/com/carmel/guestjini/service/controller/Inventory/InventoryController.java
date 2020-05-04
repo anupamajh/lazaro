@@ -1,15 +1,19 @@
 package com.carmel.guestjini.service.controller.Inventory;
 
 import com.carmel.guestjini.service.common.DateUtil;
+import com.carmel.guestjini.service.components.ApplicationConstantsService;
 import com.carmel.guestjini.service.components.UserInformation;
 import com.carmel.guestjini.service.config.PackageConstants;
 import com.carmel.guestjini.service.model.Booking.Booking;
+import com.carmel.guestjini.service.model.DTO.Common.ApplicationConstantDTO;
 import com.carmel.guestjini.service.model.Inventory.Inventory;
+import com.carmel.guestjini.service.model.Inventory.InventoryDetail;
 import com.carmel.guestjini.service.model.Inventory.InventoryLocation;
 import com.carmel.guestjini.service.model.Principal.UserInfo;
 import com.carmel.guestjini.service.request.Inventory.PaymentRequest;
 import com.carmel.guestjini.service.response.Inventory.InventoryResponse;
 import com.carmel.guestjini.service.service.Booking.BookingService;
+import com.carmel.guestjini.service.service.Inventory.InventoryDetailService;
 import com.carmel.guestjini.service.service.Inventory.InventoryLocationService;
 import com.carmel.guestjini.service.service.Inventory.InventoryService;
 import com.carmel.guestjini.service.service.Inventory.PackageService;
@@ -30,7 +34,7 @@ import javax.validation.Valid;
 import java.util.*;
 
 import static com.carmel.guestjini.service.specification.Booking.BookingSpecification.checkInventoryAvailability;
-import static com.carmel.guestjini.service.specification.Inventory.InventorySpecification.filterInventoryByAvailability;
+import static com.carmel.guestjini.service.specification.Inventory.InventoryDetailSpecification.filterInventoryDetailByAvailability;
 import static com.carmel.guestjini.service.specification.Inventory.InventorySpecification.textInAllColumns;
 
 
@@ -56,6 +60,12 @@ public class InventoryController {
 
     @Autowired
     BookingService bookingService;
+
+    @Autowired
+    InventoryDetailService inventoryDetailService;
+
+    @Autowired
+    ApplicationConstantsService applicationConstantsService;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public InventoryResponse save(@Valid @RequestBody Inventory inventory) {
@@ -318,32 +328,47 @@ public class InventoryController {
     public InventoryResponse getSuitableInventory(@RequestBody PaymentRequest paymentRequest) {
         InventoryResponse inventoryResponse = new InventoryResponse();
         try {
+            String allowedInventoryTypes = "600";
             String packageName = paymentRequest.getStayPackage();
+            String propertyName = paymentRequest.getProperty();
             String strCheckInDate = paymentRequest.getCheckInDate();
             String strCheckoutDate = paymentRequest.getCheckOutDate();
             String packageId = "";
-            if (packageConstants
-                    .getPackageConstants()
-                    .containsKey(packageName)
-            ) {
-                packageId = packageConstants
-                        .getPackageConstants().get(packageName);
-            }
+            String propertyId = "";
+            ApplicationConstantDTO applicationConstantDTO =
+                    applicationConstantsService.getApplicationConstant(propertyName);
+            propertyId = applicationConstantDTO.getValue();
+            applicationConstantDTO =
+                    applicationConstantsService.getApplicationConstant(packageName);
+            packageId = applicationConstantDTO.getValue();
 
-            if (packageId.trim().equals("")) {
+            applicationConstantDTO =
+                    applicationConstantsService.getApplicationConstant("allowed_inventory_types");
+            allowedInventoryTypes = applicationConstantDTO.getValue();
+
+            if (packageId == null) {
                 throw new Exception("Package not found");
             }
-            List<Inventory> inventories = inventoryService.findAll(
-                    filterInventoryByAvailability(
-                            packageId,
+            if (propertyId == null) {
+                throw new Exception("Property not found");
+            }
+            if (allowedInventoryTypes == null) {
+                allowedInventoryTypes = "600";
+            }
+
+            List<InventoryDetail> inventoryDetailList =
+                    inventoryDetailService.findAll(filterInventoryDetailByAvailability(
+                            packageId.trim(),
+                            propertyId.trim(),
+                            allowedInventoryTypes.trim(),
                             paymentRequest.getHasBalcony(),
                             paymentRequest.getHasBathRoom()
-                    )
-            );
+
+                    ));
             String selectedInventoryId = "";
             Boolean hasInventory = false;
-            for (Inventory inventory : inventories) {
-                String parentIds = inventoryService.getParentIds(inventory.getId());
+            for (InventoryDetail inventoryDetail : inventoryDetailList) {
+                String parentIds = inventoryService.getParentIds(inventoryDetail.getInventoryId());
                 List<String> inventoryIds = Arrays.asList(parentIds.split("\\s*,\\s*"));
                 List<Booking> bookings = bookingService.findAll(
                         checkInventoryAvailability(
@@ -351,11 +376,10 @@ public class InventoryController {
                                 DateUtil.convertToDate(strCheckInDate),
                                 DateUtil.convertToDate(strCheckoutDate))
                 );
-                if (bookings.size() > 0) {
-                    throw new Exception("Selected inventory not available for booking, Please select some other inventory");
-                } else {
-                    selectedInventoryId = inventory.getId();
+                if (bookings.isEmpty()) {
+                    selectedInventoryId = inventoryDetail.getInventoryId();
                     hasInventory = true;
+                    break;
                 }
             }
             if (hasInventory) {

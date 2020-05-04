@@ -47,7 +47,9 @@ public class InventoryDTO {
         this.deletedBy = inventory.getDeletedBy();
         this.childrens =  new ArrayList<>();
         this.inventoryType = new InventoryTypeDTO(inventory.getInventoryType());
-        this.inventoryLocation = new InventoryLocationDTO(inventory.getInventoryLocation());
+        if(inventory.getInventoryLocation() !=null ) {
+            this.inventoryLocation = new InventoryLocationDTO(inventory.getInventoryLocation());
+        }
         this.packages = new ArrayList<>();
         if(inventory.getPackages() != null) {
             inventory.getPackages().forEach(aPackage -> {
