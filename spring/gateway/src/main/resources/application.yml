@@ -9,6 +9,10 @@ eureka:
     fetch-registry: true
     serviceUrl:
       defaultZone: http://139.59.32.238:8001/eureka/
+ribbon:
+  eureka:
+    enabled: true
+
 zuul:
   sensitiveHeaders: Cookie,Set-Cookie
   routes:
@@ -21,6 +25,9 @@ zuul:
     common-web:
       path: /web/**
       url: http://localhost:8007
+  host:
+    connect-timeout-millis: 5000000
+    socket-timeout-millis: 50000000
 #    lazaro-service:
 #      path: /lazaro/**
 #      url: http://localhost:8003
