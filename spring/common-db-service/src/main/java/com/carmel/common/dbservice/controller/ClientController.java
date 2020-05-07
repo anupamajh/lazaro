@@ -46,7 +46,6 @@ public class ClientController {
     @Autowired
     UserService userService;
 
-
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ClientResponse register(@Valid @RequestBody Client client) {
         UserInfo userInfo = userInformation.getUserInfo();
@@ -139,6 +138,5 @@ public class ClientController {
         }
         return false;
     }
-
 
 }

@@ -1,10 +1,14 @@
 package com.carmel.common.dbservice.controller;
 
+import com.carmel.common.dbservice.common.Search.SearchBuilder;
+import com.carmel.common.dbservice.common.Search.SearchRequest;
 import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.Organization;
+import com.carmel.common.dbservice.model.User;
 import com.carmel.common.dbservice.model.UserInfo;
 import com.carmel.common.dbservice.response.OrganizationResponse;
 import com.carmel.common.dbservice.response.OrganizationsResponse;
+import com.carmel.common.dbservice.response.UsersResponse;
 import com.carmel.common.dbservice.services.OrganizationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -19,6 +23,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
@@ -38,6 +47,9 @@ public class OrganizationController {
 
     @Autowired
     UserInformation userInformation;
+
+    @Autowired
+    EntityManager entityManager;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public OrganizationResponse save(@Valid @RequestBody Organization organization) {
@@ -255,4 +267,44 @@ public class OrganizationController {
             return false;
         }
     }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public OrganizationsResponse search(@RequestBody SearchRequest searchRequest) {
+        OrganizationsResponse organizationsResponse = new OrganizationsResponse();
+        try{
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<Organization> criteriaQuery = criteriaBuilder.createQuery(Organization.class);
+            Root<Organization> root = criteriaQuery.from(Organization.class);
+            criteriaQuery = SearchBuilder.buildSearch(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root,
+                    Organization.class,
+                    searchRequest
+            );
+            long totalRecords = SearchBuilder.getTotalRecordCount(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root
+            );
+            TypedQuery<Organization> typedQuery = entityManager.createQuery(criteriaQuery);
+            typedQuery.setFirstResult((searchRequest.getCurrentPage() - 1) * searchRequest.getPageSize());
+            typedQuery.setMaxResults(searchRequest.getPageSize());
+            List<Organization> organizationList = typedQuery.getResultList();
+            organizationsResponse.setCurrentRecords(organizationList.size());
+            organizationsResponse.setTotalRecords(totalRecords);
+            organizationsResponse.setSuccess(true);
+            organizationsResponse.setError("");
+            organizationsResponse.setOrganizationList(organizationList);
+        }catch (Exception ex){
+            logger.error(ex.getMessage(), ex);
+            logger.error(ex.toString(), ex);
+            organizationsResponse.setSuccess(false);
+            organizationsResponse.setError(ex.getMessage());
+        }
+        return  organizationsResponse;
+    }
+
 }

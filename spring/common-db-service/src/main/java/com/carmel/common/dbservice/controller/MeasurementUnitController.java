@@ -1,5 +1,7 @@
 package com.carmel.common.dbservice.controller;
 
+import com.carmel.common.dbservice.common.Search.SearchBuilder;
+import com.carmel.common.dbservice.common.Search.SearchRequest;
 import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.MeasurementUnit;
 import com.carmel.common.dbservice.model.UserInfo;
@@ -18,6 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
@@ -37,6 +44,9 @@ public class MeasurementUnitController {
 
     @Autowired
     MeasurementUnitService measurementUnitService;
+
+    @Autowired
+    EntityManager entityManager;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public MeasurementUnitResponse save(@Valid @RequestBody MeasurementUnit measurementUnit) {
@@ -250,4 +260,44 @@ public class MeasurementUnitController {
             return false;
         }
     }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public MeasurementUnitResponse search(@RequestBody SearchRequest searchRequest) {
+        MeasurementUnitResponse measurementUnitResponse = new MeasurementUnitResponse();
+        try{
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<MeasurementUnit> criteriaQuery = criteriaBuilder.createQuery(MeasurementUnit.class);
+            Root<MeasurementUnit> root = criteriaQuery.from(MeasurementUnit.class);
+            criteriaQuery = SearchBuilder.buildSearch(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root,
+                    MeasurementUnit.class,
+                    searchRequest
+            );
+            long totalRecords = SearchBuilder.getTotalRecordCount(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root
+            );
+            TypedQuery<MeasurementUnit> typedQuery = entityManager.createQuery(criteriaQuery);
+            typedQuery.setFirstResult((searchRequest.getCurrentPage() - 1) * searchRequest.getPageSize());
+            typedQuery.setMaxResults(searchRequest.getPageSize());
+            List<MeasurementUnit> measurementUnitList = typedQuery.getResultList();
+            measurementUnitResponse.setCurrentRecords(measurementUnitList.size());
+            measurementUnitResponse.setTotalRecords(totalRecords);
+            measurementUnitResponse.setSuccess(true);
+            measurementUnitResponse.setError("");
+            measurementUnitResponse.setMeasurementUnitList(measurementUnitList);
+        }catch (Exception ex){
+            logger.error(ex.getMessage(), ex);
+            logger.error(ex.toString(), ex);
+            measurementUnitResponse.setSuccess(false);
+            measurementUnitResponse.setError(ex.getMessage());
+        }
+        return  measurementUnitResponse;
+    }
+
 }

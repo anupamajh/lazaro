@@ -1,10 +1,14 @@
 package com.carmel.common.dbservice.controller;
 
+import com.carmel.common.dbservice.common.Search.SearchBuilder;
+import com.carmel.common.dbservice.common.Search.SearchRequest;
 import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.Album;
 import com.carmel.common.dbservice.model.Photo;
+import com.carmel.common.dbservice.model.User;
 import com.carmel.common.dbservice.model.UserInfo;
 import com.carmel.common.dbservice.response.PhotoResponse;
+import com.carmel.common.dbservice.response.UsersResponse;
 import com.carmel.common.dbservice.services.AlbumService;
 import com.carmel.common.dbservice.services.PhotoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,6 +24,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
@@ -41,6 +50,9 @@ public class PhotoController {
 
     @Autowired
     AlbumService albumService;
+
+    @Autowired
+    EntityManager entityManager;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public PhotoResponse save(@Valid @RequestBody Photo photo) {
@@ -284,6 +296,45 @@ public class PhotoController {
         } else {
             return false;
         }
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public PhotoResponse search(@RequestBody SearchRequest searchRequest) {
+        PhotoResponse photoResponse = new PhotoResponse();
+        try{
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<Photo> criteriaQuery = criteriaBuilder.createQuery(Photo.class);
+            Root<Photo> root = criteriaQuery.from(Photo.class);
+            criteriaQuery = SearchBuilder.buildSearch(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root,
+                    Photo.class,
+                    searchRequest
+            );
+            long totalRecords = SearchBuilder.getTotalRecordCount(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root
+            );
+            TypedQuery<Photo> typedQuery = entityManager.createQuery(criteriaQuery);
+            typedQuery.setFirstResult((searchRequest.getCurrentPage() - 1) * searchRequest.getPageSize());
+            typedQuery.setMaxResults(searchRequest.getPageSize());
+            List<Photo> photoList = typedQuery.getResultList();
+            photoResponse.setCurrentRecords(photoList.size());
+            photoResponse.setTotalRecords(totalRecords);
+            photoResponse.setSuccess(true);
+            photoResponse.setError("");
+            photoResponse.setPhotoList(photoList);
+        }catch (Exception ex){
+            logger.error(ex.getMessage(), ex);
+            logger.error(ex.toString(), ex);
+            photoResponse.setSuccess(false);
+            photoResponse.setError(ex.getMessage());
+        }
+        return  photoResponse;
     }
 
 }

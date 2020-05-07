@@ -1,6 +1,8 @@
 package com.carmel.common.dbservice.controller;
 
 import com.carmel.common.dbservice.common.GroupType;
+import com.carmel.common.dbservice.common.Search.SearchBuilder;
+import com.carmel.common.dbservice.common.Search.SearchRequest;
 import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.Group;
 import com.carmel.common.dbservice.model.Interest;
@@ -22,6 +24,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
@@ -43,6 +50,9 @@ public class InterestController {
 
     @Autowired
     GroupService groupService;
+
+    @Autowired
+    EntityManager entityManager;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @Transactional(rollbackFor = Exception.class)
@@ -273,4 +283,44 @@ public class InterestController {
             return false;
         }
     }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public InterestResponse search(@RequestBody SearchRequest searchRequest) {
+        InterestResponse interestResponse = new InterestResponse();
+        try{
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<Interest> criteriaQuery = criteriaBuilder.createQuery(Interest.class);
+            Root<Interest> root = criteriaQuery.from(Interest.class);
+            criteriaQuery = SearchBuilder.buildSearch(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root,
+                    Interest.class,
+                    searchRequest
+            );
+            long totalRecords = SearchBuilder.getTotalRecordCount(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root
+            );
+            TypedQuery<Interest> typedQuery = entityManager.createQuery(criteriaQuery);
+            typedQuery.setFirstResult((searchRequest.getCurrentPage() - 1) * searchRequest.getPageSize());
+            typedQuery.setMaxResults(searchRequest.getPageSize());
+            List<Interest> interestList = typedQuery.getResultList();
+            interestResponse.setCurrentRecords(interestList.size());
+            interestResponse.setTotalRecords(totalRecords);
+            interestResponse.setSuccess(true);
+            interestResponse.setError("");
+            interestResponse.setInterestList(interestList);
+        }catch (Exception ex){
+            logger.error(ex.getMessage(), ex);
+            logger.error(ex.toString(), ex);
+            interestResponse.setSuccess(false);
+            interestResponse.setError(ex.getMessage());
+        }
+        return  interestResponse;
+    }
+
 }

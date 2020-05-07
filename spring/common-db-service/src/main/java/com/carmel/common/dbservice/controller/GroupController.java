@@ -1,6 +1,8 @@
 package com.carmel.common.dbservice.controller;
 
 
+import com.carmel.common.dbservice.common.Search.SearchBuilder;
+import com.carmel.common.dbservice.common.Search.SearchRequest;
 import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.*;
 import com.carmel.common.dbservice.model.DTO.AddressBookDTO;
@@ -21,6 +23,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.validation.Valid;
 import java.util.*;
 
@@ -48,6 +55,9 @@ public class GroupController {
 
     @Autowired
     UserInterestsService userInterestsService;
+
+    @Autowired
+    EntityManager entityManager;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @Transactional(rollbackFor = Exception.class)
@@ -458,4 +468,44 @@ public class GroupController {
             return false;
         }
     }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public GroupResponse search(@RequestBody SearchRequest searchRequest) {
+        GroupResponse groupResponse = new GroupResponse();
+        try{
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<Group> criteriaQuery = criteriaBuilder.createQuery(Group.class);
+            Root<Group> root = criteriaQuery.from(Group.class);
+            criteriaQuery = SearchBuilder.buildSearch(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root,
+                    Group.class,
+                    searchRequest
+            );
+            long totalRecords = SearchBuilder.getTotalRecordCount(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root
+            );
+            TypedQuery<Group> typedQuery = entityManager.createQuery(criteriaQuery);
+            typedQuery.setFirstResult((searchRequest.getCurrentPage() - 1) * searchRequest.getPageSize());
+            typedQuery.setMaxResults(searchRequest.getPageSize());
+            List<Group> groupList = typedQuery.getResultList();
+            groupResponse.setCurrentRecords(groupList.size());
+            groupResponse.setTotalRecords(totalRecords);
+            groupResponse.setSuccess(true);
+            groupResponse.setError("");
+            groupResponse.setGroupList(groupList);
+        }catch (Exception ex){
+            logger.error(ex.getMessage(), ex);
+            logger.error(ex.toString(), ex);
+            groupResponse.setSuccess(false);
+            groupResponse.setError(ex.getMessage());
+        }
+        return  groupResponse;
+    }
+
 }

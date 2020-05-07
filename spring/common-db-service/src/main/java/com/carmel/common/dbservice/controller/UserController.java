@@ -1,5 +1,7 @@
 package com.carmel.common.dbservice.controller;
 
+import com.carmel.common.dbservice.common.Search.SearchBuilder;
+import com.carmel.common.dbservice.common.Search.SearchRequest;
 import com.carmel.common.dbservice.component.MailClient;
 import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.AddressBook;
@@ -26,6 +28,11 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.FileInputStream;
@@ -60,6 +67,9 @@ public class UserController {
 
     @Autowired
     UserPreferenceService userPreferenceService;
+
+    @Autowired
+    EntityManager entityManager;
 
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -477,6 +487,46 @@ public class UserController {
         }
         return genericResponse;
     }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public UsersResponse search(@RequestBody SearchRequest searchRequest) {
+        UsersResponse usersResponse = new UsersResponse();
+        try{
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+            Root<User> root = criteriaQuery.from(User.class);
+            criteriaQuery = SearchBuilder.buildSearch(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root,
+                    User.class,
+                    searchRequest
+            );
+            long totalRecords = SearchBuilder.getTotalRecordCount(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root
+            );
+            TypedQuery<User> typedQuery = entityManager.createQuery(criteriaQuery);
+            typedQuery.setFirstResult((searchRequest.getCurrentPage() - 1) * searchRequest.getPageSize());
+            typedQuery.setMaxResults(searchRequest.getPageSize());
+            List<User> userList = typedQuery.getResultList();
+            usersResponse.setCurrentRecords(userList.size());
+            usersResponse.setTotalRecords(totalRecords);
+            usersResponse.setSuccess(true);
+            usersResponse.setError("");
+            usersResponse.setUserList(userList);
+        }catch (Exception ex){
+            logger.error(ex.getMessage(), ex);
+            logger.error(ex.toString(), ex);
+            usersResponse.setSuccess(false);
+            usersResponse.setError(ex.getMessage());
+        }
+        return  usersResponse;
+    }
+
 
     @RequestMapping(value = "/find-users-in")
     public UsersResponse findUsersIn(@RequestBody List<String> userIds) {

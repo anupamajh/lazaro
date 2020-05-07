@@ -1,5 +1,7 @@
 package com.carmel.common.dbservice.controller;
 
+import com.carmel.common.dbservice.common.Search.SearchBuilder;
+import com.carmel.common.dbservice.common.Search.SearchRequest;
 import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.AccountHead;
 import com.carmel.common.dbservice.model.UserInfo;
@@ -18,6 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
@@ -36,6 +43,9 @@ public class AccountHeadController {
 
     @Autowired
     AccountHeadService accountHeadService;
+
+    @Autowired
+    EntityManager entityManager;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public AccountHeadResponse save(@Valid @RequestBody AccountHead accountHead) {
@@ -235,6 +245,45 @@ public class AccountHeadController {
         return accountHeadResponse;
     }
 
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public AccountHeadResponse search(@RequestBody SearchRequest searchRequest) {
+        AccountHeadResponse accountHeadResponse = new AccountHeadResponse();
+        try{
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<AccountHead> criteriaQuery = criteriaBuilder.createQuery(AccountHead.class);
+            Root<AccountHead> root = criteriaQuery.from(AccountHead.class);
+            criteriaQuery = SearchBuilder.buildSearch(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root,
+                    AccountHead.class,
+                    searchRequest
+            );
+            long totalRecords = SearchBuilder.getTotalRecordCount(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root
+            );
+            TypedQuery<AccountHead> typedQuery = entityManager.createQuery(criteriaQuery);
+            typedQuery.setFirstResult((searchRequest.getCurrentPage() - 1) * searchRequest.getPageSize());
+            typedQuery.setMaxResults(searchRequest.getPageSize());
+            List<AccountHead> accountHeadList = typedQuery.getResultList();
+            accountHeadResponse.setCurrentRecords(accountHeadList.size());
+            accountHeadResponse.setTotalRecords(totalRecords);
+            accountHeadResponse.setSuccess(true);
+            accountHeadResponse.setError("");
+            accountHeadResponse.setAccountHeadList(accountHeadList);
+        }catch (Exception ex){
+            logger.error(ex.getMessage(), ex);
+            logger.error(ex.toString(), ex);
+            accountHeadResponse.setSuccess(false);
+            accountHeadResponse.setError(ex.getMessage());
+        }
+        return  accountHeadResponse;
+    }
+
     private boolean checkDuplicate(AccountHead accountHead) {
         List<AccountHead> accountHeadList;
         if (accountHead.getId().equals("")) {
@@ -249,7 +298,4 @@ public class AccountHeadController {
             return false;
         }
     }
-
-
-
 }

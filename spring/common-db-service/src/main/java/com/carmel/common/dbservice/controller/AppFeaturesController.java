@@ -1,5 +1,7 @@
 package com.carmel.common.dbservice.controller;
 
+import com.carmel.common.dbservice.common.Search.SearchBuilder;
+import com.carmel.common.dbservice.common.Search.SearchRequest;
 import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.AppFeatures;
 import com.carmel.common.dbservice.model.DTO.AppFeatureTreeDTO;
@@ -22,6 +24,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.validation.Valid;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -42,6 +49,9 @@ public class AppFeaturesController {
 
     @Autowired
     UserInformation userInformation;
+
+    @Autowired
+    EntityManager entityManager;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public AppFeaturesResponse save(@Valid @RequestBody AppFeatures appFeatures) {
@@ -279,6 +289,46 @@ public class AppFeaturesController {
         }
         return appFeaturesResponse;
     }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public AppFeaturesResponse search(@RequestBody SearchRequest searchRequest) {
+        AppFeaturesResponse appFeaturesResponse = new AppFeaturesResponse();
+        try{
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<AppFeatures> criteriaQuery = criteriaBuilder.createQuery(AppFeatures.class);
+            Root<AppFeatures> root = criteriaQuery.from(AppFeatures.class);
+            criteriaQuery = SearchBuilder.buildSearch(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root,
+                    AppFeatures.class,
+                    searchRequest
+            );
+            long totalRecords = SearchBuilder.getTotalRecordCount(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root
+            );
+            TypedQuery<AppFeatures> typedQuery = entityManager.createQuery(criteriaQuery);
+            typedQuery.setFirstResult((searchRequest.getCurrentPage() - 1) * searchRequest.getPageSize());
+            typedQuery.setMaxResults(searchRequest.getPageSize());
+            List<AppFeatures> appFeaturesList = typedQuery.getResultList();
+            appFeaturesResponse.setCurrentRecords(appFeaturesList.size());
+            appFeaturesResponse.setTotalRecords(totalRecords);
+            appFeaturesResponse.setSuccess(true);
+            appFeaturesResponse.setError("");
+            appFeaturesResponse.setAppFeaturesList(appFeaturesList);
+        }catch (Exception ex){
+            logger.error(ex.getMessage(), ex);
+            logger.error(ex.toString(), ex);
+            appFeaturesResponse.setSuccess(false);
+            appFeaturesResponse.setError(ex.getMessage());
+        }
+        return  appFeaturesResponse;
+    }
+
 
     private boolean checkDuplicate(AppFeatures appFeatures) {
         List<AppFeatures> appFeaturesList;

@@ -1,6 +1,5 @@
 package com.carmel.common.dbservice.specifications;
 
-import com.carmel.common.dbservice.model.Album;
 import com.carmel.common.dbservice.model.ApplicationConstant;
 import org.springframework.data.jpa.domain.Specification;
 
