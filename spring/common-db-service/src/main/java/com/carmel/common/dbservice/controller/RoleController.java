@@ -1,5 +1,7 @@
 package com.carmel.common.dbservice.controller;
 
+import com.carmel.common.dbservice.common.Search.SearchBuilder;
+import com.carmel.common.dbservice.common.Search.SearchRequest;
 import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.Role;
 import com.carmel.common.dbservice.model.UserInfo;
@@ -20,6 +22,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
@@ -42,6 +49,9 @@ public class RoleController {
 
     @Autowired
     OrganizationService organizationService;
+
+    @Autowired
+    EntityManager entityManager;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public RoleResponse save(@Valid @RequestBody Role role) {
@@ -224,7 +234,7 @@ public class RoleController {
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("roleName"));
             Page<Role> page;
             if (searchText == null) {
-                page = roleService.findAllByClient(userInfo.getClient(),pageable);
+                page = roleService.findAllByClient(userInfo.getClient(), pageable);
             } else {
                 page = roleService.findAll(textInAllColumns(searchText, userInfo.getClient()), pageable);
             }
@@ -235,13 +245,52 @@ public class RoleController {
             logger.trace("Completed Successfully");
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
-            logger.error(ex.getMessage(), ex);
             rolesResponse.setSuccess(false);
             rolesResponse.setError(ex.getMessage());
         }
         logger.trace("Exiting");
         return rolesResponse;
     }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public RolesResponse search(@RequestBody SearchRequest searchRequest) {
+        RolesResponse rolesResponse = new RolesResponse();
+        try{
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<Role> criteriaQuery = criteriaBuilder.createQuery(Role.class);
+            Root<Role> root = criteriaQuery.from(Role.class);
+            criteriaQuery = SearchBuilder.buildSearch(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root,
+                    Role.class,
+                    searchRequest
+            );
+            long totalRecords = SearchBuilder.getTotalRecordCount(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root
+            );
+            TypedQuery<Role> typedQuery = entityManager.createQuery(criteriaQuery);
+            typedQuery.setFirstResult((searchRequest.getCurrentPage() - 1) * searchRequest.getPageSize());
+            typedQuery.setMaxResults(searchRequest.getPageSize());
+            List<Role> roleList = typedQuery.getResultList();
+            rolesResponse.setCurrentRecords(roleList.size());
+            rolesResponse.setTotalRecords(totalRecords);
+            rolesResponse.setSuccess(true);
+            rolesResponse.setError("");
+            rolesResponse.setRoleList(roleList);
+        }catch (Exception ex){
+            logger.error(ex.getMessage(), ex);
+            logger.error(ex.toString(), ex);
+            rolesResponse.setSuccess(false);
+            rolesResponse.setError(ex.getMessage());
+        }
+        return  rolesResponse;
+    }
+
 
     private boolean checkDuplicate(Role role) {
         List<Role> roleList;
