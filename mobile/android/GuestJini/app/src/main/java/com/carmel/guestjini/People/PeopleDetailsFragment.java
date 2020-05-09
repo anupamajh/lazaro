@@ -45,7 +45,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class PeopleDetailsFragment extends Fragment {
     ImageView backButton, favouriteUnselectedIcon;
     LinearLayout unlikeIconLinearLayout;
-    TextView addFafouriteText, profileName, genderName;
+    TextView addFafouriteText, profileName, genderName, mobileNo, emailId;
     private String profile_name, profile_gender;
     private ConstraintLayout scrollViewLayout, commonInterestsSubLayout;
 
@@ -70,7 +70,8 @@ public class PeopleDetailsFragment extends Fragment {
         genderName = rootView.findViewById(R.id.genderName);
         scrollViewLayout = rootView.findViewById(R.id.scrollViewLayout);
         commonInterestsSubLayout = rootView.findViewById(R.id.commonInterestsSubLayout);
-
+        mobileNo = rootView.findViewById(R.id.mobileNo);
+        emailId = rootView.findViewById(R.id.emailId);
         final Bundle bundle = this.getArguments();
         if (bundle != null) {
             personId = bundle.getString("personId");
@@ -141,16 +142,16 @@ public class PeopleDetailsFragment extends Fragment {
                     progressDialog.dismiss();
                     try {
                         PeopleResponse peopleResponse = response.body();
-                        if(peopleResponse.isSuccess()){
+                        if (peopleResponse.isSuccess()) {
                             String genderText = "Male";
-                            if(peopleResponse.getMyUserInfo().getGender() == 1){
+                            if (peopleResponse.getMyUserInfo().getGender() == 1) {
                                 genderText = "Male";
-                            }else if(peopleResponse.getMyUserInfo().getGender() == 2){
+                            } else if (peopleResponse.getMyUserInfo().getGender() == 2) {
                                 genderText = "Female";
                             }
                             profileName.setText(peopleResponse.getMyAddressBook().getDisplayName());
                             genderName.setText(genderText);
-                        }else{
+                        } else {
                             progressDialog.dismiss();
                             showDialog(false, "There was problem fetching person details! Please Try after sometime");
                         }
