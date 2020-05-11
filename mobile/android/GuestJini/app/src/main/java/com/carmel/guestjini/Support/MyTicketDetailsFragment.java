@@ -96,7 +96,7 @@ public class MyTicketDetailsFragment extends Fragment {
         ticketName = rootView.findViewById(R.id.ticketsName);
         ticketDateAndTime = rootView.findViewById(R.id.tickestsDateAndTime);
         ticketValue = rootView.findViewById(R.id.ticketsValue);
-        ticketDescription = rootView.findViewById(R.id.tickestsDescription);
+        ticketDescription = rootView.findViewById(R.id.ticketDescription);
         //foreground = rootView.findViewById(R.id.foreground);
         ratingLayout = rootView.findViewById(R.id.ratingLayout);
         star1 = rootView.findViewById(R.id.star1);

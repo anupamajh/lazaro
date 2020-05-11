@@ -83,6 +83,7 @@
                     android:textSize="12sp"></TextView>
 
                 <TextView
+                    android:id="@+id/txtNarration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/dateAndTime1"

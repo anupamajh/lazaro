@@ -61,7 +61,7 @@ public class PeopleLandingFragment extends Fragment implements PeopleAdapter.OnI
     private TextView showingYourFavourites, searchResultCount;
     private ConstraintLayout searchLayout, noResultFoundLayout, recyclerViewLayout;
     private PeopleAdapter peopleAdapter;
-
+    private PeopleResponse peopleResponse;
     AlertDialog progressDialog;
 
     @Override
@@ -90,65 +90,6 @@ public class PeopleLandingFragment extends Fragment implements PeopleAdapter.OnI
         peopleAdapter = new PeopleAdapter(personArrayList, this);
         peopleRecylerView.setAdapter(peopleAdapter);
         loadPeopleList();
-//        PeopleModel peopleModel=new PeopleModel();
-//        peopleModel.setAddPeopleName("John Doe");
-//        peopleModel.setAddPeopleGender("Male");
-//        peopleModel.setCompatibilityCount("12/12");
-//        peopleModel.setNotificationIndicator(R.drawable.red_small_circle);
-//        peopleModel.setProfilePicture(R.drawable.profile_image);
-//        peopleModelArrayList.add(peopleModel);
-//
-//        peopleModel=new PeopleModel();
-//        peopleModel.setAddPeopleName("Peter Law");
-//        peopleModel.setAddPeopleGender("Male");
-//        peopleModel.setCompatibilityCount("08/12");
-//        peopleModel.setProfilePicture(R.drawable.profile_image);
-//        peopleModelArrayList.add(peopleModel);
-//
-//        peopleModel=new PeopleModel();
-//        peopleModel.setAddPeopleName("Luke Ray");
-//        peopleModel.setCompatibilityCount("05/12");
-//        peopleModel.setProfilePicture(R.drawable.profile_image);
-//        peopleModelArrayList.add(peopleModel);
-//
-//        peopleModel=new PeopleModel();
-//        peopleModel.setAddPeopleName("Daisy Lake");
-//        peopleModel.setAddPeopleGender("Female");
-//        peopleModel.setCompatibilityCount("02/12");
-//        peopleModel.setProfilePicture(R.drawable.profile_image);
-//        peopleModelArrayList.add(peopleModel);
-//
-//        peopleModel=new PeopleModel();
-//        peopleModel.setAddPeopleName("Jeret Quartz");
-//        peopleModel.setAddPeopleGender("Female");
-//        peopleModel.setCompatibilityCount("01/12");
-//        peopleModel.setProfilePicture(R.drawable.profile_image);
-//        peopleModelArrayList.add(peopleModel);
-//
-//        peopleModel=new PeopleModel();
-//        peopleModel.setAddPeopleName("Dan Quartz");
-//        peopleModel.setAddPeopleGender("Male");
-//        peopleModel.setCompatibilityCount("00/12");
-//        peopleModel.setProfilePicture(R.drawable.profile_image);
-//        peopleModelArrayList.add(peopleModel);
-
-
-//        search.addTextChangedListener(new TextWatcher() {
-//            private boolean flag=true;
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                filter(s.toString());
-//
-//            }
-//        });
 
         searchLayout.setOnClickListener(new View.OnClickListener() {
             private boolean flag = true;
@@ -283,7 +224,7 @@ public class PeopleLandingFragment extends Fragment implements PeopleAdapter.OnI
         fragmentTransaction.commit();
 
         Bundle bundle = new Bundle();
-        bundle.putString("personId",personArrayList.get(position).getAddressBook().getUserId());
+        bundle.putString("personId", personArrayList.get(position).getAddressBook().getUserId());
         peopleDetailsFragment.setArguments(bundle);
     }
 
@@ -310,11 +251,11 @@ public class PeopleLandingFragment extends Fragment implements PeopleAdapter.OnI
             public void onResponse(Call<PeopleResponse> call, Response<PeopleResponse> response) {
                 progressDialog.dismiss();
                 try {
-                    PeopleResponse peopleResponse = response.body();
+                    peopleResponse = response.body();
                     if (peopleResponse.isSuccess()) {
                         personArrayList = new ArrayList<>();
                         personArrayList.addAll(peopleResponse.getPersonList());
-                        peopleAdapter.filterList(personArrayList);
+                        peopleAdapter.filterList(personArrayList,peopleResponse);
                     } else {
                         showDialog(false, "There was a problem fetching people list! Please try after sometime");
                     }

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -45,7 +48,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class PeopleDetailsFragment extends Fragment {
     ImageView backButton, favouriteUnselectedIcon;
     LinearLayout unlikeIconLinearLayout;
-    TextView addFafouriteText, profileName, genderName, mobileNo, emailId;
+    TextView addFafouriteText, profileName, genderName, mobileNo, emailId, commonInterestTitle;
     private String profile_name, profile_gender;
     private ConstraintLayout scrollViewLayout, commonInterestsSubLayout;
 
@@ -70,6 +73,7 @@ public class PeopleDetailsFragment extends Fragment {
         genderName = rootView.findViewById(R.id.genderName);
         scrollViewLayout = rootView.findViewById(R.id.scrollViewLayout);
         commonInterestsSubLayout = rootView.findViewById(R.id.commonInterestsSubLayout);
+        commonInterestTitle = rootView.findViewById(R.id.commonInterestsTitle);
         mobileNo = rootView.findViewById(R.id.mobileNo);
         emailId = rootView.findViewById(R.id.emailId);
         final Bundle bundle = this.getArguments();
@@ -82,7 +86,7 @@ public class PeopleDetailsFragment extends Fragment {
         scrollViewLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                commonInterestsSubLayout.setVisibility(View.GONE);
+               // commonInterestsSubLayout.setVisibility(View.GONE);
             }
         });
         unlikeIconLinearLayout.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +110,7 @@ public class PeopleDetailsFragment extends Fragment {
             PeopleLandingFragment peopleLandingFragment = new PeopleLandingFragment();
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.peoplePlaceHolder, peopleLandingFragment);
+            fragmentTransaction.replace(R.id.CommunityPlaceHolder, peopleLandingFragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
 
@@ -151,6 +155,13 @@ public class PeopleDetailsFragment extends Fragment {
                             }
                             profileName.setText(peopleResponse.getMyAddressBook().getDisplayName());
                             genderName.setText(genderText);
+                            mobileNo.setText(peopleResponse.getMyAddressBook().getPhone1());
+                            emailId.setText(peopleResponse.getMyAddressBook().getEmail1());
+                            peopleResponse.getMyInterestMap().forEach(interestMap -> {
+                                Integer interestTitleId = addInterestHeading("Hello Pete", null);
+                            });
+
+
                         } else {
                             progressDialog.dismiss();
                             showDialog(false, "There was problem fetching person details! Please Try after sometime");
@@ -205,5 +216,28 @@ public class PeopleDetailsFragment extends Fragment {
             }
         });
         dialog.show();
+    }
+
+    private Integer addInterestHeading(String interestCategoryName, Integer interestTitleId) {
+        //Typeface typeface = getResources().getFont(R.font.roboto_bold);
+        //TextView previousView = getLa
+        TextView interestHeading = new TextView(getContext());
+        ConstraintSet constraintSet = new ConstraintSet();
+        ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+        layoutParams.setMargins(24, 38, 0, 0);
+        interestHeading.setTextColor(ContextCompat.getColor(getContext(), R.color.colorSummerSky));
+        interestHeading.setTextSize(12);
+        interestHeading.setText(interestCategoryName);
+        interestHeading.setId(View.generateViewId());
+        interestHeading.setVisibility(View.VISIBLE);
+        //interestHeading.setTypeface(typeface);
+        commonInterestsSubLayout.addView(interestHeading, layoutParams);
+        constraintSet.clone(commonInterestsSubLayout);
+        constraintSet.connect(interestHeading.getId(),ConstraintSet.START, commonInterestTitle.getId(),ConstraintSet.START);
+        constraintSet.connect(interestHeading.getId(),ConstraintSet.TOP, commonInterestTitle.getId(),ConstraintSet.BOTTOM);
+        constraintSet.applyTo(commonInterestsSubLayout);
+        return  interestHeading.getId();
     }
 }

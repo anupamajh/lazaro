@@ -98,7 +98,7 @@ public class AccountsDetailsFragment extends Fragment implements RentInvoiceAdap
             }
         });
 
-
+        AccountsTitle = "RENT INVOICE";
         final Bundle bundle = getArguments();
         if (bundle != null) {
             AccountsTitle = bundle.getString("AccountsTitle");

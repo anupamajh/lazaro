@@ -244,6 +244,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/outdoorInterestsTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -257,6 +258,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/commonInterestsTitle" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/cyclingText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -270,6 +272,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/outdoorInterestsTitle" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/cyclingDivider"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -281,6 +284,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/cyclingText" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/HikingText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -294,6 +298,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/cyclingDivider" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/hobbiesTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -307,6 +312,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/HikingText" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/cookingText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -320,6 +326,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/hobbiesTitle" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/cookingDivider"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -331,6 +338,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/cookingText" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/gardenigText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
