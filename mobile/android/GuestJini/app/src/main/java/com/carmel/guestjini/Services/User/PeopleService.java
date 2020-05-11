@@ -21,4 +21,9 @@ public interface PeopleService {
             @Body Map<String, String> postData
     );
 
+    @POST("/common/people/add-remove-favourite")
+    Call<PeopleResponse> addFavourite(
+            @Body Map<String, String> postData
+    );
+
 }

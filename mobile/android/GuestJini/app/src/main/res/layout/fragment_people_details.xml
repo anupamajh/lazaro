@@ -383,6 +383,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/techTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -396,6 +397,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/otherInterests" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/artificialText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -409,6 +411,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/techTitle" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/roboticsDivider"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -420,6 +423,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/artificialText" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/roboticsTextPeopleDetails"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

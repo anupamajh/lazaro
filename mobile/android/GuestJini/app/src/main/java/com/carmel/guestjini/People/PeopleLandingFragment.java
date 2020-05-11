@@ -87,7 +87,7 @@ public class PeopleLandingFragment extends Fragment implements PeopleAdapter.OnI
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         peopleRecylerView.setLayoutManager(linearLayoutManager);
         peopleRecylerView.setHasFixedSize(true);
-        peopleAdapter = new PeopleAdapter(personArrayList, this);
+        peopleAdapter = new PeopleAdapter(personArrayList, this, getContext());
         peopleRecylerView.setAdapter(peopleAdapter);
         loadPeopleList();
 

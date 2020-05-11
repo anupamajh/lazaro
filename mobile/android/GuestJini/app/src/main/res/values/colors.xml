@@ -58,5 +58,9 @@
     <color name="colorPaleCyan">#BACBCE</color>
     <color name="colorIvory">#F5F5F4</color>
 
+    <color name="otherInterestTitle">#747474</color>
+
+    <color name="otherInterestName">#909090</color>
+
 
 </resources>
