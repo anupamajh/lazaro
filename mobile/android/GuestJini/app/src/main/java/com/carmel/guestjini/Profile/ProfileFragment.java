@@ -16,7 +16,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -24,7 +23,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.carmel.guestjini.CommunityActivity;
-import com.carmel.guestjini.MainActivity;
 import com.carmel.guestjini.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

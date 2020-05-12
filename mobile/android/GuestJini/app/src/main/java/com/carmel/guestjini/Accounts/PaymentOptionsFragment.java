@@ -2,33 +2,18 @@ package com.carmel.guestjini.Accounts;
 
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.WebViewClient;
-import android.widget.ImageView;
 
 import com.carmel.guestjini.R;
-
-import android.webkit.WebView;
-
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import Adapter.PaymentOptionsAdapter;
-import Model.PaymentOptionsModel;
-import kotlin.text.Charsets;
 
 public class PaymentOptionsFragment extends Fragment {
     private ImageView backArrow;

@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +14,6 @@ import com.carmel.guestjini.R;
 
 import java.util.ArrayList;
 
-import Model.InvitingMembersModel;
 import Model.JoinedMemberModel;
 
 public class JoinedMembersAdapter extends RecyclerView.Adapter<JoinedMembersAdapter.ViewHolder> {

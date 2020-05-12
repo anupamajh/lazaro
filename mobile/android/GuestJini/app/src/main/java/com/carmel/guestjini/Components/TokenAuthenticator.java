@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.carmel.guestjini.Common.EndPoints;
 import com.carmel.guestjini.Models.Authentication.AccessToken;
-import com.carmel.guestjini.Services.Authentication.AuthService;
 import com.carmel.guestjini.Services.Authentication.AuthServiceHolder;
 
 import java.io.IOException;

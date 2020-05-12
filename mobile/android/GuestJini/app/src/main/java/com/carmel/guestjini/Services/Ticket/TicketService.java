@@ -1,7 +1,6 @@
 package com.carmel.guestjini.Services.Ticket;
 
 import com.carmel.guestjini.Common.EndPoints;
-import com.carmel.guestjini.Models.Ticket.Ticket;
 import com.carmel.guestjini.Models.Ticket.TicketRequest;
 import com.carmel.guestjini.Models.Ticket.TicketResponse;
 
@@ -9,7 +8,6 @@ import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface TicketService {

@@ -14,8 +14,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.carmel.guestjini.CommunityGroups.CommunityGroupsFragment;
-import com.carmel.guestjini.CommunityGroups.InvitedGroupViewFragment;
 import com.carmel.guestjini.R;
 
 import java.util.ArrayList;

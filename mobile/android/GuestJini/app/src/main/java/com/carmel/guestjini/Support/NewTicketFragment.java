@@ -9,11 +9,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +16,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.carmel.guestjini.Common.EndPoints;
 import com.carmel.guestjini.Components.OkHttpClientInstance;
-import com.carmel.guestjini.Components.TokenAuthenticator;
 import com.carmel.guestjini.Models.Ticket.Ticket;
 import com.carmel.guestjini.Models.Ticket.TicketRequest;
 import com.carmel.guestjini.Models.Ticket.TicketResponse;
@@ -34,7 +32,6 @@ import com.carmel.guestjini.Services.Ticket.TicketService;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 

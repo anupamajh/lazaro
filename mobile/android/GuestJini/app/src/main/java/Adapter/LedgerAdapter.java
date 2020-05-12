@@ -13,7 +13,6 @@ import com.carmel.guestjini.R;
 
 import java.util.ArrayList;
 
-
 import Model.LedgerModel;
 
 public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.ViewHolder> {

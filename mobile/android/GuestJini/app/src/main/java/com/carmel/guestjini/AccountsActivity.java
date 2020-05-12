@@ -1,16 +1,15 @@
 package com.carmel.guestjini;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-
 import com.carmel.guestjini.Accounts.AccountsFragment;
-import com.carmel.guestjini.Groups.GroupsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AccountsActivity extends AppCompatActivity {

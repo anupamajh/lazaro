@@ -1,7 +1,6 @@
 package Adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,19 +16,12 @@ import com.carmel.guestjini.Common.DateUtil;
 import com.carmel.guestjini.Models.Ticket.Ticket;
 import com.carmel.guestjini.R;
 
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import Model.MyTicketsModel;
-
-import static Model.MyTicketsModel.ONE_TYPE;
-import static Model.MyTicketsModel.TWO_TYPE;
 
 public class TicketAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private ArrayList<Ticket> tickets;

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,9 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.carmel.guestjini.CommunityActivity;
 import com.carmel.guestjini.Delegates.CommunityMainNavigationListener;
-import com.carmel.guestjini.GroupsActivity;
-import com.carmel.guestjini.PeopleActivity;
-import com.carmel.guestjini.ProfileActivity;
 import com.carmel.guestjini.R;
 
 import java.util.ArrayList;
@@ -82,7 +78,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
                     //intent =  new Intent(context, PeopleActivity.class);
                     break;
                 case 2:
-                    intent =  new Intent(context, GroupsActivity.class);
+                    communityMainNavigationListener.onClickNavigation(3);
                     break;
                 default:
                     intent =  new Intent(context, CommunityActivity.class);

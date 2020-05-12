@@ -2,12 +2,8 @@ package com.carmel.guestjini.Services.Authentication;
 
 import com.carmel.guestjini.Common.EndPoints;
 import com.carmel.guestjini.Models.Authentication.AccessToken;
-import com.carmel.guestjini.Models.Ticket.Ticket;
-import com.carmel.guestjini.Models.Ticket.TicketResponse;
 
 import retrofit2.Call;
-import retrofit2.Response;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;

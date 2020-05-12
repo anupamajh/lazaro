@@ -9,8 +9,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.carmel.guestjini.R;
+
 import java.util.ArrayList;
+
 import Model.BillsModel;
 
 public class BillsAdapter extends RecyclerView.Adapter<BillsAdapter.ViewHolder> {

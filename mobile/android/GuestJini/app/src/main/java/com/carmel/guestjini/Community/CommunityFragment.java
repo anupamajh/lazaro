@@ -2,6 +2,9 @@ package com.carmel.guestjini.Community;
 
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -9,11 +12,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.carmel.guestjini.Delegates.CommunityMainNavigationListener;
+import com.carmel.guestjini.Groups.GroupsFragment;
 import com.carmel.guestjini.People.PeopleLandingFragment;
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Settings.MyProfileFragment;
@@ -54,8 +54,13 @@ public class CommunityFragment extends Fragment implements CommunityMainNavigati
             case 1: { //Load Profile
                 loadProfileFragment();
             }
+            break;
             case 2: { //Load People
                 loadPeopleFragment();
+            }
+            break;
+            case 3: { //Load Groups
+                loadGroupFragment();
             }
             break;
         }
@@ -79,6 +84,15 @@ public class CommunityFragment extends Fragment implements CommunityMainNavigati
         FragmentManager fragmentManager=getFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.CommunityPlaceHolder,peopleLandingFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    private void loadGroupFragment() {
+        GroupsFragment groupsFragment=new GroupsFragment();
+        FragmentManager fragmentManager=getFragmentManager();
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.CommunityPlaceHolder,groupsFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }

@@ -4,8 +4,6 @@ import com.carmel.guestjini.Common.EndPoints;
 import com.carmel.guestjini.Models.Ticket.KBResponse;
 import com.carmel.guestjini.Models.Ticket.KBReview;
 import com.carmel.guestjini.Models.Ticket.KBReviewResponse;
-import com.carmel.guestjini.Models.Ticket.TicketRequest;
-import com.carmel.guestjini.Models.Ticket.TicketResponse;
 
 import java.util.Map;
 

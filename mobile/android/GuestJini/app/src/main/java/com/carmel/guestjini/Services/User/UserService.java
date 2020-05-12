@@ -1,7 +1,6 @@
 package com.carmel.guestjini.Services.User;
 
 import com.carmel.guestjini.Common.EndPoints;
-import com.carmel.guestjini.ForgotPassword;
 import com.carmel.guestjini.Models.GenericResponse;
 import com.carmel.guestjini.Models.User.AppAccessRequestResponse;
 import com.carmel.guestjini.Models.User.ForgotPasswordResponse;
@@ -9,7 +8,6 @@ import com.carmel.guestjini.Models.User.UserInfo;
 
 import java.util.Map;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;

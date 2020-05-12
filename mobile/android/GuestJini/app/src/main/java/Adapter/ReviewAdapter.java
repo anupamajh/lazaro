@@ -16,8 +16,6 @@ import com.carmel.guestjini.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.ReviewModel;
-
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder> {
     private Context context;
     ArrayList<KBReview> reviewModels;

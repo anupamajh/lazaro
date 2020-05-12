@@ -14,7 +14,6 @@ import com.carmel.guestjini.R;
 import java.util.ArrayList;
 
 import Model.GroupChatModel;
-import Model.MyTicketsModel;
 
 import static Model.MyTicketsModel.ONE_TYPE;
 import static Model.MyTicketsModel.TWO_TYPE;

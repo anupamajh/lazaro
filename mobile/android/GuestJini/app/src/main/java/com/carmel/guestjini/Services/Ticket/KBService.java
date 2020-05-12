@@ -2,7 +2,6 @@ package com.carmel.guestjini.Services.Ticket;
 
 import com.carmel.guestjini.Common.EndPoints;
 import com.carmel.guestjini.Models.Ticket.KBResponse;
-import com.carmel.guestjini.Models.Ticket.TicketResponse;
 
 import java.util.Map;
 

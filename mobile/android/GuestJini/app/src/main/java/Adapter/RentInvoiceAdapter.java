@@ -16,8 +16,6 @@ import com.carmel.guestjini.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.RentInvoiceModel;
-
 public class RentInvoiceAdapter extends RecyclerView.Adapter<RentInvoiceAdapter.ViewHolder> {
 
     private Context context;

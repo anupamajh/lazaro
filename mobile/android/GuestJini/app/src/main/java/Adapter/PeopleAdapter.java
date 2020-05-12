@@ -17,7 +17,6 @@ import com.carmel.guestjini.R;
 
 import java.util.ArrayList;
 
-import Model.PeopleModel;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.ViewHolder> {

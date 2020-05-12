@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.carmel.guestjini.CommunityActivity;
 import com.carmel.guestjini.CommunityGroupsActivity;
 import com.carmel.guestjini.InterestGroupsActivity;
-
 import com.carmel.guestjini.MyGroupsActivity;
 import com.carmel.guestjini.R;
 

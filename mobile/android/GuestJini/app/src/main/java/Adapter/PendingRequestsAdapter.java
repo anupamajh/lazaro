@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.carmel.guestjini.R;
 
 import java.util.ArrayList;
-import java.util.PriorityQueue;
 
 import Model.InvitingMembersModel;
 

@@ -10,34 +10,44 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.carmel.guestjini.Models.Group.Group;
 import com.carmel.guestjini.R;
 
 import java.util.ArrayList;
 
 import Model.CommunityGroupsModel;
 
-import static Model.CommunityGroupsModel.InvitedUnreadUserCell;
 import static Model.CommunityGroupsModel.JoinedGroupsCell;
 import static Model.CommunityGroupsModel.RemovedCell;
 
 
 public class MyGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
-    private ArrayList<CommunityGroupsModel> myGroupsList;
+    private ArrayList<Group> groupArrayList;
     private OnItemClickListener onItemClickListener;
-    public MyGroupsAdapter(Context context, ArrayList<CommunityGroupsModel> myGroupsArrayList,OnItemClickListener onItemClickListener) {
+
+    public MyGroupsAdapter(Context context, ArrayList<Group> groupArrayList,OnItemClickListener onItemClickListener) {
         this.context=context;
-        this.myGroupsList=myGroupsArrayList;
+        this.groupArrayList=groupArrayList;
         this.onItemClickListener=onItemClickListener;
     }
+
     @Override
     public int getItemViewType(int position){
-        CommunityGroupsModel myGroupsModel=myGroupsList.get(position);
-        if(myGroupsModel!=null){
-            return myGroupsModel.getViewType();
-        }
-        return 0;
+        Group group=groupArrayList.get(position);
+        return getViewType(group);
     }
+
+
+    private int getViewType(Group group) {
+        int viewType = JoinedGroupsCell;
+        if (group.getIsSubscribed() == 1) {
+            viewType = JoinedGroupsCell;
+        }
+        return viewType;
+    }
+
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -55,29 +65,34 @@ public class MyGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        CommunityGroupsModel myGroupsModel=myGroupsList.get(position);
-        switch (myGroupsModel.getViewType()) {
-
+        Group group=groupArrayList.get(position);
+        int viewType = getViewType(group);
+        switch (viewType) {
             case JoinedGroupsCell:
-                ((MyGroupsAdapter.JoinedViewHolder) holder).communityGroupTitle.setText(myGroupsModel.getCommunityGroupTitle());
-                ((MyGroupsAdapter.JoinedViewHolder) holder).communityGroupAdmin.setText(myGroupsModel.getCommunityGroupAdmin());
-                ((MyGroupsAdapter.JoinedViewHolder) holder).communityGroupDescription.setText(myGroupsModel.getCommunityGroupDescription());
-                ((MyGroupsAdapter.JoinedViewHolder) holder).communityGroupCreationDateAndTime.setText(myGroupsModel.getCommunityGroupCreationDateAndTime());
-                ((MyGroupsAdapter.JoinedViewHolder) holder).adminProfileIcon.setImageResource(myGroupsModel.getAdminProfileIcon());
+                ((MyGroupsAdapter.JoinedViewHolder) holder).communityGroupTitle.setText(group.getName());
+                ((MyGroupsAdapter.JoinedViewHolder) holder).communityGroupAdmin.setVisibility(View.GONE);
+                ((MyGroupsAdapter.JoinedViewHolder) holder).communityGroupDescription.setText(group.getDescription());
+                ((MyGroupsAdapter.JoinedViewHolder) holder).communityGroupCreationDateAndTime.setText(group.getCreationTime());
+                ((MyGroupsAdapter.JoinedViewHolder) holder).adminProfileIcon.setImageResource(R.drawable.profile_image);
                 break;
             case RemovedCell:
-                ((MyGroupsAdapter.GroupContainerHolder) holder).communityGroupTitle.setText(myGroupsModel.getCommunityGroupTitle());
-                ((MyGroupsAdapter.GroupContainerHolder) holder).communityGroupAdmin.setText(myGroupsModel.getCommunityGroupAdmin());
-                ((MyGroupsAdapter.GroupContainerHolder) holder).communityGroupDescription.setText(myGroupsModel.getCommunityGroupDescription());
-                ((MyGroupsAdapter.GroupContainerHolder) holder).communityGroupCreationDateAndTime.setText(myGroupsModel.getCommunityGroupCreationDateAndTime());
-                ((MyGroupsAdapter.GroupContainerHolder) holder).adminProfileIcon.setImageResource(myGroupsModel.getAdminProfileIcon());
+                ((MyGroupsAdapter.GroupContainerHolder) holder).communityGroupTitle.setText(group.getName());
+                ((MyGroupsAdapter.GroupContainerHolder) holder).communityGroupAdmin.setVisibility(View.GONE);
+                ((MyGroupsAdapter.GroupContainerHolder) holder).communityGroupDescription.setText(group.getDescription());
+                ((MyGroupsAdapter.GroupContainerHolder) holder).communityGroupCreationDateAndTime.setText(group.getCreationTime());
+                ((MyGroupsAdapter.GroupContainerHolder) holder).adminProfileIcon.setImageResource(R.drawable.profile_image);
                 break;
         }
     }
 
     @Override
     public int getItemCount() {
-        return myGroupsList.size();
+        return groupArrayList.size();
+    }
+
+    public void update(ArrayList<Group> groupArrayList) {
+        this.groupArrayList = groupArrayList;
+        notifyDataSetChanged();
     }
 
     class JoinedViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
@@ -120,8 +135,5 @@ public class MyGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public interface OnItemClickListener{
         void onClikJoinedGroup(int position);
         void onClikRemovedGroup(int position);
-
-
-
     }
 }

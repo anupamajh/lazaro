@@ -1,7 +1,5 @@
 package Model;
 
-import android.graphics.drawable.Drawable;
-
 public class TicketsModel {
     String ticketsName;
     String ticketsAuthorName;

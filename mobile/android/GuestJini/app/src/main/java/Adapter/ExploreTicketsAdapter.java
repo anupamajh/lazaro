@@ -18,8 +18,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.TicketsModel;
-
 
 public class ExploreTicketsAdapter extends RecyclerView.Adapter<ExploreTicketsAdapter.ViewHolder> {
     private Context context;
