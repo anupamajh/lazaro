@@ -17,6 +17,10 @@ public class AddressBook {
     private String geoLat;
     private String geoLon;
     private String creationTime;
+    private int isInvited;
+    private int isMe;
+    private int hasAcceptedInvitation;
+
 
     public String getId() {
         return id;
@@ -144,5 +148,29 @@ public class AddressBook {
 
     public void setCreationTime(String creationTime) {
         this.creationTime = creationTime;
+    }
+
+    public int getIsInvited() {
+        return isInvited;
+    }
+
+    public void setIsInvited(int isInvited) {
+        this.isInvited = isInvited;
+    }
+
+    public int getIsMe() {
+        return isMe;
+    }
+
+    public void setIsMe(int isMe) {
+        this.isMe = isMe;
+    }
+
+    public int getHasAcceptedInvitation() {
+        return hasAcceptedInvitation;
+    }
+
+    public void setHasAcceptedInvitation(int hasAcceptedInvitation) {
+        this.hasAcceptedInvitation = hasAcceptedInvitation;
     }
 }

@@ -118,6 +118,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/myGroupCreationDate" />
 
                 <Button
+                    android:visibility="gone"
                     android:id="@+id/deleteButton"
                     android:layout_width="75dp"
                     android:layout_height="38dp"
@@ -137,6 +138,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/conversation"
                 android:layout_width="224dp"
                 android:layout_height="58dp"
@@ -178,13 +180,14 @@
             </RelativeLayout>
 
             <com.google.android.material.card.MaterialCardView
+
                 android:id="@+id/requestCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginEnd="32dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:cardBackgroundColor="@color/colorWhisper1"
                 app:cardCornerRadius="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -301,6 +304,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/emptyLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -328,6 +332,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/inviteLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -388,12 +393,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/inviteLayout">
 
                 <LinearLayout
+
                     android:id="@+id/invitationCountLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -402,7 +408,7 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
                     android:orientation="horizontal"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -434,6 +440,7 @@
                 </LinearLayout>
 
                 <RelativeLayout
+                    android:visibility="gone"
                     android:id="@+id/joinedMainLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -497,7 +504,7 @@
                         android:layout_marginStart="1dp"
                         android:layout_marginTop="0dp"
                         android:layout_marginEnd="1dp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent" />
                 </RelativeLayout>
 
@@ -538,7 +545,7 @@
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="13dp"
                             android:letterSpacing="0.1"
-                            android:text="@string/count_of_pending_requests"
+                            android:text="Members"
                             android:textColor="@color/colorDimGray"
                             android:textSize="10sp"
                             app:fontFamily="@font/roboto_bold" />
@@ -566,7 +573,7 @@
                         android:layout_marginStart="1dp"
                         android:layout_marginTop="0dp"
                         android:layout_marginEnd="1dp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent" />
                 </RelativeLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

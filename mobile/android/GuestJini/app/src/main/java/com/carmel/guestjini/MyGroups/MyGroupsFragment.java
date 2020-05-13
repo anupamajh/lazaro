@@ -50,53 +50,58 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MyGroupsFragment extends Fragment implements MyGroupsAdapter.OnItemClickListener{
-    private  ImageView createIcon,backArrow;
-    private TextView noCreatedGroupText,later;
-    private Button inviteButton,createButton;
+public class MyGroupsFragment extends Fragment implements MyGroupsAdapter.OnItemClickListener {
+    private ImageView createIcon, backArrow;
+    private TextView noCreatedGroupText, later;
+    private Button inviteButton, createButton;
     private RecyclerView myGroupsRecyclerView;
-    private ArrayList<Group> groupArrayList=new ArrayList<>();
+    private ArrayList<Group> groupArrayList = new ArrayList<>();
     private ConstraintLayout newGroupMainLayout;
     private RelativeLayout inviteAndLaterLayout;
-    String GroupName1,GroupDescription1;
-    private EditText groupNameEdit,groupDescrptionEdit;
+    String GroupName1, GroupDescription1;
+    private EditText groupNameEdit, groupDescrptionEdit;
 
     MyGroupsAdapter myGroupsAdapter;
     AlertDialog progressDialog;
+
+    private ConstraintLayout myGroupsListLayout;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView= inflater.inflate(R.layout.fragment_my_groups, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_my_groups, container, false);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setCancelable(false); // if you want user to wait for some process to finish,
         builder.setView(R.layout.layout_loading_dialog);
         progressDialog = builder.create();
-        createIcon=rootView.findViewById(R.id.createIcon);
-        inviteButton=rootView.findViewById(R.id.inviteButton);
-        myGroupsRecyclerView=rootView.findViewById(R.id.myGroupsRecyclerView);
-        backArrow=rootView.findViewById(R.id.backArrow);
-        createButton=rootView.findViewById(R.id.createButton);
-        newGroupMainLayout=rootView.findViewById(R.id.newGroupMainLayout);
-        inviteAndLaterLayout=rootView.findViewById(R.id.inviteAndLaterLayout);
-        noCreatedGroupText=rootView.findViewById(R.id.noCreatedGroupText);
-        groupDescrptionEdit=rootView.findViewById(R.id.groupDescrptionEdit);
-        groupNameEdit=rootView.findViewById(R.id.groupNameEdit);
-        later=rootView.findViewById(R.id.later);
+        createIcon = rootView.findViewById(R.id.createIcon);
+        inviteButton = rootView.findViewById(R.id.inviteButton);
+        myGroupsRecyclerView = rootView.findViewById(R.id.myGroupsRecyclerView);
+        myGroupsListLayout = rootView.findViewById(R.id.myGroupsListLayout);
+        backArrow = rootView.findViewById(R.id.backArrow);
+        createButton = rootView.findViewById(R.id.createButton);
+        newGroupMainLayout = rootView.findViewById(R.id.newGroupMainLayout);
+        inviteAndLaterLayout = rootView.findViewById(R.id.inviteAndLaterLayout);
+        noCreatedGroupText = rootView.findViewById(R.id.noCreatedGroupText);
+        groupDescrptionEdit = rootView.findViewById(R.id.groupDescrptionEdit);
+        groupNameEdit = rootView.findViewById(R.id.groupNameEdit);
+        later = rootView.findViewById(R.id.later);
+        myGroupsListLayout.setVisibility(View.VISIBLE);
+        ;
+        newGroupMainLayout.setVisibility(View.GONE);
 
-
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         myGroupsRecyclerView.setLayoutManager(linearLayoutManager);
         myGroupsRecyclerView.setHasFixedSize(true);
-        myGroupsAdapter=new MyGroupsAdapter(getContext(),groupArrayList,this);
+        myGroupsAdapter = new MyGroupsAdapter(getContext(), groupArrayList, this);
         myGroupsRecyclerView.setAdapter(myGroupsAdapter);
 
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(), GroupsActivity.class);
+                Intent intent = new Intent(getContext(), GroupsActivity.class);
                 startActivity(intent);
             }
         });
@@ -108,6 +113,7 @@ public class MyGroupsFragment extends Fragment implements MyGroupsAdapter.OnItem
                 noCreatedGroupText.setVisibility(View.GONE);
                 createIcon.setVisibility(View.GONE);
                 inviteAndLaterLayout.setVisibility(View.GONE);
+                myGroupsListLayout.setVisibility(View.GONE);
 
 //                NewGroupFragment newGroupFragment=new NewGroupFragment();
 //                FragmentManager fragmentManager=getFragmentManager();
@@ -121,51 +127,16 @@ public class MyGroupsFragment extends Fragment implements MyGroupsAdapter.OnItem
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                GroupName1=groupNameEdit.getText().toString();
-                GroupDescription1=groupDescrptionEdit.getText().toString();
-                final Dialog dialog = new Dialog(getContext());
-                dialog.setContentView(R.layout.alert_dailogbox);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-                TextView alertDailogTitle = (TextView) dialog.findViewById(R.id.alertDailogTitle);
-                alertDailogTitle.setText(getText(R.string.success));
-
-                TextView alertDailogMessage = (TextView) dialog.findViewById(R.id.alertDailogDescription);
-                alertDailogMessage.setText(getText(R.string.feedback_success));
-
-                FloatingActionButton doneButton = (FloatingActionButton) dialog.findViewById(R.id.done_button);
-                doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
-                        .parseColor("#32BDD2")));
-                doneButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                        newGroupMainLayout.setVisibility(View.GONE);
-                        noCreatedGroupText.setVisibility(View.VISIBLE);
-                        createIcon.setVisibility(View.VISIBLE);
-                        inviteAndLaterLayout.setVisibility(View.VISIBLE);
-                        noCreatedGroupText.setText(null);
-                        noCreatedGroupText.setText(getText(R.string.no_group_invited));
-//                        MyGroupsFragment myGroupsFragment=new MyGroupsFragment();
-//                        FragmentManager fragmentManager=getFragmentManager();
-//                        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-//                        fragmentTransaction.replace(R.id.myGroupsPlaceHolder,myGroupsFragment);
-//                        fragmentTransaction.addToBackStack(null);
-//                        fragmentTransaction.commit();
-                    }
-                });
-
-                dialog.show();
+                createMyGroup();
             }
         });
         inviteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InvitingMembersFragment invitingMembersFragment=new InvitingMembersFragment();
-                FragmentManager fragmentManager=getFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.myGroupsPlaceHolder,invitingMembersFragment);
+                InvitingMembersFragment invitingMembersFragment = new InvitingMembersFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.myGroupsPlaceHolder, invitingMembersFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
@@ -173,14 +144,14 @@ public class MyGroupsFragment extends Fragment implements MyGroupsAdapter.OnItem
         later.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyGroupsDetailsFragment myGroupsDetailsFragment=new MyGroupsDetailsFragment();
-                FragmentManager fragmentManager=getFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.myGroupsPlaceHolder,myGroupsDetailsFragment);
+                MyGroupsDetailsFragment myGroupsDetailsFragment = new MyGroupsDetailsFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.myGroupsPlaceHolder, myGroupsDetailsFragment);
                 fragmentTransaction.addToBackStack(null);
-                Bundle bundle=new Bundle();
-                bundle.putString("GroupName",GroupName1);
-                bundle.putString("GroupDescription",GroupDescription1);
+                Bundle bundle = new Bundle();
+                bundle.putString("GroupName", GroupName1);
+                bundle.putString("GroupDescription", GroupDescription1);
                 myGroupsDetailsFragment.setArguments(bundle);
                 fragmentTransaction.commit();
             }
@@ -191,14 +162,13 @@ public class MyGroupsFragment extends Fragment implements MyGroupsAdapter.OnItem
 
     @Override
     public void onClikJoinedGroup(int position) {
-        groupArrayList.get(position);
-        MyGroupsDetailsFragment myGroupsDetailsFragment=new MyGroupsDetailsFragment();
-        FragmentManager fragmentManager=getFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.myGroupsPlaceHolder,myGroupsDetailsFragment);
+        MyGroupsDetailsFragment myGroupsDetailsFragment = new MyGroupsDetailsFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.myGroupsPlaceHolder, myGroupsDetailsFragment);
         fragmentTransaction.addToBackStack(null);
-        Bundle bundle=new Bundle();
-//        bundle.putString("GroupName",myGroupsArrayList.get(position).getCommunityGroupTitle());
+        Bundle bundle = new Bundle();
+        bundle.putString("groupId",groupArrayList.get(position).getId());
 //        bundle.putString("GroupDescription",myGroupsArrayList.get(position).getCommunityGroupDescription());
 //        bundle.putString("GroupCreationDateAndTime",myGroupsArrayList.get(position).getCommunityGroupCreationDateAndTime());
 //        bundle.putInt("GroupIcon",myGroupsArrayList.get(position).getAdminProfileIcon());
@@ -240,12 +210,12 @@ public class MyGroupsFragment extends Fragment implements MyGroupsAdapter.OnItem
                     progressDialog.dismiss();
                     try {
                         GroupResponse groupResponse = response.body();
-                        if(groupResponse.getSuccess()){
+                        if (groupResponse.getSuccess()) {
                             groupArrayList = new ArrayList<>();
                             groupArrayList.addAll(groupResponse.getGroupList());
                             myGroupsAdapter.update(groupArrayList);
 
-                        }else{
+                        } else {
                             showDialog(false, "There was a problem fetching people list! Please try after sometime");
                         }
                     } catch (Exception ex) {
@@ -263,6 +233,68 @@ public class MyGroupsFragment extends Fragment implements MyGroupsAdapter.OnItem
         } catch (Exception ex) {
             progressDialog.dismiss();
             showDialog(false, "There was a problem fetching group list! Please try after sometime");
+        }
+    }
+
+    private void createMyGroup() {
+        try {
+            Group group = new Group();
+            group.setName(groupNameEdit.getText().toString());
+            group.setDescription(groupDescrptionEdit.getText().toString());
+            group.setGroupType(2);
+            if (group.getName().trim().equals("")) {
+                showDialog(false, "Group name is required!");
+            }else{
+                progressDialog.show();
+                AuthServiceHolder authServiceHolder = new AuthServiceHolder();
+                SharedPreferences preferences = getContext().getSharedPreferences("GuestJini", Context.MODE_PRIVATE);
+                String accessToken = preferences.getString("access_token", "");
+                OkHttpClient okHttpClient = new OkHttpClientInstance.Builder(getActivity(), authServiceHolder)
+                        .addHeader("Authorization", accessToken)
+                        .build();
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(EndPoints.END_POINT_URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .client(okHttpClient)
+                        .build();
+                AuthService authService = retrofit.create(AuthService.class);
+                authServiceHolder.set(authService);
+                GroupService groupService = retrofit.create(GroupService.class);
+                Call<GroupResponse> groupResponseCall = groupService.saveGroup(group);
+                groupResponseCall.enqueue(new Callback<GroupResponse>() {
+                    @Override
+                    public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
+                        progressDialog.dismiss();
+                        try {
+                            GroupResponse groupResponse = response.body();
+                            if (groupResponse.getSuccess()) {
+                                newGroupMainLayout.setVisibility(View.GONE);
+                                noCreatedGroupText.setVisibility(View.GONE);
+                                createIcon.setVisibility(View.VISIBLE);
+                                inviteAndLaterLayout.setVisibility(View.GONE);
+                                myGroupsListLayout.setVisibility(View.VISIBLE);
+                                showDialog(true, "Group created successfully!");
+                                geMyGroups();
+                            } else {
+                                showDialog(false, "There was a problem creating group! Please try after sometime");
+                            }
+                        } catch (Exception ex) {
+                            showDialog(false, "There was a problem creating group! Please try after sometime");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<GroupResponse> call, Throwable t) {
+                        progressDialog.dismiss();
+                        showDialog(false, "There was a problem creating group! Please try after sometime");
+                    }
+                });
+
+            }
+        } catch (Exception ex) {
+            progressDialog.dismiss();
+            showDialog(false, "There was a problem creating group! Please try after sometime");
+
         }
     }
 

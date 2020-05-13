@@ -76,6 +76,11 @@ public class GroupChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return groupChatList.size();
     }
 
+    public void update(ArrayList<GroupChatModel> groupChatList) {
+        this.groupChatList = groupChatList;
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView groupChatDateAndTime,groupChatMemberName,groupChatMessage;
         public ViewHolder(@NonNull View itemView) {

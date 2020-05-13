@@ -1,5 +1,7 @@
 package Model;
 
+import com.carmel.guestjini.Models.Group.GroupConversation;
+
 public class GroupChatModel {
     private String addGroupChatDateAndTime;
     private String addGroupChatMemberName;
@@ -12,6 +14,20 @@ public class GroupChatModel {
         this.addGroupChatDateAndTime = addGroupChatDateAndTime;
         this.addGroupChatMemberName = addGroupChatMemberName;
         this.addGroupChatMessage = addGroupChatMessage;
+        this.viewType = viewType;
+    }
+
+    public GroupChatModel() {
+    }
+
+    public GroupChatModel(GroupConversation groupConversation) {
+        this.addGroupChatDateAndTime = groupConversation.getCreationTime();
+        this.addGroupChatMemberName = groupConversation.getDisplayName();
+        this.addGroupChatMessage = groupConversation.getMessage();
+        int viewType = GroupChatModel.ONE_TYPE;
+        if(groupConversation.getIsItMe() == 1){
+            viewType = GroupChatModel.TWO_TYPE;
+        }
         this.viewType = viewType;
     }
 
