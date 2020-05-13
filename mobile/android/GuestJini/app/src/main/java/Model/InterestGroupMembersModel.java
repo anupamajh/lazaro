@@ -1,10 +1,24 @@
 package Model;
 
+import com.carmel.guestjini.Models.User.AddressBook;
+import com.carmel.guestjini.R;
+
 public class InterestGroupMembersModel {
 
     public String groupMemberProfileName;
     public String groupMemberProfileCreatedDate;
     private int groupProfileIcon;
+    private String groupId;
+
+    public InterestGroupMembersModel() {
+    }
+
+    public InterestGroupMembersModel(AddressBook addressBook, String groupId) {
+        this.groupMemberProfileName = addressBook.getDisplayName();
+        this.groupMemberProfileCreatedDate = addressBook.getCreationTime();
+        this.groupProfileIcon = R.drawable.profile;
+        this.groupId = groupId;
+    }
 
     public String getGroupMemberProfileName() {
         return groupMemberProfileName;
@@ -30,7 +44,11 @@ public class InterestGroupMembersModel {
         this.groupProfileIcon = groupProfileIcon;
     }
 
+    public String getGroupId() {
+        return groupId;
+    }
 
-
-
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
 }

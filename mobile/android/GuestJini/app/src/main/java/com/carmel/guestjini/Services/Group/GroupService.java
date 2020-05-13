@@ -35,6 +35,11 @@ public interface GroupService {
             @Body Map<String, String> postData
     );
 
+    @POST("/common/groups/subscribe")
+    Call<GroupResponse> subscribe(
+            @Body Map<String, String> postData
+    );
+
     @POST("/common/group-conversation/get-by-group")
     Call<GroupConversationResponse> getGroupConversationById(
             @Body Map<String, String> postData

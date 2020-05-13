@@ -46,6 +46,11 @@ public class InterestGroupMemberAdapter extends RecyclerView.Adapter<InterestGro
         return interestGroupMembersList.size();
     }
 
+    public void update(ArrayList<InterestGroupMembersModel> interestGroupMemberslist) {
+        this.interestGroupMembersList = interestGroupMemberslist;
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView interestGroupMemberProfileName,getInterestGroupMemberProfileCreatedDate,profileDivider;
         ImageView interestGroupMemberProfileImage;

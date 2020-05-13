@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.carmel.guestjini.Common.EndPoints;
 import com.carmel.guestjini.Components.OkHttpClientInstance;
+import com.carmel.guestjini.InterestGroups.SubscribedGroupChatFragment;
 import com.carmel.guestjini.Models.Group.Group;
 import com.carmel.guestjini.Models.Group.GroupResponse;
 import com.carmel.guestjini.Models.User.AddressBook;
@@ -52,15 +53,18 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MyGroupsDetailsFragment extends Fragment implements JoinedMembersAdapter.OnItemClickListener, PendingRequestsAdapter.PendingRequestDelegate {
-    private TextView groupName,groupDescription,groupCreationDateAndTime;
-    String GroupName,GroupDescription,GroupCreationDateAndTime;
-    private ImageView backArrow,dropDownImage,dropDownIcon;
-    private Button inviteButton,deleteButton;
-    private ArrayList<JoinedMemberModel> joinedMembersArrayList=new ArrayList<>();
-    private ArrayList<InvitingMembersModel> pendingRequestsArrayList=new ArrayList<>();
-    private RecyclerView joinedMembersRecyclerView,pendingRequestsRecyclerView;
-    private RelativeLayout joinedLayout,pendingRequests,conversation,requestsLayout;
-    private ConstraintLayout noInvitedLayout,invitationsLayout;
+    private TextView groupName, groupDescription, groupCreationDateAndTime;
+    String GroupName, GroupDescription, GroupCreationDateAndTime;
+    private ImageView backArrow, dropDownImage, dropDownIcon;
+    private Button inviteButton, deleteButton;
+    private ArrayList<JoinedMemberModel> joinedMembersArrayList = new ArrayList<>();
+    private ArrayList<InvitingMembersModel> pendingRequestsArrayList = new ArrayList<>();
+    private RecyclerView joinedMembersRecyclerView, pendingRequestsRecyclerView;
+    private RelativeLayout joinedLayout, pendingRequests, conversation, requestsLayout;
+    private ConstraintLayout noInvitedLayout, invitationsLayout;
+
+    private Button btnMessage;
+
 
     PendingRequestsAdapter pendingRequestsAdapter;
 
@@ -72,7 +76,7 @@ public class MyGroupsDetailsFragment extends Fragment implements JoinedMembersAd
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView= inflater.inflate(R.layout.fragment_my_groups_details, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_my_groups_details, container, false);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setCancelable(false); // if you want user to wait for some process to finish,
         builder.setView(R.layout.layout_loading_dialog);
@@ -80,19 +84,20 @@ public class MyGroupsDetailsFragment extends Fragment implements JoinedMembersAd
         groupName = rootView.findViewById(R.id.myGroupName);
         groupCreationDateAndTime = rootView.findViewById(R.id.myGroupCreationDate);
         groupDescription = rootView.findViewById(R.id.myGroupDescription);
-        backArrow=rootView.findViewById(R.id.backArrow);
-        inviteButton=rootView.findViewById(R.id.inviteButton);
-        deleteButton=rootView.findViewById(R.id.deleteButton);
-        pendingRequestsRecyclerView=rootView.findViewById(R.id.pendingRequestsRecyclerView);
-        joinedMembersRecyclerView=rootView.findViewById(R.id.joinedMembersRecyclerView);
-        joinedLayout=rootView.findViewById(R.id.joinedLayout);
-        dropDownImage=rootView.findViewById(R.id.dropDownImage);
-        pendingRequests=rootView.findViewById(R.id.pendingRequests);
-        dropDownIcon=rootView.findViewById(R.id.dropDownIcon);
-        conversation=rootView.findViewById(R.id.conversation);
-        requestsLayout=rootView.findViewById(R.id.requestsLayout);
-        noInvitedLayout=rootView.findViewById(R.id.noInvitedLayout);
-        invitationsLayout=rootView.findViewById(R.id.invitationsLayout);
+        backArrow = rootView.findViewById(R.id.backArrow);
+        inviteButton = rootView.findViewById(R.id.inviteButton);
+        deleteButton = rootView.findViewById(R.id.deleteButton);
+        pendingRequestsRecyclerView = rootView.findViewById(R.id.pendingRequestsRecyclerView);
+        joinedMembersRecyclerView = rootView.findViewById(R.id.joinedMembersRecyclerView);
+        joinedLayout = rootView.findViewById(R.id.joinedLayout);
+        dropDownImage = rootView.findViewById(R.id.dropDownImage);
+        pendingRequests = rootView.findViewById(R.id.pendingRequests);
+        dropDownIcon = rootView.findViewById(R.id.dropDownIcon);
+        conversation = rootView.findViewById(R.id.conversation);
+        requestsLayout = rootView.findViewById(R.id.requestsLayout);
+        noInvitedLayout = rootView.findViewById(R.id.noInvitedLayout);
+        invitationsLayout = rootView.findViewById(R.id.invitationsLayout);
+        btnMessage = rootView.findViewById(R.id.messageButton);
 
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -101,13 +106,29 @@ public class MyGroupsDetailsFragment extends Fragment implements JoinedMembersAd
 
         }
 
+        btnMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SubscribedGroupChatFragment subscribedGroupChatFragment = new SubscribedGroupChatFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.myGroupsPlaceHolder, subscribedGroupChatFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                Bundle bundle = new Bundle();
+                bundle.putString("groupId", groupId);
+                bundle.putString("groupType", "3");
+                subscribedGroupChatFragment.setArguments(bundle);
+            }
+        });
+
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyGroupsFragment myGroupsFragment=new MyGroupsFragment();
-                FragmentManager fragmentManager=getFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.myGroupsPlaceHolder,myGroupsFragment);
+                MyGroupsFragment myGroupsFragment = new MyGroupsFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.myGroupsPlaceHolder, myGroupsFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 
@@ -117,61 +138,61 @@ public class MyGroupsDetailsFragment extends Fragment implements JoinedMembersAd
         inviteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InvitingMembersFragment invitingMembersFragment=new InvitingMembersFragment();
-                FragmentManager fragmentManager=getFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.myGroupsPlaceHolder,invitingMembersFragment);
+                InvitingMembersFragment invitingMembersFragment = new InvitingMembersFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.myGroupsPlaceHolder, invitingMembersFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });
 
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Dialog dialog = new Dialog(getContext());
-                dialog.setContentView(R.layout.alert_dailogbox);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-
-                TextView alertDailogTitle = (TextView) dialog.findViewById(R.id.alertDailogTitle);
-                alertDailogTitle.setText(getText(R.string.delete_group));
-                alertDailogTitle.setTextColor(ColorStateList.valueOf(Color.parseColor("#E65959")));
-
-                TextView alertDailogMessage = (TextView) dialog.findViewById(R.id.alertDailogDescription);
-                alertDailogMessage.setText(getText(R.string.feedback_success));
-
-                FloatingActionButton doneButton = (FloatingActionButton) dialog.findViewById(R.id.done_button);
-                doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
-                        .parseColor("#E65959")));
-                doneButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                        MyGroupsFragment myGroupsFragment=new MyGroupsFragment();
-                        FragmentManager fragmentManager=getFragmentManager();
-                        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.myGroupsPlaceHolder,myGroupsFragment);
-                        fragmentTransaction.addToBackStack(null);
-                        fragmentTransaction.commit();
-                    }
-                });
-
-                dialog.show();
-            }
-        });
+//        deleteButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                final Dialog dialog = new Dialog(getContext());
+//                dialog.setContentView(R.layout.alert_dailogbox);
+//                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//
+//
+//                TextView alertDailogTitle = (TextView) dialog.findViewById(R.id.alertDailogTitle);
+//                alertDailogTitle.setText(getText(R.string.delete_group));
+//                alertDailogTitle.setTextColor(ColorStateList.valueOf(Color.parseColor("#E65959")));
+//
+//                TextView alertDailogMessage = (TextView) dialog.findViewById(R.id.alertDailogDescription);
+//                alertDailogMessage.setText(getText(R.string.feedback_success));
+//
+//                FloatingActionButton doneButton = (FloatingActionButton) dialog.findViewById(R.id.done_button);
+//                doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
+//                        .parseColor("#E65959")));
+//                doneButton.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        dialog.dismiss();
+//                        MyGroupsFragment myGroupsFragment = new MyGroupsFragment();
+//                        FragmentManager fragmentManager = getFragmentManager();
+//                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                        fragmentTransaction.replace(R.id.myGroupsPlaceHolder, myGroupsFragment);
+//                        fragmentTransaction.addToBackStack(null);
+//                        fragmentTransaction.commit();
+//                    }
+//                });
+//
+//                dialog.show();
+//            }
+//        });
 
         conversation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyGroupsChatFragment myGroupChatFragment=new MyGroupsChatFragment();
-                FragmentManager fragmentManager=getFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.myGroupsPlaceHolder,myGroupChatFragment);
+                MyGroupsChatFragment myGroupChatFragment = new MyGroupsChatFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.myGroupsPlaceHolder, myGroupChatFragment);
                 fragmentTransaction.addToBackStack(null);
-                Bundle bundle=new Bundle();
-                bundle.putString("MyGroupName",GroupName);
-                bundle.putString("MyGroupDescription",GroupDescription);
+                Bundle bundle = new Bundle();
+                bundle.putString("MyGroupName", GroupName);
+                bundle.putString("MyGroupDescription", GroupDescription);
                 fragmentTransaction.commit();
                 myGroupChatFragment.setArguments(bundle);
             }
@@ -180,40 +201,41 @@ public class MyGroupsDetailsFragment extends Fragment implements JoinedMembersAd
         requestsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyGroupsRequestsFragment myGroupsRequestsFragment=new MyGroupsRequestsFragment();
-                FragmentManager fragmentManager=getFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.myGroupsPlaceHolder,myGroupsRequestsFragment);
+                MyGroupsRequestsFragment myGroupsRequestsFragment = new MyGroupsRequestsFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.myGroupsPlaceHolder, myGroupsRequestsFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });
 
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         joinedMembersRecyclerView.setLayoutManager(linearLayoutManager);
         joinedMembersRecyclerView.setHasFixedSize(true);
-        JoinedMembersAdapter joinedMembersAdapter=new JoinedMembersAdapter(getContext(),joinedMembersArrayList,this);
+        JoinedMembersAdapter joinedMembersAdapter = new JoinedMembersAdapter(getContext(), joinedMembersArrayList, this);
         joinedMembersRecyclerView.setAdapter(joinedMembersAdapter);
         joinedMembersRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
 
 
-        joinedMembersArrayList.add(new JoinedMemberModel(R.drawable.profile2,"Soloman Jakes","Today (Just now)"));
-        joinedMembersArrayList.add(new JoinedMemberModel(R.drawable.profile,"Luke Ray","Since 29 Jun 2019 (2 Hours ago"));
-        joinedMembersArrayList.add(new JoinedMemberModel(R.drawable.profile1,"Daisy Lake","Since 29 Jun 2019 (1 Day ago"));
-        joinedMembersArrayList.add(new JoinedMemberModel(R.drawable.profile2,"Mark Smith","Since 29 Jun 2019 (3 Days ago"));
-        joinedMembersArrayList.add(new JoinedMemberModel(R.drawable.profile,"Lucy Lake","Since 29 Jun 2019 (1 Day ago"));
-        joinedMembersArrayList.add(new JoinedMemberModel(R.drawable.profile2,"Dan Smith","Since 29 Jun 2019 (3 Days ago"));
+        joinedMembersArrayList.add(new JoinedMemberModel(R.drawable.profile2, "Soloman Jakes", "Today (Just now)"));
+        joinedMembersArrayList.add(new JoinedMemberModel(R.drawable.profile, "Luke Ray", "Since 29 Jun 2019 (2 Hours ago"));
+        joinedMembersArrayList.add(new JoinedMemberModel(R.drawable.profile1, "Daisy Lake", "Since 29 Jun 2019 (1 Day ago"));
+        joinedMembersArrayList.add(new JoinedMemberModel(R.drawable.profile2, "Mark Smith", "Since 29 Jun 2019 (3 Days ago"));
+        joinedMembersArrayList.add(new JoinedMemberModel(R.drawable.profile, "Lucy Lake", "Since 29 Jun 2019 (1 Day ago"));
+        joinedMembersArrayList.add(new JoinedMemberModel(R.drawable.profile2, "Dan Smith", "Since 29 Jun 2019 (3 Days ago"));
 
         joinedLayout.setOnClickListener(new View.OnClickListener() {
-            private boolean flag=true;
+            private boolean flag = true;
+
             @Override
             public void onClick(View v) {
                 if (flag) {
                     flag = false;
                     dropDownImage.setImageResource(R.drawable.dropup_icon_mdpi);
                     joinedMembersRecyclerView.setVisibility(View.VISIBLE);
-                }else {
-                    flag=true;
+                } else {
+                    flag = true;
                     dropDownImage.setImageResource(R.drawable.dropdown_icon_mdpi);
                     joinedMembersRecyclerView.setVisibility(View.GONE);
 
@@ -222,26 +244,25 @@ public class MyGroupsDetailsFragment extends Fragment implements JoinedMembersAd
         });
 
 
-
-
-        LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext());
         pendingRequestsRecyclerView.setLayoutManager(linearLayoutManager1);
         pendingRequestsRecyclerView.setHasFixedSize(true);
-        pendingRequestsAdapter=new PendingRequestsAdapter(getContext(),pendingRequestsArrayList);
+        pendingRequestsAdapter = new PendingRequestsAdapter(getContext(), pendingRequestsArrayList);
         pendingRequestsAdapter.setPendingRequestDelegate(this);
         pendingRequestsRecyclerView.setAdapter(pendingRequestsAdapter);
         pendingRequestsRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
 
         pendingRequests.setOnClickListener(new View.OnClickListener() {
-            private boolean flag=true;
+            private boolean flag = true;
+
             @Override
             public void onClick(View v) {
                 if (flag) {
                     flag = false;
                     dropDownIcon.setImageResource(R.drawable.dropup_icon_mdpi);
                     pendingRequestsRecyclerView.setVisibility(View.VISIBLE);
-                }else {
-                    flag=true;
+                } else {
+                    flag = true;
                     dropDownIcon.setImageResource(R.drawable.dropdown_icon_mdpi);
                     pendingRequestsRecyclerView.setVisibility(View.GONE);
 
@@ -258,8 +279,8 @@ public class MyGroupsDetailsFragment extends Fragment implements JoinedMembersAd
 
     }
 
-    private void getGroupById(){
-        try{
+    private void getGroupById() {
+        try {
             progressDialog.show();
             AuthServiceHolder authServiceHolder = new AuthServiceHolder();
             SharedPreferences preferences = getContext().getSharedPreferences("GuestJini", Context.MODE_PRIVATE);
@@ -286,23 +307,23 @@ public class MyGroupsDetailsFragment extends Fragment implements JoinedMembersAd
                     try {
                         progressDialog.dismiss();
                         GroupResponse groupResponse = response.body();
-                        if(groupResponse.getSuccess()){
+                        if (groupResponse.getSuccess()) {
                             Group myGroup = groupResponse.getGroup();
                             groupName.setText(myGroup.getName());
                             groupCreationDateAndTime.setText(myGroup.getCreationTime());
                             groupDescription.setText(myGroup.getDescription());
                             pendingRequestsArrayList = new ArrayList<>();
-                            for(AddressBook addressBook:groupResponse.getGroupPeople()){
+                            for (AddressBook addressBook : groupResponse.getGroupPeople()) {
                                 InvitingMembersModel invitingMembersModel = new InvitingMembersModel(addressBook, myGroup.getId());
                                 pendingRequestsArrayList.add(invitingMembersModel);
                             }
                             pendingRequestsAdapter.update(pendingRequestsArrayList);
 
-                        }else{
+                        } else {
                             progressDialog.dismiss();
                             showDialog(false, "There was a problem fetching group! Please try after sometime");
                         }
-                    }catch (Exception ex){
+                    } catch (Exception ex) {
                         progressDialog.dismiss();
                         showDialog(false, "There was a problem fetching group! Please try after sometime");
                     }
@@ -316,7 +337,7 @@ public class MyGroupsDetailsFragment extends Fragment implements JoinedMembersAd
 
                 }
             });
-        }catch (Exception ex){
+        } catch (Exception ex) {
             progressDialog.dismiss();
             showDialog(false, "There was a problem fetching group! Please try after sometime");
         }
@@ -357,7 +378,7 @@ public class MyGroupsDetailsFragment extends Fragment implements JoinedMembersAd
 
     @Override
     public void onInviteClicked(String userId, String groupId) {
-        try{
+        try {
             progressDialog.show();
             AuthServiceHolder authServiceHolder = new AuthServiceHolder();
             SharedPreferences preferences = getContext().getSharedPreferences("GuestJini", Context.MODE_PRIVATE);
@@ -385,14 +406,14 @@ public class MyGroupsDetailsFragment extends Fragment implements JoinedMembersAd
                     try {
                         progressDialog.dismiss();
                         GroupResponse groupResponse = response.body();
-                        if(groupResponse.getSuccess()){
+                        if (groupResponse.getSuccess()) {
                             showDialog(true, "Invitation has been sent successfully");
                             getGroupById();
-                        }else{
+                        } else {
                             progressDialog.dismiss();
                             showDialog(false, "There was a problem inviting member to group! Please try after sometime");
                         }
-                    }catch (Exception ex){
+                    } catch (Exception ex) {
                         progressDialog.dismiss();
                         showDialog(false, "There was a problem inviting member to group! Please try after sometime");
                     }
@@ -406,7 +427,7 @@ public class MyGroupsDetailsFragment extends Fragment implements JoinedMembersAd
 
                 }
             });
-        }catch (Exception ex){
+        } catch (Exception ex) {
             progressDialog.dismiss();
             showDialog(false, "There was a problem inviting member to group! Please try after sometime");
         }

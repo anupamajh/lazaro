@@ -159,6 +159,7 @@ public class InterestGroupsFragment extends Fragment implements InterestGroupsAd
 
     @Override
     public void onclickUnsubscribeGroup(int position) {
+        Group group = groupArrayList.get(position);
         SubscribedGroupDetailedFragment subscribedGroupDetailedFragment = new SubscribedGroupDetailedFragment();
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -166,9 +167,8 @@ public class InterestGroupsFragment extends Fragment implements InterestGroupsAd
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
         Bundle bundle = new Bundle();
-//        bundle.putString("Interest Group Type", interestGroupsList.get(position).getAddInterestCategoryTitle());
-//        bundle.putString("Interest Group Name", interestGroupsList.get(position).getAddInterestGroupTitle());
-//        bundle.putString("interestGroupDescription", interestGroupsList.get(position).getAddInterestGroupDescription());
+        bundle.putString("groupId", group.getId());
+        bundle.putString("groupType", "1");
         subscribedGroupDetailedFragment.setArguments(bundle);
     }
 

@@ -30,6 +30,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.carmel.guestjini.Common.EndPoints;
 import com.carmel.guestjini.Components.OkHttpClientInstance;
 import com.carmel.guestjini.GroupsActivity;
+import com.carmel.guestjini.InterestGroups.SubscribedGroupChatFragment;
+import com.carmel.guestjini.InterestGroups.SubscribedGroupDetailedFragment;
 import com.carmel.guestjini.Models.Group.Group;
 import com.carmel.guestjini.Models.Group.GroupResponse;
 import com.carmel.guestjini.R;
@@ -147,20 +149,32 @@ public class CommunityGroupsFragment extends Fragment implements CommunityGroups
 
     @Override
     public void onClikRequestAcceptedGroup(int position) {
-        groupArrayList.get(position);
-        CommunityGroupChatFragment communityGroupChatFragment=new CommunityGroupChatFragment();
-        FragmentManager fragmentManager=getFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.communityGroupsPlaceHolder,communityGroupChatFragment);
+        Group group = groupArrayList.get(position);
+        SubscribedGroupChatFragment subscribedGroupChatFragment = new SubscribedGroupChatFragment();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.communityGroupsPlaceHolder, subscribedGroupChatFragment);
         fragmentTransaction.addToBackStack(null);
-        Bundle bundle=new Bundle();
-//        bundle.putString("GroupName",communityGroupsList.get(position).getCommunityGroupTitle());
-//        bundle.putString("GroupDescription",communityGroupsList.get(position).getCommunityGroupDescription());
-//        bundle.putString("GroupAdminName",communityGroupsList.get(position).getCommunityGroupAdmin());
-//        bundle.putString("GroupCreationDateAndTime",communityGroupsList.get(position).getCommunityGroupCreationDateAndTime());
-//        bundle.putInt("GroupIcon",communityGroupsList.get(position).getAdminProfileIcon());
-        communityGroupChatFragment.setArguments(bundle);
         fragmentTransaction.commit();
+        Bundle bundle = new Bundle();
+        bundle.putString("groupId", group.getId());
+        bundle.putString("groupType", "2");
+        subscribedGroupChatFragment.setArguments(bundle);
+//
+//        groupArrayList.get(position);
+//        CommunityGroupChatFragment communityGroupChatFragment=new CommunityGroupChatFragment();
+//        FragmentManager fragmentManager=getFragmentManager();
+//        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+//        fragmentTransaction.replace(R.id.communityGroupsPlaceHolder,communityGroupChatFragment);
+//        fragmentTransaction.addToBackStack(null);
+//        Bundle bundle=new Bundle();
+////        bundle.putString("GroupName",communityGroupsList.get(position).getCommunityGroupTitle());
+////        bundle.putString("GroupDescription",communityGroupsList.get(position).getCommunityGroupDescription());
+////        bundle.putString("GroupAdminName",communityGroupsList.get(position).getCommunityGroupAdmin());
+////        bundle.putString("GroupCreationDateAndTime",communityGroupsList.get(position).getCommunityGroupCreationDateAndTime());
+////        bundle.putInt("GroupIcon",communityGroupsList.get(position).getAdminProfileIcon());
+//        communityGroupChatFragment.setArguments(bundle);
+//        fragmentTransaction.commit();
     }
 
     @Override
@@ -196,20 +210,32 @@ public class CommunityGroupsFragment extends Fragment implements CommunityGroups
 
     @Override
     public void onClikUnsubscribedGroup(int position) {
-        groupArrayList.get(position);
-        InvitedGroupViewFragment invitedGroupViewFragment=new InvitedGroupViewFragment();
-        FragmentManager fragmentManager=getFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.communityGroupsPlaceHolder,invitedGroupViewFragment);
+
+        Group group = groupArrayList.get(position);
+        SubscribedGroupDetailedFragment subscribedGroupDetailedFragment = new SubscribedGroupDetailedFragment();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.communityGroupsPlaceHolder, subscribedGroupDetailedFragment);
         fragmentTransaction.addToBackStack(null);
-        Bundle bundle=new Bundle();
-//        bundle.putString("GroupName",communityGroupsList.get(position).getCommunityGroupTitle());
-//        bundle.putString("GroupDescription",communityGroupsList.get(position).getCommunityGroupDescription());
-//        bundle.putString("GroupAdminName",communityGroupsList.get(position).getCommunityGroupAdmin());
-//        bundle.putString("GroupCreationDateAndTime",communityGroupsList.get(position).getCommunityGroupCreationDateAndTime());
-//        bundle.putInt("GroupIcon",communityGroupsList.get(position).getAdminProfileIcon());
-        invitedGroupViewFragment.setArguments(bundle);
         fragmentTransaction.commit();
+        Bundle bundle = new Bundle();
+        bundle.putString("groupId", group.getId());
+        bundle.putString("groupType", "2");
+        subscribedGroupDetailedFragment.setArguments(bundle);
+//        groupArrayList.get(position);
+//        InvitedGroupViewFragment invitedGroupViewFragment=new InvitedGroupViewFragment();
+//        FragmentManager fragmentManager=getFragmentManager();
+//        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+//        fragmentTransaction.replace(R.id.communityGroupsPlaceHolder,invitedGroupViewFragment);
+//        fragmentTransaction.addToBackStack(null);
+//        Bundle bundle=new Bundle();
+////        bundle.putString("GroupName",communityGroupsList.get(position).getCommunityGroupTitle());
+////        bundle.putString("GroupDescription",communityGroupsList.get(position).getCommunityGroupDescription());
+////        bundle.putString("GroupAdminName",communityGroupsList.get(position).getCommunityGroupAdmin());
+////        bundle.putString("GroupCreationDateAndTime",communityGroupsList.get(position).getCommunityGroupCreationDateAndTime());
+////        bundle.putInt("GroupIcon",communityGroupsList.get(position).getAdminProfileIcon());
+//        invitedGroupViewFragment.setArguments(bundle);
+//        fragmentTransaction.commit();
     }
 
     private void getCommunityGroups() {

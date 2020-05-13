@@ -118,17 +118,17 @@
                     app:layout_constraintTop_toBottomOf="@+id/myGroupCreationDate" />
 
                 <Button
-                    android:visibility="gone"
-                    android:id="@+id/deleteButton"
-                    android:layout_width="75dp"
+                    android:visibility="visible"
+                    android:id="@+id/messageButton"
+                    android:layout_width="85dp"
                     android:layout_height="38dp"
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="32dp"
-                    android:backgroundTint="@color/colorRoman"
+                    android:backgroundTint="@color/colorSummerSky"
                     android:elevation="2dp"
                     android:letterSpacing="0.06"
-                    android:text="@string/delete"
+                    android:text="MESSAGES"
                     android:textColor="@color/colorWhite"
                     android:textSize="11sp"
                     app:fontFamily="@font/roboto_bold"

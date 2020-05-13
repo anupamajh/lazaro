@@ -4,6 +4,7 @@ package com.carmel.guestjini.InterestGroups;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -23,12 +24,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.carmel.guestjini.Common.EndPoints;
+import com.carmel.guestjini.CommunityGroupsActivity;
 import com.carmel.guestjini.Components.OkHttpClientInstance;
 import com.carmel.guestjini.Models.Group.Group;
 import com.carmel.guestjini.Models.Group.GroupConversation;
 import com.carmel.guestjini.Models.Group.GroupConversationResponse;
 import com.carmel.guestjini.Models.Group.GroupResponse;
 import com.carmel.guestjini.Models.User.AddressBook;
+import com.carmel.guestjini.MyGroupsActivity;
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Services.Authentication.AuthService;
 import com.carmel.guestjini.Services.Authentication.AuthServiceHolder;
@@ -124,18 +127,30 @@ public class SubscribedGroupChatFragment extends Fragment {
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InterestGroupsFragment interestGroupsFragment = new InterestGroupsFragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.interestGroupsPlaceHolder, interestGroupsFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                if (groupType == 1) {
+                    InterestGroupsFragment interestGroupsFragment = new InterestGroupsFragment();
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.interestGroupsPlaceHolder, interestGroupsFragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                } else if (groupType == 2) {
+                    final Intent intent;
+                    intent = new Intent(getContext(), CommunityGroupsActivity.class);
+                    getContext().startActivity(intent);
+                }else if (groupType == 3) {
+                    final Intent intent;
+                    intent = new Intent(getContext(), MyGroupsActivity.class);
+                    getContext().startActivity(intent);
+                }
             }
         });
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         groupChatRecyclerView.setLayoutManager(linearLayoutManager);
-        groupChatAdapter = new GroupChatAdapter(rootView.getContext(), groupChatList);
+        groupChatAdapter = new
+
+                GroupChatAdapter(rootView.getContext(), groupChatList);
         groupChatRecyclerView.setAdapter(groupChatAdapter);
         Bundle bundle = this.getArguments();
         if (bundle != null) {
@@ -147,6 +162,7 @@ public class SubscribedGroupChatFragment extends Fragment {
                 txtPageTitle.setText("COMMUNITY GROUPS");
             } else if (groupType == 3) {
                 txtPageTitle.setText("MY GROUPS");
+                informationIcon.setVisibility(View.GONE);
             }
             getGroupById();
             getConversationByGroup();
@@ -296,10 +312,10 @@ public class SubscribedGroupChatFragment extends Fragment {
                     progressDialog.dismiss();
                     try {
                         GroupConversationResponse groupConversationResponse = response.body();
-                        if(groupConversationResponse.getSuccess()){
+                        if (groupConversationResponse.getSuccess()) {
                             txtMessage.setText("");
                             getConversationByGroup();
-                        }else{
+                        } else {
                             showDialog(false, "There was a problem saving conversation! Please try after sometime");
                         }
                     } catch (Exception ex) {
