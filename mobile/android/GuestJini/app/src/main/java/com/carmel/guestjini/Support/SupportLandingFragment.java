@@ -43,13 +43,6 @@ public class SupportLandingFragment extends Fragment {
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 
-//                FindHelpFragment findHelpFragment=new FindHelpFragment();
-//                FragmentManager fragmentManager=getFragmentManager();
-//                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.SuppotPlaceHolder,findHelpFragment);
-//                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
-
             }
         });
 
@@ -62,15 +55,6 @@ public class SupportLandingFragment extends Fragment {
                 fragmentTransaction.replace(R.id.SuppotPlaceHolder,exploreFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-//                Bundle bundle=new Bundle();
-//                bundle.putString("popular Search", String.valueOf(popularSearches));
-//                FindHelpFragment findHelpFragment=new FindHelpFragment();
-//                FragmentManager fragmentManager=getFragmentManager();
-//                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.SuppotPlaceHolder,findHelpFragment);
-//                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
-//                findHelpFragment.setArguments(bundle);
             }
         });
 

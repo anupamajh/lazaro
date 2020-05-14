@@ -123,9 +123,13 @@ public class MyProfileFragment extends Fragment implements ActivityCompat.OnRequ
                 if (Build.VERSION.SDK_INT < 24) {
                     file = Uri.fromFile(getOutputMediaFile());
                 } else {
-                    file = Uri.parse(getOutputMediaFile().getPath()); // My work-around for new SDKs, doesn't work in Android 10.
+                    try {
+                        file = Uri.parse(getOutputMediaFile().getPath()); // My work-around for new SDKs, doesn't work in Android 10.
+                    } catch (Exception ex) {
+                        String e = ex.getMessage();
+                    }
                 }
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, file);
+               // intent.putExtra(MediaStore.EXTRA_OUTPUT, file);
                 startActivityForResult(intent, 100);
             }
         });
@@ -177,7 +181,7 @@ public class MyProfileFragment extends Fragment implements ActivityCompat.OnRequ
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.SettingsPlaceHolder, settingsLandingFragment);
                     fragmentTransaction.commit();
-                }else if(back == 1){
+                } else if (back == 1) {
                     Intent intent = new Intent(getContext(), CommunityActivity.class);
                     startActivity(intent);
                 }
@@ -291,20 +295,19 @@ public class MyProfileFragment extends Fragment implements ActivityCompat.OnRequ
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == 100) {
-            //if (resultCode == RESULT_OK) {
-            profileIcon.setImageURI(file);
             try {
+                 Bitmap bm = (Bitmap) data.getExtras().get("data");
+                profileIcon.setImageBitmap(bm);
                 BitmapDrawable bitmapDrawable = ((BitmapDrawable) profileIcon.getDrawable());
                 Bitmap bitmap = bitmapDrawable.getBitmap();
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
-                String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                String encoded = Base64.encodeToString(byteArray, Base64.NO_WRAP);
                 uploadProfilePic(encoded);
             } catch (Exception ex) {
-
+                String e = ex.getMessage();
             }
-            //}
         } else if (requestCode == 200) {
             if (resultCode == RESULT_OK) {
                 profileIcon.setImageURI(data.getData());
@@ -314,7 +317,7 @@ public class MyProfileFragment extends Fragment implements ActivityCompat.OnRequ
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                     byte[] byteArray = byteArrayOutputStream.toByteArray();
-                    String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                    String encoded = Base64.encodeToString(byteArray, Base64.NO_WRAP);
                     uploadProfilePic(encoded);
                 } catch (Exception ex) {
 
@@ -511,7 +514,7 @@ public class MyProfileFragment extends Fragment implements ActivityCompat.OnRequ
                     progressDialog.dismiss();
                     try {
                         UserInfo userInfo = response.body();
-                        if (userInfo.getId() != null) {
+                        if (userInfo.getAddressBook() != null) {
                             showDialog(true, "Profile pic changed successfully!");
                         } else {
                             showDialog(false, "There was a problem saving profile pic! Please try after sometime");

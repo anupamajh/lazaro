@@ -6,8 +6,10 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/default_profile_pic"
@@ -25,7 +27,8 @@
         <activity android:name=".GroupsActivity" />
         <activity android:name=".PeopleActivity" />
         <activity android:name=".CommunityActivity"></activity>
-        <activity android:name=".SupportActivity"></activity>
+        <activity android:name=".SupportActivity"
+            android:windowSoftInputMode="adjustNothing"></activity>
         <activity android:name=".SettingsActivity"></activity>
         <activity android:name=".Login"></activity>
         <activity android:name=".MainActivity">
