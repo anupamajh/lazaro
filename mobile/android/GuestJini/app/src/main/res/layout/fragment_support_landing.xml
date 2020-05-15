@@ -106,6 +106,7 @@
                                     android:layout_marginStart="32dp"
                                     android:layout_marginTop="20dp"
                                     android:layout_marginEnd="32dp"
+                                    android:padding="5dp"
                                     android:background="@drawable/search"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintHorizontal_bias="0.0"
@@ -114,11 +115,12 @@
 
                                     <EditText
                                         android:id="@+id/search"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="20dp"
                                         android:background="@color/colorWhite"
                                         android:ems="18"
+                                        android:layout_marginEnd="32dp"
                                         android:hint="@string/search"
                                         android:inputType="text"
                                         android:letterSpacing="0.07"
@@ -126,6 +128,7 @@
                                         android:paddingBottom="2dp"
                                         android:textColorHint="@color/colorSuvaGray"
                                         android:textSize="10sp"
+                                        app:layout_constraintRight_toLeftOf="@+id/searchIcon"
                                         app:layout_constraintBottom_toBottomOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
                                         app:layout_constraintTop_toTopOf="parent"></EditText>
