@@ -22,10 +22,16 @@ public class CommunityActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.communityIcon);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if(item.getItemId() != ACTIVITY_ID){
+//                for (int i = 0; i < bottomNavigationView.getMenu().size(); i++) {
+//                    MenuItem menuItem = bottomNavigationView.getMenu().getItem(i);
+//                    boolean isChecked = menuItem.getItemId() == item.getItemId();
+//                    menuItem.setChecked(isChecked);
+//                }
+                 if(item.getItemId() != ACTIVITY_ID){
                     switch (item.getItemId()){
                         case R.id.suppotIcon:
                         {
