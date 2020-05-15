@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -39,6 +40,9 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import Adapter.TicketAdapter;
 import okhttp3.OkHttpClient;
@@ -61,6 +65,8 @@ public class MyTicketsRecyclerViewFragment extends Fragment implements TicketAda
     ConstraintLayout clearAllLayout, ascendingLayout, todayLayout, yesterdayLayout;
     TextView ascending, clearAll, clearDescription;
     LinearLayout openLayout;
+    private EditText txtSearch;
+    private ImageView searchIcon;
     public ArrayList<Ticket> tickets = new ArrayList<>();
     AlertDialog progressDialog;
 
@@ -89,6 +95,10 @@ public class MyTicketsRecyclerViewFragment extends Fragment implements TicketAda
         clearAll = rootView.findViewById(R.id.clearAll);
         clearDescription = rootView.findViewById(R.id.clearDescription);
         openLayout = rootView.findViewById(R.id.openLayout);
+        txtSearch = rootView.findViewById(R.id.search);
+        searchIcon = rootView.findViewById(R.id.searchIcon);
+
+
 
 //        spinner=rootView.findViewById(R.id.selectDateSpinner);
 //        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
@@ -175,6 +185,8 @@ public class MyTicketsRecyclerViewFragment extends Fragment implements TicketAda
                 boolean hasError = true;
                 TicketResponse ticketResponse = response.body();
                 if (ticketResponse.isSuccess()) {
+                    tickets = new ArrayList<>();
+                    tickets.addAll(ticketResponse.getTaskTicketList());
                     ticketAdapter.updateData(ticketResponse.getTaskTicketList());
                 } else {
                     showDialog(false,"There was a problem fetching tickets! Please try after sometime");
@@ -238,6 +250,26 @@ public class MyTicketsRecyclerViewFragment extends Fragment implements TicketAda
                 }
             }
         });
+
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String strSearch = txtSearch.getText().toString().trim();
+                if(!strSearch.equals("")){
+                    List<Ticket> collect = tickets.stream().filter(ticket -> (
+                            (ticket.getTicketNarration() + " " + ticket.getTicketTitle())
+                                    .toLowerCase().trim()
+                                    .contains(strSearch.toLowerCase().trim()))
+                    ).collect(Collectors.toList());
+                    ticketAdapter.updateData(collect);
+
+                }else{
+                    ticketAdapter.updateData(tickets);
+                }
+
+            }
+        });
+
         return rootView;
 
     }

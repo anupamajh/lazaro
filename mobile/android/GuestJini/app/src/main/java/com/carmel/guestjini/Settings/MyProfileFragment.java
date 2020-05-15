@@ -378,6 +378,8 @@ public class MyProfileFragment extends Fragment implements ActivityCompat.OnRequ
                             txtPhoneNo.setText(userInfo.getPhone());
                             txtEmail.setText(userInfo.getAddressBook().getEmail1());
                             txtPlaceOfOrigin.setText("");
+
+
                         }
                     }
                 } catch (

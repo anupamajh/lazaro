@@ -158,6 +158,7 @@ public class TicketAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     public void updateData(List<Ticket> ticketList){
+        this.tickets = new ArrayList<>();
         this.tickets.addAll(ticketList);
         notifyDataSetChanged();;
     }

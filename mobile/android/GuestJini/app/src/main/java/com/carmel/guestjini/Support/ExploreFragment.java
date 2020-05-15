@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,6 +38,8 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import Adapter.ExploreTicketsAdapter;
 import okhttp3.OkHttpClient;
@@ -56,6 +59,8 @@ public class ExploreFragment extends Fragment implements ExploreTicketsAdapter.O
     private LinearLayout elevatorLayout;
     private ConstraintLayout filterPopup;
     private ExploreTicketsAdapter exploreTicketsAdapter;
+    private EditText txtSearch;
+    private ImageView searchIcon;
     AlertDialog progressDialog;
 
     @Override
@@ -78,6 +83,8 @@ public class ExploreFragment extends Fragment implements ExploreTicketsAdapter.O
         dialogClearFilter = rootView.findViewById(R.id.clearFilterId);
         elevators = (TextView) rootView.findViewById(R.id.elevators);
         articlesDetails = (TextView) rootView.findViewById(R.id.articlesDetails);
+        txtSearch = rootView.findViewById(R.id.search);
+        searchIcon = rootView.findViewById(R.id.searchIcon);
 
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -86,31 +93,22 @@ public class ExploreFragment extends Fragment implements ExploreTicketsAdapter.O
         recyclerView.setAdapter(exploreTicketsAdapter);
         recyclerView.setHasFixedSize(true);
 
-//        TicketsModel ticketsModel=new TicketsModel();
-//        ticketsModel.setTicketsName("Elevator is not working?");
-//        ticketsModel.setTicketsAuthorName("Author - John Doe");
-//        ticketsModel.setTicketsDate("10 Jan 2019");
-//        ticketsModel.setTicketsDescription("Lorem ipsum dolor sit amet consectetur adipiscing elit sodales.");
-//        ticketsModel.setNavigationIcon(R.drawable.ic_navigate_next_black_24dp);
-//        ticketsModelsList.add(ticketsModel);
-//
-//
-//        ticketsModel=new TicketsModel();
-//        ticketsModel.setTicketsName("Coffee machine is not working?");
-//        ticketsModel.setTicketsAuthorName("Author - Jaret Quartz");
-//        ticketsModel.setTicketsDate("03 Jan 2019");
-//        ticketsModel.setTicketsDescription("Lorem ipsum dolor sit amet consectetur adipiscing elit sodales.");
-//        ticketsModel.setNavigationIcon(R.drawable.ic_navigate_next_black_24dp);
-//        ticketsModelsList.add(ticketsModel);
-//
-//
-//        ticketsModel=new TicketsModel();
-//        ticketsModel.setTicketsName("What is the speed of Wifi?");
-//        ticketsModel.setTicketsAuthorName("Author - John Doe");
-//        ticketsModel.setTicketsDate("29 Dec 2018");
-//        ticketsModel.setTicketsDescription("Lorem ipsum dolor sit amet consectetur adipiscing elit sodales.");
-//        ticketsModel.setNavigationIcon(R.drawable.ic_navigate_next_black_24dp);
-//        ticketsModelsList.add(ticketsModel);
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String searchText = txtSearch.getText().toString().trim();
+                if (!searchText.equals("")) {
+                    List<KB> collection = kbArrayList.stream()
+                            .filter(kb -> (kb.getAuthorName() + " " +
+                                    kb.getTopicTitle() + " " +
+                                    kb.getTopicNarration()).toLowerCase().contains(searchText.toLowerCase()))
+                            .collect(Collectors.toList());
+                    exploreTicketsAdapter.update(collection);
+                } else {
+                    exploreTicketsAdapter.update(kbArrayList);
+                }
+            }
+        });
 
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,54 +174,7 @@ public class ExploreFragment extends Fragment implements ExploreTicketsAdapter.O
                 filterPopup.setVisibility(View.GONE);
             }
         });
-//        exploreFilterIcon.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                final Dialog dialog = new Dialog(getContext());
-//                dialog.setContentView(R.layout.explore_filter_list);
-//                WindowManager.LayoutParams wmlp = dialog.getWindow().getAttributes();
-//                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                wmlp.gravity = Gravity.TOP | Gravity.LEFT;
-//                wmlp.x = 50;   //x position
-//                wmlp.y = 350;   //y position
-//                TextView elevators = (TextView) dialog.findViewById(R.id.elevators);
-//                elevators.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        dialog.dismiss();
-//                        articlesDetails.setText("15 articles found in Elevator category.");
-//                        showingCategories.setVisibility(View.GONE);
-//                        clearFilter.setVisibility(View.VISIBLE);
-//                        elevatorLayout.setVisibility(View.VISIBLE);
-//                        showing.setText("Showing 03 of 15");
-//                        dialogClearFilter=dialog.findViewById(R.id.clearFilterId);
-//                        dialogClearFilter.setTextColor(Color.parseColor("#32BDD2"));
-//                        dialogClearFilter.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                showingCategories.setVisibility(View.VISIBLE);
-//                                clearFilter.setVisibility(View.GONE);
-//                                elevatorLayout.setVisibility(View.GONE);
-//                                articlesDetails.setText(getText(R.string.filer_description));
-//                                showing.setText(getText(R.string.show));
-//                            }
-//                        });
-//
-//                        clearFilter.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                showingCategories.setVisibility(View.VISIBLE);
-//                                clearFilter.setVisibility(View.GONE);
-//                                elevatorLayout.setVisibility(View.GONE);
-//                                articlesDetails.setText(getText(R.string.filer_description));
-//                                showing.setText(getText(R.string.show));
-//                            }
-//                        });
-//                    }
-//                });
-//                dialog.show();
-//            }
-//        });
+
 
         this.getKbList();
 
@@ -245,7 +196,7 @@ public class ExploreFragment extends Fragment implements ExploreTicketsAdapter.O
 
     private void getKbList() {
         try {
-           progressDialog.show();
+            progressDialog.show();
             AuthServiceHolder authServiceHolder = new AuthServiceHolder();
             SharedPreferences preferences = getContext().getSharedPreferences("GuestJini", Context.MODE_PRIVATE);
             String accessToken = preferences.getString("access_token", "");
@@ -268,25 +219,42 @@ public class ExploreFragment extends Fragment implements ExploreTicketsAdapter.O
                         progressDialog.dismiss();
                         KBResponse kbResponse = response.body();
                         if (kbResponse.getSuccess()) {
-                            exploreTicketsAdapter.update(kbResponse.getKbList());
+                            final Bundle bundle = getArguments();
+                            String strSearch = "";
+                            if (bundle != null) {
+                                if (bundle.containsKey("searchText")) {
+                                    strSearch = bundle.getString("searchText").trim();
+                                    txtSearch.setText(strSearch);
+                                }
+                            }
                             kbArrayList = new ArrayList<>();
                             kbArrayList.addAll(kbResponse.getKbList());
+                            if(strSearch.equals("")) {
+                                exploreTicketsAdapter.update(kbResponse.getKbList());
+                            }else{
+                                List<KB> collection = kbArrayList.stream()
+                                        .filter(kb -> (kb.getAuthorName() + " " +
+                                                kb.getTopicTitle() + " " +
+                                                kb.getTopicNarration()).toLowerCase().contains(bundle.getString("searchText").trim().toLowerCase()))
+                                        .collect(Collectors.toList());
+                                exploreTicketsAdapter.update(collection);
+                            }
                         } else {
-                            showDialog(false,"There was a problem fetching articles! Please try after sometime");
+                            showDialog(false, "There was a problem fetching articles! Please try after sometime");
                         }
                     } catch (Exception ex) {
-                        showDialog(false,"There was a problem fetching articles! Please try after sometime");
+                        showDialog(false, "There was a problem fetching articles! Please try after sometime");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<KBResponse> call, Throwable t) {
                     progressDialog.dismiss();
-                    showDialog(false,"There was a problem fetching articles! Please try after sometime");
+                    showDialog(false, "There was a problem fetching articles! Please try after sometime");
                 }
             });
         } catch (Exception ex) {
-            showDialog(false,"There was a problem fetching articles! Please try after sometime");
+            showDialog(false, "There was a problem fetching articles! Please try after sometime");
         }
 
     }
