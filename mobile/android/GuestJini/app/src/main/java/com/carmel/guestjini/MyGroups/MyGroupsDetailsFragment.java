@@ -253,7 +253,7 @@ public class MyGroupsDetailsFragment extends Fragment implements JoinedMembersAd
         pendingRequestsRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
 
         pendingRequests.setOnClickListener(new View.OnClickListener() {
-            private boolean flag = true;
+            private boolean flag = false;
 
             @Override
             public void onClick(View v) {
