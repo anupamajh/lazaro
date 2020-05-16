@@ -110,16 +110,26 @@ public class SubscribedGroupChatFragment extends Fragment {
         informationIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SubscribedGroupDetailedFragment subscribedGroupDetailedFragment = new SubscribedGroupDetailedFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.interestGroupsPlaceHolder, subscribedGroupDetailedFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-                Bundle bundle = new Bundle();
-                bundle.putString("groupId", groupId);
-                bundle.putString("groupType", String.valueOf(groupType));
-                subscribedGroupDetailedFragment.setArguments(bundle);
+                if(groupType == 1) {
+                    SubscribedGroupDetailedFragment subscribedGroupDetailedFragment = new SubscribedGroupDetailedFragment();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.interestGroupsPlaceHolder, subscribedGroupDetailedFragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("groupId", groupId);
+                    bundle.putString("groupType", String.valueOf(groupType));
+                    subscribedGroupDetailedFragment.setArguments(bundle);
+                }else if(groupType == 2){
+                    final Intent intent;
+                    intent =  new Intent(getContext(), CommunityGroupsActivity.class);
+                    getContext().startActivity(intent);
+                }else if(groupType == 3){
+                    final Intent intent;
+                    intent =  new Intent(getContext(), MyGroupsActivity.class);
+                    getContext().startActivity(intent);
+                }
             }
         });
 

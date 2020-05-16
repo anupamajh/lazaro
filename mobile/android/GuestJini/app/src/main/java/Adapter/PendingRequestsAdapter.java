@@ -62,7 +62,7 @@ public class PendingRequestsAdapter extends RecyclerView.Adapter<PendingRequests
             if(pendingRequestsModel.getHasAcceptedInvitation() == 0){
                 holder.invitationSentMessage.setText("Invitation Sent");
             }else {
-                holder.invitationSentMessage.setText("Invitation Accepted");
+                holder.invitationSentMessage.setText("Accepted");
             }
         }
     }

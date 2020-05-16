@@ -128,7 +128,7 @@
                 <TextView
                     android:id="@+id/invitationSentMessage"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="18dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="0dp"
@@ -138,7 +138,7 @@
                     android:textColor="@color/colorDimGray"
                     android:textSize="11sp"
                     app:fontFamily="@font/roboto"
-                    tools:layout_editor_absoluteY="20dp" />
+                     />
 
                 <TextView
                     android:id="@+id/invitationSentDate"
