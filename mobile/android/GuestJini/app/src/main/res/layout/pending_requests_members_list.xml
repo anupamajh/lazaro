@@ -116,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:layout_below="@+id/invitationSentMessage"
-                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="4dp"
                     android:backgroundTint="@color/colorSummerSky"
