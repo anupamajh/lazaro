@@ -113,7 +113,7 @@
                 android:visibility="visible">
                 <Button
                     android:id="@+id/inviteButton"
-                    android:layout_width="85dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:layout_below="@+id/invitationSentMessage"
                     android:layout_alignParentStart="true"
