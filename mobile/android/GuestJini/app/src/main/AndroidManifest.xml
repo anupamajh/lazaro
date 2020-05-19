@@ -18,19 +18,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme1"
         android:usesCleartextTraffic="true">
-        <activity android:name=".WebView"></activity>
-        <activity android:name=".AccountsActivity"></activity>
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".WebView" />
+        <activity android:name=".AccountsActivity" />
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".MyGroupsActivity" />
         <activity android:name=".CommunityGroupsActivity" />
         <activity android:name=".InterestGroupsActivity" />
         <activity android:name=".GroupsActivity" />
         <activity android:name=".PeopleActivity" />
-        <activity android:name=".CommunityActivity"></activity>
-        <activity android:name=".SupportActivity"
-            android:windowSoftInputMode="adjustNothing"></activity>
-        <activity android:name=".SettingsActivity"></activity>
-        <activity android:name=".Login"></activity>
+        <activity android:name=".CommunityActivity" />
+        <activity
+            android:name=".SupportActivity"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".Login" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
