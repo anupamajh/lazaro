@@ -139,7 +139,7 @@
                               android:text="@string/name"
                               android:textColor="@color/colorDimGray"
                               android:textSize="12sp"
-                              app:fontFamily="@font/roboto"
+                              app:fontFamily="@font/roboto_medium"
                               app:layout_constraintBottom_toTopOf="@+id/johnDeoText"
                               app:layout_constraintStart_toStartOf="parent"
                               app:layout_constraintTop_toTopOf="parent" />
@@ -187,7 +187,7 @@
                               android:text="@string/gender"
                               android:textColor="@color/colorDimGray"
                               android:textSize="12sp"
-                              app:fontFamily="@font/roboto"
+                              app:fontFamily="@font/roboto_medium"
                               app:layout_constraintStart_toStartOf="parent"
                               app:layout_constraintTop_toTopOf="parent" />
 
@@ -245,7 +245,7 @@
                               android:text="@string/age"
                               android:textColor="@color/colorDimGray"
                               android:textSize="12sp"
-                              app:fontFamily="@font/roboto"
+                              app:fontFamily="@font/roboto_medium"
                               app:layout_constraintStart_toStartOf="parent"
                               app:layout_constraintTop_toTopOf="parent" />
 
@@ -306,7 +306,7 @@
                               android:textAllCaps="true"
                               android:textColor="@color/colorDimGray"
                               android:textSize="12sp"
-                              app:fontFamily="@font/roboto"
+                              app:fontFamily="@font/roboto_medium"
                               app:layout_constraintStart_toStartOf="parent"
                               app:layout_constraintTop_toTopOf="parent" />
 
@@ -367,7 +367,7 @@
                               android:textAllCaps="true"
                               android:textColor="@color/colorDimGray"
                               android:textSize="12sp"
-                              app:fontFamily="@font/roboto"
+                              app:fontFamily="@font/roboto_medium"
                               app:layout_constraintStart_toStartOf="parent"
                               app:layout_constraintTop_toTopOf="parent" />
 
@@ -422,7 +422,7 @@
                               android:text="@string/place_of_origin"
                               android:textColor="@color/colorDimGray"
                               android:textSize="12sp"
-                              app:fontFamily="@font/roboto"
+                              app:fontFamily="@font/roboto_medium"
                               app:layout_constraintStart_toStartOf="parent"
                               app:layout_constraintTop_toTopOf="parent" />
 
@@ -445,7 +445,7 @@
                               android:text=""
                               android:textColor="@color/colorDimGray"
                               android:textSize="12sp"
-                              app:fontFamily="@font/roboto"
+                              app:fontFamily="@font/roboto_medium"
                               app:layout_constraintTop_toBottomOf="@id/yourPlaceOfOriginText"
                               app:layout_constraintStart_toStartOf="@id/editIcon"
                               app:layout_constraintEnd_toStartOf="@id/yourPlaceToggleIcon" />
@@ -487,7 +487,7 @@
                               android:text="@string/my_interests"
                               android:textColor="@color/colorDimGray"
                               android:textSize="12sp"
-                              app:fontFamily="@font/roboto"
+                              app:fontFamily="@font/roboto_medium"
                               app:layout_constraintStart_toStartOf="parent"
                               app:layout_constraintTop_toBottomOf="@+id/redCircle" />
 
@@ -620,7 +620,7 @@
                         android:text="@string/cameraDescription"
                         android:textColor="@color/colorDimGray"
                         android:textSize="10sp"
-                        app:fontFamily="@font/roboto"
+                        app:fontFamily="@font/roboto_medium"
                         app:layout_constraintStart_toEndOf="@+id/cameraIcon"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -682,7 +682,7 @@
                         android:text="@string/galleryDescription"
                         android:textColor="@color/colorSuvaGray"
                         android:textSize="10sp"
-                        app:fontFamily="@font/roboto"
+                        app:fontFamily="@font/roboto_medium"
                         android:lineSpacingExtra="3dp"
                         app:layout_constraintStart_toEndOf="@+id/galleryIcon"
                         app:layout_constraintTop_toTopOf="parent" />

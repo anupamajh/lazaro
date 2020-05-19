@@ -38,7 +38,7 @@
             android:text="@string/dateTime"
             android:textColor="@color/colorSuvaGray"
             android:textSize="9sp"
-            app:fontFamily="@font/roboto"
+            app:fontFamily="@font/roboto_medium"
             android:letterSpacing="0.05"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/notificationIndicator" />
@@ -69,7 +69,7 @@
             android:text="@string/userMassage"
             android:textColor="@color/colorDimGray"
             android:textSize="10sp"
-            app:fontFamily="@font/roboto"
+            app:fontFamily="@font/roboto_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userName" />
     </androidx.constraintlayout.widget.ConstraintLayout>

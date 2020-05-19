@@ -39,7 +39,7 @@
             android:text="@string/ticket_name"
             android:textColor="@color/colorZambezi1"
             android:textSize="12sp"
-            app:fontFamily="@font/roboto"
+            app:fontFamily="@font/roboto_medium"
             app:layout_constraintStart_toEndOf="@+id/profilePicture"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -67,7 +67,7 @@
             android:text="@string/ticket_date"
             android:textColor="@color/colorSuvaGray"
             android:textSize="9sp"
-            app:fontFamily="@font/roboto"
+            app:fontFamily="@font/roboto_medium"
             app:layout_constraintStart_toEndOf="@+id/profilePicture"
             app:layout_constraintTop_toBottomOf="@+id/ticketAuthorName" />
 
@@ -83,7 +83,7 @@
             android:text="@string/ticket_description"
             android:textColor="@color/colorDimGray"
             android:textSize="11sp"
-            app:fontFamily="@font/roboto"
+            app:fontFamily="@font/roboto_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ticketDate" />

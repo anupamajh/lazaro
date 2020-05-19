@@ -29,7 +29,7 @@
             android:text="@string/clear"
             android:textColor="@color/colorSuvaGray"
             android:textSize="10sp"
-            app:fontFamily="@font/roboto"
+            app:fontFamily="@font/roboto_medium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

@@ -27,7 +27,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="5dp"
         android:text="@string/rent_invoice_no"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/roboto_medium"
         android:textColor="@color/colorDimGray"
         android:textSize="10sp"
         android:letterSpacing="0.05"

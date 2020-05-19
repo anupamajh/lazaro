@@ -15,8 +15,6 @@ import com.carmel.guestjini.R;
 
 import java.util.ArrayList;
 
-import Model.CommunityGroupsModel;
-
 import static Model.CommunityGroupsModel.JoinedGroupsCell;
 import static Model.CommunityGroupsModel.RemovedCell;
 

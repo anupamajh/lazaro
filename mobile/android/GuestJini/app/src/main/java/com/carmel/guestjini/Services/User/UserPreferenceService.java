@@ -1,7 +1,6 @@
 package com.carmel.guestjini.Services.User;
 
 import com.carmel.guestjini.Common.EndPoints;
-import com.carmel.guestjini.Models.GenericResponse;
 import com.carmel.guestjini.Models.User.UserPreferenceResponse;
 
 import java.util.Map;

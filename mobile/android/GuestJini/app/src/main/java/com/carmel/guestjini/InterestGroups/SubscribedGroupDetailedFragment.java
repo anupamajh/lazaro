@@ -24,7 +24,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.carmel.guestjini.Common.EndPoints;
-import com.carmel.guestjini.CommunityGroups.CommunityGroupsFragment;
 import com.carmel.guestjini.CommunityGroupsActivity;
 import com.carmel.guestjini.Components.OkHttpClientInstance;
 import com.carmel.guestjini.Models.Group.Group;
@@ -43,7 +42,6 @@ import java.util.Map;
 
 import Adapter.InterestGroupMemberAdapter;
 import Model.InterestGroupMembersModel;
-import Model.InvitingMembersModel;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;

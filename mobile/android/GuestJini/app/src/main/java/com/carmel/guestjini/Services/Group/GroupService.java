@@ -2,7 +2,6 @@ package com.carmel.guestjini.Services.Group;
 
 import com.carmel.guestjini.Common.EndPoints;
 import com.carmel.guestjini.Models.Group.Group;
-import com.carmel.guestjini.Models.Group.GroupConversation;
 import com.carmel.guestjini.Models.Group.GroupConversationResponse;
 import com.carmel.guestjini.Models.Group.GroupResponse;
 

@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".Common.GuestJiniApplication"
         android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
@@ -18,35 +19,43 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme1"
         android:usesCleartextTraffic="true">
-        <activity android:name=".WebView" />
-        <activity android:name=".AccountsActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".MyGroupsActivity" />
-        <activity android:name=".CommunityGroupsActivity" />
-        <activity android:name=".InterestGroupsActivity" />
-        <activity android:name=".GroupsActivity" />
-        <activity android:name=".PeopleActivity" />
-        <activity android:name=".CommunityActivity" />
         <activity
-            android:name=".SupportActivity"
-            android:windowSoftInputMode="adjustNothing" />
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".Login" />
-        <activity android:name=".MainActivity">
+            android:name=".Screens.Common.Main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CalenderActivity" />
-        <activity android:name=".AppAccessRequest" />
-        <activity android:name=".ForgotPasswordOTPValidation" />
-        <activity android:name=".ForgotPassword" />
 
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
+<!--        <activity android:name=".WebView" />-->
+<!--        <activity android:name=".AccountsActivity" />-->
+<!--        <activity android:name=".ProfileActivity" />-->
+<!--        <activity android:name=".MyGroupsActivity" />-->
+<!--        <activity android:name=".CommunityGroupsActivity" />-->
+<!--        <activity android:name=".InterestGroupsActivity" />-->
+<!--        <activity android:name=".GroupsActivity" />-->
+<!--        <activity android:name=".PeopleActivity" />-->
+<!--        <activity android:name=".CommunityActivity" />-->
+<!--        <activity-->
+<!--            android:name=".SupportActivity"-->
+<!--            android:windowSoftInputMode="adjustNothing" />-->
+<!--        <activity android:name=".SettingsActivity" />-->
+<!--        <activity android:name=".Login" />-->
+<!--        <activity android:name=".MainActivity">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+<!--        <activity android:name=".CalenderActivity" />-->
+<!--        <activity android:name=".AppAccessRequest" />-->
+<!--        <activity android:name=".ForgotPasswordOTPValidation" />-->
+<!--        <activity android:name=".ForgotPassword" />-->
+
+<!--        <meta-data-->
+<!--            android:name="preloaded_fonts"-->
+<!--            android:resource="@array/preloaded_fonts" />-->
     </application>
 
 </manifest>

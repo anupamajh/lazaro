@@ -50,7 +50,7 @@
                     android:text="Gym"
                     android:textColor="#909090"
                     android:textSize="10dp"
-                    app:fontFamily="@font/roboto"
+                    app:fontFamily="@font/roboto_medium"
                     tools:layout_editor_absoluteX="37dp"
                     tools:layout_editor_absoluteY="70dp" />
 
@@ -66,7 +66,7 @@
                     android:text="Morning Walk"
                     android:textColor="#909090"
                     android:textSize="10dp"
-                    app:fontFamily="@font/roboto"
+                    app:fontFamily="@font/roboto_medium"
                     tools:layout_editor_absoluteX="37dp"
                     tools:layout_editor_absoluteY="99dp" />
         </RelativeLayout>
@@ -119,7 +119,7 @@
                     android:text="Adventure Photography"
                     android:textColor="#909090"
                     android:textSize="10dp"
-                    app:fontFamily="@font/roboto"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/photographyTitle" />
 
@@ -134,7 +134,7 @@
                     android:text="Panaroma"
                     android:textColor="#909090"
                     android:textSize="10dp"
-                    app:fontFamily="@font/roboto"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/adventurePhotographyText" />
 
@@ -149,7 +149,7 @@
                     android:text="Cityscape Photography"
                     android:textColor="#909090"
                     android:textSize="10dp"
-                    app:fontFamily="@font/roboto"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/PanaromaText" />
         </RelativeLayout>
@@ -202,7 +202,7 @@
                     android:text="Action Thriller"
                     android:textColor="#909090"
                     android:textSize="10dp"
-                    app:fontFamily="@font/roboto"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/filmTitle" />
 
@@ -217,7 +217,7 @@
                     android:text="Comedy"
                     android:textColor="#909090"
                     android:textSize="10dp"
-                    app:fontFamily="@font/roboto"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/actionThrillerText" />
 
@@ -232,7 +232,7 @@
                     android:text="Horror"
                     android:textColor="#909090"
                     android:textSize="10dp"
-                    app:fontFamily="@font/roboto"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ComedyText" />
 
@@ -247,7 +247,7 @@
                     android:text="Mystery/Drama"
                     android:textColor="#909090"
                     android:textSize="10dp"
-                    app:fontFamily="@font/roboto"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/horrorText" />
         </RelativeLayout>

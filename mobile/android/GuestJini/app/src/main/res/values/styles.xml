@@ -14,7 +14,10 @@
     <style name="AppTheme.RoundedCornerMaterialButton" parent="Widget.MaterialComponents.Button">
         <item name="android:background">@drawable/rounded_shape</item>
     </style>
-
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
     <style name="button" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/colorSummerSky</item>
         <item name="cornerRadius">@dimen/login_button_corners_radius</item>

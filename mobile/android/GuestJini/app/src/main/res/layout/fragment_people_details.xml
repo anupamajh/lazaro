@@ -106,7 +106,7 @@
                         android:text="Male"
                         android:textColor="@color/colorSuvaGray"
                         android:textSize="10sp"
-                        app:fontFamily="@font/roboto"
+                        app:fontFamily="@font/roboto_medium"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/profileName" />
@@ -173,7 +173,7 @@
                         android:text="MOBILE"
                         android:textColor="@color/colorDimGray"
                         android:textSize="10sp"
-                        app:fontFamily="@font/roboto"
+                        app:fontFamily="@font/roboto_medium"
                         app:layout_constraintStart_toEndOf="@+id/addToFavouriteLinearLayout"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -198,7 +198,7 @@
                         android:text="EMAIL"
                         android:textColor="@color/colorDimGray"
                         android:textSize="10sp"
-                        app:fontFamily="@font/roboto"
+                        app:fontFamily="@font/roboto_medium"
                         app:layout_constraintStart_toEndOf="@+id/addToFavouriteLinearLayout"
                         app:layout_constraintTop_toBottomOf="@+id/mobileNo" />
 
@@ -267,7 +267,7 @@
                         android:text="Cycling"
                         android:textColor="@color/colorSuvaGray"
                         android:textSize="10sp"
-                        app:fontFamily="@font/roboto"
+                        app:fontFamily="@font/roboto_medium"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/outdoorInterestsTitle" />
 
@@ -293,7 +293,7 @@
                         android:text="Hiking"
                         android:textColor="@color/colorSuvaGray"
                         android:textSize="10sp"
-                        app:fontFamily="@font/roboto"
+                        app:fontFamily="@font/roboto_medium"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/cyclingDivider" />
 
@@ -321,7 +321,7 @@
                         android:text="Cooking"
                         android:textColor="@color/colorSuvaGray"
                         android:textSize="10sp"
-                        app:fontFamily="@font/roboto"
+                        app:fontFamily="@font/roboto_medium"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/hobbiesTitle" />
 
@@ -348,7 +348,7 @@
                         android:text="Gardening"
                         android:textColor="@color/colorSuvaGray"
                         android:textSize="10sp"
-                        app:fontFamily="@font/roboto"
+                        app:fontFamily="@font/roboto_medium"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/cookingDivider" />
@@ -406,7 +406,7 @@
                         android:text="Artificial Intelligence"
                         android:textColor="#909090"
                         android:textSize="10dp"
-                        app:fontFamily="@font/roboto"
+                        app:fontFamily="@font/roboto_medium"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/techTitle" />
 
@@ -433,7 +433,7 @@
                         android:text="Robotics"
                         android:textColor="#909090"
                         android:textSize="10dp"
-                        app:fontFamily="@font/roboto"
+                        app:fontFamily="@font/roboto_medium"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/roboticsDivider" />

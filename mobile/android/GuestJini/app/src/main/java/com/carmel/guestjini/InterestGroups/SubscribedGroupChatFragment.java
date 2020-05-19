@@ -30,7 +30,6 @@ import com.carmel.guestjini.Models.Group.Group;
 import com.carmel.guestjini.Models.Group.GroupConversation;
 import com.carmel.guestjini.Models.Group.GroupConversationResponse;
 import com.carmel.guestjini.Models.Group.GroupResponse;
-import com.carmel.guestjini.Models.User.AddressBook;
 import com.carmel.guestjini.MyGroupsActivity;
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Services.Authentication.AuthService;
@@ -44,7 +43,6 @@ import java.util.Map;
 
 import Adapter.GroupChatAdapter;
 import Model.GroupChatModel;
-import Model.InvitingMembersModel;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;

@@ -60,7 +60,7 @@
                     android:text="@string/people_name"
                     android:textColor="@color/colorDimGray"
                     android:textSize="12sp"
-                    app:fontFamily="@font/roboto"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintStart_toEndOf="@+id/peopleProfilePicture"
                     tools:layout_editor_absoluteY="20dp" />
 
@@ -86,7 +86,7 @@
                     android:text="@string/people_gender"
                     android:textColor="@color/colorSuvaGray"
                     android:textSize="10sp"
-                    app:fontFamily="@font/roboto"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintStart_toEndOf="@+id/peopleProfilePicture"
                     app:layout_constraintTop_toBottomOf="@+id/profileName" />
 
@@ -103,7 +103,7 @@
                     android:textColor="@color/colorSuvaGray"
                     android:textSize="10sp"
                     android:visibility="gone"
-                    app:fontFamily="@font/roboto"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintStart_toEndOf="@+id/peopleProfilePicture"
                     app:layout_constraintTop_toBottomOf="@+id/profileName" />
             </RelativeLayout>
@@ -162,7 +162,7 @@
                     android:text="@string/people_gender"
                     android:textColor="@color/colorDarkGray"
                     android:textSize="10sp"
-                    app:fontFamily="@font/roboto"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintTop_toBottomOf="@+id/invitationSentMessage" />
             </LinearLayout>
 

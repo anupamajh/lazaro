@@ -107,13 +107,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="3dp"
-                    android:fontFamily="@font/roboto"
+                    android:fontFamily="@font/roboto_medium"
                     android:letterSpacing="0.04"
                     android:lineSpacingExtra="2dp"
                     android:text="@string/group_description"
                     android:textColor="@color/colorSuvaGray"
                     android:textSize="10sp"
-                    app:fontFamily="@font/roboto"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/myGroupCreationDate" />
 
@@ -249,7 +249,7 @@
                         android:text="@string/requestText"
                         android:textColor="@color/colorDimGray"
                         android:textSize="11sp"
-                        app:fontFamily="@font/roboto"
+                        app:fontFamily="@font/roboto_medium"
                         app:layout_constraintStart_toStartOf="parent"
                         tools:layout_editor_absoluteY="26dp" />
                 </RelativeLayout>

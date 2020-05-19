@@ -62,7 +62,7 @@
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien. ultricies."
                 android:textColor="@color/colorDimGray"
                 android:textSize="10dp"
-                app:fontFamily="@font/roboto"
+                app:fontFamily="@font/roboto_medium"
                 android:letterSpacing="0.05"
                 android:lineSpacingExtra="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"

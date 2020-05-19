@@ -42,7 +42,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import Adapter.MyGroupsAdapter;
-import Model.CommunityGroupsModel;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;

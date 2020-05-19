@@ -91,7 +91,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="19dp"
             android:textSize="10sp"
-            app:fontFamily="@font/roboto"
+            app:fontFamily="@font/roboto_medium"
             android:textColor="@color/colorSuvaGray"
             android:text="@string/interestGroupDescription"
             app:layout_constraintTop_toBottomOf="@+id/interestGroupName"
@@ -109,7 +109,7 @@
 <!--            android:text="@string/interestGroupDescription"-->
 <!--            android:textColor="@color/colorSuvaGray"-->
 <!--            android:textSize="10sp"-->
-<!--            app:fontFamily="@font/roboto"-->
+<!--            app:fontFamily="@font/roboto_medium"-->
 <!--            app:layout_constraintBottom_toBottomOf="parent"-->
 <!--            app:layout_constraintEnd_toEndOf="parent"-->
 <!--            app:layout_constraintStart_toStartOf="@+id/interestGroupName"-->
@@ -275,7 +275,7 @@
 <!--                android:text="CREATED BY"-->
 <!--                android:textColor="@color/colorSuvaGray"-->
 <!--                android:textSize="10sp"-->
-<!--                app:fontFamily="@font/roboto"-->
+<!--                app:fontFamily="@font/roboto_medium"-->
 <!--                app:layout_constraintStart_toEndOf="@+id/systemIcon"-->
 <!--                app:layout_constraintTop_toTopOf="parent" />-->
 
@@ -301,7 +301,7 @@
 <!--                android:text="26 Jul 2018 03:48 PM"-->
 <!--                android:textColor="@color/colorDimGray"-->
 <!--                android:textSize="8sp"-->
-<!--                app:fontFamily="@font/roboto"-->
+<!--                app:fontFamily="@font/roboto_medium"-->
 <!--                app:layout_constraintStart_toEndOf="@+id/systemIcon"-->
 <!--                app:layout_constraintTop_toBottomOf="@+id/systemTitle" />-->
 <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
