@@ -11,28 +11,66 @@ import com.carmel.guestjini.Screens.Common.Controllers.BackPressedListener;
 import com.carmel.guestjini.Screens.Common.Controllers.BaseActivity;
 import com.carmel.guestjini.Screens.Common.FragmentHelper.FragmentFrameWrapper;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
+import com.carmel.guestjini.Screens.Common.SharedPreference.SharedPreferenceHelper;
+import com.carmel.guestjini.Screens.Login.LoginEventBus;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class MainActivity extends BaseActivity implements
         BackPressDispatcher,
-        FragmentFrameWrapper {
+        FragmentFrameWrapper,
+        BaseActivityMVCView.Listener,
+        LoginEventBus.Listener {
 
     private final Set<BackPressedListener> mBackPressedListeners = new HashSet<>();
     private ScreensNavigator mScreensNavigator;
     private BaseActivityMVCView viewMVC;
+    private SharedPreferenceHelper sharedPreferenceHelper;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mScreensNavigator = getCompositionRoot().getScreensNavigator();
+        getCompositionRoot().getLoginEventBus().registerListener(this);
         viewMVC = getCompositionRoot().getViewMVCFactory().getBaseActivityView(null);
+        sharedPreferenceHelper = getCompositionRoot().getSharedPreferenceHelper();
         setContentView(viewMVC.getRootView());
-        if(savedInstanceState == null){
-            mScreensNavigator.toWelcomeScreen();
+        if (savedInstanceState == null) {
+            if (sharedPreferenceHelper.readBooleanValue("isLoggedIn")) {
+                mScreensNavigator.toSupportHome();
+                viewMVC.showBottomNavigationView();
+            } else {
+                mScreensNavigator.toWelcomeScreen();
+                viewMVC.hideBottomNavigationView();
+            }
         }
 
+    }
+
+    @Override
+    public void onSupportClicked() {
+        mScreensNavigator.toSupportHome();
+    }
+
+    @Override
+    public void onCommunityClicked() {
+        mScreensNavigator.toCommunityHome();
+    }
+
+    @Override
+    public void onAccountsClicked() {
+        mScreensNavigator.toAccountsHome();
+    }
+
+    @Override
+    public void onRewardsClicked() {
+        mScreensNavigator.toRewardsHome();
+    }
+
+    @Override
+    public void onSettingsClicked() {
+        mScreensNavigator.toSettingsHome();
     }
 
     @Override
@@ -48,6 +86,11 @@ public class MainActivity extends BaseActivity implements
     @Override
     public void registerListener(BackPressedListener listener) {
 
+    }
+
+    @Override
+    public void onLoginSuccess(Object event) {
+        viewMVC.showBottomNavigationView();
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.carmel.guestjini.Networking.Users.AccessToken;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
 import com.carmel.guestjini.Screens.Common.SharedPreference.SharedPreferenceHelper;
+import com.carmel.guestjini.Screens.Common.ViewMVCFactory;
 
 import java.io.Serializable;
 
@@ -21,21 +22,27 @@ public class LoginController implements
     private final SharedPreferenceHelper sharedPreferenceHelper;
     private final AttemptLoginUseCase attemptLoginUseCase;
     private final DialogsManager mDialogsManager;
+    private ViewMVCFactory viewMVCFactory;
 
     private LoginViewMVC viewMVC;
     private ScreenState mScreenState = ScreenState.IDLE;
 
+    private LoginEventBus loginEventBus;
 
     public LoginController(
             ScreensNavigator mScreensNavigator,
             AttemptLoginUseCase attemptLoginUseCase,
             SharedPreferenceHelper sharedPreferenceHelper,
-            DialogsManager mDialogsManager
+            DialogsManager mDialogsManager,
+            ViewMVCFactory viewMVCFactory,
+            LoginEventBus loginEventBus
     ) {
         this.mScreensNavigator = mScreensNavigator;
         this.sharedPreferenceHelper = sharedPreferenceHelper;
         this.attemptLoginUseCase = attemptLoginUseCase;
         this.mDialogsManager = mDialogsManager;
+        this.viewMVCFactory = viewMVCFactory;
+        this.loginEventBus = loginEventBus;
     }
 
     public void onStart() {
@@ -110,6 +117,7 @@ public class LoginController implements
             viewMVC.showAuthenticationFailure();
         }else{
             mScreensNavigator.toSupportHome();
+            loginEventBus.postEvent(null);
         }
 
     }

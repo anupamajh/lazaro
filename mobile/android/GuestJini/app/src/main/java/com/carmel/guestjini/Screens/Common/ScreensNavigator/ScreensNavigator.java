@@ -1,7 +1,11 @@
 package com.carmel.guestjini.Screens.Common.ScreensNavigator;
 
+import com.carmel.guestjini.Screens.Common.BaseActivityView.BaseActivityMVCView;
 import com.carmel.guestjini.Screens.Common.FragmentHelper.FragmentFrameHelper;
 import com.carmel.guestjini.Screens.Login.LoginFragment;
+import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailFragment;
+import com.carmel.guestjini.Screens.Support.KBList.KBListFragment;
+import com.carmel.guestjini.Screens.Support.SupportHome.SupportHomeFragment;
 import com.carmel.guestjini.Screens.Welcome.WelcomeFragment;
 
 public class ScreensNavigator {
@@ -16,13 +20,52 @@ public class ScreensNavigator {
         mFragmentFrameHelper.replaceFragmentAndClearBackstack(WelcomeFragment.createFragment());
     }
 
-
     public void toLoginScreen() {
-        mFragmentFrameHelper.replaceFragment(LoginFragment.createFragment());
+        mFragmentFrameHelper.replaceFragmentAndClearBackstack(LoginFragment.createFragment());
     }
 
     public void toSupportHome() {
-        //TODO: Implement this method
-//        throw new RuntimeException("TODO");
+        mFragmentFrameHelper.replaceFragmentAndClearBackstack(SupportHomeFragment.createFragment());
     }
+
+    public void toCommunityHome() {
+        //TODO: Implement this method
+    }
+
+    public void toAccountsHome() {
+        //TODO: Implement this method
+    }
+
+    public void toRewardsHome() {
+        //TODO: Implement this method
+    }
+
+    public void toSettingsHome() {
+        //TODO: Implement this method
+    }
+
+    public void toKBList(String searchText) {
+        mFragmentFrameHelper.replaceFragment(KBListFragment.createFragment(searchText));
+    }
+
+    public void toKBList() {
+        mFragmentFrameHelper.replaceFragment(KBListFragment.createFragment(""));
+    }
+
+    public void toCreateTicket() {
+        //TODO: Implement this method
+    }
+
+    public void toTicketList() {
+        //TODO: Implement this method
+    }
+
+    public void toKBDetails(String kbId) {
+        mFragmentFrameHelper.replaceFragment(KBDetailFragment.createFragment(kbId));
+    }
+
+    public void navigateUp() {
+        mFragmentFrameHelper.navigateUp();
+    }
+
 }

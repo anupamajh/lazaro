@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Screens.Common.Dialogs.InfoDialog.InfoDialog;
+import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptDialog;
 
 public class DialogsManager {
 
@@ -25,7 +26,7 @@ public class DialogsManager {
             String title,
             String message,
             boolean isSuccess
-    ){
+    ) {
         DialogFragment dialogFragment = InfoDialog.createDialog(
                 title,
                 message,
@@ -54,6 +55,19 @@ public class DialogsManager {
                 title,
                 getString(R.string.network_filed_message),
                 false
+        );
+        dialogFragment.show(mFragmentManager, tag);
+    }
+
+    public void showUseCaseFailedDialog(
+            String title,
+            @Nullable String tag
+    ) {
+        DialogFragment dialogFragment = PromptDialog.newPromptDialog(
+                title,
+                getString(R.string.error_use_case_network_failed_message),
+                getString(R.string.error_network_call_failed_positive_button_caption),
+                getString(R.string.error_network_call_failed_negative_button_caption)
         );
         dialogFragment.show(mFragmentManager, tag);
     }

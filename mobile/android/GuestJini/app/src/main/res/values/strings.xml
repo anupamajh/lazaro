@@ -359,4 +359,7 @@
     <string name="amount_rs">Amount (Rs)</string>
     <string name="towardsRent">Towards rent for the month of Jul, 2108</string>
     <string name="rentAddress">Unit : Alta Vista - A Block - Floor 1 - 1A4 - R1 - POD 287</string>
+    <string name="error_use_case_network_failed_message">Error occurred while fetching data from server!</string>
+    <string name="error_network_call_failed_positive_button_caption">RETRY</string>
+    <string name="error_network_call_failed_negative_button_caption">CANCEL</string>
 </resources>

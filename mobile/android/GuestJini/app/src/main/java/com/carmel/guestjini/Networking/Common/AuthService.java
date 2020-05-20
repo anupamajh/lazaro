@@ -1,27 +1,21 @@
-package com.carmel.guestjini.Networking;
+package com.carmel.guestjini.Networking.Common;
 
-
-
-import com.carmel.guestjini.Networking.KnowledgeBase.KBResponse;
-import com.carmel.guestjini.Networking.Users.AccessToken;
-
-import java.util.Map;
+import com.carmel.guestjini.Models.Authentication.AccessToken;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 
-public interface GuestJiniAPI {
+public interface AuthService {
     @FormUrlEncoded
     @POST("/auth/oauth/token")
     Call<AccessToken> attemptLogin(
             @Header("Authorization") String credentials,
             @Field("grant_type") String grantType,
             @Field("username") String userName,
-            @Field("password") String password);
+            @Field("password")  String password);
 
     @FormUrlEncoded
     @POST("/auth/oauth/token")
@@ -30,10 +24,4 @@ public interface GuestJiniAPI {
             @Field("grant_type") String grantType,
             @Field("refresh_token") String refreshToken
     );
-
-    @POST("/guest-jini/kb/get-all")
-    Call<KBResponse> getKBList();
-
-    @POST("/guest-jini/kb/get")
-    Call<KBResponse> getKBById(@Body Map<String, String> postData);
 }

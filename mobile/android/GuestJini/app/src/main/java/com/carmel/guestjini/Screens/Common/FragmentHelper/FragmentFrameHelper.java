@@ -12,7 +12,11 @@ public class FragmentFrameHelper {
     private final FragmentFrameWrapper mFragmentFrameWrapper;
     private final FragmentManager mFragmentManager;
 
-    public FragmentFrameHelper(Activity activity, FragmentFrameWrapper fragmentFrameWrapper, FragmentManager fragmentManager) {
+    public FragmentFrameHelper(
+            Activity activity,
+            FragmentFrameWrapper fragmentFrameWrapper,
+            FragmentManager fragmentManager
+    ) {
         mActivity = activity;
         mFragmentFrameWrapper = fragmentFrameWrapper;
         mFragmentManager = fragmentManager;
@@ -21,6 +25,7 @@ public class FragmentFrameHelper {
     public void replaceFragment(Fragment newFragment) {
         replaceFragment(newFragment, true, false);
     }
+
 
     public void replaceFragmentDontAddToBackstack(Fragment newFragment) {
         replaceFragment(newFragment, false, false);
