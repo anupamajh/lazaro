@@ -21,6 +21,10 @@ import com.carmel.guestjini.Screens.Support.KBList.KBListViewMVC;
 import com.carmel.guestjini.Screens.Support.KBList.KBListViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.SupportHome.SupportHomeViewMVC;
 import com.carmel.guestjini.Screens.Support.SupportHome.SupportHomeViewMVCImpl;
+import com.carmel.guestjini.Screens.Support.TicketList.TicketListItem.TicketListItemViewMVC;
+import com.carmel.guestjini.Screens.Support.TicketList.TicketListItem.TicketListItemViewMVCImpl;
+import com.carmel.guestjini.Screens.Support.TicketList.TicketListViewMVC;
+import com.carmel.guestjini.Screens.Support.TicketList.TicketListViewMVCImpl;
 import com.carmel.guestjini.Screens.Welcome.WelcomeViewMVC;
 import com.carmel.guestjini.Screens.Welcome.WelcomeViewMVCImpl;
 
@@ -78,6 +82,21 @@ public class ViewMVCFactory {
         return new KBReviewItemViewMVCImpl(
                 layoutInflater,
                 parent
+        );
+    }
+
+    public TicketListItemViewMVC getTicketListItemViewMVC(@Nullable ViewGroup parent) {
+        return new TicketListItemViewMVCImpl(
+                layoutInflater,
+                parent
+        );
+    }
+
+    public TicketListViewMVC getTicketListViewMVC(@Nullable ViewGroup parent) {
+        return new TicketListViewMVCImpl(
+                layoutInflater,
+                parent,
+                this
         );
     }
 }

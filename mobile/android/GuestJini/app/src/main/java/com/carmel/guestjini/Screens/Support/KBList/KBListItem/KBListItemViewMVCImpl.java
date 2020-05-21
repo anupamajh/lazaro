@@ -48,7 +48,7 @@ public class KBListItemViewMVCImpl
     }
 
     @Override
-    public void bindQuestion(KB kb) {
+    public void bindKB(KB kb) {
         this.kb = kb;
         txtKBTitle.setText(kb.getTopicTitle());
         txtKBAuthorName.setText(kb.getAuthorName());

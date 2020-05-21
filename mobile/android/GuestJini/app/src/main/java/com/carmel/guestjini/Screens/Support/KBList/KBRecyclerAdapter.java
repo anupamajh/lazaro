@@ -55,7 +55,7 @@ public class KBRecyclerAdapter
 
     @Override
     public void onBindViewHolder(@NonNull KBViewHolder holder, int position) {
-        holder.viewMVC.bindQuestion(this.kbList.get(position));
+        holder.viewMVC.bindKB(this.kbList.get(position));
     }
 
     @Override

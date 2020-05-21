@@ -10,7 +10,7 @@ public interface KBListItemViewMVC extends ObservableViewMvc<KBListItemViewMVC.L
         void onKBItemClicked(KB kb);
     }
 
-    void bindQuestion(KB kb);
+    void bindKB(KB kb);
 
 
 }

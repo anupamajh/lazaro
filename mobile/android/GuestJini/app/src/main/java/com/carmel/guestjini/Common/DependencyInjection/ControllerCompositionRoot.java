@@ -29,7 +29,9 @@ import com.carmel.guestjini.Screens.Login.LoginEventBus;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailController;
 import com.carmel.guestjini.Screens.Support.KBList.KBListController;
 import com.carmel.guestjini.Screens.Support.SupportHome.SupportHomeController;
+import com.carmel.guestjini.Screens.Support.TicketList.TicketListController;
 import com.carmel.guestjini.Screens.Welcome.WelcomeController;
+import com.carmel.guestjini.Tickets.FetchTicketListUseCase;
 
 public class ControllerCompositionRoot {
     private final CompositionRoot compositionRoot;
@@ -134,6 +136,11 @@ public class ControllerCompositionRoot {
         return new SaveKBReviewUseCase(getAuthenticatedGuestJiniAPI());
     }
 
+    private FetchTicketListUseCase getFetchTicketListUseCase() {
+        return new FetchTicketListUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+
     public SharedPreferenceHelper getSharedPreferenceHelper() {
         return new SharedPreferenceHelper(preferences, editor);
 
@@ -192,4 +199,14 @@ public class ControllerCompositionRoot {
                 getDialogsEventBus()
         );
     }
-}
+
+    public TicketListController getTicketListController() {
+        return new TicketListController(
+                getFetchTicketListUseCase(),
+                getScreensNavigator(),
+                getDialogsManager(),
+                getDialogsEventBus()
+        );
+    }
+
+ }

@@ -8,6 +8,10 @@ import com.carmel.guestjini.Networking.KnowledgeBase.KBRatingResponse;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBResponse;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBReview;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBReviewResponse;
+import com.carmel.guestjini.Networking.Tickets.TaskNote;
+import com.carmel.guestjini.Networking.Tickets.TaskNotesResponse;
+import com.carmel.guestjini.Networking.Tickets.TicketRequest;
+import com.carmel.guestjini.Networking.Tickets.TicketResponse;
 import com.carmel.guestjini.Networking.Users.AccessToken;
 
 import java.util.Map;
@@ -59,5 +63,28 @@ public interface GuestJiniAPI {
     @POST("/guest-jini/kb-review/get-all")
     Call<KBReviewResponse> getAllKBReviews(
             @Body Map<String, String> postData
+    );
+
+    @POST("/guest-jini/task-ticket/save")
+    Call<TicketResponse> saveTicket(
+            @Body TicketRequest ticketRequest
+    );
+
+    @POST("/guest-jini/task-ticket/get-all")
+    Call<TicketResponse>  getTicketList();
+
+    @POST("/guest-jini/task-ticket/get")
+    Call<TicketResponse>  getTicketById(
+            @Body Map<String, String> requestData
+    );
+
+    @POST("/guest-jini/task-ticket-notes/get-ticket-notes")
+    Call<TaskNotesResponse> getTicketNotes(
+            @Body Map<String, String> requestData
+    );
+
+    @POST("/guest-jini/task-ticket-notes/save")
+    Call<TaskNotesResponse> saveTicketNotes(
+            @Body TaskNote taskNote
     );
 }

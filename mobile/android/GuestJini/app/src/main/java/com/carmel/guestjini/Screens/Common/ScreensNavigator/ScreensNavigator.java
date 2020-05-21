@@ -5,6 +5,7 @@ import com.carmel.guestjini.Screens.Login.LoginFragment;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailFragment;
 import com.carmel.guestjini.Screens.Support.KBList.KBListFragment;
 import com.carmel.guestjini.Screens.Support.SupportHome.SupportHomeFragment;
+import com.carmel.guestjini.Screens.Support.TicketList.TicketListFragment;
 import com.carmel.guestjini.Screens.Welcome.WelcomeFragment;
 
 public class ScreensNavigator {
@@ -56,7 +57,7 @@ public class ScreensNavigator {
     }
 
     public void toTicketList() {
-        //TODO: Implement this method
+        mFragmentFrameHelper.replaceFragment(TicketListFragment.createFragment());
     }
 
     public void toKBDetails(String kbId) {
@@ -67,4 +68,7 @@ public class ScreensNavigator {
         mFragmentFrameHelper.navigateUp();
     }
 
+    public void toTicketDetails(String id) {
+        //TODO: Implement this method
+    }
 }
