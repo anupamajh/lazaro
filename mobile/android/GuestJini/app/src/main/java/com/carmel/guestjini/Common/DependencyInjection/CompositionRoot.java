@@ -3,7 +3,6 @@ package com.carmel.guestjini.Common.DependencyInjection;
 import androidx.fragment.app.FragmentActivity;
 
 import com.carmel.guestjini.Common.Constants;
-import com.carmel.guestjini.Common.EndPoints;
 import com.carmel.guestjini.Components.OkHttpClientInstance;
 import com.carmel.guestjini.Networking.GuestJiniAPI;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;

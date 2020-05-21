@@ -13,6 +13,8 @@ import com.carmel.guestjini.Screens.Login.LoginViewMVC;
 import com.carmel.guestjini.Screens.Login.LoginViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailViewMVC;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailViewMVCImpl;
+import com.carmel.guestjini.Screens.Support.KBDetail.KBReviewItem.KBReviewItemViewMVC;
+import com.carmel.guestjini.Screens.Support.KBDetail.KBReviewItem.KBReviewItemViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.KBList.KBListItem.KBListItemViewMVC;
 import com.carmel.guestjini.Screens.Support.KBList.KBListItem.KBListItemViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.KBList.KBListViewMVC;
@@ -66,6 +68,14 @@ public class ViewMVCFactory {
 
     public KBDetailViewMVC getKBDetailsViewMVC(@Nullable ViewGroup parent) {
         return new KBDetailViewMVCImpl(
+                layoutInflater,
+                parent,
+                this
+        );
+    }
+
+    public KBReviewItemViewMVC getKBReviewItemViewMVC(@Nullable ViewGroup parent) {
+        return new KBReviewItemViewMVCImpl(
                 layoutInflater,
                 parent
         );

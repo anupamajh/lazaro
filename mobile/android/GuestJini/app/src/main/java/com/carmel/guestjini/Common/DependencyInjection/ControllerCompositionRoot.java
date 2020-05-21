@@ -10,6 +10,12 @@ import androidx.fragment.app.FragmentManager;
 import com.carmel.guestjini.Authentication.AttemptLoginUseCase;
 import com.carmel.guestjini.KnowledgeBase.FetchKBDetailsUseCase;
 import com.carmel.guestjini.KnowledgeBase.FetchKBListUseCase;
+import com.carmel.guestjini.KnowledgeBase.FetchKBRatingPercentageUseCase;
+import com.carmel.guestjini.KnowledgeBase.FetchKBRatingUseCase;
+import com.carmel.guestjini.KnowledgeBase.FetchKBReviewListUseCase;
+import com.carmel.guestjini.KnowledgeBase.KBDislikeArticleUseCase;
+import com.carmel.guestjini.KnowledgeBase.KBLikeArticleUseCase;
+import com.carmel.guestjini.KnowledgeBase.SaveKBReviewUseCase;
 import com.carmel.guestjini.Networking.GuestJiniAPI;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
@@ -104,6 +110,30 @@ public class ControllerCompositionRoot {
         return new FetchKBDetailsUseCase(getAuthenticatedGuestJiniAPI());
     }
 
+    private FetchKBRatingUseCase getFetchKBRatingUseCaseUseCase() {
+        return new FetchKBRatingUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private FetchKBRatingPercentageUseCase getFetchKBRatingPercentageUseCase() {
+        return new FetchKBRatingPercentageUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private FetchKBReviewListUseCase getFetchKBReviewListUseCase() {
+        return new FetchKBReviewListUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private KBLikeArticleUseCase getKBLikeArticleUseCasee() {
+        return new KBLikeArticleUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private KBDislikeArticleUseCase getKBDislikeArticleUseCase() {
+        return new KBDislikeArticleUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private SaveKBReviewUseCase getSaveKBReviewUseCase() {
+        return new SaveKBReviewUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
     public SharedPreferenceHelper getSharedPreferenceHelper() {
         return new SharedPreferenceHelper(preferences, editor);
 
@@ -151,6 +181,12 @@ public class ControllerCompositionRoot {
     public KBDetailController getKBDetailController() {
         return new KBDetailController(
                 getFetchKBDetailsUseCase(),
+                getFetchKBRatingUseCaseUseCase(),
+                getFetchKBRatingPercentageUseCase(),
+                getFetchKBReviewListUseCase(),
+                getKBDislikeArticleUseCase(),
+                getKBLikeArticleUseCasee(),
+                getSaveKBReviewUseCase(),
                 getScreensNavigator(),
                 getDialogsManager(),
                 getDialogsEventBus()

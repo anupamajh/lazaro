@@ -15,7 +15,7 @@ public class LoginController implements
 {
 
     private enum ScreenState {
-        IDLE, FETCHING_QUESTIONS, QUESTIONS_LIST_SHOWN, NETWORK_ERROR
+        IDLE, ATTEMPTING_LOGIN, LOGIN_COMPLETED, NETWORK_ERROR
     }
 
     private final ScreensNavigator mScreensNavigator;

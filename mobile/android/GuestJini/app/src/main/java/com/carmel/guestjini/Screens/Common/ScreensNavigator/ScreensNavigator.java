@@ -1,6 +1,5 @@
 package com.carmel.guestjini.Screens.Common.ScreensNavigator;
 
-import com.carmel.guestjini.Screens.Common.BaseActivityView.BaseActivityMVCView;
 import com.carmel.guestjini.Screens.Common.FragmentHelper.FragmentFrameHelper;
 import com.carmel.guestjini.Screens.Login.LoginFragment;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailFragment;

@@ -2,7 +2,12 @@ package com.carmel.guestjini.Networking;
 
 
 
+import com.carmel.guestjini.Networking.KnowledgeBase.KBRating;
+import com.carmel.guestjini.Networking.KnowledgeBase.KBRatingPercentResponse;
+import com.carmel.guestjini.Networking.KnowledgeBase.KBRatingResponse;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBResponse;
+import com.carmel.guestjini.Networking.KnowledgeBase.KBReview;
+import com.carmel.guestjini.Networking.KnowledgeBase.KBReviewResponse;
 import com.carmel.guestjini.Networking.Users.AccessToken;
 
 import java.util.Map;
@@ -36,4 +41,23 @@ public interface GuestJiniAPI {
 
     @POST("/guest-jini/kb/get")
     Call<KBResponse> getKBById(@Body Map<String, String> postData);
+
+    @POST("/guest-jini/kb-rating/save")
+    Call<KBRatingResponse> saveKBRating(@Body KBRating kbRating);
+
+    @POST("/guest-jini/kb-rating/get-my-rating")
+    Call<KBRatingResponse> getKBRatings(@Body Map<String, String> postData);
+
+    @POST("/guest-jini/kb-rating/get-rating-percent")
+    Call<KBRatingPercentResponse> getKBRatingPercentage(@Body Map<String, String> postData);
+
+    @POST("/guest-jini/kb-review/save")
+    Call<KBResponse> saveKBReview(
+            @Body KBReview kbReview
+    );
+
+    @POST("/guest-jini/kb-review/get-all")
+    Call<KBReviewResponse> getAllKBReviews(
+            @Body Map<String, String> postData
+    );
 }

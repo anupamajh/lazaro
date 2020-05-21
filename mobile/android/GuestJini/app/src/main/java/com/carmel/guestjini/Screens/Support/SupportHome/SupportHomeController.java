@@ -8,7 +8,7 @@ public class SupportHomeController implements
         SupportHomeViewMVC.Listener {
 
     private enum ScreenState {
-        IDLE, FETCHING_QUESTIONS, QUESTIONS_LIST_SHOWN, NETWORK_ERROR
+        IDLE, NETWORK_ERROR
     }
 
     private final ScreensNavigator mScreensNavigator;

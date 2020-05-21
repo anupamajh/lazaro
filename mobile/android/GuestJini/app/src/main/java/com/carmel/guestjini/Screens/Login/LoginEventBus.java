@@ -1,7 +1,6 @@
 package com.carmel.guestjini.Screens.Login;
 
 import com.carmel.guestjini.Common.BaseObservable;
-import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 
 public class LoginEventBus  extends BaseObservable<LoginEventBus.Listener> {
     public interface Listener {

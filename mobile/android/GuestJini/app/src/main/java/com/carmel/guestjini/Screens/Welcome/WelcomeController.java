@@ -8,7 +8,7 @@ public class WelcomeController  implements WelcomeViewMVC.Listener {
 
 
     private enum ScreenState {
-        IDLE, FETCHING_QUESTIONS, QUESTIONS_LIST_SHOWN, NETWORK_ERROR
+        IDLE, NETWORK_ERROR
     }
 
     private final ScreensNavigator mScreensNavigator;

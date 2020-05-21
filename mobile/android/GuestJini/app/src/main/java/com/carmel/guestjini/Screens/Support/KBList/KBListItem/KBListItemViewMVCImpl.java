@@ -1,7 +1,6 @@
 package com.carmel.guestjini.Screens.Support.KBList.KBListItem;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -11,7 +10,6 @@ import com.carmel.guestjini.Common.StringUtils;
 import com.carmel.guestjini.Networking.KnowledgeBase.KB;
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
-import com.carmel.guestjini.Screens.Support.KBList.KBListViewMVC;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import de.hdodenhof.circleimageview.CircleImageView;
