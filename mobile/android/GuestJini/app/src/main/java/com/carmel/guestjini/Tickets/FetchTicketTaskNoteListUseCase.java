@@ -29,7 +29,7 @@ public interface Listener {
         this.guestJiniAPI = guestJiniAPI;
     }
 
-    public void fetchTicketListAndNotify(String ticketId) {
+    public void fetchTicketNotesListAndNotify(String ticketId) {
         Map<String, String> requestData = new HashMap<>();
         requestData.put("ticketId", ticketId);
         this.guestJiniAPI.getTicketNotes(requestData).enqueue(new Callback<TaskNotesResponse>() {

@@ -30,9 +30,13 @@ import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketController;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailController;
 import com.carmel.guestjini.Screens.Support.KBList.KBListController;
 import com.carmel.guestjini.Screens.Support.SupportHome.SupportHomeController;
+import com.carmel.guestjini.Screens.Support.TicketDetail.TicketDetailsController;
 import com.carmel.guestjini.Screens.Support.TicketList.TicketListController;
 import com.carmel.guestjini.Screens.Welcome.WelcomeController;
 import com.carmel.guestjini.Tickets.FetchTicketListUseCase;
+import com.carmel.guestjini.Tickets.FetchTicketTaskNoteListUseCase;
+import com.carmel.guestjini.Tickets.FetchTicketUseCase;
+import com.carmel.guestjini.Tickets.SaveTaskNoteUseCase;
 import com.carmel.guestjini.Tickets.SaveTicketUseCase;
 
 public class ControllerCompositionRoot {
@@ -147,6 +151,20 @@ public class ControllerCompositionRoot {
         return new SaveTicketUseCase(getAuthenticatedGuestJiniAPI());
     }
 
+    private FetchTicketUseCase getFetchTicketUseCase() {
+        return new FetchTicketUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+
+    private FetchTicketTaskNoteListUseCase getFetchTicketTaskNoteListUseCase() {
+        return new FetchTicketTaskNoteListUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+
+    private SaveTaskNoteUseCase getSaveTaskNoteUseCase() {
+        return new SaveTaskNoteUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
 
     public SharedPreferenceHelper getSharedPreferenceHelper() {
         return new SharedPreferenceHelper(preferences, editor);
@@ -224,4 +242,17 @@ public class ControllerCompositionRoot {
                 getDialogsEventBus()
         );
     }
+
+    public TicketDetailsController getTicketDetailsController() {
+        return new TicketDetailsController(
+                getFetchTicketUseCase(),
+                getFetchTicketTaskNoteListUseCase(),
+                getSaveTaskNoteUseCase(),
+                getScreensNavigator(),
+                getDialogsManager(),
+                getDialogsEventBus()
+        );
+    }
+
+
 }

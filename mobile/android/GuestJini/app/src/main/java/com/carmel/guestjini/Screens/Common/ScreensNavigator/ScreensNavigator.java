@@ -6,6 +6,7 @@ import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketFragment;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailFragment;
 import com.carmel.guestjini.Screens.Support.KBList.KBListFragment;
 import com.carmel.guestjini.Screens.Support.SupportHome.SupportHomeFragment;
+import com.carmel.guestjini.Screens.Support.TicketDetail.TicketDetailsFragment;
 import com.carmel.guestjini.Screens.Support.TicketList.TicketListFragment;
 import com.carmel.guestjini.Screens.Welcome.WelcomeFragment;
 
@@ -61,6 +62,11 @@ public class ScreensNavigator {
         mFragmentFrameHelper.replaceFragment(TicketListFragment.createFragment());
     }
 
+    public void toTicketDetails(String ticketId) {
+        mFragmentFrameHelper.replaceFragment(TicketDetailsFragment.createFragment(ticketId));
+    }
+
+
     public void toKBDetails(String kbId) {
         mFragmentFrameHelper.replaceFragment(KBDetailFragment.createFragment(kbId));
     }
@@ -69,7 +75,4 @@ public class ScreensNavigator {
         mFragmentFrameHelper.navigateUp();
     }
 
-    public void toTicketDetails(String id) {
-        //TODO: Implement this method
-    }
-}
+ }

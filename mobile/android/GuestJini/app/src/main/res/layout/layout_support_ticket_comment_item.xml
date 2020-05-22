@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:cardBackgroundColor="@color/colorWhisper1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/colorVeryLightGray"
+        app:strokeWidth="0.25dp">
+
+        <RelativeLayout
+            android:id="@+id/layoutParent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="42dp"
+                android:background="@drawable/dashed_line"
+                android:paddingBottom="35dp">
+
+                <RelativeLayout
+                    android:id="@+id/layoutCommentDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="34dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="32dp">
+
+                    <TextView
+                        android:id="@+id/txtAuthorName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="0dp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:letterSpacing="0.05"
+                        android:text="@string/sameer_rawat"
+                        android:textColor="@color/colorGray44"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txtCommentDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtAuthorName"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="0dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:letterSpacing="0.05"
+                        android:text="27th Jul 2018 08:18 PM"
+                        android:textColor="@color/colorDimGray"
+
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txtComment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtCommentDate"
+                        android:layout_marginTop="13dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:letterSpacing="0.05"
+                        android:lineSpacingExtra="3dp"
+                        android:text="@string/sameer_description"
+                        android:textColor="@color/colorDimGray"
+                        android:textSize="12sp" />
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/viewDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@id/layoutCommentDetails"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="34dp"
+                    android:layout_marginTop="27dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="0dp"
+                    android:background="@color/colorWhisper4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/imgCommentIcon"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="0dp"
+                android:src="@drawable/chat_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</FrameLayout>
