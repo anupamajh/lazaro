@@ -115,6 +115,11 @@ public class TicketListController implements
     }
 
     @Override
+    public void onCreateTicketClicked() {
+        screensNavigator.toCreateTicket();
+    }
+
+    @Override
     public void onTicketListFetched(List<Ticket> ticketList) {
         this.ticketList = ticketList;
         mScreenState = ScreenState.TICKET_LIST_SHOWN;

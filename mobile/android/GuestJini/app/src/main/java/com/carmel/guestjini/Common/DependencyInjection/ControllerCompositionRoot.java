@@ -26,12 +26,14 @@ import com.carmel.guestjini.Screens.Common.SharedPreference.SharedPreferenceHelp
 import com.carmel.guestjini.Screens.Common.ViewMVCFactory;
 import com.carmel.guestjini.Screens.Login.LoginController;
 import com.carmel.guestjini.Screens.Login.LoginEventBus;
+import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketController;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailController;
 import com.carmel.guestjini.Screens.Support.KBList.KBListController;
 import com.carmel.guestjini.Screens.Support.SupportHome.SupportHomeController;
 import com.carmel.guestjini.Screens.Support.TicketList.TicketListController;
 import com.carmel.guestjini.Screens.Welcome.WelcomeController;
 import com.carmel.guestjini.Tickets.FetchTicketListUseCase;
+import com.carmel.guestjini.Tickets.SaveTicketUseCase;
 
 public class ControllerCompositionRoot {
     private final CompositionRoot compositionRoot;
@@ -141,6 +143,11 @@ public class ControllerCompositionRoot {
     }
 
 
+    private SaveTicketUseCase getSaveTicketUseCase() {
+        return new SaveTicketUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+
     public SharedPreferenceHelper getSharedPreferenceHelper() {
         return new SharedPreferenceHelper(preferences, editor);
 
@@ -209,4 +216,12 @@ public class ControllerCompositionRoot {
         );
     }
 
- }
+    public CreateTicketController getCreateTicketController() {
+        return new CreateTicketController(
+                getScreensNavigator(),
+                getSaveTicketUseCase(),
+                getDialogsManager(),
+                getDialogsEventBus()
+        );
+    }
+}

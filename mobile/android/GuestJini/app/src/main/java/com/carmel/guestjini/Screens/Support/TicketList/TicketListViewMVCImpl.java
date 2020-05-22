@@ -15,6 +15,7 @@ import com.carmel.guestjini.Networking.Tickets.Ticket;
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Screens.Common.ViewMVCFactory;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class TicketListViewMVCImpl
         TicketListRecyclerAdapter.Listener {
 
     private final EditText txtSearch;
+    private final FloatingActionButton btnNewTicket;
     private final TicketListRecyclerAdapter ticketListRecyclerAdapter;
     private final ProgressBar progressBar;
 
@@ -40,6 +42,7 @@ public class TicketListViewMVCImpl
         ticketRecyclerView.setAdapter(ticketListRecyclerAdapter);
         ImageView btnSearch = findViewById(R.id.btnSearch);
         ImageView btnBack = findViewById(R.id.btnBack);
+        btnNewTicket = findViewById(R.id.btnNewTicket);
         btnSearch.setOnClickListener(view -> {
             String searchText = txtSearch.getText().toString().trim();
             for (Listener listener : getListeners()) {
@@ -50,6 +53,12 @@ public class TicketListViewMVCImpl
         btnBack.setOnClickListener(view -> {
             for (Listener listener : getListeners()) {
                 listener.onBackClicked();
+            }
+        });
+
+        btnNewTicket.setOnClickListener(view -> {
+            for (Listener listener : getListeners()) {
+                listener.onCreateTicketClicked();
             }
         });
 

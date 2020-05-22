@@ -11,6 +11,8 @@ import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptViewMvc;
 import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptViewMvcImpl;
 import com.carmel.guestjini.Screens.Login.LoginViewMVC;
 import com.carmel.guestjini.Screens.Login.LoginViewMVCImpl;
+import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketViewMVC;
+import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailViewMVC;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBReviewItem.KBReviewItemViewMVC;
@@ -97,6 +99,13 @@ public class ViewMVCFactory {
                 layoutInflater,
                 parent,
                 this
+        );
+    }
+
+    public CreateTicketViewMVC getCreateTicketViewMVC(@Nullable ViewGroup parent) {
+        return new CreateTicketViewMVCImpl(
+                layoutInflater,
+                parent
         );
     }
 }

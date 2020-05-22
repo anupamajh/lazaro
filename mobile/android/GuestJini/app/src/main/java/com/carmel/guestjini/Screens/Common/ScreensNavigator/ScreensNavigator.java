@@ -2,6 +2,7 @@ package com.carmel.guestjini.Screens.Common.ScreensNavigator;
 
 import com.carmel.guestjini.Screens.Common.FragmentHelper.FragmentFrameHelper;
 import com.carmel.guestjini.Screens.Login.LoginFragment;
+import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketFragment;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailFragment;
 import com.carmel.guestjini.Screens.Support.KBList.KBListFragment;
 import com.carmel.guestjini.Screens.Support.SupportHome.SupportHomeFragment;
@@ -53,7 +54,7 @@ public class ScreensNavigator {
     }
 
     public void toCreateTicket() {
-        //TODO: Implement this method
+        mFragmentFrameHelper.replaceFragment(CreateTicketFragment.createFragment());
     }
 
     public void toTicketList() {

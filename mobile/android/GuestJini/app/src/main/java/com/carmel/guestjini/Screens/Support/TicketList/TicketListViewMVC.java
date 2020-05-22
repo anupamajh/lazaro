@@ -10,6 +10,7 @@ public interface TicketListViewMVC  extends ObservableViewMvc<TicketListViewMVC.
         void onTicketClicked(Ticket ticket);
         void onSearchClicked(String searchText);
         void onBackClicked();
+        void onCreateTicketClicked();
     }
 
     void bindTickets(List<Ticket> ticketList, int totalItems);
