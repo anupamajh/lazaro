@@ -127,6 +127,4 @@ public class TicketDetailsViewMVCImpl
     public void hideProgressIndication() {
         progressBar.setVisibility(View.GONE);
     }
-
-
 }

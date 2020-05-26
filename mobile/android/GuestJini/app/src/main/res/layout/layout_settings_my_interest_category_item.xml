@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@drawable/add_to_favourite"
+        >
+        <TextView
+            android:id="@+id/txtCategoryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="6dp"
+            android:letterSpacing="0.1"
+            android:text="TextView"
+            android:textColor="#747474"
+            android:textSize="12dp"
+            app:fontFamily="@font/roboto_medium" />
+
+        <ImageView
+            android:id="@+id/btnShowCategories"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="6dp"
+            app:srcCompat="@drawable/dropdown_icon_mdpi"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lstInterests"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:layout_below="@id/btnShowCategories"
+            />
+    </RelativeLayout>
+
+</FrameLayout>

@@ -26,6 +26,9 @@ import com.carmel.guestjini.Screens.Common.SharedPreference.SharedPreferenceHelp
 import com.carmel.guestjini.Screens.Common.ViewMVCFactory;
 import com.carmel.guestjini.Screens.Login.LoginController;
 import com.carmel.guestjini.Screens.Login.LoginEventBus;
+import com.carmel.guestjini.Screens.Settings.MyInterests.MyInterestController;
+import com.carmel.guestjini.Screens.Settings.MyProfile.MyProfileController;
+import com.carmel.guestjini.Screens.Settings.SettingsHome.SettingsHomeController;
 import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketController;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailController;
 import com.carmel.guestjini.Screens.Support.KBList.KBListController;
@@ -38,6 +41,16 @@ import com.carmel.guestjini.Tickets.FetchTicketTaskNoteListUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketUseCase;
 import com.carmel.guestjini.Tickets.SaveTaskNoteUseCase;
 import com.carmel.guestjini.Tickets.SaveTicketUseCase;
+import com.carmel.guestjini.Users.AppAccessRequestUseCase;
+import com.carmel.guestjini.Users.ChangePasswordUseCase;
+import com.carmel.guestjini.Users.FetchInterestCategoryListUseCase;
+import com.carmel.guestjini.Users.FetchInterestListUseCase;
+import com.carmel.guestjini.Users.FetchMyInterestsUseCase;
+import com.carmel.guestjini.Users.FetchMyProfilePicUseCase;
+import com.carmel.guestjini.Users.FetchMyProfileUseCase;
+import com.carmel.guestjini.Users.ResetPasswordUseCase;
+import com.carmel.guestjini.Users.SaveMyInterestUseCase;
+import com.carmel.guestjini.Users.SaveProfilePicUseCase;
 
 public class ControllerCompositionRoot {
     private final CompositionRoot compositionRoot;
@@ -161,10 +174,56 @@ public class ControllerCompositionRoot {
     }
 
 
+    private AppAccessRequestUseCase getAppAccessRequestUseCase() {
+        return new AppAccessRequestUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+
+    private ChangePasswordUseCase getChangePasswordUseCase() {
+        return new ChangePasswordUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+
+    private FetchMyProfilePicUseCase getFetchMyProfilePicUseCase() {
+        return new FetchMyProfilePicUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+
+    private FetchMyProfileUseCase getFetchMyProfileUseCase() {
+        return new FetchMyProfileUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+
+    private ResetPasswordUseCase getResetPasswordUseCase() {
+        return new ResetPasswordUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+
+    private SaveProfilePicUseCase getSaveProfilePicUseCase() {
+        return new SaveProfilePicUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+
     private SaveTaskNoteUseCase getSaveTaskNoteUseCase() {
         return new SaveTaskNoteUseCase(getAuthenticatedGuestJiniAPI());
     }
 
+
+    private SaveMyInterestUseCase getSaveMyInterestsUseCase() {
+        return new SaveMyInterestUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private FetchMyInterestsUseCase getFetchMyInterestsUseCase() {
+        return new FetchMyInterestsUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private FetchInterestListUseCase getFetchInterestListUseCase() {
+        return new FetchInterestListUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private FetchInterestCategoryListUseCase getFetchInterestCategoryListUseCase() {
+        return new FetchInterestCategoryListUseCase(getAuthenticatedGuestJiniAPI());
+    }
 
     public SharedPreferenceHelper getSharedPreferenceHelper() {
         return new SharedPreferenceHelper(preferences, editor);
@@ -255,4 +314,30 @@ public class ControllerCompositionRoot {
     }
 
 
+    public SettingsHomeController getSettingsHomeController() {
+        return  new SettingsHomeController(
+                getScreensNavigator()
+        );
+    }
+
+    public MyInterestController getMyInterestController() {
+        return new MyInterestController(
+                getFetchInterestCategoryListUseCase(),
+                getFetchInterestListUseCase(),
+                getFetchMyInterestsUseCase(),
+                getSaveMyInterestsUseCase(),
+                getScreensNavigator(),
+                getDialogsManager(),
+                getDialogsEventBus()
+        );
+    }
+
+    public MyProfileController getMyProfileController() {
+        return new MyProfileController(
+                getFetchMyProfileUseCase(),
+                getScreensNavigator(),
+                getDialogsManager(),
+                getDialogsEventBus()
+        );
+    }
 }

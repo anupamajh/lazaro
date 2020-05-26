@@ -11,6 +11,16 @@ import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptViewMvc;
 import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptViewMvcImpl;
 import com.carmel.guestjini.Screens.Login.LoginViewMVC;
 import com.carmel.guestjini.Screens.Login.LoginViewMVCImpl;
+import com.carmel.guestjini.Screens.Settings.MyInterests.InterestCategoryItem.InterestCategoryItemViewMVC;
+import com.carmel.guestjini.Screens.Settings.MyInterests.InterestCategoryItem.InterestCategoryItemViewMVCImpl;
+import com.carmel.guestjini.Screens.Settings.MyInterests.InterestItem.InterestItemViewMVC;
+import com.carmel.guestjini.Screens.Settings.MyInterests.InterestItem.InterestItemViewMVCImpl;
+import com.carmel.guestjini.Screens.Settings.MyInterests.MyInterestViewMVC;
+import com.carmel.guestjini.Screens.Settings.MyInterests.MyInterestViewMVCImpl;
+import com.carmel.guestjini.Screens.Settings.MyProfile.MyProfileViewMVC;
+import com.carmel.guestjini.Screens.Settings.MyProfile.MyProfileViewMVCImpl;
+import com.carmel.guestjini.Screens.Settings.SettingsHome.SettingsHomeViewMVC;
+import com.carmel.guestjini.Screens.Settings.SettingsHome.SettingsHomeViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketViewMVC;
 import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailViewMVC;
@@ -126,5 +136,35 @@ public class ViewMVCFactory {
                 parent,
                 this
         );
+    }
+
+    public SettingsHomeViewMVC getSettingsHomeViewMVC(@Nullable ViewGroup parent) {
+        return new SettingsHomeViewMVCImpl(
+                layoutInflater,
+                parent
+        );
+    }
+
+    public InterestItemViewMVC getInterestItemViewMVC(@Nullable ViewGroup parent) {
+        return new InterestItemViewMVCImpl(
+                layoutInflater,
+                parent
+        );
+    }
+
+    public InterestCategoryItemViewMVC getInterestCategoryItemViewMVC(ViewGroup parent) {
+        return new InterestCategoryItemViewMVCImpl(
+                layoutInflater,
+                parent,
+                this
+        );
+    }
+
+    public MyInterestViewMVC getMyInterestViewMVC(@Nullable ViewGroup parent) {
+        return new MyInterestViewMVCImpl(layoutInflater,parent, this);
+    }
+
+    public MyProfileViewMVC getMyProfileViewMVC(@Nullable ViewGroup parent) {
+        return new MyProfileViewMVCImpl(layoutInflater,parent);
     }
 }

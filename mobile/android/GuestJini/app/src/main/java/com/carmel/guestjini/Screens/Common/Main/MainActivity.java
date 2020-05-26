@@ -34,6 +34,7 @@ public class MainActivity extends BaseActivity implements
         mScreensNavigator = getCompositionRoot().getScreensNavigator();
         getCompositionRoot().getLoginEventBus().registerListener(this);
         viewMVC = getCompositionRoot().getViewMVCFactory().getBaseActivityView(null);
+        viewMVC.registerListener(this);
         sharedPreferenceHelper = getCompositionRoot().getSharedPreferenceHelper();
         setContentView(viewMVC.getRootView());
         if (savedInstanceState == null) {

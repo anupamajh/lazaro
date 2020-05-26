@@ -475,7 +475,7 @@
 
                       </androidx.constraintlayout.widget.ConstraintLayout>
                       <androidx.constraintlayout.widget.ConstraintLayout
-                          android:visibility="gone"
+                          android:visibility="visible"
                           android:layout_width="match_parent"
                           android:layout_height="match_parent">
                           <TextView

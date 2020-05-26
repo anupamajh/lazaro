@@ -2,6 +2,9 @@ package com.carmel.guestjini.Screens.Common.ScreensNavigator;
 
 import com.carmel.guestjini.Screens.Common.FragmentHelper.FragmentFrameHelper;
 import com.carmel.guestjini.Screens.Login.LoginFragment;
+import com.carmel.guestjini.Screens.Settings.MyInterests.MyInterestFragment;
+import com.carmel.guestjini.Screens.Settings.MyProfile.MyProfileFragment;
+import com.carmel.guestjini.Screens.Settings.SettingsHome.SettingsHomeFragment;
 import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketFragment;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailFragment;
 import com.carmel.guestjini.Screens.Support.KBList.KBListFragment;
@@ -43,7 +46,7 @@ public class ScreensNavigator {
     }
 
     public void toSettingsHome() {
-        //TODO: Implement this method
+        mFragmentFrameHelper.replaceFragment(SettingsHomeFragment.createFragment());
     }
 
     public void toKBList(String searchText) {
@@ -75,4 +78,28 @@ public class ScreensNavigator {
         mFragmentFrameHelper.navigateUp();
     }
 
- }
+
+    public void toMyProfile() {
+        mFragmentFrameHelper.replaceFragment(MyProfileFragment.createFragment());
+    }
+
+    public void toChangePassword() {
+        //TODO: Implement this method
+    }
+
+    public void toPrivacyPolicy() {
+        //TODO: Implement this method
+    }
+
+    public void toTermsAndConditions() {
+        //TODO: Implement this method
+    }
+
+    public void toNotifications() {
+        //TODO: Implement this method
+    }
+
+    public void toMyInterests() {
+        mFragmentFrameHelper.replaceFragment(MyInterestFragment.createFragment());
+    }
+}
