@@ -7,6 +7,14 @@ import androidx.annotation.Nullable;
 
 import com.carmel.guestjini.Screens.Accounts.AccountsHome.AccountsHomeViewMVC;
 import com.carmel.guestjini.Screens.Accounts.AccountsHome.AccountsHomeViewMVCImpl;
+import com.carmel.guestjini.Screens.Accounts.Payments.PaymentsViewMVC;
+import com.carmel.guestjini.Screens.Accounts.Payments.PaymentsViewMVCImpl;
+import com.carmel.guestjini.Screens.Accounts.RentInvoiceDetails.RentInvoiceDetailViewMVC;
+import com.carmel.guestjini.Screens.Accounts.RentInvoiceDetails.RentInvoiceDetailViewMVCImpl;
+import com.carmel.guestjini.Screens.Accounts.RentInvoiceList.RentInvoiceItem.RentInvoiceItemMVC;
+import com.carmel.guestjini.Screens.Accounts.RentInvoiceList.RentInvoiceItem.RentInvoiceItemMVCImpl;
+import com.carmel.guestjini.Screens.Accounts.RentInvoiceList.RentInvoiceListViewMVC;
+import com.carmel.guestjini.Screens.Accounts.RentInvoiceList.RentInvoiceListViewMVCImpl;
 import com.carmel.guestjini.Screens.Common.BaseActivityView.BaseActivityMVCView;
 import com.carmel.guestjini.Screens.Common.BaseActivityView.BaseActivityMVCViewImpl;
 import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptViewMvc;
@@ -190,5 +198,34 @@ public class ViewMVCFactory {
 
     public AccountsHomeViewMVC getAccountsHomeViewMVC(@Nullable ViewGroup parent) {
         return new AccountsHomeViewMVCImpl(layoutInflater,parent);
+    }
+
+    public RentInvoiceItemMVC getRentInvoiceItemMVC(@Nullable ViewGroup parent) {
+        return new RentInvoiceItemMVCImpl(
+                layoutInflater,
+                parent
+        );
+    }
+
+    public RentInvoiceListViewMVC getRentInvoiceListViewMVC(@Nullable ViewGroup parent) {
+        return new RentInvoiceListViewMVCImpl(
+                layoutInflater,
+                parent,
+                this
+        );
+    }
+
+    public RentInvoiceDetailViewMVC getRentInvoiceDetailViewMVC(@Nullable ViewGroup parent) {
+        return new RentInvoiceDetailViewMVCImpl(
+                layoutInflater,
+                parent
+        );
+    }
+
+    public PaymentsViewMVC getPaymentsViewMVC(@Nullable ViewGroup parent) {
+        return new PaymentsViewMVCImpl(
+                layoutInflater,
+                parent
+        );
     }
 }

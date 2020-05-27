@@ -1,6 +1,9 @@
 package com.carmel.guestjini.Screens.Common.ScreensNavigator;
 
 import com.carmel.guestjini.Screens.Accounts.AccountsHome.AccountsHomeFragment;
+import com.carmel.guestjini.Screens.Accounts.Payments.PaymentsFragment;
+import com.carmel.guestjini.Screens.Accounts.RentInvoiceDetails.RentInvoiceDetailFragment;
+import com.carmel.guestjini.Screens.Accounts.RentInvoiceList.RentInvoiceListFragment;
 import com.carmel.guestjini.Screens.Common.FragmentHelper.FragmentFrameHelper;
 import com.carmel.guestjini.Screens.Login.LoginFragment;
 import com.carmel.guestjini.Screens.Settings.ChangePassword.ChangePasswordFragment;
@@ -108,6 +111,25 @@ public class ScreensNavigator {
     }
 
     public void toRentInvoiceList() {
-        //TODO: Implement this method
+        mFragmentFrameHelper.replaceFragment(RentInvoiceListFragment.createFragment());
+    }
+
+    public void toRentInvoiceDetailsScreen(String accountTicketId) {
+        mFragmentFrameHelper.replaceFragment(RentInvoiceDetailFragment.createFragment(accountTicketId));
+    }
+
+    public void toPaymentScreen
+            (
+                    String accountTicketId,
+                    String guestId,
+                    String email,
+                    String transactionAmount
+            ) {
+        mFragmentFrameHelper.replaceFragment(PaymentsFragment.createFragment(
+                accountTicketId,
+                guestId,
+                email,
+                transactionAmount
+        ));
     }
 }

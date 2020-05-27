@@ -1,6 +1,7 @@
 package com.carmel.guestjini.Networking;
 
 
+import com.carmel.guestjini.Networking.Accounts.AccountTicketResponse;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBRating;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBRatingPercentResponse;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBRatingResponse;
@@ -140,5 +141,16 @@ public interface GuestJiniAPI {
             (
                     @Body Map<String, String> postData
             );
+
+    @POST("/guest-jini/account-tickets/get-my-rent-invoice")
+    Call<AccountTicketResponse> getMyRentInvoices();
+
+
+    @POST("/guest-jini/account-tickets/get")
+    Call<AccountTicketResponse> getMyRentInvoiceDetails(
+            @Body Map<String, String> postData
+    );
+
+
 
 }

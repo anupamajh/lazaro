@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.carmel.guestjini.Accounts.FetchMyRentInvoiceDetailsUseCase;
+import com.carmel.guestjini.Accounts.FetchMyRentInvoiceListUseCase;
 import com.carmel.guestjini.Authentication.AttemptLoginUseCase;
 import com.carmel.guestjini.KnowledgeBase.FetchKBDetailsUseCase;
 import com.carmel.guestjini.KnowledgeBase.FetchKBListUseCase;
@@ -18,6 +20,9 @@ import com.carmel.guestjini.KnowledgeBase.KBLikeArticleUseCase;
 import com.carmel.guestjini.KnowledgeBase.SaveKBReviewUseCase;
 import com.carmel.guestjini.Networking.GuestJiniAPI;
 import com.carmel.guestjini.Screens.Accounts.AccountsHome.AccountsHomeController;
+import com.carmel.guestjini.Screens.Accounts.Payments.PaymentsController;
+import com.carmel.guestjini.Screens.Accounts.RentInvoiceDetails.RentInvoiceDetailController;
+import com.carmel.guestjini.Screens.Accounts.RentInvoiceList.RentInvoiceListController;
 import com.carmel.guestjini.Screens.Common.Controllers.ActivityResultDispatcher;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
@@ -239,6 +244,14 @@ public class ControllerCompositionRoot {
         return new SaveUserPreferenceUseCase(getAuthenticatedGuestJiniAPI());
     }
 
+    private FetchMyRentInvoiceListUseCase getFetchMyRentInvoiceUseCase() {
+        return new FetchMyRentInvoiceListUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private FetchMyRentInvoiceDetailsUseCase getFetchMyRentInvoiceDetailsUseCase() {
+        return new FetchMyRentInvoiceDetailsUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
     public SharedPreferenceHelper getSharedPreferenceHelper() {
         return new SharedPreferenceHelper(preferences, editor);
 
@@ -329,7 +342,7 @@ public class ControllerCompositionRoot {
 
 
     public SettingsHomeController getSettingsHomeController() {
-        return  new SettingsHomeController(
+        return new SettingsHomeController(
                 getScreensNavigator(),
                 getSharedPreferenceHelper(),
                 getLoginEventBus());
@@ -368,20 +381,40 @@ public class ControllerCompositionRoot {
     }
 
     public PrivacyPolicyController getPrivacyPolicyController() {
-        return  new PrivacyPolicyController(
+        return new PrivacyPolicyController(
                 getScreensNavigator()
         );
     }
 
     public TermsAndConditionsController getTermsAndConditionsController() {
-        return  new TermsAndConditionsController(
+        return new TermsAndConditionsController(
                 getScreensNavigator()
         );
     }
 
     public AccountsHomeController getAccountsHomeController() {
-        return  new AccountsHomeController(
+        return new AccountsHomeController(
                 getScreensNavigator()
         );
+    }
+
+    public RentInvoiceListController getRentInvoiceListController() {
+        return new RentInvoiceListController(
+                getFetchMyRentInvoiceUseCase(),
+                getScreensNavigator(),
+                getDialogsManager(),
+                getDialogsEventBus()
+        );
+    }
+
+    public RentInvoiceDetailController getRentInvoiceDetailController() {
+        return new RentInvoiceDetailController(getFetchMyRentInvoiceDetailsUseCase(),
+                getScreensNavigator(),
+                getDialogsManager(),
+                getDialogsEventBus());
+    }
+
+    public PaymentsController getPaymentsController() {
+        return new PaymentsController(getScreensNavigator());
     }
 }
