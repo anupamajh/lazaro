@@ -19,6 +19,7 @@ import com.carmel.guestjini.Networking.Users.InterestResponse;
 import com.carmel.guestjini.Networking.Users.UserInfo;
 import com.carmel.guestjini.Networking.Users.UserInterests;
 import com.carmel.guestjini.Networking.Users.UserInterestsResponse;
+import com.carmel.guestjini.Networking.Users.UserPreferenceResponse;
 
 import java.util.Map;
 
@@ -134,5 +135,10 @@ public interface GuestJiniAPI {
             @Body UserInterests userInterests
     );
 
+    @POST("/common/user-preference/save")
+    Call<UserPreferenceResponse> saveUserPreference
+            (
+                    @Body Map<String, String> postData
+            );
 
 }

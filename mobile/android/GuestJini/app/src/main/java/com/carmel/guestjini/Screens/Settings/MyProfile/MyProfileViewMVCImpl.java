@@ -1,17 +1,26 @@
 package com.carmel.guestjini.Screens.Settings.MyProfile;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.carmel.guestjini.Common.AgeCalculator;
 import com.carmel.guestjini.Common.DateUtil;
 import com.carmel.guestjini.Networking.Users.UserInfo;
+import com.carmel.guestjini.Networking.Users.UserPreference;
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
 import com.google.android.material.button.MaterialButton;
@@ -42,6 +51,20 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
     private final TextView txtMobileNumber;
     private final TextView txtEmail;
     private final TextView txtPlaceOfOrigin;
+    private final ImageView btnGenderToggle;
+    private final ImageView btnAgeToggle;
+    private final ImageView btnMobileNumberToggle;
+    private final ImageView btnPlaceOfOriginToggle;
+    private final ImageView btnEmailToggle;
+    private final CircleImageView imgProfile;
+    private final DrawerLayout profileDrawerLayout;
+    private final FloatingActionButton btnChangeProfileImage;
+
+    private final RelativeLayout cameraIconLayout;
+    private final RelativeLayout galleryIconLayout;
+
+
+    private boolean isLoading = true;
 
 
     public MyProfileViewMVCImpl(
@@ -51,24 +74,46 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
         setRootView(inflater.inflate(R.layout.layout_settings_my_profile, parent, false));
         progressBar = findViewById(R.id.progress);
         ImageView btnBack = findViewById(R.id.btnBack);
-        CircleImageView imgProfile = findViewById(R.id.imgProfile);
-        FloatingActionButton btnChangeProfileImage = findViewById(R.id.btnChangeProfileImage);
+        imgProfile = findViewById(R.id.imgProfile);
+        btnChangeProfileImage = findViewById(R.id.btnChangeProfileImage);
         btnProfileToggle = findViewById(R.id.btnProfileToggle);
         txtFullName = findViewById(R.id.txtFullName);
         txtGender = findViewById(R.id.txtGender);
-        ImageView btnGenderToggle = findViewById(R.id.btnGenderToggle);
+        btnGenderToggle = findViewById(R.id.btnGenderToggle);
         txtAge = findViewById(R.id.txtAge);
-        ImageView btnAgeToggle = findViewById(R.id.btnAgeToggle);
+        btnAgeToggle = findViewById(R.id.btnAgeToggle);
         txtMobileNumber = findViewById(R.id.txtMobileNumber);
-        ImageView btnMobileNumberToggle = findViewById(R.id.btnMobileNumberToggle);
+        btnMobileNumberToggle = findViewById(R.id.btnMobileNumberToggle);
         txtEmail = findViewById(R.id.txtEmail);
-        ImageView btnEmailToggle = findViewById(R.id.btnEmailToggle);
+        btnEmailToggle = findViewById(R.id.btnEmailToggle);
         txtPlaceOfOrigin = findViewById(R.id.txtPlaceOfOrigin);
-        ImageView btnPlaceOfOriginToggle = findViewById(R.id.btnPlaceOfOriginToggle);
+        btnPlaceOfOriginToggle = findViewById(R.id.btnPlaceOfOriginToggle);
         MaterialButton btnSetupInterest = findViewById(R.id.btnSetupInterest);
+        profileDrawerLayout = findViewById(R.id.profileDrawerLayout);
+        cameraIconLayout = findViewById(R.id.cameraLayout);
+        galleryIconLayout = findViewById(R.id.galleryLayout);
+
+        btnChangeProfileImage.setOnClickListener(view -> {
+            profileDrawerLayout.openDrawer(GravityCompat.START);
+        });
+
         btnBack.setOnClickListener(view -> {
             for (Listener listener : getListeners()) {
                 listener.onBackClicked();
+            }
+        });
+
+        cameraIconLayout.setOnClickListener(view -> {
+            profileDrawerLayout.closeDrawers();
+            for (Listener listener : getListeners()) {
+                listener.onCameraClicked();
+            }
+        });
+
+        galleryIconLayout.setOnClickListener(view -> {
+            profileDrawerLayout.closeDrawers();
+            for (Listener listener : getListeners()) {
+                listener.onGalleryClicked();
             }
         });
 
@@ -87,8 +132,10 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
                     btnProfileToggle.setImageResource(R.drawable.toggle_icon_off_xxhdpi);
                     isVisible = false;
                 }
-                for (Listener listener : getListeners()) {
-                    listener.onUserPreferenceChange(USER_PREFERENCE_SHOW_PROFILE_PIC, isVisible);
+                if (!isLoading) {
+                    for (Listener listener : getListeners()) {
+                        listener.onUserPreferenceChange(USER_PREFERENCE_SHOW_PROFILE_PIC, isVisible);
+                    }
                 }
             }
         });
@@ -101,15 +148,17 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    btnProfileToggle.setImageResource(R.drawable.toggle_icon_on_xxhdpi);
+                    btnGenderToggle.setImageResource(R.drawable.toggle_icon_on_xxhdpi);
                     isVisible = true;
                 } else {
                     flag = true;
-                    btnProfileToggle.setImageResource(R.drawable.toggle_icon_off_xxhdpi);
+                    btnGenderToggle.setImageResource(R.drawable.toggle_icon_off_xxhdpi);
                     isVisible = false;
                 }
-                for (Listener listener : getListeners()) {
-                    listener.onUserPreferenceChange(USER_PREFERENCE_SHOW_GENDER, isVisible);
+                if (!isLoading) {
+                    for (Listener listener : getListeners()) {
+                        listener.onUserPreferenceChange(USER_PREFERENCE_SHOW_GENDER, isVisible);
+                    }
                 }
             }
         });
@@ -122,15 +171,17 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    btnProfileToggle.setImageResource(R.drawable.toggle_icon_on_xxhdpi);
+                    btnAgeToggle.setImageResource(R.drawable.toggle_icon_on_xxhdpi);
                     isVisible = true;
                 } else {
                     flag = true;
-                    btnProfileToggle.setImageResource(R.drawable.toggle_icon_off_xxhdpi);
+                    btnAgeToggle.setImageResource(R.drawable.toggle_icon_off_xxhdpi);
                     isVisible = false;
                 }
-                for (Listener listener : getListeners()) {
-                    listener.onUserPreferenceChange(USER_PREFERENCE_SHOW_AGE, isVisible);
+                if (!isLoading) {
+                    for (Listener listener : getListeners()) {
+                        listener.onUserPreferenceChange(USER_PREFERENCE_SHOW_AGE, isVisible);
+                    }
                 }
             }
         });
@@ -143,15 +194,17 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    btnProfileToggle.setImageResource(R.drawable.toggle_icon_on_xxhdpi);
+                    btnMobileNumberToggle.setImageResource(R.drawable.toggle_icon_on_xxhdpi);
                     isVisible = true;
                 } else {
                     flag = true;
-                    btnProfileToggle.setImageResource(R.drawable.toggle_icon_off_xxhdpi);
+                    btnMobileNumberToggle.setImageResource(R.drawable.toggle_icon_off_xxhdpi);
                     isVisible = false;
                 }
-                for (Listener listener : getListeners()) {
-                    listener.onUserPreferenceChange(USER_PREFERENCE_SHOW_MOBILE_NUMBER, isVisible);
+                if (!isLoading) {
+                    for (Listener listener : getListeners()) {
+                        listener.onUserPreferenceChange(USER_PREFERENCE_SHOW_MOBILE_NUMBER, isVisible);
+                    }
                 }
             }
         });
@@ -164,15 +217,17 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    btnProfileToggle.setImageResource(R.drawable.toggle_icon_on_xxhdpi);
+                    btnEmailToggle.setImageResource(R.drawable.toggle_icon_on_xxhdpi);
                     isVisible = true;
                 } else {
                     flag = true;
-                    btnProfileToggle.setImageResource(R.drawable.toggle_icon_off_xxhdpi);
+                    btnEmailToggle.setImageResource(R.drawable.toggle_icon_off_xxhdpi);
                     isVisible = false;
                 }
-                for (Listener listener : getListeners()) {
-                    listener.onUserPreferenceChange(USER_PREFERENCE_SHOW_EMAIL, isVisible);
+                if (!isLoading) {
+                    for (Listener listener : getListeners()) {
+                        listener.onUserPreferenceChange(USER_PREFERENCE_SHOW_EMAIL, isVisible);
+                    }
                 }
             }
         });
@@ -185,15 +240,17 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    btnProfileToggle.setImageResource(R.drawable.toggle_icon_on_xxhdpi);
+                    btnPlaceOfOriginToggle.setImageResource(R.drawable.toggle_icon_on_xxhdpi);
                     isVisible = true;
                 } else {
                     flag = true;
-                    btnProfileToggle.setImageResource(R.drawable.toggle_icon_off_xxhdpi);
+                    btnPlaceOfOriginToggle.setImageResource(R.drawable.toggle_icon_off_xxhdpi);
                     isVisible = false;
                 }
-                for (Listener listener : getListeners()) {
-                    listener.onUserPreferenceChange(USER_PREFERENCE_SHOW_PLACE_OF_ORIGIN, isVisible);
+                if (!isLoading) {
+                    for (Listener listener : getListeners()) {
+                        listener.onUserPreferenceChange(USER_PREFERENCE_SHOW_PLACE_OF_ORIGIN, isVisible);
+                    }
                 }
             }
         });
@@ -233,6 +290,58 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
         txtMobileNumber.setText(userInfo.getPhone());
         txtEmail.setText(userInfo.getAddressBook().getEmail1());
         txtPlaceOfOrigin.setText("");
+        for (UserPreference userPreference : userInfo.getUserPreferences()) {
+            switch (userPreference.getPreferenceType()) {
+                case USER_PREFERENCE_SHOW_PROFILE_PIC: {
+                    btnProfileToggle.callOnClick();
+                }
+                break;
+                case USER_PREFERENCE_SHOW_GENDER: {
+                    btnGenderToggle.callOnClick();
+                }
+                break;
+                case USER_PREFERENCE_SHOW_AGE: {
+                    btnAgeToggle.callOnClick();
+                }
+                break;
+                case USER_PREFERENCE_SHOW_EMAIL: {
+                    btnEmailToggle.callOnClick();
+                }
+                break;
+                case USER_PREFERENCE_SHOW_PLACE_OF_ORIGIN: {
+                    btnPlaceOfOriginToggle.callOnClick();
+                }
+                break;
+                case USER_PREFERENCE_SHOW_MOBILE_NUMBER: {
+                    btnMobileNumberToggle.callOnClick();
+                }
+                break;
+            }
+        }
+        isLoading = false;
+
+    }
+
+    @Override
+    public void enableProfileIcon(boolean enable) {
+        btnChangeProfileImage.setEnabled(enable);
+    }
+
+    @Override
+    public void setImageURI(Uri data) {
+        imgProfile.setImageURI(data);
+    }
+
+    @Override
+    public BitmapDrawable getProfilePicDrawable() {
+        return (BitmapDrawable)imgProfile.getDrawable();
+    }
+
+    @Override
+    public void bindProfilePic(String response) {
+        byte[] decodedString = Base64.decode(response, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        imgProfile.setImageBitmap(decodedByte);
 
     }
 

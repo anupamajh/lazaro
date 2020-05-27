@@ -1,11 +1,14 @@
 package com.carmel.guestjini.Screens.Common.Main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
 import androidx.annotation.Nullable;
 
 import com.carmel.guestjini.Screens.Common.BaseActivityView.BaseActivityMVCView;
+import com.carmel.guestjini.Screens.Common.Controllers.ActivityResultDispatcher;
+import com.carmel.guestjini.Screens.Common.Controllers.ActivityResultListener;
 import com.carmel.guestjini.Screens.Common.Controllers.BackPressDispatcher;
 import com.carmel.guestjini.Screens.Common.Controllers.BackPressedListener;
 import com.carmel.guestjini.Screens.Common.Controllers.BaseActivity;
@@ -19,11 +22,13 @@ import java.util.Set;
 
 public class MainActivity extends BaseActivity implements
         BackPressDispatcher,
+        ActivityResultDispatcher,
         FragmentFrameWrapper,
         BaseActivityMVCView.Listener,
         LoginEventBus.Listener {
 
     private final Set<BackPressedListener> mBackPressedListeners = new HashSet<>();
+    private final Set<ActivityResultListener> activityResultListeners = new HashSet<>();
     private ScreensNavigator mScreensNavigator;
     private BaseActivityMVCView viewMVC;
     private SharedPreferenceHelper sharedPreferenceHelper;
@@ -86,7 +91,36 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void registerListener(BackPressedListener listener) {
+        mBackPressedListeners.add(listener);
+    }
 
+    @Override
+    public void unregisterListener(BackPressedListener listener) {
+        mBackPressedListeners.add(listener);
+    }
+
+    @Override
+    public void registerListener(ActivityResultListener listener) {
+        activityResultListeners.add(listener);
+    }
+
+    @Override
+    public void unregisterListener(ActivityResultListener listener) {
+        activityResultListeners.remove(listener);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        boolean isActivityListenerConsumed = false;
+        for (ActivityResultListener listener : activityResultListeners) {
+            listener.onActivityResult(requestCode, resultCode, data);
+            isActivityListenerConsumed = true;
+        }
+        if (isActivityListenerConsumed) {
+            return;
+        }else{
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override
@@ -95,12 +129,12 @@ public class MainActivity extends BaseActivity implements
     }
 
     @Override
-    public void unregisterListener(BackPressedListener listener) {
-
+    public FrameLayout getFragmentFrame() {
+        return viewMVC.getFragmentFrame();
     }
 
     @Override
-    public FrameLayout getFragmentFrame() {
-        return viewMVC.getFragmentFrame();
+    public void onBackPressed() {
+
     }
 }

@@ -13,6 +13,7 @@ import com.carmel.guestjini.Services.Authentication.AuthServiceHolder;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class CompositionRoot {
     private Retrofit mRetrofit;
@@ -38,6 +39,7 @@ public class CompositionRoot {
                     .build();
             authenticatedRetrofit = new Retrofit.Builder()
                     .baseUrl(Constants.BASE_URL)
+                    .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(okHttpClient)
                     .build();

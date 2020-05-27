@@ -17,6 +17,7 @@ import com.carmel.guestjini.KnowledgeBase.KBDislikeArticleUseCase;
 import com.carmel.guestjini.KnowledgeBase.KBLikeArticleUseCase;
 import com.carmel.guestjini.KnowledgeBase.SaveKBReviewUseCase;
 import com.carmel.guestjini.Networking.GuestJiniAPI;
+import com.carmel.guestjini.Screens.Common.Controllers.ActivityResultDispatcher;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.FragmentHelper.FragmentFrameHelper;
@@ -51,6 +52,7 @@ import com.carmel.guestjini.Users.FetchMyProfileUseCase;
 import com.carmel.guestjini.Users.ResetPasswordUseCase;
 import com.carmel.guestjini.Users.SaveMyInterestUseCase;
 import com.carmel.guestjini.Users.SaveProfilePicUseCase;
+import com.carmel.guestjini.Users.SaveUserPreferenceUseCase;
 
 public class ControllerCompositionRoot {
     private final CompositionRoot compositionRoot;
@@ -83,6 +85,10 @@ public class ControllerCompositionRoot {
 
     private Context getContext() {
         return fragmentActivity;
+    }
+
+    public ActivityResultDispatcher getActivityResultDispatcher() {
+        return (ActivityResultDispatcher) getActivity();
     }
 
     private FragmentManager getFragmentManager() {
@@ -225,6 +231,10 @@ public class ControllerCompositionRoot {
         return new FetchInterestCategoryListUseCase(getAuthenticatedGuestJiniAPI());
     }
 
+    private SaveUserPreferenceUseCase getSaveUserPreferenceUseCase() {
+        return new SaveUserPreferenceUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
     public SharedPreferenceHelper getSharedPreferenceHelper() {
         return new SharedPreferenceHelper(preferences, editor);
 
@@ -335,9 +345,11 @@ public class ControllerCompositionRoot {
     public MyProfileController getMyProfileController() {
         return new MyProfileController(
                 getFetchMyProfileUseCase(),
+                getFetchMyProfilePicUseCase(),
+                getSaveProfilePicUseCase(),
+                getSaveUserPreferenceUseCase(),
                 getScreensNavigator(),
                 getDialogsManager(),
-                getDialogsEventBus()
-        );
+                getDialogsEventBus());
     }
 }
