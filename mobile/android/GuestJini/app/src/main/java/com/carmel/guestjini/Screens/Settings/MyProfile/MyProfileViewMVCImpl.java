@@ -62,6 +62,8 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
 
     private final RelativeLayout cameraIconLayout;
     private final RelativeLayout galleryIconLayout;
+    private final FloatingActionButton cameraIcon;
+    private final FloatingActionButton galleryIcon;
 
 
     private boolean isLoading = true;
@@ -93,6 +95,9 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
         cameraIconLayout = findViewById(R.id.cameraLayout);
         galleryIconLayout = findViewById(R.id.galleryLayout);
 
+        cameraIcon = findViewById(R.id.cameraIcon);
+        galleryIcon = findViewById(R.id.galleryIcon);
+
         btnChangeProfileImage.setOnClickListener(view -> {
             profileDrawerLayout.openDrawer(GravityCompat.START);
         });
@@ -111,6 +116,20 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
         });
 
         galleryIconLayout.setOnClickListener(view -> {
+            profileDrawerLayout.closeDrawers();
+            for (Listener listener : getListeners()) {
+                listener.onGalleryClicked();
+            }
+        });
+
+        cameraIcon.setOnClickListener(view -> {
+            profileDrawerLayout.closeDrawers();
+            for (Listener listener : getListeners()) {
+                listener.onCameraClicked();
+            }
+        });
+
+        galleryIcon.setOnClickListener(view -> {
             profileDrawerLayout.closeDrawers();
             for (Listener listener : getListeners()) {
                 listener.onGalleryClicked();
