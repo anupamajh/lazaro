@@ -1,5 +1,6 @@
 package com.carmel.guestjini.Screens.Common.ScreensNavigator;
 
+import com.carmel.guestjini.Screens.Accounts.AccountsHome.AccountsHomeFragment;
 import com.carmel.guestjini.Screens.Common.FragmentHelper.FragmentFrameHelper;
 import com.carmel.guestjini.Screens.Login.LoginFragment;
 import com.carmel.guestjini.Screens.Settings.ChangePassword.ChangePasswordFragment;
@@ -41,7 +42,7 @@ public class ScreensNavigator {
     }
 
     public void toAccountsHome() {
-        //TODO: Implement this method
+        mFragmentFrameHelper.replaceFragment(AccountsHomeFragment.createFragment());
     }
 
     public void toRewardsHome() {
@@ -104,5 +105,9 @@ public class ScreensNavigator {
 
     public void toMyInterests() {
         mFragmentFrameHelper.replaceFragment(MyInterestFragment.createFragment());
+    }
+
+    public void toRentInvoiceList() {
+        //TODO: Implement this method
     }
 }

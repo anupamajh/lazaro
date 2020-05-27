@@ -17,6 +17,7 @@ import com.carmel.guestjini.KnowledgeBase.KBDislikeArticleUseCase;
 import com.carmel.guestjini.KnowledgeBase.KBLikeArticleUseCase;
 import com.carmel.guestjini.KnowledgeBase.SaveKBReviewUseCase;
 import com.carmel.guestjini.Networking.GuestJiniAPI;
+import com.carmel.guestjini.Screens.Accounts.AccountsHome.AccountsHomeController;
 import com.carmel.guestjini.Screens.Common.Controllers.ActivityResultDispatcher;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
@@ -374,6 +375,12 @@ public class ControllerCompositionRoot {
 
     public TermsAndConditionsController getTermsAndConditionsController() {
         return  new TermsAndConditionsController(
+                getScreensNavigator()
+        );
+    }
+
+    public AccountsHomeController getAccountsHomeController() {
+        return  new AccountsHomeController(
                 getScreensNavigator()
         );
     }

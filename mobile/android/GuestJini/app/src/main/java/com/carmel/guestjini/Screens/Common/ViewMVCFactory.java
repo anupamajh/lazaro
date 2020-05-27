@@ -5,6 +5,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 
+import com.carmel.guestjini.Screens.Accounts.AccountsHome.AccountsHomeViewMVC;
+import com.carmel.guestjini.Screens.Accounts.AccountsHome.AccountsHomeViewMVCImpl;
 import com.carmel.guestjini.Screens.Common.BaseActivityView.BaseActivityMVCView;
 import com.carmel.guestjini.Screens.Common.BaseActivityView.BaseActivityMVCViewImpl;
 import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptViewMvc;
@@ -184,5 +186,9 @@ public class ViewMVCFactory {
 
     public TermsAndConditionsViewMVC getTermsAndConditionsViewMVC(@Nullable ViewGroup parent) {
         return new TermsAndConditionsViewMVCImpl(layoutInflater,parent);
+    }
+
+    public AccountsHomeViewMVC getAccountsHomeViewMVC(@Nullable ViewGroup parent) {
+        return new AccountsHomeViewMVCImpl(layoutInflater,parent);
     }
 }
