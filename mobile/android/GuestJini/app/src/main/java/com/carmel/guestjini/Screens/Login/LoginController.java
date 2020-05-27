@@ -64,7 +64,7 @@ public class LoginController implements
         return new SavedState(mScreenState);
     }
 
-    public void restoreSavedSate(SavedState savedState) {
+    public void restoreSavedState(SavedState savedState) {
         mScreenState = savedState.mScreenState;
     }
 
@@ -117,7 +117,7 @@ public class LoginController implements
             viewMVC.showAuthenticationFailure();
         }else{
             mScreensNavigator.toSupportHome();
-            loginEventBus.postEvent(null);
+            loginEventBus.postEvent(1);
         }
 
     }

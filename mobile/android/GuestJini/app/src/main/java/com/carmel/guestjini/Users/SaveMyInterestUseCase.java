@@ -5,8 +5,6 @@ import com.carmel.guestjini.Networking.Users.UserInterests;
 import com.carmel.guestjini.Networking.Users.UserInterestsResponse;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
 
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

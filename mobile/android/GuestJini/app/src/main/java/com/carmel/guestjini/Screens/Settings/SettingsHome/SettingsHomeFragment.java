@@ -46,7 +46,7 @@ public class SettingsHomeFragment extends BaseFragment {
     }
 
     private void restoreControllerState(Bundle savedInstanceState){
-        settingsHomeController.restoreSavedSate(
+        settingsHomeController.restoreSavedState(
                 (SettingsHomeController.SavedState)
                         savedInstanceState.getSerializable(SAVED_STATE_SETTINGS_HOME_FRAGMENT)
         );

@@ -125,7 +125,17 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void onLoginSuccess(Object event) {
-        viewMVC.showBottomNavigationView();
+        if (event instanceof Integer) {
+            switch (((Integer) event)) {
+                case 1:
+                    viewMVC.showBottomNavigationView();
+                    break;
+                case 0:
+                    viewMVC.hideBottomNavigationView();
+                    break;
+            }
+        }
+
     }
 
     @Override

@@ -47,7 +47,7 @@ public class WelcomeFragment  extends BaseFragment {
     }
 
     private void restoreControllerState(Bundle savedInstanceState){
-        welcomeController.restoreSavedSate(
+        welcomeController.restoreSavedState(
                 (WelcomeController.SavedState)
                         savedInstanceState.getSerializable(SAVED_STATE_WELCOME_FRAGMENT)
         );

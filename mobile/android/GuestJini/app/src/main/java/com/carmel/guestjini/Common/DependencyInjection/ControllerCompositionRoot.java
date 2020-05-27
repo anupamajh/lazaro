@@ -27,9 +27,12 @@ import com.carmel.guestjini.Screens.Common.SharedPreference.SharedPreferenceHelp
 import com.carmel.guestjini.Screens.Common.ViewMVCFactory;
 import com.carmel.guestjini.Screens.Login.LoginController;
 import com.carmel.guestjini.Screens.Login.LoginEventBus;
+import com.carmel.guestjini.Screens.Settings.ChangePassword.ChangePasswordController;
 import com.carmel.guestjini.Screens.Settings.MyInterests.MyInterestController;
 import com.carmel.guestjini.Screens.Settings.MyProfile.MyProfileController;
+import com.carmel.guestjini.Screens.Settings.PrivacyPolicy.PrivacyPolicyController;
 import com.carmel.guestjini.Screens.Settings.SettingsHome.SettingsHomeController;
+import com.carmel.guestjini.Screens.Settings.TermsAndConditions.TermsAndConditionsController;
 import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketController;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailController;
 import com.carmel.guestjini.Screens.Support.KBList.KBListController;
@@ -326,8 +329,9 @@ public class ControllerCompositionRoot {
 
     public SettingsHomeController getSettingsHomeController() {
         return  new SettingsHomeController(
-                getScreensNavigator()
-        );
+                getScreensNavigator(),
+                getSharedPreferenceHelper(),
+                getLoginEventBus());
     }
 
     public MyInterestController getMyInterestController() {
@@ -351,5 +355,26 @@ public class ControllerCompositionRoot {
                 getScreensNavigator(),
                 getDialogsManager(),
                 getDialogsEventBus());
+    }
+
+    public ChangePasswordController getChangePasswordController() {
+        return new ChangePasswordController(
+                getChangePasswordUseCase(),
+                getScreensNavigator(),
+                getDialogsManager(),
+                getDialogsEventBus()
+        );
+    }
+
+    public PrivacyPolicyController getPrivacyPolicyController() {
+        return  new PrivacyPolicyController(
+                getScreensNavigator()
+        );
+    }
+
+    public TermsAndConditionsController getTermsAndConditionsController() {
+        return  new TermsAndConditionsController(
+                getScreensNavigator()
+        );
     }
 }

@@ -36,7 +36,7 @@ public class WelcomeController  implements WelcomeViewMVC.Listener {
         return new SavedState(mScreenState);
     }
 
-    public void restoreSavedSate(SavedState savedState) {
+    public void restoreSavedState(SavedState savedState) {
         mScreenState = savedState.mScreenState;
     }
 

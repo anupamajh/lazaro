@@ -46,7 +46,7 @@ public class SupportHomeFragment extends BaseFragment {
     }
 
     private void restoreControllerState(Bundle savedInstanceState){
-        supportHomeController.restoreSavedSate(
+        supportHomeController.restoreSavedState(
                 (SupportHomeController.SavedState)
                         savedInstanceState.getSerializable(SAVED_STATE_SUPPORT_HOME_FRAGMENT)
         );

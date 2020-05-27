@@ -17,13 +17,12 @@ import androidx.fragment.app.Fragment;
 import com.carmel.guestjini.Screens.Common.Controllers.ActivityResultListener;
 import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
 
-public class MyProfileFragment  extends BaseFragment
-    implements ActivityResultListener
-
-{
-    public static Fragment createFragment(){
+public class MyProfileFragment extends BaseFragment
+        implements ActivityResultListener {
+    public static Fragment createFragment() {
         return new MyProfileFragment();
     }
+
     private static final String SAVED_STATE_MY_PROFILE_FRAGMENT = "SAVED_STATE_MY_PROFILE_FRAGMENT";
 
     private MyProfileController myProfileController;

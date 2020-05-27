@@ -27,7 +27,7 @@ public class ChangePasswordUseCase extends BaseObservableViewMvc<ChangePasswordU
         this.guestJiniAPI = guestJiniAPI;
     }
 
-    public void requestAppAccessAndNotify(
+    public void changePasswordAndNotify(
             String currentPassword,
             String newPassword
     ) {

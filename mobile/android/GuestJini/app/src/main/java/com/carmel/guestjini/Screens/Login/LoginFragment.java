@@ -47,7 +47,7 @@ public class LoginFragment   extends BaseFragment {
     }
 
     private void restoreControllerState(Bundle savedInstanceState){
-        loginController.restoreSavedSate(
+        loginController.restoreSavedState(
                 (LoginController.SavedState)
                         savedInstanceState.getSerializable(SAVED_STATE_LOGIN_FRAGMENT)
         );

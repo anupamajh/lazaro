@@ -1,11 +1,11 @@
-package com.carmel.guestjini.Screens.Support.SupportHome;
+package com.carmel.guestjini.Screens.Settings.TermsAndConditions;
 
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
 
 import java.io.Serializable;
 
-public class SupportHomeController implements
-        SupportHomeViewMVC.Listener {
+public class TermsAndConditionsController
+        implements TermsAndConditionsViewMVC.Listener {
 
     private enum ScreenState {
         IDLE, NETWORK_ERROR
@@ -13,13 +13,10 @@ public class SupportHomeController implements
 
     private final ScreensNavigator mScreensNavigator;
 
-    private SupportHomeViewMVC viewMVC;
+    private TermsAndConditionsViewMVC viewMVC;
     private ScreenState mScreenState = ScreenState.IDLE;
 
-
-    public SupportHomeController(
-            ScreensNavigator mScreensNavigator
-    ) {
+    public TermsAndConditionsController(ScreensNavigator mScreensNavigator) {
         this.mScreensNavigator = mScreensNavigator;
     }
 
@@ -31,8 +28,8 @@ public class SupportHomeController implements
         viewMVC.unregisterListener(this);
     }
 
-    public void bindView(SupportHomeViewMVC supportHomeViewMVC) {
-        viewMVC = supportHomeViewMVC;
+    public void bindView(TermsAndConditionsViewMVC viewMVC) {
+        this.viewMVC = viewMVC;
     }
 
 
@@ -44,32 +41,15 @@ public class SupportHomeController implements
         mScreenState = savedState.mScreenState;
     }
 
+    @Override
+    public void onBackPressed() {
+        mScreensNavigator.navigateUp();
+    }
+
     public static class SavedState implements Serializable {
         private final ScreenState mScreenState;
-
         public SavedState(ScreenState screenState) {
             mScreenState = screenState;
         }
-    }
-
-
-    @Override
-    public void onKBSearchClicked(String searchText) {
-        mScreensNavigator.toKBList(searchText);
-    }
-
-    @Override
-    public void onKBExploreClicked() {
-        mScreensNavigator.toKBList();
-    }
-
-    @Override
-    public void onCreateTicketClicked() {
-        mScreensNavigator.toCreateTicket();
-    }
-
-    @Override
-    public void onGotoTicketsClicked() {
-        mScreensNavigator.toTicketList();
     }
 }

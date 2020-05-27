@@ -2,9 +2,12 @@ package com.carmel.guestjini.Screens.Common.ScreensNavigator;
 
 import com.carmel.guestjini.Screens.Common.FragmentHelper.FragmentFrameHelper;
 import com.carmel.guestjini.Screens.Login.LoginFragment;
+import com.carmel.guestjini.Screens.Settings.ChangePassword.ChangePasswordFragment;
 import com.carmel.guestjini.Screens.Settings.MyInterests.MyInterestFragment;
 import com.carmel.guestjini.Screens.Settings.MyProfile.MyProfileFragment;
+import com.carmel.guestjini.Screens.Settings.PrivacyPolicy.PrivacyPolicyFragment;
 import com.carmel.guestjini.Screens.Settings.SettingsHome.SettingsHomeFragment;
+import com.carmel.guestjini.Screens.Settings.TermsAndConditions.TermsAndConditionsFragment;
 import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketFragment;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailFragment;
 import com.carmel.guestjini.Screens.Support.KBList.KBListFragment;
@@ -84,15 +87,15 @@ public class ScreensNavigator {
     }
 
     public void toChangePassword() {
-        //TODO: Implement this method
+        mFragmentFrameHelper.replaceFragment(ChangePasswordFragment.createFragment());
     }
 
     public void toPrivacyPolicy() {
-        //TODO: Implement this method
+        mFragmentFrameHelper.replaceFragment(PrivacyPolicyFragment.createFragment());
     }
 
     public void toTermsAndConditions() {
-        //TODO: Implement this method
+        mFragmentFrameHelper.replaceFragment(TermsAndConditionsFragment.createFragment());
     }
 
     public void toNotifications() {

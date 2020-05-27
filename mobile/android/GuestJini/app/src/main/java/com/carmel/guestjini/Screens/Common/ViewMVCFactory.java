@@ -11,6 +11,8 @@ import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptViewMvc;
 import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptViewMvcImpl;
 import com.carmel.guestjini.Screens.Login.LoginViewMVC;
 import com.carmel.guestjini.Screens.Login.LoginViewMVCImpl;
+import com.carmel.guestjini.Screens.Settings.ChangePassword.ChangePasswordViewMVC;
+import com.carmel.guestjini.Screens.Settings.ChangePassword.ChangePasswordViewMVCImpl;
 import com.carmel.guestjini.Screens.Settings.MyInterests.InterestCategoryItem.InterestCategoryItemViewMVC;
 import com.carmel.guestjini.Screens.Settings.MyInterests.InterestCategoryItem.InterestCategoryItemViewMVCImpl;
 import com.carmel.guestjini.Screens.Settings.MyInterests.InterestItem.InterestItemViewMVC;
@@ -19,8 +21,12 @@ import com.carmel.guestjini.Screens.Settings.MyInterests.MyInterestViewMVC;
 import com.carmel.guestjini.Screens.Settings.MyInterests.MyInterestViewMVCImpl;
 import com.carmel.guestjini.Screens.Settings.MyProfile.MyProfileViewMVC;
 import com.carmel.guestjini.Screens.Settings.MyProfile.MyProfileViewMVCImpl;
+import com.carmel.guestjini.Screens.Settings.PrivacyPolicy.PrivacyPolicyViewMVC;
+import com.carmel.guestjini.Screens.Settings.PrivacyPolicy.PrivacyPolicyViewMVCImpl;
 import com.carmel.guestjini.Screens.Settings.SettingsHome.SettingsHomeViewMVC;
 import com.carmel.guestjini.Screens.Settings.SettingsHome.SettingsHomeViewMVCImpl;
+import com.carmel.guestjini.Screens.Settings.TermsAndConditions.TermsAndConditionsViewMVC;
+import com.carmel.guestjini.Screens.Settings.TermsAndConditions.TermsAndConditionsViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketViewMVC;
 import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailViewMVC;
@@ -166,5 +172,17 @@ public class ViewMVCFactory {
 
     public MyProfileViewMVC getMyProfileViewMVC(@Nullable ViewGroup parent) {
         return new MyProfileViewMVCImpl(layoutInflater,parent);
+    }
+
+    public ChangePasswordViewMVC getChangePasswordViewMVC(@Nullable ViewGroup parent) {
+        return new ChangePasswordViewMVCImpl(layoutInflater,parent);
+    }
+
+    public PrivacyPolicyViewMVC getPrivacyPolicyViewMVC(@Nullable ViewGroup parent) {
+        return new PrivacyPolicyViewMVCImpl(layoutInflater,parent);
+    }
+
+    public TermsAndConditionsViewMVC getTermsAndConditionsViewMVC(@Nullable ViewGroup parent) {
+        return new TermsAndConditionsViewMVCImpl(layoutInflater,parent);
     }
 }

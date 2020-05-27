@@ -1,7 +1,6 @@
 package com.carmel.guestjini.Users;
 
 import com.carmel.guestjini.Networking.GuestJiniAPI;
-import com.carmel.guestjini.Networking.Users.UserPreference;
 import com.carmel.guestjini.Networking.Users.UserPreferenceResponse;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
 
