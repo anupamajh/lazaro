@@ -362,4 +362,7 @@
     <string name="error_use_case_network_failed_message">Error occurred while fetching data from server!</string>
     <string name="error_network_call_failed_positive_button_caption">RETRY</string>
     <string name="error_network_call_failed_negative_button_caption">CANCEL</string>
+    <string name="people">PEOPLE</string>
+    <string name="people_description">Meet the community members and make new friends.</string>
+    <string name="groups_description">Join the groups and catch all the action. You will get suggestions based on your profile.</string>
 </resources>

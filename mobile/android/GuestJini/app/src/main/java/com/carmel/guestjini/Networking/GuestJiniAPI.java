@@ -2,6 +2,9 @@ package com.carmel.guestjini.Networking;
 
 
 import com.carmel.guestjini.Networking.Accounts.AccountTicketResponse;
+import com.carmel.guestjini.Networking.Group.Group;
+import com.carmel.guestjini.Networking.Group.GroupConversationResponse;
+import com.carmel.guestjini.Networking.Group.GroupResponse;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBRating;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBRatingPercentResponse;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBRatingResponse;
@@ -17,6 +20,7 @@ import com.carmel.guestjini.Networking.Users.AppAccessRequestResponse;
 import com.carmel.guestjini.Networking.Users.ForgotPasswordResponse;
 import com.carmel.guestjini.Networking.Users.InterestCategoryResponse;
 import com.carmel.guestjini.Networking.Users.InterestResponse;
+import com.carmel.guestjini.Networking.Users.PeopleResponse;
 import com.carmel.guestjini.Networking.Users.UserInfo;
 import com.carmel.guestjini.Networking.Users.UserInterests;
 import com.carmel.guestjini.Networking.Users.UserInterestsResponse;
@@ -151,6 +155,52 @@ public interface GuestJiniAPI {
             @Body Map<String, String> postData
     );
 
+    @POST("/common/people/get-people")
+    Call<PeopleResponse> getPeopleList();
 
+    @POST("/common/people/get-person")
+    Call<PeopleResponse> getPersonDetails(
+            @Body Map<String, String> postData
+    );
+
+    @POST("/common/people/add-remove-favourite")
+    Call<PeopleResponse> addPersonFavourite(
+            @Body Map<String, String> postData
+    );
+
+    @POST("/common/groups/get-all-by-type")
+    Call<GroupResponse> getGroupByType(
+            @Body Map<String, String> postData
+    );
+
+    @POST("/common/groups/save")
+    Call<GroupResponse> saveGroup(
+            @Body Group group
+    );
+
+    @POST("/common/groups/get")
+    Call<GroupResponse> getGroupById(
+            @Body Map<String, String> postData
+    );
+
+    @POST("/common/groups/invite")
+    Call<GroupResponse> inviteToGroup(
+            @Body Map<String, String> postData
+    );
+
+    @POST("/common/groups/subscribe")
+    Call<GroupResponse> subscribeToGroup(
+            @Body Map<String, String> postData
+    );
+
+    @POST("/common/group-conversation/get-by-group")
+    Call<GroupConversationResponse> getGroupConversationById(
+            @Body Map<String, String> postData
+    );
+
+    @POST("/common/group-conversation/save")
+    Call<GroupConversationResponse> saveGroupConversation(
+            @Body Map<String, String> postData
+    );
 
 }

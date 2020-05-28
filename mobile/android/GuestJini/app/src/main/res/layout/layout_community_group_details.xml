@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/layoutHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:contentDescription="@string/back_arrow_icon"
+                android:src="@drawable/back_arrow_icon_xxhdpi" />
+
+            <TextView
+                android:id="@+id/txtHeaderTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="32dp"
+                android:layout_toEndOf="@+id/btnBack"
+                android:letterSpacing="0.1"
+                android:text="@string/groups"
+                android:textAllCaps="true"
+                android:textColor="@color/colorZambezi"
+                android:textSize="14sp"
+                app:fontFamily="@font/roboto_bold" />
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/layoutHeader">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/layoutGroupHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="52dp"
+                    android:background="@color/colorWhisper1">
+
+                    <TextView
+                        android:id="@+id/txtGroupCategoryName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="22dp"
+                        android:layout_marginTop="18dp"
+                        android:letterSpacing="0.1"
+                        android:text="@string/interestGroupType"
+                        android:textColor="@color/colorSuvaGray"
+                        android:textSize="10sp"
+                        app:fontFamily="@font/roboto_medium" />
+
+                    <TextView
+                        android:id="@+id/txtGroupName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtGroupCategoryName"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="22dp"
+                        android:layout_marginTop="2dp"
+                        android:letterSpacing="0.1"
+                        android:text="@string/interestGroupName"
+                        android:textColor="@color/colorZambezi1"
+                        android:textSize="10sp"
+                        app:fontFamily="@font/roboto_medium" />
+
+                    <TextView
+                        android:id="@+id/txtGroupDescription"
+                        android:layout_width="320dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtGroupName"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="22dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="19dp"
+                        android:text="Interest Group Description"
+                        android:textColor="@color/colorSuvaGray"
+                        android:textSize="10sp"
+                        app:fontFamily="@font/roboto_medium" />
+
+                    <Button
+                        android:id="@+id/btnSubscribe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="32dp"
+                        android:backgroundTint="@color/colorSummerSky"
+                        android:letterSpacing="0.06"
+                        android:text="@string/subscribe"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="10sp"
+                        app:fontFamily="@font/roboto_bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/btnExit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="32dp"
+                        android:backgroundTint="@color/colorSummerSky"
+                        android:letterSpacing="0.06"
+                        android:text="@string/exit"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="10sp"
+                        app:fontFamily="@font/roboto_bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutGroupInformation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layoutGroupHeader"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="45dp"
+                        android:layout_marginEnd="32dp"
+                        android:background="@drawable/interests_group_desktop"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/systemIcon"
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginBottom="28dp"
+                            android:src="@drawable/desktop_round_icon"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            />
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_toEndOf="@id/systemIcon"
+                            android:layout_centerVertical="true"
+                            >
+                            <TextView
+                                android:id="@+id/txtCreatedByTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:text="CREATED BY"
+                                android:textColor="@color/colorSuvaGray"
+                                android:textSize="8sp"
+                                app:fontFamily="@font/roboto_medium"
+                                android:layout_alignParentTop="true"
+                                />
+
+
+                            <TextView
+                                android:id="@+id/txtCreatedBy"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginTop="2dp"
+                                android:text="System"
+                                android:textColor="@color/colorZambezi1"
+                                android:textSize="12sp"
+                                app:fontFamily="@font/roboto_medium"
+                                android:layout_below="@id/txtCreatedByTitle"
+                                />
+
+                            <TextView
+                                android:id="@+id/txtCreationTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:text="26 Jul 2018 03:48 PM"
+                                android:textColor="@color/colorSuvaGray"
+                                android:textSize="8sp"
+                                app:fontFamily="@font/roboto_medium"
+                                android:layout_below="@id/txtCreatedBy" />
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/layoutGroupInformation"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="32dp"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/memberCountOfGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/memberText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="0dp"
+                            android:layout_marginTop="8dp"
+                            android:text="27 Members"
+                            android:textColor="#505050"
+                            android:textSize="10sp"
+                            app:fontFamily="@font/roboto_medium"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                        <View
+                            android:id="@+id/divider"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="14dp"
+                            android:background="@drawable/horizontal_line"
+                            app:layout_constraintBottom_toTopOf="@id/navigationLayout"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/memberCountOfGroup"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="16dp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/lstGroupMembers"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="0dp"
+                            android:layout_marginEnd="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+                    </RelativeLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
+</FrameLayout>

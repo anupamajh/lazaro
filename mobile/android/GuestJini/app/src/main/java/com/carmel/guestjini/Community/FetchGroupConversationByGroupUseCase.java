@@ -1,8 +1,7 @@
-package com.carmel.guestjini.Accounts;
+package com.carmel.guestjini.Community;
 
 import com.carmel.guestjini.Common.BaseObservable;
-import com.carmel.guestjini.Networking.Accounts.AccountTicket;
-import com.carmel.guestjini.Networking.Accounts.AccountTicketResponse;
+import com.carmel.guestjini.Networking.Group.GroupConversationResponse;
 import com.carmel.guestjini.Networking.GuestJiniAPI;
 
 import java.util.HashMap;
@@ -12,31 +11,31 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FetchMyRentInvoiceDetailsUseCase extends BaseObservable<FetchMyRentInvoiceDetailsUseCase.Listener> {
+public class FetchGroupConversationByGroupUseCase extends BaseObservable<FetchGroupConversationByGroupUseCase.Listener> {
 
     public interface Listener {
-        void onRentInvoiceDetailFetched(AccountTicket accountTicket);
+        void onGroupConversationFetched(GroupConversationResponse groupConversationResponse);
 
-        void onRentInvoiceDetailFetchFailed();
+        void onGroupConversationFetchFailed();
 
         void onNetworkFailed();
     }
 
     private final GuestJiniAPI guestJiniAPI;
 
-    public FetchMyRentInvoiceDetailsUseCase(GuestJiniAPI guestJiniAPI) {
+    public FetchGroupConversationByGroupUseCase(GuestJiniAPI guestJiniAPI) {
         this.guestJiniAPI = guestJiniAPI;
     }
 
-    public void fetchRentInvoiceDetailAndNotify(String id) {
+    public void fetchGroupConversationByGroupAndNotify(String groupId) {
         Map<String, String> postData = new HashMap<>();
-        postData.put("id",id);
-        this.guestJiniAPI.getMyRentInvoiceDetails(postData).enqueue(new Callback<AccountTicketResponse>() {
+        postData.put("groupId", groupId);
+        this.guestJiniAPI.getGroupConversationById(postData).enqueue(new Callback<GroupConversationResponse>() {
             @Override
-            public void onResponse(Call<AccountTicketResponse> call, Response<AccountTicketResponse> response) {
+            public void onResponse(Call<GroupConversationResponse> call, Response<GroupConversationResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getSuccess()) {
-                        notifySuccess(response.body().getAccountTicket());
+                        notifySuccess(response.body());
                     } else {
                         notifyFailure();
                     }
@@ -46,7 +45,7 @@ public class FetchMyRentInvoiceDetailsUseCase extends BaseObservable<FetchMyRent
             }
 
             @Override
-            public void onFailure(Call<AccountTicketResponse> call, Throwable t) {
+            public void onFailure(Call<GroupConversationResponse> call, Throwable t) {
                 notifyNetworkFailure();
             }
         });
@@ -60,13 +59,13 @@ public class FetchMyRentInvoiceDetailsUseCase extends BaseObservable<FetchMyRent
 
     private void notifyFailure() {
         for (Listener listener : getListeners()) {
-            listener.onRentInvoiceDetailFetchFailed();
+            listener.onGroupConversationFetchFailed();
         }
     }
 
-    private void notifySuccess(AccountTicket accountTicket) {
+    private void notifySuccess(GroupConversationResponse groupConversationResponse) {
         for (Listener listener : getListeners()) {
-            listener.onRentInvoiceDetailFetched(accountTicket);
+            listener.onGroupConversationFetched(groupConversationResponse);
         }
     }
 }

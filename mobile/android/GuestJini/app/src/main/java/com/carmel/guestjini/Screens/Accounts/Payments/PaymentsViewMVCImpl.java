@@ -1,6 +1,5 @@
 package com.carmel.guestjini.Screens.Accounts.Payments;
 
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.webkit.WebView;

@@ -19,6 +19,26 @@ import com.carmel.guestjini.Screens.Common.BaseActivityView.BaseActivityMVCView;
 import com.carmel.guestjini.Screens.Common.BaseActivityView.BaseActivityMVCViewImpl;
 import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptViewMvc;
 import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptViewMvcImpl;
+import com.carmel.guestjini.Screens.Community.CommunityHome.CommunityHomeViewMVC;
+import com.carmel.guestjini.Screens.Community.CommunityHome.CommunityHomeViewMVCImpl;
+import com.carmel.guestjini.Screens.Community.GroupDetails.GroupDetailsViewMVC;
+import com.carmel.guestjini.Screens.Community.GroupDetails.GroupDetailsViewMVCImpl;
+import com.carmel.guestjini.Screens.Community.GroupDetails.GroupMember.GroupMemberViewMVC;
+import com.carmel.guestjini.Screens.Community.GroupDetails.GroupMember.GroupMemberViewMVCImpl;
+import com.carmel.guestjini.Screens.Community.GroupHome.GroupHomeViewMVC;
+import com.carmel.guestjini.Screens.Community.GroupHome.GroupHomeViewMVCImpl;
+import com.carmel.guestjini.Screens.Community.GroupList.GroupListItem.GroupListItemViewMVC;
+import com.carmel.guestjini.Screens.Community.GroupList.GroupListItem.GroupListItemViewMVCImpl;
+import com.carmel.guestjini.Screens.Community.GroupList.GroupListItem.GroupListMatchingItemViewMVCImpl;
+import com.carmel.guestjini.Screens.Community.GroupList.GroupListItem.GroupListUnSubScribedItemViewMVCImpl;
+import com.carmel.guestjini.Screens.Community.GroupList.GroupListViewMVC;
+import com.carmel.guestjini.Screens.Community.GroupList.GroupListViewMVCImpl;
+import com.carmel.guestjini.Screens.Community.PeopleList.PeopleListItem.PeopleListItemViewMVC;
+import com.carmel.guestjini.Screens.Community.PeopleList.PeopleListItem.PeopleListItemViewMVCImpl;
+import com.carmel.guestjini.Screens.Community.PeopleList.PeopleListViewMVC;
+import com.carmel.guestjini.Screens.Community.PeopleList.PeopleListViewMVCImpl;
+import com.carmel.guestjini.Screens.Community.PersonDetail.PersonDetailViewMVC;
+import com.carmel.guestjini.Screens.Community.PersonDetail.PersonDetailViewMVCImpl;
 import com.carmel.guestjini.Screens.Login.LoginViewMVC;
 import com.carmel.guestjini.Screens.Login.LoginViewMVCImpl;
 import com.carmel.guestjini.Screens.Settings.ChangePassword.ChangePasswordViewMVC;
@@ -224,6 +244,86 @@ public class ViewMVCFactory {
 
     public PaymentsViewMVC getPaymentsViewMVC(@Nullable ViewGroup parent) {
         return new PaymentsViewMVCImpl(
+                layoutInflater,
+                parent
+        );
+    }
+
+    public CommunityHomeViewMVC getCommunityHomeViewMVC(@Nullable ViewGroup parent) {
+        return new CommunityHomeViewMVCImpl(
+                layoutInflater,
+                parent
+        );
+    }
+
+    public PeopleListItemViewMVC getPeopleListItemViewMVC(@Nullable ViewGroup parent) {
+        return new PeopleListItemViewMVCImpl(
+                layoutInflater,
+                parent
+        );
+    }
+
+    public PeopleListViewMVC getPeopleListViewMVC(@Nullable ViewGroup parent) {
+        return new PeopleListViewMVCImpl(
+                layoutInflater,
+                parent,
+                this
+        );
+    }
+
+    public PersonDetailViewMVC getPersonDetailViewMVC(@Nullable ViewGroup parent) {
+        return new PersonDetailViewMVCImpl(
+                layoutInflater,
+                parent
+        );
+    }
+
+    public GroupHomeViewMVC getGroupHomeViewMVC(@Nullable ViewGroup parent) {
+        return new GroupHomeViewMVCImpl(
+                layoutInflater,
+                parent
+        );
+    }
+
+    public GroupListItemViewMVC getGroupListItemViewMVC(@Nullable ViewGroup parent) {
+        return new GroupListItemViewMVCImpl(
+                layoutInflater,
+                parent
+        );
+    }
+
+    public GroupListViewMVC getGroupListViewMVC(@Nullable ViewGroup parent) {
+        return new GroupListViewMVCImpl(
+                layoutInflater,
+                parent,
+                this
+        );
+    }
+
+    public GroupMemberViewMVC getGroupMemberViewMVC(@Nullable ViewGroup parent) {
+        return new GroupMemberViewMVCImpl(
+                layoutInflater,
+                parent
+        );
+    }
+
+    public GroupDetailsViewMVC getGroupDetailsViewMVC(@Nullable ViewGroup parent) {
+        return new GroupDetailsViewMVCImpl(
+                layoutInflater,
+                parent,
+                this
+        );
+    }
+
+    public GroupListItemViewMVC getGroupListMatchingItemViewMVC(@Nullable ViewGroup parent) {
+        return new GroupListMatchingItemViewMVCImpl(
+                layoutInflater,
+                parent
+        );
+    }
+
+    public GroupListItemViewMVC getGroupListUnSubScribedItemViewMVCImpl(ViewGroup parent) {
+        return new GroupListUnSubScribedItemViewMVCImpl(
                 layoutInflater,
                 parent
         );

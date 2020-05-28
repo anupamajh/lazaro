@@ -2,7 +2,6 @@ package com.carmel.guestjini.Screens.Accounts.AccountsHome;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
 

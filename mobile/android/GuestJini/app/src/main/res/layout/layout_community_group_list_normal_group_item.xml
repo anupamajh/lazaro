@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="28dp"
+            app:cardBackgroundColor="@color/colorWhisper1"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+           >
+
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <TextView
+                   android:id="@+id/txtInterestCategoryName"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginStart="24dp"
+                   android:layout_marginTop="24dp"
+                   android:text="Outdoor Adventure"
+                   android:textColor="@color/colorSuvaGray"
+                   android:textSize="10sp"
+                   android:letterSpacing="0.05"
+                   app:fontFamily="@font/roboto_medium"
+                   android:layout_alignParentTop="true"
+                   android:layout_alignParentStart="true"
+                   />
+               <TextView
+                   android:id="@+id/txtInterestName"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginStart="24dp"
+                   android:layout_marginTop="4dp"
+                   android:text="SKY DIVING"
+                   android:textColor="@color/colorZambezi1"
+                   android:textSize="10sp"
+                   android:letterSpacing="0.05"
+                   app:fontFamily="@font/roboto_medium"
+                   android:layout_alignParentStart="true"
+                   android:layout_below="@id/txtInterestCategoryName"
+                    />
+               <TextView
+                   android:id="@+id/txtDescription"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginStart="24dp"
+                   android:layout_marginTop="10dp"
+                   android:layout_marginBottom="16dp"
+                   android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien. ultricies."
+                   android:textColor="@color/colorDimGray"
+                   android:textSize="10sp"
+                   app:fontFamily="@font/roboto_medium"
+                   android:letterSpacing="0.05"
+                   android:lineSpacingExtra="2dp"
+                   android:layout_alignParentStart="true"
+                   android:layout_below="@id/txtInterestName"
+                   />
+               <ImageView
+                   android:id="@+id/btnInformation"
+                   android:layout_width="24dp"
+                   android:layout_height="24dp"
+                   android:layout_marginTop="15dp"
+                   android:layout_marginEnd="32dp"
+                   app:srcCompat="@drawable/information_icon"
+                   android:layout_alignParentTop="true"
+                   android:layout_alignParentEnd="true"
+                   />
+           </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </RelativeLayout>
+</FrameLayout>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/layoutHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:contentDescription="@string/back_arrow_icon"
+                android:src="@drawable/back_arrow_icon_xxhdpi" />
+
+            <TextView
+                android:id="@+id/txtHeaderTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="32dp"
+                android:layout_toEndOf="@+id/btnBack"
+                android:letterSpacing="0.1"
+                android:text="@string/people"
+                android:textAllCaps="true"
+                android:textColor="@color/colorZambezi"
+                android:textSize="14sp"
+                app:fontFamily="@font/roboto_bold" />
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutHeader">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp">
+
+                <RelativeLayout
+                    android:id="@+id/layoutProfileHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/imgProfilePicture"
+                        android:layout_width="47dp"
+                        android:layout_height="47dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/profile_image" />
+
+                    <TextView
+                        android:id="@+id/txtFullName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/imgProfilePicture"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="Profile Name"
+                        android:textColor="@color/colorZambezi1"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/lato_bold" />
+
+
+                    <TextView
+                        android:id="@+id/txtGender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtFullName"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:text="Male"
+                        android:textColor="@color/colorSuvaGray"
+                        android:textSize="10sp"
+                        app:fontFamily="@font/roboto_medium" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutFavourite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layoutProfileHeader"
+                    android:layout_marginTop="20dp"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/layoutAddFavouriteSection"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#32BDD2"
+                        android:orientation="vertical"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        >
+
+                        <ImageView
+                            android:id="@+id/btnAddFavourite"
+                            android:layout_width="25dp"
+                            android:layout_height="23dp"
+                            android:layout_marginStart="38dp"
+                            android:layout_marginTop="22dp"
+                            android:layout_marginEnd="30dp"
+                            android:src="@drawable/unlike_button_xhdpi" />
+
+                        <TextView
+                            android:id="@+id/addToFavouriteTitle"
+                            android:layout_width="70dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="14dp"
+                            android:layout_marginBottom="24dp"
+                            android:gravity="center"
+                            android:text="Add to favourites"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="10sp"
+                            app:fontFamily="@font/roboto_medium" />
+
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/txtMobileTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:text="MOBILE"
+                        android:textColor="@color/colorDimGray"
+                        android:textSize="10sp"
+                        app:fontFamily="@font/roboto_medium"
+                        android:layout_toEndOf="@id/layoutAddFavouriteSection"
+                        android:layout_alignParentTop="true"
+                         />
+
+                    <TextView
+                        android:id="@+id/txtMobileNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:text="9090909090"
+                        android:textColor="@color/colorMatterhon"
+                        android:textSize="12dp"
+                        app:fontFamily="@font/roboto_medium"
+                        android:layout_toEndOf="@id/layoutAddFavouriteSection"
+                        android:layout_below="@id/txtMobileTitle"
+                        />
+
+                    <TextView
+                        android:id="@+id/txtEmailTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:text="EMAIL"
+                        android:textColor="@color/colorDimGray"
+                        android:textSize="10sp"
+                        app:fontFamily="@font/roboto_medium"
+                        android:layout_toEndOf="@id/layoutAddFavouriteSection"
+                        android:layout_below="@id/txtMobileNumber"
+                        />
+
+                    <TextView
+                        android:id="@+id/txtEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:text="johndoe@gmail.com"
+                        android:textColor="@color/colorMatterhon"
+                        android:textSize="12sp"
+                        app:fontFamily="@font/roboto_medium"
+                        android:layout_toEndOf="@id/layoutAddFavouriteSection"
+                        android:layout_below="@id/txtEmailTitle" />
+
+                </RelativeLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/commonInterestsSubLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="42dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/common_interests"
+                    android:layout_below="@id/layoutFavourite"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                   >
+
+                    <TextView
+                        android:id="@+id/commonInterestsTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#32BDD2"
+                        android:paddingStart="26dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="Common Interests"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/roboto_bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/otherInterestsSubLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="42dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/other_interests"
+                    android:layout_below="@id/commonInterestsSubLayout"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                  >
+
+                    <TextView
+                        android:id="@+id/otherInterests"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/add_to_favourite"
+                        android:paddingStart="26dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="Other Interests"
+                        android:textColor="#5A5A5A"
+                        android:textSize="14dp"
+                        app:fontFamily="@font/roboto_bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
+</FrameLayout>

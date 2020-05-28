@@ -5,6 +5,12 @@ import com.carmel.guestjini.Screens.Accounts.Payments.PaymentsFragment;
 import com.carmel.guestjini.Screens.Accounts.RentInvoiceDetails.RentInvoiceDetailFragment;
 import com.carmel.guestjini.Screens.Accounts.RentInvoiceList.RentInvoiceListFragment;
 import com.carmel.guestjini.Screens.Common.FragmentHelper.FragmentFrameHelper;
+import com.carmel.guestjini.Screens.Community.CommunityHome.CommunityHomeFragment;
+import com.carmel.guestjini.Screens.Community.GroupDetails.GroupDetailsFragment;
+import com.carmel.guestjini.Screens.Community.GroupHome.GroupHomeFragment;
+import com.carmel.guestjini.Screens.Community.GroupList.GroupListFragment;
+import com.carmel.guestjini.Screens.Community.PeopleList.PeopleListFragment;
+import com.carmel.guestjini.Screens.Community.PersonDetail.PersonDetailFragment;
 import com.carmel.guestjini.Screens.Login.LoginFragment;
 import com.carmel.guestjini.Screens.Settings.ChangePassword.ChangePasswordFragment;
 import com.carmel.guestjini.Screens.Settings.MyInterests.MyInterestFragment;
@@ -41,7 +47,7 @@ public class ScreensNavigator {
     }
 
     public void toCommunityHome() {
-        //TODO: Implement this method
+        mFragmentFrameHelper.replaceFragment(CommunityHomeFragment.createFragment());
     }
 
     public void toAccountsHome() {
@@ -131,5 +137,33 @@ public class ScreensNavigator {
                 email,
                 transactionAmount
         ));
+    }
+
+    public void toPeopleList() {
+        mFragmentFrameHelper.replaceFragment(PeopleListFragment.createFragment());
+    }
+
+    public void toGroupHome() {
+        mFragmentFrameHelper.replaceFragment(GroupHomeFragment.createFragment());
+    }
+
+    public void toPersonDetailsScreen(String userId) {
+        mFragmentFrameHelper.replaceFragment(PersonDetailFragment.createFragment(userId));
+    }
+
+    public void toInterestGroupsScreen() {
+        mFragmentFrameHelper.replaceFragment(GroupListFragment.createFragment(1));
+    }
+
+    public void toCommunityGroupsScreen() {
+        mFragmentFrameHelper.replaceFragment(GroupListFragment.createFragment(2));
+    }
+
+    public void toMyGroupsScreen() {
+        mFragmentFrameHelper.replaceFragment(GroupListFragment.createFragment(3));
+    }
+
+    public void toGroupDetailScreen(String groupId) {
+        mFragmentFrameHelper.replaceFragment(GroupDetailsFragment.createFragment(groupId));
     }
 }

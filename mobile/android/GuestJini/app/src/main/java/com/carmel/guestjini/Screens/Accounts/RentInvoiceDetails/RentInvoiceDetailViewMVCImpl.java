@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 
 import com.carmel.guestjini.Networking.Accounts.AccountTicket;
 import com.carmel.guestjini.R;
-import com.carmel.guestjini.Screens.Common.ViewMVCFactory;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
 
 public class RentInvoiceDetailViewMVCImpl

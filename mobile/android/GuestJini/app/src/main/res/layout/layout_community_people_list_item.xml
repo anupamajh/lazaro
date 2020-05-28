@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:outlineSpotShadowColor="#00000029"
+            app:cardBackgroundColor="@color/colorWhisper1"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp"
+            android:layout_marginBottom="28dp"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:id="@+id/layoutProfileHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                  >
+
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/peopleProfileImage"
+                        android:layout_width="41dp"
+                        android:layout_height="41dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="20dp"
+                        android:src="@drawable/profile_image"
+                      />
+
+                    <TextView
+                        android:id="@+id/peopleName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="22dp"
+                        android:letterSpacing="0.06"
+                        android:layout_toEndOf="@+id/peopleProfileImage"
+                        android:textSize="12sp"
+                        android:textColor="@color/colorZambezi1"
+                        android:text="@string/people_name"
+                        app:fontFamily="@font/roboto_medium"
+                        />
+
+                    <TextView
+                        android:id="@+id/peopleGender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/peopleName"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_toEndOf="@+id/peopleProfileImage"
+                        android:text="@string/people_gender"
+                        android:textSize="10dp"
+                        android:textColor="@color/colorDimGray"
+                        android:letterSpacing="0.06"
+                        app:fontFamily="@font/roboto_medium"
+                       />
+
+                    <TextView
+                        android:id="@+id/notificationIndicator"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:background="@drawable/red_small_circle"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/layoutProfileHeader"
+                   >
+
+                    <ImageView
+                        android:id="@+id/btnFavourite"
+                        android:layout_width="31dp"
+                        android:layout_height="31dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="38dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/like_and_unlike_button"
+                        />
+
+                    <TextView
+                        android:id="@+id/compatibilityMeter"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="32dp"
+                        android:layout_toEndOf="@+id/btnFavourite"
+                        android:background="#32BDD2"
+                         />
+
+                    <TextView
+                        android:id="@+id/peopleInterests"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/compatibilityMeter"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_toEndOf="@+id/btnFavourite"
+                        android:text="@string/Common_interests"
+                        android:textSize="8dp"
+                        android:letterSpacing="0.06"
+                        app:fontFamily="@font/roboto_medium"
+                        />
+
+                    <TextView
+                        android:id="@+id/compatibilityCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/compatibilityMeter"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="32dp"
+                        android:text="@string/compatibility_count"
+                        android:letterSpacing="0.04"
+                        android:textSize="8dp"
+                        app:fontFamily="@font/roboto_medium"
+                        />
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </RelativeLayout>
+</FrameLayout>

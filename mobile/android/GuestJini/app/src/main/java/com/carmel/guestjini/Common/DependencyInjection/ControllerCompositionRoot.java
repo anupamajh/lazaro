@@ -10,6 +10,16 @@ import androidx.fragment.app.FragmentManager;
 import com.carmel.guestjini.Accounts.FetchMyRentInvoiceDetailsUseCase;
 import com.carmel.guestjini.Accounts.FetchMyRentInvoiceListUseCase;
 import com.carmel.guestjini.Authentication.AttemptLoginUseCase;
+import com.carmel.guestjini.Community.AddPersonToFavouriteUseCase;
+import com.carmel.guestjini.Community.FetchGroupByIdUseCase;
+import com.carmel.guestjini.Community.FetchGroupConversationByGroupUseCase;
+import com.carmel.guestjini.Community.FetchGroupListByTypeUseCase;
+import com.carmel.guestjini.Community.FetchPeopleListUseCase;
+import com.carmel.guestjini.Community.FetchPersonDetailUseCase;
+import com.carmel.guestjini.Community.InviteToGroupUseCase;
+import com.carmel.guestjini.Community.SaveGroupConversationUseCase;
+import com.carmel.guestjini.Community.SaveGroupUseCase;
+import com.carmel.guestjini.Community.SubscribeToGroupUseCase;
 import com.carmel.guestjini.KnowledgeBase.FetchKBDetailsUseCase;
 import com.carmel.guestjini.KnowledgeBase.FetchKBListUseCase;
 import com.carmel.guestjini.KnowledgeBase.FetchKBRatingPercentageUseCase;
@@ -31,6 +41,12 @@ import com.carmel.guestjini.Screens.Common.FragmentHelper.FragmentFrameWrapper;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
 import com.carmel.guestjini.Screens.Common.SharedPreference.SharedPreferenceHelper;
 import com.carmel.guestjini.Screens.Common.ViewMVCFactory;
+import com.carmel.guestjini.Screens.Community.CommunityHome.CommunityHomeController;
+import com.carmel.guestjini.Screens.Community.GroupDetails.GroupDetailsController;
+import com.carmel.guestjini.Screens.Community.GroupHome.GroupHomeController;
+import com.carmel.guestjini.Screens.Community.GroupList.GroupListController;
+import com.carmel.guestjini.Screens.Community.PeopleList.PeopleListController;
+import com.carmel.guestjini.Screens.Community.PersonDetail.PersonDetailController;
 import com.carmel.guestjini.Screens.Login.LoginController;
 import com.carmel.guestjini.Screens.Login.LoginEventBus;
 import com.carmel.guestjini.Screens.Settings.ChangePassword.ChangePasswordController;
@@ -252,6 +268,46 @@ public class ControllerCompositionRoot {
         return new FetchMyRentInvoiceDetailsUseCase(getAuthenticatedGuestJiniAPI());
     }
 
+    private AddPersonToFavouriteUseCase getAddPersonToFavouriteUseCase() {
+        return new AddPersonToFavouriteUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private FetchGroupByIdUseCase getFetchGroupByIdUseCase() {
+        return new FetchGroupByIdUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private FetchGroupConversationByGroupUseCase getFetchGroupConversationByGroupUseCase() {
+        return new FetchGroupConversationByGroupUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private FetchGroupListByTypeUseCase getFetchGroupListByTypeUseCase() {
+        return new FetchGroupListByTypeUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private FetchPeopleListUseCase getFetchPeopleListUseCase() {
+        return new FetchPeopleListUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private FetchPersonDetailUseCase getFetchPersonDetailUseCase() {
+        return new FetchPersonDetailUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private InviteToGroupUseCase getInviteToGroupUseCase() {
+        return new InviteToGroupUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private SaveGroupUseCase getSaveGroupUseCase() {
+        return new SaveGroupUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private SaveGroupConversationUseCase getSaveGroupConversationUseCase() {
+        return new SaveGroupConversationUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private SubscribeToGroupUseCase getSubscribeToGroupUseCase() {
+        return new SubscribeToGroupUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
     public SharedPreferenceHelper getSharedPreferenceHelper() {
         return new SharedPreferenceHelper(preferences, editor);
 
@@ -416,5 +472,52 @@ public class ControllerCompositionRoot {
 
     public PaymentsController getPaymentsController() {
         return new PaymentsController(getScreensNavigator());
+    }
+
+    public CommunityHomeController getCommunityHomeController() {
+        return new CommunityHomeController(getScreensNavigator());
+    }
+
+    public PeopleListController getPeopleListController() {
+        return new PeopleListController(
+                getFetchPeopleListUseCase(),
+                getAddPersonToFavouriteUseCase(),
+                getScreensNavigator(),
+                getDialogsManager(),
+                getDialogsEventBus()
+        );
+    }
+
+    public PersonDetailController getPersonDetailController() {
+        return new PersonDetailController(
+                getFetchPersonDetailUseCase(),
+                getAddPersonToFavouriteUseCase(),
+                getScreensNavigator(),
+                getDialogsManager(),
+                getDialogsEventBus()
+        );
+    }
+
+    public GroupHomeController getGroupHomeController() {
+        return new GroupHomeController(getScreensNavigator());
+    }
+
+    public GroupListController getGroupListController() {
+        return new GroupListController(
+                getFetchGroupListByTypeUseCase(),
+                getScreensNavigator(),
+                getDialogsManager(),
+                getDialogsEventBus()
+        );
+    }
+
+    public GroupDetailsController getGroupDetailsController() {
+        return new GroupDetailsController(
+                getFetchGroupByIdUseCase(),
+                getInviteToGroupUseCase(),
+                getScreensNavigator(),
+                getDialogsManager(),
+                getDialogsEventBus()
+        );
     }
 }
