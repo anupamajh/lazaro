@@ -22,22 +22,23 @@ import com.carmel.guestjini.R;
 
 public class SettingsLandingFragment extends Fragment {
 
-ConstraintLayout changePasswordLayout,myProfileLayout,logOutLayout;
+    ConstraintLayout changePasswordLayout, myProfileLayout, logOutLayout;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View rootview=inflater.inflate(R.layout.fragment_settings_landing, container, false);
-        changePasswordLayout=rootview.findViewById(R.id.changePasswordLayout);
-        myProfileLayout=rootview.findViewById(R.id.myProfileLayout);
-        logOutLayout=rootview.findViewById(R.id.logOutLayout);
+        final View rootview = inflater.inflate(R.layout.fragment_settings_landing, container, false);
+        changePasswordLayout = rootview.findViewById(R.id.changePasswordLayout);
+        myProfileLayout = rootview.findViewById(R.id.myProfileLayout);
+        logOutLayout = rootview.findViewById(R.id.logOutLayout);
         changePasswordLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ChangePasswordFragment changePasswordFragment=new ChangePasswordFragment();
-                FragmentManager fragmentManager=getFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.SettingsPlaceHolder,changePasswordFragment);
+                ChangePasswordFragment changePasswordFragment = new ChangePasswordFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.SettingsPlaceHolder, changePasswordFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
@@ -45,10 +46,10 @@ ConstraintLayout changePasswordLayout,myProfileLayout,logOutLayout;
         myProfileLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyProfileFragment myProfileFragment=new MyProfileFragment();
-                FragmentManager fragmentManager=getFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.SettingsPlaceHolder,myProfileFragment);
+                MyProfileFragment myProfileFragment = new MyProfileFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.SettingsPlaceHolder, myProfileFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
@@ -64,16 +65,16 @@ ConstraintLayout changePasswordLayout,myProfileLayout,logOutLayout;
                 editor.putString("token_type", "");
                 editor.putLong("expires_in", 0);
                 editor.apply();
-                Intent intent=new Intent(getContext(), Login.class);
+                Intent intent = new Intent(getContext(), Login.class);
                 startActivity(intent);
-                Toast toast=new Toast(getContext());
+                Toast toast = new Toast(getContext());
                 ViewGroup viewGroup = rootview.findViewById(android.R.id.content);
                 View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.toast_layout, viewGroup, false);
                 TextView text = (TextView) dialogView.findViewById(R.id.visibleToast);
                 text.setText("Logged out successfully.");
                 toast.setView(dialogView);
-                toast.makeText(getActivity(),"", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.getAbsoluteGravity(0,0),0,700);
+                toast.makeText(getActivity(), "", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.getAbsoluteGravity(0, 0), 0, 700);
                 toast.show();
             }
         });

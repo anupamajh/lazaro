@@ -251,7 +251,7 @@ public class PeopleLandingFragment extends Fragment implements PeopleAdapter.OnI
                     if (peopleResponse.isSuccess()) {
                         personArrayList = new ArrayList<>();
                         personArrayList.addAll(peopleResponse.getPersonList());
-                        peopleAdapter.filterList(personArrayList,peopleResponse);
+                        peopleAdapter.filterList(personArrayList, peopleResponse);
                     } else {
                         showDialog(false, "There was a problem fetching people list! Please try after sometime");
                     }

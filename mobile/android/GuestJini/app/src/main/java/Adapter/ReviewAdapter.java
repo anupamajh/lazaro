@@ -19,22 +19,23 @@ import java.util.List;
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder> {
     private Context context;
     ArrayList<KBReview> reviewModels;
+
     public ReviewAdapter(Context context, ArrayList<KBReview> reviewModelArrayList) {
-        this.context=context;
-        this.reviewModels=reviewModelArrayList;
+        this.context = context;
+        this.reviewModels = reviewModelArrayList;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        final View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.review_list,parent,false);
-        ViewHolder viewHolder=new ViewHolder(v);
+        final View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.review_list, parent, false);
+        ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        KBReview kbReview=this.reviewModels.get(position);
+        KBReview kbReview = this.reviewModels.get(position);
         holder.reviewerName.setText(String.valueOf(kbReview.getReviewByName()));
         //TODO: Format Date
         holder.reviewerDate.setText(String.valueOf(kbReview.getCreationTime()));
@@ -53,14 +54,15 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView reviewerName,reviewerDate,reviewDescription;
+        TextView reviewerName, reviewerDate, reviewDescription;
         ImageView revierProfile;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            reviewerName=itemView.findViewById(R.id.reviewerName);
-            reviewerDate=itemView.findViewById(R.id.reviewerDate);
-            reviewDescription=itemView.findViewById(R.id.reviewDescription);
-            revierProfile=itemView.findViewById(R.id.reviewProfilePicture);
+            reviewerName = itemView.findViewById(R.id.reviewerName);
+            reviewerDate = itemView.findViewById(R.id.reviewerDate);
+            reviewDescription = itemView.findViewById(R.id.reviewDescription);
+            revierProfile = itemView.findViewById(R.id.reviewProfilePicture);
             revierProfile.setImageResource(R.drawable.profile_image);
         }
     }

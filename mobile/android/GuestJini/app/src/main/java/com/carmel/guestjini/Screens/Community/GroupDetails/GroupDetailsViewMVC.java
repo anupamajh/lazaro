@@ -8,9 +8,11 @@ public interface GroupDetailsViewMVC extends ObservableViewMvc<GroupDetailsViewM
         void onInviteClicked(String userId, String groupId);
 
         void onBackClicked();
+
+        void onMessageClicked(String groupId);
     }
 
-    void bindGroupResponse(GroupResponse groupResponse);
+    void bindGroupResponse(GroupResponse groupResponse, int groupType);
 
     void showProgressIndication();
 

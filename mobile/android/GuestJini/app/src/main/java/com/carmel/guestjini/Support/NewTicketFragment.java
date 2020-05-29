@@ -56,7 +56,6 @@ public class NewTicketFragment extends Fragment {
     AlertDialog progressDialog;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -121,11 +120,11 @@ public class NewTicketFragment extends Fragment {
                         @Override
                         public void onResponse(Call<TicketResponse> call, Response<TicketResponse> response) {
                             progressDialog.dismiss();
-                            if(response.isSuccessful()){
+                            if (response.isSuccessful()) {
                                 TicketResponse ticketResponse = response.body();
-                                if(ticketResponse.isSuccess()){
+                                if (ticketResponse.isSuccess()) {
                                     showTicketSuccessDialog(true);
-                                }else{
+                                } else {
                                     showTicketSuccessDialog(false);
                                 }
                             }
@@ -156,30 +155,30 @@ public class NewTicketFragment extends Fragment {
         return rootView;
     }
 
-    private void showTicketSuccessDialog(boolean isSuccess){
+    private void showTicketSuccessDialog(boolean isSuccess) {
         final Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.alert_dailogbox);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         TextView alertDailogTitle = (TextView) dialog.findViewById(R.id.alertDailogTitle);
-        if(isSuccess) {
+        if (isSuccess) {
             alertDailogTitle.setText(getText(R.string.success));
-        }else{
+        } else {
             alertDailogTitle.setText(getText(R.string.failed));
             alertDailogTitle.setTextColor(Color.parseColor("#E65959"));
         }
         TextView alertDailogMessage = (TextView) dialog.findViewById(R.id.alertDailogDescription);
-        if(isSuccess) {
+        if (isSuccess) {
             alertDailogMessage.setText(R.string.ticket_success);
-        }else{
+        } else {
             alertDailogMessage.setText(R.string.ticket_failed);
         }
 
         FloatingActionButton doneButton = (FloatingActionButton) dialog.findViewById(R.id.done_button);
-        if(isSuccess) {
+        if (isSuccess) {
             doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
                     .parseColor("#32BDD2")));
-        }else{
+        } else {
             doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
                     .parseColor("#E65959")));
         }

@@ -21,21 +21,22 @@ public class ReceiptsAdapter extends RecyclerView.Adapter<ReceiptsAdapter.ViewHo
     private ArrayList<ReceiptsModel> receiptsModelList;
     private OnItemClickListener onItemClickListener;
 
-    public ReceiptsAdapter(Context context, ArrayList<ReceiptsModel> receiptsModelList,OnItemClickListener onItemClickListener) {
+    public ReceiptsAdapter(Context context, ArrayList<ReceiptsModel> receiptsModelList, OnItemClickListener onItemClickListener) {
         this.context = context;
         this.receiptsModelList = receiptsModelList;
-        this.onItemClickListener=onItemClickListener;
+        this.onItemClickListener = onItemClickListener;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.receipts_list,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.receipts_list, parent, false);
         return new ReceiptsAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ReceiptsModel receiptsModel=receiptsModelList.get(position);
+        ReceiptsModel receiptsModel = receiptsModelList.get(position);
         holder.receiptsDate.setText(receiptsModel.getReceiptsDate());
         holder.receiptsNo.setText(receiptsModel.getReceiptsNo());
         holder.receptsAmount.setText(receiptsModel.getAmount());
@@ -48,17 +49,17 @@ public class ReceiptsAdapter extends RecyclerView.Adapter<ReceiptsAdapter.ViewHo
         return receiptsModelList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView receiptsDate,receiptsNo,receptsAmount,reciptsCreationDateTime;
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private TextView receiptsDate, receiptsNo, receptsAmount, reciptsCreationDateTime;
         private ImageView rightNavigationIcon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            receiptsDate=itemView.findViewById(R.id.receiptsDate);
-            receiptsNo=itemView.findViewById(R.id.receiptsNo);
-            receptsAmount=itemView.findViewById(R.id.amount);
-            reciptsCreationDateTime=itemView.findViewById(R.id.createdDateTime);
-            rightNavigationIcon=itemView.findViewById(R.id.navigateRight);
+            receiptsDate = itemView.findViewById(R.id.receiptsDate);
+            receiptsNo = itemView.findViewById(R.id.receiptsNo);
+            receptsAmount = itemView.findViewById(R.id.amount);
+            reciptsCreationDateTime = itemView.findViewById(R.id.createdDateTime);
+            rightNavigationIcon = itemView.findViewById(R.id.navigateRight);
             itemView.setOnClickListener(this);
         }
 
@@ -67,6 +68,7 @@ public class ReceiptsAdapter extends RecyclerView.Adapter<ReceiptsAdapter.ViewHo
             onItemClickListener.onReceiptsClick(getAdapterPosition());
         }
     }
+
     public interface OnItemClickListener {
         void onReceiptsClick(int position);
     }

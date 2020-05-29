@@ -15,13 +15,13 @@ import retrofit2.Response;
 
 public class FetchTicketTaskNoteListUseCase extends BaseObservable<FetchTicketTaskNoteListUseCase.Listener> {
 
-public interface Listener {
-    void onTaskNoteListFetched(List<TaskNote> taskNoteList);
+    public interface Listener {
+        void onTaskNoteListFetched(List<TaskNote> taskNoteList);
 
-    void onTaskNoteListFetchFailed();
+        void onTaskNoteListFetchFailed();
 
-    void onNetworkFailed();
-}
+        void onNetworkFailed();
+    }
 
     private final GuestJiniAPI guestJiniAPI;
 

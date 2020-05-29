@@ -353,7 +353,7 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
 
     @Override
     public BitmapDrawable getProfilePicDrawable() {
-        return (BitmapDrawable)imgProfile.getDrawable();
+        return (BitmapDrawable) imgProfile.getDrawable();
     }
 
     @Override

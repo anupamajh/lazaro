@@ -44,13 +44,13 @@ public class RentInvoiceDetailViewMVCImpl
         ImageView btnBack = findViewById(R.id.btnBack);
 
         btnBack.setOnClickListener(v -> {
-            for(Listener listener:getListeners()){
+            for (Listener listener : getListeners()) {
                 listener.onBackClicked();
             }
         });
 
         btnPayNow.setOnClickListener(v -> {
-            for(Listener listener:getListeners()){
+            for (Listener listener : getListeners()) {
                 listener.onPayNowClicked(
                         accountTicket.getId(),
                         accountTicket.getGuestId(),

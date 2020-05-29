@@ -26,37 +26,37 @@ public class SettingsHomeViewMVCImpl
         RelativeLayout layoutLogout = findViewById(R.id.layoutLogout);
 
         layoutMyProfile.setOnClickListener(view -> {
-            for(Listener listener:getListeners()){
+            for (Listener listener : getListeners()) {
                 listener.onMyProfileClicked();
             }
         });
 
         layoutChangePassword.setOnClickListener(view -> {
-            for(Listener listener:getListeners()){
+            for (Listener listener : getListeners()) {
                 listener.onChangePasswordClicked();
             }
         });
 
         layoutPrivacyPolicy.setOnClickListener(view -> {
-            for(Listener listener:getListeners()){
+            for (Listener listener : getListeners()) {
                 listener.onPrivacyPolicyClicked();
             }
         });
 
         layoutTermsAndConditions.setOnClickListener(view -> {
-            for(Listener listener:getListeners()){
+            for (Listener listener : getListeners()) {
                 listener.onTermsAndConditionsClicked();
             }
         });
 
         layoutNotifications.setOnClickListener(view -> {
-            for(Listener listener:getListeners()){
+            for (Listener listener : getListeners()) {
                 listener.onNotificationsClicked();
             }
         });
 
         layoutLogout.setOnClickListener(view -> {
-            for(Listener listener:getListeners()){
+            for (Listener listener : getListeners()) {
                 listener.onLogoutClicked();
             }
         });

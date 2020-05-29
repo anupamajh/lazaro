@@ -5,7 +5,7 @@ import com.carmel.guestjini.Screens.Common.Views.ObservableViewMvc;
 
 public interface InterestItemViewMVC extends ObservableViewMvc<InterestItemViewMVC.Listener> {
 
-    public interface Listener{
+    public interface Listener {
         void onInterestClicked(Interest interest, int isInterested);
     }
 

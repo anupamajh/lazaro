@@ -33,6 +33,7 @@ import com.carmel.guestjini.Screens.Accounts.AccountsHome.AccountsHomeController
 import com.carmel.guestjini.Screens.Accounts.Payments.PaymentsController;
 import com.carmel.guestjini.Screens.Accounts.RentInvoiceDetails.RentInvoiceDetailController;
 import com.carmel.guestjini.Screens.Accounts.RentInvoiceList.RentInvoiceListController;
+import com.carmel.guestjini.Screens.AppAccessRequest.AppAccessRequestController;
 import com.carmel.guestjini.Screens.Common.Controllers.ActivityResultDispatcher;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
@@ -42,11 +43,14 @@ import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
 import com.carmel.guestjini.Screens.Common.SharedPreference.SharedPreferenceHelper;
 import com.carmel.guestjini.Screens.Common.ViewMVCFactory;
 import com.carmel.guestjini.Screens.Community.CommunityHome.CommunityHomeController;
+import com.carmel.guestjini.Screens.Community.CreateGroup.CreateGroupController;
+import com.carmel.guestjini.Screens.Community.GroupConversation.GroupConversationController;
 import com.carmel.guestjini.Screens.Community.GroupDetails.GroupDetailsController;
 import com.carmel.guestjini.Screens.Community.GroupHome.GroupHomeController;
 import com.carmel.guestjini.Screens.Community.GroupList.GroupListController;
 import com.carmel.guestjini.Screens.Community.PeopleList.PeopleListController;
 import com.carmel.guestjini.Screens.Community.PersonDetail.PersonDetailController;
+import com.carmel.guestjini.Screens.ForgotPassword.ForgotPasswordController;
 import com.carmel.guestjini.Screens.Login.LoginController;
 import com.carmel.guestjini.Screens.Login.LoginEventBus;
 import com.carmel.guestjini.Screens.Settings.ChangePassword.ChangePasswordController;
@@ -518,6 +522,42 @@ public class ControllerCompositionRoot {
                 getScreensNavigator(),
                 getDialogsManager(),
                 getDialogsEventBus()
+        );
+    }
+
+    public CreateGroupController getCreateGroupController() {
+        return new CreateGroupController(
+                getScreensNavigator(),
+                getSaveGroupUseCase(),
+                getDialogsManager(),
+                getDialogsEventBus()
+        );
+    }
+
+    public GroupConversationController getGroupConversationController() {
+        return new GroupConversationController(
+                getFetchGroupByIdUseCase(),
+                getFetchGroupConversationByGroupUseCase(),
+                getSaveGroupConversationUseCase(),
+                getScreensNavigator(),
+                getDialogsManager(),
+                getDialogsEventBus()
+        );
+    }
+
+    public ForgotPasswordController getForgotPasswordController() {
+        return new ForgotPasswordController(
+                getResetPasswordUseCase(),
+                getScreensNavigator(),
+                getDialogsManager()
+        );
+    }
+
+    public AppAccessRequestController getAppAccessRequestController() {
+        return new AppAccessRequestController(
+                getAppAccessRequestUseCase(),
+                getScreensNavigator(),
+                getDialogsManager()
         );
     }
 }

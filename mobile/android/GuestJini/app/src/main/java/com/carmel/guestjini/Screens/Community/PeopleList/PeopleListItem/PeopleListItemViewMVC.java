@@ -4,8 +4,9 @@ import com.carmel.guestjini.Networking.Users.Person;
 import com.carmel.guestjini.Screens.Common.Views.ObservableViewMvc;
 
 public interface PeopleListItemViewMVC extends ObservableViewMvc<PeopleListItemViewMVC.Listener> {
-    public interface Listener{
+    public interface Listener {
         void onPersonClicked(Person person);
+
         void onFavouriteClicked(Person person, int isFavourite);
     }
 

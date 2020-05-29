@@ -13,9 +13,10 @@ import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
 
 public class PeopleListFragment
         extends BaseFragment {
-    public static Fragment createFragment(){
+    public static Fragment createFragment() {
         return new PeopleListFragment();
     }
+
     private static final String SAVED_STATE_PEOPLE_LIST_FRAGMENT = "SAVED_STATE_PEOPLE_LIST_FRAGMENT";
 
     private PeopleListController peopleListController;

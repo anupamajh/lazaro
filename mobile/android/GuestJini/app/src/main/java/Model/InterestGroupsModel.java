@@ -12,12 +12,13 @@ public class InterestGroupsModel {
     }
 
     String addInterestCategoryTitle;
-     String addInterestGroupTitle;
-     String addInterestGroupDescription;
-     String addIndicatorDescription;
-     int addIndicator;
-     int addInformationIcons;
+    String addInterestGroupTitle;
+    String addInterestGroupDescription;
+    String addIndicatorDescription;
+    int addIndicator;
+    int addInformationIcons;
     private int viewType;
+
     public int getViewType() {
         return viewType;
     }

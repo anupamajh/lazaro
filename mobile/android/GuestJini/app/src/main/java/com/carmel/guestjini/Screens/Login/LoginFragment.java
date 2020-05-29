@@ -11,11 +11,12 @@ import androidx.fragment.app.Fragment;
 
 import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
 
-public class LoginFragment   extends BaseFragment {
+public class LoginFragment extends BaseFragment {
 
-    public static Fragment createFragment(){
+    public static Fragment createFragment() {
         return new LoginFragment();
     }
+
     private static final String SAVED_STATE_LOGIN_FRAGMENT = "SAVED_STATE_LOGIN_FRAGMENT";
     private LoginController loginController;
 
@@ -46,7 +47,7 @@ public class LoginFragment   extends BaseFragment {
         outState.putSerializable(SAVED_STATE_LOGIN_FRAGMENT, loginController.getSavedState());
     }
 
-    private void restoreControllerState(Bundle savedInstanceState){
+    private void restoreControllerState(Bundle savedInstanceState) {
         loginController.restoreSavedState(
                 (LoginController.SavedState)
                         savedInstanceState.getSerializable(SAVED_STATE_LOGIN_FRAGMENT)

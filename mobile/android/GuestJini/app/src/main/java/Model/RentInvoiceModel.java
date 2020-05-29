@@ -12,6 +12,7 @@ public class RentInvoiceModel {
         this.rentInvoiceAmount = rentInvoiceAmount;
         this.rightNavigationIcon = rightNavigationIcon;
     }
+
     public String getRentInvoiceDate() {
         return rentInvoiceDate;
     }

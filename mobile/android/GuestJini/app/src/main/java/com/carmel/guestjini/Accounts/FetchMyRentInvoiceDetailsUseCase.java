@@ -30,7 +30,7 @@ public class FetchMyRentInvoiceDetailsUseCase extends BaseObservable<FetchMyRent
 
     public void fetchRentInvoiceDetailAndNotify(String id) {
         Map<String, String> postData = new HashMap<>();
-        postData.put("id",id);
+        postData.put("id", id);
         this.guestJiniAPI.getMyRentInvoiceDetails(postData).enqueue(new Callback<AccountTicketResponse>() {
             @Override
             public void onResponse(Call<AccountTicketResponse> call, Response<AccountTicketResponse> response) {

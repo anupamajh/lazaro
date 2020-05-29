@@ -24,34 +24,29 @@ public class BottomNavigationListener implements BottomNavigationView.OnNavigati
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() != this.currentMenu){
-            switch (item.getItemId()){
-                case R.id.suppotIcon:
-                {
-                    Intent intent=new Intent(context, SupportActivity.class);
+        if (item.getItemId() != this.currentMenu) {
+            switch (item.getItemId()) {
+                case R.id.suppotIcon: {
+                    Intent intent = new Intent(context, SupportActivity.class);
                     context.startActivity(intent);
                 }
                 break;
-                case R.id.communityIcon:
-                {
-                    Intent intent=new Intent(context, CommunityActivity.class);
+                case R.id.communityIcon: {
+                    Intent intent = new Intent(context, CommunityActivity.class);
                     context.startActivity(intent);
                 }
                 break;
-                case R.id.accountsIcon:
-                {
-                    Intent intent=new Intent(context, AccountsActivity.class);
+                case R.id.accountsIcon: {
+                    Intent intent = new Intent(context, AccountsActivity.class);
                     context.startActivity(intent);
                 }
                 break;
-                case R.id.rewardsIcon:
-                {
+                case R.id.rewardsIcon: {
                     return false;
                 }
                 //break;
-                case R.id.settingsIcon:
-                {
-                    Intent intent=new Intent(context, SettingsActivity.class);
+                case R.id.settingsIcon: {
+                    Intent intent = new Intent(context, SettingsActivity.class);
                     context.startActivity(intent);
                 }
                 break;

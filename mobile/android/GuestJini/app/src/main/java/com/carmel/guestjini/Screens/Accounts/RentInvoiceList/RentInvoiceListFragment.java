@@ -13,9 +13,10 @@ import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
 
 public class RentInvoiceListFragment
         extends BaseFragment {
-    public static Fragment createFragment(){
+    public static Fragment createFragment() {
         return new RentInvoiceListFragment();
     }
+
     private static final String SAVED_STATE_RENT_INVOICE_LIST_FRAGMENT = "SAVED_STATE_RENT_INVOICE_LIST_FRAGMENT";
 
     private RentInvoiceListController rentInvoiceListController;

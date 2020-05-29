@@ -154,6 +154,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/done"
                 style="@style/Widget.MaterialComponents.Button"
@@ -169,6 +170,7 @@
                 app:cornerRadius="@dimen/change_password_radius"
                 app:layout_constraintBottom_toTopOf="@+id/view8"
                 app:layout_constraintEnd_toEndOf="parent"></com.google.android.material.button.MaterialButton>
+
             <View
                 android:id="@+id/view8"
                 android:layout_width="match_parent"
@@ -177,14 +179,14 @@
                 app:layout_constraintBottom_toTopOf="@id/bottomNavigationViewLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"></View>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/bottomNavigationViewLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                >
+                app:layout_constraintStart_toStartOf="parent">
 
 
                 <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -537,4 +539,4 @@
     </androidx.drawerlayout.widget.DrawerLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

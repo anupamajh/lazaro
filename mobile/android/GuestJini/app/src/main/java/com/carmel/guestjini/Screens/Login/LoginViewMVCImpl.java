@@ -66,15 +66,16 @@ public class LoginViewMVCImpl extends BaseObservableViewMvc<LoginViewMVC.Listene
 
         passwordMaskingIcon.setOnClickListener(new View.OnClickListener() {
             private boolean flag = true;
+
             @Override
             public void onClick(View view) {
-                if(flag) {
-                    flag=false;
+                if (flag) {
+                    flag = false;
                     passwordMaskingIcon.setImageResource(R.drawable.password_unmasking_icon);
                     txtPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
 
-                }else{
-                    flag=true;
+                } else {
+                    flag = true;
                     passwordMaskingIcon.setImageResource(R.drawable.password_masking_icon);
                     txtPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
@@ -88,17 +89,17 @@ public class LoginViewMVCImpl extends BaseObservableViewMvc<LoginViewMVC.Listene
         txtInvalidCredentialsError.setVisibility(View.GONE);
         String strLoginId = txtLoginId.getText().toString().trim();
         String strPassword = txtPassword.getText().toString().trim();
-        if(strLoginId.length() == 0){
+        if (strLoginId.length() == 0) {
             hasError = false;
             txtEmailErrorField.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             txtEmailErrorField.setVisibility(View.GONE);
         }
 
-        if(strPassword.length() == 0){
+        if (strPassword.length() == 0) {
             hasError = false;
             txtPasswordErrorField.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             txtPasswordErrorField.setVisibility(View.GONE);
         }
         return hasError;

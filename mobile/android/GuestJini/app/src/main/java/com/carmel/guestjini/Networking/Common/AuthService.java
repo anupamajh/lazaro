@@ -15,7 +15,7 @@ public interface AuthService {
             @Header("Authorization") String credentials,
             @Field("grant_type") String grantType,
             @Field("username") String userName,
-            @Field("password")  String password);
+            @Field("password") String password);
 
     @FormUrlEncoded
     @POST("/auth/oauth/token")

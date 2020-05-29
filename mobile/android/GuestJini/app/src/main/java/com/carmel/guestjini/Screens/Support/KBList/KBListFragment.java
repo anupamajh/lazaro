@@ -14,9 +14,11 @@ import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
 public class KBListFragment
         extends BaseFragment {
     private static final String ARG_SEARCH_STRING = "ARG_SEARCH_STRING";
-    public static Fragment createFragment(){
+
+    public static Fragment createFragment() {
         return new KBListFragment();
     }
+
     private static final String SAVED_STATE_KB_LIST_FRAGMENT = "SAVED_STATE_KB_LIST_FRAGMENT";
 
     private KBListController kbListController;

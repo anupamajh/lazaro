@@ -46,6 +46,7 @@
                 android:textSize="14sp"
                 app:fontFamily="@font/roboto_bold" />
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/layoutList"
             android:layout_width="match_parent"

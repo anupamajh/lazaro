@@ -12,12 +12,11 @@ import androidx.fragment.app.Fragment;
 import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
 
 public class MyInterestFragment
-    extends BaseFragment
-
-{
-    public static Fragment createFragment(){
+        extends BaseFragment {
+    public static Fragment createFragment() {
         return new MyInterestFragment();
     }
+
     private static final String SAVED_STATE_MY_INTEREST_FRAGMENT = "SAVED_STATE_MY_INTEREST_FRAGMENT";
 
     private MyInterestController myInterestController;

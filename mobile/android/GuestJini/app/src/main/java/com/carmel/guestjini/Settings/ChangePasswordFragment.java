@@ -74,10 +74,10 @@ public class ChangePasswordFragment extends Fragment {
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SettingsLandingFragment settingsLandingFragment=new SettingsLandingFragment();
-                FragmentManager fragmentManager=getFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.SettingsPlaceHolder,settingsLandingFragment);
+                SettingsLandingFragment settingsLandingFragment = new SettingsLandingFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.SettingsPlaceHolder, settingsLandingFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
@@ -198,9 +198,9 @@ public class ChangePasswordFragment extends Fragment {
             public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {
                 try {
                     GenericResponse genericResponse = response.body();
-                    if(genericResponse.getSuccess()){
+                    if (genericResponse.getSuccess()) {
                         showDialog(true, "Password changed successfully");
-                    }else{
+                    } else {
                         showDialog(false, "There was an error while changing password, Please try after sometime");
                     }
                 } catch (Exception ex) {

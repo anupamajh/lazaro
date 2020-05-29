@@ -101,8 +101,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/layoutProfileHeader"
-                    android:layout_marginTop="20dp"
-                    >
+                    android:layout_marginTop="20dp">
 
                     <LinearLayout
                         android:id="@+id/layoutAddFavouriteSection"
@@ -111,8 +110,7 @@
                         android:background="#32BDD2"
                         android:orientation="vertical"
                         android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true"
-                        >
+                        android:layout_alignParentStart="true">
 
                         <ImageView
                             android:id="@+id/btnAddFavourite"
@@ -138,6 +136,7 @@
                             app:fontFamily="@font/roboto_medium" />
 
                     </LinearLayout>
+
                     <TextView
                         android:id="@+id/txtMobileTitle"
                         android:layout_width="wrap_content"
@@ -149,8 +148,7 @@
                         android:textSize="10sp"
                         app:fontFamily="@font/roboto_medium"
                         android:layout_toEndOf="@id/layoutAddFavouriteSection"
-                        android:layout_alignParentTop="true"
-                         />
+                        android:layout_alignParentTop="true" />
 
                     <TextView
                         android:id="@+id/txtMobileNumber"
@@ -162,8 +160,7 @@
                         android:textSize="12dp"
                         app:fontFamily="@font/roboto_medium"
                         android:layout_toEndOf="@id/layoutAddFavouriteSection"
-                        android:layout_below="@id/txtMobileTitle"
-                        />
+                        android:layout_below="@id/txtMobileTitle" />
 
                     <TextView
                         android:id="@+id/txtEmailTitle"
@@ -176,8 +173,7 @@
                         android:textSize="10sp"
                         app:fontFamily="@font/roboto_medium"
                         android:layout_toEndOf="@id/layoutAddFavouriteSection"
-                        android:layout_below="@id/txtMobileNumber"
-                        />
+                        android:layout_below="@id/txtMobileNumber" />
 
                     <TextView
                         android:id="@+id/txtEmail"
@@ -203,8 +199,7 @@
                     android:background="@drawable/common_interests"
                     android:layout_below="@id/layoutFavourite"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                   >
+                    android:layout_alignParentEnd="true">
 
                     <TextView
                         android:id="@+id/commonInterestsTitle"
@@ -234,8 +229,7 @@
                     android:background="@drawable/other_interests"
                     android:layout_below="@id/commonInterestsSubLayout"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                  >
+                    android:layout_alignParentEnd="true">
 
                     <TextView
                         android:id="@+id/otherInterests"

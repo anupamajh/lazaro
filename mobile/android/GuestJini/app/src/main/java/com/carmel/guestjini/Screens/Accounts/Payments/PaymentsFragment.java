@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
 
-public class PaymentsFragment  extends BaseFragment {
+public class PaymentsFragment extends BaseFragment {
     private static final String ARG_ACCOUNT_TICKET_ID = "ARG_ACCOUNT_TICKET_ID";
     private static final String ARG_GUEST_ID = "ARG_GUEST_ID";
     private static final String ARG_EMAIL = "ARG_EMAIL";
@@ -24,7 +24,7 @@ public class PaymentsFragment  extends BaseFragment {
             String guestId,
             String email,
             String transactionAmount
-    ){
+    ) {
         Bundle args = new Bundle();
         args.putString(ARG_ACCOUNT_TICKET_ID, accountTicketId);
         args.putString(ARG_GUEST_ID, guestId);
@@ -68,7 +68,7 @@ public class PaymentsFragment  extends BaseFragment {
         outState.putSerializable(SAVED_STATE_PAYMENTS_FRAGMENT, paymentsController.getSavedState());
     }
 
-    private void restoreControllerState(Bundle savedInstanceState){
+    private void restoreControllerState(Bundle savedInstanceState) {
         paymentsController.restoreSavedState(
                 (PaymentsController.SavedState)
                         savedInstanceState.getSerializable(SAVED_STATE_PAYMENTS_FRAGMENT)
@@ -78,12 +78,15 @@ public class PaymentsFragment  extends BaseFragment {
     private String getAccountTicketId() {
         return getArguments().getString(ARG_ACCOUNT_TICKET_ID);
     }
+
     private String getGuestId() {
         return getArguments().getString(ARG_GUEST_ID);
     }
+
     private String getEmail() {
         return getArguments().getString(ARG_EMAIL);
     }
+
     private String getTransactionAmount() {
         return getArguments().getString(ARG_TRANSACTION_AMOUNT);
     }

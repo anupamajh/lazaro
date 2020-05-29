@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".InterestGroups.SubscribedGroupDetailedFragment">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/interestGroupsHeader"
         android:layout_width="match_parent"
@@ -113,6 +114,7 @@
             app:fontFamily="@font/roboto_bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <Button
             android:id="@+id/exitButton"
             android:layout_width="60dp"
@@ -253,8 +255,7 @@
                     android:background="@drawable/horizontal_line"
                     app:layout_constraintBottom_toTopOf="@id/navigationLayout"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    ></View>
+                    app:layout_constraintStart_toStartOf="parent"></View>
 
             </LinearLayout>
 

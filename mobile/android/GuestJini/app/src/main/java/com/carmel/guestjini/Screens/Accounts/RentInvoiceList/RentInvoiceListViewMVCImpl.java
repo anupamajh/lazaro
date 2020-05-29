@@ -27,8 +27,8 @@ public class RentInvoiceListViewMVCImpl
 
 
     public RentInvoiceListViewMVCImpl(LayoutInflater inflater,
-                             @Nullable ViewGroup parent,
-                             ViewMVCFactory viewMVCFactory
+                                      @Nullable ViewGroup parent,
+                                      ViewMVCFactory viewMVCFactory
     ) {
         setRootView(inflater.inflate(R.layout.layout_accounts_rent_invoice_list, parent, false));
 

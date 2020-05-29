@@ -27,22 +27,23 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
     }
 
     private ArrayList<CommunityModel> communityModels;
+
     public CommunityAdapter(Context context, ArrayList<CommunityModel> communityModelArrayList) {
-        this.context=context;
-        this.communityModels =communityModelArrayList;
+        this.context = context;
+        this.communityModels = communityModelArrayList;
     }
 
     @NonNull
     @Override
     public CommunityAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.community_landing_list,parent,false);
-        ViewHolder viewHolder=new ViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.community_landing_list, parent, false);
+        ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull CommunityAdapter.ViewHolder holder, int position) {
-        CommunityModel communityModel= communityModels.get(position);
+        CommunityModel communityModel = communityModels.get(position);
         holder.title.setText(String.valueOf(communityModel.getTitle()));
         holder.description.setText(String.valueOf(communityModel.getDescription()));
     }
@@ -53,22 +54,23 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView title,description;
+        private TextView title, description;
         private View notificationBar;
         private final Context context;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            notificationBar=itemView.findViewById(R.id.notifiactionBar);
-            title=itemView.findViewById(R.id.title);
-            description=itemView.findViewById(R.id.description);
+            notificationBar = itemView.findViewById(R.id.notifiactionBar);
+            title = itemView.findViewById(R.id.title);
+            description = itemView.findViewById(R.id.description);
             itemView.setOnClickListener(this);
-            context=itemView.getContext();
+            context = itemView.getContext();
         }
 
         @Override
         public void onClick(View v) {
             final Intent intent;
-            switch (getAdapterPosition()){
+            switch (getAdapterPosition()) {
                 case 0:
                     communityMainNavigationListener.onClickNavigation(1);
                     //intent =  new Intent(context, ProfileActivity.class);
@@ -81,11 +83,11 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
                     communityMainNavigationListener.onClickNavigation(3);
                     break;
                 default:
-                    intent =  new Intent(context, CommunityActivity.class);
+                    intent = new Intent(context, CommunityActivity.class);
                     break;
             }
 //            context.startActivity(intent);
         }
     }
-  }
+}
 

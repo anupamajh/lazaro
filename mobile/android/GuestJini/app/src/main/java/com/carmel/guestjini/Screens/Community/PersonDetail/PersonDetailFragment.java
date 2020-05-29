@@ -11,11 +11,11 @@ import androidx.fragment.app.Fragment;
 
 import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
 
-public class PersonDetailFragment  extends BaseFragment {
+public class PersonDetailFragment extends BaseFragment {
     private static final String ARG_PERSON_ID = "ARG_PERSON_ID";
     private static final String SAVED_STATE_PERSON_DETAIL_FRAGMENT = "SAVED_STATE_PERSON_DETAIL_FRAGMENT";
 
-    public static Fragment createFragment(String personId){
+    public static Fragment createFragment(String personId) {
         Bundle args = new Bundle();
         args.putString(ARG_PERSON_ID, personId);
         PersonDetailFragment fragment = new PersonDetailFragment();

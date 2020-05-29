@@ -7,7 +7,10 @@ public interface NavDrawerViewMvc {
     }
 
     FrameLayout getFragmentFrame();
+
     boolean isDrawerOpen();
+
     void openDrawer();
+
     void closeDrawer();
 }

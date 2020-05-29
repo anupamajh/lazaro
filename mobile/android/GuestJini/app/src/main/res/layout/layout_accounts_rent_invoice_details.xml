@@ -51,10 +51,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layoutHeader">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="20dp">
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardRentInvoiceDetails"
                     android:layout_width="match_parent"
@@ -201,8 +203,8 @@
                     android:layout_marginTop="30dp"
                     android:gravity="center"
                     android:layout_below="@id/cardRentInvoiceDetails"
-                    android:layout_alignParentBottom="true"
-                    >
+                    android:layout_alignParentBottom="true">
+
                     <Button
                         android:id="@+id/btnPayNow"
                         android:layout_width="wrap_content"

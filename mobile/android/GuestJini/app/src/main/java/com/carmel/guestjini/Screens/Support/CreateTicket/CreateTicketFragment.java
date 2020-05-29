@@ -15,7 +15,7 @@ public class CreateTicketFragment extends BaseFragment {
 
     private static final String SAVED_STATE_CREATE_TICKET_FRAGMENT = "SAVED_STATE_CREATE_TICKET_FRAGMENT";
 
-    public static Fragment createFragment(){
+    public static Fragment createFragment() {
         return new CreateTicketFragment();
     }
 

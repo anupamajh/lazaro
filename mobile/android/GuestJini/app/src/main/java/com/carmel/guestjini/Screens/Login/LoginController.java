@@ -11,8 +11,7 @@ import java.io.Serializable;
 
 public class LoginController implements
         LoginViewMVC.Listener,
-        AttemptLoginUseCase.Listener
-{
+        AttemptLoginUseCase.Listener {
 
     private enum ScreenState {
         IDLE, ATTEMPTING_LOGIN, LOGIN_COMPLETED, NETWORK_ERROR
@@ -87,12 +86,12 @@ public class LoginController implements
 
     @Override
     public void onForgotPasswordClicked() {
-
+        mScreensNavigator.toForgotPasswordScreen();
     }
 
     @Override
     public void onSignUpClicked() {
-
+        mScreensNavigator.toAppAccessRequestScreen();
     }
 
     @Override
@@ -112,10 +111,10 @@ public class LoginController implements
                 }
             }
         }
-        if(hasError){
+        if (hasError) {
             sharedPreferenceHelper.saveBooleanValue("isLoggedIn", false);
             viewMVC.showAuthenticationFailure();
-        }else{
+        } else {
             mScreensNavigator.toSupportHome();
             loginEventBus.postEvent(1);
         }

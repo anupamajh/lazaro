@@ -21,8 +21,7 @@ import java.util.List;
 
 public class InterestCategoryItemViewMVCImpl
         extends BaseObservableViewMvc<InterestCategoryItemViewMVC.Listener>
-        implements InterestCategoryItemViewMVC, InterestRecycleAdapter.Listener
-{
+        implements InterestCategoryItemViewMVC, InterestRecycleAdapter.Listener {
 
     private final TextView txtCategoryName;
     private InterestCategory interestCategory;
@@ -42,6 +41,7 @@ public class InterestCategoryItemViewMVCImpl
         ImageView btnShowCategories = findViewById(R.id.btnShowCategories);
         btnShowCategories.setOnClickListener(new View.OnClickListener() {
             private boolean flag = true;
+
             @Override
             public void onClick(View view) {
 

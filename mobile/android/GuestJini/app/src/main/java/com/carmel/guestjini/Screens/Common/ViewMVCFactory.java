@@ -15,12 +15,21 @@ import com.carmel.guestjini.Screens.Accounts.RentInvoiceList.RentInvoiceItem.Ren
 import com.carmel.guestjini.Screens.Accounts.RentInvoiceList.RentInvoiceItem.RentInvoiceItemMVCImpl;
 import com.carmel.guestjini.Screens.Accounts.RentInvoiceList.RentInvoiceListViewMVC;
 import com.carmel.guestjini.Screens.Accounts.RentInvoiceList.RentInvoiceListViewMVCImpl;
+import com.carmel.guestjini.Screens.AppAccessRequest.AppAccessRequestViewMVC;
+import com.carmel.guestjini.Screens.AppAccessRequest.AppAccessRequestViewMVCImpl;
 import com.carmel.guestjini.Screens.Common.BaseActivityView.BaseActivityMVCView;
 import com.carmel.guestjini.Screens.Common.BaseActivityView.BaseActivityMVCViewImpl;
 import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptViewMvc;
 import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptViewMvcImpl;
 import com.carmel.guestjini.Screens.Community.CommunityHome.CommunityHomeViewMVC;
 import com.carmel.guestjini.Screens.Community.CommunityHome.CommunityHomeViewMVCImpl;
+import com.carmel.guestjini.Screens.Community.CreateGroup.CreateGroupViewMVC;
+import com.carmel.guestjini.Screens.Community.CreateGroup.CreateGroupViewMVCImpl;
+import com.carmel.guestjini.Screens.Community.GroupConversation.GroupConversationItem.GroupConversationItemMineViewMVCImpl;
+import com.carmel.guestjini.Screens.Community.GroupConversation.GroupConversationItem.GroupConversationItemOtherViewMVC;
+import com.carmel.guestjini.Screens.Community.GroupConversation.GroupConversationItem.GroupConversationItemViewMVC;
+import com.carmel.guestjini.Screens.Community.GroupConversation.GroupConversationViewMVC;
+import com.carmel.guestjini.Screens.Community.GroupConversation.GroupConversationViewMVCImpl;
 import com.carmel.guestjini.Screens.Community.GroupDetails.GroupDetailsViewMVC;
 import com.carmel.guestjini.Screens.Community.GroupDetails.GroupDetailsViewMVCImpl;
 import com.carmel.guestjini.Screens.Community.GroupDetails.GroupMember.GroupMemberViewMVC;
@@ -39,6 +48,8 @@ import com.carmel.guestjini.Screens.Community.PeopleList.PeopleListViewMVC;
 import com.carmel.guestjini.Screens.Community.PeopleList.PeopleListViewMVCImpl;
 import com.carmel.guestjini.Screens.Community.PersonDetail.PersonDetailViewMVC;
 import com.carmel.guestjini.Screens.Community.PersonDetail.PersonDetailViewMVCImpl;
+import com.carmel.guestjini.Screens.ForgotPassword.ForgotPasswordViewMVC;
+import com.carmel.guestjini.Screens.ForgotPassword.ForgotPasswordViewMVCImpl;
 import com.carmel.guestjini.Screens.Login.LoginViewMVC;
 import com.carmel.guestjini.Screens.Login.LoginViewMVCImpl;
 import com.carmel.guestjini.Screens.Settings.ChangePassword.ChangePasswordViewMVC;
@@ -197,27 +208,27 @@ public class ViewMVCFactory {
     }
 
     public MyInterestViewMVC getMyInterestViewMVC(@Nullable ViewGroup parent) {
-        return new MyInterestViewMVCImpl(layoutInflater,parent, this);
+        return new MyInterestViewMVCImpl(layoutInflater, parent, this);
     }
 
     public MyProfileViewMVC getMyProfileViewMVC(@Nullable ViewGroup parent) {
-        return new MyProfileViewMVCImpl(layoutInflater,parent);
+        return new MyProfileViewMVCImpl(layoutInflater, parent);
     }
 
     public ChangePasswordViewMVC getChangePasswordViewMVC(@Nullable ViewGroup parent) {
-        return new ChangePasswordViewMVCImpl(layoutInflater,parent);
+        return new ChangePasswordViewMVCImpl(layoutInflater, parent);
     }
 
     public PrivacyPolicyViewMVC getPrivacyPolicyViewMVC(@Nullable ViewGroup parent) {
-        return new PrivacyPolicyViewMVCImpl(layoutInflater,parent);
+        return new PrivacyPolicyViewMVCImpl(layoutInflater, parent);
     }
 
     public TermsAndConditionsViewMVC getTermsAndConditionsViewMVC(@Nullable ViewGroup parent) {
-        return new TermsAndConditionsViewMVCImpl(layoutInflater,parent);
+        return new TermsAndConditionsViewMVCImpl(layoutInflater, parent);
     }
 
     public AccountsHomeViewMVC getAccountsHomeViewMVC(@Nullable ViewGroup parent) {
-        return new AccountsHomeViewMVCImpl(layoutInflater,parent);
+        return new AccountsHomeViewMVCImpl(layoutInflater, parent);
     }
 
     public RentInvoiceItemMVC getRentInvoiceItemMVC(@Nullable ViewGroup parent) {
@@ -322,8 +333,51 @@ public class ViewMVCFactory {
         );
     }
 
-    public GroupListItemViewMVC getGroupListUnSubScribedItemViewMVCImpl(ViewGroup parent) {
+    public GroupListItemViewMVC getGroupListUnSubScribedItemViewMVCImpl(@Nullable ViewGroup parent) {
         return new GroupListUnSubScribedItemViewMVCImpl(
+                layoutInflater,
+                parent
+        );
+    }
+
+    public CreateGroupViewMVC getCreateGroupViewMVC(@Nullable ViewGroup parent) {
+        return new CreateGroupViewMVCImpl(
+                layoutInflater,
+                parent
+        );
+    }
+
+    public GroupConversationItemViewMVC getGroupConversationItemMineViewMVC(@Nullable ViewGroup parent) {
+        return new GroupConversationItemMineViewMVCImpl(
+                layoutInflater,
+                parent
+        );
+    }
+
+    public GroupConversationItemViewMVC getGroupConversationItemOtherViewMVC(@Nullable ViewGroup parent) {
+        return new GroupConversationItemOtherViewMVC(
+                layoutInflater,
+                parent
+        );
+    }
+
+    public GroupConversationViewMVC getGroupConversationViewMVC(@Nullable ViewGroup parent) {
+        return new GroupConversationViewMVCImpl(
+                layoutInflater,
+                parent,
+                this
+        );
+    }
+
+    public ForgotPasswordViewMVC getForgotPasswordViewMVC(@Nullable ViewGroup parent) {
+        return new ForgotPasswordViewMVCImpl(
+                layoutInflater,
+                parent
+        );
+    }
+
+    public AppAccessRequestViewMVC getAppAccessRequestViewMVC(@Nullable ViewGroup parent) {
+        return new AppAccessRequestViewMVCImpl(
                 layoutInflater,
                 parent
         );

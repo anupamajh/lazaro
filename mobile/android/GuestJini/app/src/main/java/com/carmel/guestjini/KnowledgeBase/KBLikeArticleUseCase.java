@@ -10,8 +10,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class KBLikeArticleUseCase
-        extends BaseObservable<KBLikeArticleUseCase.Listener>
-{
+        extends BaseObservable<KBLikeArticleUseCase.Listener> {
     public interface Listener {
         void onKBLiked(KBRating kbRating);
 
@@ -27,7 +26,7 @@ public class KBLikeArticleUseCase
     }
 
     public void likeKBArticleAndNotify(String kbId, Integer isLiked) {
-         KBRating kbRating = new KBRating();
+        KBRating kbRating = new KBRating();
         kbRating.setKbId(kbId);
         kbRating.setIsLiked(isLiked);
         this.guestJiniAPI.saveKBRating(kbRating).enqueue(new Callback<KBRatingResponse>() {

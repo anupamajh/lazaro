@@ -13,9 +13,10 @@ import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
 
 public class TicketListFragment
         extends BaseFragment {
-    public static Fragment createFragment(){
+    public static Fragment createFragment() {
         return new TicketListFragment();
     }
+
     private static final String SAVED_STATE_TICKET_LIST_FRAGMENT = "SAVED_STATE_TICKET_LIST_FRAGMENT";
 
     private TicketListController ticketListController;

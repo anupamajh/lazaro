@@ -9,10 +9,8 @@ import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptDialogEven
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.stream.Collectors;
 
-public class GroupDetailsController  implements
+public class GroupDetailsController implements
         GroupDetailsViewMVC.Listener,
         FetchGroupByIdUseCase.Listener,
         InviteToGroupUseCase.Listener,
@@ -32,6 +30,7 @@ public class GroupDetailsController  implements
 
     private GroupDetailsViewMVC viewMvc;
     private String groupId;
+    private int groupType;
 
     private ScreenState mScreenState = ScreenState.IDLE;
 
@@ -61,10 +60,12 @@ public class GroupDetailsController  implements
         mScreenState = savedState.mScreenState;
     }
 
-    public void onStart(String groupId) {
+    public void onStart(String groupId, Integer groupType) {
         this.groupId = groupId;
+        this.groupType = groupType;
         viewMvc.registerListener(this);
         fetchGroupByIdUseCase.registerListener(this);
+        inviteToGroupUseCase.registerListener(this);
         dialogsEventBus.registerListener(this);
 
         if (mScreenState != ScreenState.NETWORK_ERROR) {
@@ -76,6 +77,8 @@ public class GroupDetailsController  implements
         viewMvc.unregisterListener(this);
         dialogsEventBus.unregisterListener(this);
         fetchGroupByIdUseCase.unregisterListener(this);
+        inviteToGroupUseCase.unregisterListener(this);
+
     }
 
     private void fetchGroupByIdAndNotify() {
@@ -87,7 +90,7 @@ public class GroupDetailsController  implements
     private void inviteToGroupAndNotify(String userId, String groupId) {
         mScreenState = ScreenState.INVITE_TO_GROUP;
         viewMvc.showProgressIndication();
-        inviteToGroupUseCase.inviteAndNotify(userId,groupId);
+        inviteToGroupUseCase.inviteAndNotify(groupId, userId);
     }
 
     @Override
@@ -96,7 +99,7 @@ public class GroupDetailsController  implements
         this.groupResponse = groupResponse;
         mScreenState = ScreenState.GROUP_SHOWN;
         viewMvc.hideProgressIndication();
-        viewMvc.bindGroupResponse(groupResponse);
+        viewMvc.bindGroupResponse(groupResponse, groupType);
     }
 
     @Override
@@ -112,9 +115,15 @@ public class GroupDetailsController  implements
     }
 
     @Override
+    public void onMessageClicked(String groupId) {
+        screensNavigator.toGroupConversationScreen(groupId, groupType);
+    }
+
+    @Override
     public void onGroupInvited(GroupResponse groupResponse) {
         mScreenState = ScreenState.INVITED_TO_GROUP;
         viewMvc.hideProgressIndication();
+        fetchGroupByIdAndNotify();
     }
 
     @Override

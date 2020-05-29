@@ -5,8 +5,7 @@
     android:id="@+id/communityUnreadSubscribedCell"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-   >
+    android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -140,7 +139,6 @@
             </RelativeLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

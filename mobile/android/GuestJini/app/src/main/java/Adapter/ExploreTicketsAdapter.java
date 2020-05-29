@@ -21,26 +21,27 @@ import java.util.List;
 
 public class ExploreTicketsAdapter extends RecyclerView.Adapter<ExploreTicketsAdapter.ViewHolder> {
     private Context context;
-   private ArrayList<KB> kbArrayList;
+    private ArrayList<KB> kbArrayList;
     private OnItemClickListener onItemClickListener;
-    public ExploreTicketsAdapter(Context context, ArrayList<KB> kbArrayList,OnItemClickListener onItemClickListener) {
-        this.context=context;
-        this.kbArrayList=kbArrayList;
-        this.onItemClickListener=onItemClickListener;
+
+    public ExploreTicketsAdapter(Context context, ArrayList<KB> kbArrayList, OnItemClickListener onItemClickListener) {
+        this.context = context;
+        this.kbArrayList = kbArrayList;
+        this.onItemClickListener = onItemClickListener;
 
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.explore_list,parent,false);
-        ViewHolder viewHolder=new ViewHolder(v,onItemClickListener);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.explore_list, parent, false);
+        ViewHolder viewHolder = new ViewHolder(v, onItemClickListener);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ExploreTicketsAdapter.ViewHolder holder, int position) {
-        final KB kb=this.kbArrayList.get(position);
+        final KB kb = this.kbArrayList.get(position);
         holder.ticketsName.setText(String.valueOf(kb.getTopicTitle()));
         holder.ticketsDate.setText(String.valueOf(kb.getCreationTime()));
         holder.ticketsAuthorName.setText(String.valueOf(kb.getAuthorName()));
@@ -60,31 +61,33 @@ public class ExploreTicketsAdapter extends RecyclerView.Adapter<ExploreTicketsAd
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView profilePicture;
         FloatingActionButton navigationIcon;
-        TextView ticketsName,ticketsDate,ticketsAuthorName,ticketsDescription;
+        TextView ticketsName, ticketsDate, ticketsAuthorName, ticketsDescription;
         OnItemClickListener onItemClickListener;
         ConstraintLayout exploreListLayout;
-        public ViewHolder(@NonNull View itemView,OnItemClickListener onItemClickListener) {
+
+        public ViewHolder(@NonNull View itemView, OnItemClickListener onItemClickListener) {
             super(itemView);
-            profilePicture=itemView.findViewById(R.id.profilePicture);
-            navigationIcon=itemView.findViewById(R.id.navigationIcon);
-            ticketsName=itemView.findViewById(R.id.ticketName);
-            ticketsDate=itemView.findViewById(R.id.ticketDate);
-            ticketsAuthorName=itemView.findViewById(R.id.ticketAuthorName);
-            ticketsDescription=itemView.findViewById(R.id.ticketDescription);
+            profilePicture = itemView.findViewById(R.id.profilePicture);
+            navigationIcon = itemView.findViewById(R.id.navigationIcon);
+            ticketsName = itemView.findViewById(R.id.ticketName);
+            ticketsDate = itemView.findViewById(R.id.ticketDate);
+            ticketsAuthorName = itemView.findViewById(R.id.ticketAuthorName);
+            ticketsDescription = itemView.findViewById(R.id.ticketDescription);
             profilePicture.setImageResource(R.drawable.profile_image);
-            exploreListLayout=itemView.findViewById(R.id.exploreListLayout);
-            this.onItemClickListener=onItemClickListener;
+            exploreListLayout = itemView.findViewById(R.id.exploreListLayout);
+            this.onItemClickListener = onItemClickListener;
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-        onItemClickListener.onItemClick(getAdapterPosition());
+            onItemClickListener.onItemClick(getAdapterPosition());
         }
     }
+
     public interface OnItemClickListener {
         void onItemClick(int position);
     }

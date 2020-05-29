@@ -21,7 +21,7 @@ public class PromptViewMvcImpl extends BaseObservableViewMvc<PromptViewMvc.Liste
     private Button btnDone;
     private Button btnCancel;
 
-    
+
     public PromptViewMvcImpl(LayoutInflater inflater,
                              @Nullable ViewGroup parent) {
         setRootView(inflater.inflate(R.layout.layout_base_prompt_dialog, parent, false));
@@ -36,7 +36,8 @@ public class PromptViewMvcImpl extends BaseObservableViewMvc<PromptViewMvc.Liste
             public void onClick(View v) {
                 for (Listener listener : getListeners()) {
                     listener.onPositiveButtonClicked();
-                };
+                }
+                ;
             }
         });
 
@@ -48,7 +49,7 @@ public class PromptViewMvcImpl extends BaseObservableViewMvc<PromptViewMvc.Liste
                 }
             }
         });
-        
+
     }
 
     @Override

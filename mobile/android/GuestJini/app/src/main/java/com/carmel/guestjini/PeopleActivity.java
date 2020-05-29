@@ -14,10 +14,10 @@ public class PeopleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_people);
-        PeopleLandingFragment peopleLandingFragment=new PeopleLandingFragment();
-        FragmentManager fragmentManager=getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.peoplePlaceHolder,peopleLandingFragment);
+        PeopleLandingFragment peopleLandingFragment = new PeopleLandingFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.peoplePlaceHolder, peopleLandingFragment);
         fragmentTransaction.commit();
     }
 }

@@ -36,13 +36,13 @@ public class MyProfileController
         FetchMyProfileUseCase.Listener,
         SaveUserPreferenceUseCase.Listener,
         FetchMyProfilePicUseCase.Listener, SaveProfilePicUseCase.Listener {
-     private enum ScreenState {
+    private enum ScreenState {
         IDLE,
         FETCHING_MY_PROFILE, MY_PROFILE_FETCHED,
         FETCHING_MY_PROFILE_PIC, MY_PROFILE_PIC_FETCHED,
-         SAVING_USER_PREFERENCE, USER_PREFERENCE_SAVED,
-         SAVING_USER_PROFILE_PIC, USER_PROFILE_PIC_SAVED,
-         NETWORK_ERROR
+        SAVING_USER_PREFERENCE, USER_PREFERENCE_SAVED,
+        SAVING_USER_PROFILE_PIC, USER_PROFILE_PIC_SAVED,
+        NETWORK_ERROR
     }
 
     private final FetchMyProfileUseCase fetchMyProfileUseCase;
@@ -56,7 +56,7 @@ public class MyProfileController
     private MyProfileViewMVC viewMVC;
     private ScreenState mScreenState = ScreenState.IDLE;
     private Uri file;
-    private  FragmentActivity activity;
+    private FragmentActivity activity;
 
 
     public MyProfileController
@@ -81,7 +81,7 @@ public class MyProfileController
         this.viewMVC = viewMvc;
     }
 
-    public void bindActivity(FragmentActivity activity){
+    public void bindActivity(FragmentActivity activity) {
         this.activity = activity;
     }
 
@@ -152,7 +152,7 @@ public class MyProfileController
         fetchMyProfileUseCase.fetchProfileAndNotify();
     }
 
-    private void fetchMyProfilePicAndNotify(){
+    private void fetchMyProfilePicAndNotify() {
         viewMVC.showProgressIndication();
         mScreenState = ScreenState.FETCHING_MY_PROFILE_PIC;
         fetchMyProfilePicUseCase.fetchProfilePicAndNotify();

@@ -12,9 +12,10 @@ import androidx.fragment.app.Fragment;
 import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
 
 public class SupportHomeFragment extends BaseFragment {
-    public static Fragment createFragment(){
+    public static Fragment createFragment() {
         return new SupportHomeFragment();
     }
+
     private static final String SAVED_STATE_SUPPORT_HOME_FRAGMENT = "SAVED_STATE_SUPPORT_HOME_FRAGMENT";
     private SupportHomeController supportHomeController;
 
@@ -45,7 +46,7 @@ public class SupportHomeFragment extends BaseFragment {
         outState.putSerializable(SAVED_STATE_SUPPORT_HOME_FRAGMENT, supportHomeController.getSavedState());
     }
 
-    private void restoreControllerState(Bundle savedInstanceState){
+    private void restoreControllerState(Bundle savedInstanceState) {
         supportHomeController.restoreSavedState(
                 (SupportHomeController.SavedState)
                         savedInstanceState.getSerializable(SAVED_STATE_SUPPORT_HOME_FRAGMENT)

@@ -46,10 +46,10 @@ public class InfoDialog extends BaseDialog {
 
         txtDialogTitle.setText(getArguments().getString(ARG_TITLE));
         txtDialogMessage.setText(getArguments().getString(ARG_MESSAGE));
-        if(getArguments().getBoolean(ARG_IS_SUCCESS)){
+        if (getArguments().getBoolean(ARG_IS_SUCCESS)) {
             btnDone.setBackgroundTintList(ColorStateList.valueOf(Color
                     .parseColor("#32BDD2")));
-        }else{
+        } else {
             btnDone.setBackgroundTintList(ColorStateList.valueOf(Color
                     .parseColor("#E65959")));
         }

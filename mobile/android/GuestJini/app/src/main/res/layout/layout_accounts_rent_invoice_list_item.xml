@@ -44,8 +44,7 @@
             android:textColor="@color/colorZambezi1"
             android:textSize="11sp"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/btnShowRentInvoiceDetails"
-            />
+            android:layout_toLeftOf="@id/btnShowRentInvoiceDetails" />
 
         <ImageView
             android:id="@+id/btnShowRentInvoiceDetails"

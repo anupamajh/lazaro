@@ -492,23 +492,24 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
-           <LinearLayout
-               android:id="@+id/payNowLayout"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_marginTop="30dp"
-               android:gravity="center">
-               <Button
-                   android:id="@+id/payNowButton"
-                   android:layout_width="wrap_content"
-                   android:layout_height="47dp"
-                   android:backgroundTint="@color/colorSummerSky"
-                   android:fontFamily="@font/roboto_bold"
-                   android:paddingStart="25dp"
-                   android:paddingEnd="25dp"
-                   android:text="@string/pay_now"
-                   android:textSize="12sp" />
-           </LinearLayout>
+            <LinearLayout
+                android:id="@+id/payNowLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/payNowButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="47dp"
+                    android:backgroundTint="@color/colorSummerSky"
+                    android:fontFamily="@font/roboto_bold"
+                    android:paddingStart="25dp"
+                    android:paddingEnd="25dp"
+                    android:text="@string/pay_now"
+                    android:textSize="12sp" />
+            </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/transactionSuccessfulLayout"
@@ -572,7 +573,7 @@
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
-<!--    </RelativeLayout>-->
+    <!--    </RelativeLayout>-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/receiptsDetailsLayout"

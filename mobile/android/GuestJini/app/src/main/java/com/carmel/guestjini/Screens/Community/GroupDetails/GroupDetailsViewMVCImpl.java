@@ -31,9 +31,11 @@ public class GroupDetailsViewMVCImpl
     private final TextView txtCreationTime;
     private final TextView memberText;
     private final Button btnExit;
+    private final Button btnMessage;
     private final Button btnSubscribe;
 
     private GroupResponse groupResponse;
+    private int groupType;
 
     public GroupDetailsViewMVCImpl(LayoutInflater inflater,
                                    @Nullable ViewGroup parent,
@@ -48,25 +50,34 @@ public class GroupDetailsViewMVCImpl
         txtCreationTime = findViewById(R.id.txtCreationTime);
         memberText = findViewById(R.id.memberText);
         btnExit = findViewById(R.id.btnExit);
+        btnMessage = findViewById(R.id.btnMessage);
         btnSubscribe = findViewById(R.id.btnSubscribe);
         ImageView btnBack = findViewById(R.id.btnBack);
         progressBar = findViewById(R.id.progress);
         groupMemberRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         groupMemberRecycleAdapter = new GroupMemberRecycleAdapter(this, viewMVCFactory);
         groupMemberRecyclerView.setAdapter(groupMemberRecycleAdapter);
+        btnMessage.setVisibility(View.GONE);
         btnBack.setOnClickListener(view -> {
             for (Listener listener : getListeners()) {
                 listener.onBackClicked();
             }
         });
 
+        btnMessage.setOnClickListener(view -> {
+            for (Listener listener : getListeners()) {
+                listener.onMessageClicked(groupResponse.getGroup().getId());
+            }
+        });
+
     }
 
     @Override
-    public void bindGroupResponse(GroupResponse groupResponse) {
+    public void bindGroupResponse(GroupResponse groupResponse, int groupType) {
         this.groupResponse = groupResponse;
+        this.groupType = groupType;
         memberText.setText(this.groupResponse.getGroupPeople().size() + " Members");
-        groupMemberRecycleAdapter.bindGroupResponse(groupResponse);
+        groupMemberRecycleAdapter.bindGroupResponse(groupResponse, groupType);
         txtGroupCategoryName.setText(groupResponse.getGroup().getInterestCategoryName());
         txtGroupName.setText(groupResponse.getGroup().getName());
         txtGroupDescription.setText(groupResponse.getGroup().getDescription());
@@ -77,8 +88,9 @@ public class GroupDetailsViewMVCImpl
             btnExit.setVisibility(View.GONE);
             btnSubscribe.setVisibility(View.VISIBLE);
         }
-        if(groupResponse.getGroup().getGroupType() == 2){
+        if (groupResponse.getGroup().getGroupType() == 2) {
             btnExit.setVisibility(View.GONE);
+            btnMessage.setVisibility(View.VISIBLE);
         }
     }
 

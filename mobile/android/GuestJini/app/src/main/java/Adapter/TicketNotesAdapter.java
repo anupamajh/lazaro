@@ -14,7 +14,7 @@ import com.carmel.guestjini.R;
 
 import java.util.ArrayList;
 
-public class TicketNotesAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TicketNotesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private ArrayList<TaskNote> taskNotes;
     TextView txtName, txtDate, txtNotes;
@@ -28,7 +28,7 @@ public class TicketNotesAdapter  extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_notes_cell,parent,false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_notes_cell, parent, false);
         txtName = view.findViewById(R.id.name1);
         txtDate = view.findViewById(R.id.dateAndTime1);
         txtNotes = view.findViewById(R.id.txtNarration);
@@ -53,7 +53,7 @@ public class TicketNotesAdapter  extends RecyclerView.Adapter<RecyclerView.ViewH
         notifyDataSetChanged();
     }
 
-    class TaskNotesViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener{
+    class TaskNotesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
         public TaskNotesViewHolder(@NonNull View itemView) {

@@ -213,7 +213,7 @@
                                     android:layout_centerHorizontal="true"
                                     android:layout_marginTop="6dp"
                                     android:layout_marginBottom="16dp"
-                                    android:text="90%"
+                                    android:text="0%"
                                     android:textSize="10sp" />
                             </RelativeLayout>
 
@@ -239,7 +239,7 @@
                                     android:layout_centerHorizontal="true"
                                     android:layout_marginTop="6dp"
                                     android:layout_marginBottom="16dp"
-                                    android:text="90%"
+                                    android:text="0%"
                                     android:textSize="10sp" />
                             </RelativeLayout>
                         </RelativeLayout>
@@ -256,6 +256,7 @@
                     android:layout_marginEnd="25dp"
                     android:backgroundTint="@color/colorAzure"
                     app:cardCornerRadius="6dp">
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -272,8 +273,7 @@
                             android:textColor="@color/colorZambezi1"
                             android:textSize="12sp"
                             android:layout_alignParentTop="true"
-                            android:layout_alignParentStart="true"
-                           />
+                            android:layout_alignParentStart="true" />
 
                         <EditText
                             android:id="@+id/txtReviewText"
@@ -290,8 +290,7 @@
                             android:textColor="@color/colorSuvaGray"
                             android:textSize="12sp"
                             android:layout_alignParentStart="true"
-                            android:layout_below="@+id/txtReviewHelpText"
-                           />
+                            android:layout_below="@+id/txtReviewHelpText" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnSubmitReview"
@@ -306,18 +305,17 @@
                             android:textSize="10sp"
                             app:cornerRadius="@dimen/submit_button_radius"
                             android:layout_alignParentStart="true"
-                            android:layout_below="@+id/txtReviewText"
-                            />
+                            android:layout_below="@+id/txtReviewText" />
                     </RelativeLayout>
                 </com.google.android.material.card.MaterialCardView>
+
                 <RelativeLayout
                     android:id="@+id/layoutList"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/cardReview"
                     android:layout_marginTop="50dp"
-                    android:padding="25dp"
-                    >
+                    android:padding="25dp">
                     <!-- TODO: Check why minheight is required, Require help from UI Expert -->
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/lstKBReview"
@@ -327,8 +325,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        />
+                        android:layout_alignParentBottom="true" />
                 </RelativeLayout>
             </RelativeLayout>
 

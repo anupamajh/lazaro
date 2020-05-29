@@ -11,10 +11,11 @@ import androidx.fragment.app.Fragment;
 
 import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
 
-public class TermsAndConditionsFragment  extends BaseFragment {
-    public static Fragment createFragment(){
+public class TermsAndConditionsFragment extends BaseFragment {
+    public static Fragment createFragment() {
         return new TermsAndConditionsFragment();
     }
+
     private static final String SAVED_STATE_SETTINGS_TERMS_CONDITIONS_FRAGMENT = "SAVED_STATE_SETTINGS_TERMS_CONDITIONS_FRAGMENT";
     private TermsAndConditionsController termsAndConditionsController;
 
@@ -45,7 +46,7 @@ public class TermsAndConditionsFragment  extends BaseFragment {
         outState.putSerializable(SAVED_STATE_SETTINGS_TERMS_CONDITIONS_FRAGMENT, termsAndConditionsController.getSavedState());
     }
 
-    private void restoreControllerState(Bundle savedInstanceState){
+    private void restoreControllerState(Bundle savedInstanceState) {
         termsAndConditionsController.restoreSavedState(
                 (TermsAndConditionsController.SavedState)
                         savedInstanceState.getSerializable(SAVED_STATE_SETTINGS_TERMS_CONDITIONS_FRAGMENT)

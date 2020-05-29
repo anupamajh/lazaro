@@ -87,7 +87,7 @@ public class AttachFilesFragment extends Fragment {
 
             }
         });
-        folderLayout .setOnClickListener(new View.OnClickListener() {
+        folderLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

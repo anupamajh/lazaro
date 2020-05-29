@@ -17,296 +17,295 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-<!--        <ScrollView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:background="@color/colorWhite"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent">-->
+        <!--        <ScrollView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:background="@color/colorWhite"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent">-->
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@color/colorWhite"-->
-<!--                android:orientation="vertical">-->
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:background="@color/colorWhite"-->
+        <!--                android:orientation="vertical">-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/myTicketsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/MyTicketsTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="32dp"
+                    android:letterSpacing="0.1"
+                    android:text="@string/my_tickets"
+                    android:textColor="@color/colorZambezi"
+                    android:textSize="14sp"
+                    app:fontFamily="@font/roboto_bold"
+                    app:layout_constraintStart_toEndOf="@+id/leftArrowMark"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/leftArrowMark"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="36dp"
+                    android:contentDescription="@string/back_arrow_icon"
+                    android:src="@drawable/back_arrow_icon_xxhdpi"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/addIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="24dp"
+                    app:backgroundTint="@color/colorSummerSky"
+                    app:fabCustomSize="36dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:maxImageSize="25dp"
+                    app:srcCompat="@drawable/ic_add_black_24dp"
+                    app:tint="@color/colorWhite">
+
+                </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/searchMainLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/myTicketsLayout">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/searchLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/colorWhite">
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="42dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="28dp"
+                    android:padding="5dp"
+                    android:background="@drawable/search"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/myTicketsLayout"
+                    <EditText
+                        android:id="@+id/search"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
                         android:background="@color/colorWhite"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="32dp"
+                        android:ems="24"
+                        android:hint="@string/search"
+                        android:letterSpacing="0.07"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:textColorHint="@color/colorSuvaGray"
+                        android:textSize="10sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/searchIcon"></EditText>
 
-                        <TextView
-                            android:id="@+id/MyTicketsTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginTop="32dp"
-                            android:letterSpacing="0.1"
-                            android:text="@string/my_tickets"
-                            android:textColor="@color/colorZambezi"
-                            android:textSize="14sp"
-                            app:fontFamily="@font/roboto_bold"
-                            app:layout_constraintStart_toEndOf="@+id/leftArrowMark"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:id="@+id/leftArrowMark"
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:layout_marginStart="32dp"
-                            android:layout_marginTop="36dp"
-                            android:contentDescription="@string/back_arrow_icon"
-                            android:src="@drawable/back_arrow_icon_xxhdpi"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-
-                        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                            android:id="@+id/addIcon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="24dp"
-                            app:backgroundTint="@color/colorSummerSky"
-                            app:fabCustomSize="36dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:maxImageSize="25dp"
-                            app:srcCompat="@drawable/ic_add_black_24dp"
-                            app:tint="@color/colorWhite">
-
-                        </com.google.android.material.floatingactionbutton.FloatingActionButton>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/searchMainLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/myTicketsLayout">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/searchLayout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="32dp"
-                            android:layout_marginTop="42dp"
-                            android:layout_marginEnd="32dp"
-                            android:layout_marginBottom="28dp"
-                            android:padding="5dp"
-                            android:background="@drawable/search"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <EditText
-                                android:id="@+id/search"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="20dp"
-                                android:background="@color/colorWhite"
-                                android:layout_marginEnd="32dp"
-                                android:ems="24"
-                                android:hint="@string/search"
-                                android:letterSpacing="0.07"
-                                android:paddingTop="2dp"
-                                android:paddingBottom="2dp"
-                                android:textColorHint="@color/colorSuvaGray"
-                                android:textSize="10sp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintRight_toLeftOf="@+id/searchIcon"
-                                ></EditText>
-
-                            <ImageView
-                                android:id="@+id/searchIcon"
-                                android:layout_width="17dp"
-                                android:layout_height="17dp"
-                                android:layout_marginTop="9dp"
-                                android:layout_marginEnd="12dp"
-                                android:layout_marginBottom="9dp"
-                                android:layout_marginLeft="5dp"
-                                android:src="@drawable/search_icon_xxhdpi"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
-
-                            </ImageView>
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:visibility="gone"
-                        android:id="@+id/filterIconLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/searchMainLayout">
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/filterIcon"
-                            style="@style/Widget.MaterialComponents.Button.Icon"
-                            android:layout_width="34dp"
-                            android:layout_height="44dp"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentTop="true"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="32dp"
-                            android:layout_marginTop="4dp"
-                            android:backgroundTint="@color/colorSummerSky"
-                            android:paddingStart="20dp"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            app:icon="@drawable/filter_image_xxhdpi"
-                            app:iconGravity="textStart"
-                            app:iconSize="20dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <LinearLayout
-                            android:id="@+id/openLayout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginTop="16dp"
-                            android:background="@drawable/open"
-                            android:paddingStart="12dp"
-                            android:paddingTop="2dp"
-                            android:paddingEnd="12dp"
-                            android:paddingBottom="2dp"
-                            android:visibility="gone"
-                            app:layout_constraintStart_toEndOf="@+id/filterIcon"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <TextView
-                                android:id="@+id/open1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:layout_alignParentTop="true"
-                                android:fontFamily="@font/roboto_medium"
-                                android:text="Open"
-                                android:textColor="@color/colorDimGray"
-                                android:textSize="11sp">
-
-                            </TextView>
-
-                            <ImageView
-                                android:layout_width="8dp"
-                                android:layout_height="8dp"
-                                android:layout_alignParentTop="true"
-                                android:layout_marginStart="14dp"
-                                android:layout_marginTop="3dp"
-                                android:layout_toEndOf="@+id/open1"
-                                android:src="@drawable/cancel_icon_xxhdpi"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
-
-                            </ImageView>
-
-                        </LinearLayout>
-
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginTop="16dp"
-                        app:layout_constraintBottom_toTopOf="@+id/view8"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/filterIconLayout">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/myTicketsRecyclerView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                        </androidx.recyclerview.widget.RecyclerView>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginTop="16dp"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toTopOf="@+id/view8"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/filterIconLayout">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/openMyTicketsRecyclerView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                        </androidx.recyclerview.widget.RecyclerView>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                    <View
-                        android:id="@+id/view8"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@drawable/horizontal_line"
-                        app:layout_constraintBottom_toTopOf="@id/bottomNavigationViewLayout"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"></View>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/bottomNavigationViewLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                    <ImageView
+                        android:id="@+id/searchIcon"
+                        android:layout_width="17dp"
+                        android:layout_height="17dp"
+                        android:layout_marginTop="9dp"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginBottom="9dp"
+                        android:layout_marginLeft="5dp"
+                        android:src="@drawable/search_icon_xxhdpi"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent">
+                        app:layout_constraintTop_toTopOf="parent">
 
+                    </ImageView>
 
-                        <com.google.android.material.bottomnavigation.BottomNavigationView
-                            android:id="@+id/bottomNavigationView"
-                            android:visibility="gone"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_gravity="bottom"
-                            app:itemIconTint="@drawable/item_selected"
-                            app:itemTextColor="@drawable/item_selected"
-                            app:labelVisibilityMode="labeled"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--            </LinearLayout>-->
-<!--        </ScrollView>-->
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:visibility="gone"
+                android:id="@+id/filterIconLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchMainLayout">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/filterIcon"
+                    style="@style/Widget.MaterialComponents.Button.Icon"
+                    android:layout_width="34dp"
+                    android:layout_height="44dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="4dp"
+                    android:backgroundTint="@color/colorSummerSky"
+                    android:paddingStart="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    app:icon="@drawable/filter_image_xxhdpi"
+                    app:iconGravity="textStart"
+                    app:iconSize="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/openLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/open"
+                    android:paddingStart="12dp"
+                    android:paddingTop="2dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="2dp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@+id/filterIcon"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/open1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Open"
+                        android:textColor="@color/colorDimGray"
+                        android:textSize="11sp">
+
+                    </TextView>
+
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_toEndOf="@+id/open1"
+                        android:src="@drawable/cancel_icon_xxhdpi"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    </ImageView>
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/view8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/filterIconLayout">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/myTicketsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/view8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/filterIconLayout">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/openMyTicketsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/view8"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/horizontal_line"
+                app:layout_constraintBottom_toTopOf="@id/bottomNavigationViewLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"></View>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bottomNavigationViewLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:id="@+id/bottomNavigationView"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="bottom"
+                    app:itemIconTint="@drawable/item_selected"
+                    app:itemTextColor="@drawable/item_selected"
+                    app:labelVisibilityMode="labeled"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--            </LinearLayout>-->
+        <!--        </ScrollView>-->
 
 
         <com.google.android.material.navigation.NavigationView
@@ -732,13 +731,13 @@
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/constraintLayout13"></View>
-<!--                        <Spinner-->
-<!--                            android:id="@+id/selectDateSpinner"-->
-<!--                            android:layout_width="147dp"-->
-<!--                            android:layout_height="35dp"-->
-<!--                            android:background="@drawable/open"-->
-<!--                            tools:layout_editor_absoluteX="24dp"-->
-<!--                            tools:layout_editor_absoluteY="482dp"></Spinner>-->
+                        <!--                        <Spinner-->
+                        <!--                            android:id="@+id/selectDateSpinner"-->
+                        <!--                            android:layout_width="147dp"-->
+                        <!--                            android:layout_height="35dp"-->
+                        <!--                            android:background="@drawable/open"-->
+                        <!--                            tools:layout_editor_absoluteX="24dp"-->
+                        <!--                            tools:layout_editor_absoluteY="482dp"></Spinner>-->
 
                         <ImageView
                             android:id="@+id/sortIcon"
@@ -888,8 +887,7 @@
         </com.google.android.material.navigation.NavigationView>
     </androidx.drawerlayout.widget.DrawerLayout>
 
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

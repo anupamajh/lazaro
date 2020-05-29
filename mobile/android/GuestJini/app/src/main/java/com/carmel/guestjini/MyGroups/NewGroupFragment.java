@@ -23,20 +23,21 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class NewGroupFragment extends Fragment {
     private ImageView backArrow;
     private Button createButton;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootview= inflater.inflate(R.layout.fragment_new_group, container, false);
-        backArrow=rootview.findViewById(R.id.backArrow);
-        createButton=rootview.findViewById(R.id.createButton);
+        View rootview = inflater.inflate(R.layout.fragment_new_group, container, false);
+        backArrow = rootview.findViewById(R.id.backArrow);
+        createButton = rootview.findViewById(R.id.createButton);
 
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyGroupsFragment myGroupsFragment=new MyGroupsFragment();
+                MyGroupsFragment myGroupsFragment = new MyGroupsFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.myGroupsPlaceHolder, myGroupsFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
@@ -63,10 +64,10 @@ public class NewGroupFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
-                        MyGroupsFragment myGroupsFragment=new MyGroupsFragment();
-                        FragmentManager fragmentManager=getFragmentManager();
-                        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.myGroupsPlaceHolder,myGroupsFragment);
+                        MyGroupsFragment myGroupsFragment = new MyGroupsFragment();
+                        FragmentManager fragmentManager = getFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.myGroupsPlaceHolder, myGroupsFragment);
                         fragmentTransaction.addToBackStack(null);
                         fragmentTransaction.commit();
                     }

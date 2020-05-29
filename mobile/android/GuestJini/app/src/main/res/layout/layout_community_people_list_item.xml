@@ -7,6 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -16,8 +17,8 @@
             app:cardBackgroundColor="@color/colorWhisper1"
             app:cardCornerRadius="5dp"
             app:cardElevation="5dp"
-            android:layout_marginBottom="28dp"
-            >
+            android:layout_marginBottom="28dp">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -29,8 +30,7 @@
                     android:layout_marginTop="0dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
-                  >
+                    android:layout_alignParentTop="true">
 
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -41,8 +41,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_marginStart="32dp"
                         android:layout_marginTop="20dp"
-                        android:src="@drawable/profile_image"
-                      />
+                        android:src="@drawable/profile_image" />
 
                     <TextView
                         android:id="@+id/peopleName"
@@ -56,8 +55,7 @@
                         android:textSize="12sp"
                         android:textColor="@color/colorZambezi1"
                         android:text="@string/people_name"
-                        app:fontFamily="@font/roboto_medium"
-                        />
+                        app:fontFamily="@font/roboto_medium" />
 
                     <TextView
                         android:id="@+id/peopleGender"
@@ -71,8 +69,7 @@
                         android:textSize="10dp"
                         android:textColor="@color/colorDimGray"
                         android:letterSpacing="0.06"
-                        app:fontFamily="@font/roboto_medium"
-                       />
+                        app:fontFamily="@font/roboto_medium" />
 
                     <TextView
                         android:id="@+id/notificationIndicator"
@@ -82,8 +79,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="12dp"
                         android:layout_marginEnd="12dp"
-                        android:background="@drawable/red_small_circle"
-                        />
+                        android:background="@drawable/red_small_circle" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -92,8 +88,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_below="@id/layoutProfileHeader"
-                   >
+                    android:layout_below="@id/layoutProfileHeader">
 
                     <ImageView
                         android:id="@+id/btnFavourite"
@@ -104,8 +99,7 @@
                         android:layout_marginStart="38dp"
                         android:layout_marginTop="0dp"
                         android:layout_marginBottom="16dp"
-                        android:background="@drawable/like_and_unlike_button"
-                        />
+                        android:background="@drawable/like_and_unlike_button" />
 
                     <TextView
                         android:id="@+id/compatibilityMeter"
@@ -116,8 +110,7 @@
                         android:layout_marginTop="4dp"
                         android:layout_marginEnd="32dp"
                         android:layout_toEndOf="@+id/btnFavourite"
-                        android:background="#32BDD2"
-                         />
+                        android:background="#32BDD2" />
 
                     <TextView
                         android:id="@+id/peopleInterests"
@@ -130,8 +123,7 @@
                         android:text="@string/Common_interests"
                         android:textSize="8dp"
                         android:letterSpacing="0.06"
-                        app:fontFamily="@font/roboto_medium"
-                        />
+                        app:fontFamily="@font/roboto_medium" />
 
                     <TextView
                         android:id="@+id/compatibilityCount"
@@ -144,8 +136,7 @@
                         android:text="@string/compatibility_count"
                         android:letterSpacing="0.04"
                         android:textSize="8dp"
-                        app:fontFamily="@font/roboto_medium"
-                        />
+                        app:fontFamily="@font/roboto_medium" />
                 </RelativeLayout>
 
 

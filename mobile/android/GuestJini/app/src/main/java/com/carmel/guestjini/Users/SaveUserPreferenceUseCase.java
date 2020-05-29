@@ -11,7 +11,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SaveUserPreferenceUseCase  extends BaseObservableViewMvc<SaveUserPreferenceUseCase.Listener> {
+public class SaveUserPreferenceUseCase extends BaseObservableViewMvc<SaveUserPreferenceUseCase.Listener> {
     public interface Listener {
         void onUserPreferenceSaved(UserPreferenceResponse userPreferenceResponse);
 

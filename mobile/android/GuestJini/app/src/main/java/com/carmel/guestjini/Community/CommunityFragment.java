@@ -80,19 +80,19 @@ public class CommunityFragment extends Fragment implements CommunityMainNavigati
     }
 
     private void loadPeopleFragment() {
-        PeopleLandingFragment peopleLandingFragment=new PeopleLandingFragment();
-        FragmentManager fragmentManager=getFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.CommunityPlaceHolder,peopleLandingFragment);
+        PeopleLandingFragment peopleLandingFragment = new PeopleLandingFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.CommunityPlaceHolder, peopleLandingFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
     private void loadGroupFragment() {
-        GroupsFragment groupsFragment=new GroupsFragment();
-        FragmentManager fragmentManager=getFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.CommunityPlaceHolder,groupsFragment);
+        GroupsFragment groupsFragment = new GroupsFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.CommunityPlaceHolder, groupsFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }

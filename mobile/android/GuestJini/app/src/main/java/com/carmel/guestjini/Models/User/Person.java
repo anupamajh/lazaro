@@ -3,7 +3,7 @@ package com.carmel.guestjini.Models.User;
 import java.util.List;
 
 public class Person {
-    private  AddressBook addressBook;
+    private AddressBook addressBook;
     private List<UserInterests> userInterestsList;
     private int isFavourite;
 

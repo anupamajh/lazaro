@@ -62,6 +62,7 @@
                 android:textColor="@color/colorDimGray"
                 android:textSize="9sp"
                 app:fontFamily="@font/roboto_medium" />
+
             <TextView
                 android:id="@+id/txtKBDate"
                 android:layout_width="wrap_content"
@@ -75,6 +76,7 @@
                 android:textColor="@color/colorSuvaGray"
                 android:textSize="9sp"
                 app:fontFamily="@font/roboto_medium" />
+
             <TextView
                 android:id="@+id/txtKBShortText"
                 android:layout_width="match_parent"
@@ -90,27 +92,27 @@
                 android:textSize="11sp"
                 app:fontFamily="@font/roboto_medium" />
         </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/layoutKBAction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        >
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnShowKBDetail"
+
+        <RelativeLayout
+            android:id="@+id/layoutKBAction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="16dp"
-            app:backgroundTint="@color/colorSummerSky"
-            app:fabCustomSize="26dp"
-            app:maxImageSize="16dp"
-            app:srcCompat="@drawable/ic_navigate_next_black_24dp"
-            app:tint="@color/colorWhite"
-            android:layout_centerVertical="true"
-            />
-    </RelativeLayout>
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnShowKBDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="16dp"
+                app:backgroundTint="@color/colorSummerSky"
+                app:fabCustomSize="26dp"
+                app:maxImageSize="16dp"
+                app:srcCompat="@drawable/ic_navigate_next_black_24dp"
+                app:tint="@color/colorWhite"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
 
 
     </RelativeLayout>

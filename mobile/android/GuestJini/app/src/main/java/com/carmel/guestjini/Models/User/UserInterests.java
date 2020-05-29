@@ -9,7 +9,7 @@ public class UserInterests {
     private String interestName;
     private String interestCategoryName;
     private String getInterestCategoryId;
-    private  int isInterested;
+    private int isInterested;
     private InterestCategory interestCategory;
     private String creationTime;
 

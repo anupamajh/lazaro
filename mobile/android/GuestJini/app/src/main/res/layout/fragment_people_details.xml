@@ -5,8 +5,8 @@
     android:id="@+id/peopleDetailMainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
-    >
+    android:background="@color/colorWhite">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/peopleHeadingLayout"
         android:layout_width="match_parent"
@@ -445,6 +445,7 @@
         </LinearLayout>
 
     </ScrollView>
+
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"

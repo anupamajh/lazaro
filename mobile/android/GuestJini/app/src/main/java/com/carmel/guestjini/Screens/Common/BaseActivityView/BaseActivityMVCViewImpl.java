@@ -14,8 +14,7 @@ import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class BaseActivityMVCViewImpl extends BaseObservableViewMvc<BaseActivityMVCView.Listener>
-implements BaseActivityMVCView
-{
+        implements BaseActivityMVCView {
     private final FrameLayout baseLayout;
     private final FrameLayout frameLayout;
     private final BottomNavigationView bottomNavigationView;
@@ -29,38 +28,33 @@ implements BaseActivityMVCView
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                 switch (item.getItemId()){
-                    case R.id.suppotIcon:
-                    {
-                        for(Listener listener:getListeners()){
+                switch (item.getItemId()) {
+                    case R.id.suppotIcon: {
+                        for (Listener listener : getListeners()) {
                             listener.onSupportClicked();
                         }
                     }
                     break;
-                    case R.id.communityIcon:
-                    {
-                        for(Listener listener:getListeners()){
+                    case R.id.communityIcon: {
+                        for (Listener listener : getListeners()) {
                             listener.onCommunityClicked();
                         }
                     }
                     break;
-                    case R.id.accountsIcon:
-                    {
-                        for(Listener listener:getListeners()){
+                    case R.id.accountsIcon: {
+                        for (Listener listener : getListeners()) {
                             listener.onAccountsClicked();
                         }
                     }
                     break;
-                    case R.id.rewardsIcon:
-                    {
-                        for(Listener listener:getListeners()){
+                    case R.id.rewardsIcon: {
+                        for (Listener listener : getListeners()) {
                             listener.onRewardsClicked();
                         }
                     }
                     break;
-                    case R.id.settingsIcon:
-                    {
-                        for(Listener listener:getListeners()){
+                    case R.id.settingsIcon: {
+                        for (Listener listener : getListeners()) {
                             listener.onSettingsClicked();
                         }
                     }

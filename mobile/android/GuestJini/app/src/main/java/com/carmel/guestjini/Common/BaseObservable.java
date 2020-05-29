@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class BaseObservable <LISTENER_CLASS> {
+public class BaseObservable<LISTENER_CLASS> {
 
     // thread-safe set of listeners
     private final Set<LISTENER_CLASS> mListeners = Collections.newSetFromMap(

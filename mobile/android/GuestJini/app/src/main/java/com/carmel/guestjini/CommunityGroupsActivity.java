@@ -14,10 +14,10 @@ public class CommunityGroupsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_groups);
-        CommunityGroupsFragment communityGroupsFragment=new CommunityGroupsFragment();
-        FragmentManager fragmentManager=getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.communityGroupsPlaceHolder,communityGroupsFragment);
+        CommunityGroupsFragment communityGroupsFragment = new CommunityGroupsFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.communityGroupsPlaceHolder, communityGroupsFragment);
         fragmentTransaction.commit();
     }
 }

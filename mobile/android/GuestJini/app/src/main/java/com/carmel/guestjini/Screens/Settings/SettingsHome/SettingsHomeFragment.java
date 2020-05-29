@@ -12,9 +12,10 @@ import androidx.fragment.app.Fragment;
 import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
 
 public class SettingsHomeFragment extends BaseFragment {
-    public static Fragment createFragment(){
+    public static Fragment createFragment() {
         return new SettingsHomeFragment();
     }
+
     private static final String SAVED_STATE_SETTINGS_HOME_FRAGMENT = "SAVED_STATE_SETTINGS_HOME_FRAGMENT";
     private SettingsHomeController settingsHomeController;
 
@@ -45,7 +46,7 @@ public class SettingsHomeFragment extends BaseFragment {
         outState.putSerializable(SAVED_STATE_SETTINGS_HOME_FRAGMENT, settingsHomeController.getSavedState());
     }
 
-    private void restoreControllerState(Bundle savedInstanceState){
+    private void restoreControllerState(Bundle savedInstanceState) {
         settingsHomeController.restoreSavedState(
                 (SettingsHomeController.SavedState)
                         savedInstanceState.getSerializable(SAVED_STATE_SETTINGS_HOME_FRAGMENT)

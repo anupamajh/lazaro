@@ -53,7 +53,7 @@ public class ArticlesDetailsFragment extends Fragment {
     private RecyclerView reviewRecyclerView;
     private ImageView backArrow;
     private MaterialButton submitButton;
-    private TextView ticketAuthorName, ticketName, ticketDate, ticketDescription, reviewEditText,likeIconPercentage,unlikeIconPercentage;
+    private TextView ticketAuthorName, ticketName, ticketDate, ticketDescription, reviewEditText, likeIconPercentage, unlikeIconPercentage;
     CircleImageView likeIcon, unlikeIcon;
     MediaController mediaController;
     ArrayList<KBReview> reviewModelArrayList = new ArrayList<>();
@@ -449,7 +449,7 @@ public class ArticlesDetailsFragment extends Fragment {
                 public void onResponse(Call<KBRatingPercentResponse> call, Response<KBRatingPercentResponse> response) {
                     try {
                         KBRatingPercentResponse kbRatingPercentResponse = response.body();
-                        if(kbRatingPercentResponse.getSuccess()){
+                        if (kbRatingPercentResponse.getSuccess()) {
                             likeIconPercentage.setText(String.valueOf(kbRatingPercentResponse.likedPercent));
                             unlikeIconPercentage.setText(String.valueOf(kbRatingPercentResponse.disLikedPercent));
                         }

@@ -47,6 +47,7 @@ public class ReceiptsModel {
     public void setAmount(String amount) {
         this.amount = amount;
     }
+
     public int getNavigationIcon() {
         return navigationIcon;
     }
@@ -54,7 +55,6 @@ public class ReceiptsModel {
     public void setNavigationIcon(int navigationIcon) {
         this.navigationIcon = navigationIcon;
     }
-
 
 
 }

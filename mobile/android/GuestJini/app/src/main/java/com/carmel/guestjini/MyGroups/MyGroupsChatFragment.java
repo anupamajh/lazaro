@@ -26,23 +26,23 @@ import Model.GroupChatModel;
  */
 public class MyGroupsChatFragment extends Fragment {
     private ImageView backArrow;
-    private TextView myGroupName,myGroupDescription;
-    String MyGroupName,MyGroupDescription;
+    private TextView myGroupName, myGroupDescription;
+    String MyGroupName, MyGroupDescription;
     private RecyclerView groupChatRecyclerView;
-    private ArrayList<GroupChatModel> groupChatList=new ArrayList<>();
+    private ArrayList<GroupChatModel> groupChatList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView= inflater.inflate(R.layout.fragment_my_group_chat, container, false);
-        myGroupName=rootView.findViewById(R.id.myGroupName);
-        myGroupDescription=rootView.findViewById(R.id.myGroupDescription);
-        groupChatRecyclerView=rootView.findViewById(R.id.myGroupChatRecyclerView);
-        backArrow=rootView.findViewById(R.id.backButton);
+        View rootView = inflater.inflate(R.layout.fragment_my_group_chat, container, false);
+        myGroupName = rootView.findViewById(R.id.myGroupName);
+        myGroupDescription = rootView.findViewById(R.id.myGroupDescription);
+        groupChatRecyclerView = rootView.findViewById(R.id.myGroupChatRecyclerView);
+        backArrow = rootView.findViewById(R.id.backButton);
 
-        Bundle bundle=getArguments();
-        if(bundle!=null) {
+        Bundle bundle = getArguments();
+        if (bundle != null) {
             MyGroupName = bundle.getString("MyGroupName");
             MyGroupDescription = bundle.getString("MyGroupDescription");
 
@@ -53,39 +53,39 @@ public class MyGroupsChatFragment extends Fragment {
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyGroupsDetailsFragment myGroupsDetailsFragment=new MyGroupsDetailsFragment();
-                FragmentManager fragmentManager=getFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.myGroupsPlaceHolder,myGroupsDetailsFragment);
+                MyGroupsDetailsFragment myGroupsDetailsFragment = new MyGroupsDetailsFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.myGroupsPlaceHolder, myGroupsDetailsFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });
 
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         groupChatRecyclerView.setLayoutManager(linearLayoutManager);
-        GroupChatAdapter groupChatAdapter=new GroupChatAdapter(rootView.getContext(),groupChatList);
+        GroupChatAdapter groupChatAdapter = new GroupChatAdapter(rootView.getContext(), groupChatList);
         groupChatRecyclerView.setAdapter(groupChatAdapter);
 
         groupChatList.add(new GroupChatModel(
                 "26 Jul 2019, 02:25 pm",
                 "Peter Law",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.",GroupChatModel.ONE_TYPE));
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.", GroupChatModel.ONE_TYPE));
 
         groupChatList.add(new GroupChatModel(
                 "26 Jul 2019, 04:25 pm",
                 "Luke Ray ",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.",GroupChatModel.ONE_TYPE));
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.", GroupChatModel.ONE_TYPE));
 
         groupChatList.add(new GroupChatModel(
                 "26 Jul 2019, 02:25 pm",
                 "Andrew Paul ",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.",GroupChatModel.ONE_TYPE));
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.", GroupChatModel.ONE_TYPE));
 
         groupChatList.add(new GroupChatModel(
                 "26 Jul 2019, 06:25 pm",
                 "You ",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.",GroupChatModel.TWO_TYPE));
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat sapien, ultricies.", GroupChatModel.TWO_TYPE));
         return rootView;
     }
 

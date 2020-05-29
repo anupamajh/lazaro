@@ -35,54 +35,55 @@ public class Login extends AppCompatActivity {
             .addInterceptor(logging)
             .build();
 
-    TextView emailErrorField,passwordErrorField,forgotPassword,invalidCredentials,getOneNow;
-    EditText email,password;
+    TextView emailErrorField, passwordErrorField, forgotPassword, invalidCredentials, getOneNow;
+    EditText email, password;
     ImageView passwordIcon;
     MaterialButton loginButton;
     ConstraintLayout passwordLayout;
     String MobilePattern = "[0-9]{10}";
     String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{3,})$";
-//    String EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-    String  PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.* [@#$%^&+=])(?=\\S+$).{4,}$";
+    //    String EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.* [@#$%^&+=])(?=\\S+$).{4,}$";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        emailErrorField=findViewById(R.id.emailErrorField);
-        passwordErrorField=findViewById(R.id.passwordErrorField);
-        forgotPassword=findViewById(R.id.forgotPassword);
-        invalidCredentials=findViewById(R.id.invalidCredentials);
-        getOneNow=findViewById(R.id.getOneNow);
-        passwordIcon=findViewById(R.id.passwordMaskingIcon);
-        email=findViewById(R.id.email);
-        password=findViewById(R.id.password);
-        loginButton=findViewById(R.id.login);
-        passwordLayout=findViewById(R.id.passwordLayout);
+        emailErrorField = findViewById(R.id.emailErrorField);
+        passwordErrorField = findViewById(R.id.passwordErrorField);
+        forgotPassword = findViewById(R.id.forgotPassword);
+        invalidCredentials = findViewById(R.id.invalidCredentials);
+        getOneNow = findViewById(R.id.getOneNow);
+        passwordIcon = findViewById(R.id.passwordMaskingIcon);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
+        loginButton = findViewById(R.id.login);
+        passwordLayout = findViewById(R.id.passwordLayout);
 
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(email.getText().toString().trim().length()==0 && password.getText().toString().trim().length()==0){
+                if (email.getText().toString().trim().length() == 0 && password.getText().toString().trim().length() == 0) {
                     emailErrorField.setVisibility(View.VISIBLE);
                     passwordErrorField.setVisibility(View.VISIBLE);
                     passwordLayout.setBackgroundResource(R.drawable.edit_red_textbox);
                     email.setBackgroundResource(R.drawable.edit_red_textbox);
-                }else {
+                } else {
                     emailErrorField.setVisibility(View.GONE);
                     passwordErrorField.setVisibility(View.GONE);
                     email.setBackgroundResource(R.drawable.edit_textbox);
                     passwordLayout.setBackgroundResource(R.drawable.edit_textbox);
-                    if(email.getText().toString().trim().length()==0){
+                    if (email.getText().toString().trim().length() == 0) {
                         emailErrorField.setVisibility(View.VISIBLE);
                         email.setBackgroundResource(R.drawable.edit_red_textbox);
                         invalidCredentials.setVisibility(View.GONE);
-                    }else if(password.getText().toString().trim().length()==0){
+                    } else if (password.getText().toString().trim().length() == 0) {
                         passwordErrorField.setVisibility(View.VISIBLE);
                         passwordLayout.setBackgroundResource(R.drawable.edit_red_textbox);
                         invalidCredentials.setVisibility(View.GONE);
-                    }else if(!email.getText().toString().trim().matches(EMAIL_PATTERN) && !email.getText().toString().trim().matches(MobilePattern)){
+                    } else if (!email.getText().toString().trim().matches(EMAIL_PATTERN) && !email.getText().toString().trim().matches(MobilePattern)) {
                         invalidCredentials.setVisibility(View.VISIBLE);
                         emailErrorField.setVisibility(View.GONE);
                         email.setBackgroundResource(R.drawable.edit_textbox);
@@ -95,7 +96,7 @@ public class Login extends AppCompatActivity {
                         passwordLayout.setBackgroundResource(R.drawable.edit_textbox);
                     }
                          */
-                    }else {
+                    } else {
                         //TODO: Implement login call
                         Retrofit retrofit = new Retrofit.Builder()
                                 .baseUrl(EndPoints.END_POINT_URL)
@@ -135,8 +136,8 @@ public class Login extends AppCompatActivity {
                                     editor.putBoolean("isLoggedIn", false);
                                     editor.commit();
 
-                                }else{
-                                    Intent intent=new Intent(getApplicationContext(),SupportActivity.class);
+                                } else {
+                                    Intent intent = new Intent(getApplicationContext(), SupportActivity.class);
                                     startActivity(intent);
                                 }
                             }
@@ -156,15 +157,16 @@ public class Login extends AppCompatActivity {
 
         passwordIcon.setOnClickListener(new View.OnClickListener() {
             private boolean flag = true;
+
             @Override
             public void onClick(View v) {
-                if(flag) {
-                    flag=false;
+                if (flag) {
+                    flag = false;
                     passwordIcon.setImageResource(R.drawable.password_unmasking_icon);
                     password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
 
-                }else{
-                    flag=true;
+                } else {
+                    flag = true;
                     passwordIcon.setImageResource(R.drawable.password_masking_icon);
                     password.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
@@ -173,7 +175,7 @@ public class Login extends AppCompatActivity {
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),ForgotPassword.class);
+                Intent intent = new Intent(getApplicationContext(), ForgotPassword.class);
                 startActivity(intent);
             }
         });
@@ -181,7 +183,7 @@ public class Login extends AppCompatActivity {
         getOneNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(), AppAccessRequest.class);
+                Intent intent = new Intent(getApplicationContext(), AppAccessRequest.class);
                 startActivity(intent);
             }
         });

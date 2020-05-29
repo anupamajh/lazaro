@@ -8,7 +8,9 @@ import java.util.List;
 public interface KBListViewMVC extends ObservableViewMvc<KBListViewMVC.Listener> {
     public interface Listener {
         void onKBItemClicked(KB kb);
+
         void onSearchClicked(String searchText);
+
         void onBackClicked();
     }
 

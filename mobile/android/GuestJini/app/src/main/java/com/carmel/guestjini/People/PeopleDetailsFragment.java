@@ -164,10 +164,10 @@ public class PeopleDetailsFragment extends Fragment {
                             mobileNo.setText(peopleResponse.getOthersAddressBook().getPhone1());
                             emailId.setText(peopleResponse.getOthersAddressBook().getEmail1());
                             Integer interestTitleId = null;
-                            if(peopleResponse.getIsFavourite() == 0){
+                            if (peopleResponse.getIsFavourite() == 0) {
                                 favouriteUnselectedIcon.setImageResource(R.drawable.unlike_button_xhdpi);
                                 addFafouriteText.setText("Add to favourites");
-                            }else{
+                            } else {
                                 favouriteUnselectedIcon.setImageResource(R.drawable.like_button_xhdpi);
                                 addFafouriteText.setText("Remove from favourites");
                             }
@@ -243,7 +243,7 @@ public class PeopleDetailsFragment extends Fragment {
     }
 
     private Integer addInterestHeading(String interestCategoryName, Integer interestTitleId, InterestMap interestMap) {
-       // Typeface typeface = getResources().getFont(R.font.roboto_bold);
+        // Typeface typeface = getResources().getFont(R.font.roboto_bold);
         TextView previousView = commonInterestTitle;
         if (interestTitleId != null) {
             previousView = commonInterestsSubLayout.findViewById(interestTitleId);
@@ -266,7 +266,7 @@ public class PeopleDetailsFragment extends Fragment {
         constraintSet.connect(interestHeading.getId(), ConstraintSet.TOP, previousView.getId(), ConstraintSet.BOTTOM);
         constraintSet.applyTo(commonInterestsSubLayout);
         Integer interestViewId = interestHeading.getId();
-        for(UserInterests userInterests: interestMap.getInterestList()){
+        for (UserInterests userInterests : interestMap.getInterestList()) {
             interestViewId = addInterests(userInterests, interestViewId);
         }
         TextView deviderLine = new TextView(getContext());
@@ -274,7 +274,7 @@ public class PeopleDetailsFragment extends Fragment {
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
         );
         layoutParams.setMargins(24, 8, 0, 0);
-        deviderLine.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.divider_line));
+        deviderLine.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.divider_line));
         deviderLine.setId(View.generateViewId());
         commonInterestsSubLayout.addView(deviderLine, layoutParams);
         constraintSet = new ConstraintSet();
@@ -285,9 +285,9 @@ public class PeopleDetailsFragment extends Fragment {
         return deviderLine.getId();
     }
 
-    private Integer addInterests(UserInterests userInterests, Integer interestViewId){
+    private Integer addInterests(UserInterests userInterests, Integer interestViewId) {
         TextView previousView = commonInterestTitle;
-        if(interestViewId != null){
+        if (interestViewId != null) {
             previousView = commonInterestsSubLayout.findViewById(interestViewId);
         }
         TextView interestView = new TextView(getContext());
@@ -334,7 +334,7 @@ public class PeopleDetailsFragment extends Fragment {
         constraintSet.connect(interestHeading.getId(), ConstraintSet.TOP, previousView.getId(), ConstraintSet.BOTTOM);
         constraintSet.applyTo(otherInterestsSubLayout);
         Integer interestViewId = interestHeading.getId();
-        for(UserInterests userInterests: interestMap.getInterestList()){
+        for (UserInterests userInterests : interestMap.getInterestList()) {
             interestViewId = addOtherInterests(userInterests, interestViewId);
         }
         TextView deviderLine = new TextView(getContext());
@@ -342,7 +342,7 @@ public class PeopleDetailsFragment extends Fragment {
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
         );
         layoutParams.setMargins(24, 8, 0, 0);
-        deviderLine.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.divider_line));
+        deviderLine.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.divider_line));
         deviderLine.setId(View.generateViewId());
         otherInterestsSubLayout.addView(deviderLine, layoutParams);
         constraintSet = new ConstraintSet();
@@ -353,9 +353,9 @@ public class PeopleDetailsFragment extends Fragment {
         return deviderLine.getId();
     }
 
-    private Integer addOtherInterests(UserInterests userInterests, Integer interestViewId){
+    private Integer addOtherInterests(UserInterests userInterests, Integer interestViewId) {
         TextView previousView = otherInterestsTitle;
-        if(interestViewId != null){
+        if (interestViewId != null) {
             previousView = otherInterestsSubLayout.findViewById(interestViewId);
         }
         TextView interestView = new TextView(getContext());
@@ -378,7 +378,7 @@ public class PeopleDetailsFragment extends Fragment {
         return interestView.getId();
     }
 
-    private void updateIsFavourite(Integer isFavourite){
+    private void updateIsFavourite(Integer isFavourite) {
         try {
             progressDialog.show();
             AuthServiceHolder authServiceHolder = new AuthServiceHolder();

@@ -33,10 +33,10 @@ public class InvitingMembersFragment extends Fragment implements InvitingMembers
     private RecyclerView inviteGroupsRecyclerView;
     private ArrayList<InvitingMembersModel> invitingMembersArrayList = new ArrayList<>();
     private EditText search;
-    private TextView searchResultCount,showingYourFavourites;
+    private TextView searchResultCount, showingYourFavourites;
     private ImageView filterIcon, backArrow;
     private ConstraintLayout searchLayout, noResultFoundLayout, recyclerViewLayout;
-    ListPopupWindow  listPopupWindow;
+    ListPopupWindow listPopupWindow;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,7 +51,7 @@ public class InvitingMembersFragment extends Fragment implements InvitingMembers
         searchResultCount = rootView.findViewById(R.id.searchResultCount);
         backArrow = rootView.findViewById(R.id.backArrow);
         filterIcon = rootView.findViewById(R.id.filterIcon);
-        showingYourFavourites=rootView.findViewById(R.id.showingFavourites);
+        showingYourFavourites = rootView.findViewById(R.id.showingFavourites);
 
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -144,9 +144,9 @@ public class InvitingMembersFragment extends Fragment implements InvitingMembers
         });
 
 
-
         filterIcon.setOnClickListener(new View.OnClickListener() {
             private boolean flag = true;
+
             @Override
             public void onClick(View v) {
                 if (flag) {

@@ -20,16 +20,16 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.ViewHolder
     private ArrayList<LedgerModel> ledgerModelList;
     private OnItemClickListener onItemClickListener;
 
-    public LedgerAdapter(Context context, ArrayList<LedgerModel> ledgerModelList,OnItemClickListener onItemClickListener) {
+    public LedgerAdapter(Context context, ArrayList<LedgerModel> ledgerModelList, OnItemClickListener onItemClickListener) {
         this.context = context;
         this.ledgerModelList = ledgerModelList;
-        this.onItemClickListener=onItemClickListener;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
     @Override
     public LedgerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.ledger_list,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ledger_list, parent, false);
         return new LedgerAdapter.ViewHolder(view);
     }
 
@@ -48,15 +48,16 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.ViewHolder
         return ledgerModelList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView ledgerDate,ledgerType,ledgerName,credit,balance;
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private TextView ledgerDate, ledgerType, ledgerName, credit, balance;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ledgerDate=itemView.findViewById(R.id.ledgerDate);
-            ledgerType=itemView.findViewById(R.id.ledgerType);
-            ledgerName=itemView.findViewById(R.id.ledgerName);
-            credit=itemView.findViewById(R.id.debitAmount);
-            balance=itemView.findViewById(R.id.balanceAmount);
+            ledgerDate = itemView.findViewById(R.id.ledgerDate);
+            ledgerType = itemView.findViewById(R.id.ledgerType);
+            ledgerName = itemView.findViewById(R.id.ledgerName);
+            credit = itemView.findViewById(R.id.debitAmount);
+            balance = itemView.findViewById(R.id.balanceAmount);
             itemView.setOnClickListener(this);
 
         }
@@ -67,6 +68,7 @@ public class LedgerAdapter extends RecyclerView.Adapter<LedgerAdapter.ViewHolder
 
         }
     }
+
     public interface OnItemClickListener {
         void onLedgerItemClick(int position);
     }

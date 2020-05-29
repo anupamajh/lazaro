@@ -229,9 +229,9 @@ public class ExploreFragment extends Fragment implements ExploreTicketsAdapter.O
                             }
                             kbArrayList = new ArrayList<>();
                             kbArrayList.addAll(kbResponse.getKbList());
-                            if(strSearch.equals("")) {
+                            if (strSearch.equals("")) {
                                 exploreTicketsAdapter.update(kbResponse.getKbList());
-                            }else{
+                            } else {
                                 List<KB> collection = kbArrayList.stream()
                                         .filter(kb -> (kb.getAuthorName() + " " +
                                                 kb.getTopicTitle() + " " +

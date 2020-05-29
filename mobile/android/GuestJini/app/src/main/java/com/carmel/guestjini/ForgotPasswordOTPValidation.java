@@ -20,47 +20,47 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ForgotPasswordOTPValidation extends AppCompatActivity {
-    TextView resendOtp,otpErrorField,getOneNow;
+    TextView resendOtp, otpErrorField, getOneNow;
     MaterialButton submitButton;
-    EditText firstOtp,secondOtp,thirdOtp,fourthOtp;
-    final Context context=this;
+    EditText firstOtp, secondOtp, thirdOtp, fourthOtp;
+    final Context context = this;
     ImageView backArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password_otpvalidation);
-        resendOtp=findViewById(R.id.resendOtp);
-        otpErrorField=findViewById(R.id.otpErrorMessage);
-        submitButton=findViewById(R.id.submitButton);
-        backArrow=findViewById(R.id.backArrow);
-        firstOtp=findViewById(R.id.firstOTPBox);
-        secondOtp=findViewById(R.id.secondOTPBox);
-        thirdOtp=findViewById(R.id.thirdOTPBox);
-        fourthOtp=findViewById(R.id.fourthOTPBox);
-        getOneNow=findViewById(R.id.getOneNow);
+        resendOtp = findViewById(R.id.resendOtp);
+        otpErrorField = findViewById(R.id.otpErrorMessage);
+        submitButton = findViewById(R.id.submitButton);
+        backArrow = findViewById(R.id.backArrow);
+        firstOtp = findViewById(R.id.firstOTPBox);
+        secondOtp = findViewById(R.id.secondOTPBox);
+        thirdOtp = findViewById(R.id.thirdOTPBox);
+        fourthOtp = findViewById(R.id.fourthOTPBox);
+        getOneNow = findViewById(R.id.getOneNow);
 
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),Login.class);
+                Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
             }
         });
         getOneNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),AppAccessRequest.class);
+                Intent intent = new Intent(getApplicationContext(), AppAccessRequest.class);
                 startActivity(intent);
             }
         });
 
-        final StringBuilder sb=new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         firstOtp.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
 
-                if (s.length() ==1) {
+                if (s.length() == 1) {
                     secondOtp.requestFocus();
                 }
 
@@ -133,27 +133,27 @@ public class ForgotPasswordOTPValidation extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String firstOtpBox=firstOtp.getText().toString().trim();
-                String secondOtpBox=secondOtp.getText().toString().trim();
-                String thirdOtpBox=thirdOtp.getText().toString().trim();
-                String fourthOtpBox=fourthOtp.getText().toString().trim();
+                String firstOtpBox = firstOtp.getText().toString().trim();
+                String secondOtpBox = secondOtp.getText().toString().trim();
+                String thirdOtpBox = thirdOtp.getText().toString().trim();
+                String fourthOtpBox = fourthOtp.getText().toString().trim();
 
-                if((firstOtpBox.length()==0) && (secondOtpBox.length()==0) && (thirdOtpBox.length()==0) && (fourthOtpBox.length()==0)){
+                if ((firstOtpBox.length() == 0) && (secondOtpBox.length() == 0) && (thirdOtpBox.length() == 0) && (fourthOtpBox.length() == 0)) {
                     otpErrorField.setVisibility(View.VISIBLE);
                     firstOtp.setBackgroundResource(R.drawable.otp_error_box);
                     secondOtp.setBackgroundResource(R.drawable.otp_error_box);
                     thirdOtp.setBackgroundResource(R.drawable.otp_error_box);
                     fourthOtp.setBackgroundResource(R.drawable.otp_error_box);
-                }else {
+                } else {
                     otpErrorField.setVisibility(View.GONE);
                     firstOtp.setBackgroundResource(R.drawable.otp_box);
                     secondOtp.setBackgroundResource(R.drawable.otp_box);
                     thirdOtp.setBackgroundResource(R.drawable.otp_box);
                     fourthOtp.setBackgroundResource(R.drawable.otp_box);
                 }
-                if(!(firstOtpBox.length()==1) || !(secondOtpBox.length()==1) || !(thirdOtpBox.length()==1) || !(fourthOtpBox.length()==1)){
+                if (!(firstOtpBox.length() == 1) || !(secondOtpBox.length() == 1) || !(thirdOtpBox.length() == 1) || !(fourthOtpBox.length() == 1)) {
                     otpErrorField.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     final Dialog dialog = new Dialog(context);
                     dialog.setContentView(R.layout.alert_dailogbox);
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

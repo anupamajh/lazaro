@@ -129,7 +129,7 @@ public class MyProfileFragment extends Fragment implements ActivityCompat.OnRequ
                         String e = ex.getMessage();
                     }
                 }
-               // intent.putExtra(MediaStore.EXTRA_OUTPUT, file);
+                // intent.putExtra(MediaStore.EXTRA_OUTPUT, file);
                 startActivityForResult(intent, 100);
             }
         });
@@ -296,7 +296,7 @@ public class MyProfileFragment extends Fragment implements ActivityCompat.OnRequ
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == 100) {
             try {
-                 Bitmap bm = (Bitmap) data.getExtras().get("data");
+                Bitmap bm = (Bitmap) data.getExtras().get("data");
                 profileIcon.setImageBitmap(bm);
                 BitmapDrawable bitmapDrawable = ((BitmapDrawable) profileIcon.getDrawable());
                 Bitmap bitmap = bitmapDrawable.getBitmap();

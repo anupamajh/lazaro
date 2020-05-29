@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
+
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,157 +14,157 @@
         app:cardBackgroundColor="@color/colorWhisper1"
         app:cardCornerRadius="5dp"
         app:cardElevation="5dp"
-        android:layout_marginBottom="28dp"
-    >
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/people_added_recycler_view_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="7dp"
-        android:outlineSpotShadowColor="#00000029"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        android:layout_marginBottom="28dp">
 
-        <RelativeLayout
-            android:id="@+id/profileLayout"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/people_added_recycler_view_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/peopleProfileImage"
-                android:layout_width="41dp"
-                android:layout_height="41dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/profile_image"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="16dp"></de.hdodenhof.circleimageview.CircleImageView>
-
-            <TextView
-                android:id="@+id/peopleName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="22dp"
-                android:letterSpacing="0.06"
-                android:layout_toEndOf="@+id/peopleProfileImage"
-                android:textSize="12sp"
-                android:textColor="@color/colorZambezi1"
-                android:text="@string/people_name"
-                app:fontFamily="@font/roboto_medium"
-                app:layout_constraintStart_toEndOf="@+id/peopleProfileImage"
-                tools:layout_editor_absoluteY="20dp" />
-
-            <TextView
-                android:id="@+id/peopleGender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/peopleName"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="2dp"
-                android:layout_toEndOf="@+id/peopleProfileImage"
-                android:text="@string/people_gender"
-                android:textSize="10dp"
-                android:textColor="@color/colorDimGray"
-                android:letterSpacing="0.06"
-                app:fontFamily="@font/roboto_medium"
-                app:layout_constraintStart_toEndOf="@+id/peopleProfileImage"
-                app:layout_constraintTop_toBottomOf="@+id/peopleName" />
-
-            <TextView
-                android:id="@+id/notificationIndicator"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="12dp"
-                android:background="@drawable/red_small_circle"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:layout_editor_absoluteY="12dp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:elevation="7dp"
+            android:outlineSpotShadowColor="#00000029"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileLayout">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
 
-            <ImageView
-                android:id="@+id/unlike_blue_image"
-                android:layout_width="31dp"
-                android:layout_height="31dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="38dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/like_and_unlike_button"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/compatibilityMeter"
+            <RelativeLayout
+                android:id="@+id/profileLayout"
                 android:layout_width="match_parent"
-                android:layout_height="6dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="32dp"
-                android:layout_toEndOf="@+id/unlike_blue_image"
-                android:background="#32BDD2"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="93dp" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/peopleInterests"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/compatibilityMeter"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="5dp"
-                android:layout_toEndOf="@+id/unlike_blue_image"
-                android:text="@string/Common_interests"
-                android:textSize="8dp"
-                android:letterSpacing="0.06"
-                app:fontFamily="@font/roboto_medium"
-                app:layout_constraintStart_toEndOf="@+id/unlike_blue_image"
-                app:layout_constraintTop_toBottomOf="@+id/compatibilityMeter" />
 
-            <TextView
-                android:id="@+id/compatibilityCount"
-                android:layout_width="wrap_content"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/peopleProfileImage"
+                    android:layout_width="41dp"
+                    android:layout_height="41dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/profile_image"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="16dp"></de.hdodenhof.circleimageview.CircleImageView>
+
+                <TextView
+                    android:id="@+id/peopleName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="22dp"
+                    android:letterSpacing="0.06"
+                    android:layout_toEndOf="@+id/peopleProfileImage"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorZambezi1"
+                    android:text="@string/people_name"
+                    app:fontFamily="@font/roboto_medium"
+                    app:layout_constraintStart_toEndOf="@+id/peopleProfileImage"
+                    tools:layout_editor_absoluteY="20dp" />
+
+                <TextView
+                    android:id="@+id/peopleGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/peopleName"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_toEndOf="@+id/peopleProfileImage"
+                    android:text="@string/people_gender"
+                    android:textSize="10dp"
+                    android:textColor="@color/colorDimGray"
+                    android:letterSpacing="0.06"
+                    app:fontFamily="@font/roboto_medium"
+                    app:layout_constraintStart_toEndOf="@+id/peopleProfileImage"
+                    app:layout_constraintTop_toBottomOf="@+id/peopleName" />
+
+                <TextView
+                    android:id="@+id/notificationIndicator"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/red_small_circle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:layout_editor_absoluteY="12dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/compatibilityMeter"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="32dp"
-                android:text="@string/compatibility_count"
-                android:letterSpacing="0.04"
-                android:textSize="8dp"
-                app:fontFamily="@font/roboto_medium"
+                android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/compatibilityMeter" />
-        </RelativeLayout>
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileLayout">
+
+                <ImageView
+                    android:id="@+id/unlike_blue_image"
+                    android:layout_width="31dp"
+                    android:layout_height="31dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="38dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/like_and_unlike_button"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/compatibilityMeter"
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_toEndOf="@+id/unlike_blue_image"
+                    android:background="#32BDD2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="93dp" />
+
+                <TextView
+                    android:id="@+id/peopleInterests"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/compatibilityMeter"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toEndOf="@+id/unlike_blue_image"
+                    android:text="@string/Common_interests"
+                    android:textSize="8dp"
+                    android:letterSpacing="0.06"
+                    app:fontFamily="@font/roboto_medium"
+                    app:layout_constraintStart_toEndOf="@+id/unlike_blue_image"
+                    app:layout_constraintTop_toBottomOf="@+id/compatibilityMeter" />
+
+                <TextView
+                    android:id="@+id/compatibilityCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/compatibilityMeter"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="32dp"
+                    android:text="@string/compatibility_count"
+                    android:letterSpacing="0.04"
+                    android:textSize="8dp"
+                    app:fontFamily="@font/roboto_medium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/compatibilityMeter" />
+            </RelativeLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

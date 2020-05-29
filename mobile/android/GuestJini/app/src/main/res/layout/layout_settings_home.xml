@@ -70,8 +70,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:contentDescription="@string/change_password"
-                    android:src="@drawable/change_password_icon_xhdpi"
-                    />
+                    android:src="@drawable/change_password_icon_xhdpi" />
 
                 <TextView
                     android:id="@+id/changePasswordTitle"
@@ -113,8 +112,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:contentDescription="@string/privacy_policy"
-                    android:src="@drawable/privacy_policy_icon_xhdpi"
-                    />
+                    android:src="@drawable/privacy_policy_icon_xhdpi" />
 
                 <TextView
                     android:id="@+id/privacyPolicyTitle"
@@ -156,8 +154,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:contentDescription="@string/term_conditions"
-                    android:src="@drawable/terms_conditions_icon_xhdpi"
-                    />
+                    android:src="@drawable/terms_conditions_icon_xhdpi" />
 
                 <TextView
                     android:id="@+id/termsAndConditionsTitle"
@@ -199,8 +196,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:contentDescription="@string/notifications"
-                    android:src="@drawable/notification_icon_xhdpi"
-                    />
+                    android:src="@drawable/notification_icon_xhdpi" />
 
                 <TextView
                     android:id="@+id/notificationsTitle"
@@ -242,8 +238,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:contentDescription="@string/log_out"
-                    android:src="@drawable/logout_icon_xhdpi"
-                    />
+                    android:src="@drawable/logout_icon_xhdpi" />
 
                 <TextView
                     android:id="@+id/logoutTitle"

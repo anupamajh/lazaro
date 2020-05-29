@@ -14,13 +14,15 @@ import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
 public class TicketDetailsFragment
         extends BaseFragment {
     private static final String ARG_TICKET_ID = "ARG_TICKET_ID";
-    public static Fragment createFragment(String ticketId){
+
+    public static Fragment createFragment(String ticketId) {
         Bundle args = new Bundle();
         args.putString(ARG_TICKET_ID, ticketId);
         TicketDetailsFragment fragment = new TicketDetailsFragment();
         fragment.setArguments(args);
         return fragment;
     }
+
     private static final String SAVED_STATE_TICKET_DETAIL_FRAGMENT = "SAVED_STATE_TICKET_DETAIL_FRAGMENT";
 
     private TicketDetailsController ticketDetailsController;

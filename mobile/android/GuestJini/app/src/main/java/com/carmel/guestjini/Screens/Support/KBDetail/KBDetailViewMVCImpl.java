@@ -137,10 +137,12 @@ public class KBDetailViewMVCImpl
 
     @Override
     public void bindKBRating(KBRating kbRating) {
-        if (kbRating.getIsLiked() == 0) {
-            btnDislikeIcon.callOnClick();
-        } else if (kbRating.getIsLiked() == 1) {
-            btnDislikeIcon.callOnClick();
+        if(kbRating !=null) {
+            if (kbRating.getIsLiked() == 0) {
+                btnDislikeIcon.callOnClick();
+            } else if (kbRating.getIsLiked() == 1) {
+                btnDislikeIcon.callOnClick();
+            }
         }
     }
 

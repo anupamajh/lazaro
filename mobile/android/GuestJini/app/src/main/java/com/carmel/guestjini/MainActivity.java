@@ -21,10 +21,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        rightArrowIcon=findViewById(R.id.landingButton);
-        carouselView=findViewById(R.id.carouselView);
-        final  int[] images=new int[]{
-                R.drawable.landing_image,R.drawable.orange_plain_image,R.drawable.purple_plain_image,R.drawable.yellow_plain_image
+        rightArrowIcon = findViewById(R.id.landingButton);
+        carouselView = findViewById(R.id.carouselView);
+        final int[] images = new int[]{
+                R.drawable.landing_image, R.drawable.orange_plain_image, R.drawable.purple_plain_image, R.drawable.yellow_plain_image
 
         };
         SharedPreferences preferences = getSharedPreferences("GuestJini", Context.MODE_PRIVATE);
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         rightArrowIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),Login.class);
+                Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
             }
         });

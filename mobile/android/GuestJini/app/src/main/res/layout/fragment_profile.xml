@@ -114,6 +114,7 @@
                             app:tint="@color/colorWhite">
 
                         </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
                         <TextView
                             android:id="@+id/uploadYourPhotoText"
                             android:layout_width="wrap_content"
@@ -476,9 +477,11 @@
                             app:layout_constraintEnd_toEndOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
                         <TextView
                             android:id="@+id/myInterests"
                             android:layout_width="wrap_content"
@@ -560,6 +563,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <com.google.android.material.navigation.NavigationView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -588,20 +592,20 @@
                     app:layout_constraintTop_toTopOf="parent">
 
 
-<!--                    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--                        android:id="@+id/cameraIcon"-->
-<!--                        style="@style/Widget.MaterialComponents.Button.Icon"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        app:backgroundTint="@color/colorSummerSky"-->
-<!--                        app:fabCustomSize="38dp"-->
-<!--                        app:iconSize="24dp"-->
-<!--                        app:layout_constraintStart_toStartOf="parent"-->
-<!--                        app:maxImageSize="15dp"-->
-<!--                        app:srcCompat="@drawable/ic_camera"-->
-<!--                        app:tint="@color/colorWhite">-->
+                    <!--                    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+                    <!--                        android:id="@+id/cameraIcon"-->
+                    <!--                        style="@style/Widget.MaterialComponents.Button.Icon"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        app:backgroundTint="@color/colorSummerSky"-->
+                    <!--                        app:fabCustomSize="38dp"-->
+                    <!--                        app:iconSize="24dp"-->
+                    <!--                        app:layout_constraintStart_toStartOf="parent"-->
+                    <!--                        app:maxImageSize="15dp"-->
+                    <!--                        app:srcCompat="@drawable/ic_camera"-->
+                    <!--                        app:tint="@color/colorWhite">-->
 
-<!--                </com.google.android.material.floatingactionbutton.FloatingActionButton>-->
+                    <!--                </com.google.android.material.floatingactionbutton.FloatingActionButton>-->
                     <ImageView
                         android:id="@+id/cameraImage"
                         android:layout_width="35dp"

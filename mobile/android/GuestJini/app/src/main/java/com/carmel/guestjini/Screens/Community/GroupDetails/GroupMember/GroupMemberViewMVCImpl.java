@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.carmel.guestjini.Common.DateUtil;
-import com.carmel.guestjini.Common.StringUtils;
 import com.carmel.guestjini.Networking.Users.AddressBook;
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
@@ -29,8 +28,6 @@ public class GroupMemberViewMVCImpl
     TextView txtInvitationStatus;
 
     private AddressBook addressBook;
-    private int isSubscribed;
-    private int isInvited;
     private String groupId;
 
     public GroupMemberViewMVCImpl(
@@ -44,7 +41,7 @@ public class GroupMemberViewMVCImpl
         btnInvite = findViewById(R.id.btnInvite);
         txtInvitationStatus = findViewById(R.id.txtInvitationStatus);
         btnInvite.setOnClickListener(v -> {
-            for(Listener listener:getListeners()){
+            for (Listener listener : getListeners()) {
                 listener.onInviteClicked(addressBook.getUserId(), groupId);
             }
         });
@@ -53,25 +50,21 @@ public class GroupMemberViewMVCImpl
     @Override
     public void bingGroupMember(
             AddressBook addressBook,
-            int isSubscribed,
-            int isInvited,
             String groupId,
             int groupType
     ) {
         this.addressBook = addressBook;
-        this.isSubscribed = isSubscribed;
         this.groupId = groupId;
-        this.isInvited = isInvited;
         Date creationDate = DateUtil.convertToDate(addressBook.getCreationTime());
         txtFullName.setText(addressBook.getDisplayName());
-        txtFullName.setText(DateUtil.getFormattedDate(creationDate));
-        if(groupType != 2) {
+        txtGroupJoinDate.setText(DateUtil.getFormattedDate(creationDate));
+        if (groupType != 3) {
             btnInvite.setVisibility(View.GONE);
             txtInvitationStatus.setVisibility(View.GONE);
-        }else {
-            if (isInvited == 1) {
+        } else {
+            if (this.addressBook.getIsInvited() == 1) {
                 btnInvite.setVisibility(View.GONE);
-                if (isSubscribed == 0) {
+                if (this.addressBook.getHasAcceptedInvitation() == 0) {
                     txtInvitationStatus.setText("Invitation Sent");
                 } else {
                     txtInvitationStatus.setText("Invitation Accepted");

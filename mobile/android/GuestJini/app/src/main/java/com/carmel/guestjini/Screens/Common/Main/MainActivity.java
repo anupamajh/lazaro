@@ -118,7 +118,7 @@ public class MainActivity extends BaseActivity implements
         }
         if (isActivityListenerConsumed) {
             return;
-        }else{
+        } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }

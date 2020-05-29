@@ -195,6 +195,7 @@
                         android:text="@string/tickets"
                         android:textColor="@color/colorCharcoal"
                         android:textSize="@dimen/find_help_textsize" />
+
                     <TextView
                         android:id="@+id/txtTicketsDescription"
                         android:layout_width="match_parent"
@@ -209,8 +210,8 @@
                         app:fontFamily="@font/roboto_medium"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentEnd="true"
-                        android:layout_below="@+id/txtTicketsTitle"
-                        />
+                        android:layout_below="@+id/txtTicketsTitle" />
+
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnCreateTicket"
                         android:layout_width="wrap_content"
@@ -223,8 +224,8 @@
                         android:textSize="10sp"
                         app:cornerRadius="@dimen/change_password_radius"
                         android:layout_alignParentStart="true"
-                        android:layout_below="@+id/txtTicketsDescription"
-                        />
+                        android:layout_below="@+id/txtTicketsDescription" />
+
                     <View
                         android:id="@+id/borderView"
                         android:layout_width="match_parent"
@@ -234,8 +235,7 @@
                         android:background="#CCCCCC"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentEnd="true"
-                        android:layout_below="@+id/btnCreateTicket"
-                        />
+                        android:layout_below="@+id/btnCreateTicket" />
 
                     <TextView
                         android:id="@+id/txtGoToTicketsText"
@@ -249,8 +249,8 @@
                         android:textColor="@color/colorCharcoal"
                         android:textSize="12sp"
                         android:layout_alignParentStart="true"
-                        android:layout_below="@+id/borderView"
-                        />
+                        android:layout_below="@+id/borderView" />
+
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/btnTicketList"
                         android:layout_width="wrap_content"
@@ -263,9 +263,7 @@
                         app:srcCompat="@drawable/ic_navigate_next_black_24dp"
                         app:tint="@color/colorWhite"
                         android:layout_alignParentStart="true"
-                        android:layout_below="@+id/txtGoToTicketsText"
-                        />
-
+                        android:layout_below="@+id/txtGoToTicketsText" />
 
 
                 </RelativeLayout>

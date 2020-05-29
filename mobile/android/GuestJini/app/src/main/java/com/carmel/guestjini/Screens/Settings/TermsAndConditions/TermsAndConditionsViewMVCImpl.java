@@ -25,7 +25,7 @@ public class TermsAndConditionsViewMVCImpl
         String url = "https://guesture.in/terms-and-conditions";
         webView.loadUrl(url);
         btnBack.setOnClickListener(view -> {
-            for(Listener listener:getListeners()){
+            for (Listener listener : getListeners()) {
                 listener.onBackPressed();
             }
         });

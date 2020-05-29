@@ -11,10 +11,11 @@ import androidx.fragment.app.Fragment;
 
 import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
 
-public class PrivacyPolicyFragment  extends BaseFragment {
-    public static Fragment createFragment(){
+public class PrivacyPolicyFragment extends BaseFragment {
+    public static Fragment createFragment() {
         return new PrivacyPolicyFragment();
     }
+
     private static final String SAVED_STATE_SETTINGS_PRIVACY_POLICY_FRAGMENT = "SAVED_STATE_SETTINGS_PRIVACY_POLICY_FRAGMENT";
     private PrivacyPolicyController privacyPolicyController;
 
@@ -45,7 +46,7 @@ public class PrivacyPolicyFragment  extends BaseFragment {
         outState.putSerializable(SAVED_STATE_SETTINGS_PRIVACY_POLICY_FRAGMENT, privacyPolicyController.getSavedState());
     }
 
-    private void restoreControllerState(Bundle savedInstanceState){
+    private void restoreControllerState(Bundle savedInstanceState) {
         privacyPolicyController.restoreSavedState(
                 (PrivacyPolicyController.SavedState)
                         savedInstanceState.getSerializable(SAVED_STATE_SETTINGS_PRIVACY_POLICY_FRAGMENT)

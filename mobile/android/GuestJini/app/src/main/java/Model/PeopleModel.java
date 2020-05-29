@@ -53,7 +53,7 @@ public class PeopleModel {
         return compatibilityCount;
     }
 
-    public void setCompatibilityCount(String  compatibilityCount) {
+    public void setCompatibilityCount(String compatibilityCount) {
         this.compatibilityCount = compatibilityCount;
     }
 }

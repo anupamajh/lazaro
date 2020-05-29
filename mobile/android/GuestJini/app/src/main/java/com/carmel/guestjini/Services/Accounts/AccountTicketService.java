@@ -18,6 +18,6 @@ public interface AccountTicketService {
     @POST("/guest-jini/account-tickets/get")
     Call<AccountTicketResponse> getRentInvoice(
             @Body Map<String, String> postData
-            );
+    );
 
 }

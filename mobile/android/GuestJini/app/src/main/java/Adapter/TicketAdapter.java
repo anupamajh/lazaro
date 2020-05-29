@@ -28,24 +28,26 @@ public class TicketAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private Context context;
     private TicketAdapter.OnItemClickListener onItemClickListener;
 
-    public TicketAdapter(ArrayList<Ticket> tickets,OnItemClickListener onItemClickListener) {
+    public TicketAdapter(ArrayList<Ticket> tickets, OnItemClickListener onItemClickListener) {
         this.tickets = tickets;
-        this.onItemClickListener=onItemClickListener;
+        this.onItemClickListener = onItemClickListener;
     }
+
     @Override
     public int getItemViewType(int position) {
-        Ticket ticket=tickets.get(position);
-        if(ticket!=null){
+        Ticket ticket = tickets.get(position);
+        if (ticket != null) {
             //TODO: return ticket.getViewType();
         }
         return 0;
     }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        view= LayoutInflater.from(parent.getContext()).inflate(R.layout.my_tickets_list,parent,false);
-        return new OneViewHolder(view,onItemClickListener);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_tickets_list, parent, false);
+        return new OneViewHolder(view, onItemClickListener);
 //
 //        switch (viewType){
 //            case ONE_TYPE:
@@ -61,42 +63,38 @@ public class TicketAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
-        Ticket ticket =tickets.get(position);
+        Ticket ticket = tickets.get(position);
         String strTicketStatus = "OPEN";
-        switch (ticket.getTicketStatus()){
-            case 3:
-            {
+        switch (ticket.getTicketStatus()) {
+            case 3: {
                 strTicketStatus = "OPEN";
             }
             break;
-            case 2:
-            {
+            case 2: {
                 strTicketStatus = "STARTED";
             }
             break;
-            case 1:
-            {
+            case 1: {
                 strTicketStatus = "CLOSED";
             }
             break;
-            default:
-            {
+            default: {
                 strTicketStatus = "NEW";
             }
             break;
 
         }
-        ((OneViewHolder)holder).ticketsStatus.setText(strTicketStatus);
+        ((OneViewHolder) holder).ticketsStatus.setText(strTicketStatus);
         Date creationDate = DateUtil.convertToDate(ticket.getCreationTime());
         LocalDate localCreationDate = Instant.ofEpochMilli(creationDate.getTime())
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate();
         Date today = new Date();
         LocalDate localeToday = Instant.ofEpochMilli(today.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-        ((OneViewHolder)holder).ticketsDate.setText(DateUtil.getFormattedDate(creationDate));
-        ((OneViewHolder)holder).ticketsName.setText(ticket.getTicketTitle());
-        ((OneViewHolder)holder).ticketsValue.setText(ticket.getTicketNo());
-        ((OneViewHolder)holder).ticketsTime.setText(String.valueOf(AgeCalculator.calculateDateLapse(localCreationDate, localeToday)));
+        ((OneViewHolder) holder).ticketsDate.setText(DateUtil.getFormattedDate(creationDate));
+        ((OneViewHolder) holder).ticketsName.setText(ticket.getTicketTitle());
+        ((OneViewHolder) holder).ticketsValue.setText(ticket.getTicketNo());
+        ((OneViewHolder) holder).ticketsTime.setText(String.valueOf(AgeCalculator.calculateDateLapse(localCreationDate, localeToday)));
         //   TODO:    switch (myTicketsModel.getViewType())
     }
 
@@ -105,22 +103,23 @@ public class TicketAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return tickets.size();
     }
 
-    class OneViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView ticketsStatus,ticketsDate,ticketsName,ticketsNo,ticketsValue,clock,ticketsTime;
+    class OneViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView ticketsStatus, ticketsDate, ticketsName, ticketsNo, ticketsValue, clock, ticketsTime;
         ImageView notification;
         CardView cardView;
         OnItemClickListener onItemClickListener;
+
         public OneViewHolder(@NonNull View itemView, OnItemClickListener onItemClickListener) {
             super(itemView);
-            ticketsStatus=itemView.findViewById(R.id.ticketsStatus);
-            ticketsDate=itemView.findViewById(R.id.tickestsDateAndTime);
-            ticketsName=itemView.findViewById(R.id.ticketsName);
-            ticketsNo=itemView.findViewById(R.id.ticketsNo);
-            ticketsValue=itemView.findViewById(R.id.ticketsValue);
-            clock=itemView.findViewById(R.id.clock);
-            ticketsTime=itemView.findViewById(R.id.clockTime);
-            this.onItemClickListener=onItemClickListener;
-            notification=itemView.findViewById(R.id.notification);
+            ticketsStatus = itemView.findViewById(R.id.ticketsStatus);
+            ticketsDate = itemView.findViewById(R.id.tickestsDateAndTime);
+            ticketsName = itemView.findViewById(R.id.ticketsName);
+            ticketsNo = itemView.findViewById(R.id.ticketsNo);
+            ticketsValue = itemView.findViewById(R.id.ticketsValue);
+            clock = itemView.findViewById(R.id.clock);
+            ticketsTime = itemView.findViewById(R.id.clockTime);
+            this.onItemClickListener = onItemClickListener;
+            notification = itemView.findViewById(R.id.notification);
             itemView.setOnClickListener(this);
 //            cardView=itemView.findViewById(R.id.OpenCardView);
         }
@@ -130,19 +129,21 @@ public class TicketAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             onItemClickListener.onItemClick(getAdapterPosition());
         }
     }
+
     class TwoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView ticketsStatus,ticketsDate,ticketsName,ticketDelete;
+        TextView ticketsStatus, ticketsDate, ticketsName, ticketDelete;
         ImageView deleteIcon;
         OnItemClickListener onItemClickListener;
-        public TwoViewHolder(@NonNull View itemView,OnItemClickListener onItemClickListener) {
+
+        public TwoViewHolder(@NonNull View itemView, OnItemClickListener onItemClickListener) {
             super(itemView);
-            ticketsStatus=itemView.findViewById(R.id.ticketsStatus);
-            ticketsDate=itemView.findViewById(R.id.tickestsDateAndTime);
-            ticketsName=itemView.findViewById(R.id.ticketsName);
+            ticketsStatus = itemView.findViewById(R.id.ticketsStatus);
+            ticketsDate = itemView.findViewById(R.id.tickestsDateAndTime);
+            ticketsName = itemView.findViewById(R.id.ticketsName);
 //            cardView=itemView.findViewById(R.id.OpenCardView);
-            ticketDelete=itemView.findViewById(R.id.deleteText);
-            deleteIcon=itemView.findViewById(R.id.deleteIcon);
-            this.onItemClickListener=onItemClickListener;
+            ticketDelete = itemView.findViewById(R.id.deleteText);
+            deleteIcon = itemView.findViewById(R.id.deleteIcon);
+            this.onItemClickListener = onItemClickListener;
             itemView.setOnClickListener(this);
         }
 
@@ -151,15 +152,19 @@ public class TicketAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             onItemClickListener.onclickDraft(getAdapterPosition());
         }
     }
+
     public interface OnItemClickListener {
         void onItemClick(int position);
-        void onClick(int position,String name);
+
+        void onClick(int position, String name);
+
         void onclickDraft(int position);
     }
 
-    public void updateData(List<Ticket> ticketList){
+    public void updateData(List<Ticket> ticketList) {
         this.tickets = new ArrayList<>();
         this.tickets.addAll(ticketList);
-        notifyDataSetChanged();;
+        notifyDataSetChanged();
+        ;
     }
 }

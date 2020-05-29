@@ -30,34 +30,29 @@ public class SupportActivity extends AppCompatActivity {
 //                    boolean isChecked = menuItem.getItemId() == item.getItemId();
 //                    menuItem.setChecked(isChecked);
 //                }
-                 if(item.getItemId() != ACTIVITY_ID){
-                    switch (item.getItemId()){
-                        case R.id.suppotIcon:
-                        {
-                            Intent intent=new Intent(getApplicationContext(), SupportActivity.class);
+                if (item.getItemId() != ACTIVITY_ID) {
+                    switch (item.getItemId()) {
+                        case R.id.suppotIcon: {
+                            Intent intent = new Intent(getApplicationContext(), SupportActivity.class);
                             startActivity(intent);
                         }
                         break;
-                        case R.id.communityIcon:
-                        {
-                            Intent intent=new Intent(getApplicationContext(), CommunityActivity.class);
+                        case R.id.communityIcon: {
+                            Intent intent = new Intent(getApplicationContext(), CommunityActivity.class);
                             startActivity(intent);
                         }
                         break;
-                        case R.id.accountsIcon:
-                        {
-                            Intent intent=new Intent(getApplicationContext(), AccountsActivity.class);
+                        case R.id.accountsIcon: {
+                            Intent intent = new Intent(getApplicationContext(), AccountsActivity.class);
                             startActivity(intent);
                         }
                         break;
-                        case R.id.rewardsIcon:
-                        {
+                        case R.id.rewardsIcon: {
                             return false;
                         }
                         //break;
-                        case R.id.settingsIcon:
-                        {
-                            Intent intent=new Intent(getApplicationContext(), SettingsActivity.class);
+                        case R.id.settingsIcon: {
+                            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
                             startActivity(intent);
                         }
                         break;
@@ -67,10 +62,10 @@ public class SupportActivity extends AppCompatActivity {
                 return true;
             }
         });
-        SupportLandingFragment supportLandingFragment=new SupportLandingFragment();
-        FragmentManager fragmentManager=getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.SuppotPlaceHolder,supportLandingFragment);
+        SupportLandingFragment supportLandingFragment = new SupportLandingFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.SuppotPlaceHolder, supportLandingFragment);
         fragmentTransaction.commit();
 
     }

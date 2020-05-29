@@ -4,7 +4,7 @@ import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
 
 import java.io.Serializable;
 
-public class WelcomeController  implements WelcomeViewMVC.Listener {
+public class WelcomeController implements WelcomeViewMVC.Listener {
 
 
     private enum ScreenState {

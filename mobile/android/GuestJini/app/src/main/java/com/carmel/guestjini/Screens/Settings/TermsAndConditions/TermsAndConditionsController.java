@@ -48,6 +48,7 @@ public class TermsAndConditionsController
 
     public static class SavedState implements Serializable {
         private final ScreenState mScreenState;
+
         public SavedState(ScreenState screenState) {
             mScreenState = screenState;
         }

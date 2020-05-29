@@ -228,112 +228,112 @@
             app:layout_constraintTop_toBottomOf="@+id/noResultsFoundTitle" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <RelativeLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/interestGroupsTitle">-->
+    <!--    <RelativeLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/interestGroupsTitle">-->
 
-<!--        <TextView-->
-<!--            android:id="@+id/filterTitle1"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_alignParentEnd="true"-->
-<!--            android:layout_marginTop="4dp"-->
-<!--            android:layout_marginEnd="32dp"-->
-<!--            android:text="Showing subscribed groups."-->
-<!--            android:textColor="@color/colorZambezi"-->
-<!--            android:textSize="10sp"-->
-<!--            android:visibility="gone"-->
-<!--            android:letterSpacing="0.06"-->
-<!--            app:fontFamily="@font/roboto_bold"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
+    <!--        <TextView-->
+    <!--            android:id="@+id/filterTitle1"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_alignParentTop="true"-->
+    <!--            android:layout_alignParentEnd="true"-->
+    <!--            android:layout_marginTop="4dp"-->
+    <!--            android:layout_marginEnd="32dp"-->
+    <!--            android:text="Showing subscribed groups."-->
+    <!--            android:textColor="@color/colorZambezi"-->
+    <!--            android:textSize="10sp"-->
+    <!--            android:visibility="gone"-->
+    <!--            android:letterSpacing="0.06"-->
+    <!--            app:fontFamily="@font/roboto_bold"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
-<!--        <com.google.android.material.card.MaterialCardView-->
-<!--            android:id="@+id/filterPopup"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentTop="true"-->
-<!--            android:layout_alignParentEnd="true"-->
-<!--            android:layout_marginTop="0dp"-->
-<!--            android:layout_marginEnd="32dp"-->
-<!--            android:visibility="gone"-->
-<!--            app:strokeColor="@color/colorWhisper2"-->
-<!--            app:strokeWidth="1dp"-->
-<!--            app:cardElevation="5dp"-->
-<!--            android:letterSpacing="0.06"-->
-<!--            app:cardBackgroundColor="@color/colorWhite"-->
-<!--            tools:layout_editor_absoluteX="248dp"-->
-<!--            >-->
+    <!--        <com.google.android.material.card.MaterialCardView-->
+    <!--            android:id="@+id/filterPopup"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_alignParentTop="true"-->
+    <!--            android:layout_alignParentEnd="true"-->
+    <!--            android:layout_marginTop="0dp"-->
+    <!--            android:layout_marginEnd="32dp"-->
+    <!--            android:visibility="gone"-->
+    <!--            app:strokeColor="@color/colorWhisper2"-->
+    <!--            app:strokeWidth="1dp"-->
+    <!--            app:cardElevation="5dp"-->
+    <!--            android:letterSpacing="0.06"-->
+    <!--            app:cardBackgroundColor="@color/colorWhite"-->
+    <!--            tools:layout_editor_absoluteX="248dp"-->
+    <!--            >-->
 
-<!--            <RelativeLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentTop="true"-->
-<!--                android:layout_alignParentEnd="true"-->
-<!--                android:layout_marginTop="0dp"-->
-<!--                android:layout_marginEnd="32dp"-->
-<!--                android:paddingRight="20dp"-->
-<!--                app:layout_constraintEnd_toEndOf="parent">-->
+    <!--            <RelativeLayout-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_alignParentTop="true"-->
+    <!--                android:layout_alignParentEnd="true"-->
+    <!--                android:layout_marginTop="0dp"-->
+    <!--                android:layout_marginEnd="32dp"-->
+    <!--                android:paddingRight="20dp"-->
+    <!--                app:layout_constraintEnd_toEndOf="parent">-->
 
-<!--                <TextView-->
-<!--                    android:id="@+id/ClearTitle"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_alignParentStart="true"-->
-<!--                    android:layout_alignParentTop="true"-->
-<!--                    android:layout_marginStart="24dp"-->
-<!--                    android:layout_marginTop="20dp"-->
-<!--                    android:text="@string/clear"-->
-<!--                    android:textColor="@color/colorPinkSwan"-->
-<!--                    android:textSize="10sp"-->
-<!--                    android:letterSpacing="0.06"-->
-<!--                    app:fontFamily="@font/roboto_medium"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+    <!--                <TextView-->
+    <!--                    android:id="@+id/ClearTitle"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_alignParentStart="true"-->
+    <!--                    android:layout_alignParentTop="true"-->
+    <!--                    android:layout_marginStart="24dp"-->
+    <!--                    android:layout_marginTop="20dp"-->
+    <!--                    android:text="@string/clear"-->
+    <!--                    android:textColor="@color/colorPinkSwan"-->
+    <!--                    android:textSize="10sp"-->
+    <!--                    android:letterSpacing="0.06"-->
+    <!--                    app:fontFamily="@font/roboto_medium"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent"-->
+    <!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
 
-<!--                <TextView-->
-<!--                    android:id="@+id/subscribedTitle"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_below="@+id/ClearTitle"-->
-<!--                    android:layout_alignParentStart="true"-->
-<!--                    android:layout_marginStart="24dp"-->
-<!--                    android:layout_marginTop="24dp"-->
-<!--                    android:text="@string/subscribed"-->
-<!--                    android:textColor="@color/colorMatterhon"-->
-<!--                    android:textSize="10sp"-->
-<!--                    android:letterSpacing="0.06"-->
-<!--                    app:fontFamily="@font/roboto_medium"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/ClearTitle" />-->
+    <!--                <TextView-->
+    <!--                    android:id="@+id/subscribedTitle"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_below="@+id/ClearTitle"-->
+    <!--                    android:layout_alignParentStart="true"-->
+    <!--                    android:layout_marginStart="24dp"-->
+    <!--                    android:layout_marginTop="24dp"-->
+    <!--                    android:text="@string/subscribed"-->
+    <!--                    android:textColor="@color/colorMatterhon"-->
+    <!--                    android:textSize="10sp"-->
+    <!--                    android:letterSpacing="0.06"-->
+    <!--                    app:fontFamily="@font/roboto_medium"-->
+    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent"-->
+    <!--                    app:layout_constraintTop_toBottomOf="@+id/ClearTitle" />-->
 
-<!--                <TextView-->
-<!--                    android:id="@+id/newTitle"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_below="@+id/subscribedTitle"-->
-<!--                    android:layout_alignParentStart="true"-->
-<!--                    android:layout_alignParentLeft="false"-->
-<!--                    android:layout_marginStart="24dp"-->
-<!--                    android:layout_marginTop="24dp"-->
-<!--                    android:layout_marginBottom="28dp"-->
-<!--                    android:text="@string/New"-->
-<!--                    android:textColor="@color/colorMatterhon"-->
-<!--                    android:textSize="10sp"-->
-<!--                    android:letterSpacing="0.06"-->
-<!--                    app:fontFamily="@font/roboto_medium"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/subscribedTitle" />-->
-<!--            </RelativeLayout>-->
-<!--        </com.google.android.material.card.MaterialCardView>-->
+    <!--                <TextView-->
+    <!--                    android:id="@+id/newTitle"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_below="@+id/subscribedTitle"-->
+    <!--                    android:layout_alignParentStart="true"-->
+    <!--                    android:layout_alignParentLeft="false"-->
+    <!--                    android:layout_marginStart="24dp"-->
+    <!--                    android:layout_marginTop="24dp"-->
+    <!--                    android:layout_marginBottom="28dp"-->
+    <!--                    android:text="@string/New"-->
+    <!--                    android:textColor="@color/colorMatterhon"-->
+    <!--                    android:textSize="10sp"-->
+    <!--                    android:letterSpacing="0.06"-->
+    <!--                    app:fontFamily="@font/roboto_medium"-->
+    <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent"-->
+    <!--                    app:layout_constraintTop_toBottomOf="@+id/subscribedTitle" />-->
+    <!--            </RelativeLayout>-->
+    <!--        </com.google.android.material.card.MaterialCardView>-->
 
-<!--    </RelativeLayout>-->
+    <!--    </RelativeLayout>-->
 
     <View
         android:id="@+id/divider"

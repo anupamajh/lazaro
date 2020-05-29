@@ -16,8 +16,7 @@
         android:textColor="@color/colorSummerSky"
         android:textSize="12sp"
         app:fontFamily="@font/roboto_medium"
-        android:layout_alignParentTop="true"
-         />
+        android:layout_alignParentTop="true" />
 
     <TextView
         android:id="@+id/txtDialogMessage"
@@ -30,9 +29,8 @@
         android:textColor="@color/colorSuvaGray"
         android:textSize="11sp"
         android:lineSpacingExtra="2dp"
-       android:layout_alignParentStart="true"
-        android:layout_below="@id/txtDialogTitle"
-        />
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/txtDialogTitle" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnDone"
@@ -48,6 +46,5 @@
         app:srcCompat="@drawable/ic_done_black_24dp"
         app:tint="@color/colorWhite"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/txtDialogMessage"
-        />
+        android:layout_below="@+id/txtDialogMessage" />
 </RelativeLayout>

@@ -215,12 +215,12 @@ public class InterestGroupsFragment extends Fragment implements InterestGroupsAd
                     progressDialog.dismiss();
                     try {
                         GroupResponse groupResponse = response.body();
-                        if(groupResponse.getSuccess()){
+                        if (groupResponse.getSuccess()) {
                             groupArrayList = new ArrayList<>();
                             groupArrayList.addAll(groupResponse.getGroupList());
                             interestGroupsAdpater.update(groupArrayList);
 
-                        }else{
+                        } else {
                             showDialog(false, "There was a problem fetching people list! Please try after sometime");
                         }
                     } catch (Exception ex) {

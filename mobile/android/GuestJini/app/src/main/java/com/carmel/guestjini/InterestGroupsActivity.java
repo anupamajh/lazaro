@@ -14,11 +14,11 @@ public class InterestGroupsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interest_groups);
-        InterestGroupsFragment interestGroupsFragment=new InterestGroupsFragment();
+        InterestGroupsFragment interestGroupsFragment = new InterestGroupsFragment();
 //        SubscribedGroupChatFragment subscribedGroupChatFragment=new SubscribedGroupChatFragment();
-        FragmentManager fragmentManager=getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.interestGroupsPlaceHolder,interestGroupsFragment);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.interestGroupsPlaceHolder, interestGroupsFragment);
         fragmentTransaction.commit();
     }
 }

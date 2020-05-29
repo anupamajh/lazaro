@@ -25,7 +25,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ForgotPassword extends AppCompatActivity {
-    TextView emailErrorField,getOneNow,forgotPasswordErrorMessage;
+    TextView emailErrorField, getOneNow, forgotPasswordErrorMessage;
     EditText email;
     MaterialButton resetPassword;
     ImageView backIcon;
@@ -37,28 +37,26 @@ public class ForgotPassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
-        emailErrorField=findViewById(R.id.emailErrorField);
-        getOneNow=findViewById(R.id.getOneNow);
-        email=findViewById(R.id.email);
-        backIcon=findViewById(R.id.backArrowIcon);
-        resetPassword=findViewById(R.id.resetPasswordButton);
-        forgotPasswordErrorMessage=findViewById(R.id.forgotPasswordErrorMessage);
+        emailErrorField = findViewById(R.id.emailErrorField);
+        getOneNow = findViewById(R.id.getOneNow);
+        email = findViewById(R.id.email);
+        backIcon = findViewById(R.id.backArrowIcon);
+        resetPassword = findViewById(R.id.resetPasswordButton);
+        forgotPasswordErrorMessage = findViewById(R.id.forgotPasswordErrorMessage);
 
 
         resetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(email.getText().toString().trim().length()==0) {
+                if (email.getText().toString().trim().length() == 0) {
                     emailErrorField.setVisibility(View.VISIBLE);
                     email.setBackgroundResource(R.drawable.edit_red_textbox);
-                }
-                else if(!email.getText().toString().trim().matches(EMAIL_PATTERN) && !email.getText().toString().trim().matches(MobilePattern))  {
+                } else if (!email.getText().toString().trim().matches(EMAIL_PATTERN) && !email.getText().toString().trim().matches(MobilePattern)) {
                     forgotPasswordErrorMessage.setVisibility(View.VISIBLE);
                     emailErrorField.setVisibility(View.GONE);
                     backIcon.setVisibility(View.GONE);
                     email.setBackgroundResource(R.drawable.edit_textbox);
-                }
-                else{
+                } else {
                     try {
                         Retrofit retrofit = new Retrofit.Builder()
                                 .baseUrl(EndPoints.END_POINT_URL)
@@ -66,19 +64,19 @@ public class ForgotPassword extends AppCompatActivity {
                                 .build();
                         UserService userService = retrofit.create(UserService.class);
                         Map<String, String> postData = new HashMap<>();
-                        postData.put("user_name",email.getText().toString().trim());
+                        postData.put("user_name", email.getText().toString().trim());
                         Call<ForgotPasswordResponse> forgotPasswordResponseCall = userService.restPassword(postData);
                         forgotPasswordResponseCall.enqueue(new Callback<ForgotPasswordResponse>() {
                             @Override
                             public void onResponse(Call<ForgotPasswordResponse> call, Response<ForgotPasswordResponse> response) {
-                                try{
+                                try {
                                     ForgotPasswordResponse forgotPasswordResponse = response.body();
-                                    if(forgotPasswordResponse.getUserName() != null){
+                                    if (forgotPasswordResponse.getUserName() != null) {
                                         //TODO: Show appropriate alert
-                                    }else{
+                                    } else {
                                         //TODO: Show appropriate alert
                                     }
-                                }catch (Exception ex){
+                                } catch (Exception ex) {
                                     //TODO: Show appropriate alert
                                 }
 
@@ -89,7 +87,7 @@ public class ForgotPassword extends AppCompatActivity {
                                 //TODO: Show appropriate alert
                             }
                         });
-                    }catch (Exception ex){
+                    } catch (Exception ex) {
                         //TODO: Show appropriate alert
                     }
                 }
@@ -99,7 +97,7 @@ public class ForgotPassword extends AppCompatActivity {
         backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(), Login.class);
+                Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
             }
         });
@@ -107,7 +105,7 @@ public class ForgotPassword extends AppCompatActivity {
         getOneNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(), AppAccessRequest.class);
+                Intent intent = new Intent(getApplicationContext(), AppAccessRequest.class);
                 startActivity(intent);
             }
         });

@@ -11,7 +11,6 @@ import com.carmel.guestjini.Screens.Common.ViewMVCFactory;
 import com.carmel.guestjini.Screens.Community.GroupDetails.GroupMember.GroupMemberViewMVC;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class GroupMemberRecycleAdapter
         extends RecyclerView.Adapter<GroupMemberRecycleAdapter.MemberHolder>
@@ -36,13 +35,15 @@ public class GroupMemberRecycleAdapter
 
     private ArrayList<AddressBook> addressBookArrayList = new ArrayList<>();
     private GroupResponse groupResponse;
+    private int groupType;
 
     public GroupMemberRecycleAdapter(Listener listener, ViewMVCFactory viewMVCFactory) {
         this.listener = listener;
         this.viewMVCFactory = viewMVCFactory;
     }
 
-    public void bindGroupResponse(GroupResponse groupResponse) {
+    public void bindGroupResponse(GroupResponse groupResponse, int groupType) {
+        this.groupType = groupType;
         this.groupResponse = groupResponse;
         this.addressBookArrayList = new ArrayList<>(groupResponse.getGroupPeople());
         notifyDataSetChanged();
@@ -60,10 +61,8 @@ public class GroupMemberRecycleAdapter
     public void onBindViewHolder(@NonNull MemberHolder holder, int position) {
         holder.viewMVC.bingGroupMember(
                 this.addressBookArrayList.get(position),
-                groupResponse.getGroup().getIsSubscribed(),
-                groupResponse.getGroup().getIsInvited(),
                 groupResponse.getGroup().getId(),
-                groupResponse.getGroup().getGroupType()
+                groupType
 
         );
     }

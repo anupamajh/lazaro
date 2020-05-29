@@ -22,17 +22,17 @@ public class CommunityHomeViewMVCImpl
         MaterialCardView cardPeople = findViewById(R.id.cardPeople);
         MaterialCardView cardGroups = findViewById(R.id.cardGroups);
         cardMyProfile.setOnClickListener(v -> {
-            for (Listener listener:getListeners()){
+            for (Listener listener : getListeners()) {
                 listener.onMyProfileClicked();
             }
         });
         cardPeople.setOnClickListener(v -> {
-            for (Listener listener:getListeners()){
+            for (Listener listener : getListeners()) {
                 listener.onPeopleClicked();
             }
         });
         cardGroups.setOnClickListener(v -> {
-            for (Listener listener:getListeners()){
+            for (Listener listener : getListeners()) {
                 listener.onGroupClicked();
             }
         });

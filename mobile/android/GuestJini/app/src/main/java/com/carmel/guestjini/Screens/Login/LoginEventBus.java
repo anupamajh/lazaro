@@ -2,7 +2,7 @@ package com.carmel.guestjini.Screens.Login;
 
 import com.carmel.guestjini.Common.BaseObservable;
 
-public class LoginEventBus  extends BaseObservable<LoginEventBus.Listener> {
+public class LoginEventBus extends BaseObservable<LoginEventBus.Listener> {
     public interface Listener {
         void onLoginSuccess(Object event);
     }

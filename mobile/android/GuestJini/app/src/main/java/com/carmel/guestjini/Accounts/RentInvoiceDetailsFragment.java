@@ -282,6 +282,7 @@ public class RentInvoiceDetailsFragment extends Fragment {
             showDialog(false, "There was problem fetching invoice! Please Try after sometime");
         }
     }
+
     private void showDialog(boolean isSuccess, String message) {
         final Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.alert_dailogbox);

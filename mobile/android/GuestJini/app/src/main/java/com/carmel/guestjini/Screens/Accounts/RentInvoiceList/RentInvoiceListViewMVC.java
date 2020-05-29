@@ -5,12 +5,14 @@ import com.carmel.guestjini.Screens.Common.Views.ObservableViewMvc;
 
 import java.util.List;
 
-public interface RentInvoiceListViewMVC  extends ObservableViewMvc<RentInvoiceListViewMVC.Listener> {
+public interface RentInvoiceListViewMVC extends ObservableViewMvc<RentInvoiceListViewMVC.Listener> {
 
     public interface Listener {
         void onAccountTicketItem(AccountTicket accountTicket);
+
         void onBackClicked();
     }
+
     void bindAccountTickets(List<AccountTicket> accountTickets);
 
     void showProgressIndication();

@@ -14,10 +14,10 @@ public class GroupsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_groups);
-        GroupsFragment groupsLandingFragment=new GroupsFragment();
-        FragmentManager fragmentManager=getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.groupsPlaceHolder,groupsLandingFragment);
+        GroupsFragment groupsLandingFragment = new GroupsFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.groupsPlaceHolder, groupsLandingFragment);
         fragmentTransaction.commit();
 
     }

@@ -11,7 +11,6 @@ import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class GroupListController implements
         GroupListViewMVC.Listener,
@@ -61,6 +60,11 @@ public class GroupListController implements
 
     public void onStart(Integer groupType) {
         this.groupType = groupType;
+        if (groupType != 3) {
+            viewMvc.hideCreate();
+        } else {
+            viewMvc.showCreate();
+        }
         viewMvc.registerListener(this);
         fetchGroupListByTypeUseCase.registerListener(this);
         dialogsEventBus.registerListener(this);
@@ -86,7 +90,7 @@ public class GroupListController implements
     @Override
     public void onGroupListByTypeFetched(GroupResponse groupResponse) {
         this.groupList = groupResponse.getGroupList();
-        if(this.groupList == null){
+        if (this.groupList == null) {
             this.groupList = new ArrayList<>();
         }
         mScreenState = ScreenState.GROUP_LIST_SHOWN;
@@ -103,12 +107,21 @@ public class GroupListController implements
 
     @Override
     public void onGroupClicked(Group group) {
-        screensNavigator.toGroupDetailScreen(group.getId());
+        if (group.getIsSubscribed() == 1) {
+            screensNavigator.toGroupConversationScreen(group.getId(), groupType);
+        } else {
+            screensNavigator.toGroupDetailScreen(group.getId(), groupType);
+        }
     }
 
     @Override
     public void onBackClicked() {
         screensNavigator.navigateUp();
+    }
+
+    @Override
+    public void onNewGroupClicked() {
+        screensNavigator.toCreateGroupScreen();
     }
 
     @Override

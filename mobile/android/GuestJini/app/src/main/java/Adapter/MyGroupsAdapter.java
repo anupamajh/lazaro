@@ -24,15 +24,15 @@ public class MyGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private ArrayList<Group> groupArrayList;
     private OnItemClickListener onItemClickListener;
 
-    public MyGroupsAdapter(Context context, ArrayList<Group> groupArrayList,OnItemClickListener onItemClickListener) {
-        this.context=context;
-        this.groupArrayList=groupArrayList;
-        this.onItemClickListener=onItemClickListener;
+    public MyGroupsAdapter(Context context, ArrayList<Group> groupArrayList, OnItemClickListener onItemClickListener) {
+        this.context = context;
+        this.groupArrayList = groupArrayList;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @Override
-    public int getItemViewType(int position){
-        Group group=groupArrayList.get(position);
+    public int getItemViewType(int position) {
+        Group group = groupArrayList.get(position);
         return getViewType(group);
     }
 
@@ -63,7 +63,7 @@ public class MyGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        Group group=groupArrayList.get(position);
+        Group group = groupArrayList.get(position);
         int viewType = getViewType(group);
         switch (viewType) {
             case JoinedGroupsCell:
@@ -93,17 +93,18 @@ public class MyGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         notifyDataSetChanged();
     }
 
-    class JoinedViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
-        TextView communityGroupTitle,communityGroupAdmin,communityGroupDescription;
+    class JoinedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView communityGroupTitle, communityGroupAdmin, communityGroupDescription;
         TextView communityGroupCreationDateAndTime;
         ImageView adminProfileIcon;
+
         public JoinedViewHolder(@NonNull View itemView) {
             super(itemView);
-            communityGroupTitle=itemView.findViewById(R.id.groupsName);
-            communityGroupAdmin=itemView.findViewById(R.id.groupAdmin);
-            communityGroupCreationDateAndTime=itemView.findViewById(R.id.groupCreationDateAndTime);
-            communityGroupDescription =itemView.findViewById(R.id.groupsDescription);
-            adminProfileIcon=itemView.findViewById(R.id.communityGroupsProfileIcon);
+            communityGroupTitle = itemView.findViewById(R.id.groupsName);
+            communityGroupAdmin = itemView.findViewById(R.id.groupAdmin);
+            communityGroupCreationDateAndTime = itemView.findViewById(R.id.groupCreationDateAndTime);
+            communityGroupDescription = itemView.findViewById(R.id.groupsDescription);
+            adminProfileIcon = itemView.findViewById(R.id.communityGroupsProfileIcon);
             adminProfileIcon.setImageResource(R.drawable.profile_image);
             itemView.setOnClickListener(this);
         }
@@ -113,25 +114,28 @@ public class MyGroupsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             onItemClickListener.onClikJoinedGroup(getAdapterPosition());
         }
     }
+
     class GroupContainerHolder extends RecyclerView.ViewHolder {
-        TextView communityGroupTitle,communityGroupAdmin,communityGroupDescription;
+        TextView communityGroupTitle, communityGroupAdmin, communityGroupDescription;
         TextView communityGroupCreationDateAndTime;
         ImageView adminProfileIcon;
+
         public GroupContainerHolder(@NonNull View itemView) {
             super(itemView);
-            communityGroupTitle=itemView.findViewById(R.id.groupsName);
-            communityGroupAdmin=itemView.findViewById(R.id.groupAdmin);
-            communityGroupCreationDateAndTime=itemView.findViewById(R.id.groupCreationDateAndTime);
-            communityGroupDescription =itemView.findViewById(R.id.groupsDescription);
-            adminProfileIcon=itemView.findViewById(R.id.communityGroupsProfileIcon);
+            communityGroupTitle = itemView.findViewById(R.id.groupsName);
+            communityGroupAdmin = itemView.findViewById(R.id.groupAdmin);
+            communityGroupCreationDateAndTime = itemView.findViewById(R.id.groupCreationDateAndTime);
+            communityGroupDescription = itemView.findViewById(R.id.groupsDescription);
+            adminProfileIcon = itemView.findViewById(R.id.communityGroupsProfileIcon);
             adminProfileIcon.setImageResource(R.drawable.profile_image);
 
 
         }
     }
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onClikJoinedGroup(int position);
+
         void onClikRemovedGroup(int position);
     }
 }

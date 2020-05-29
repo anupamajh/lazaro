@@ -53,10 +53,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CommunityGroupsFragment extends Fragment implements CommunityGroupsAdapter.OnItemClickListener {
-    private ArrayList<Group> groupArrayList=new ArrayList<>();
+    private ArrayList<Group> groupArrayList = new ArrayList<>();
     private RecyclerView communityGroupsRecyclerView;
-    private ImageView communityGroupFilterIcon,backArrow;
-    private ConstraintLayout searchLayout,noResultFoundLayout,recyclerViewLayout;
+    private ImageView communityGroupFilterIcon, backArrow;
+    private ConstraintLayout searchLayout, noResultFoundLayout, recyclerViewLayout;
     private TextView searchResultCount;
     private EditText search;
 
@@ -69,31 +69,31 @@ public class CommunityGroupsFragment extends Fragment implements CommunityGroups
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView= inflater.inflate(R.layout.fragment_community_groups, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_community_groups, container, false);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setCancelable(false); // if you want user to wait for some process to finish,
         builder.setView(R.layout.layout_loading_dialog);
         progressDialog = builder.create();
-        communityGroupsRecyclerView=rootView.findViewById(R.id.RecyclerViewCommunityGroups);
-        backArrow=rootView.findViewById(R.id.backArrow);
-        searchLayout=rootView.findViewById(R.id.searchLayout);
-        noResultFoundLayout=rootView.findViewById(R.id.noResultFoundLayout);
-        recyclerViewLayout=rootView.findViewById(R.id.recyclerViewLayout);
-        searchResultCount=rootView.findViewById(R.id.searchResultCount);
-        search=rootView.findViewById(R.id.search);
-        communityGroupFilterIcon=rootView.findViewById(R.id.filterIcon);
+        communityGroupsRecyclerView = rootView.findViewById(R.id.RecyclerViewCommunityGroups);
+        backArrow = rootView.findViewById(R.id.backArrow);
+        searchLayout = rootView.findViewById(R.id.searchLayout);
+        noResultFoundLayout = rootView.findViewById(R.id.noResultFoundLayout);
+        recyclerViewLayout = rootView.findViewById(R.id.recyclerViewLayout);
+        searchResultCount = rootView.findViewById(R.id.searchResultCount);
+        search = rootView.findViewById(R.id.search);
+        communityGroupFilterIcon = rootView.findViewById(R.id.filterIcon);
 
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         communityGroupsRecyclerView.setLayoutManager(linearLayoutManager);
         communityGroupsRecyclerView.setHasFixedSize(true);
-        communityGroupsAdapter=new CommunityGroupsAdapter(getContext(),groupArrayList,this);
+        communityGroupsAdapter = new CommunityGroupsAdapter(getContext(), groupArrayList, this);
         communityGroupsAdapter.setHasStableIds(true);
         communityGroupsRecyclerView.setAdapter(communityGroupsAdapter);
 
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(), GroupsActivity.class);
+                Intent intent = new Intent(getContext(), GroupsActivity.class);
                 startActivity(intent);
             }
         });
@@ -110,16 +110,17 @@ public class CommunityGroupsFragment extends Fragment implements CommunityGroups
 
 
         searchLayout.setOnClickListener(new View.OnClickListener() {
-            private boolean flag=true;
+            private boolean flag = true;
+
             @Override
             public void onClick(View v) {
-                if(flag) {
-                    flag=false;
+                if (flag) {
+                    flag = false;
                     noResultFoundLayout.setVisibility(View.VISIBLE);
                     recyclerViewLayout.setVisibility(View.GONE);
                     search.setText("Boxing");
-                }else {
-                    flag=true;
+                } else {
+                    flag = true;
                     searchResultCount.setVisibility(View.VISIBLE);
                 }
             }
@@ -131,12 +132,12 @@ public class CommunityGroupsFragment extends Fragment implements CommunityGroups
     @Override
     public void onClikInvitedUnreadGroup(int position) {
         groupArrayList.get(position);
-        InvitedGroupViewFragment invitedGroupViewFragment=new InvitedGroupViewFragment();
-        FragmentManager fragmentManager=getFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.communityGroupsPlaceHolder,invitedGroupViewFragment);
+        InvitedGroupViewFragment invitedGroupViewFragment = new InvitedGroupViewFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.communityGroupsPlaceHolder, invitedGroupViewFragment);
         fragmentTransaction.addToBackStack(null);
-        Bundle bundle=new Bundle();
+        Bundle bundle = new Bundle();
 //        bundle.putString("GroupName",communityGroupsList.get(position).getCommunityGroupTitle());
 //        bundle.putString("GroupDescription",communityGroupsList.get(position).getCommunityGroupDescription());
 //        bundle.putString("GroupAdminName",communityGroupsList.get(position).getCommunityGroupAdmin());
@@ -179,26 +180,26 @@ public class CommunityGroupsFragment extends Fragment implements CommunityGroups
 
     @Override
     public void onClikRemovedGroup(int position) {
-        Toast toast=new Toast(getContext());
+        Toast toast = new Toast(getContext());
         ViewGroup viewGroup = null;
         View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.toast_layout, viewGroup, false);
         TextView text = (TextView) dialogView.findViewById(R.id.visibleToast);
         text.setText(getText(R.string.groupRemovedMessage));
         toast.setView(dialogView);
 //        toast.makeText(getActivity(),"", Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.getAbsoluteGravity(0,0),0,520);
+        toast.setGravity(Gravity.getAbsoluteGravity(0, 0), 0, 520);
         toast.show();
     }
 
     @Override
     public void onClikRequestedGroup(int position) {
         groupArrayList.get(position);
-        InvitedGroupViewFragment invitedGroupViewFragment=new InvitedGroupViewFragment();
-        FragmentManager fragmentManager=getFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.communityGroupsPlaceHolder,invitedGroupViewFragment);
+        InvitedGroupViewFragment invitedGroupViewFragment = new InvitedGroupViewFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.communityGroupsPlaceHolder, invitedGroupViewFragment);
         fragmentTransaction.addToBackStack(null);
-        Bundle bundle=new Bundle();
+        Bundle bundle = new Bundle();
 //        bundle.putString("GroupName",communityGroupsList.get(position).getCommunityGroupTitle());
 //        bundle.putString("GroupDescription",communityGroupsList.get(position).getCommunityGroupDescription());
 //        bundle.putString("GroupAdminName",communityGroupsList.get(position).getCommunityGroupAdmin());
@@ -266,12 +267,12 @@ public class CommunityGroupsFragment extends Fragment implements CommunityGroups
                     progressDialog.dismiss();
                     try {
                         GroupResponse groupResponse = response.body();
-                        if(groupResponse.getSuccess()){
+                        if (groupResponse.getSuccess()) {
                             groupArrayList = new ArrayList<>();
                             groupArrayList.addAll(groupResponse.getGroupList());
                             communityGroupsAdapter.update(groupArrayList);
 
-                        }else{
+                        } else {
                             showDialog(false, "There was a problem fetching people list! Please try after sometime");
                         }
                     } catch (Exception ex) {

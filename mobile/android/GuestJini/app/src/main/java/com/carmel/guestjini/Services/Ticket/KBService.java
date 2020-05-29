@@ -16,5 +16,5 @@ public interface KBService {
     Call<KBResponse> getAll();
 
     @POST("/guest-jini/kb/get")
-    Call<KBResponse> getById( @Body Map<String, String> postData);
+    Call<KBResponse> getById(@Body Map<String, String> postData);
 }

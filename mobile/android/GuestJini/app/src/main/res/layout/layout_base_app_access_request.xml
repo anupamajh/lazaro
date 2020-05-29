@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/topMarkerGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.25" />
+
+        <FrameLayout
+            android:id="@+id/topBanner"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/colorWhite"
+            app:layout_constraintBottom_toTopOf="@+id/topMarkerGuide"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhisper">
+
+                <ImageView
+                    android:id="@+id/applicationLogo"
+                    android:layout_width="158dp"
+                    android:layout_height="74dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="32dp"
+                    android:src="@drawable/guesture_logo" />
+
+                <TextView
+                    android:id="@+id/txtInformation"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/applicationLogo"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:letterSpacing="0.03"
+                    android:text="@string/guesture_description"
+                    android:textColor="@color/colorZambezi1"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/roboto_medium" />
+
+            </RelativeLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/loginForm"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topMarkerGuide">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:id="@+id/btnBack"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:src="@drawable/back_arrow_icon_xxhdpi" />
+
+                    <TextView
+                        android:id="@+id/customerCare"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_toEndOf="@id/btnBack"
+                        android:letterSpacing="0.08"
+                        android:text="@string/customer_care"
+                        android:textColor="@color/colorZambezi"
+                        android:textSize="16sp"
+                        app:fontFamily="@font/roboto_bold" />
+
+                    <TextView
+                        android:id="@+id/appAccessRequest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="35dp"
+                        android:letterSpacing="0.08"
+                        android:text="@string/app_access_request"
+                        android:textColor="@color/colorZambezi"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/roboto_bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/customerCare" />
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/appAccessRequest"
+                        android:layout_marginTop="9dp"
+                        android:letterSpacing="0.03"
+                        android:lineSpacingExtra="5dp"
+                        android:text="@string/app_access_request_description"
+                        android:textColor="@color/colorSuvaGray"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/registeredEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView8"
+                        android:layout_marginTop="38dp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:letterSpacing="0.05"
+                        android:text="@string/registered_email"
+                        android:textColor="@color/colorSummerSky"
+                        android:textSize="12sp" />
+
+
+                    <EditText
+                        android:id="@+id/txtEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:layout_below="@+id/registeredEmail"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/edit_textbox"
+                        android:elevation="3dp"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress"
+                        android:letterSpacing="0.05"
+                        android:paddingStart="16dp"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp"
+                        android:shadowColor="@color/colorBlackRussian"
+                        android:textColor="@color/colorSuvaGray"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/roboto_medium" />
+
+                    <TextView
+                        android:id="@+id/txtEmailErrorField"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtEmail"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:letterSpacing="0.05"
+                        android:text="@string/error_field"
+                        android:textColor="@color/colorMabel"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/registeredMobileNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtEmailErrorField"
+                        android:layout_marginTop="38dp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:letterSpacing="0.05"
+                        android:text="@string/registered_mobile_number1"
+                        android:textColor="@color/colorSummerSky"
+                        android:textSize="12sp" />
+
+                    <EditText
+                        android:id="@+id/txtMobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/registeredMobileNumber"
+                        android:layout_marginTop="13dp"
+                        android:background="@drawable/edit_textbox"
+                        android:elevation="3dp"
+                        android:hint="@string/mobile_number"
+                        android:inputType="phone"
+                        android:letterSpacing="0.05"
+                        android:paddingLeft="16dp"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="16dp"
+                        android:shadowColor="@color/colorBlackRussian"
+                        android:textColorHint="@color/colorSuvaGray"
+                        android:textSize="14dp"
+                        app:fontFamily="@font/roboto_medium" />
+
+                    <TextView
+                        android:id="@+id/mobileNumberErrorField"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtMobile"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:letterSpacing="0.05"
+                        android:text="@string/error_field"
+                        android:textColor="@color/colorMabel"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/btnAppAccessRequest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/mobileNumberErrorField"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="23dp"
+                        android:backgroundTint="@color/colorSummerSky"
+                        app:cornerRadius="18dp"
+                        app:fabCustomSize="38dp"
+                        app:maxImageSize="20dp"
+                        app:srcCompat="@drawable/ic_done_black_24dp"
+                        app:tint="@color/colorWhite" />
+                </RelativeLayout>
+            </ScrollView>
+
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="20dp"
+        android:visibility="gone" />
+</FrameLayout>

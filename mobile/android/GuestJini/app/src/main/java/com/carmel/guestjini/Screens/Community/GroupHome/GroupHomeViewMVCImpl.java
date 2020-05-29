@@ -21,17 +21,17 @@ public class GroupHomeViewMVCImpl extends BaseObservableViewMvc<GroupHomeViewMVC
         MaterialCardView cardCommunityGroups = findViewById(R.id.cardCommunityGroups);
         MaterialCardView cardMyGroups = findViewById(R.id.cardMyGroups);
         cardInterestGroups.setOnClickListener(v -> {
-            for (Listener listener:getListeners()){
+            for (Listener listener : getListeners()) {
                 listener.onInterestGroupClicked();
             }
         });
         cardCommunityGroups.setOnClickListener(v -> {
-            for (Listener listener:getListeners()){
+            for (Listener listener : getListeners()) {
                 listener.onCommunityGroupClicked();
             }
         });
         cardMyGroups.setOnClickListener(v -> {
-            for (Listener listener:getListeners()){
+            for (Listener listener : getListeners()) {
                 listener.onMyGroupClicked();
             }
         });

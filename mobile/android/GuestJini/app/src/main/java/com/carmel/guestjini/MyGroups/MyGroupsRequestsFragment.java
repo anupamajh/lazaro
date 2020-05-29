@@ -25,48 +25,49 @@ import Model.MyGroupsRequestsModel;
 public class MyGroupsRequestsFragment extends Fragment {
     private RecyclerView myGroupsRequestsRecyclerView;
     private ImageView backArrow;
-    private ArrayList<MyGroupsRequestsModel> myGroupsRequestsArrayList=new ArrayList<>();
+    private ArrayList<MyGroupsRequestsModel> myGroupsRequestsArrayList = new ArrayList<>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView= inflater.inflate(R.layout.fragment_my_groups_requests, container, false);
-        myGroupsRequestsRecyclerView=rootView.findViewById(R.id.myGroupsRequestsRecyclerView);
-        backArrow=rootView.findViewById(R.id.backButton);
+        View rootView = inflater.inflate(R.layout.fragment_my_groups_requests, container, false);
+        myGroupsRequestsRecyclerView = rootView.findViewById(R.id.myGroupsRequestsRecyclerView);
+        backArrow = rootView.findViewById(R.id.backButton);
 
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyGroupsDetailsFragment myGroupsDetailsFragment=new MyGroupsDetailsFragment();
-                FragmentManager fragmentManager=getFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.myGroupsPlaceHolder,myGroupsDetailsFragment);
+                MyGroupsDetailsFragment myGroupsDetailsFragment = new MyGroupsDetailsFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.myGroupsPlaceHolder, myGroupsDetailsFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });
 
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         myGroupsRequestsRecyclerView.setLayoutManager(linearLayoutManager);
         myGroupsRequestsRecyclerView.setHasFixedSize(true);
-        MyGroupsRequestsAdpter myGroupsRequestsAdpter=new MyGroupsRequestsAdpter(getContext(),myGroupsRequestsArrayList);
+        MyGroupsRequestsAdpter myGroupsRequestsAdpter = new MyGroupsRequestsAdpter(getContext(), myGroupsRequestsArrayList);
         myGroupsRequestsRecyclerView.setAdapter(myGroupsRequestsAdpter);
         myGroupsRequestsRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
 
         myGroupsRequestsArrayList.add(new MyGroupsRequestsModel(R.drawable.profile2,
                 "Nora Bravos",
                 "Today 11:48 AM (2 Hours ago)",
-                R.drawable.round_right_icon_xxhdpi,"ACCEPT"));
+                R.drawable.round_right_icon_xxhdpi, "ACCEPT"));
 
         myGroupsRequestsArrayList.add(new MyGroupsRequestsModel(R.drawable.profile2,
                 "Luke Ray",
                 "29 Jun 2019 10:05 AM (1 Day ago)",
-                R.drawable.round_right_icon_xxhdpi,"ACCEPT"));
+                R.drawable.round_right_icon_xxhdpi, "ACCEPT"));
 
         myGroupsRequestsArrayList.add(new MyGroupsRequestsModel(R.drawable.profile2,
                 "Daisy Lake",
                 "30 Jun 2019 06:32 PM (2 Days ago)",
-                R.drawable.right_icon_xxhdpi,"ACCEPTED"));
+                R.drawable.right_icon_xxhdpi, "ACCEPTED"));
 
         return rootView;
     }

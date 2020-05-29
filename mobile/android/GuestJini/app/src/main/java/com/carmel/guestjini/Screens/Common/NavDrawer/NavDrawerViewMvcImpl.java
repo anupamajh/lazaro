@@ -14,7 +14,7 @@ import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
 import com.google.android.material.navigation.NavigationView;
 
 public class NavDrawerViewMvcImpl extends BaseObservableViewMvc<NavDrawerViewMvc.Listener>
-        implements NavDrawerViewMvc  {
+        implements NavDrawerViewMvc {
 
     private final DrawerLayout mDrawerLayout;
     private final FrameLayout mFrameLayout;

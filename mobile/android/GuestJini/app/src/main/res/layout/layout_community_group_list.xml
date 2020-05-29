@@ -45,6 +45,20 @@
                 android:textColor="@color/colorZambezi"
                 android:textSize="14sp"
                 app:fontFamily="@font/roboto_bold" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnNewGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                app:backgroundTint="@color/colorSummerSky"
+                app:fabCustomSize="36dp"
+                app:maxImageSize="25dp"
+                app:srcCompat="@drawable/ic_add_black_24dp"
+                app:tint="@color/colorWhite" />
         </RelativeLayout>
 
 

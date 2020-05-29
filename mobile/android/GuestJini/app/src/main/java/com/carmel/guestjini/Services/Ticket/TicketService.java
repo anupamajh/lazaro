@@ -19,10 +19,10 @@ public interface TicketService {
     );
 
     @POST("/guest-jini/task-ticket/get-all")
-    Call<TicketResponse>  getAll();
+    Call<TicketResponse> getAll();
 
     @POST("/guest-jini/task-ticket/get")
-    Call<TicketResponse>  get(
+    Call<TicketResponse> get(
             @Body Map<String, String> requestData
     );
 }

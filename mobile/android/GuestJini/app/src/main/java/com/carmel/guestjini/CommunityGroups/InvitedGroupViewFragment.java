@@ -32,14 +32,14 @@ import Model.InterestGroupMembersModel;
 
 
 public class InvitedGroupViewFragment extends Fragment {
-    private ArrayList<InterestGroupMembersModel> communityGroupMemberModel=new ArrayList<>();
+    private ArrayList<InterestGroupMembersModel> communityGroupMemberModel = new ArrayList<>();
     private RecyclerView groupMemberRecyclerView;
-    private TextView groupName,groupDescription,groupAdminName,groupCreationDateAndTime;
-    String GroupName,GroupDescription,GroupAdminName,GroupCreationDateAndTime;
+    private TextView groupName, groupDescription, groupAdminName, groupCreationDateAndTime;
+    String GroupName, GroupDescription, GroupAdminName, GroupCreationDateAndTime;
     Integer ProfileIcon;
-    private Button conversationButton,ignoreButton,exitButton,sendRequestButton;
-    private RelativeLayout conversationMainLayout,requesteView,notRequestedLayout,progressTitle;
-    private ImageView backButton,profileIcon;
+    private Button conversationButton, ignoreButton, exitButton, sendRequestButton;
+    private RelativeLayout conversationMainLayout, requesteView, notRequestedLayout, progressTitle;
+    private ImageView backButton, profileIcon;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,13 +54,13 @@ public class InvitedGroupViewFragment extends Fragment {
         conversationButton = rootview.findViewById(R.id.conversationButton);
         ignoreButton = rootview.findViewById(R.id.ignoreButton);
         exitButton = rootview.findViewById(R.id.exitButton);
-        conversationMainLayout=rootview.findViewById(R.id.conversationMainLayout);
-        backButton=rootview.findViewById(R.id.backButton);
-        requesteView=rootview.findViewById(R.id.requesteView);
-        profileIcon=rootview.findViewById(R.id.systemIcon);
-        notRequestedLayout=rootview.findViewById(R.id.notRequestedLayout);
-        sendRequestButton=rootview.findViewById(R.id.sendRequestButton);
-        progressTitle=rootview.findViewById(R.id.progressTitle);
+        conversationMainLayout = rootview.findViewById(R.id.conversationMainLayout);
+        backButton = rootview.findViewById(R.id.backButton);
+        requesteView = rootview.findViewById(R.id.requesteView);
+        profileIcon = rootview.findViewById(R.id.systemIcon);
+        notRequestedLayout = rootview.findViewById(R.id.notRequestedLayout);
+        sendRequestButton = rootview.findViewById(R.id.sendRequestButton);
+        progressTitle = rootview.findViewById(R.id.progressTitle);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         groupMemberRecyclerView.setLayoutManager(linearLayoutManager);
@@ -104,7 +104,7 @@ public class InvitedGroupViewFragment extends Fragment {
             GroupDescription = bundle.getString("GroupDescription");
             GroupAdminName = bundle.getString("GroupAdminName");
             GroupCreationDateAndTime = bundle.getString("GroupCreationDateAndTime");
-            ProfileIcon=bundle.getInt("GroupIcon");
+            ProfileIcon = bundle.getInt("GroupIcon");
 
 
             groupName.setText(GroupName);
@@ -131,7 +131,6 @@ public class InvitedGroupViewFragment extends Fragment {
             conversationMainLayout.setVisibility(View.GONE);
             requesteView.setVisibility(View.GONE);
         }
-
 
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -242,19 +241,19 @@ public class InvitedGroupViewFragment extends Fragment {
             public void onClick(View v) {
                 requesteView.setVisibility(View.VISIBLE);
                 notRequestedLayout.setVisibility(View.GONE);
-                Toast toast=new Toast(getContext());
+                Toast toast = new Toast(getContext());
                 ViewGroup viewGroup = rootview.findViewById(android.R.id.content);
                 View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.toast_layout, viewGroup, false);
                 TextView text = (TextView) dialogView.findViewById(R.id.visibleToast);
                 text.setText(getText(R.string.requestSuccess));
                 toast.setView(dialogView);
-                toast.makeText(getActivity(),"", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.getAbsoluteGravity(0,0),0,520);
+                toast.makeText(getActivity(), "", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.getAbsoluteGravity(0, 0), 0, 520);
                 toast.show();
 
             }
         });
         return rootview;
-        }
-
     }
+
+}

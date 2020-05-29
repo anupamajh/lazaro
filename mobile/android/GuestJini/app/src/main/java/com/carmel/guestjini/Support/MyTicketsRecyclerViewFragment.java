@@ -98,7 +98,6 @@ public class MyTicketsRecyclerViewFragment extends Fragment implements TicketAda
         searchIcon = rootView.findViewById(R.id.searchIcon);
 
 
-
 //        spinner=rootView.findViewById(R.id.selectDateSpinner);
 //        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
 //                R.array.planets_array, android.R.layout.simple_spinner_item);
@@ -188,14 +187,14 @@ public class MyTicketsRecyclerViewFragment extends Fragment implements TicketAda
                     tickets.addAll(ticketResponse.getTaskTicketList());
                     ticketAdapter.updateData(ticketResponse.getTaskTicketList());
                 } else {
-                    showDialog(false,"There was a problem fetching tickets! Please try after sometime");
+                    showDialog(false, "There was a problem fetching tickets! Please try after sometime");
                 }
             }
 
             @Override
             public void onFailure(Call<TicketResponse> call, Throwable t) {
                 progressDialog.dismiss();
-                showDialog(false,"There was a problem fetching tickets! Please try after sometime");
+                showDialog(false, "There was a problem fetching tickets! Please try after sometime");
             }
         });
 
@@ -254,7 +253,7 @@ public class MyTicketsRecyclerViewFragment extends Fragment implements TicketAda
             @Override
             public void onClick(View view) {
                 String strSearch = txtSearch.getText().toString().trim();
-                if(!strSearch.equals("")){
+                if (!strSearch.equals("")) {
                     List<Ticket> collect = tickets.stream().filter(ticket -> (
                             (ticket.getTicketNarration() + " " + ticket.getTicketTitle())
                                     .toLowerCase().trim()
@@ -262,7 +261,7 @@ public class MyTicketsRecyclerViewFragment extends Fragment implements TicketAda
                     ).collect(Collectors.toList());
                     ticketAdapter.updateData(collect);
 
-                }else{
+                } else {
                     ticketAdapter.updateData(tickets);
                 }
 

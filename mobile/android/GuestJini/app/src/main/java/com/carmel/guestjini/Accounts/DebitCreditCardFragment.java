@@ -26,9 +26,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class DebitCreditCardFragment extends Fragment {
     private Button payButton;
-    private EditText cardNumberEditText,expiryDateEditText,cvvEditText,cardHolderNameEditText;
-    private TextView cardNumberErrorField,expiryDateErrorField,cvvErrorField,cardHolderNameErrorField;
-    private ConstraintLayout debitCreditMainLayout,processingLayout;
+    private EditText cardNumberEditText, expiryDateEditText, cvvEditText, cardHolderNameEditText;
+    private TextView cardNumberErrorField, expiryDateErrorField, cvvErrorField, cardHolderNameErrorField;
+    private ConstraintLayout debitCreditMainLayout, processingLayout;
     private TextView amount;
     private ImageView backArrow;
 
@@ -36,41 +36,40 @@ public class DebitCreditCardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootview= inflater.inflate(R.layout.fragment_debit_credit_card, container, false);
-        payButton=rootview.findViewById(R.id.payButton);
-        cardNumberEditText=rootview.findViewById(R.id.cardNumberEditText);
-        expiryDateEditText=rootview.findViewById(R.id.expiryDateEditText);
-        cvvEditText=rootview.findViewById(R.id.cvvEditText);
-        cardHolderNameEditText=rootview.findViewById(R.id.cardHolderNameEditText);
+        View rootview = inflater.inflate(R.layout.fragment_debit_credit_card, container, false);
+        payButton = rootview.findViewById(R.id.payButton);
+        cardNumberEditText = rootview.findViewById(R.id.cardNumberEditText);
+        expiryDateEditText = rootview.findViewById(R.id.expiryDateEditText);
+        cvvEditText = rootview.findViewById(R.id.cvvEditText);
+        cardHolderNameEditText = rootview.findViewById(R.id.cardHolderNameEditText);
 
-        cardNumberErrorField=rootview.findViewById(R.id.cardNumberErrorField);
-        expiryDateErrorField=rootview.findViewById(R.id.expiryDateErrorField);
-        cvvErrorField=rootview.findViewById(R.id.cvvErrorField);
-        cardHolderNameErrorField=rootview.findViewById(R.id.cardHolderNameErrorField);
-        debitCreditMainLayout=rootview.findViewById(R.id.debitCreditMainLayout);
-        processingLayout=rootview.findViewById(R.id.processingLayout);
-        amount=rootview.findViewById(R.id.amount);
-        backArrow=rootview.findViewById(R.id.backArrow);
+        cardNumberErrorField = rootview.findViewById(R.id.cardNumberErrorField);
+        expiryDateErrorField = rootview.findViewById(R.id.expiryDateErrorField);
+        cvvErrorField = rootview.findViewById(R.id.cvvErrorField);
+        cardHolderNameErrorField = rootview.findViewById(R.id.cardHolderNameErrorField);
+        debitCreditMainLayout = rootview.findViewById(R.id.debitCreditMainLayout);
+        processingLayout = rootview.findViewById(R.id.processingLayout);
+        amount = rootview.findViewById(R.id.amount);
+        backArrow = rootview.findViewById(R.id.backArrow);
 
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PaymentOptionsFragment paymentOptionsFragment=new PaymentOptionsFragment();
-                FragmentManager fragmentManager=getFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.AccountsPlaceHolder,paymentOptionsFragment);
+                PaymentOptionsFragment paymentOptionsFragment = new PaymentOptionsFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.AccountsPlaceHolder, paymentOptionsFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });
 
-        final String Amount=amount.getText().toString();
+        final String Amount = amount.getText().toString();
         payButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(cardNumberEditText.getText().toString().trim().length()==0 && expiryDateEditText.getText().toString().trim().length()==0
-                && cvvEditText.getText().toString().trim().length()==0 && cardHolderNameEditText.getText().toString().trim().length()==0)
-                {
+                if (cardNumberEditText.getText().toString().trim().length() == 0 && expiryDateEditText.getText().toString().trim().length() == 0
+                        && cvvEditText.getText().toString().trim().length() == 0 && cardHolderNameEditText.getText().toString().trim().length() == 0) {
                     cardNumberErrorField.setVisibility(View.VISIBLE);
                     expiryDateErrorField.setVisibility(View.VISIBLE);
                     cvvErrorField.setVisibility(View.VISIBLE);
@@ -80,7 +79,7 @@ public class DebitCreditCardFragment extends Fragment {
                     expiryDateEditText.setBackgroundResource(R.drawable.card_red_edit_box);
                     cvvEditText.setBackgroundResource(R.drawable.card_red_edit_box);
                     cardHolderNameEditText.setBackgroundResource(R.drawable.card_red_edit_box);
-                }else{
+                } else {
                     payButton.setBackgroundTintList(ContextCompat.getColorStateList(getContext(), R.color.colorSummerSky));
                     cardNumberEditText.setBackgroundResource(R.drawable.card_edit_box);
                     expiryDateEditText.setBackgroundResource(R.drawable.card_edit_box);
@@ -91,10 +90,10 @@ public class DebitCreditCardFragment extends Fragment {
                     cvvErrorField.setVisibility(View.GONE);
                     cardHolderNameErrorField.setVisibility(View.GONE);
 
-                    final Dialog dialog=new Dialog(getContext());
+                    final Dialog dialog = new Dialog(getContext());
                     dialog.setContentView(R.layout.dialogbox_processing);
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    LinearLayout linearLayout=(LinearLayout)dialog.findViewById(R.id.proceesDialogLayout);
+                    LinearLayout linearLayout = (LinearLayout) dialog.findViewById(R.id.proceesDialogLayout);
                     linearLayout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -112,7 +111,7 @@ public class DebitCreditCardFragment extends Fragment {
         processingLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Dialog dialog=new Dialog(getContext());
+                final Dialog dialog = new Dialog(getContext());
                 dialog.setContentView(R.layout.alert_dailogbox);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -123,7 +122,7 @@ public class DebitCreditCardFragment extends Fragment {
                 TextView alertDailogMessage = (TextView) dialog.findViewById(R.id.alertDailogDescription);
                 alertDailogMessage.setText(R.string.ticket_failed);
 
-                FloatingActionButton doneButton= (FloatingActionButton) dialog.findViewById(R.id.done_button);
+                FloatingActionButton doneButton = (FloatingActionButton) dialog.findViewById(R.id.done_button);
                 doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
                         .parseColor("#E65959")));
 
@@ -132,7 +131,7 @@ public class DebitCreditCardFragment extends Fragment {
                     public void onClick(View v) {
                         dialog.dismiss();
 
-                        final Dialog dialog=new Dialog(getContext());
+                        final Dialog dialog = new Dialog(getContext());
                         dialog.setContentView(R.layout.alert_dailogbox);
                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -142,17 +141,17 @@ public class DebitCreditCardFragment extends Fragment {
                         TextView alertDailogMessage = (TextView) dialog.findViewById(R.id.alertDailogDescription);
                         alertDailogMessage.setText(getText(R.string.ticket_success));
 
-                        FloatingActionButton doneButton= (FloatingActionButton) dialog.findViewById(R.id.done_button);
+                        FloatingActionButton doneButton = (FloatingActionButton) dialog.findViewById(R.id.done_button);
                         doneButton.setBackgroundTintList(ColorStateList.valueOf(Color
                                 .parseColor("#32BDD2")));
                         doneButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 dialog.dismiss();
-                                RentInvoiceDetailsFragment rentInvoiceDetailsFragment=new RentInvoiceDetailsFragment();
-                                FragmentManager fragmentManager=getFragmentManager();
-                                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                                fragmentTransaction.replace(R.id.AccountsPlaceHolder,rentInvoiceDetailsFragment);
+                                RentInvoiceDetailsFragment rentInvoiceDetailsFragment = new RentInvoiceDetailsFragment();
+                                FragmentManager fragmentManager = getFragmentManager();
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                fragmentTransaction.replace(R.id.AccountsPlaceHolder, rentInvoiceDetailsFragment);
                                 fragmentTransaction.addToBackStack(null);
                                 fragmentTransaction.commit();
 //                                Bundle bundle=new Bundle();

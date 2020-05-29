@@ -4,7 +4,7 @@ import androidx.annotation.Nullable;
 
 
 public class AuthServiceHolder {
-   AuthService authService = null;
+    AuthService authService = null;
 
     @Nullable
     public AuthService get() {

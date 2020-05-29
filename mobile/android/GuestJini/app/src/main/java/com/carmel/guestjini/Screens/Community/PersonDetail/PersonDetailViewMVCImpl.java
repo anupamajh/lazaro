@@ -16,7 +16,6 @@ import com.carmel.guestjini.Networking.Users.InterestMap;
 import com.carmel.guestjini.Networking.Users.PeopleResponse;
 import com.carmel.guestjini.Networking.Users.UserInterests;
 import com.carmel.guestjini.R;
-import com.carmel.guestjini.Screens.Common.ViewMVCFactory;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
 
 public class PersonDetailViewMVCImpl extends
@@ -69,7 +68,7 @@ public class PersonDetailViewMVCImpl extends
                 btnAddFavourite.setImageResource(R.drawable.unlike_button_xhdpi);
                 addToFavouriteTitle.setText("Add to favourites");
                 isFavourite = 0;
-            }else{
+            } else {
                 btnAddFavourite.setImageResource(R.drawable.like_button_xhdpi);
                 addToFavouriteTitle.setText("Remove from favourites");
                 isFavourite = 1;
@@ -95,10 +94,10 @@ public class PersonDetailViewMVCImpl extends
         txtGender.setText(genderText);
         txtMobileNumber.setText(this.peopleResponse.getOthersAddressBook().getPhone1());
         txtEmail.setText(this.peopleResponse.getOthersAddressBook().getEmail1());
-        if(this.peopleResponse.getIsFavourite() == 0){
+        if (this.peopleResponse.getIsFavourite() == 0) {
             btnAddFavourite.setImageResource(R.drawable.unlike_button_xhdpi);
             addToFavouriteTitle.setText("Add to favourites");
-        }else{
+        } else {
             btnAddFavourite.setImageResource(R.drawable.like_button_xhdpi);
             addToFavouriteTitle.setText("Remove from favourites");
         }
@@ -153,7 +152,7 @@ public class PersonDetailViewMVCImpl extends
         constraintSet.connect(interestHeading.getId(), ConstraintSet.TOP, previousView.getId(), ConstraintSet.BOTTOM);
         constraintSet.applyTo(commonInterestsSubLayout);
         Integer interestViewId = interestHeading.getId();
-        for(UserInterests userInterests: interestMap.getInterestList()){
+        for (UserInterests userInterests : interestMap.getInterestList()) {
             interestViewId = addInterests(userInterests, interestViewId);
         }
         TextView deviderLine = new TextView(getContext());
@@ -161,7 +160,7 @@ public class PersonDetailViewMVCImpl extends
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
         );
         layoutParams.setMargins(24, 8, 0, 0);
-        deviderLine.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.divider_line));
+        deviderLine.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.divider_line));
         deviderLine.setId(View.generateViewId());
         commonInterestsSubLayout.addView(deviderLine, layoutParams);
         constraintSet = new ConstraintSet();
@@ -172,9 +171,9 @@ public class PersonDetailViewMVCImpl extends
         return deviderLine.getId();
     }
 
-    private Integer addInterests(UserInterests userInterests, Integer interestViewId){
+    private Integer addInterests(UserInterests userInterests, Integer interestViewId) {
         TextView previousView = commonInterestTitle;
-        if(interestViewId != null){
+        if (interestViewId != null) {
             previousView = commonInterestsSubLayout.findViewById(interestViewId);
         }
         TextView interestView = new TextView(getContext());
@@ -221,7 +220,7 @@ public class PersonDetailViewMVCImpl extends
         constraintSet.connect(interestHeading.getId(), ConstraintSet.TOP, previousView.getId(), ConstraintSet.BOTTOM);
         constraintSet.applyTo(otherInterestsSubLayout);
         Integer interestViewId = interestHeading.getId();
-        for(UserInterests userInterests: interestMap.getInterestList()){
+        for (UserInterests userInterests : interestMap.getInterestList()) {
             interestViewId = addOtherInterests(userInterests, interestViewId);
         }
         TextView deviderLine = new TextView(getContext());
@@ -229,7 +228,7 @@ public class PersonDetailViewMVCImpl extends
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
         );
         layoutParams.setMargins(24, 8, 0, 0);
-        deviderLine.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.divider_line));
+        deviderLine.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.divider_line));
         deviderLine.setId(View.generateViewId());
         otherInterestsSubLayout.addView(deviderLine, layoutParams);
         constraintSet = new ConstraintSet();
@@ -240,9 +239,9 @@ public class PersonDetailViewMVCImpl extends
         return deviderLine.getId();
     }
 
-    private Integer addOtherInterests(UserInterests userInterests, Integer interestViewId){
+    private Integer addOtherInterests(UserInterests userInterests, Integer interestViewId) {
         TextView previousView = otherInterestsTitle;
-        if(interestViewId != null){
+        if (interestViewId != null) {
             previousView = otherInterestsSubLayout.findViewById(interestViewId);
         }
         TextView interestView = new TextView(getContext());

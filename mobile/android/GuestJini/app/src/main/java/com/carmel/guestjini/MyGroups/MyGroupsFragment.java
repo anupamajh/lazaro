@@ -167,7 +167,7 @@ public class MyGroupsFragment extends Fragment implements MyGroupsAdapter.OnItem
         fragmentTransaction.replace(R.id.myGroupsPlaceHolder, myGroupsDetailsFragment);
         fragmentTransaction.addToBackStack(null);
         Bundle bundle = new Bundle();
-        bundle.putString("groupId",groupArrayList.get(position).getId());
+        bundle.putString("groupId", groupArrayList.get(position).getId());
 //        bundle.putString("GroupDescription",myGroupsArrayList.get(position).getCommunityGroupDescription());
 //        bundle.putString("GroupCreationDateAndTime",myGroupsArrayList.get(position).getCommunityGroupCreationDateAndTime());
 //        bundle.putInt("GroupIcon",myGroupsArrayList.get(position).getAdminProfileIcon());
@@ -243,7 +243,7 @@ public class MyGroupsFragment extends Fragment implements MyGroupsAdapter.OnItem
             group.setGroupType(2);
             if (group.getName().trim().equals("")) {
                 showDialog(false, "Group name is required!");
-            }else{
+            } else {
                 progressDialog.show();
                 AuthServiceHolder authServiceHolder = new AuthServiceHolder();
                 SharedPreferences preferences = getContext().getSharedPreferences("GuestJini", Context.MODE_PRIVATE);

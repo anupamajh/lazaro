@@ -9,7 +9,9 @@ public interface PeopleListViewMVC
         extends ObservableViewMvc<PeopleListViewMVC.Listener> {
     public interface Listener {
         void onPersonClicked(Person person);
+
         void onFavouriteClicked(Person person, int isFavourite);
+
         void onBackClicked();
     }
 

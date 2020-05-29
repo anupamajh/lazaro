@@ -45,7 +45,7 @@ public class FragmentFrameHelper {
         Fragment currentFragment = getCurrentFragment();
 
         if (mFragmentManager.getBackStackEntryCount() > 0) {
-           removeCurrentFragment();
+            removeCurrentFragment();
             if (mFragmentManager.popBackStackImmediate()) {
                 return;
             }
@@ -53,7 +53,7 @@ public class FragmentFrameHelper {
 
         if (HierarchicalFragment.class.isInstance(currentFragment)) {
             Fragment parentFragment =
-                    ((HierarchicalFragment)currentFragment).getHierarchicalParentFragment();
+                    ((HierarchicalFragment) currentFragment).getHierarchicalParentFragment();
             if (parentFragment != null) {
                 replaceFragment(parentFragment, false, true);
                 return;
@@ -88,7 +88,7 @@ public class FragmentFrameHelper {
         ft.replace(getFragmentFrameId(), newFragment, null);
 
         if (mFragmentManager.isStateSaved()) {
-              ft.commitAllowingStateLoss();
+            ft.commitAllowingStateLoss();
         } else {
             ft.commit();
         }

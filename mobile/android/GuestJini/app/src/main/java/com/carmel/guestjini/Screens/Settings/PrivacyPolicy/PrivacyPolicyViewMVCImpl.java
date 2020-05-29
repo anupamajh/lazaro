@@ -25,7 +25,7 @@ public class PrivacyPolicyViewMVCImpl
         String url = "https://guesture.in/privacy-policy";
         webView.loadUrl(url);
         btnBack.setOnClickListener(view -> {
-            for(Listener listener:getListeners()){
+            for (Listener listener : getListeners()) {
                 listener.onBackPressed();
             }
         });

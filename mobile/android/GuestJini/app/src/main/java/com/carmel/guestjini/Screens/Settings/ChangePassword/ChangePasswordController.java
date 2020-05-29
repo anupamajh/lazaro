@@ -13,7 +13,7 @@ public class ChangePasswordController
         implements ChangePasswordViewMVC.Listener,
         DialogsEventBus.Listener,
         ChangePasswordUseCase.Listener {
-     private enum ScreenState {
+    private enum ScreenState {
         IDLE,
         CHANGING_PASSWORD, PASSWORD_CHANGED,
         NETWORK_ERROR
@@ -123,6 +123,7 @@ public class ChangePasswordController
 
     public static class SavedState implements Serializable {
         private final ScreenState mScreenState;
+
         public SavedState(ScreenState screenState) {
             mScreenState = screenState;
         }

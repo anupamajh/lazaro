@@ -16,7 +16,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.Route;
 
-public class TokenAuthenticator  implements Authenticator {
+public class TokenAuthenticator implements Authenticator {
     private Context context;
     private AuthServiceHolder authServiceHolder;
 
@@ -54,10 +54,10 @@ public class TokenAuthenticator  implements Authenticator {
                     }
                 }
                 return response.request().newBuilder()
-                        .header("Authorization", "Bearer " +newAccessToken)
+                        .header("Authorization", "Bearer " + newAccessToken)
                         .build();
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             Log.d("Exception", ex.toString());
         }
         return null;

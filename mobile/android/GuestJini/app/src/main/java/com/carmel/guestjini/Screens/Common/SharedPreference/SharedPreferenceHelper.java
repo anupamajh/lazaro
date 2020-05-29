@@ -16,46 +16,56 @@ public class SharedPreferenceHelper {
         this.editor = editor;
     }
 
-    public void saveStringValue(String key, String value){
+    public void saveStringValue(String key, String value) {
         editor.putString(key, value);
     }
-    public void saveLongValue(String key, long value){
+
+    public void saveLongValue(String key, long value) {
         editor.putLong(key, value);
     }
-    public void saveBooleanValue(String key, boolean value){
+
+    public void saveBooleanValue(String key, boolean value) {
         editor.putBoolean(key, value);
     }
-    public void saveFloatValue(String key, float value){
+
+    public void saveFloatValue(String key, float value) {
         editor.putFloat(key, value);
     }
-    public void saveIntValue(String key, int value){
+
+    public void saveIntValue(String key, int value) {
         editor.putInt(key, value);
     }
-    public void saveStringSetValue(String key, Set<String> value){
+
+    public void saveStringSetValue(String key, Set<String> value) {
         editor.putStringSet(key, value);
     }
 
-    public void commit(){
+    public void commit() {
         editor.commit();
     }
 
-    public String readStringValue(String key){
-        return preferences.getString(key,"");
+    public String readStringValue(String key) {
+        return preferences.getString(key, "");
     }
-    public long readLongValue(String key){
+
+    public long readLongValue(String key) {
         return preferences.getLong(key, 0);
     }
-    public boolean readBooleanValue(String key){
+
+    public boolean readBooleanValue(String key) {
         return preferences.getBoolean(key, false);
     }
-    public float readFloatValue(String key){
+
+    public float readFloatValue(String key) {
         return preferences.getFloat(key, 0f);
     }
-    public int readIntValue(String key){
+
+    public int readIntValue(String key) {
         return preferences.getInt(key, 0);
     }
-    public  Set<String> readStringSetValue(String key){
-        return  preferences.getStringSet(key, null);
+
+    public Set<String> readStringSetValue(String key) {
+        return preferences.getStringSet(key, null);
     }
 
 }

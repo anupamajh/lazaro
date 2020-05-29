@@ -222,22 +222,22 @@ public class FindHelpFragment extends Fragment implements ExploreTicketsAdapter.
                         if (kbResponse.getSuccess()) {
                             exploreTicketsAdapter.update(kbResponse.getKbList());
                         } else {
-                            showDialog(false,"There was a problem fetching articles! Please try after sometime");
+                            showDialog(false, "There was a problem fetching articles! Please try after sometime");
                         }
                     } catch (Exception ex) {
-                        showDialog(false,"There was a problem fetching articles! Please try after sometime");
+                        showDialog(false, "There was a problem fetching articles! Please try after sometime");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<KBResponse> call, Throwable t) {
                     progressDialog.dismiss();
-                    showDialog(false,"There was a problem fetching articles! Please try after sometime");
+                    showDialog(false, "There was a problem fetching articles! Please try after sometime");
                 }
             });
         } catch (Exception ex) {
             progressDialog.dismiss();
-            showDialog(false,"There was a problem fetching articles! Please try after sometime");
+            showDialog(false, "There was a problem fetching articles! Please try after sometime");
         }
 
     }

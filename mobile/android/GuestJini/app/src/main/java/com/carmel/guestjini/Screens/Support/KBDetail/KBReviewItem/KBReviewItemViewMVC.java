@@ -7,5 +7,6 @@ public interface KBReviewItemViewMVC extends ObservableViewMvc<KBReviewItemViewM
     public interface Listener {
 
     }
+
     void bindReviewItem(KBReview kbReview);
 }

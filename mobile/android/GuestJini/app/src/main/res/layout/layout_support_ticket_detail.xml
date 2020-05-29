@@ -217,6 +217,7 @@
                         android:text="@string/activityTitle"
                         android:textColor="@color/colorZambezi1"
                         android:textSize="13sp" />
+
                     <RelativeLayout
                         android:id="@+id/layoutTicketCommentCard"
                         android:layout_width="match_parent"
@@ -225,16 +226,14 @@
                         android:layout_marginTop="20dp"
                         android:paddingBottom="40dp"
                         android:visibility="visible"
-                        android:layout_below="@+id/txtActivityTitle"
-                        >
+                        android:layout_below="@+id/txtActivityTitle">
 
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/cardTicketComment"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/colorAzure"
-                            app:cardCornerRadius="6dp"
-                            >
+                            app:cardCornerRadius="6dp">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
@@ -293,13 +292,14 @@
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </com.google.android.material.card.MaterialCardView>
                     </RelativeLayout>
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/layoutCommentList"
                         android:layout_alignParentStart="true"
-                        android:layout_below="@+id/layoutTicketCommentCard"
-                        >
+                        android:layout_below="@+id/layoutTicketCommentCard">
+
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/lstTaskNotes"
                             android:layout_width="match_parent"
@@ -307,7 +307,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"/>
+                            app:layout_constraintTop_toTopOf="parent" />
                     </RelativeLayout>
                 </RelativeLayout>
             </RelativeLayout>

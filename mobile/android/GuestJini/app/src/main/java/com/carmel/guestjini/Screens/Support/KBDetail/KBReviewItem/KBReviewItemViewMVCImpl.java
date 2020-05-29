@@ -12,8 +12,7 @@ import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
 
 public class KBReviewItemViewMVCImpl
         extends BaseObservableViewMvc<KBReviewItemViewMVC.Listener>
-    implements KBReviewItemViewMVC
-{
+        implements KBReviewItemViewMVC {
 
     private final TextView txtReviewerName;
     private final TextView txtReviewDate;

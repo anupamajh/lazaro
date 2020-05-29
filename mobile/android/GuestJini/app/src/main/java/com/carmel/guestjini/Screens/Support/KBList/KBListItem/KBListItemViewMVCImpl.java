@@ -54,7 +54,7 @@ public class KBListItemViewMVCImpl
         txtKBAuthorName.setText(kb.getAuthorName());
         txtKBDate.setText(kb.getCreationTime()); //TODO: format date here
         txtKBShortText.setText(StringUtils.toEllipsis(
-                kb.getTopicNarration(),150,0
+                kb.getTopicNarration(), 150, 0
                 )
         );
         //TODO: find a nice way to bind image

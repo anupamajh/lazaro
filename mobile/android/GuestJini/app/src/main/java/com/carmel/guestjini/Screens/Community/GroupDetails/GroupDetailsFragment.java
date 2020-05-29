@@ -14,13 +14,15 @@ import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
 public class GroupDetailsFragment
         extends BaseFragment {
     private static final String ARG_GROUP_ID_STRING = "ARG_GROUP_ID_STRING";
+    private static final String ARG_GROUP_TYPE_INTEGER = "ARG_GROUP_TYPE_INTEGER";
     private static final String SAVED_STATE_GROUP_DETAIL_FRAGMENT = "SAVED_STATE_GROUP_DETAIL_FRAGMENT";
 
     private GroupDetailsController groupDetailsController;
 
-    public static Fragment createFragment(String groupId) {
+    public static Fragment createFragment(String groupId, Integer groupType) {
         Bundle args = new Bundle();
         args.putString(ARG_GROUP_ID_STRING, groupId);
+        args.putInt(ARG_GROUP_TYPE_INTEGER, groupType);
         GroupDetailsFragment fragment = new GroupDetailsFragment();
         fragment.setArguments(args);
         return fragment;
@@ -48,7 +50,7 @@ public class GroupDetailsFragment
     @Override
     public void onStart() {
         super.onStart();
-        groupDetailsController.onStart(getGroupId());
+        groupDetailsController.onStart(getGroupId(), getGroupType());
     }
 
     @Override
@@ -66,4 +68,9 @@ public class GroupDetailsFragment
     private String getGroupId() {
         return getArguments().getString(ARG_GROUP_ID_STRING);
     }
+
+    private Integer getGroupType() {
+        return getArguments().getInt(ARG_GROUP_TYPE_INTEGER);
+    }
+
 }

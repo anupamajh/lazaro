@@ -128,6 +128,7 @@ public class KBDetailController
         viewMVC.showProgressIndication();
         fetchKBDetailsUseCase.fetchKBDetailsAndNotify(kbId);
     }
+
     private void fetchKBRatingAndNotify() {
         mScreenState = ScreenState.FETCHING_KB_RATING;
         viewMVC.showProgressIndication();
@@ -239,6 +240,8 @@ public class KBDetailController
         mScreenState = ScreenState.KB_DISLIKE_SAVED;
         viewMVC.hideProgressIndication();
         fetchKBRatingPercentageAndNotify();
+        dialogsManager.showInfoDialog(null, "Knowledge Base", "Your rating has been submitted!", true);
+
     }
 
     @Override
@@ -253,6 +256,7 @@ public class KBDetailController
         mScreenState = ScreenState.KB_LIKE_SAVED;
         viewMVC.hideProgressIndication();
         fetchKBRatingPercentageAndNotify();
+        dialogsManager.showInfoDialog(null, "Knowledge Base", "Your rating has been submitted!", true);
     }
 
     @Override
@@ -268,6 +272,7 @@ public class KBDetailController
         viewMVC.hideProgressIndication();
         viewMVC.clearReviewText();
         fetchKBReviewListAndNotify();
+        dialogsManager.showInfoDialog(null, "Knowledge Base", "Your review has been submitted!", true);
     }
 
     @Override

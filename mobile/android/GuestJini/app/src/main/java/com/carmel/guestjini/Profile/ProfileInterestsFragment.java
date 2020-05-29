@@ -32,81 +32,82 @@ import Model.ProfileInterestsModel;
 public class ProfileInterestsFragment extends Fragment implements ProfileInterestsRecyclerAdapter.OnItemClickListener {
 
     RecyclerView recyclerView;
-    ArrayList<ProfileInterestsModel> profileInterestsList =new ArrayList<>();
+    ArrayList<ProfileInterestsModel> profileInterestsList = new ArrayList<>();
     TextView viewMyInterestsText;
     ImageView backButton;
     ConstraintLayout myInterestsMainLayout;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-     final  View rootView= inflater.inflate(R.layout.fragment_profile_interests, container, false);
-       recyclerView=rootView.findViewById(R.id.recyclerViewMyInterest1);
-       viewMyInterestsText=rootView.findViewById(R.id.viewMyInterestsTilte);
-        myInterestsMainLayout=rootView.findViewById(R.id.myInterestsMainLayout);
-        backButton =rootView.findViewById(R.id.leftArrowMarkMyInterests);
+        final View rootView = inflater.inflate(R.layout.fragment_profile_interests, container, false);
+        recyclerView = rootView.findViewById(R.id.recyclerViewMyInterest1);
+        viewMyInterestsText = rootView.findViewById(R.id.viewMyInterestsTilte);
+        myInterestsMainLayout = rootView.findViewById(R.id.myInterestsMainLayout);
+        backButton = rootView.findViewById(R.id.leftArrowMarkMyInterests);
 
 //         demo purpose
-       viewMyInterestsText.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               final Dialog dialog = new Dialog(getContext());
-               dialog.setContentView(R.layout.selected_interest_list_dailog_box);
-               dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-               WindowManager.LayoutParams wmlp = dialog.getWindow().getAttributes();
+        viewMyInterestsText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.selected_interest_list_dailog_box);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                WindowManager.LayoutParams wmlp = dialog.getWindow().getAttributes();
 
-               wmlp.gravity = Gravity.TOP | Gravity.RIGHT;
-               wmlp.x = 50;   //x position
-               wmlp.y = 510;   //y position
+                wmlp.gravity = Gravity.TOP | Gravity.RIGHT;
+                wmlp.x = 50;   //x position
+                wmlp.y = 510;   //y position
 
-               ConstraintLayout constraintLayout=(ConstraintLayout) dialog.findViewById(R.id.selectedInterestListDailogBox);
+                ConstraintLayout constraintLayout = (ConstraintLayout) dialog.findViewById(R.id.selectedInterestListDailogBox);
                 constraintLayout.setOnClickListener(new View.OnClickListener() {
-                   @Override
-                   public void onClick(View v) {
-                       dialog.dismiss();
-                   }
-               });
-               dialog.show();
-           }
-       });
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+            }
+        });
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ProfileFragment profileFragment=new ProfileFragment();
-                FragmentManager fragmentManager=getFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+                ProfileFragment profileFragment = new ProfileFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.add(R.id.profilePlaceHolder,profileFragment).commit();
+                fragmentTransaction.add(R.id.profilePlaceHolder, profileFragment).commit();
 
             }
         });
         myInterestsMainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ProfileFragment profileFragment=new ProfileFragment();
-                FragmentManager fragmentManager=getFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+                ProfileFragment profileFragment = new ProfileFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.add(R.id.profilePlaceHolder,profileFragment).commit();
-                Toast toast=new Toast(getContext());
+                fragmentTransaction.add(R.id.profilePlaceHolder, profileFragment).commit();
+                Toast toast = new Toast(getContext());
                 ViewGroup viewGroup = rootView.findViewById(android.R.id.content);
                 View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.toast_layout, viewGroup, false);
                 TextView text = (TextView) dialogView.findViewById(R.id.visibleToast);
                 text.setText("NOT SAVED                                                            " +
                         " Lorem ipsum doler sit amet.");
                 toast.setView(dialogView);
-                toast.makeText(getActivity(),"", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.getAbsoluteGravity(0,0),0,520);
+                toast.makeText(getActivity(), "", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.getAbsoluteGravity(0, 0), 0, 520);
                 toast.show();
             }
         });
 
         // demo purpose
 
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        ProfileInterestsRecyclerAdapter myInterests1RecyclerAdapter=new ProfileInterestsRecyclerAdapter(rootView.getContext(), profileInterestsList,this);
+        ProfileInterestsRecyclerAdapter myInterests1RecyclerAdapter = new ProfileInterestsRecyclerAdapter(rootView.getContext(), profileInterestsList, this);
         recyclerView.setAdapter(myInterests1RecyclerAdapter);
 
         profileInterestsList.add(new ProfileInterestsModel(
@@ -149,8 +150,8 @@ public class ProfileInterestsFragment extends Fragment implements ProfileInteres
                 "Career and Business (05)",
                 R.drawable.dropdown_icon_mdpi));
 
-         return rootView;
-     }
+        return rootView;
+    }
 
     @Override
     public void onItemClick(int position) {

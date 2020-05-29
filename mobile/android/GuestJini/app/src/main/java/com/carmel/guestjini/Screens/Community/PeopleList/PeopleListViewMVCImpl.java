@@ -25,8 +25,8 @@ public class PeopleListViewMVCImpl
     private final ProgressBar progressBar;
 
     public PeopleListViewMVCImpl(LayoutInflater inflater,
-                             @Nullable ViewGroup parent,
-                             ViewMVCFactory viewMVCFactory
+                                 @Nullable ViewGroup parent,
+                                 ViewMVCFactory viewMVCFactory
     ) {
         setRootView(inflater.inflate(R.layout.layout_community_people_list, parent, false));
         RecyclerView peopleRecyclerView = findViewById(R.id.lstPeople);

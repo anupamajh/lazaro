@@ -22,6 +22,7 @@ public class RentInvoiceRecycleAdapter
 
     static class AccountViewHolder extends RecyclerView.ViewHolder {
         private final RentInvoiceItemMVC viewMVC;
+
         public AccountViewHolder(@NonNull RentInvoiceItemMVC viewMvc) {
             super(viewMvc.getRootView());
             this.viewMVC = viewMvc;

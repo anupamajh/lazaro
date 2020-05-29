@@ -25,7 +25,7 @@ public class GroupChatModel {
         this.addGroupChatMemberName = groupConversation.getDisplayName();
         this.addGroupChatMessage = groupConversation.getMessage();
         int viewType = GroupChatModel.ONE_TYPE;
-        if(groupConversation.getIsItMe() == 1){
+        if (groupConversation.getIsItMe() == 1) {
             viewType = GroupChatModel.TWO_TYPE;
         }
         this.viewType = viewType;

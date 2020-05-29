@@ -21,5 +21,5 @@ public interface TaskNoteService {
     @POST("/guest-jini/task-ticket-notes/save")
     Call<TaskNotesResponse> save(
             @Body TaskNote taskNote
-            );
+    );
 }

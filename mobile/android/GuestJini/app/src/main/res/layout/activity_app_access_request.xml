@@ -192,7 +192,7 @@
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/regesteredEmailErrorField" />
-            
+
             <EditText
                 android:id="@+id/registeredMobileNumberEditbox"
                 android:layout_width="match_parent"

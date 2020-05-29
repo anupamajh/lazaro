@@ -24,7 +24,7 @@ public class FetchMyProfileUseCase extends BaseObservableViewMvc<FetchMyProfileU
         this.guestJiniAPI = guestJiniAPI;
     }
 
-    public void fetchProfileAndNotify(){
+    public void fetchProfileAndNotify() {
         this.guestJiniAPI.getMyProfile().enqueue(new Callback<UserInfo>() {
             @Override
             public void onResponse(Call<UserInfo> call, Response<UserInfo> response) {
@@ -41,7 +41,7 @@ public class FetchMyProfileUseCase extends BaseObservableViewMvc<FetchMyProfileU
 
             @Override
             public void onFailure(Call<UserInfo> call, Throwable t) {
-               notifyNetworkFailure();
+                notifyNetworkFailure();
             }
         });
     }
@@ -53,7 +53,7 @@ public class FetchMyProfileUseCase extends BaseObservableViewMvc<FetchMyProfileU
         }
     }
 
-    private void notifySuccess(UserInfo  response) {
+    private void notifySuccess(UserInfo response) {
         for (Listener listener : getListeners()) {
             listener.onProfileFetched(response);
         }

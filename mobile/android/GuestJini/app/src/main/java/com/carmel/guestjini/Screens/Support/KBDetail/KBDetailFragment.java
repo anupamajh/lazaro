@@ -15,7 +15,7 @@ public class KBDetailFragment extends BaseFragment {
     private static final String ARG_KB_ID = "ARG_KB_ID";
     private static final String SAVED_STATE_KB_DETAIL_FRAGMENT = "SAVED_STATE_KB_DETAIL_FRAGMENT";
 
-    public static Fragment createFragment(String kbId){
+    public static Fragment createFragment(String kbId) {
         Bundle args = new Bundle();
         args.putString(ARG_KB_ID, kbId);
         KBDetailFragment fragment = new KBDetailFragment();

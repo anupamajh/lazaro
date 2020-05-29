@@ -101,7 +101,7 @@ public class AccountsDetailsFragment extends Fragment implements RentInvoiceAdap
         if (bundle != null) {
             AccountsTitle = bundle.getString("AccountsTitle");
             accountsTitle.setText(AccountsTitle);
-            if(AccountsTitle.equals(null)){
+            if (AccountsTitle.equals(null)) {
                 AccountsTitle = "RENT INVOICE";
             }
         }
@@ -198,7 +198,7 @@ public class AccountsDetailsFragment extends Fragment implements RentInvoiceAdap
 //        bundle.putString("RentInvoiceNo",rentInvoiceArrayList.get(position).getRentInvoiceNo());
 //        bundle.putString("RentInvoiceAmount",rentInvoiceArrayList.get(position).getRentInvoiceAmount());
         bundle.putString("AccountsTitle", AccountsTitle);
-        bundle.putString("accountTicketId",accountTicket.getId());
+        bundle.putString("accountTicketId", accountTicket.getId());
         rentInvoiceDetailsFragment.setArguments(bundle);
         fragmentTransaction.commit();
 
@@ -273,24 +273,24 @@ public class AccountsDetailsFragment extends Fragment implements RentInvoiceAdap
                 public void onResponse(Call<AccountTicketResponse> call, Response<AccountTicketResponse> response) {
                     progressDialog.dismiss();
                     AccountTicketResponse accountTicketResponse = response.body();
-                    if(accountTicketResponse.getSuccess()){
+                    if (accountTicketResponse.getSuccess()) {
                         rentInvoiceArrayList = new ArrayList<>();
                         rentInvoiceArrayList.addAll(accountTicketResponse.getAccountTicketList());
                         rentInvoiceAdapter.update(accountTicketResponse.getAccountTicketList());
-                    }else{
-                        showDialog(false,"There was a problem fetching rent invoices! Please try after sometime");
+                    } else {
+                        showDialog(false, "There was a problem fetching rent invoices! Please try after sometime");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<AccountTicketResponse> call, Throwable t) {
                     progressDialog.dismiss();
-                    showDialog(false,"There was a problem fetching rent invoices! Please try after sometime");
+                    showDialog(false, "There was a problem fetching rent invoices! Please try after sometime");
                 }
             });
-        }catch (Exception ex){
+        } catch (Exception ex) {
             progressDialog.dismiss();
-            showDialog(false,"There was a problem fetching rent invoices! Please try after sometime");
+            showDialog(false, "There was a problem fetching rent invoices! Please try after sometime");
         }
 
     }

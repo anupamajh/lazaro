@@ -53,10 +53,10 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.ViewHolder
         int currentCount = person.getUserInterestsList().size();
         String compatibilityCount = String.valueOf(currentCount) + "/" + String.valueOf(totalInterestCount);
         if (totalInterestCount > 0) {
-            width = width - (84-47);
+            width = width - (84 - 47);
             Double widthPercent = (Double.parseDouble(String.valueOf(currentCount)) / Double.parseDouble(String.valueOf(totalInterestCount)));
             Double calcWidth = Double.parseDouble(String.valueOf(width)) * (widthPercent);
-            ViewGroup.LayoutParams params = (ViewGroup.LayoutParams)  holder.compatibilityMeter.getLayoutParams();
+            ViewGroup.LayoutParams params = (ViewGroup.LayoutParams) holder.compatibilityMeter.getLayoutParams();
             params.width = calcWidth.intValue();
             holder.compatibilityMeter.setLayoutParams(params);
         }

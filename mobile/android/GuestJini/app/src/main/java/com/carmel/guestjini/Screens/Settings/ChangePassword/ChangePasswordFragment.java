@@ -47,7 +47,7 @@ public class ChangePasswordFragment extends BaseFragment {
         outState.putSerializable(SAVED_STATE_CHANGE_PASSWORD_FRAGMENT, changePasswordController.getSavedState());
     }
 
-    private void restoreControllerState(Bundle savedInstanceState){
+    private void restoreControllerState(Bundle savedInstanceState) {
         changePasswordController.restoreSavedState(
                 (ChangePasswordController.SavedState)
                         savedInstanceState.getSerializable(SAVED_STATE_CHANGE_PASSWORD_FRAGMENT)

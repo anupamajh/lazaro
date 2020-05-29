@@ -140,6 +140,23 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <Button
+                        android:id="@+id/btnMessage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="32dp"
+                        android:backgroundTint="@color/colorSummerSky"
+                        android:letterSpacing="0.06"
+                        android:text="MESSAGE"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="10sp"
+                        app:fontFamily="@font/roboto_bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -149,6 +166,7 @@
                     android:layout_below="@id/layoutGroupHeader"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true">
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_marginStart="32dp"
@@ -156,6 +174,7 @@
                         android:layout_marginEnd="32dp"
                         android:background="@drawable/interests_group_desktop"
                         android:layout_height="wrap_content">
+
                         <ImageView
                             android:id="@+id/systemIcon"
                             android:layout_width="38dp"
@@ -165,15 +184,15 @@
                             android:layout_marginBottom="28dp"
                             android:src="@drawable/desktop_round_icon"
                             android:layout_alignParentStart="true"
-                            android:layout_centerVertical="true"
-                            />
+                            android:layout_centerVertical="true" />
+
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentTop="true"
                             android:layout_toEndOf="@id/systemIcon"
-                            android:layout_centerVertical="true"
-                            >
+                            android:layout_centerVertical="true">
+
                             <TextView
                                 android:id="@+id/txtCreatedByTitle"
                                 android:layout_width="wrap_content"
@@ -183,8 +202,7 @@
                                 android:textColor="@color/colorSuvaGray"
                                 android:textSize="8sp"
                                 app:fontFamily="@font/roboto_medium"
-                                android:layout_alignParentTop="true"
-                                />
+                                android:layout_alignParentTop="true" />
 
 
                             <TextView
@@ -197,8 +215,7 @@
                                 android:textColor="@color/colorZambezi1"
                                 android:textSize="12sp"
                                 app:fontFamily="@font/roboto_medium"
-                                android:layout_below="@id/txtCreatedByTitle"
-                                />
+                                android:layout_below="@id/txtCreatedByTitle" />
 
                             <TextView
                                 android:id="@+id/txtCreationTime"
@@ -223,8 +240,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="24dp"
-                    android:layout_marginEnd="32dp"
-                    >
+                    android:layout_marginEnd="32dp">
 
                     <LinearLayout
                         android:id="@+id/memberCountOfGroup"

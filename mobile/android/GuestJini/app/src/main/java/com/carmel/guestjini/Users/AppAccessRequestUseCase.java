@@ -39,7 +39,7 @@ public class AppAccessRequestUseCase extends BaseObservableViewMvc<AppAccessRequ
             @Override
             public void onResponse(Call<AppAccessRequestResponse> call, Response<AppAccessRequestResponse> response) {
                 if (response.isSuccessful()) {
-                    if (response.body().getId()!=null) {
+                    if (response.body().getId() != null) {
                         notifySuccess(response.body());
                     } else {
                         notifyFailure();
@@ -72,7 +72,7 @@ public class AppAccessRequestUseCase extends BaseObservableViewMvc<AppAccessRequ
         for (Listener listener : getListeners()) {
             listener.onAppAccessRequestSuccess(appAccessRequestResponse);
         }
-        
+
     }
 
 }

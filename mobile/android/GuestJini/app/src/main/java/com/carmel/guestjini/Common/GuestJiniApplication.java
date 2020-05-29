@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.carmel.guestjini.Common.DependencyInjection.CompositionRoot;
 
-public class GuestJiniApplication  extends Application {
+public class GuestJiniApplication extends Application {
     private CompositionRoot compositionRoot;
 
     @Override
@@ -13,7 +13,7 @@ public class GuestJiniApplication  extends Application {
         compositionRoot = new CompositionRoot();
     }
 
-    public CompositionRoot getCompositionRoot(){
+    public CompositionRoot getCompositionRoot() {
         return compositionRoot;
     }
 }

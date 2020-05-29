@@ -8,7 +8,6 @@ public class TicketsModel {
     int profilePicture;
 
 
-
     int navigationIcon;
 
     public String getTicketsName() {

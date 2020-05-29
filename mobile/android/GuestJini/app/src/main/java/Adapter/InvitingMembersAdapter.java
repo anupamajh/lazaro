@@ -25,23 +25,24 @@ public class InvitingMembersAdapter extends RecyclerView.Adapter<InvitingMembers
     private Context context;
     private ArrayList<InvitingMembersModel> invitingMembersList;
     private OnItemClickListener onItemClickListener;
-    public InvitingMembersAdapter(Context context, ArrayList<InvitingMembersModel> invitingMembersArrayList,OnItemClickListener onItemClickListener) {
-        this.context=context;
-        this.invitingMembersList=invitingMembersArrayList;
-        this.onItemClickListener=onItemClickListener;
+
+    public InvitingMembersAdapter(Context context, ArrayList<InvitingMembersModel> invitingMembersArrayList, OnItemClickListener onItemClickListener) {
+        this.context = context;
+        this.invitingMembersList = invitingMembersArrayList;
+        this.onItemClickListener = onItemClickListener;
 
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.invite_members_list,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.invite_members_list, parent, false);
         return new InvitingMembersAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-        InvitingMembersModel invitingMembersModel=invitingMembersList.get(position);
+        InvitingMembersModel invitingMembersModel = invitingMembersList.get(position);
         holder.profilePicture.setImageResource(invitingMembersModel.getProfilePicture());
         holder.favouritesIndicator.setImageResource(invitingMembersModel.getFavouritesIndicator());
         holder.profileName.setText(invitingMembersModel.getProfileName());
@@ -59,7 +60,7 @@ public class InvitingMembersAdapter extends RecyclerView.Adapter<InvitingMembers
                 TextView text = (TextView) dialogView.findViewById(R.id.visibleToast);
                 text.setText("INVITE SENT \nLorem ipsum doler sit amet.");
                 toast.setView(dialogView);
-                toast.setGravity(Gravity.getAbsoluteGravity(0,0),0,520);
+                toast.setGravity(Gravity.getAbsoluteGravity(0, 0), 0, 520);
                 toast.show();
             }
         });
@@ -70,22 +71,23 @@ public class InvitingMembersAdapter extends RecyclerView.Adapter<InvitingMembers
         return invitingMembersList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView favouritesIndicator;
-        private TextView profileName,profileGender,invitationSentDate,invitationSentMessage;
+        private TextView profileName, profileGender, invitationSentDate, invitationSentMessage;
         private Button inviteButton;
         private LinearLayout inviteSentLayout;
         CircleImageView profilePicture;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            profilePicture=itemView.findViewById(R.id.peopleProfilePicture);
-            favouritesIndicator=itemView.findViewById(R.id.favouritesIndicator);
-            profileName=itemView.findViewById(R.id.profileName);
-            profileGender=itemView.findViewById(R.id.profileGender);
-            invitationSentDate=itemView.findViewById(R.id.invitationSentDate);
-            invitationSentMessage=itemView.findViewById(R.id.invitationSentMessage);
-            inviteButton=itemView.findViewById(R.id.inviteButton);
-            inviteSentLayout=itemView.findViewById(R.id.inviteSentLayout);
+            profilePicture = itemView.findViewById(R.id.peopleProfilePicture);
+            favouritesIndicator = itemView.findViewById(R.id.favouritesIndicator);
+            profileName = itemView.findViewById(R.id.profileName);
+            profileGender = itemView.findViewById(R.id.profileGender);
+            invitationSentDate = itemView.findViewById(R.id.invitationSentDate);
+            invitationSentMessage = itemView.findViewById(R.id.invitationSentMessage);
+            inviteButton = itemView.findViewById(R.id.inviteButton);
+            inviteSentLayout = itemView.findViewById(R.id.inviteSentLayout);
 //            inviteButton.setOnClickListener(this);
         }
 
@@ -94,7 +96,8 @@ public class InvitingMembersAdapter extends RecyclerView.Adapter<InvitingMembers
             onItemClickListener.onItemClick(getAdapterPosition());
         }
     }
-    public interface OnItemClickListener{
+
+    public interface OnItemClickListener {
         void onItemClick(int position);
 
     }

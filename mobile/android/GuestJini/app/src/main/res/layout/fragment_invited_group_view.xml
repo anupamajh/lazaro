@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CommunityGroups.InvitedGroupViewFragment">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/communityGroupsHeader"
         android:layout_width="match_parent"
@@ -51,7 +52,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/interestGroupsCyclingCell"
                 android:layout_width="match_parent"
@@ -377,8 +379,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="20dp"
-                    android:visibility="gone"
-                    >
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/joinMessage"
@@ -420,8 +421,7 @@
                         android:fontFamily="@font/roboto_bold"
                         android:letterSpacing="0.05"
                         android:text="@string/sendRequestButton"
-                        android:textSize="10sp"
-                       />
+                        android:textSize="10sp" />
 
                     <RelativeLayout
                         android:id="@+id/progressTitle"
@@ -514,8 +514,7 @@
                             android:background="@drawable/horizontal_line"
                             app:layout_constraintBottom_toTopOf="@id/navigationLayout"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            ></View>
+                            app:layout_constraintStart_toStartOf="parent"></View>
 
                     </LinearLayout>
 

@@ -136,20 +136,20 @@ public class SubscribedGroupDetailedFragment extends Fragment {
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(groupType == 1) {
+                if (groupType == 1) {
                     InterestGroupsFragment interestGroupsFragment = new InterestGroupsFragment();
                     FragmentManager fragmentManager = getFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.interestGroupsPlaceHolder, interestGroupsFragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
-                }else if(groupType == 2){
+                } else if (groupType == 2) {
                     final Intent intent;
-                    intent =  new Intent(getContext(), CommunityGroupsActivity.class);
+                    intent = new Intent(getContext(), CommunityGroupsActivity.class);
                     getContext().startActivity(intent);
-                }else if(groupType == 3){
+                } else if (groupType == 3) {
                     final Intent intent;
-                    intent =  new Intent(getContext(), MyGroupsActivity.class);
+                    intent = new Intent(getContext(), MyGroupsActivity.class);
                     getContext().startActivity(intent);
                 }
             }
@@ -253,7 +253,7 @@ public class SubscribedGroupDetailedFragment extends Fragment {
         }
     }
 
-    private void subscribe(){
+    private void subscribe() {
         try {
             progressDialog.show();
             AuthServiceHolder authServiceHolder = new AuthServiceHolder();

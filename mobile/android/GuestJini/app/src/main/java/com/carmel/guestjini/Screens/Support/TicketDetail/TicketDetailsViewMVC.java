@@ -12,6 +12,7 @@ public interface TicketDetailsViewMVC
 
     public interface Listener {
         void onBackClicked();
+
         void onSubmitClicked(String ticketId, String comment);
     }
 

@@ -18,23 +18,23 @@ import java.util.ArrayList;
 
 import Model.ProfileInterestsModel;
 
-public class ProfileInterestsRecyclerAdapter extends RecyclerView.Adapter<ProfileInterestsRecyclerAdapter.ViewHolder>{
+public class ProfileInterestsRecyclerAdapter extends RecyclerView.Adapter<ProfileInterestsRecyclerAdapter.ViewHolder> {
     private Context context;
     ArrayList<ProfileInterestsModel> profileInterestsList;
     private OnItemClickListener onItemClickListener;
 
     public ProfileInterestsRecyclerAdapter(@NonNull Context context, ArrayList<ProfileInterestsModel> myInterestsList, OnItemClickListener onItemClickListener) {
-        this.context=context;
-        this.profileInterestsList =myInterestsList;
-        this.onItemClickListener=onItemClickListener;
+        this.context = context;
+        this.profileInterestsList = myInterestsList;
+        this.onItemClickListener = onItemClickListener;
     }
 
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.profile_interests_list,parent,false);
-        ViewHolder viewHolder=new ViewHolder(v,onItemClickListener);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.profile_interests_list, parent, false);
+        ViewHolder viewHolder = new ViewHolder(v, onItemClickListener);
         return viewHolder;
     }
 
@@ -43,20 +43,21 @@ public class ProfileInterestsRecyclerAdapter extends RecyclerView.Adapter<Profil
 
     @Override
     public void onBindViewHolder(@NonNull final ProfileInterestsRecyclerAdapter.ViewHolder holder, int position) {
-    final ProfileInterestsModel myInterests1Model=this.profileInterestsList.get(position);
-    holder.addInterestsName.setText(myInterests1Model.getAddMainCategory());
-    holder.dropDownImage.setImageResource(myInterests1Model.getUpwardDropDownButton());
-    holder.outDoorAdventureLayout.setVisibility(View.GONE);
+        final ProfileInterestsModel myInterests1Model = this.profileInterestsList.get(position);
+        holder.addInterestsName.setText(myInterests1Model.getAddMainCategory());
+        holder.dropDownImage.setImageResource(myInterests1Model.getUpwardDropDownButton());
+        holder.outDoorAdventureLayout.setVisibility(View.GONE);
         holder.myInterestRelativeLayout.setOnClickListener(new View.OnClickListener() {
-            private boolean flag=true;
+            private boolean flag = true;
+
             @Override
             public void onClick(View v) {
                 if (flag) {
                     flag = false;
                     holder.dropDownImage.setImageResource(R.drawable.dropup_icon_mdpi);
                     holder.outDoorAdventureLayout.setVisibility(View.VISIBLE);
-                }else {
-                    flag=true;
+                } else {
+                    flag = true;
                     holder.dropDownImage.setImageResource(R.drawable.dropdown_icon_mdpi);
                     holder.outDoorAdventureLayout.setVisibility(View.GONE);
 
@@ -65,56 +66,60 @@ public class ProfileInterestsRecyclerAdapter extends RecyclerView.Adapter<Profil
         });
 
         holder.hikingUncheckedCheckBox.setOnClickListener(new View.OnClickListener() {
-            private boolean flag=true;
+            private boolean flag = true;
+
             @Override
             public void onClick(View v) {
-                if(flag){
+                if (flag) {
                     flag = false;
                     holder.hikingUncheckedCheckBox.setImageResource(R.drawable.checked_icon_xhdpi);
                 } else {
-                    flag=true;
+                    flag = true;
                     holder.hikingUncheckedCheckBox.setImageResource(R.drawable.unchecked_icon_xxhdpi);
                 }
 
             }
         });
         holder.bikingUncheckedCheckBox.setOnClickListener(new View.OnClickListener() {
-            private boolean flag=true;
+            private boolean flag = true;
+
             @Override
             public void onClick(View v) {
-                if(flag){
+                if (flag) {
                     flag = false;
                     holder.bikingUncheckedCheckBox.setImageResource(R.drawable.checked_icon_xhdpi);
                 } else {
-                    flag=true;
+                    flag = true;
                     holder.bikingUncheckedCheckBox.setImageResource(R.drawable.unchecked_icon_xxhdpi);
                 }
 
             }
         });
         holder.cyclingUncheckedCheckBox.setOnClickListener(new View.OnClickListener() {
-            private boolean flag=true;
+            private boolean flag = true;
+
             @Override
             public void onClick(View v) {
-                if(flag){
+                if (flag) {
                     flag = false;
                     holder.cyclingUncheckedCheckBox.setImageResource(R.drawable.checked_icon_xhdpi);
                 } else {
-                    flag=true;
+                    flag = true;
                     holder.cyclingUncheckedCheckBox.setImageResource(R.drawable.unchecked_icon_xxhdpi);
                 }
 
             }
         });
         holder.campingUncheckedCheckBox.setOnClickListener(new View.OnClickListener() {
-            private boolean flag=true;
+            private boolean flag = true;
+
             @Override
             public void onClick(View v) {
-                if(flag){
+                if (flag) {
                     flag = false;
                     holder.campingUncheckedCheckBox.setImageResource(R.drawable.checked_icon_xhdpi);
                 } else {
-                    flag=true;
+                    flag = true;
                     holder.campingUncheckedCheckBox.setImageResource(R.drawable.unchecked_icon_xxhdpi);
                 }
 
@@ -131,22 +136,23 @@ public class ProfileInterestsRecyclerAdapter extends RecyclerView.Adapter<Profil
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView addInterestsName;
-        ImageView dropDownImage, hikingUncheckedCheckBox,bikingUncheckedCheckBox,cyclingUncheckedCheckBox,campingUncheckedCheckBox;
+        ImageView dropDownImage, hikingUncheckedCheckBox, bikingUncheckedCheckBox, cyclingUncheckedCheckBox, campingUncheckedCheckBox;
         OnItemClickListener onItemClickListener;
         RelativeLayout myInterestRelativeLayout;
         ConstraintLayout outDoorAdventureLayout;
-        public ViewHolder(@NonNull View itemView,OnItemClickListener onItemClickListener) {
+
+        public ViewHolder(@NonNull View itemView, OnItemClickListener onItemClickListener) {
             super(itemView);
-            addInterestsName=itemView.findViewById(R.id.mainCategory);
-            dropDownImage=itemView.findViewById(R.id.dropDownImage);
+            addInterestsName = itemView.findViewById(R.id.mainCategory);
+            dropDownImage = itemView.findViewById(R.id.dropDownImage);
             dropDownImage.setImageResource(R.drawable.dropdown_icon_mdpi);
-            outDoorAdventureLayout=itemView.findViewById(R.id.adventureLayout);
-            hikingUncheckedCheckBox =itemView.findViewById(R.id.hikingCheckbox);
-            bikingUncheckedCheckBox =itemView.findViewById(R.id.bikingCheckBox);
-            cyclingUncheckedCheckBox =itemView.findViewById(R.id.cyclingCheckbox);
-            campingUncheckedCheckBox =itemView.findViewById(R.id.campingCheckbox);
-            myInterestRelativeLayout=itemView.findViewById(R.id.myInterestsRelativeLayout);
-            this.onItemClickListener=onItemClickListener;
+            outDoorAdventureLayout = itemView.findViewById(R.id.adventureLayout);
+            hikingUncheckedCheckBox = itemView.findViewById(R.id.hikingCheckbox);
+            bikingUncheckedCheckBox = itemView.findViewById(R.id.bikingCheckBox);
+            cyclingUncheckedCheckBox = itemView.findViewById(R.id.cyclingCheckbox);
+            campingUncheckedCheckBox = itemView.findViewById(R.id.campingCheckbox);
+            myInterestRelativeLayout = itemView.findViewById(R.id.myInterestsRelativeLayout);
+            this.onItemClickListener = onItemClickListener;
         }
 
         @Override
@@ -155,6 +161,7 @@ public class ProfileInterestsRecyclerAdapter extends RecyclerView.Adapter<Profil
 
         }
     }
+
     public interface OnItemClickListener {
         void onItemClick(int position);
     }

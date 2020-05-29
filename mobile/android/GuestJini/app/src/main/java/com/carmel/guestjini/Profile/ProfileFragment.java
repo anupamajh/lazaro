@@ -30,43 +30,44 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class ProfileFragment extends Fragment {
-    ImageView editImage,drawerCameraIcon,drawerGalleryIcon,profileToggleButton,backArrow;
+    ImageView editImage, drawerCameraIcon, drawerGalleryIcon, profileToggleButton, backArrow;
     Button setupButton;
-    RelativeLayout cameraLayout,galleryLayout;
+    RelativeLayout cameraLayout, galleryLayout;
     DrawerLayout drawerLayout;
-    ImageView genderToggleButton,ageToggleButton,mobileNoToggleButton,emailToggleButton,placeToggleButton;
+    ImageView genderToggleButton, ageToggleButton, mobileNoToggleButton, emailToggleButton, placeToggleButton;
     TextView uploadYourPhotoText;
     FloatingActionButton profileEditIcon;
     CircleImageView cameraIcon;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-     final  View rootView=inflater.inflate(R.layout.fragment_profile, container, false);
-       cameraIcon=rootView.findViewById(R.id.cameraIcon);
-       drawerLayout=rootView.findViewById(R.id.profileDrawerLayout);
-        setupButton=rootView.findViewById(R.id.setupButton);
-        editImage=rootView.findViewById(R.id.editIcon);
-        drawerCameraIcon=rootView.findViewById(R.id.cameraImage);
-        drawerGalleryIcon=rootView.findViewById(R.id.galleryImage);
-        genderToggleButton=rootView.findViewById(R.id.genderToggleIcon);
+        final View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
+        cameraIcon = rootView.findViewById(R.id.cameraIcon);
+        drawerLayout = rootView.findViewById(R.id.profileDrawerLayout);
+        setupButton = rootView.findViewById(R.id.setupButton);
+        editImage = rootView.findViewById(R.id.editIcon);
+        drawerCameraIcon = rootView.findViewById(R.id.cameraImage);
+        drawerGalleryIcon = rootView.findViewById(R.id.galleryImage);
+        genderToggleButton = rootView.findViewById(R.id.genderToggleIcon);
 
-        ageToggleButton=rootView.findViewById(R.id.ageToggleIcon);
-        mobileNoToggleButton=rootView.findViewById(R.id.mobileNoToggleIcon);
-        emailToggleButton=rootView.findViewById(R.id.emailToggleIcon);
-        placeToggleButton=rootView.findViewById(R.id.yourPlaceToggleIcon);
-        cameraLayout=rootView.findViewById(R.id.cameraLayout);
-        galleryLayout=rootView.findViewById(R.id.galleryLayout);
+        ageToggleButton = rootView.findViewById(R.id.ageToggleIcon);
+        mobileNoToggleButton = rootView.findViewById(R.id.mobileNoToggleIcon);
+        emailToggleButton = rootView.findViewById(R.id.emailToggleIcon);
+        placeToggleButton = rootView.findViewById(R.id.yourPlaceToggleIcon);
+        cameraLayout = rootView.findViewById(R.id.cameraLayout);
+        galleryLayout = rootView.findViewById(R.id.galleryLayout);
 
-        uploadYourPhotoText=rootView.findViewById(R.id.uploadYourPhotoText);
-        profileEditIcon=rootView.findViewById(R.id.profileEdit);
-        profileToggleButton=rootView.findViewById(R.id.profileToggleButton);
-        backArrow=rootView.findViewById(R.id.leftArrowMark);
+        uploadYourPhotoText = rootView.findViewById(R.id.uploadYourPhotoText);
+        profileEditIcon = rootView.findViewById(R.id.profileEdit);
+        profileToggleButton = rootView.findViewById(R.id.profileToggleButton);
+        backArrow = rootView.findViewById(R.id.leftArrowMark);
 
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext().getApplicationContext(), CommunityActivity.class);
+                Intent intent = new Intent(getContext().getApplicationContext(), CommunityActivity.class);
                 startActivity(intent);
             }
         });
@@ -99,138 +100,130 @@ public class ProfileFragment extends Fragment {
 
         genderToggleButton.setOnClickListener(new View.OnClickListener() {
             private boolean flag = true;
+
             @Override
             public void onClick(View v) {
-                    if(flag)
-                    {
-                        genderToggleButton.setImageResource(R.drawable.toggle_icon_on_xxhdpi);
-                        flag=false;
-                        Toast toast=new Toast(getContext());
-                        ViewGroup viewGroup = rootView.findViewById(android.R.id.content);
-                        View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.toast_layout, viewGroup, false);
-                        TextView text = (TextView) dialogView.findViewById(R.id.visibleToast);
-                        text.setText("VISIBLE - Others can see your Gender and you can see others Gender.");
-                        toast.setView(dialogView);
-                        toast.makeText(getActivity(),"", Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.getAbsoluteGravity(0,0),0,520);
-                        toast.show();
-                    }
-                    else
-                    {
-                        flag=true;
-                        genderToggleButton.setImageResource(R.drawable.toggle_icon_off_xxhdpi);
-                        Toast toast=new Toast(getContext());
-                        ViewGroup viewGroup = rootView.findViewById(android.R.id.content);
-                        View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.toast_layout, viewGroup, false);
-                        TextView text = (TextView) dialogView.findViewById(R.id.visibleToast);
-                        text.setText("HIDDEN - Others can't see your Gender and you can't see others Gender.");
-                        toast.setView(dialogView);
-                        toast.makeText(getActivity(),"", Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.getAbsoluteGravity(0,0),0,520);
-                        toast.show();
-                    }
+                if (flag) {
+                    genderToggleButton.setImageResource(R.drawable.toggle_icon_on_xxhdpi);
+                    flag = false;
+                    Toast toast = new Toast(getContext());
+                    ViewGroup viewGroup = rootView.findViewById(android.R.id.content);
+                    View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.toast_layout, viewGroup, false);
+                    TextView text = (TextView) dialogView.findViewById(R.id.visibleToast);
+                    text.setText("VISIBLE - Others can see your Gender and you can see others Gender.");
+                    toast.setView(dialogView);
+                    toast.makeText(getActivity(), "", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.getAbsoluteGravity(0, 0), 0, 520);
+                    toast.show();
+                } else {
+                    flag = true;
+                    genderToggleButton.setImageResource(R.drawable.toggle_icon_off_xxhdpi);
+                    Toast toast = new Toast(getContext());
+                    ViewGroup viewGroup = rootView.findViewById(android.R.id.content);
+                    View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.toast_layout, viewGroup, false);
+                    TextView text = (TextView) dialogView.findViewById(R.id.visibleToast);
+                    text.setText("HIDDEN - Others can't see your Gender and you can't see others Gender.");
+                    toast.setView(dialogView);
+                    toast.makeText(getActivity(), "", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.getAbsoluteGravity(0, 0), 0, 520);
+                    toast.show();
                 }
-            });
+            }
+        });
 
         ageToggleButton.setOnClickListener(new View.OnClickListener() {
             private boolean flag = true;
+
             @Override
             public void onClick(View v) {
 
-                if(flag)
-                {
+                if (flag) {
                     ageToggleButton.setImageResource(R.drawable.toggle_icon_on_xxhdpi);
-                    flag=false;
-                    Toast toast=new Toast(getContext());
+                    flag = false;
+                    Toast toast = new Toast(getContext());
                     ViewGroup viewGroup = rootView.findViewById(android.R.id.content);
                     View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.toast_layout, viewGroup, false);
                     TextView text = (TextView) dialogView.findViewById(R.id.visibleToast);
                     text.setText("VISIBLE - Others can see your Age and you can see others Age.");
                     toast.setView(dialogView);
-                    toast.makeText(getActivity(),"", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.getAbsoluteGravity(0,0),0,520);
+                    toast.makeText(getActivity(), "", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.getAbsoluteGravity(0, 0), 0, 520);
                     toast.show();
-                }
-                else
-                {
-                    flag=true;
+                } else {
+                    flag = true;
                     ageToggleButton.setImageResource(R.drawable.toggle_icon_off_xxhdpi);
-                    Toast toast=new Toast(getContext());
+                    Toast toast = new Toast(getContext());
                     ViewGroup viewGroup = rootView.findViewById(android.R.id.content);
                     View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.toast_layout, viewGroup, false);
                     TextView text = (TextView) dialogView.findViewById(R.id.visibleToast);
                     text.setText("HIDDEN - Others can't see your Age and you can't see others Age.");
                     toast.setView(dialogView);
-                    toast.makeText(getActivity(),"", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.getAbsoluteGravity(0,0),0,520);
+                    toast.makeText(getActivity(), "", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.getAbsoluteGravity(0, 0), 0, 520);
                     toast.show();
                 }
             }
         });
         mobileNoToggleButton.setOnClickListener(new View.OnClickListener() {
             private boolean flag = true;
+
             @Override
             public void onClick(View v) {
-                if(flag)
-                {
+                if (flag) {
                     mobileNoToggleButton.setImageResource(R.drawable.toggle_icon_on_xxhdpi);
-                    flag=false;
-                    Toast toast=new Toast(getContext());
+                    flag = false;
+                    Toast toast = new Toast(getContext());
                     ViewGroup viewGroup = rootView.findViewById(android.R.id.content);
                     View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.toast_layout, viewGroup, false);
                     TextView text = (TextView) dialogView.findViewById(R.id.visibleToast);
                     text.setText("VISIBLE - Others can see your Mobile Number and you can see others Mobile Number.");
                     toast.setView(dialogView);
-                    toast.makeText(getActivity(),"", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.getAbsoluteGravity(0,0),0,520);
+                    toast.makeText(getActivity(), "", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.getAbsoluteGravity(0, 0), 0, 520);
                     toast.show();
-                }
-                else
-                {
-                    flag=true;
+                } else {
+                    flag = true;
                     mobileNoToggleButton.setImageResource(R.drawable.toggle_icon_off_xxhdpi);
-                    Toast toast=new Toast(getContext());
+                    Toast toast = new Toast(getContext());
                     ViewGroup viewGroup = rootView.findViewById(android.R.id.content);
                     View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.toast_layout, viewGroup, false);
                     TextView text = (TextView) dialogView.findViewById(R.id.visibleToast);
                     text.setText("HIDDEN - Others can't see your Mobile Number and you can't see others Mobile Number.");
                     toast.setView(dialogView);
-                    toast.makeText(getActivity(),"", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.getAbsoluteGravity(0,0),0,520);
+                    toast.makeText(getActivity(), "", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.getAbsoluteGravity(0, 0), 0, 520);
                     toast.show();
                 }
             }
         });
         emailToggleButton.setOnClickListener(new View.OnClickListener() {
             private boolean flag = true;
+
             @Override
             public void onClick(View v) {
-                if(flag)
-                {
+                if (flag) {
                     emailToggleButton.setImageResource(R.drawable.toggle_icon_on_xxhdpi);
-                    flag=false;
-                    Toast toast=new Toast(getContext());
+                    flag = false;
+                    Toast toast = new Toast(getContext());
                     ViewGroup viewGroup = rootView.findViewById(android.R.id.content);
                     View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.toast_layout, viewGroup, false);
                     TextView text = (TextView) dialogView.findViewById(R.id.visibleToast);
                     text.setText("VISIBLE - Others can see your Email and you can see others Email.");
                     toast.setView(dialogView);
-                    toast.makeText(getActivity(),"", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.getAbsoluteGravity(0,0),0,520);
+                    toast.makeText(getActivity(), "", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.getAbsoluteGravity(0, 0), 0, 520);
                     toast.show();
-                }
-                else
-                {
-                    flag=true;
+                } else {
+                    flag = true;
                     emailToggleButton.setImageResource(R.drawable.toggle_icon_off_xxhdpi);
-                    Toast toast=new Toast(getContext());
+                    Toast toast = new Toast(getContext());
                     ViewGroup viewGroup = rootView.findViewById(android.R.id.content);
                     View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.toast_layout, viewGroup, false);
                     TextView text = (TextView) dialogView.findViewById(R.id.visibleToast);
                     text.setText("HIDDEN - Others can't see your Email and you can't see others Email.");
                     toast.setView(dialogView);
-                    toast.makeText(getActivity(),"", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.getAbsoluteGravity(0,0),0,520);
+                    toast.makeText(getActivity(), "", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.getAbsoluteGravity(0, 0), 0, 520);
                     toast.show();
                 }
             }
@@ -238,66 +231,64 @@ public class ProfileFragment extends Fragment {
 
         placeToggleButton.setOnClickListener(new View.OnClickListener() {
             private boolean flag = true;
+
             @Override
             public void onClick(View v) {
-                if(flag)
-                {
+                if (flag) {
                     placeToggleButton.setImageResource(R.drawable.toggle_icon_on_xxhdpi);
-                    flag=false;
-                    Toast toast=new Toast(getContext());
+                    flag = false;
+                    Toast toast = new Toast(getContext());
                     ViewGroup viewGroup = rootView.findViewById(android.R.id.content);
                     View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.toast_layout, viewGroup, false);
                     TextView text = (TextView) dialogView.findViewById(R.id.visibleToast);
                     text.setText("VISIBLE - Others can see your Place and you can see others Place.");
                     toast.setView(dialogView);
-                    toast.makeText(getActivity(),"", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.getAbsoluteGravity(0,0),0,520);
+                    toast.makeText(getActivity(), "", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.getAbsoluteGravity(0, 0), 0, 520);
                     toast.show();
-                }
-                else
-                {
-                    flag=true;
+                } else {
+                    flag = true;
                     placeToggleButton.setImageResource(R.drawable.toggle_icon_off_xxhdpi);
-                    Toast toast=new Toast(getContext());
+                    Toast toast = new Toast(getContext());
                     ViewGroup viewGroup = rootView.findViewById(android.R.id.content);
                     View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.toast_layout, viewGroup, false);
                     TextView text = (TextView) dialogView.findViewById(R.id.visibleToast);
                     text.setText("HIDDEN - Others can't see your Place and you can't see others Place.");
                     toast.setView(dialogView);
-                    toast.makeText(getActivity(),"", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.getAbsoluteGravity(0,0),0,520);
+                    toast.makeText(getActivity(), "", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.getAbsoluteGravity(0, 0), 0, 520);
                     toast.show();
                 }
             }
         });
         profileToggleButton.setOnClickListener(new View.OnClickListener() {
             private boolean flag = true;
+
             @Override
             public void onClick(View v) {
-                if(flag){
-                    flag=false;
+                if (flag) {
+                    flag = false;
                     profileToggleButton.setImageResource(R.drawable.toggle_icon_on_xxhdpi);
-                    Toast toast=new Toast(getContext());
+                    Toast toast = new Toast(getContext());
                     ViewGroup viewGroup = rootView.findViewById(android.R.id.content);
                     View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.toast_layout, viewGroup, false);
                     TextView text = (TextView) dialogView.findViewById(R.id.visibleToast);
                     text.setText("VISIBLE - Others can see your Profile and you can see others Profile.");
                     toast.setView(dialogView);
-                    toast.makeText(getActivity(),"", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.getAbsoluteGravity(0,0),0,520);
+                    toast.makeText(getActivity(), "", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.getAbsoluteGravity(0, 0), 0, 520);
                     toast.show();
-                } else
-                {
-                    flag=true;
+                } else {
+                    flag = true;
                     profileToggleButton.setImageResource(R.drawable.toggle_icon_off_xxhdpi);
-                    Toast toast=new Toast(getContext());
+                    Toast toast = new Toast(getContext());
                     ViewGroup viewGroup = rootView.findViewById(android.R.id.content);
                     View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.toast_layout, viewGroup, false);
                     TextView text = (TextView) dialogView.findViewById(R.id.visibleToast);
                     text.setText("HIDDEN - Others can't see your Profile and you can't see others Profile.");
                     toast.setView(dialogView);
-                    toast.makeText(getActivity(),"", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.getAbsoluteGravity(0,0),0,520);
+                    toast.makeText(getActivity(), "", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.getAbsoluteGravity(0, 0), 0, 520);
                     toast.show();
                 }
 
@@ -328,9 +319,9 @@ public class ProfileFragment extends Fragment {
                     public void onClick(View v) {
                         dialog.dismiss();
                         cameraIcon.setImageResource(R.drawable.profile_image);
-                               uploadYourPhotoText.setVisibility(View.GONE);
-                               profileEditIcon.setVisibility(View.VISIBLE);
-                               profileToggleButton.setVisibility(View.VISIBLE);
+                        uploadYourPhotoText.setVisibility(View.GONE);
+                        profileEditIcon.setVisibility(View.VISIBLE);
+                        profileToggleButton.setVisibility(View.VISIBLE);
 //                        final Dialog dialog = new Dialog(getContext());
 //                        dialog.setContentView(R.layout.alert_dailog_box);
 //                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -363,12 +354,13 @@ public class ProfileFragment extends Fragment {
 
             }
         });
-       galleryLayout.setOnClickListener(new View.OnClickListener() {
-           private boolean flag=true;
+        galleryLayout.setOnClickListener(new View.OnClickListener() {
+            private boolean flag = true;
+
             @Override
             public void onClick(View v) {
-                if(flag) {
-                    flag=false;
+                if (flag) {
+                    flag = false;
                     drawerLayout.closeDrawer(Gravity.LEFT);
                     final Dialog dialog = new Dialog(getContext());
                     dialog.setContentView(R.layout.alert_dailog_box);
@@ -390,9 +382,9 @@ public class ProfileFragment extends Fragment {
                         public void onClick(View v) {
                             dialog.dismiss();
                             cameraIcon.setImageResource(R.drawable.profile_image);
-                                    uploadYourPhotoText.setVisibility(View.GONE);
-                                    profileEditIcon.setVisibility(View.VISIBLE);
-                                    profileToggleButton.setVisibility(View.VISIBLE);
+                            uploadYourPhotoText.setVisibility(View.GONE);
+                            profileEditIcon.setVisibility(View.VISIBLE);
+                            profileToggleButton.setVisibility(View.VISIBLE);
 //                            final Dialog dialog = new Dialog(getContext());
 //                            dialog.setContentView(R.layout.alert_dailog_box);
 //                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -421,11 +413,9 @@ public class ProfileFragment extends Fragment {
                         }
                     });
                     dialog.show();
-                }
-                else
-                    {
-                        flag=true;
-                        galleryLayout.setOnClickListener(new View.OnClickListener() {
+                } else {
+                    flag = true;
+                    galleryLayout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             drawerLayout.closeDrawer(Gravity.LEFT);
@@ -444,37 +434,38 @@ public class ProfileFragment extends Fragment {
 
                             ImageView doneButton = (ImageView) dialog.findViewById(R.id.doneButton);
                             doneButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
+                                @Override
+                                public void onClick(View v) {
                                     dialog.dismiss();
 
-                                 }
-                             });
+                                }
+                            });
                             dialog.show();
                         }
-                        });
-                    }
+                    });
                 }
-            });
+            }
+        });
         setupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              ProfileInterestsFragment profileInterestsFragment=new ProfileInterestsFragment();
-                FragmentManager fragmentManager=getFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+                ProfileInterestsFragment profileInterestsFragment = new ProfileInterestsFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.add(R.id.profilePlaceHolder,profileInterestsFragment).commit();
+                fragmentTransaction.add(R.id.profilePlaceHolder, profileInterestsFragment).commit();
             }
         });
         cameraIcon.setOnClickListener(new View.OnClickListener() {
-            private boolean flag=true;
+            private boolean flag = true;
+
             @Override
             public void onClick(View v) {
-                if(flag) {
-                    flag=false;
+                if (flag) {
+                    flag = false;
                     drawerLayout.openDrawer(GravityCompat.START);
-                }else{
-                    flag=true;
+                } else {
+                    flag = true;
                     drawerLayout.openDrawer(GravityCompat.START);
                     drawerCameraIcon.setImageResource(R.drawable.round_edit_icon_xhdpi);
                     drawerGalleryIcon.setImageResource(R.drawable.delete_icon_xhdpi);
@@ -496,11 +487,11 @@ public class ProfileFragment extends Fragment {
 
                             ImageView doneButton = (ImageView) dialog.findViewById(R.id.doneButton);
                             doneButton.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            dialog.dismiss();
-                                        }
-                                    });
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                }
+                            });
                             dialog.show();
                         }
                     });
@@ -508,6 +499,6 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
-       return rootView;
+        return rootView;
     }
 }

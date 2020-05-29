@@ -20,22 +20,22 @@ public class AccountsAdapter extends RecyclerView.Adapter<AccountsAdapter.ViewHo
     private ArrayList<AccountsModel> accountsModelList;
     private OnItemClickListener onItemClickListener;
 
-    public AccountsAdapter(Context context, ArrayList<AccountsModel> accountsModelList,OnItemClickListener onItemClickListener) {
+    public AccountsAdapter(Context context, ArrayList<AccountsModel> accountsModelList, OnItemClickListener onItemClickListener) {
         this.context = context;
         this.accountsModelList = accountsModelList;
-        this.onItemClickListener=onItemClickListener;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
     @Override
     public AccountsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.accounts_landing_list,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.accounts_landing_list, parent, false);
         return new AccountsAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AccountsAdapter.ViewHolder holder, int position) {
-        AccountsModel accountsModel=accountsModelList.get(position);
+        AccountsModel accountsModel = accountsModelList.get(position);
         holder.accountsTitle.setText(accountsModel.getAccountsTitle());
         holder.accountsDescription.setText(accountsModel.getAccountsDescription());
     }
@@ -46,11 +46,12 @@ public class AccountsAdapter extends RecyclerView.Adapter<AccountsAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView accountsTitle,accountsDescription;
+        private TextView accountsTitle, accountsDescription;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            accountsTitle=itemView.findViewById(R.id.accountsTilte);
-            accountsDescription=itemView.findViewById(R.id.accountsDescription);
+            accountsTitle = itemView.findViewById(R.id.accountsTilte);
+            accountsDescription = itemView.findViewById(R.id.accountsDescription);
             itemView.setOnClickListener(this);
         }
 
@@ -63,10 +64,14 @@ public class AccountsAdapter extends RecyclerView.Adapter<AccountsAdapter.ViewHo
 
         }
     }
+
     public interface OnItemClickListener {
         void onItemClick(int position);
+
         void onReceiptClick(int position);
+
         void onLedgerItemCilck(int position);
+
         void onBillsItemClick(int position);
     }
 }

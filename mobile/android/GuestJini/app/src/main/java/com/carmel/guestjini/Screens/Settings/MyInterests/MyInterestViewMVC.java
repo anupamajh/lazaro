@@ -8,8 +8,7 @@ import com.carmel.guestjini.Screens.Common.Views.ObservableViewMvc;
 import java.util.List;
 
 public interface MyInterestViewMVC
-    extends ObservableViewMvc<MyInterestViewMVC.Listener>
-{
+        extends ObservableViewMvc<MyInterestViewMVC.Listener> {
 
     void bindUserInterests(List<UserInterests> response);
 

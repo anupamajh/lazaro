@@ -17,6 +17,7 @@ public class SaveMyInterestUseCase extends BaseObservableViewMvc<SaveMyInterestU
 
         void onNetworkFailed();
     }
+
     private final GuestJiniAPI guestJiniAPI;
 
     public SaveMyInterestUseCase(GuestJiniAPI guestJiniAPI) {

@@ -57,7 +57,7 @@ public class PaymentOptionsFragment extends Fragment {
             public void onClick(View v) {
                 RentInvoiceDetailsFragment rentInvoiceDetailsFragment = new RentInvoiceDetailsFragment();
                 FragmentManager fragmentManager = getFragmentManager();
-                 bundle.putString("accountTicketId", bundle.getString("accountTicketId"));
+                bundle.putString("accountTicketId", bundle.getString("accountTicketId"));
                 bundle.putString("AccountsTitle", "RENT INVOICE");
                 rentInvoiceDetailsFragment.setArguments(bundle);
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
