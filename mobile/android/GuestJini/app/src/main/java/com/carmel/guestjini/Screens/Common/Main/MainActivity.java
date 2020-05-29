@@ -129,6 +129,7 @@ public class MainActivity extends BaseActivity implements
             switch (((Integer) event)) {
                 case 1:
                     viewMVC.showBottomNavigationView();
+                    viewMVC.setSupportSelected();
                     break;
                 case 0:
                     viewMVC.hideBottomNavigationView();

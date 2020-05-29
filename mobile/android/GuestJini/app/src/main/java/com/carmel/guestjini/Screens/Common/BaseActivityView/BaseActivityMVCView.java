@@ -24,4 +24,6 @@ public interface BaseActivityMVCView extends ObservableViewMvc<BaseActivityMVCVi
 
     void hideBottomNavigationView();
 
+    void setSupportSelected();
+
 }

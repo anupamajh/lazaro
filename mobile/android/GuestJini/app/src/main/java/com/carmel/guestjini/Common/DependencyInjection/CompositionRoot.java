@@ -4,11 +4,11 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.carmel.guestjini.Common.Constants;
 import com.carmel.guestjini.Components.OkHttpClientInstance;
+import com.carmel.guestjini.Networking.Common.AuthService;
+import com.carmel.guestjini.Networking.Common.AuthServiceHolder;
 import com.carmel.guestjini.Networking.GuestJiniAPI;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Login.LoginEventBus;
-import com.carmel.guestjini.Services.Authentication.AuthService;
-import com.carmel.guestjini.Services.Authentication.AuthServiceHolder;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;

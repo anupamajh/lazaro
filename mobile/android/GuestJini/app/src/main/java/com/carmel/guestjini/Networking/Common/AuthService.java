@@ -1,6 +1,8 @@
 package com.carmel.guestjini.Networking.Common;
 
-import com.carmel.guestjini.Models.Authentication.AccessToken;
+
+
+import com.carmel.guestjini.Networking.Users.AccessToken;
 
 import retrofit2.Call;
 import retrofit2.http.Field;

@@ -80,4 +80,9 @@ public class BaseActivityMVCViewImpl extends BaseObservableViewMvc<BaseActivityM
     public void hideBottomNavigationView() {
         bottomNavigationView.setVisibility(View.GONE);
     }
+
+    @Override
+    public void setSupportSelected() {
+        bottomNavigationView.setSelectedItemId(R.id.suppotIcon);
+    }
 }
