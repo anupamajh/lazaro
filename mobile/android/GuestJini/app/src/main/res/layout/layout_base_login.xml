@@ -177,7 +177,7 @@
                             android:layout_marginTop="14dp"
                             android:layout_marginEnd="10dp"
                             android:layout_marginBottom="13dp"
-                            android:src="@drawable/password_masking_icon" />
+                            android:src="@drawable/hide_pwd_icon" />
                     </RelativeLayout>
 
                     <TextView

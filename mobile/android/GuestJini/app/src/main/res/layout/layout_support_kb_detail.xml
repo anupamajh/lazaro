@@ -29,7 +29,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
                 android:contentDescription="@string/back_arrow_icon"
-                android:src="@drawable/back_arrow_icon_xxhdpi" />
+                android:src="@drawable/back_arrow_icon" />
 
             <TextView
                 android:id="@+id/txtHeaderTitle"
@@ -77,7 +77,7 @@
                             android:layout_marginStart="36dp"
                             android:layout_marginTop="36dp"
                             android:layout_marginBottom="36dp"
-                            android:src="@drawable/profile_image" />
+                            android:src="@drawable/image_1" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -201,7 +201,7 @@
                                     android:layout_height="45dp"
                                     android:layout_centerHorizontal="true"
                                     android:layout_marginTop="16dp"
-                                    android:src="@drawable/like_icon_xxhdpi"
+                                    android:src="@drawable/like_icon"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -229,7 +229,7 @@
                                     android:layout_width="45dp"
                                     android:layout_height="45dp"
                                     android:layout_marginTop="16dp"
-                                    android:src="@drawable/unlike_icon_xxhdpi" />
+                                    android:src="@drawable/unlike_icon" />
 
                                 <TextView
                                     android:id="@+id/txtDislikePercentage"

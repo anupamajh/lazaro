@@ -63,9 +63,9 @@ public class PeopleListItemViewMVCImpl
         peopleName.setText(person.getAddressBook().getDisplayName());
         peopleGender.setVisibility(View.GONE);
         if (person.getIsFavourite() == 0) {
-            btnFavourite.setImageResource(R.drawable.unlike_icon_xhdpi);
+            btnFavourite.setImageResource(R.drawable.favourite_select_icon);
         } else {
-            btnFavourite.setImageResource(R.drawable.like_icon_xhdpi);
+            btnFavourite.setImageResource(R.drawable.favourite_selected_icon);
         }
         setCompatibilityMeter(totalInterestCount, person.getUserInterestsList().size());
     }

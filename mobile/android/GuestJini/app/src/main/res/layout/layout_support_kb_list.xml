@@ -29,7 +29,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
                 android:contentDescription="@string/back_arrow_icon"
-                android:src="@drawable/back_arrow_icon_xxhdpi" />
+                android:src="@drawable/back_arrow_icon" />
 
             <TextView
                 android:id="@+id/txtHeaderTitle"
@@ -87,7 +87,7 @@
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="9dp"
 
-                android:src="@drawable/search_icon_xxhdpi">
+                android:src="@drawable/search_icon">
 
             </ImageView>
 

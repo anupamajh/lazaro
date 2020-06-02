@@ -75,7 +75,7 @@
                     android:layout_height="24dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="32dp"
-                    app:srcCompat="@drawable/information_icon"
+                    app:srcCompat="@drawable/info_dark_grey_icon"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true" />
 
@@ -99,7 +99,7 @@
                     android:layout_height="24dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
-                    app:srcCompat="@drawable/indicator_icon"
+                    app:srcCompat="@drawable/match_interest_heart_icon"
                     android:layout_below="@id/interestGroupDivider" />
 
 

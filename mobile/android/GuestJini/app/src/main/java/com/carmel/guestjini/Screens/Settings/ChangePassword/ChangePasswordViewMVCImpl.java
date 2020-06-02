@@ -52,12 +52,12 @@ public class ChangePasswordViewMVCImpl
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    txtCurrentPasswordMaskingIcon.setImageResource(R.drawable.password_unmasking_icon);
+                    txtCurrentPasswordMaskingIcon.setImageResource(R.drawable.show_pwd_icon);
                     txtCurrentPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
 
                 } else {
                     flag = true;
-                    txtCurrentPasswordMaskingIcon.setImageResource(R.drawable.password_masking_icon);
+                    txtCurrentPasswordMaskingIcon.setImageResource(R.drawable.hide_pwd_icon);
                     txtCurrentPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
             }
@@ -70,12 +70,12 @@ public class ChangePasswordViewMVCImpl
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    txtNewPasswordMaskingIcon.setImageResource(R.drawable.password_unmasking_icon);
+                    txtNewPasswordMaskingIcon.setImageResource(R.drawable.show_pwd_icon);
                     txtNewPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
 
                 } else {
                     flag = true;
-                    txtNewPasswordMaskingIcon.setImageResource(R.drawable.password_masking_icon);
+                    txtNewPasswordMaskingIcon.setImageResource(R.drawable.hide_pwd_icon);
                     txtNewPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
             }
@@ -88,12 +88,12 @@ public class ChangePasswordViewMVCImpl
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    txtConfirmPasswordMaskingIcon.setImageResource(R.drawable.password_unmasking_icon);
+                    txtConfirmPasswordMaskingIcon.setImageResource(R.drawable.show_pwd_icon);
                     txtConfirmPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
 
                 } else {
                     flag = true;
-                    txtConfirmPasswordMaskingIcon.setImageResource(R.drawable.password_masking_icon);
+                    txtConfirmPasswordMaskingIcon.setImageResource(R.drawable.hide_pwd_icon);
                     txtConfirmPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
             }

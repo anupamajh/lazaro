@@ -112,7 +112,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="26dp"
                 android:layout_marginTop="0dp"
-                android:src="@drawable/chat_icon"
+                android:src="@drawable/message_yellow_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </RelativeLayout>

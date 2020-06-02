@@ -83,7 +83,7 @@
                     android:layout_marginEnd="8dp"
                     android:backgroundTint="@color/colorSummerSky"
                     app:cornerRadius="@dimen/login_button_corners_radius"
-                    app:icon="@drawable/arrow_forward_xxhdpi"
+                    app:icon="@drawable/right_arrow_white_icon"
                     app:iconGravity="textEnd"
                     app:iconSize="28dp"
                     app:layout_constraintTop_toBottomOf="@+id/txtInformation" />

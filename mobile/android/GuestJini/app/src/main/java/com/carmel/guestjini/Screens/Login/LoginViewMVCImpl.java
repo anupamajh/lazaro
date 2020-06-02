@@ -71,12 +71,12 @@ public class LoginViewMVCImpl extends BaseObservableViewMvc<LoginViewMVC.Listene
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    passwordMaskingIcon.setImageResource(R.drawable.password_unmasking_icon);
+                    passwordMaskingIcon.setImageResource(R.drawable.show_pwd_icon);
                     txtPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
 
                 } else {
                     flag = true;
-                    passwordMaskingIcon.setImageResource(R.drawable.password_masking_icon);
+                    passwordMaskingIcon.setImageResource(R.drawable.hide_pwd_icon);
                     txtPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
             }

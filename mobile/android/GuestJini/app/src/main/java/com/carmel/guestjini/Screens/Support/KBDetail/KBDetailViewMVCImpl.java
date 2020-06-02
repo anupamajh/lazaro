@@ -89,13 +89,13 @@ public class KBDetailViewMVCImpl
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    btnLikeIcon.setImageResource(R.drawable.like_icon_black_xxhdpi);
+                    btnLikeIcon.setImageResource(R.drawable.liked_icon);
                     for (Listener listener : getListeners()) {
                         listener.onLikeClicked(kbId, 1);
                     }
                 } else {
                     flag = true;
-                    btnLikeIcon.setImageResource(R.drawable.like_icon_xxhdpi);
+                    btnLikeIcon.setImageResource(R.drawable.like_icon);
                     for (Listener listener : getListeners()) {
                         listener.onLikeClicked(kbId, null);
                     }
@@ -116,7 +116,7 @@ public class KBDetailViewMVCImpl
                     }
                 } else {
                     flag = true;
-                    btnDislikeIcon.setImageResource(R.drawable.unlike_icon_xxhdpi);
+                    btnDislikeIcon.setImageResource(R.drawable.unlike_icon);
                     for (Listener listener : getListeners()) {
                         listener.onDislikeClicked(kbId, null);
                     }

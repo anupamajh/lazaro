@@ -29,7 +29,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
                 android:contentDescription="@string/back_arrow_icon"
-                android:src="@drawable/back_arrow_icon_xxhdpi" />
+                android:src="@drawable/back_arrow_icon" />
 
             <TextView
                 android:id="@+id/txtHeaderTitle"
@@ -182,7 +182,7 @@
                             android:layout_marginStart="30dp"
                             android:layout_marginTop="30dp"
                             android:layout_marginBottom="28dp"
-                            android:src="@drawable/desktop_round_icon"
+                            android:src="@drawable/administrator_icon"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true" />
 

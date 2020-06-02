@@ -24,7 +24,7 @@
                 android:layout_marginStart="36dp"
                 android:layout_marginTop="36dp"
                 android:layout_marginBottom="36dp"
-                android:src="@drawable/profile_image" />
+                android:src="@drawable/image_1" />
         </RelativeLayout>
 
         <RelativeLayout

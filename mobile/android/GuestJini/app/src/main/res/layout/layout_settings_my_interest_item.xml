@@ -34,7 +34,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/unchecked_icon_xxhdpi" />
+            android:background="@drawable/square_box_icon" />
 
         <View
             android:layout_width="match_parent"

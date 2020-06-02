@@ -52,7 +52,7 @@
             android:layout_height="25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/navigation_icon_xhdpi"
+            app:srcCompat="@drawable/right_arrow_with_cyan_circle_icon"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
 

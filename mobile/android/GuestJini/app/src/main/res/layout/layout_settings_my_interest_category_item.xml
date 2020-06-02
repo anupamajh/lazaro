@@ -33,7 +33,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="6dp"
-            app:srcCompat="@drawable/dropdown_icon_mdpi" />
+            app:srcCompat="@drawable/dropdown_grey_icon" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/lstInterests"

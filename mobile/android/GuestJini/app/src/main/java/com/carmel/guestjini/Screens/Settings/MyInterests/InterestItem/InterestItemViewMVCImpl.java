@@ -37,11 +37,11 @@ public class InterestItemViewMVCImpl
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    btnInterested.setImageResource(R.drawable.checked_icon_xhdpi);
+                    btnInterested.setImageResource(R.drawable.check_icon);
                     isInterested = 1;
                 } else {
                     flag = true;
-                    btnInterested.setImageResource(R.drawable.unchecked_icon_xxhdpi);
+                    btnInterested.setImageResource(R.drawable.square_box_icon);
                     isInterested = 0;
                 }
                 if (!isInitiating) {
