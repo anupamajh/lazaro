@@ -38,7 +38,7 @@ public class GroupListItemViewMVCImpl
 
         btnInformation.setOnClickListener(v -> {
             for (Listener listener : getListeners()) {
-                listener.onGroupClicked(group);
+                listener.onGroupDetailClicked(group);
             }
         });
     }

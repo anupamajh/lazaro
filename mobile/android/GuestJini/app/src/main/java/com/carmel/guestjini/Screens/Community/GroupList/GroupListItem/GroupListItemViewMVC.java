@@ -7,6 +7,7 @@ public interface GroupListItemViewMVC extends ObservableViewMvc<GroupListItemVie
 
     public interface Listener {
         void onGroupClicked(Group group);
+        void onGroupDetailClicked(Group group);
     }
 
     void bindGroup(Group group);

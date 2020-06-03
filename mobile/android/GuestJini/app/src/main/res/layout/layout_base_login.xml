@@ -223,7 +223,7 @@
                         android:text="@string/page_title" />
 
                     <RelativeLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/btnLogin"
                         android:layout_centerHorizontal="true">
@@ -232,7 +232,6 @@
                             android:id="@+id/txtDontHaveText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="60dp"
                             android:layout_marginBottom="20dp"
                             android:fontFamily="@font/roboto_medium"
                             android:text="@string/dont_have_text"

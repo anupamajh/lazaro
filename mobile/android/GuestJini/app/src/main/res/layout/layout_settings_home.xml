@@ -70,7 +70,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:contentDescription="@string/change_password"
-                    android:src="@drawable/redeem_points_icon" />
+                    android:src="@drawable/change_pwd_icon" />
 
                 <TextView
                     android:id="@+id/changePasswordTitle"

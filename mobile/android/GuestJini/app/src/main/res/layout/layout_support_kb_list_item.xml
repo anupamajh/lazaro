@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/layoutProfilePic"
-            android:layout_toLeftOf="@+id/layoutKBAction">
+            android:layout_toStartOf="@+id/layoutKBAction">
 
             <TextView
                 android:id="@+id/txtKBTitle"
@@ -43,7 +43,6 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="36dp"
-                android:letterSpacing="0.04"
                 android:text="@string/ticket_name"
                 android:textColor="@color/colorZambezi1"
                 android:textSize="12sp"

@@ -60,6 +60,13 @@ public class GroupListViewMVCImpl
     }
 
     @Override
+    public void onGroupDetailClicked(Group group) {
+        for (Listener listener : getListeners()) {
+            listener.onGroupDetailClicked(group);
+        }
+    }
+
+    @Override
     public void bindGroups(List<Group> groupList) {
         groupListRecycleAdapter.bindGroups(groupList);
     }

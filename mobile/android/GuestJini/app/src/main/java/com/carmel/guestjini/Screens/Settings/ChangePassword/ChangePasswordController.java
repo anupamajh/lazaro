@@ -104,6 +104,7 @@ public class ChangePasswordController
         mScreenState = ScreenState.PASSWORD_CHANGED;
         viewMVC.hideProgressIndication();
         viewMVC.clearFields();
+        dialogsManager.showInfoDialog(null, "Change Password", "Password changed successfully!", true);
     }
 
     @Override

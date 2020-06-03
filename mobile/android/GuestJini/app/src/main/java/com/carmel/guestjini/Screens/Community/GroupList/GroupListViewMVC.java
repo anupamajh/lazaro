@@ -13,6 +13,8 @@ public interface GroupListViewMVC extends ObservableViewMvc<GroupListViewMVC.Lis
         void onBackClicked();
 
         void onNewGroupClicked();
+
+        void onGroupDetailClicked(Group group);
     }
 
     void bindGroups(List<Group> groupList);

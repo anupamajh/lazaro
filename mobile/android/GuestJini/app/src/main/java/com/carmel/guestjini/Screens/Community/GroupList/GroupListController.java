@@ -114,6 +114,8 @@ public class GroupListController implements
         }
     }
 
+
+
     @Override
     public void onBackClicked() {
         screensNavigator.navigateUp();
@@ -122,6 +124,11 @@ public class GroupListController implements
     @Override
     public void onNewGroupClicked() {
         screensNavigator.toCreateGroupScreen();
+    }
+
+    @Override
+    public void onGroupDetailClicked(Group group) {
+        screensNavigator.toGroupDetailScreen(group.getId(), groupType);
     }
 
     @Override

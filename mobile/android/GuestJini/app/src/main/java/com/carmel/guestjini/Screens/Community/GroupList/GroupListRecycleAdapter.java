@@ -17,6 +17,7 @@ public class GroupListRecycleAdapter
         implements GroupListItemViewMVC.Listener {
     public interface Listener {
         void onGroupClicked(Group group);
+        void onGroupDetailClicked(Group group);
     }
 
     static class GroupViewHolder extends RecyclerView.ViewHolder {
@@ -94,5 +95,10 @@ public class GroupListRecycleAdapter
     @Override
     public void onGroupClicked(Group group) {
         listener.onGroupClicked(group);
+    }
+
+    @Override
+    public void onGroupDetailClicked(Group group) {
+        listener.onGroupDetailClicked(group);
     }
 }

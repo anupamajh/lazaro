@@ -110,7 +110,7 @@ public class KBDetailViewMVCImpl
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    btnDislikeIcon.setImageResource(R.drawable.unlike_icon_black_xxhdpi);
+                    btnDislikeIcon.setImageResource(R.drawable.unliked_icon);
                     for (Listener listener : getListeners()) {
                         listener.onDislikeClicked(kbId, 0);
                     }
