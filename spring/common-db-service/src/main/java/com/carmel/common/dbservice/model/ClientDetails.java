@@ -75,7 +75,7 @@ public class ClientDetails {
     private Date lastModifiedTime;
 
     @Column(name = "is_deleted")
-    private  int isDeleted;
+    private int isDeleted;
 
     @Column(name = "deleted_by")
     @Length(max = 40)

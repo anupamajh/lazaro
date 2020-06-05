@@ -1,8 +1,6 @@
 package com.carmel.common.dbservice.common.Search;
 
 
-
-
 import com.carmel.common.dbservice.common.DateUtil;
 
 import javax.persistence.EntityManager;

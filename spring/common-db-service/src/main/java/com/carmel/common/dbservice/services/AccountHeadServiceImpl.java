@@ -43,7 +43,7 @@ public class AccountHeadServiceImpl implements AccountHeadService {
 
     @Override
     public Page<AccountHead> findAllByClientIdAndIsDeleted(String clientId, int isDeleted, Pageable pageable) {
-        return accountHeadRepository.findAllByClientIdAndIsDeleted(clientId, isDeleted,pageable);
+        return accountHeadRepository.findAllByClientIdAndIsDeleted(clientId, isDeleted, pageable);
     }
 
     @Override

@@ -4,9 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.carmel.guestjini.Common.EndPoints;
-import com.carmel.guestjini.Models.Authentication.AccessToken;
-import com.carmel.guestjini.Services.Authentication.AuthServiceHolder;
+
+import com.carmel.guestjini.Common.Constants;
+import com.carmel.guestjini.Networking.Common.AuthServiceHolder;
+import com.carmel.guestjini.Networking.Users.AccessToken;
 
 import java.io.IOException;
 
@@ -16,7 +17,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.Route;
 
-public class TokenAuthenticator  implements Authenticator {
+public class TokenAuthenticator implements Authenticator {
     private Context context;
     private AuthServiceHolder authServiceHolder;
 
@@ -35,7 +36,7 @@ public class TokenAuthenticator  implements Authenticator {
         final SharedPreferences.Editor editor = preferences.edit();
         String refreshToken = preferences.getString("refresh_token", null);
         String username = preferences.getString("username", null);
-        String credentials = Credentials.basic(EndPoints.CLIENT_ID, EndPoints.CLIENT_SECRETE);
+        String credentials = Credentials.basic(Constants.CLIENT_ID, Constants.CLIENT_SECRETE);
         try {
             retrofit2.Response retrofitResponse = authServiceHolder.get().refreshToken(credentials, "refresh_token", refreshToken).execute();
             if (retrofitResponse != null) {
@@ -54,10 +55,10 @@ public class TokenAuthenticator  implements Authenticator {
                     }
                 }
                 return response.request().newBuilder()
-                        .header("Authorization", "Bearer " +newAccessToken)
+                        .header("Authorization", "Bearer " + newAccessToken)
                         .build();
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             Log.d("Exception", ex.toString());
         }
         return null;

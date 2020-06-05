@@ -23,7 +23,7 @@ public class DateUtil {
 
     public static Date convertToDate(String input) {
         Date date = null;
-        if(null == input) {
+        if (null == input) {
             return null;
         }
         for (SimpleDateFormat format : dateFormats) {

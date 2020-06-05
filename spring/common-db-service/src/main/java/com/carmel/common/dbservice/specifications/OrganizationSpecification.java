@@ -25,7 +25,7 @@ public class OrganizationSpecification {
                         builder.like(root.get("orgDomain"), finalText)
                         ),
                         builder.equal(root.get("isDeleted"), 0),
-                        builder.equal(root.get("client"),client )
+                        builder.equal(root.get("client"), client)
                 );
             }
         };

@@ -28,7 +28,7 @@ public class UserDeviceDataController {
     UserDeviceDataService userDeviceDataService;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public UserDeviceDataResponse save(@RequestBody  UserDeviceData userDeviceData) {
+    public UserDeviceDataResponse save(@RequestBody UserDeviceData userDeviceData) {
         UserInfo userInfo = userInformation.getUserInfo();
         logger.trace("Entering");
         UserDeviceDataResponse userDeviceDataResponse = new UserDeviceDataResponse();
@@ -59,7 +59,6 @@ public class UserDeviceDataController {
         }
         return userDeviceDataResponse;
     }
-
 
 
 }

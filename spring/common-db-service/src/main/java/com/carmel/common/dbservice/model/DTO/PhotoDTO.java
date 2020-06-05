@@ -23,7 +23,8 @@ public class PhotoDTO {
     private Date deletedTime;
     private AlbumDTO album;
 
-    public PhotoDTO(){}
+    public PhotoDTO() {
+    }
 
     public PhotoDTO(Photo photo) {
         this.id = photo.getId();

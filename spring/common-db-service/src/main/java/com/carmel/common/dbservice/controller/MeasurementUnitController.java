@@ -58,8 +58,8 @@ public class MeasurementUnitController {
             if (measurementUnit.getId() == null) {
                 measurementUnit.setId("");
             }
-            if(measurementUnit.getOrgId() == null || measurementUnit.getOrgId().isEmpty()){
-                if(userInfo.getDefaultOrganization() != null) {
+            if (measurementUnit.getOrgId() == null || measurementUnit.getOrgId().isEmpty()) {
+                if (userInfo.getDefaultOrganization() != null) {
                     measurementUnit.setOrgId(userInfo.getDefaultOrganization().getId());
                 }
             }
@@ -227,7 +227,7 @@ public class MeasurementUnitController {
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("title"));
             Page<MeasurementUnit> page;
             if (searchText == null) {
-                page = measurementUnitService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(),0,pageable);
+                page = measurementUnitService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(), 0, pageable);
             } else {
                 page = measurementUnitService.findAll(textInAllColumns(searchText, userInfo.getClient().getClientId()), pageable);
             }
@@ -264,7 +264,7 @@ public class MeasurementUnitController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public MeasurementUnitResponse search(@RequestBody SearchRequest searchRequest) {
         MeasurementUnitResponse measurementUnitResponse = new MeasurementUnitResponse();
-        try{
+        try {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<MeasurementUnit> criteriaQuery = criteriaBuilder.createQuery(MeasurementUnit.class);
             Root<MeasurementUnit> root = criteriaQuery.from(MeasurementUnit.class);
@@ -291,13 +291,13 @@ public class MeasurementUnitController {
             measurementUnitResponse.setSuccess(true);
             measurementUnitResponse.setError("");
             measurementUnitResponse.setMeasurementUnitList(measurementUnitList);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             logger.error(ex.toString(), ex);
             measurementUnitResponse.setSuccess(false);
             measurementUnitResponse.setError(ex.getMessage());
         }
-        return  measurementUnitResponse;
+        return measurementUnitResponse;
     }
 
 }

@@ -40,7 +40,7 @@ public class NotifierController {
     public GenericResponse sendNotificationByUserName(Map<String, String> formData) {
         GenericResponse genericResponse = new GenericResponse();
         try {
-            Resource resource=resourceLoader.getResource("classpath:certificates/AuthKey_AKFM2GC67F.p8");
+            Resource resource = resourceLoader.getResource("classpath:certificates/AuthKey_AKFM2GC67F.p8");
             File certificateFIle = resource.getFile();
             final ApnsClient apnsClient = new ApnsClientBuilder()
                     .setApnsServer(ApnsClientBuilder.DEVELOPMENT_APNS_HOST)

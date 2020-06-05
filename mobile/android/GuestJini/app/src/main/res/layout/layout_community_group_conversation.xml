@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/layoutHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:contentDescription="@string/back_arrow_icon"
+                android:src="@drawable/back_arrow_icon" />
+
+            <TextView
+                android:id="@+id/txtHeaderTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="32dp"
+                android:layout_toEndOf="@+id/btnBack"
+                android:letterSpacing="0.1"
+                android:text="@string/groups"
+                android:textAllCaps="true"
+                android:textColor="@color/colorZambezi"
+                android:textSize="14sp"
+                app:fontFamily="@font/roboto_bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layoutGroupDescription"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:background="@color/colorWhisper1"
+            android:layout_below="@id/layoutHeader">
+
+            <TextView
+                android:id="@+id/txtGroupName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:letterSpacing="0.05"
+                android:text="@string/interestGroupName"
+                android:textColor="@color/colorZambezi1"
+                android:textSize="11sp"
+                app:fontFamily="@font/roboto_medium"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true" />
+
+            <TextView
+                android:id="@+id/txtGroupDescription"
+                android:layout_width="match_parent"
+                android:layout_height="26dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/group_description_title"
+                android:textColor="@color/colorSuvaGray"
+                android:textSize="10sp"
+                app:fontFamily="@font/roboto_medium"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/txtGroupName"
+
+                />
+
+            <Button
+                android:id="@+id/btnGroupInformation"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="32dp"
+                android:backgroundTint="@color/colorSummerSky"
+                android:text="INFO"
+                android:textColor="@color/colorWhite"
+                android:textSize="12sp"
+                android:visibility="visible"
+                app:fontFamily="@font/roboto_bold"
+                android:layout_alignParentEnd="true" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/recyclerViewMainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/layoutGroupDescription">
+
+            <RelativeLayout
+                android:id="@+id/recyclerLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="45dp"
+                android:background="@color/colorSolitude">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/lstGroupConversation"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="12dp"
+                    android:paddingBottom="30dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/messageLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/recyclerLayout"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="-45dp">
+
+                <EditText
+                    android:id="@+id/txtMessage"
+                    android:layout_width="339dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@color/colorWhite"
+                    android:ems="10"
+                    android:hint="@string/writeHere"
+                    android:inputType="textPersonName"
+                    android:paddingStart="20dp"
+                    android:paddingTop="13dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="13dp"
+                    android:textColor="@color/colorSuvaGray"
+                    android:textSize="10sp" />
+
+                <Button
+                    android:id="@+id/btnSend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="-5dp"
+                    android:layout_toEndOf="@+id/txtMessage"
+                    android:backgroundTint="@color/colorSummerSky"
+                    android:text="@string/send"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/roboto_bold" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</FrameLayout>

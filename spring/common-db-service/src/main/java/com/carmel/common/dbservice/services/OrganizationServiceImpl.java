@@ -25,12 +25,12 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public List<Organization> findAllByOrgName(String orgName) {
-        return organizationRepository.findAllByOrgNameAndIsDeletedIs(orgName,0);
+        return organizationRepository.findAllByOrgNameAndIsDeletedIs(orgName, 0);
     }
 
     @Override
     public List<Organization> findAllByOrgNameAndIdIsNot(String orgName, String id) {
-        return organizationRepository.findAllByOrgNameAndIdIsNotAndIsDeletedIs(orgName, id,0);
+        return organizationRepository.findAllByOrgNameAndIdIsNotAndIsDeletedIs(orgName, id, 0);
     }
 
     @Override
@@ -45,12 +45,12 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public Page<Organization> findAll(Pageable pageable) {
-        return organizationRepository.findAllByIsDeletedIs(0,pageable);
+        return organizationRepository.findAllByIsDeletedIs(0, pageable);
     }
 
     @Override
     public Page<Organization> findAllByClient(Client client, Pageable pageable) {
-        return organizationRepository.findAllByClientAndIsDeleted(client, 0,pageable);
+        return organizationRepository.findAllByClientAndIsDeleted(client, 0, pageable);
     }
 
     @Override

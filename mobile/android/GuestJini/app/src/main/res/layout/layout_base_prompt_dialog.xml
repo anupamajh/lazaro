@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/txtDialogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="44dp"
+        android:letterSpacing="0.1"
+        android:text="@string/alert_title"
+        android:textColor="@color/colorSummerSky"
+        android:textSize="12sp"
+        app:fontFamily="@font/roboto_medium" />
+
+    <TextView
+        android:id="@+id/txtDialogMessage"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtDialogTitle"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="12dp"
+        android:letterSpacing="0.05"
+        android:lineSpacingExtra="2dp"
+        android:text="@string/alert_message"
+        android:textColor="@color/colorSuvaGray"
+        android:textSize="11sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtDialogMessage"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:id="@+id/btnDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="32dp"
+            android:layout_alignParentStart="true"
+            android:background="@color/colorTrackTint" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="32dp"
+            android:layout_alignParentEnd="true"
+            android:background="@color/colorRoman" />
+    </RelativeLayout>
+
+</RelativeLayout>

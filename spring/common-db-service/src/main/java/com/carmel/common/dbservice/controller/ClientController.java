@@ -29,22 +29,17 @@ import java.util.Optional;
 public class ClientController {
 
     Logger logger = LoggerFactory.getLogger(ClientController.class);
-    private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
     @Autowired
     ClientService clientService;
-
     @Autowired
     ClientDetailService clientDetailService;
-
     @Autowired
     UserInformation userInformation;
-
     @Autowired
     RoleService roleService;
-
     @Autowired
     UserService userService;
+    private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ClientResponse register(@Valid @RequestBody Client client) {

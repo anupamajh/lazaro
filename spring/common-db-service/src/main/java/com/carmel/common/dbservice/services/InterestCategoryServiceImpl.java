@@ -48,6 +48,6 @@ public class InterestCategoryServiceImpl implements InterestCategoryService {
 
     @Override
     public List<InterestCategory> findAllByClientIdAndIsDeletedAndNameAndIdIsNot(String clientId, int isDeleted, String name, String id) {
-        return interestCategoryRepository.findAllByClientIdAndIsDeletedAndNameAndIdIsNot(clientId, isDeleted,name, id);
+        return interestCategoryRepository.findAllByClientIdAndIsDeletedAndNameAndIdIsNot(clientId, isDeleted, name, id);
     }
 }

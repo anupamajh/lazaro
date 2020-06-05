@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AlbumServiceImpl implements AlbumService{
+public class AlbumServiceImpl implements AlbumService {
 
     @Autowired
     AlbumRepository albumRepository;
@@ -29,7 +29,7 @@ public class AlbumServiceImpl implements AlbumService{
 
     @Override
     public List<Album> findAllByClientIdAndTitleAndIdIsNot(String clientId, String title, String id) {
-        return albumRepository.findAllByClientIdAndTitleAndIdIsNot(clientId, title,id);
+        return albumRepository.findAllByClientIdAndTitleAndIdIsNot(clientId, title, id);
     }
 
     @Override
@@ -49,6 +49,6 @@ public class AlbumServiceImpl implements AlbumService{
 
     @Override
     public Page<Album> findAll(Specification<Album> textInAllColumns, Pageable pageable) {
-        return albumRepository.findAll(textInAllColumns,pageable);
+        return albumRepository.findAll(textInAllColumns, pageable);
     }
 }

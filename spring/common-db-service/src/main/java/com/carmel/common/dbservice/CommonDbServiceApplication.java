@@ -14,17 +14,17 @@ import org.springframework.web.client.RestTemplate;
 @EnableResourceServer
 public class CommonDbServiceApplication {
 
-	@LoadBalanced
-	@Bean
-	RestTemplate restTemplate(){
-		return  new RestTemplate();
-	}
+    @Autowired
+    RestTemplate restTemplate;
 
-	@Autowired
-	RestTemplate restTemplate;
+    public static void main(String[] args) {
+        SpringApplication.run(CommonDbServiceApplication.class, args);
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(CommonDbServiceApplication.class, args);
-	}
+    @LoadBalanced
+    @Bean
+    RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
 }

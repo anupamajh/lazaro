@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtSupportHomeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="52dp"
+                android:gravity="center"
+                android:letterSpacing="0.15"
+                android:text="@string/help_title"
+                android:textColor="@color/colorDimGray"
+                android:textSize="@dimen/hepl_title_size"
+                app:fontFamily="@font/roboto_light" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/knowledgeBaseCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtSupportHomeTitle"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="24dp"
+                app:cardBackgroundColor="@color/colorWhisper1"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/txtFindHelpText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="34dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:letterSpacing="0.05"
+                        android:text="@string/find_help"
+                        android:textColor="@color/colorCharcoal"
+                        android:textSize="@dimen/find_help_textsize" />
+
+                    <RelativeLayout
+                        android:id="@+id/kbSearchLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtFindHelpText"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="32dp"
+                        android:background="@drawable/search"
+                        android:padding="5dp">
+
+                        <EditText
+                            android:id="@+id/txtSearch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="9dp"
+                            android:layout_toLeftOf="@+id/btnSearch"
+                            android:background="@color/colorWhite"
+                            android:ems="18"
+                            android:hint="@string/search"
+                            android:inputType="text"
+                            android:letterSpacing="0.07"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="2dp"
+                            android:textColorHint="@color/colorSuvaGray"
+                            android:textSize="10sp" />
+
+                        <ImageView
+                            android:id="@+id/btnSearch"
+                            android:layout_width="17dp"
+                            android:layout_height="17dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="9dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginBottom="9dp"
+                            android:src="@drawable/search_icon">
+
+                        </ImageView>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/txtKBExploreTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/kbSearchLayout"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="54dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:letterSpacing="0.06"
+                        android:text="@string/Explore"
+                        android:textColor="@color/colorCharcoal"
+                        android:textSize="12sp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtKBExploreTitle"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="15dp"
+                        android:layout_alignParentEnd="true">
+
+                        <TextView
+                            android:id="@+id/txtKbExploreDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_toLeftOf="@+id/btnExploreKB"
+                            android:letterSpacing="0.04"
+                            android:text="@string/explore_description"
+                            android:textColor="@color/colorSuvaGray"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/roboto_medium" />
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/btnExploreKB"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="2dp"
+                            app:backgroundTint="@color/colorSummerSky"
+                            app:fabCustomSize="26dp"
+                            app:maxImageSize="16dp"
+                            app:srcCompat="@drawable/ic_navigate_next_black_24dp"
+                            app:tint="@color/colorWhite" />
+
+                    </RelativeLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/helpDeskBaseCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/knowledgeBaseCardView"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="24dp"
+                app:cardBackgroundColor="@color/colorWhisper1"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/txtTicketsTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="34dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:letterSpacing="0.05"
+                        android:text="@string/tickets"
+                        android:textColor="@color/colorCharcoal"
+                        android:textSize="@dimen/find_help_textsize" />
+
+                    <TextView
+                        android:id="@+id/txtTicketsDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="17dp"
+                        android:layout_marginEnd="70dp"
+                        android:letterSpacing="0.04"
+                        android:text="@string/tickets_description"
+                        android:textColor="@color/colorSuvaGray"
+                        android:textSize="12sp"
+                        app:fontFamily="@font/roboto_medium"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@+id/txtTicketsTitle" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCreateTicket"
+                        android:layout_width="wrap_content"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="@color/colorSummerSky"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/create_tickets"
+                        android:textSize="10sp"
+                        app:cornerRadius="@dimen/change_password_radius"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/txtTicketsDescription" />
+
+                    <View
+                        android:id="@+id/borderView"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="80dp"
+                        android:background="#CCCCCC"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@+id/btnCreateTicket" />
+
+                    <TextView
+                        android:id="@+id/txtGoToTicketsText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:letterSpacing="0.03"
+                        android:text="@string/goto_your_tickets"
+                        android:textColor="@color/colorCharcoal"
+                        android:textSize="12sp"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/borderView" />
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/btnTicketList"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="2dp"
+                        app:backgroundTint="@color/colorSummerSky"
+                        app:fabCustomSize="26dp"
+                        app:maxImageSize="16dp"
+                        app:srcCompat="@drawable/ic_navigate_next_black_24dp"
+                        app:tint="@color/colorWhite"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/txtGoToTicketsText" />
+
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+
+    </ScrollView>
+</FrameLayout>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/layoutProfilePic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profilePicture"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginBottom="36dp"
+                android:src="@drawable/image_1" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layoutKBExcerpt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/layoutProfilePic">
+
+            <TextView
+                android:id="@+id/txtReviewerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="36dp"
+                android:letterSpacing="0.04"
+                android:text="@string/reviewName"
+                android:textColor="@color/colorZambezi1"
+                android:textSize="12sp"
+                app:fontFamily="@font/roboto_medium" />
+
+            <TextView
+                android:id="@+id/txtReviewDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtReviewerName"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:letterSpacing="0.04"
+                android:text="@string/ticket_author_name"
+                android:textColor="@color/colorDimGray"
+                android:textSize="9sp"
+                app:fontFamily="@font/roboto_medium" />
+
+            <TextView
+                android:id="@+id/txtReviewText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="8dp"
+                android:layout_below="@+id/txtReviewDate"
+                android:layout_alignParentStart="true"
+                android:letterSpacing="0.05"
+                android:lineSpacingExtra="3dp"
+                android:text="@string/reviewDescription"
+                android:textColor="@color/colorDimGray"
+                android:textSize="11sp"
+                app:fontFamily="@font/roboto_medium" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</FrameLayout>

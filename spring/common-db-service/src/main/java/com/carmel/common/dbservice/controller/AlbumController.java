@@ -57,8 +57,8 @@ public class AlbumController {
             if (album.getId() == null) {
                 album.setId("");
             }
-            if(album.getOrgId() == null || album.getOrgId().isEmpty()){
-                if(userInfo.getDefaultOrganization() != null) {
+            if (album.getOrgId() == null || album.getOrgId().isEmpty()) {
+                if (userInfo.getDefaultOrganization() != null) {
                     album.setOrgId(userInfo.getDefaultOrganization().getId());
                 }
             }
@@ -226,7 +226,7 @@ public class AlbumController {
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("title"));
             Page<Album> page;
             if (searchText == null) {
-                page = albumService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(),0,pageable);
+                page = albumService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(), 0, pageable);
             } else {
                 page = albumService.findAll(textInAllColumns(searchText, userInfo.getClient().getClientId()), pageable);
             }
@@ -248,7 +248,7 @@ public class AlbumController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public AlbumResponse search(@RequestBody SearchRequest searchRequest) {
         AlbumResponse albumResponse = new AlbumResponse();
-        try{
+        try {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<Album> criteriaQuery = criteriaBuilder.createQuery(Album.class);
             Root<Album> root = criteriaQuery.from(Album.class);
@@ -275,13 +275,13 @@ public class AlbumController {
             albumResponse.setSuccess(true);
             albumResponse.setError("");
             albumResponse.setAlbumList(albumList);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             logger.error(ex.toString(), ex);
             albumResponse.setSuccess(false);
             albumResponse.setError(ex.getMessage());
         }
-        return  albumResponse;
+        return albumResponse;
     }
 
     private boolean checkDuplicate(Album album) {

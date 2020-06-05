@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/layoutHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:contentDescription="@string/back_arrow_icon"
+                android:src="@drawable/back_arrow_icon" />
+
+            <TextView
+                android:id="@+id/txtHeaderTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="32dp"
+                android:layout_toEndOf="@+id/btnBack"
+                android:letterSpacing="0.1"
+                android:text="@string/Explore"
+                android:textAllCaps="true"
+                android:textColor="@color/colorZambezi"
+                android:textSize="14sp"
+                app:fontFamily="@font/roboto_bold" />
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutHeader">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/layoutKBDetailHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/layoutProfilePic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/profilePicture"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginStart="36dp"
+                            android:layout_marginTop="36dp"
+                            android:layout_marginBottom="36dp"
+                            android:src="@drawable/image_1" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layoutAuthorDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/layoutProfilePic">
+
+                        <TextView
+                            android:id="@+id/txtKBAuthorName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="36dp"
+                            android:letterSpacing="0.04"
+                            android:text=""
+                            android:textColor="@color/colorZambezi1"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/roboto_medium" />
+
+                        <TextView
+                            android:id="@+id/txtKBDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txtKBAuthorName"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:letterSpacing="0.04"
+                            android:text=""
+                            android:textColor="@color/colorSuvaGray"
+                            android:textSize="9sp"
+                            app:fontFamily="@font/roboto_medium" />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutKBDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layoutKBDetailHeader"
+                    android:layout_marginTop="20dp"
+                    android:padding="25dp">
+
+                    <TextView
+                        android:id="@+id/txtKBTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/roboto_medium"
+                        android:letterSpacing="0.05"
+                        android:text=""
+                        android:textColor="@color/colorZambezi1"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/txtKBNarration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtKBTitle"
+                        android:layout_marginTop="24dp"
+                        android:lineSpacingExtra="3dp"
+                        android:text=""
+                        android:textColor="@color/colorGrey"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardFeedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layoutKBDetails"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="42dp"
+                    android:layout_marginEnd="25dp"
+                    android:backgroundTint="@color/colorAzure"
+                    app:cardCornerRadius="6dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:id="@+id/txtFeedBackHelpText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/wasThisHelpful"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_marginStart="28dp"
+                                android:layout_marginTop="40dp"
+                                android:layout_marginBottom="40dp"
+                                android:fontFamily="@font/roboto_medium"
+                                android:letterSpacing="0.05"
+                                android:text="@string/was_this_helpful"
+                                android:textColor="@color/colorZambezi1"
+                                android:textSize="12sp" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true">
+
+                            <RelativeLayout
+                                android:id="@+id/layoutFeedbackLikeSection"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="20dp">
+
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:id="@+id/btnLikeIcon"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="16dp"
+                                    android:src="@drawable/like_icon"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/txtLikePercentage"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/btnLikeIcon"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="6dp"
+                                    android:layout_marginBottom="16dp"
+                                    android:text="0%"
+                                    android:textSize="10sp" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/layoutFeedbackDislikeSection"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@+id/layoutFeedbackLikeSection"
+                                android:padding="20dp">
+
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:id="@+id/btnDislikeIcon"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_marginTop="16dp"
+                                    android:src="@drawable/unlike_icon" />
+
+                                <TextView
+                                    android:id="@+id/txtDislikePercentage"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/btnDislikeIcon"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="6dp"
+                                    android:layout_marginBottom="16dp"
+                                    android:text="0%"
+                                    android:textSize="10sp" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardReview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cardFeedback"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="42dp"
+                    android:layout_marginEnd="25dp"
+                    android:backgroundTint="@color/colorAzure"
+                    app:cardCornerRadius="6dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="25dp">
+
+                        <TextView
+                            android:id="@+id/txtReviewHelpText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:letterSpacing="0.05"
+                            android:text="@string/writeReview"
+                            android:textColor="@color/colorZambezi1"
+                            android:textSize="12sp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentStart="true" />
+
+                        <EditText
+                            android:id="@+id/txtReviewText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="26dp"
+                            android:background="@drawable/review_edit_box"
+                            android:inputType="textMultiLine"
+                            android:paddingStart="6dp"
+                            android:paddingTop="14dp"
+                            android:paddingEnd="6dp"
+                            android:paddingBottom="62dp"
+                            android:textColor="@color/colorSuvaGray"
+                            android:textSize="12sp"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/txtReviewHelpText" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSubmitReview"
+                            android:layout_width="80dp"
+                            android:layout_height="38dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:backgroundTint="@color/colorSummerSky"
+                            android:fontFamily="@font/roboto_bold"
+                            android:letterSpacing="0.06"
+                            android:text="@string/submit"
+                            android:textSize="10sp"
+                            app:cornerRadius="@dimen/submit_button_radius"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/txtReviewText" />
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <RelativeLayout
+                    android:id="@+id/layoutList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/cardReview"
+                    android:layout_marginTop="50dp"
+                    android:padding="25dp">
+                    <!-- TODO: Check why minheight is required, Require help from UI Expert -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/lstKBReview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="150dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </ScrollView>
+    </RelativeLayout>
+</FrameLayout>

@@ -22,10 +22,10 @@ public class Application {
     private String name;
 
     @Column(name = "status")
-    private  int status;
+    private int status;
 
     @Column(name = "`order`")
-    private  int order;
+    private int order;
 
     @Column(name = "version")
     @Length(max = 20)

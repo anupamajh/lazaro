@@ -29,7 +29,7 @@ public class AddressBookDTO {
     private Date creationTime;
     private String lastModifiedBy;
     private Date lastModifiedTime;
-    private  int isDeleted;
+    private int isDeleted;
     private String deletedBy;
     private Date deletedTime;
     private int isInvited;

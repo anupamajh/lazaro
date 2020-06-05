@@ -31,7 +31,7 @@ public class ClientDTO {
         this.authorizedGrantTypes = client.getAuthorizedGrantTypes();
         this.authorities = client.getAuthorities();
         this.autoapprove = client.getAutoapprove();
-        this.clientDetails =  client.getClientDetails() != null? ClientDetailsDTO.getSimple(client.getClientDetails()):null;
+        this.clientDetails = client.getClientDetails() != null ? ClientDetailsDTO.getSimple(client.getClientDetails()) : null;
 
     }
 

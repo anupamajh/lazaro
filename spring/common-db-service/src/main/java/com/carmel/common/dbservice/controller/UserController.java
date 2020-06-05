@@ -48,29 +48,20 @@ import static com.carmel.common.dbservice.specifications.UserSpecification.textI
 @RequestMapping(value = "/user")
 public class UserController {
 
-    private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
-
     Logger logger = LoggerFactory.getLogger(UserController.class);
-
     @Autowired
     UserInformation userInformation;
-
     @Autowired
     UserService userService;
-
     @Autowired
     MailClient mailClient;
-
     @Autowired
     AddressBookService addressBookService;
-
     @Autowired
     UserPreferenceService userPreferenceService;
-
     @Autowired
     EntityManager entityManager;
-
+    private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public UserResponse save(@Valid @RequestBody User user) {
@@ -438,14 +429,15 @@ public class UserController {
         UserResponse userResponse = new UserResponse();
         try {
             Optional<User> optionalUser = userService.findById(formData.get("id"));
-            if(optionalUser.isPresent()){
+            if (optionalUser.isPresent()) {
                 User user = optionalUser.get();
                 user.setPassword(passwordEncoder.encode(formData.get("password")));
                 user.setAccountStatus(2);
                 User savedUser = userService.save(user);
-                userResponse.setUser(savedUser);;
+                userResponse.setUser(savedUser);
+                ;
                 userResponse.setSuccess(true);
-            }else{
+            } else {
                 throw new Exception("User not found");
             }
         } catch (Exception ex) {
@@ -491,7 +483,7 @@ public class UserController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public UsersResponse search(@RequestBody SearchRequest searchRequest) {
         UsersResponse usersResponse = new UsersResponse();
-        try{
+        try {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
             Root<User> root = criteriaQuery.from(User.class);
@@ -518,13 +510,13 @@ public class UserController {
             usersResponse.setSuccess(true);
             usersResponse.setError("");
             usersResponse.setUserList(userList);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             logger.error(ex.toString(), ex);
             usersResponse.setSuccess(false);
             usersResponse.setError(ex.getMessage());
         }
-        return  usersResponse;
+        return usersResponse;
     }
 
 

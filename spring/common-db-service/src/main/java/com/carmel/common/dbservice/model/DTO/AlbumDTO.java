@@ -22,7 +22,8 @@ public class AlbumDTO {
     private Date deletedTime;
     private List<PhotoDTO> photos;
 
-    public AlbumDTO(){}
+    public AlbumDTO() {
+    }
 
     public AlbumDTO(Album album) {
         this.id = album.getId();
@@ -38,7 +39,7 @@ public class AlbumDTO {
         this.deletedBy = album.getDeletedBy();
         this.deletedTime = album.getDeletedTime();
         this.photos = new ArrayList<>();
-        if(album.getPhotos()!=null) {
+        if (album.getPhotos() != null) {
             album.getPhotos().forEach(photo -> {
                 this.photos.add(PhotoDTO.getSimple(photo));
             });

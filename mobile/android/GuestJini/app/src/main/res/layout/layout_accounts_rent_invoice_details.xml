@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/layoutHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:contentDescription="@string/back_arrow_icon"
+                android:src="@drawable/back_arrow_icon" />
+
+            <TextView
+                android:id="@+id/txtHeaderTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="32dp"
+                android:layout_toEndOf="@+id/btnBack"
+                android:letterSpacing="0.1"
+                android:text="@string/rent_invoice"
+                android:textAllCaps="true"
+                android:textColor="@color/colorZambezi"
+                android:textSize="14sp"
+                app:fontFamily="@font/roboto_bold" />
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutHeader">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardRentInvoiceDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="54dp"
+                    android:backgroundTint="@color/colorWhite"
+                    app:cardCornerRadius="10dp"
+                    app:strokeColor="@color/colorVeryLightGray"
+                    app:strokeWidth="0.7dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/txtRentInvoiceDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:letterSpacing="0.05"
+                            android:text="@string/rent_invoice_date"
+                            android:textColor="@color/colorDimGray"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txtRentInvoiceNo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:letterSpacing="0.05"
+                            android:text="@string/rent_invoice_no"
+                            android:textColor="@color/colorDimGray"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/txtRentInvoiceDate" />
+
+
+                        <TextView
+                            android:id="@+id/txtPackageLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:letterSpacing="0.05"
+                            android:text="@string/package_label"
+                            android:textColor="@color/colorDimGray"
+                            android:textSize="11sp"
+                            android:visibility="gone"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/txtNarration" />
+
+                        <TextView
+                            android:id="@+id/txtPackageName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="50dp"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:letterSpacing="0.05"
+                            android:text="@string/package_Name"
+                            android:textColor="@color/colorDimGray"
+                            android:visibility="gone"
+                            android:textSize="11sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/txtPackageLabel"
+                            app:layout_constraintTop_toBottomOf="@+id/txtNarration" />
+
+                        <TextView
+                            android:id="@+id/amountLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:letterSpacing="0.05"
+                            android:text="@string/total_amount"
+                            android:textColor="@color/colorZambezi1"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/txtNarration" />
+
+                        <TextView
+                            android:id="@+id/txtTotalAmount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="90dp"
+                            android:layout_marginTop="25dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:letterSpacing="0.05"
+                            android:text="@string/amount_value"
+                            android:textColor="@color/colorZambezi1"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/amountLabel"
+                            app:layout_constraintTop_toBottomOf="@+id/txtNarration" />
+
+                        <TextView
+                            android:id="@+id/txtNarration"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="13dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:letterSpacing="0.05"
+                            android:text="@string/towardsRent"
+                            android:textColor="@color/colorSuvaGray"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.151"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/txtRentInvoiceNo" />
+
+                        <TextView
+                            android:id="@+id/txtAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:letterSpacing="0.05"
+                            android:text="@string/rentAddress"
+                            android:textColor="@color/colorDimGray"
+                            android:visibility="gone"
+                            android:textSize="10sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/txtPackageLabel" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:id="@+id/payNowLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:layout_below="@id/cardRentInvoiceDetails"
+                    android:layout_alignParentBottom="true">
+
+                    <Button
+                        android:id="@+id/btnPayNow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="47dp"
+                        android:backgroundTint="@color/colorSummerSky"
+                        android:fontFamily="@font/roboto_bold"
+                        android:paddingStart="25dp"
+                        android:paddingEnd="25dp"
+                        android:text="@string/pay_now"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </ScrollView>
+    </RelativeLayout>
+</FrameLayout>

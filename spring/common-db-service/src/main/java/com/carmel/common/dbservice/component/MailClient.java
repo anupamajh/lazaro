@@ -9,10 +9,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MailClient {
-    private JavaMailSender mailSender;
-
     @Autowired
     MailContentBuilder mailContentBuilder;
+    private JavaMailSender mailSender;
 
     @Autowired
     public MailClient(JavaMailSender mailSender) {
@@ -25,7 +24,7 @@ public class MailClient {
             messageHelper.setFrom("no-reply@carmelsolutions.net");
             messageHelper.setTo(recipient);
             messageHelper.setSubject("Sample mail subject");
-            String content = mailContentBuilder.build(message , "mailTemplates/resetPassword");
+            String content = mailContentBuilder.build(message, "mailTemplates/resetPassword");
             messageHelper.setText(content, true);
         };
         try {

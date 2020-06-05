@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/txtDialogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="44dp"
+        android:letterSpacing="0.1"
+        android:text="@string/alert_title"
+        android:textColor="@color/colorSummerSky"
+        android:textSize="12sp"
+        app:fontFamily="@font/roboto_medium"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:id="@+id/txtDialogMessage"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="12dp"
+        android:letterSpacing="0.05"
+        android:text="@string/alert_message"
+        android:textColor="@color/colorSuvaGray"
+        android:textSize="11sp"
+        android:lineSpacingExtra="2dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/txtDialogTitle" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
+        app:cornerRadius="18dp"
+        app:fabCustomSize="38dp"
+        app:maxImageSize="20dp"
+        app:srcCompat="@drawable/ic_done_black_24dp"
+        app:tint="@color/colorWhite"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/txtDialogMessage" />
+</RelativeLayout>

@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/profileDrawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/layoutHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:contentDescription="@string/back_arrow_icon"
+                    android:src="@drawable/back_arrow_icon" />
+
+                <TextView
+                    android:id="@+id/txtHeaderTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_toEndOf="@+id/btnBack"
+                    android:letterSpacing="0.1"
+                    android:text="@string/my_profile"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorZambezi"
+                    android:textSize="14sp"
+                    app:fontFamily="@font/roboto_bold" />
+            </RelativeLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/layoutHeader">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
+
+                    <RelativeLayout
+                        android:id="@+id/layoutProfilePic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/imgProfile"
+                            android:layout_width="51dp"
+                            android:layout_height="51dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="20dp"
+                            android:src="@drawable/default_user_icon" />
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/btnChangeProfileImage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="-20dp"
+                            android:layout_toEndOf="@+id/imgProfile"
+                            app:backgroundTint="@color/colorSummerSky"
+                            app:fabCustomSize="20dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:maxImageSize="10dp"
+                            app:srcCompat="@drawable/ic_mode_edit_black_24dp"
+                            app:tint="@color/colorWhite">
+
+                        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+                        <ImageView
+                            android:id="@+id/btnProfileToggle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/imgProfile"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="8dp"
+                            android:src="@drawable/toggle_off_icon"
+                            android:visibility="visible" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layoutFullName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/layoutProfilePic"
+                        android:layout_alignParentStart="true">
+
+                        <TextView
+                            android:id="@+id/txtNameTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="32dp"
+                            android:letterSpacing="0.1"
+                            android:text="@string/name"
+                            android:textColor="@color/colorDimGray"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/roboto_medium" />
+
+                        <TextView
+                            android:id="@+id/txtFullName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txtNameTitle"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginTop="4dp"
+                            android:letterSpacing="0.1"
+                            android:text="@string/john"
+                            android:textColor="@color/colorMatterhon"
+                            android:textSize="14sp"
+                            app:fontFamily="@font/roboto_medium" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/horizontal_line" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layoutGender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/layoutFullName"
+                        android:layout_alignParentStart="true">
+
+                        <TextView
+                            android:id="@+id/txtGenderTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="32dp"
+                            android:letterSpacing="0.1"
+                            android:text="@string/gender"
+                            android:textColor="@color/colorDimGray"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/roboto_medium" />
+
+                        <TextView
+                            android:id="@+id/txtGender"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txtGenderTitle"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginTop="4dp"
+                            android:letterSpacing="0.1"
+                            android:text="@string/male_or_female"
+                            android:textColor="@color/colorMatterhon"
+                            android:textSize="14sp"
+                            app:fontFamily="@font/roboto_medium" />
+
+                        <ImageView
+                            android:id="@+id/btnGenderToggle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="4dp"
+                            android:src="@drawable/toggle_off_icon" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/horizontal_line" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layoutAge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/layoutGender"
+                        android:layout_alignParentStart="true">
+
+                        <TextView
+                            android:id="@+id/txtAgeTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="32dp"
+                            android:letterSpacing="0.1"
+                            android:text="@string/age"
+                            android:textColor="@color/colorDimGray"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/roboto_medium" />
+
+                        <TextView
+                            android:id="@+id/txtAge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txtAgeTitle"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginTop="4dp"
+                            android:letterSpacing="0.1"
+                            android:text="@string/age_value"
+                            android:textColor="@color/colorMatterhon"
+                            android:textSize="14sp"
+                            app:fontFamily="@font/roboto_medium" />
+
+                        <ImageView
+                            android:id="@+id/btnAgeToggle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="4dp"
+                            android:src="@drawable/toggle_off_icon" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/horizontal_line" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layoutMobileNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/layoutAge"
+                        android:layout_alignParentStart="true">
+
+                        <TextView
+                            android:id="@+id/txtMobileNumberTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="32dp"
+                            android:letterSpacing="0.1"
+                            android:text="@string/mobile_number"
+                            android:textColor="@color/colorDimGray"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/roboto_medium" />
+
+                        <TextView
+                            android:id="@+id/txtMobileNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txtMobileNumberTitle"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginTop="4dp"
+                            android:letterSpacing="0.1"
+                            android:text="@string/mobile"
+                            android:textColor="@color/colorMatterhon"
+                            android:textSize="14sp"
+                            app:fontFamily="@font/roboto_medium" />
+
+                        <ImageView
+                            android:id="@+id/btnMobileNumberToggle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="4dp"
+                            android:src="@drawable/toggle_off_icon" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/horizontal_line" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layoutEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/layoutMobileNumber"
+                        android:layout_alignParentStart="true">
+
+                        <TextView
+                            android:id="@+id/txtEmailTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="32dp"
+                            android:letterSpacing="0.1"
+                            android:text="@string/email"
+                            android:textColor="@color/colorDimGray"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/roboto_medium" />
+
+                        <TextView
+                            android:id="@+id/txtEmail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txtEmailTitle"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginTop="4dp"
+                            android:letterSpacing="0.1"
+                            android:text="@string/email_value"
+                            android:textColor="@color/colorMatterhon"
+                            android:textSize="14sp"
+                            app:fontFamily="@font/roboto_medium" />
+
+                        <ImageView
+                            android:id="@+id/btnEmailToggle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="4dp"
+                            android:src="@drawable/toggle_off_icon" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/horizontal_line" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layoutPlaceOfOrigin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/layoutEmail"
+                        android:layout_alignParentStart="true">
+
+                        <TextView
+                            android:id="@+id/txtPlaceOfOriginTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="32dp"
+                            android:letterSpacing="0.1"
+                            android:text="@string/place_of_origin"
+                            android:textColor="@color/colorDimGray"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/roboto_medium" />
+
+                        <TextView
+                            android:id="@+id/txtPlaceOfOrigin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txtPlaceOfOriginTitle"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginTop="4dp"
+                            android:letterSpacing="0.1"
+                            android:text=""
+                            android:textColor="@color/colorMatterhon"
+                            android:textSize="14sp"
+                            app:fontFamily="@font/roboto_medium" />
+
+                        <ImageView
+                            android:id="@+id/btnPlaceOfOriginToggle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="4dp"
+                            android:src="@drawable/toggle_off_icon" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/horizontal_line" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layoutSetupInterest"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/layoutPlaceOfOrigin"
+                        android:layout_alignParentStart="true"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/txtMyInterestTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="32dp"
+                            android:letterSpacing="0.1"
+                            android:text="@string/my_interests"
+                            android:textColor="@color/colorDimGray"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/roboto_medium" />
+
+                        <TextView
+                            android:id="@+id/redCircle"
+                            android:layout_width="9dp"
+                            android:layout_height="9dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="28dp"
+                            android:layout_toEndOf="@+id/txtMyInterestTitle"
+                            android:background="@drawable/red_small_circle" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSetupInterest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="42dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="20dp"
+                            android:backgroundTint="@color/colorSummerSky"
+                            android:letterSpacing="0.1"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="@string/setup"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp"
+                            app:cornerRadius="3dp"
+                            app:fontFamily="@font/roboto_medium" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/horizontal_line" />
+                    </RelativeLayout>
+
+                </RelativeLayout>
+            </ScrollView>
+        </RelativeLayout>
+
+
+        <com.google.android.material.navigation.NavigationView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_marginEnd="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/exploreSideDrawer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:id="@+id/cameraLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/cameraIcon"
+                        style="@style/Widget.MaterialComponents.Button.Icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="56dp"
+                        app:backgroundTint="@color/colorSummerSky"
+                        app:fabCustomSize="38dp"
+                        app:iconSize="24dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:maxImageSize="15dp"
+                        app:srcCompat="@drawable/ic_camera"
+                        app:tint="@color/colorWhite">
+
+                    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+                    <TextView
+                        android:id="@+id/cameraDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="23dp"
+                        android:layout_marginTop="66dp"
+                        android:layout_marginEnd="40dp"
+                        android:layout_toEndOf="@+id/cameraIcon"
+                        android:letterSpacing="0.04"
+                        android:lineSpacingExtra="3dp"
+                        android:text="@string/cameraDescription"
+                        android:textColor="@color/colorDimGray"
+                        android:textSize="10sp"
+                        app:fontFamily="@font/roboto_medium"
+                        app:layout_constraintStart_toEndOf="@+id/cameraIcon"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/cameraDivider"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.7dp"
+                        android:layout_below="@+id/cameraDescription"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="36dp"
+                        android:layout_marginEnd="0dp"
+                        android:background="@color/colorVeryLightGray"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"></View>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/galleryLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cameraLayout">
+
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/galleryIcon"
+                        style="@style/Widget.MaterialComponents.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="34dp"
+                        android:layout_marginBottom="27dp"
+                        app:backgroundTint="@color/colorSummerSky"
+                        app:fabCustomSize="40dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:maxImageSize="18dp"
+                        app:srcCompat="@drawable/ic_insert_photo_black_24dp"
+                        app:tint="@color/colorWhite">
+
+                    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+                    <TextView
+                        android:id="@+id/galleryDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="23dp"
+                        android:layout_marginTop="44dp"
+                        android:layout_marginEnd="38dp"
+                        android:layout_toEndOf="@+id/galleryIcon"
+                        android:letterSpacing="0.04"
+                        android:text="@string/galleryDescription"
+                        android:textColor="@color/colorSuvaGray"
+                        android:textSize="10sp"
+                        app:fontFamily="@font/roboto_medium"
+                        android:lineSpacingExtra="3dp"
+                        app:layout_constraintStart_toEndOf="@+id/galleryIcon"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </RelativeLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.navigation.NavigationView>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+</FrameLayout>
