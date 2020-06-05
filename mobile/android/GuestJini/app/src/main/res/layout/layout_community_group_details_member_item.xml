@@ -33,6 +33,7 @@
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@id/layoutProfilePic"
             android:layout_toStartOf="@id/layoutInvite"
+            android:layout_marginBottom="15dp"
             >
 
             <TextView
