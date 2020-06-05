@@ -26,4 +26,6 @@ public interface BookingService {
     Guest doCheckIn(Booking booking, Date actualCheckInDate) throws Exception;
 
     Booking doCancelCheckIn(Booking booking)  throws Exception;
+
+    Optional<Booking> findByPhoneAndBookingStatus(String mobileNumber, int bookingStatus);
 }

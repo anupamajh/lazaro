@@ -6,11 +6,11 @@ spring:
     username: jacksparrow
     password: TH_12rthahalli
     driver-class-name: com.mysql.cj.jdbc.Driver
-  #  datasource:
-  #    url: jdbc:mysql://68.183.246.143:3306/guestjini?createDatabaseIfNotExist=true&useSSL=false
-  #    username: jacksparrow
-  #    password: c@rmel@p1rat3s@hub11
-  #    driver-class-name: com.mysql.cj.jdbc.Driver
+#  datasource:
+#    url: jdbc:mysql://68.183.246.143:3306/guestjini?createDatabaseIfNotExist=true&useSSL=false
+#    username: jacksparrow
+#    password: c@rmel@p1rat3s@hub11
+#    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       naming:
@@ -26,6 +26,20 @@ spring:
       enabled: true
       max-file-size: 100MB
       max-request-size: 200MB
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: amazon@carmelsolutions.net
+    password: P@ssw0rd
+    properties:
+      mail:
+        smtp:
+          auth: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+          starttls:
+            enable: true
 
 logging:
   level:
@@ -63,6 +77,7 @@ security:
       client-id: 21e43c55-28ef-478a-ae65-dc896e5eaa34
       client-secret: P@ssw0rd
 carmel:
+  baseUrl: http://localhost:8100
   imageSavePath: /opt/carmel/storage/images/
   userInfoURL: http://common-db-service/user/me
   dbServiceURL: http://common-db-service
@@ -88,4 +103,10 @@ carmel:
   allowedPropertyTypes:
     pods: 600
     rooms: 500
+  oauth2:
+    client:
+      grantType: client_credentials
+      clientId: 1ae3e919-0c52-4054-860f-0eaa79815734
+      clientSecret: P@ssw0rd
+      accessTokenUri: http://139.59.32.238:8005/oauth/token
 

@@ -17,3 +17,38 @@ spring:
     database: mysql
   application:
     name: guest-jini-data-migrator
+security:
+  oauth2:
+    client:
+      client-id: 21e43c55-28ef-478a-ae65-dc896e5eaa34
+      client-secret: P@ssw0rd
+      user-authorization-uri: http://68.183.246.143:8005/oauth/authorize
+      access-token-uri: http://68.183.246.143:8005/oauth/token
+    resource:
+      token-info-uri: http://68.183.246.143:8005/oauth/check_token
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://68.183.246.143:8001/eureka/
+
+
+
+carmel:
+  fileUploadPath: /Users/pete/SVN/carmel/GuestJini-web/web/res/static/uploads/
+  baseUrl: http://localhost:8100
+  userInfoURL: http://common-db-service/user/me
+  dbServiceURL: http://common-db-service
+  guestJiniServiceURL: http://guest-jini-service
+  accountsServiceURL: http://guesture-accounts-service
+  bookingServiceURL: http://guesture-booking-service
+  helpdeskServiceURL: http://guesture-helpdesk-service
+  paymentServiceURL: http://guesture-payment-service
+  inventoryServiceURL: http://guesture-inventory-service
+  oauth2:
+    client:
+      grantType: client_credentials
+      clientId: 21e43c55-28ef-478a-ae65-dc896e5eaa34
+      clientSecret: P@ssw0rd
+      accessTokenUri: http://68.183.246.143:8005/oauth/token

@@ -2,16 +2,23 @@ package com.carmel.guestjini.service.controller.Booking;
 
 import com.carmel.guestjini.service.common.Booking.BookingStatus;
 import com.carmel.guestjini.service.common.DateUtil;
+import com.carmel.guestjini.service.components.ApplicationConstantsService;
+import com.carmel.guestjini.service.components.MailClient;
 import com.carmel.guestjini.service.components.UserInformation;
+import com.carmel.guestjini.service.components.UserService;
+import com.carmel.guestjini.service.config.CarmelConfig;
 import com.carmel.guestjini.service.model.Accounts.AccountReceipts;
 import com.carmel.guestjini.service.model.Booking.Booking;
 import com.carmel.guestjini.service.model.Booking.BookingAdditionalCharge;
 import com.carmel.guestjini.service.model.Booking.Guest;
+import com.carmel.guestjini.service.model.DTO.Common.ApplicationConstantDTO;
 import com.carmel.guestjini.service.model.Inventory.Package;
 import com.carmel.guestjini.service.model.Inventory.PackageCharge;
 import com.carmel.guestjini.service.model.Principal.UserInfo;
+import com.carmel.guestjini.service.request.Booking.BookingRequest;
 import com.carmel.guestjini.service.response.Accounts.AccountReceiptsResponse;
 import com.carmel.guestjini.service.response.Booking.BookingResponse;
+import com.carmel.guestjini.service.response.Common.UserResponse;
 import com.carmel.guestjini.service.service.Accounts.AccountReceiptService;
 import com.carmel.guestjini.service.service.Booking.BookingAdditionalChargeService;
 import com.carmel.guestjini.service.service.Booking.BookingService;
@@ -63,6 +70,17 @@ public class BookingController {
     @Autowired
     AccountReceiptService accountReceiptsService;
 
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    ApplicationConstantsService applicationConstantsService;
+
+    @Autowired
+    CarmelConfig carmelConfig;
+
+    @Autowired
+    MailClient mailClient;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public BookingResponse save(@Valid @RequestBody Booking booking) {
@@ -192,10 +210,10 @@ public class BookingController {
             List<String> inventoryIds = Arrays.asList(parentIds.split("\\s*,\\s*"));
             List<Booking> bookings = bookingService.findAll(
                     checkInventoryAvailability(inventoryIds, checkInDate,
-                           checkOutDate));
+                            checkOutDate));
             if (bookings.size() > 0) {
                 throw new Exception("Selected inventory not available for booking, Please select some other inventory");
-            }else{
+            } else {
                 bookingResponse.setInventoryId(inventoryId);
                 bookingResponse.setSuccess(true);
             }
@@ -620,13 +638,13 @@ public class BookingController {
         try {
             String bookingId = formData.get("bookingId") == null ? null : String.valueOf(formData.get("bookingId"));
             Date actualCheckInDate = formData.get("actual_checkin") != null ? DateUtil.convertToDate(formData.get("actual_checkin")) : null;
-             if (bookingId == null) {
+            if (bookingId == null) {
                 throw new Exception("Booking ID not received");
             }
             Optional<Booking> optionalBooking = bookingService.findById(bookingId);
             if (optionalBooking.isPresent()) {
                 Booking booking = optionalBooking.get();
-                if(actualCheckInDate == null){
+                if (actualCheckInDate == null) {
                     actualCheckInDate = booking.getCheckInTime();
                 }
 
@@ -659,7 +677,7 @@ public class BookingController {
         BookingResponse bookingResponse = new BookingResponse();
         try {
             String bookingId = formData.get("bookingId") == null ? null : String.valueOf(formData.get("bookingId"));
-            Date actualCheckInDate = formData.get("actual_checkin") != null ?  DateUtil.convertToDate(formData.get("actual_checkin")) : null;
+            Date actualCheckInDate = formData.get("actual_checkin") != null ? DateUtil.convertToDate(formData.get("actual_checkin")) : null;
             if (bookingId == null) {
                 throw new Exception("Booking ID not received");
             }
@@ -698,6 +716,79 @@ public class BookingController {
             accountReceiptsResponse.setError(ex.getMessage());
         }
         return accountReceiptsResponse;
+    }
+
+
+    @RequestMapping(value = "/create-booking")
+    @Transactional(rollbackFor = Exception.class)
+    public BookingResponse createBooking(
+            @RequestBody BookingRequest bookingRequest
+    ) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        BookingResponse bookingResponse = new BookingResponse();
+        try {
+            Optional<Booking> optionalBooking = bookingService.findByPhoneAndBookingStatus(bookingRequest.getMobileNumber(), BookingStatus.ACTIVE);
+            if (optionalBooking.isPresent()) {
+                bookingResponse.setSuccess(false);
+                bookingResponse.setError("We already have an active booking with the mobile number! Kindly contact administrator");
+            } else {
+                Booking booking = new Booking();
+                booking.setReferenceNo(String.valueOf(System.nanoTime()));
+                booking.setBookingStatus(1);
+                booking.setProcessId(bookingRequest.getOrderId());
+                booking.setPhone(bookingRequest.getMobileNumber());
+                booking.setFullName(bookingRequest.getFullName());
+                booking.setEmail(bookingRequest.getEmailAddress());
+                booking.setGender(bookingRequest.getGender());
+                booking.setCheckIn(DateUtil.convertToDate(bookingRequest.getCheckinDate()));
+                booking.setCheckOut(DateUtil.convertToDate(bookingRequest.getCheckoutDate()));
+                booking.setCheckInTime(DateUtil.convertToDate(bookingRequest.getCheckinDate()));
+                booking.setCheckOutTime(DateUtil.convertToDate(bookingRequest.getCheckoutDate()));
+                booking = bookingService.save(booking);
+                ApplicationConstantDTO applicationConstantDTO =
+                        applicationConstantsService.getApplicationConstant(bookingRequest.getStayPackage());
+                String packageId = applicationConstantDTO.getValue();
+                Optional<Package> optionalPackage = packageService
+                        .findById(packageId);
+                if (optionalPackage.isPresent()) {
+                    Package aPackage = optionalPackage.get();
+                    booking.setPackageId(aPackage.getId());
+                    booking.setRent(aPackage.getRent());
+                    booking.setRentUnit(aPackage.getRentCycle());
+                    booking = bookingService.save(booking);
+                } else {
+                    throw new Exception("Selected package is not available!");
+                }
+                String parentIds = inventoryService.getParentIds(bookingRequest.getSelectedInventory());
+                List<String> inventoryIds = Arrays.asList(parentIds.split("\\s*,\\s*"));
+                List<Booking> bookings = bookingService.findAll(
+                        checkInventoryAvailability(inventoryIds, booking.getCheckInTime(),
+                                booking.getCheckOutTime(), booking.getReferenceNo()));
+                if (bookings.size() > 0) {
+                    throw new Exception("Selected inventory not available for booking, Please select some other inventory");
+                }
+                booking.setInventoryId(bookingRequest.getSelectedInventory());
+                booking = bookingService.save(booking);
+                UserResponse userResponse = userService.signUpGuest(bookingRequest);
+                if (!userResponse.isSuccess()) {
+                    throw new Exception(userResponse.getError());
+                }
+                bookingRequest.setActivationLink(
+                        carmelConfig.getBaseUrl() + "/user/activate-account/" + userResponse.getUser().getId()
+                );
+                this.sendActivationEmail(bookingRequest);
+                bookingResponse.setSuccess(true);
+                bookingResponse.setBooking(booking);
+            }
+        } catch (Exception ex) {
+            bookingResponse.setSuccess(false);
+            bookingResponse.setError(ex.getMessage());
+        }
+        return bookingResponse;
+    }
+    private boolean sendActivationEmail(BookingRequest bookingRequest) {
+        mailClient.setGuestSignUpEmail(bookingRequest);
+        return true;
     }
 
 }

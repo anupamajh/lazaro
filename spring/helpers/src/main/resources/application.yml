@@ -62,3 +62,4 @@ carmel:
   inventoryServiceURL: http://guesture-inventory-service
   imageSavePath: /opt/carmel/storage/images/
   supportEmail: prasanna.pete@carmelsolutions.net
+

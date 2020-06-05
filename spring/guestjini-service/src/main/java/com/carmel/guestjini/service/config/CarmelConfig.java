@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "carmel")
 public class CarmelConfig {
+    public String baseUrl;
     private String userInfoURL;
     private String dbServiceURL;
     private String inventoryServiceURL;
@@ -54,5 +55,13 @@ public class CarmelConfig {
 
     public void setImageSavePath(String imageSavePath) {
         this.imageSavePath = imageSavePath;
+    }
+
+    public String getBaseUrl() {
+        return baseUrl;
+    }
+
+    public void setBaseUrl(String baseUrl) {
+        this.baseUrl = baseUrl;
     }
 }

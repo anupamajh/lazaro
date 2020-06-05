@@ -16,6 +16,7 @@ public class UserDTO {
     private String lastLoginFrom;
     private int isOperator;
     private int accountStatus;
+    private int gender;
     private String createdBy;
     private Date creationTime;
     private String lastModifiedBy;
@@ -103,6 +104,14 @@ public class UserDTO {
 
     public void setIsOperator(int isOperator) {
         this.isOperator = isOperator;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 
     public int getAccountStatus() {

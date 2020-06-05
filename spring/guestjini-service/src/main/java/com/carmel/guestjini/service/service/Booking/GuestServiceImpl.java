@@ -103,8 +103,8 @@ public class GuestServiceImpl implements GuestService {
 
     @Override
     public GuestResponse getGuestById(String guestId) throws Exception {
+        GuestResponse guestResponse = new GuestResponse();
         try {
-            GuestResponse guestResponse = new GuestResponse();
             Optional<Guest> optionalGuest = this.findById(guestId);
             if(optionalGuest.isPresent()){
                 guestResponse.setGuest(optionalGuest.get());
@@ -115,7 +115,8 @@ public class GuestServiceImpl implements GuestService {
         } catch (Exception ex) {
             throw ex;
         }
-        return null;
+        return guestResponse;
+//        return null;
     }
 
     @Override

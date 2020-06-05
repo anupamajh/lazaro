@@ -1,8 +1,7 @@
 package com.carmel.common.datamigrator.controller;
 
-import com.carmel.common.datamigrator.model.Booking;
-import com.carmel.common.datamigrator.model.BookingAdditionalCharge;
-import com.carmel.common.datamigrator.model.Inventory;
+import com.carmel.common.datamigrator.Services.BookingService;
+import com.carmel.common.datamigrator.model.*;
 import com.carmel.common.datamigrator.model.Package;
 import com.carmel.common.datamigrator.repository.BookingAdditionalChargeRepository;
 import com.carmel.common.datamigrator.repository.BookingRepository;
@@ -41,6 +40,9 @@ public class BookingController {
 
     @Autowired
     BookingAdditionalChargeRepository bookingAdditionalChargeRepository;
+
+    @Autowired
+    BookingService bookingService;
 
     @RequestMapping("/import-excel")
     public void importBooking() {
@@ -427,4 +429,127 @@ public class BookingController {
             String str = ex.getMessage();
         }
     }
+
+    @RequestMapping("/check-in")
+    public void checkIn() {
+        try {
+            Integer CHECK_IN_DATE_COL_NO = null;
+            Integer POD_NO_COL_NO = null;
+            Integer ROOM_NO_COL_NO = null;
+            Integer FLAT_COL_NO = null;
+            Integer FLOOR_COL_NO = null;
+            Integer BLOCK_COL_NO = null;
+            Integer FULL_NAME_COL_NO = null;
+            Integer GENDER_COL_NO = null;
+            Integer PACKAGE_COL_NO = null;
+            Integer POD_PRICE_COL_NO = null;
+            Integer UTILITY_CHARGES_COL_NO = null;
+            Integer SECURITY_DEPOSIT_COL_NO = null;
+            Integer PHONE_NO_COL_NO = null;
+            Integer EMAIL_ID_COL_NO = null;
+            Integer COMPANY_COL_NO = null;
+            Integer DISCOUNT_COL_NO = null;
+            int i = 0;
+            int rowCount = 0;
+
+            FileInputStream excelFile = new FileInputStream(new File(FILE_NAME));
+            Workbook workbook = new XSSFWorkbook(excelFile);
+            Sheet datatypeSheet = workbook.getSheetAt(0);
+            Iterator<Row> iterator = datatypeSheet.iterator();
+            while (iterator.hasNext()) {
+                Row currentRow = iterator.next();
+                Iterator<Cell> cellIterator = currentRow.iterator();
+                if (rowCount == 0) {
+                    while (cellIterator.hasNext()) {
+                        Cell currentCell = cellIterator.next();
+                        switch (currentCell.getStringCellValue().toLowerCase().trim()) {
+                            case "check in date": {
+                                CHECK_IN_DATE_COL_NO = i;
+                            }
+                            break;
+                            case "pod no": {
+                                POD_NO_COL_NO = i;
+                            }
+                            case "floor": {
+                                FLOOR_COL_NO = i;
+                            }
+                            break;
+                            case "room": {
+                                ROOM_NO_COL_NO = i;
+                            }
+                            break;
+                            case "suite": {
+                                FLAT_COL_NO = i;
+                            }
+                            break;
+                            case "block": {
+                                BLOCK_COL_NO = i;
+                            }
+                            break;
+                            case "name": {
+                                FULL_NAME_COL_NO = i;
+                            }
+                            break;
+                            case "gender": {
+                                GENDER_COL_NO = i;
+                            }
+                            break;
+                            case "payment package": {
+                                PACKAGE_COL_NO = i;
+                            }
+                            break;
+                            case "pod price": {
+                                POD_PRICE_COL_NO = i;
+                            }
+                            break;
+                            case "utility charges": {
+                                UTILITY_CHARGES_COL_NO = i;
+                            }
+                            break;
+                            case "security deposit": {
+                                SECURITY_DEPOSIT_COL_NO = i;
+                            }
+                            break;
+                            case "phone no": {
+                                PHONE_NO_COL_NO = i;
+                            }
+                            break;
+                            case "email id": {
+                                EMAIL_ID_COL_NO = i;
+                            }
+                            break;
+                            case "company": {
+                                COMPANY_COL_NO = i;
+                            }
+                            case "discount": {
+                                DISCOUNT_COL_NO = i;
+                            }
+                            break;
+                        }
+                        i++;
+                    }
+                    rowCount++;
+                } else {
+                    try {
+                        String email = currentRow.getCell(EMAIL_ID_COL_NO).getStringCellValue().trim();
+                        if (!email.equals("")) {
+                            Optional<Booking> optionalBooking = bookingRepository.findByEmailAndBookingStatus(email, 1);
+                            Booking booking;
+                            if (optionalBooking.isPresent()) {
+                                booking = optionalBooking.get();
+                                bookingService.doCheckIn(booking, booking.getCheckInTime());
+                            }
+                        }
+                    } catch (Exception ex) {
+                        String str = ex.getMessage();
+                        //TODO: Handle the error
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            String str = ex.getMessage();
+            //TODO: Handle the error
+        }
+    }
+
 }

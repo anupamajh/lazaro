@@ -1,4 +1,4 @@
-package com.carmel.guestjini.service.common;
+package com.carmel.common.datamigrator.Common;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,8 +16,6 @@ public class DateUtil {
             add(new SimpleDateFormat("dd.M.yyyy hh:mm:ss a"));
             add(new SimpleDateFormat("dd.MMM.yyyy"));
             add(new SimpleDateFormat("dd-MMM-yyyy"));
-            add(new SimpleDateFormat("yyyy-M-dd"));
-            add(new SimpleDateFormat("yyyy-M-dd hh:mm:ss"));
             add(new SimpleDateFormat("dd/M/yyyy"));
             add(new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy"));
         }

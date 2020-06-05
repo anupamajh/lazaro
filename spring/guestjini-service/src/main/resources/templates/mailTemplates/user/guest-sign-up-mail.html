@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Payment Report</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
+
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <strong> Please <a th:href="${bookingRequest.activationLink}">
+                        Activate Your Account </a></strong>
+                    <br>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                    <p>
+                        <em>Your Order ID: [[${bookingRequest.orderId}]]</em>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

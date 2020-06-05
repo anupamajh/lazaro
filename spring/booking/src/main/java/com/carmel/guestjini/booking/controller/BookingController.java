@@ -381,6 +381,34 @@ public class BookingController {
         return bookingResponse;
     }
 
+    @RequestMapping(value = "/get-booking-by-mobile-number", method = RequestMethod.POST)
+    public BookingResponse getBookingByMobileNumber(@RequestBody Map<String, String> formData) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        BookingResponse bookingResponse = new BookingResponse();
+        try {
+            logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
+            Optional<Booking> optionalBooking = bookingService.findByPhoneAndBookingStatus(formData.get("mobileNumber"), 1);
+            if (optionalBooking.isPresent()) {
+                Booking booking = optionalBooking.get();
+                bookingResponse.setSuccess(true);
+                bookingResponse.setError("");
+                bookingResponse.setBooking(booking);
+            } else {
+                bookingResponse.setSuccess(false);
+                bookingResponse.setError("Error occurred while fetching booking!! Please try after sometime");
+            }
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            bookingResponse.setSuccess(false);
+            bookingResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return bookingResponse;
+    }
+
+
     @RequestMapping(value = "/get-deleted", method = RequestMethod.POST)
     public BookingResponse getDeleted() {
         UserInfo userInfo = userInformation.getUserInfo();

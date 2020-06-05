@@ -3,26 +3,26 @@ server:
   servlet:
     session:
       cookie:
-        name: CARMELSESSION
+        name: REACHWELLSESSION
 
 security:
   oauth2:
     client:
-      client-id: pete
+      client-id: 21e43c55-28ef-478a-ae65-dc896e5eaa34
       client-secret: P@ssw0rd
-      user-authorization-uri: http://139.59.32.238:8005/oauth/authorize
-      access-token-uri: http://139.59.32.238:8005/oauth/token
+      user-authorization-uri: http://134.209.154.228:8005/oauth/authorize
+      access-token-uri: http://134.209.154.228:8005/oauth/token
     resource:
-      token-info-uri: http://139.59.32.238:8005/oauth/check_token
+      token-info-uri: http://134.209.154.228:8005/oauth/check_token
 
 eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://139.59.32.238:8001/eureka/
+      defaultZone: http://134.209.154.228:8001/eureka/
 
 
 spring:
   application:
-    name: common-web-dev
+    name: reachwell-application

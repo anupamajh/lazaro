@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BookingRepository extends JpaRepository<Booking, String> {
     List<Booking> findAll(Specification<Booking> bookingSpecification);
@@ -16,4 +17,6 @@ public interface BookingRepository extends JpaRepository<Booking, String> {
     Page<Booking> findAllByClientIdAndIsDeleted(String clientId, int isDeleted, Pageable pageable);
 
     Page<Booking> findAll(Specification<Booking> textInAllColumns, Pageable pageable);
+
+    Optional<Booking> findByPhoneAndBookingStatus(String mobileNumber, int BookingStatus);
 }

@@ -2,11 +2,13 @@ package com.carmel.guestjini.service.components;
 
 import com.carmel.guestjini.service.config.CarmelConfig;
 import com.carmel.guestjini.service.model.DTO.Common.UserDTO;
+import com.carmel.guestjini.service.request.Booking.BookingRequest;
 import com.carmel.guestjini.service.response.Common.UserResponse;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.http.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +21,11 @@ public class UserService {
 
     @Autowired
     RestTemplate restTemplate;
+
+    @Autowired
+    @LoadBalanced
+    RestTemplate clientAuthenticated;
+
 
     @Autowired
     CarmelConfig carmelConfig;
@@ -39,6 +46,35 @@ public class UserService {
             ResponseEntity<UserResponse> result =
                     restTemplate.exchange(carmelConfig.getDbServiceURL() + "/user/guest-sign-up",
                             HttpMethod.POST, entity, UserResponse.class);
+            return result.getBody();
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
+     public UserResponse signUpGuest(BookingRequest bookingRequest) throws Exception {
+        try {
+            UserDTO userDTO = new UserDTO();
+            userDTO.setFullName(bookingRequest.getFullName());
+            userDTO.setAccountStatus(2);
+            userDTO.setUserName(bookingRequest.getEmailAddress());
+            userDTO.setPhone(bookingRequest.getMobileNumber());
+            userDTO.setGender(bookingRequest.getGender());
+            userDTO.setIsOperator(0);
+            userDTO.setPassword("");
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            ObjectMapper objectMapper = new ObjectMapper();
+            String postJsonString = objectMapper.writeValueAsString(userDTO);
+            JSONParser parser = new JSONParser(JSONParser.MODE_PERMISSIVE);
+            JSONObject postData = (JSONObject) parser.parse(postJsonString);
+            HttpEntity<String> entity = new HttpEntity<String>(postData.toJSONString(), headers);
+            ResponseEntity<UserResponse> result =
+                    clientAuthenticated.postForEntity(
+                            carmelConfig.getDbServiceURL() + "/user/guest-sign-up",
+                            entity,
+                            UserResponse.class
+                    );
             return result.getBody();
         } catch (Exception ex) {
             throw ex;

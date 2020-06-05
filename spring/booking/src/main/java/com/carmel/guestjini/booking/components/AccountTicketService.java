@@ -57,7 +57,7 @@ public class AccountTicketService {
             postData.put("guestId", guestId);
             HttpEntity<String> entity = new HttpEntity<>(postData.toJSONString(), headers);
             ResponseEntity<AccountTicketResponse> result =
-                    restTemplate.exchange(yamlConfig.getAccountsServiceURL() + "/account-tickets//delete-account-tickets-by-guest",
+                    restTemplate.exchange(yamlConfig.getAccountsServiceURL() + "/account-tickets/delete-account-tickets-by-guest",
                             HttpMethod.POST, entity, AccountTicketResponse.class);
             return result.getBody();
         } catch (Exception ex) {
@@ -80,7 +80,7 @@ public class AccountTicketService {
             JSONObject postData = (JSONObject) parser.parse(postJsonString);
             HttpEntity<String> entity = new HttpEntity<>(postData.toJSONString(), headers);
             ResponseEntity<AccountTicketResponse> result =
-                    restTemplate.exchange(yamlConfig.getAccountsServiceURL() + "/account-tickets//generate-month-invoices",
+                    restTemplate.exchange(yamlConfig.getAccountsServiceURL() + "/account-tickets/generate-month-invoices",
                             HttpMethod.POST, entity, AccountTicketResponse.class);
             return result.getBody();
 

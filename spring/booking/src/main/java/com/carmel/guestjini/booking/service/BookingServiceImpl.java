@@ -322,4 +322,8 @@ public class BookingServiceImpl implements BookingService {
         return accountTicketResponse;
     }
 
+    @Override
+    public Optional<Booking> findByPhoneAndBookingStatus(String mobileNumber, int bookingStatus) {
+        return bookingRepository.findByPhoneAndBookingStatus(mobileNumber, bookingStatus);
+    }
 }
