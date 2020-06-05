@@ -56,7 +56,7 @@ public class Organization {
     private Date lastModifiedTime;
 
     @Column(name = "is_deleted")
-    private  int isDeleted;
+    private int isDeleted;
 
     @Column(name = "deleted_by")
     @Length(max = 40)
@@ -65,12 +65,12 @@ public class Organization {
     @Column(name = "deleted_time")
     private Date deletedTime;
 
-    @ManyToOne(cascade={CascadeType.ALL})
-    @JoinColumn(name="parent_id")
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "parent_id")
     @JsonBackReference
     private Organization parent;
 
-    @OneToMany(mappedBy="parent")
+    @OneToMany(mappedBy = "parent")
     @JsonManagedReference
     private List<Organization> childrens = new ArrayList<>();
 

@@ -95,21 +95,21 @@ public class GroupResponse {
                     .findFirst();
             Optional<GroupPeople> optionalGroupPeople = groupPeopleList.stream().filter(gp -> gp.getGroupId().equals(group1.getId())).findFirst();
             groupDTO.setCardType(0);
-            if(optionalGroupPeople.isPresent() && optionalGroupPeople.get().getHasAcceptedInvitation() == 1){
+            if (optionalGroupPeople.isPresent() && optionalGroupPeople.get().getHasAcceptedInvitation() == 1) {
                 groupDTO.setIsSubscribed(1);
                 groupDTO.setCardType(1);//Subscribed Card
-            }else{
+            } else {
                 groupDTO.setIsSubscribed(0);
                 groupDTO.setCardType(2);//Invited Card
             }
             optionalInterestCategory.ifPresent(interestCategory -> groupDTO.setInterestCategoryName(interestCategory.getName()));
             Optional<UserInterests> optionalUserInterests = userInterests.stream().filter(ui -> ui.getInterestId().equals(group1.getInterestId()) && ui.getIsInterested() == 1).findFirst();
-            if(optionalUserInterests.isPresent()){
+            if (optionalUserInterests.isPresent()) {
                 groupDTO.setIsMatchingInterest(1);
-                if(groupDTO.getCardType() != 1){
+                if (groupDTO.getCardType() != 1) {
                     groupDTO.setCardType(3);//Matching Interest Card
                 }
-            }else{
+            } else {
                 groupDTO.setIsMatchingInterest(0);
             }
             this.groupList.add(groupDTO);

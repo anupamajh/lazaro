@@ -35,8 +35,8 @@ public class UserPreferenceController {
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         UserPrefrenceResponse userPrefrenceResponse = new UserPrefrenceResponse();
-        try{
-            if(userPreference.getId() == null){
+        try {
+            if (userPreference.getId() == null) {
                 userPreference.setId("");
             }
             logger.trace("Data:{}", objectMapper.writeValueAsString(userInfo));
@@ -44,13 +44,13 @@ public class UserPreferenceController {
             Optional<UserPreference> optionalUserPreference = userPreferenceService.findByUserIdAndPreferenceType(userInfo.getId(), userPreference.getPreferenceType());
             UserPreference tempUserPreference = userPreference;
 
-            if(optionalUserPreference.isPresent()){
+            if (optionalUserPreference.isPresent()) {
                 tempUserPreference = optionalUserPreference.get();
                 logger.trace("Data:{}", objectMapper.writeValueAsString(tempUserPreference));
 
                 tempUserPreference.setPreferenceType(userPreference.getPreferenceType());
                 tempUserPreference.setIsHidden(userPreference.getIsHidden());
-            }else{
+            } else {
                 tempUserPreference.setUserId(userInfo.getId());
                 tempUserPreference.setPreferenceType(userPreference.getPreferenceType());
                 tempUserPreference.setIsHidden(userPreference.getIsHidden());
@@ -59,7 +59,7 @@ public class UserPreferenceController {
             userPrefrenceResponse.setUserPreference(userPreferenceService.save(tempUserPreference));
             userPrefrenceResponse.setSuccess(true);
             userPrefrenceResponse.setError("");
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             userPrefrenceResponse.setSuccess(false);
             userPrefrenceResponse.setError(ex.getMessage());

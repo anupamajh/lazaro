@@ -27,19 +27,6 @@ public class UserInterestsDTO {
     private InterestCategory interestCategory;
 
 
-    public boolean hasSameInterestId(List<UserInterestsDTO> userInterestsDTOS){
-        if(userInterestsDTOS.stream().filter(uidto -> uidto.getInterestId().equals(this.interestId)).collect(Collectors.toList()).size() > 0){
-            return true;
-        }
-        return false;
-    }
-
-    public boolean hasDiferentInterestId(List<UserInterestsDTO> userInterestsDTOS){
-        if(userInterestsDTOS.stream().filter(uidto -> uidto.getInterestId().equals(this.interestId)).collect(Collectors.toList()).size() > 0){
-            return false;
-        }
-        return true;
-    }
     public UserInterestsDTO() {
     }
 
@@ -57,6 +44,20 @@ public class UserInterestsDTO {
         this.isDeleted = userInterests.getIsDeleted();
         this.deletedBy = userInterests.getDeletedBy();
         this.deletedTime = userInterests.getDeletedTime();
+    }
+
+    public boolean hasSameInterestId(List<UserInterestsDTO> userInterestsDTOS) {
+        if (userInterestsDTOS.stream().filter(uidto -> uidto.getInterestId().equals(this.interestId)).collect(Collectors.toList()).size() > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasDiferentInterestId(List<UserInterestsDTO> userInterestsDTOS) {
+        if (userInterestsDTOS.stream().filter(uidto -> uidto.getInterestId().equals(this.interestId)).collect(Collectors.toList()).size() > 0) {
+            return false;
+        }
+        return true;
     }
 
     public String getId() {

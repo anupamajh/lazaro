@@ -10,7 +10,7 @@ public class InterestSpecification {
             searchText = "%" + searchText + "%";
         }
         String finalText = searchText;
-        return  (root, query, builder) -> builder.and(builder.or(
+        return (root, query, builder) -> builder.and(builder.or(
                 builder.like(root.get("name"), finalText),
                 builder.like(root.get("description"), finalText)
                 ),

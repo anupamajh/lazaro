@@ -40,7 +40,7 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     public List<Photo> findAllByIsDeletedAndClientIdAndAlbum(int isDeleted, String clientId, Album album) {
-        return photoRepository.findAllByIsDeletedAndClientIdAndAlbum(isDeleted, clientId,album);
+        return photoRepository.findAllByIsDeletedAndClientIdAndAlbum(isDeleted, clientId, album);
     }
 
     @Override

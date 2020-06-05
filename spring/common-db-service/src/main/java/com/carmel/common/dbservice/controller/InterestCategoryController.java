@@ -56,8 +56,8 @@ public class InterestCategoryController {
             if (interestCategory.getId() == null) {
                 interestCategory.setId("");
             }
-            if(interestCategory.getOrgId() == null || interestCategory.getOrgId().isEmpty()){
-                if(userInfo.getDefaultOrganization() != null) {
+            if (interestCategory.getOrgId() == null || interestCategory.getOrgId().isEmpty()) {
+                if (userInfo.getDefaultOrganization() != null) {
                     interestCategory.setOrgId(userInfo.getDefaultOrganization().getId());
                 }
             }
@@ -224,7 +224,7 @@ public class InterestCategoryController {
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("name"));
             Page<InterestCategory> page;
             if (searchText == null) {
-                page = interestCategoryService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(),0,pageable);
+                page = interestCategoryService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(), 0, pageable);
             } else {
                 page = interestCategoryService.findAll(textInAllColumns(searchText, userInfo.getClient().getClientId()), pageable);
             }
@@ -249,7 +249,7 @@ public class InterestCategoryController {
             accountHeadList = interestCategoryService.findAllByClientIdAndIsDeletedAndName(interestCategory.getClientId(), 0, interestCategory.getName());
         } else {
             accountHeadList = interestCategoryService.findAllByClientIdAndIsDeletedAndNameAndIdIsNot(
-                    interestCategory.getClientId(),0, interestCategory.getName(), interestCategory.getId());
+                    interestCategory.getClientId(), 0, interestCategory.getName(), interestCategory.getId());
         }
         if (accountHeadList.size() > 0) {
             return true;
@@ -261,7 +261,7 @@ public class InterestCategoryController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public InterestCategoryResponse search(@RequestBody SearchRequest searchRequest) {
         InterestCategoryResponse interestCategoryResponse = new InterestCategoryResponse();
-        try{
+        try {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<InterestCategory> criteriaQuery = criteriaBuilder.createQuery(InterestCategory.class);
             Root<InterestCategory> root = criteriaQuery.from(InterestCategory.class);
@@ -288,13 +288,13 @@ public class InterestCategoryController {
             interestCategoryResponse.setSuccess(true);
             interestCategoryResponse.setError("");
             interestCategoryResponse.setInterestCategoryList(interestCategoryList);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             logger.error(ex.toString(), ex);
             interestCategoryResponse.setSuccess(false);
             interestCategoryResponse.setError(ex.getMessage());
         }
-        return  interestCategoryResponse;
+        return interestCategoryResponse;
     }
 
 }

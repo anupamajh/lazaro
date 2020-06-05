@@ -64,8 +64,8 @@ public class InterestController {
             if (interest.getId() == null) {
                 interest.setId("");
             }
-            if(interest.getOrgId() == null || interest.getOrgId().isEmpty()){
-                if(userInfo.getDefaultOrganization() != null) {
+            if (interest.getOrgId() == null || interest.getOrgId().isEmpty()) {
+                if (userInfo.getDefaultOrganization() != null) {
                     interest.setOrgId(userInfo.getDefaultOrganization().getId());
                 }
             }
@@ -85,7 +85,7 @@ public class InterestController {
                 Interest savedInterest = interestService.save(interest);
                 Group group = new Group();
                 Optional<Group> optionalGroup = groupService.findByInterestId(savedInterest.getId());
-                if(optionalGroup.isPresent()) {
+                if (optionalGroup.isPresent()) {
                     group = optionalGroup.get();
                 }
                 group.setClientId(savedInterest.getClientId());
@@ -250,7 +250,7 @@ public class InterestController {
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("name"));
             Page<Interest> page;
             if (searchText == null) {
-                page = interestService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(),0,pageable);
+                page = interestService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(), 0, pageable);
             } else {
                 page = interestService.findAll(textInAllColumns(searchText, userInfo.getClient().getClientId()), pageable);
             }
@@ -275,7 +275,7 @@ public class InterestController {
             accountHeadList = interestService.findAllByClientIdAndIsDeletedAndName(interest.getClientId(), 0, interest.getName());
         } else {
             accountHeadList = interestService.findAllByClientIdAndIsDeletedAndNameAndIdIsNot(
-                    interest.getClientId(),0, interest.getName(), interest.getId());
+                    interest.getClientId(), 0, interest.getName(), interest.getId());
         }
         if (accountHeadList.size() > 0) {
             return true;
@@ -287,7 +287,7 @@ public class InterestController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public InterestResponse search(@RequestBody SearchRequest searchRequest) {
         InterestResponse interestResponse = new InterestResponse();
-        try{
+        try {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<Interest> criteriaQuery = criteriaBuilder.createQuery(Interest.class);
             Root<Interest> root = criteriaQuery.from(Interest.class);
@@ -314,13 +314,13 @@ public class InterestController {
             interestResponse.setSuccess(true);
             interestResponse.setError("");
             interestResponse.setInterestList(interestList);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             logger.error(ex.toString(), ex);
             interestResponse.setSuccess(false);
             interestResponse.setError(ex.getMessage());
         }
-        return  interestResponse;
+        return interestResponse;
     }
 
 }

@@ -9,7 +9,7 @@ public class ApplicationConstantSpecification {
             searchText = "%" + searchText + "%";
         }
         String finalText = searchText;
-        return  (root, query, builder) -> builder.and(builder.or(
+        return (root, query, builder) -> builder.and(builder.or(
                 builder.like(root.get("key"), finalText)
                 ),
                 builder.equal(root.get("clientId"), clientId)

@@ -28,4 +28,9 @@ public class AddressBookServiceImpl implements AddressBookService {
     public List<AddressBook> findAllByIsDeleted(int isDeleted) {
         return addressBookRepository.findAllByIsDeleted(isDeleted);
     }
+
+    @Override
+    public List<AddressBook> findAllByIsDeletedAndUserIdIsNot(int isDeleted, String userId) {
+        return addressBookRepository.findAllByIsDeletedAndUserIdIsNot(isDeleted, userId);
+    }
 }

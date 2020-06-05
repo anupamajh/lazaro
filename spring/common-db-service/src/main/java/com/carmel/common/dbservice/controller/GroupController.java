@@ -145,9 +145,9 @@ public class GroupController {
         try {
             GroupPeople groupPeople;
             Optional<GroupPeople> optionalGroupPeople = groupPeopleService.findByUserIdAndGroupId(userInfo.getId(), formData.get("groupId"));
-            if(optionalGroupPeople.isPresent()){
+            if (optionalGroupPeople.isPresent()) {
                 groupPeople = optionalGroupPeople.get();
-            }else{
+            } else {
                 groupPeople = new GroupPeople();
             }
             groupPeople.setCreatedBy(userInfo.getId());
@@ -182,7 +182,7 @@ public class GroupController {
 
                 Group group = optionalGroup.get();
                 int inputGroupType = group.getGroupType();
-                if(group.getGroupOwnerId() != null) {
+                if (group.getGroupOwnerId() != null) {
                     if (group.getGroupOwnerId().equals(userInfo.getId())) {
                         inputGroupType = 3;
                     }
@@ -211,9 +211,9 @@ public class GroupController {
                         if (optionalGroupPeople.isPresent()) {
                             addressBookDTO.setIsInvited(1);
                             addressBookDTO.setHasAcceptedInvitation(optionalGroupPeople.get().getHasAcceptedInvitation());
-                            if(addressBookDTO.getUserId().equals(userInfo.getId())){
+                            if (addressBookDTO.getUserId().equals(userInfo.getId())) {
                                 addressBookDTO.setIsMe(1);
-                            }else{
+                            } else {
                                 addressBookDTO.setIsMe(0);
                             }
                         } else {
@@ -235,14 +235,14 @@ public class GroupController {
 
                 Optional<GroupPeople> optionalGroupPeople = groupPeopleService.findByUserIdAndGroupId(userInfo.getId(), group.getId());
                 if (optionalGroupPeople.isPresent()) {
-                    if(optionalGroupPeople.get().getHasAcceptedInvitation() == 1) {
+                    if (optionalGroupPeople.get().getHasAcceptedInvitation() == 1) {
                         groupDTO.setIsSubscribed(1);
-                    }else{
+                    } else {
                         groupDTO.setIsSubscribed(0);
                     }
                     groupDTO.setIsInvited(1);
                     groupDTO.setSubscribedDate(optionalGroupPeople.get().getCreationTime());
-                }else{
+                } else {
                     groupDTO.setIsInvited(0);
                 }
 
@@ -265,7 +265,7 @@ public class GroupController {
     }
 
     @RequestMapping(value = "/invite", method = RequestMethod.POST)
-    public GroupResponse inviteToGroup(@RequestBody Map<String, String> formData){
+    public GroupResponse inviteToGroup(@RequestBody Map<String, String> formData) {
         UserInfo userInfo = userInformation.getUserInfo();
         ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
@@ -290,7 +290,7 @@ public class GroupController {
         return groupResponse;
     }
 
-   @RequestMapping(value = "/get-deleted", method = RequestMethod.POST)
+    @RequestMapping(value = "/get-deleted", method = RequestMethod.POST)
     public GroupResponse getDeleted() {
         UserInfo userInfo = userInformation.getUserInfo();
         logger.trace("Entering");
@@ -472,7 +472,7 @@ public class GroupController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public GroupResponse search(@RequestBody SearchRequest searchRequest) {
         GroupResponse groupResponse = new GroupResponse();
-        try{
+        try {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<Group> criteriaQuery = criteriaBuilder.createQuery(Group.class);
             Root<Group> root = criteriaQuery.from(Group.class);
@@ -499,13 +499,13 @@ public class GroupController {
             groupResponse.setSuccess(true);
             groupResponse.setError("");
             groupResponse.setGroupList(groupList);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             logger.error(ex.toString(), ex);
             groupResponse.setSuccess(false);
             groupResponse.setError(ex.getMessage());
         }
-        return  groupResponse;
+        return groupResponse;
     }
 
 }

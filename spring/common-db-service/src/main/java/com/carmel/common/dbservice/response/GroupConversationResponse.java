@@ -34,6 +34,7 @@ public class GroupConversationResponse {
 
         });
     }
+
     public void setGroupConversationListDTO(List<GroupConversationDTO> groupConversationList) {
         this.groupConversationList = groupConversationList;
     }

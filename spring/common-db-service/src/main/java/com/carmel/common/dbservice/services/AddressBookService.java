@@ -11,4 +11,6 @@ public interface AddressBookService {
     AddressBook save(AddressBook addressBook);
 
     List<AddressBook> findAllByIsDeleted(int isDeleted);
+
+    List<AddressBook> findAllByIsDeletedAndUserIdIsNot(int isDeleted, String userId);
 }

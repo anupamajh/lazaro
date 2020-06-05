@@ -5,10 +5,8 @@ import com.carmel.common.dbservice.common.Search.SearchRequest;
 import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.Album;
 import com.carmel.common.dbservice.model.Photo;
-import com.carmel.common.dbservice.model.User;
 import com.carmel.common.dbservice.model.UserInfo;
 import com.carmel.common.dbservice.response.PhotoResponse;
-import com.carmel.common.dbservice.response.UsersResponse;
 import com.carmel.common.dbservice.services.AlbumService;
 import com.carmel.common.dbservice.services.PhotoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -64,8 +62,8 @@ public class PhotoController {
             if (photo.getId() == null) {
                 photo.setId("");
             }
-            if(photo.getOrgId() == null || photo.getOrgId().isEmpty()){
-                if(userInfo.getDefaultOrganization() != null) {
+            if (photo.getOrgId() == null || photo.getOrgId().isEmpty()) {
+                if (userInfo.getDefaultOrganization() != null) {
                     photo.setOrgId(userInfo.getDefaultOrganization().getId());
                 }
             }
@@ -159,12 +157,12 @@ public class PhotoController {
         PhotoResponse photoResponse = new PhotoResponse();
         try {
             Optional<Album> optionalAlbum = albumService.findById(formData.get("album_id"));
-            if(optionalAlbum.isPresent()) {
+            if (optionalAlbum.isPresent()) {
                 photoResponse.setPhotoList(photoService.findAllByIsDeletedAndClientIdAndAlbum(1, userInfo.getClient().getClientId(), optionalAlbum.get()));
                 photoResponse.setSuccess(true);
                 photoResponse.setError("");
                 logger.trace("Completed Successfully");
-            }else {
+            } else {
                 photoResponse.setSuccess(false);
                 photoResponse.setError("Album not found");
             }
@@ -185,12 +183,12 @@ public class PhotoController {
         PhotoResponse photoResponse = new PhotoResponse();
         try {
             Optional<Album> optionalAlbum = albumService.findById(formData.get("album_id"));
-            if(optionalAlbum.isPresent()) {
+            if (optionalAlbum.isPresent()) {
                 photoResponse.setPhotoList(photoService.findAllByIsDeletedAndClientIdAndAlbum(0, userInfo.getClient().getClientId(), optionalAlbum.get()));
                 photoResponse.setSuccess(true);
                 photoResponse.setError("");
                 logger.trace("Completed Successfully");
-            }else{
+            } else {
                 photoResponse.setSuccess(false);
                 photoResponse.setError("Album not found");
             }
@@ -212,7 +210,7 @@ public class PhotoController {
         try {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
             Optional<Album> optionalAlbum = albumService.findById(formData.get("album_id"));
-            if(optionalAlbum.isPresent()) {
+            if (optionalAlbum.isPresent()) {
                 int pageNumber = formData.get("current_page") == null ? 0 : Integer.parseInt(formData.get("current_page"));
                 int pageSize = formData.get("page_size") == null ? 10 : Integer.parseInt(formData.get("page_size"));
                 Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("name"));
@@ -223,7 +221,7 @@ public class PhotoController {
                 photoResponse.setCurrentRecords(photoResponse.getPhotoList().size());
                 photoResponse.setSuccess(true);
                 logger.trace("Completed Successfully");
-            }else{
+            } else {
                 photoResponse.setSuccess(false);
                 photoResponse.setError("Album not found");
             }
@@ -249,9 +247,9 @@ public class PhotoController {
             int pageSize = formData.get("page_size") == null ? 10 : Integer.parseInt(formData.get("page_size"));
             String searchText = formData.get("search_text") == null ? null : String.valueOf(formData.get("search_text"));
             String albumId = formData.get("album_id") == null ? null : String.valueOf(formData.get("album_id"));
-            if(albumId!= null){
+            if (albumId != null) {
                 Optional<Album> optionalAlbum = albumService.findById(formData.get("album_id"));
-                if(optionalAlbum.isPresent()) {
+                if (optionalAlbum.isPresent()) {
                     Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("name"));
                     Page<Photo> page;
                     if (searchText == null) {
@@ -264,11 +262,11 @@ public class PhotoController {
                     photoResponse.setPhotoList(page.getContent());
                     photoResponse.setCurrentRecords(photoResponse.getPhotoList().size());
                     logger.trace("Completed Successfully");
-                }else{
+                } else {
                     photoResponse.setSuccess(false);
                     photoResponse.setError("Album not found");
                 }
-            }else{
+            } else {
                 photoResponse.setSuccess(false);
                 photoResponse.setError("Album not found");
             }
@@ -286,10 +284,10 @@ public class PhotoController {
     private boolean checkDuplicate(Photo photo) {
         List<Photo> photoList;
         if (photo.getId().equals("")) {
-            photoList = photoService.findAllByClientIdAndAlbumIsNotAndName(photo.getClientId(), photo.getAlbum(),photo.getName());
+            photoList = photoService.findAllByClientIdAndAlbumIsNotAndName(photo.getClientId(), photo.getAlbum(), photo.getName());
         } else {
             photoList = photoService.findAllByClientIdAndAlbumIsNotAndNameAndIdIsNot(
-                    photo.getClientId(), photo.getAlbum(),photo.getName(), photo.getId());
+                    photo.getClientId(), photo.getAlbum(), photo.getName(), photo.getId());
         }
         if (photoList.size() > 0) {
             return true;
@@ -301,7 +299,7 @@ public class PhotoController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public PhotoResponse search(@RequestBody SearchRequest searchRequest) {
         PhotoResponse photoResponse = new PhotoResponse();
-        try{
+        try {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<Photo> criteriaQuery = criteriaBuilder.createQuery(Photo.class);
             Root<Photo> root = criteriaQuery.from(Photo.class);
@@ -328,13 +326,13 @@ public class PhotoController {
             photoResponse.setSuccess(true);
             photoResponse.setError("");
             photoResponse.setPhotoList(photoList);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             logger.error(ex.toString(), ex);
             photoResponse.setSuccess(false);
             photoResponse.setError(ex.getMessage());
         }
-        return  photoResponse;
+        return photoResponse;
     }
 
 }

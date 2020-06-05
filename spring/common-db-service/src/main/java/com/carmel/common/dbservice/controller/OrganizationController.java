@@ -4,11 +4,9 @@ import com.carmel.common.dbservice.common.Search.SearchBuilder;
 import com.carmel.common.dbservice.common.Search.SearchRequest;
 import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.Organization;
-import com.carmel.common.dbservice.model.User;
 import com.carmel.common.dbservice.model.UserInfo;
 import com.carmel.common.dbservice.response.OrganizationResponse;
 import com.carmel.common.dbservice.response.OrganizationsResponse;
-import com.carmel.common.dbservice.response.UsersResponse;
 import com.carmel.common.dbservice.services.OrganizationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -59,7 +57,7 @@ public class OrganizationController {
         OrganizationResponse organizationResponse = new OrganizationResponse();
         try {
             logger.trace("Data:{}", objectMapper.writeValueAsString(organization));
-            if(organization.getParent() != null){
+            if (organization.getParent() != null) {
                 Optional<Organization> optionalOrganization =
                         organizationService.findById(organization.getParent().getId());
                 organization.setParent(optionalOrganization.get());
@@ -130,7 +128,7 @@ public class OrganizationController {
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public OrganizationResponse get(@RequestBody Map<String, String> formData) {
         ObjectMapper objectMapper = new ObjectMapper();
-         logger.trace("Entering");
+        logger.trace("Entering");
         OrganizationResponse organizationResponse = new OrganizationResponse();
         try {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
@@ -160,7 +158,7 @@ public class OrganizationController {
         logger.trace("Entering");
         OrganizationsResponse organizationsResponse = new OrganizationsResponse();
         try {
-            organizationsResponse.setOrganizationList(organizationService.findAllByDeletionStatus(0,userInfo.getClient()));
+            organizationsResponse.setOrganizationList(organizationService.findAllByDeletionStatus(0, userInfo.getClient()));
             organizationsResponse.setSuccess(true);
             organizationsResponse.setError("");
             logger.trace("Completed Successfully");
@@ -179,7 +177,7 @@ public class OrganizationController {
         logger.trace("Entering");
         OrganizationsResponse organizationsResponse = new OrganizationsResponse();
         try {
-            organizationsResponse.setOrganizationList(organizationService.findAllByDeletionStatus(1,userInfo.getClient()));
+            organizationsResponse.setOrganizationList(organizationService.findAllByDeletionStatus(1, userInfo.getClient()));
             organizationsResponse.setSuccess(true);
             organizationsResponse.setError("");
         } catch (Exception ex) {
@@ -230,9 +228,9 @@ public class OrganizationController {
             String searchText = formData.get("search_text") == null ? null : String.valueOf(formData.get("search_text"));
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("orgName"));
             Page<Organization> page;
-            if (searchText == null ){
-                page = organizationService.findAllByClient(userInfo.getClient(),pageable);
-            } else  {
+            if (searchText == null) {
+                page = organizationService.findAllByClient(userInfo.getClient(), pageable);
+            } else {
                 page = organizationService.findAll(textInAllColumns(searchText, userInfo.getClient()), pageable);
             }
 
@@ -271,7 +269,7 @@ public class OrganizationController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public OrganizationsResponse search(@RequestBody SearchRequest searchRequest) {
         OrganizationsResponse organizationsResponse = new OrganizationsResponse();
-        try{
+        try {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<Organization> criteriaQuery = criteriaBuilder.createQuery(Organization.class);
             Root<Organization> root = criteriaQuery.from(Organization.class);
@@ -298,13 +296,13 @@ public class OrganizationController {
             organizationsResponse.setSuccess(true);
             organizationsResponse.setError("");
             organizationsResponse.setOrganizationList(organizationList);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             logger.error(ex.toString(), ex);
             organizationsResponse.setSuccess(false);
             organizationsResponse.setError(ex.getMessage());
         }
-        return  organizationsResponse;
+        return organizationsResponse;
     }
 
 }

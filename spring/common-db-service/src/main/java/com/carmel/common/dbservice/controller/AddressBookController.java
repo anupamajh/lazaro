@@ -99,7 +99,7 @@ public class AddressBookController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public AddressBookResponse search(@RequestBody SearchRequest searchRequest) {
         AddressBookResponse addressBookResponse = new AddressBookResponse();
-        try{
+        try {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<AddressBook> criteriaQuery = criteriaBuilder.createQuery(AddressBook.class);
             Root<AddressBook> root = criteriaQuery.from(AddressBook.class);
@@ -126,13 +126,13 @@ public class AddressBookController {
             addressBookResponse.setSuccess(true);
             addressBookResponse.setError("");
             addressBookResponse.setAddressBookList(addressBookList);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             logger.error(ex.toString(), ex);
             addressBookResponse.setSuccess(false);
             addressBookResponse.setError(ex.getMessage());
         }
-        return  addressBookResponse;
+        return addressBookResponse;
     }
 
 }

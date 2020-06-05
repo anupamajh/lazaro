@@ -14,7 +14,7 @@ public class GroupSpecification {
                 builder.like(root.get("description"), finalText)
                 ),
                 builder.equal(root.get("isDeleted"), 0),
-                builder.equal(root.get("client"),client )
+                builder.equal(root.get("client"), client)
         );
     }
 }

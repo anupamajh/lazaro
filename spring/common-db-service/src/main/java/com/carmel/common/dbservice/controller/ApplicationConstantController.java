@@ -29,7 +29,7 @@ public class ApplicationConstantController {
         try {
             String key = formData.get("key");
             Optional<ApplicationConstant> optionalApplicationConstant = applicationConstantService.findByKey(key);
-            if(optionalApplicationConstant.isPresent()){
+            if (optionalApplicationConstant.isPresent()) {
                 applicationConstantResponse
                         .setApplicationConstant(optionalApplicationConstant.get());
                 applicationConstantResponse.setSuccess(true);

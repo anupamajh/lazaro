@@ -272,14 +272,14 @@ public class AppFeaturesController {
         try {
             Optional<User> optionalUser = userService.findById(userInfo.getId());
             optionalUser.orElseThrow(() ->
-                new Exception("User record not found")
+                    new Exception("User record not found")
             );
             List<Role> roles = optionalUser.get().getRoles();
             List<String> ids = new ArrayList<>();
             roles.forEach(role -> {
                 ids.addAll(role.getAppFeatures().stream().map(AppFeatures::getId).collect(Collectors.toList()));
             });
-            List<AppFeatures> appFeaturesList =  appFeaturesService.findAllByIdInAndIsDeleted(ids, 0);
+            List<AppFeatures> appFeaturesList = appFeaturesService.findAllByIdInAndIsDeleted(ids, 0);
             appFeaturesResponse.setSimpleAppFeaturesList(appFeaturesList);
             appFeaturesResponse.setSuccess(true);
         } catch (Exception ex) {
@@ -293,7 +293,7 @@ public class AppFeaturesController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public AppFeaturesResponse search(@RequestBody SearchRequest searchRequest) {
         AppFeaturesResponse appFeaturesResponse = new AppFeaturesResponse();
-        try{
+        try {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<AppFeatures> criteriaQuery = criteriaBuilder.createQuery(AppFeatures.class);
             Root<AppFeatures> root = criteriaQuery.from(AppFeatures.class);
@@ -320,13 +320,13 @@ public class AppFeaturesController {
             appFeaturesResponse.setSuccess(true);
             appFeaturesResponse.setError("");
             appFeaturesResponse.setAppFeaturesList(appFeaturesList);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             logger.error(ex.toString(), ex);
             appFeaturesResponse.setSuccess(false);
             appFeaturesResponse.setError(ex.getMessage());
         }
-        return  appFeaturesResponse;
+        return appFeaturesResponse;
     }
 
 

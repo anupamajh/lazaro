@@ -255,7 +255,7 @@ public class RoleController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public RolesResponse search(@RequestBody SearchRequest searchRequest) {
         RolesResponse rolesResponse = new RolesResponse();
-        try{
+        try {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<Role> criteriaQuery = criteriaBuilder.createQuery(Role.class);
             Root<Role> root = criteriaQuery.from(Role.class);
@@ -282,13 +282,13 @@ public class RoleController {
             rolesResponse.setSuccess(true);
             rolesResponse.setError("");
             rolesResponse.setRoleList(roleList);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             logger.error(ex.toString(), ex);
             rolesResponse.setSuccess(false);
             rolesResponse.setError(ex.getMessage());
         }
-        return  rolesResponse;
+        return rolesResponse;
     }
 
 

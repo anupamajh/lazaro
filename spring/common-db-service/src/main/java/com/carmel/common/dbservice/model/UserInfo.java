@@ -24,21 +24,21 @@ public class UserInfo {
     private int accountStatus;
     private int isOperator;
     private int gender;
-    private  Client client;
-    private  Organization defaultOrganization;
+    private Client client;
+    private Organization defaultOrganization;
     private List<Organization> organizations;
     private AddressBook addressBook;
     private List<UserPreference> userPreferences;
 
     private Principal principal;
 
-    public UserInfo(){
+    public UserInfo() {
 
     }
 
     public UserInfo(User user) {
         this.id = user.getId();
-        this.fullName =user.getFullName();
+        this.fullName = user.getFullName();
         this.userName = user.getUserName();
         this.phone = user.getPhone();
         this.lastLogin = user.getLastLogin();
@@ -52,13 +52,13 @@ public class UserInfo {
         this.addressBook = new AddressBook();
     }
 
-    public UserInfo(String userName){
+    public UserInfo(String userName) {
         Optional<User> optionalUser = repository.findByUserName(userName);
         optionalUser.orElseThrow(() ->
                 new UsernameNotFoundException("Cannot find the logged in principle, Please contact administrator"));
         User user = optionalUser.get();
         this.id = user.getId();
-        this.fullName =user.getUserName();
+        this.fullName = user.getUserName();
         this.userName = user.getUserName();
         this.phone = user.getPhone();
         this.lastLogin = user.getLastLogin();

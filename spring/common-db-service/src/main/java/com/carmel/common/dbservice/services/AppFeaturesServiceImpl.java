@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AppFeaturesServiceImpl implements AppFeaturesService{
+public class AppFeaturesServiceImpl implements AppFeaturesService {
 
     @Autowired
     AppFeaturesRepository appFeaturesRepository;
@@ -46,7 +46,7 @@ public class AppFeaturesServiceImpl implements AppFeaturesService{
 
     @Override
     public Page<AppFeatures> findAll(Pageable pageable) {
-        return appFeaturesRepository.findAllByIsDeleted(0,pageable);
+        return appFeaturesRepository.findAllByIsDeleted(0, pageable);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class AppFeaturesServiceImpl implements AppFeaturesService{
 
     @Override
     public Page<AppFeatures> findAllByIsDeleted(int isDeleted, Pageable pageable) {
-        return appFeaturesRepository.findAllByIsDeleted(isDeleted,pageable);
+        return appFeaturesRepository.findAllByIsDeleted(isDeleted, pageable);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class AppFeaturesServiceImpl implements AppFeaturesService{
         return generateTree(parentId, treeData);
     }
 
-    private List<AppFeatureTreeDTO> generateTree(String parentId, List<AppFeatureTreeDTO> treeData){
+    private List<AppFeatureTreeDTO> generateTree(String parentId, List<AppFeatureTreeDTO> treeData) {
         List<AppFeatures> appFeaturesList = appFeaturesRepository.findAllByParentIdIs(parentId);
         appFeaturesList.forEach(appFeatures -> {
             AppFeatureTreeDTO appFeatureTreeDTO = new AppFeatureTreeDTO(appFeatures);

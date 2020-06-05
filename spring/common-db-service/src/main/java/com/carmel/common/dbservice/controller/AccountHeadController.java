@@ -57,8 +57,8 @@ public class AccountHeadController {
             if (accountHead.getId() == null) {
                 accountHead.setId("");
             }
-            if(accountHead.getOrgId() == null || accountHead.getOrgId().isEmpty()){
-                if(userInfo.getDefaultOrganization() != null) {
+            if (accountHead.getOrgId() == null || accountHead.getOrgId().isEmpty()) {
+                if (userInfo.getDefaultOrganization() != null) {
                     accountHead.setOrgId(userInfo.getDefaultOrganization().getId());
                 }
             }
@@ -226,7 +226,7 @@ public class AccountHeadController {
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("title"));
             Page<AccountHead> page;
             if (searchText == null) {
-                page = accountHeadService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(),0,pageable);
+                page = accountHeadService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(), 0, pageable);
             } else {
                 page = accountHeadService.findAll(textInAllColumns(searchText, userInfo.getClient().getClientId()), pageable);
             }
@@ -248,7 +248,7 @@ public class AccountHeadController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public AccountHeadResponse search(@RequestBody SearchRequest searchRequest) {
         AccountHeadResponse accountHeadResponse = new AccountHeadResponse();
-        try{
+        try {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<AccountHead> criteriaQuery = criteriaBuilder.createQuery(AccountHead.class);
             Root<AccountHead> root = criteriaQuery.from(AccountHead.class);
@@ -275,13 +275,13 @@ public class AccountHeadController {
             accountHeadResponse.setSuccess(true);
             accountHeadResponse.setError("");
             accountHeadResponse.setAccountHeadList(accountHeadList);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             logger.error(ex.toString(), ex);
             accountHeadResponse.setSuccess(false);
             accountHeadResponse.setError(ex.getMessage());
         }
-        return  accountHeadResponse;
+        return accountHeadResponse;
     }
 
     private boolean checkDuplicate(AccountHead accountHead) {

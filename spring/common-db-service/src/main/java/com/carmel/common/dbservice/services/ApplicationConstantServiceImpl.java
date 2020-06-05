@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class ApplicationConstantServiceImpl implements ApplicationConstantService{
+public class ApplicationConstantServiceImpl implements ApplicationConstantService {
 
     @Autowired
     ApplicationConstantRepository applicationConstantRepository;

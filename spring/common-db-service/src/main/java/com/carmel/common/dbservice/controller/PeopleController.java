@@ -289,8 +289,8 @@ public class PeopleController {
             if (!optionalFavouritePeople.isPresent()) {
                 favouritePeople = new FavouritePeople();
                 favouritePeople.setClientId(userInfo.getClient().getClientId());
-                if(userInfo.getDefaultOrganization() != null) {
-                    if(userInfo.getDefaultOrganization() != null) {
+                if (userInfo.getDefaultOrganization() != null) {
+                    if (userInfo.getDefaultOrganization() != null) {
                         favouritePeople.setOrgId(userInfo.getDefaultOrganization().getId());
                     }
                 }
@@ -317,21 +317,22 @@ public class PeopleController {
     }
 
     @PostMapping(value = "/get-people-pic")
-    public @ResponseBody byte[] getPeoplePic(@RequestBody Map<String, String> formData){
+    public @ResponseBody
+    byte[] getPeoplePic(@RequestBody Map<String, String> formData) {
         try {
             Optional<AddressBook> optionalAddressBook = addressBookService.findByUserId(formData.get("userId"));
-            if(optionalAddressBook.isPresent()){
+            if (optionalAddressBook.isPresent()) {
                 String logoPath = optionalAddressBook.get().getLogoPath();
                 File myPic = new File(logoPath);
                 FileInputStream fileInputStreamReader = new FileInputStream(myPic);
                 byte[] bytes = new byte[(int) myPic.length()];
                 fileInputStreamReader.read(bytes);
                 return bytes;
-            }else{
-                return  null;
+            } else {
+                return null;
             }
 
-        }catch(Exception ex){
+        } catch (Exception ex) {
 
         }
 

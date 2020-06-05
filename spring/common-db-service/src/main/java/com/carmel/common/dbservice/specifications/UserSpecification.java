@@ -16,7 +16,7 @@ public class UserSpecification {
                 builder.like(root.get("userName"), finalText)
                 ),
                 builder.equal(root.get("isDeleted"), 0),
-                builder.equal(root.get("client"),client )
+                builder.equal(root.get("client"), client)
         );
     }
 }

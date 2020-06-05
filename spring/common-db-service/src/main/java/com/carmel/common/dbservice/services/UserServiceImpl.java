@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<User> findAllByClient(Pageable pageable, Client client) {
-        return userRepository.findAllByIsDeletedAndClient(0, client,pageable);
+        return userRepository.findAllByIsDeletedAndClient(0, client, pageable);
     }
 
     @Override

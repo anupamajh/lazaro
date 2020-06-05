@@ -28,7 +28,7 @@ public class InterestCategoryResponse {
     }
 
     public void setInterestCategoryList(List<InterestCategory> interestCategoryList) {
-        this.interestCategoryList =  new ArrayList<>();
+        this.interestCategoryList = new ArrayList<>();
         interestCategoryList.forEach(interestCategory1 -> {
             this.interestCategoryList.add(new InterestCategoryDTO(interestCategory1));
         });

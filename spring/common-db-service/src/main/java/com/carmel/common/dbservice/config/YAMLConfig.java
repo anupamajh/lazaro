@@ -14,7 +14,8 @@ public class YAMLConfig {
     private String accountsServiceURL;
     private String imageSavePath;
 
-    public YAMLConfig(){}
+    public YAMLConfig() {
+    }
 
     public String getUserInfoURL() {
         return userInfoURL;
