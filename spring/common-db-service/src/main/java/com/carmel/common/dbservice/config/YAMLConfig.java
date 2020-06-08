@@ -15,6 +15,7 @@ public class YAMLConfig {
     private String imageSavePath;
     private String fileUploadPath;
     private String linkedInConfigPath;
+    private String facebookConfigPath;
 
     public YAMLConfig() {
     }
@@ -73,5 +74,13 @@ public class YAMLConfig {
 
     public void setLinkedInConfigPath(String linkedInConfigPath) {
         this.linkedInConfigPath = linkedInConfigPath;
+    }
+
+    public String getFacebookConfigPath() {
+        return facebookConfigPath;
+    }
+
+    public void setFacebookConfigPath(String facebookConfigPath) {
+        this.facebookConfigPath = facebookConfigPath;
     }
 }

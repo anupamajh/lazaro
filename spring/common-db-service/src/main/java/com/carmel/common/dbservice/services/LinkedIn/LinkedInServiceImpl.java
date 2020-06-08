@@ -88,8 +88,8 @@ public class LinkedInServiceImpl implements LinkedInService {
 
                 for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) {
                     Row row = worksheet.getRow(i);
-                    if (row.getCell(linkedInColumnConfig.getLinkedInId()) != null) {
-                        if (!row.getCell(linkedInColumnConfig.getLinkedInId()).getStringCellValue().trim().equals("")) {
+                    if (row.getCell(linkedInColumnConfig.getLinkedInId()-1) != null) {
+                        if (!row.getCell(linkedInColumnConfig.getLinkedInId()-1).getStringCellValue().trim().equals("")) {
                             LinkedIn linkedIn = this.prepareLinkedInData(
                                     row,
                                     linkedInColumnConfig,
