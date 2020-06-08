@@ -13,6 +13,8 @@ public class YAMLConfig {
     private String inventoryServiceURL;
     private String accountsServiceURL;
     private String imageSavePath;
+    private String fileUploadPath;
+    private String linkedInConfigPath;
 
     public YAMLConfig() {
     }
@@ -55,5 +57,21 @@ public class YAMLConfig {
 
     public void setImageSavePath(String imageSavePath) {
         this.imageSavePath = imageSavePath;
+    }
+
+    public String getFileUploadPath() {
+        return fileUploadPath;
+    }
+
+    public void setFileUploadPath(String fileUploadPath) {
+        this.fileUploadPath = fileUploadPath;
+    }
+
+    public String getLinkedInConfigPath() {
+        return linkedInConfigPath;
+    }
+
+    public void setLinkedInConfigPath(String linkedInConfigPath) {
+        this.linkedInConfigPath = linkedInConfigPath;
     }
 }

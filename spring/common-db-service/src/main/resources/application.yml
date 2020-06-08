@@ -65,7 +65,9 @@ security:
       client-id: 21e43c55-28ef-478a-ae65-dc896e5eaa34
       client-secret: P@ssw0rd
 carmel:
+  fileUploadPath: /Users/pete/SVN/carmel/GuestJini-Development/spring/common-db-service/src/main/resources/uploads/
   userInfoURL: http://common-db-service/user/me
   dbServiceURL: http://common-db-service
   inventoryServiceURL: http://guesture-inventory-service
   imageSavePath: /opt/carmel/storage/images/
+  linkedInConfigPath: /Users/pete/SVN/carmel/GuestJini-Development/spring/common-db-service/src/main/resources/linkedin.yml
