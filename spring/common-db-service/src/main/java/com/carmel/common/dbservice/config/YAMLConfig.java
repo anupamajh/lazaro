@@ -16,6 +16,7 @@ public class YAMLConfig {
     private String fileUploadPath;
     private String linkedInConfigPath;
     private String facebookConfigPath;
+    private String instagramConfigPath;
 
     public YAMLConfig() {
     }
@@ -82,5 +83,13 @@ public class YAMLConfig {
 
     public void setFacebookConfigPath(String facebookConfigPath) {
         this.facebookConfigPath = facebookConfigPath;
+    }
+
+    public String getInstagramConfigPath() {
+        return instagramConfigPath;
+    }
+
+    public void setInstagramConfigPath(String instagramConfigPath) {
+        this.instagramConfigPath = instagramConfigPath;
     }
 }

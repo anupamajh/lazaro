@@ -72,3 +72,4 @@ carmel:
   imageSavePath: /opt/carmel/storage/images/
   linkedInConfigPath: /Users/pete/SVN/carmel/GuestJini-Development/spring/common-db-service/src/main/resources/linkedin.yml
   facebookConfigPath: /Users/pete/SVN/carmel/GuestJini-Development/spring/common-db-service/src/main/resources/facebook.yml
+  instagramConfigPath: /Users/pete/SVN/carmel/GuestJini-Development/spring/common-db-service/src/main/resources/instagram.yml
