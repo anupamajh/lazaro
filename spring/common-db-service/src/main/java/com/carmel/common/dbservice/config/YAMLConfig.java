@@ -17,6 +17,8 @@ public class YAMLConfig {
     private String linkedInConfigPath;
     private String facebookConfigPath;
     private String instagramConfigPath;
+    private String twitterConfigPath;
+    private String googleKey;
 
     public YAMLConfig() {
     }
@@ -91,5 +93,21 @@ public class YAMLConfig {
 
     public void setInstagramConfigPath(String instagramConfigPath) {
         this.instagramConfigPath = instagramConfigPath;
+    }
+
+    public String getGoogleKey() {
+        return googleKey;
+    }
+
+    public void setGoogleKey(String googleKey) {
+        this.googleKey = googleKey;
+    }
+
+    public String getTwitterConfigPath() {
+        return twitterConfigPath;
+    }
+
+    public void setTwitterConfigPath(String twitterConfigPath) {
+        this.twitterConfigPath = twitterConfigPath;
     }
 }

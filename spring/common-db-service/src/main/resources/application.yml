@@ -31,6 +31,11 @@ spring:
           writetimeout: 5000
           starttls:
             enable: true
+  servlet:
+    multipart:
+      max-file-size: 120MB
+      max-request-size: 150MB
+      enabled: true
 
 logging:
   level:
@@ -73,3 +78,5 @@ carmel:
   linkedInConfigPath: /Users/pete/SVN/carmel/GuestJini-Development/spring/common-db-service/src/main/resources/linkedin.yml
   facebookConfigPath: /Users/pete/SVN/carmel/GuestJini-Development/spring/common-db-service/src/main/resources/facebook.yml
   instagramConfigPath: /Users/pete/SVN/carmel/GuestJini-Development/spring/common-db-service/src/main/resources/instagram.yml
+  twitterConfigPath: /Users/pete/SVN/carmel/GuestJini-Development/spring/common-db-service/src/main/resources/twitter.yml
+  googleKey: AIzaSyAnt2NlFuXDQAimRh29sLvag5UrmjaQReo
