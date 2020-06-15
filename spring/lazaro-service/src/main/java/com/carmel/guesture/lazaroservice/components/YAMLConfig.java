@@ -15,6 +15,7 @@ public class YAMLConfig {
     private String crmAuthURL;
     private int leadSyncInterval;
     private int activitySyncInterval;
+    private String leadMailTo;
 
     public String getCrmURL() {
         return crmURL;
@@ -62,5 +63,13 @@ public class YAMLConfig {
 
     public void setActivitySyncInterval(int activitySyncInterval) {
         this.activitySyncInterval = activitySyncInterval;
+    }
+
+    public String getLeadMailTo() {
+        return leadMailTo;
+    }
+
+    public void setLeadMailTo(String leadMailTo) {
+        this.leadMailTo = leadMailTo;
     }
 }

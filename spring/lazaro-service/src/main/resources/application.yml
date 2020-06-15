@@ -18,6 +18,20 @@ spring:
       ddl-auto: update
   application:
     name: lazaro-service
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: amazon@carmelsolutions.net
+    password: P@ssw0rd
+    properties:
+      mail:
+        smtp:
+          auth: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+          starttls:
+            enable: true
 logging:
   level:
     root: info
@@ -56,3 +70,6 @@ olive-crm:
   crmAuthURL: http://crm.olive-suite.com/Api/access_token
   leadSyncInterval: 30000
   activitySyncInterval: 40000
+  leadMailTo: kariappa@guesture.in, chitra@guesture.in
+
+

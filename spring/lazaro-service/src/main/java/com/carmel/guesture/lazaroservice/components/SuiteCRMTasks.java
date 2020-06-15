@@ -6,7 +6,6 @@ import com.carmel.guesture.lazaroservice.request.CRMTaskData;
 import com.carmel.guesture.lazaroservice.response.CRMLeadResponse;
 import com.carmel.guesture.lazaroservice.response.CRMLeadsResponse;
 import com.carmel.guesture.lazaroservice.response.CRMUsersResponse;
-import com.carmel.guesture.lazaroservice.response.PhonedResponse;
 import com.carmel.guesture.lazaroservice.services.PersonService;
 import com.carmel.guesture.lazaroservice.services.PhonedService;
 import com.carmel.guesture.lazaroservice.services.WebsiteService;
@@ -27,7 +26,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicReference;
 
 @Component
 public class SuiteCRMTasks {
@@ -47,11 +45,14 @@ public class SuiteCRMTasks {
     @Autowired
     RestTemplate restTemplate;
 
+    @Autowired
+    MailService mailService;
+
     Logger logger = LoggerFactory.getLogger(SuiteCRMTasks.class);
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
 
-     @Scheduled(fixedRate = 30 * 1000)
+    @Scheduled(fixedRate = 30 * 1000)
     public void UploadLeads() {
         String leadPostURL = yamlConfig.getCrmURL();
         List<Person> personList = personService.findAllBySyncStatusIsNot(1);
@@ -77,14 +78,24 @@ public class SuiteCRMTasks {
                         } else {
                             data.setData(crmLead);
                             ResponseEntity<String> leadResponse = restTemplate.postForEntity(leadPostURL, data, String.class);
-                            try{
+                            try {
                                 Gson gson = new Gson();
                                 CRMLeadResponse crmLeadsResponse = gson.fromJson(leadResponse.getBody(), CRMLeadResponse.class);
                                 person.setSuiteId(crmLeadsResponse.getData().getId());
 
-                            }catch (Exception ex){
+                            } catch (Exception ex) {
 
                             }
+                        }
+                        try {
+                            String strSubject = "You have a lead :" + person.getCupidId();
+                            String strText = "Lead Details " + "\n" +
+                                    "CUPID ID : " + person.getCupidId() + "\n" +
+                                    "Phone Number : " + person.getPhoneNumber() + "\n" +
+                                    "Sources : " + person.getSources().toString() + "\n";
+                            mailService.sendASynchronousMail(strSubject, strText);
+                        }catch (Exception ex){
+
                         }
                         person.setIsSynced(1);
                         personService.save(person);
@@ -108,7 +119,7 @@ public class SuiteCRMTasks {
             for (Phoned phoned : phonedList) {
                 try {
                     Optional<Person> optionalPerson = personService.findByCupidId(phoned.getCupidId());
-                    if(optionalPerson.isPresent()) {
+                    if (optionalPerson.isPresent()) {
                         Person person = optionalPerson.get();
                         CRMLead crmLead = this.getCRMLeadBySuiteId(person.getSuiteId());
                         if (crmLead != null) {
@@ -137,7 +148,7 @@ public class SuiteCRMTasks {
             for (Website website : websiteList) {
                 try {
                     Optional<Person> optionalPerson = personService.findByCupidId(website.getCupidId());
-                    if(optionalPerson.isPresent()) {
+                    if (optionalPerson.isPresent()) {
                         Person person = optionalPerson.get();
                         CRMLead crmLead = this.getCRMLeadBySuiteId(person.getSuiteId());
                         if (crmLead != null) {
@@ -209,14 +220,14 @@ public class SuiteCRMTasks {
 
     public CRMLead getCRMLeadBySuiteId(String suiteId) {
         String url = yamlConfig.getCrmURL();
-        url += "/Leads/" +suiteId;
+        url += "/Leads/" + suiteId;
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/vnd.api+json");
         HttpEntity entity = new HttpEntity(headers);
 
         ResponseEntity<CRMLeadResponse> responseEntity = restTemplate.exchange(url, HttpMethod.GET, entity, CRMLeadResponse.class);
         CRMLeadResponse crmLeadResponse = responseEntity.getBody();
-        if(crmLeadResponse.getData() != null){
+        if (crmLeadResponse.getData() != null) {
             return crmLeadResponse.getData();
         }
         return null;
@@ -250,7 +261,7 @@ public class SuiteCRMTasks {
                             CRMLeadsResponse.class);
                 }
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.error(ex.toString());
         }
     }
