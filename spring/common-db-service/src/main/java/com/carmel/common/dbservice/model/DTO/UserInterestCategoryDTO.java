@@ -1,5 +1,8 @@
 package com.carmel.common.dbservice.model.DTO;
 
+import com.carmel.common.dbservice.Base.InterestCategory.DTO.InterestCategoryDTO;
+import com.carmel.common.dbservice.Base.UserInterests.DTO.UserInterestsDTO;
+
 import java.util.List;
 
 public class UserInterestCategoryDTO {

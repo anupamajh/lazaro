@@ -1,11 +1,21 @@
 package com.carmel.common.dbservice.controller;
 
+import com.carmel.common.dbservice.Base.AddressBook.Model.AddressBook;
+import com.carmel.common.dbservice.Base.AddressBook.Service.AddressBookService;
+import com.carmel.common.dbservice.Base.Interest.DTO.InterestDTO;
+import com.carmel.common.dbservice.Base.Interest.Model.Interest;
+import com.carmel.common.dbservice.Base.Interest.Service.InterestService;
+import com.carmel.common.dbservice.Base.InterestCategory.DTO.InterestCategoryDTO;
+import com.carmel.common.dbservice.Base.InterestCategory.Model.InterestCategory;
+import com.carmel.common.dbservice.Base.InterestCategory.Service.InterestCategoryService;
+import com.carmel.common.dbservice.Base.User.Model.User;
+import com.carmel.common.dbservice.Base.User.Service.UserService;
+import com.carmel.common.dbservice.Base.UserInterests.DTO.UserInterestsDTO;
+import com.carmel.common.dbservice.Base.UserInterests.Service.UserInterestsService;
 import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.*;
-import com.carmel.common.dbservice.model.DTO.InterestCategoryDTO;
 import com.carmel.common.dbservice.model.DTO.PersonDTO;
 import com.carmel.common.dbservice.model.DTO.UserInterestCategoryDTO;
-import com.carmel.common.dbservice.model.DTO.UserInterestsDTO;
 import com.carmel.common.dbservice.response.PeopleResponse;
 import com.carmel.common.dbservice.services.*;
 import org.slf4j.Logger;
@@ -52,7 +62,7 @@ public class PeopleController {
         UserInfo userInfo = userInformation.getUserInfo();
         PeopleResponse peopleResponse = new PeopleResponse();
         try {
-            List<AddressBook> addressBookList = addressBookService.findAllByIsDeleted(0);
+            List<AddressBook> addressBookList = addressBookService.findAllByIsDeleted(0).getAddressBookList();
             List<AddressBook> filteredAddressBook = addressBookList.stream().filter(
                     addressBook ->
                             addressBook.getUserId().equals(userInfo.getId())
@@ -62,8 +72,8 @@ public class PeopleController {
                             !addressBook.getUserId().equals(userInfo.getId())
             ).collect(Collectors.toList());
             AddressBook myAddressBook = filteredAddressBook.size() > 0 ? filteredAddressBook.get(0) : null;
-            List<UserInterestsDTO> userInterests = userInterestsService.findAll()
-                    .stream().map(UserInterestsDTO::new).collect(Collectors.toList()).stream()
+            List<UserInterestsDTO> userInterests = userInterestsService.findAll().getUserInterestsList()
+                    .stream()
                     .filter(uidto -> uidto.getIsInterested() == 1).collect(Collectors.toList());
             List<UserInterestsDTO> myInterests = userInterests.stream().filter(
                     ui -> ui.getUserId().equals(userInfo.getId())
@@ -128,18 +138,18 @@ public class PeopleController {
             optionalAddressBook = addressBookService.findByUserId(formData.get("userId"));
             optionalAddressBook.ifPresent(peopleResponse::setOthersAddressBook);
             List<UserInterestsDTO> myInterests = userInterestsService.findByUserId(userInfo.getId())
-                    .stream().map(UserInterestsDTO::new).collect(Collectors.toList()).stream()
+                    .getUserInterestsList().stream()
                     .filter(uidto -> uidto.getIsInterested() == 1).collect(Collectors.toList());
             List<UserInterestsDTO> otherInterests = userInterestsService.findByUserId(formData.get("userId"))
-                    .stream().map(UserInterestsDTO::new).collect(Collectors.toList()).stream()
+                    .getUserInterestsList().stream()
                     .filter(uidto -> uidto.getIsInterested() == 1).collect(Collectors.toList());
-            List<InterestCategory> interestCategoryList =
-                    interestCategoryService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(), 0);
-            List<Interest> interestList =
-                    interestService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(), 0);
+            List<InterestCategoryDTO> interestCategoryList =
+                    interestCategoryService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(), 0).getInterestCategoryList();
+            List<InterestDTO> interestList =
+                    interestService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(), 0).getInterestList();
             for (int i = 0; i < myInterests.size(); i++) {
                 int finalI = i;
-                Optional<Interest> optionalInterest = interestList.stream()
+                Optional<InterestDTO> optionalInterest = interestList.stream()
                         .filter(
                                 interest -> interest.getId()
                                         .equals(
@@ -152,7 +162,7 @@ public class PeopleController {
 
                 if (optionalInterest.isPresent()) {
                     myInterests.get(i).setInterestName(optionalInterest.get().getName());
-                    Optional<InterestCategory> optionalInterestCategory
+                    Optional<InterestCategoryDTO> optionalInterestCategory
                             = interestCategoryList.stream().filter(
                             ic -> {
                                 return ic.getId()
@@ -173,7 +183,7 @@ public class PeopleController {
 
             for (int i = 0; i < otherInterests.size(); i++) {
                 int finalI = i;
-                Optional<Interest> optionalInterest = interestList.stream()
+                Optional<InterestDTO> optionalInterest = interestList.stream()
                         .filter(
                                 interest -> interest.getId()
                                         .equals(
@@ -186,7 +196,7 @@ public class PeopleController {
 
                 if (optionalInterest.isPresent()) {
                     otherInterests.get(i).setInterestName(optionalInterest.get().getName());
-                    Optional<InterestCategory> optionalInterestCategory
+                    Optional<InterestCategoryDTO> optionalInterestCategory
                             = interestCategoryList.stream().filter(
                             ic -> {
                                 return ic.getId()
@@ -207,21 +217,21 @@ public class PeopleController {
 
             List<UserInterestsDTO> commonInterests = myInterests.stream().filter(uidto -> uidto.hasSameInterestId(otherInterests)).collect(Collectors.toList());
             List<UserInterestsDTO> unCommonInterests = myInterests.stream().filter(uidto -> uidto.hasDiferentInterestId(otherInterests)).collect(Collectors.toList());
-            Map<InterestCategory, List<UserInterestsDTO>> myInterestResult =
+            Map<InterestCategoryDTO, List<UserInterestsDTO>> myInterestResult =
                     myInterests.stream().collect(Collectors.groupingBy(UserInterestsDTO::getInterestCategory, Collectors.toList()));
-            Map<InterestCategory, List<UserInterestsDTO>> othersInterestResult =
+            Map<InterestCategoryDTO, List<UserInterestsDTO>> othersInterestResult =
                     otherInterests.stream().collect(Collectors.groupingBy(UserInterestsDTO::getInterestCategory, Collectors.toList()));
 
-            Map<InterestCategory, List<UserInterestsDTO>> commonInterestsResult =
+            Map<InterestCategoryDTO, List<UserInterestsDTO>> commonInterestsResult =
                     commonInterests.stream().collect(Collectors.groupingBy(UserInterestsDTO::getInterestCategory, Collectors.toList()));
-            Map<InterestCategory, List<UserInterestsDTO>> unCommonInterestResult =
+            Map<InterestCategoryDTO, List<UserInterestsDTO>> unCommonInterestResult =
                     unCommonInterests.stream().collect(Collectors.groupingBy(UserInterestsDTO::getInterestCategory, Collectors.toList()));
 
 
             List<UserInterestCategoryDTO> commonUserInterestCategoryDTOList = new ArrayList<>();
             commonInterestsResult.forEach((interestCategory, userInterestsDTOS) -> {
                 UserInterestCategoryDTO userInterestCategoryDTO = new UserInterestCategoryDTO();
-                userInterestCategoryDTO.setInterestCategory(new InterestCategoryDTO(interestCategory));
+                userInterestCategoryDTO.setInterestCategory((interestCategory));
                 userInterestCategoryDTO.setInterestList(userInterestsDTOS);
                 commonUserInterestCategoryDTOList.add(userInterestCategoryDTO);
             });
@@ -229,7 +239,7 @@ public class PeopleController {
             List<UserInterestCategoryDTO> myInterestCategoryDTOList = new ArrayList<>();
             myInterestResult.forEach((interestCategory, userInterestsDTOS) -> {
                 UserInterestCategoryDTO userInterestCategoryDTO = new UserInterestCategoryDTO();
-                userInterestCategoryDTO.setInterestCategory(new InterestCategoryDTO(interestCategory));
+                userInterestCategoryDTO.setInterestCategory((interestCategory));
                 userInterestCategoryDTO.setInterestList(userInterestsDTOS);
                 myInterestCategoryDTOList.add(userInterestCategoryDTO);
             });
@@ -237,7 +247,7 @@ public class PeopleController {
             List<UserInterestCategoryDTO> otherInterestCategoryDTOList = new ArrayList<>();
             othersInterestResult.forEach((interestCategory, userInterestsDTOS) -> {
                 UserInterestCategoryDTO userInterestCategoryDTO = new UserInterestCategoryDTO();
-                userInterestCategoryDTO.setInterestCategory(new InterestCategoryDTO(interestCategory));
+                userInterestCategoryDTO.setInterestCategory((interestCategory));
                 userInterestCategoryDTO.setInterestList(userInterestsDTOS);
                 myInterestCategoryDTOList.add(userInterestCategoryDTO);
             });
@@ -245,7 +255,7 @@ public class PeopleController {
             List<UserInterestCategoryDTO> unCommonInterestCategoryDTOList = new ArrayList<>();
             unCommonInterestResult.forEach((interestCategory, userInterestsDTOS) -> {
                 UserInterestCategoryDTO userInterestCategoryDTO = new UserInterestCategoryDTO();
-                userInterestCategoryDTO.setInterestCategory(new InterestCategoryDTO(interestCategory));
+                userInterestCategoryDTO.setInterestCategory((interestCategory));
                 userInterestCategoryDTO.setInterestList(userInterestsDTOS);
                 unCommonInterestCategoryDTOList.add(userInterestCategoryDTO);
             });

@@ -2,7 +2,6 @@ package com.carmel.common.dbservice.controller.LinkedIn;
 
 import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.config.LinkedInConfig;
-import com.carmel.common.dbservice.controller.AccountHeadController;
 import com.carmel.common.dbservice.response.LinkedIn.LinkedInResponse;
 import com.carmel.common.dbservice.services.LinkedIn.LinkedInService;
 import org.slf4j.Logger;
@@ -26,7 +25,7 @@ import java.nio.file.Paths;
 @RequestMapping(value = "/linked-in")
 public class LinkedInController {
 
-    Logger logger = LoggerFactory.getLogger(AccountHeadController.class);
+    Logger logger = LoggerFactory.getLogger(LinkedInController.class);
 
     @Autowired
     private Environment env;

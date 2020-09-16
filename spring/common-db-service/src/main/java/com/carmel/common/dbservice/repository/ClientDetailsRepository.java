@@ -1,6 +1,6 @@
 package com.carmel.common.dbservice.repository;
 
-import com.carmel.common.dbservice.model.Client;
+import com.carmel.common.dbservice.Base.Client.Model.Client;
 import com.carmel.common.dbservice.model.ClientDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 

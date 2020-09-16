@@ -1,0 +1,502 @@
+package com.carmel.common.dbservice.Base.User.Service;
+
+import com.carmel.common.dbservice.Base.AddressBook.Model.AddressBook;
+import com.carmel.common.dbservice.Base.AddressBook.Service.AddressBookService;
+import com.carmel.common.dbservice.Base.Client.Model.Client;
+import com.carmel.common.dbservice.Base.User.Model.User;
+import com.carmel.common.dbservice.Base.User.Repository.UserRepository;
+import com.carmel.common.dbservice.Base.User.Response.UsersResponse;
+import com.carmel.common.dbservice.common.Search.SearchBuilder;
+import com.carmel.common.dbservice.common.Search.SearchRequest;
+import com.carmel.common.dbservice.component.UserInformation;
+import com.carmel.common.dbservice.model.UserInfo;
+import com.carmel.common.dbservice.response.GenericResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.validation.Valid;
+import java.security.Principal;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import static com.carmel.common.dbservice.Base.User.Specification.UserSpecification.textInAllColumns;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+    private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
+    private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+
+    private ObjectMapper objectMapper = new ObjectMapper();
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    UserRepository userRepository;
+    
+    @Autowired
+    AddressBookService addressBookService;
+
+    @Autowired
+    UserInformation userInformation;
+
+    @Autowired
+    EntityManager entityManager;
+
+    @Override
+    public Optional<User> findByUserName(String userName) {
+        return userRepository.findByUserName(userName);
+    }
+
+    @Override
+    public UsersResponse saveUser(User user) throws Exception {
+        UserInfo userInfo = userInformation.getUserInfo();
+        logger.trace("Entering");
+        UsersResponse usersResponse = new UsersResponse();
+        try {
+            if (user.getId() == null) {
+                user.setId("");
+            }
+            user.setClient(userInfo.getClient());
+            logger.trace("Data:{}", objectMapper.writeValueAsString(user));
+            if (checkDuplicate(user)) {
+                usersResponse.setUser(user);
+                usersResponse.setSuccess(false);
+                usersResponse.setError("Duplicate user name!");
+            } else {
+                if (user.getId() == "") {
+                    user.setPassword(passwordEncoder.encode(user.getPassword()));
+                    user.setCreatedBy(userInfo.getId());
+                    user.setCreationTime(new Date());
+                    user.setClient(userInfo.getClient());
+                } else {
+                    Optional<User> optionalUser = userService.findById(user.getId());
+                    user.setPassword(optionalUser.get().getPassword());
+                    user.setLastModifiedBy(userInfo.getId());
+                    user.setLastModifiedTime(new Date());
+                }
+                User savedUser = userService.save(user);
+                AddressBook addressBook = new AddressBook();
+                Optional<AddressBook> optionalAddressBook = addressBookService.findByUserId(savedUser.getId());
+                if (optionalAddressBook.isPresent()) {
+                    addressBook = optionalAddressBook.get();
+                }
+                addressBook.setEmail1(user.getUserName());
+                addressBook.setDisplayName(user.getFullName());
+                addressBook.setUserId(savedUser.getId());
+                addressBookService.save(addressBook);
+                usersResponse.setUser(savedUser);
+                usersResponse.setSuccess(true);
+                usersResponse.setError("");
+            }
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            throw ex;
+        }
+        return usersResponse;
+    }
+
+    @Override
+    public UsersResponse guestSignUp(@Valid User user) throws Exception {
+        UserInfo userInfo = userInformation.getUserInfo();
+        user.setUserName(user.getPhone());
+        logger.trace("Entering");
+        UsersResponse usersResponse = new UsersResponse();
+        try {
+            if (user.getId() == null) {
+                user.setId("");
+            }
+            user.setClient(userInfo.getClient());
+            logger.trace("Data:{}", objectMapper.writeValueAsString(user));
+            User duplicateUser = getDuplicate(user);
+            if (duplicateUser != null) {
+                usersResponse.setUser(duplicateUser);
+                usersResponse.setSuccess(true);
+                usersResponse.setError("Duplicate user name!");
+            } else {
+                if (user.getId() == "") {
+                    user.setPassword(passwordEncoder.encode(user.getPassword()));
+                    user.setCreatedBy(userInfo.getId());
+                    user.setCreationTime(new Date());
+                    user.setClient(userInfo.getClient());
+                } else {
+                    Optional<User> optionalUser = userService.findById(user.getId());
+                    user.setPassword(optionalUser.get().getPassword());
+                    user.setLastModifiedBy(userInfo.getId());
+                    user.setLastModifiedTime(new Date());
+                }
+                User savedUser = userService.save(user);
+                AddressBook addressBook = new AddressBook();
+                Optional<AddressBook> optionalAddressBook = addressBookService.findByUserId(savedUser.getId());
+                if (optionalAddressBook.isPresent()) {
+                    addressBook = optionalAddressBook.get();
+                }
+                addressBook.setEmail1(user.getUserName());
+                addressBook.setDisplayName(user.getFullName());
+                addressBook.setUserId(savedUser.getId());
+                addressBookService.save(addressBook);
+                usersResponse.setUser(savedUser);
+                usersResponse.setSuccess(true);
+                usersResponse.setError("");
+            }
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            throw ex;
+        }
+        return usersResponse;
+    }
+
+    @Override
+    public UsersResponse moveToTrash(Map<String, String> formData) throws Exception {
+        UserInfo userInfo = userInformation.getUserInfo();
+        logger.trace("Entering");
+        UsersResponse usersResponse = new UsersResponse();
+        try {
+            logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
+            Optional<User> userOptional = userService.findById(formData.get("id"));
+            if (userOptional != null) {
+                User user = userOptional.get();
+                user.setIsDeleted(1);
+                user.setDeletedBy(userInfo.getId());
+                user.setDeletedTime(new Date());
+                usersResponse.setSuccess(true);
+                usersResponse.setError("");
+                usersResponse.setUser(userService.save(user));
+            } else {
+                usersResponse.setSuccess(false);
+                usersResponse.setError("Error occurred while moving user to Trash!! Please try after sometime");
+            }
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            throw ex;
+        }
+        logger.trace("Exiting");
+        return usersResponse;
+    }
+
+    @Override
+    public UsersResponse get(Map<String, String> formData) throws Exception {
+        logger.trace("Entering");
+        UsersResponse usersResponse = new UsersResponse();
+        try {
+            logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
+            Optional<User> optionalUser = userService.findById(formData.get("id"));
+            if (optionalUser != null) {
+                User user = optionalUser.get();
+                usersResponse.setSuccess(true);
+                usersResponse.setError("");
+                usersResponse.setUser(user);
+            } else {
+                usersResponse.setSuccess(false);
+                usersResponse.setError("Error occurred while fetching user!! Please try after sometime");
+            }
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            throw ex;
+        }
+        logger.trace("Exiting");
+        return usersResponse;
+    }
+
+    @Override
+    public UsersResponse getAll() throws Exception {
+        UserInfo userInfo = userInformation.getUserInfo();
+        logger.trace("Entering");
+        UsersResponse usersResponse = new UsersResponse();
+        try {
+            usersResponse.setUserList(this.findAllByDeletionStatus(0, userInfo.getClient()));
+            usersResponse.setSuccess(true);
+            usersResponse.setError("");
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            usersResponse.setSuccess(false);
+            usersResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return usersResponse;
+    }
+
+    @Override
+    public UsersResponse getDeleted() throws Exception {
+        UserInfo userInfo = userInformation.getUserInfo();
+        logger.trace("Entering");
+        UsersResponse usersResponse = new UsersResponse();
+        try {
+            usersResponse.setUserList(this.findAllByDeletionStatus(1, userInfo.getClient()));
+            usersResponse.setSuccess(true);
+            usersResponse.setError("");
+        } catch (Exception ex) {
+            usersResponse.setSuccess(false);
+            usersResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return usersResponse;
+    }
+
+    @Override
+    public UsersResponse getPaginated(Map<String, String> formData) throws Exception {
+        UserInfo userInfo = userInformation.getUserInfo();
+        logger.trace("Entering");
+        UsersResponse usersResponse = new UsersResponse();
+        try {
+            logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
+            int pageNumber = formData.get("current_page") == null ? 0 : Integer.parseInt(formData.get("current_page"));
+            int pageSize = formData.get("page_size") == null ? 10 : Integer.parseInt(formData.get("page_size"));
+            Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("fullName"));
+            Page<User> page = this.findAllByClient(pageable, userInfo.getClient());
+            usersResponse.setTotalRecords(page.getTotalElements());
+            usersResponse.setTotalPages(page.getTotalPages());
+            usersResponse.setUserList(page.getContent());
+            usersResponse.setCurrentRecords(usersResponse.getUserList().size());
+            usersResponse.setSuccess(true);
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            usersResponse.setSuccess(false);
+            usersResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return usersResponse;
+    }
+
+    @Override
+    public UsersResponse searchPaginated(Map<String, String> formData) throws Exception {
+        UserInfo userInfo = userInformation.getUserInfo();
+        logger.trace("Entering");
+        UsersResponse orgResponse = new UsersResponse();
+        try {
+            logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
+            int pageNumber = formData.get("current_page") == null ? 0 : Integer.parseInt(formData.get("current_page"));
+            int pageSize = formData.get("page_size") == null ? 10 : Integer.parseInt(formData.get("page_size"));
+            String searchText = formData.get("search_text") == null ? null : String.valueOf(formData.get("search_text"));
+            Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("userName"));
+            Page<User> page;
+            if (searchText == null) {
+                page = this.findAllByClient(pageable, userInfo.getClient());
+            } else {
+                page = this
+                        .findAll(textInAllColumns(searchText, userInfo.getClient()), pageable);
+            }
+            orgResponse.setTotalRecords(page.getTotalElements());
+            orgResponse.setTotalPages(page.getTotalPages());
+            orgResponse.setUserList(page.getContent());
+            orgResponse.setCurrentRecords(orgResponse.getUserList().size());
+            orgResponse.setSuccess(true);
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            orgResponse.setSuccess(false);
+            orgResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return orgResponse;
+    }
+
+    public boolean checkDuplicate(User user) throws Exception {
+        List<User> userList;
+        if (user.getId() == null) {
+            user.setId("");
+        }
+        if (user.getId().isEmpty()) {
+            userList = this.findAllByUserName(user.getUserName());
+        } else {
+            userList = this.findAllByUserNameAndIdIsNot(user.getUserName(), user.getId());
+        }
+        if (userList.size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public User getDuplicate(User user) throws Exception {
+        List<User> userList;
+        if (user.getId() == null) {
+            user.setId("");
+        }
+        if (user.getId().isEmpty()) {
+            userList = this.findAllByUserName(user.getUserName());
+        } else {
+            userList = this.findAllByUserNameAndIdIsNot(user.getUserName(), user.getId());
+        }
+        if (userList.size() > 0) {
+            return userList.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public UserInfo oldUser(Principal principal) throws Exception {
+        return null;
+    }
+
+    @Override
+    public UserInfo user(Principal principal) throws Exception {
+        return null;
+    }
+
+    @Override
+    public String myPic() throws Exception {
+        return null;
+    }
+
+    @Override
+    public UserInfo resetPassword(Map<String, String> formData) throws Exception {
+        return null;
+    }
+
+
+    @Override
+    public UsersResponse activateAccount(Map<String, String> formData) throws Exception {
+        UsersResponse usersResponse = new UsersResponse();
+        try {
+            Optional<User> optionalUser = userService.findById(formData.get("id"));
+            if (optionalUser.isPresent()) {
+                User user = optionalUser.get();
+                user.setPassword(passwordEncoder.encode(formData.get("password")));
+                user.setAccountStatus(2);
+                User savedUser = userService.save(user);
+                usersResponse.setUser(savedUser);
+                ;
+                usersResponse.setSuccess(true);
+            } else {
+                throw new Exception("User not found");
+            }
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            usersResponse.setSuccess(false);
+            usersResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return usersResponse;
+    }
+
+    @Override
+    public GenericResponse changePassword(Map<String, String> formData) throws Exception {
+        return null;
+    }
+
+
+    @Override
+    public UsersResponse search(SearchRequest searchRequest) throws Exception {
+        UsersResponse usersResponse = new UsersResponse();
+        try {
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+            Root<User> root = criteriaQuery.from(User.class);
+            criteriaQuery = SearchBuilder.buildSearch(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root,
+                    User.class,
+                    searchRequest
+            );
+            long totalRecords = SearchBuilder.getTotalRecordCount(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root
+            );
+            TypedQuery<User> typedQuery = entityManager.createQuery(criteriaQuery);
+            typedQuery.setFirstResult((searchRequest.getCurrentPage() - 1) * searchRequest.getPageSize());
+            typedQuery.setMaxResults(searchRequest.getPageSize());
+            List<User> userList = typedQuery.getResultList();
+            usersResponse.setCurrentRecords(userList.size());
+            usersResponse.setTotalRecords(totalRecords);
+            usersResponse.setSuccess(true);
+            usersResponse.setError("");
+            usersResponse.setUserList(userList);
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            logger.error(ex.toString(), ex);
+            usersResponse.setSuccess(false);
+            usersResponse.setError(ex.getMessage());
+        }
+        return usersResponse;
+    }
+
+    @Override
+    public UsersResponse findUsersIn(List<String> userIds) throws Exception {
+        UsersResponse usersResponse = new UsersResponse();
+        try {
+            List<User> userList = userRepository.findAllByIdIn(userIds);
+            usersResponse.setUserList(userList);
+            usersResponse.setSuccess(true);
+            usersResponse.setError("");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            usersResponse.setSuccess(false);
+            usersResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return usersResponse;
+
+    }
+
+    @Override
+    public List<User> findAllByUserName(String userName) {
+        return userRepository.findAllByUserName(userName);
+    }
+
+    @Override
+    public List<User> findAllByUserNameAndIdIsNot(String userName, String id) {
+        return userRepository.findAllByUserNameAndIdIsNot(userName, id);
+    }
+
+    @Override
+    public Optional<User> findById(String id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public List<User> findAllByDeletionStatus(int isDeleted, Client client) {
+        return userRepository.findAllByIsDeletedAndClient(isDeleted, client);
+    }
+
+    @Override
+    public Page<User> findAllByClient(Pageable pageable, Client client) {
+        return userRepository.findAllByIsDeletedAndClient(0, client, pageable);
+    }
+
+    @Override
+    public Page<User> findAll(Specification<User> textInAllColumns, Pageable pageable) {
+        return userRepository.findAll(textInAllColumns, pageable);
+    }
+
+    @Override
+    public List<User> findAllByIdIn(List<String> userIds) {
+        return userRepository.findAllByIdIn(userIds);
+    }
+}

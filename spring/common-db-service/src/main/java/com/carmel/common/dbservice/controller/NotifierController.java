@@ -1,8 +1,8 @@
 package com.carmel.common.dbservice.controller;
 
+import com.carmel.common.dbservice.Base.UserDeviceData.Service.UserDeviceDataService;
 import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.response.GenericResponse;
-import com.carmel.common.dbservice.services.UserDeviceDataService;
 import com.turo.pushy.apns.ApnsClient;
 import com.turo.pushy.apns.ApnsClientBuilder;
 import com.turo.pushy.apns.PushNotificationResponse;
@@ -25,7 +25,7 @@ import java.util.Map;
 @RequestMapping(value = "/notifier")
 public class NotifierController {
 
-    Logger logger = LoggerFactory.getLogger(GroupController.class);
+    Logger logger = LoggerFactory.getLogger(NotifierController.class);
 
     @Autowired
     UserInformation userInformation;

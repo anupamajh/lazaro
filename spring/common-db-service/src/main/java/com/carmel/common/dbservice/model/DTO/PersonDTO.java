@@ -1,6 +1,8 @@
 package com.carmel.common.dbservice.model.DTO;
 
-import com.carmel.common.dbservice.model.AddressBook;
+
+import com.carmel.common.dbservice.Base.AddressBook.Model.AddressBook;
+import com.carmel.common.dbservice.Base.UserInterests.DTO.UserInterestsDTO;
 
 import java.util.List;
 

@@ -1,5 +1,7 @@
 package com.carmel.common.dbservice.model;
 
+import com.carmel.common.dbservice.Base.AppFeature.Model.AppFeatures;
+import com.carmel.common.dbservice.Base.Client.Model.Client;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.envers.Audited;

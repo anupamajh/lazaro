@@ -1,9 +1,9 @@
 package com.carmel.common.dbservice.response;
 
-import com.carmel.common.dbservice.model.AddressBook;
+import com.carmel.common.dbservice.Base.AddressBook.Model.AddressBook;
+import com.carmel.common.dbservice.Base.UserInterests.DTO.UserInterestsDTO;
 import com.carmel.common.dbservice.model.DTO.PersonDTO;
 import com.carmel.common.dbservice.model.DTO.UserInterestCategoryDTO;
-import com.carmel.common.dbservice.model.DTO.UserInterestsDTO;
 import com.carmel.common.dbservice.model.UserInfo;
 
 import java.util.List;

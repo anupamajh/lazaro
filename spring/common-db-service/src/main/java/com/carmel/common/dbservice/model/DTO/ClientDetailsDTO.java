@@ -1,6 +1,6 @@
 package com.carmel.common.dbservice.model.DTO;
 
-import com.carmel.common.dbservice.model.AppFeatures;
+import com.carmel.common.dbservice.Base.AppFeature.Model.AppFeatures;
 import com.carmel.common.dbservice.model.ClientDetails;
 
 import java.util.Date;

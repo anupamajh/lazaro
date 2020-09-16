@@ -1,6 +1,11 @@
 package com.carmel.common.dbservice.model;
 
-import com.carmel.common.dbservice.repository.UserRepository;
+import com.carmel.common.dbservice.Base.AddressBook.Model.AddressBook;
+import com.carmel.common.dbservice.Base.Client.Model.Client;
+import com.carmel.common.dbservice.Base.Organization.Model.Organization;
+import com.carmel.common.dbservice.Base.User.Model.User;
+import com.carmel.common.dbservice.Base.User.Repository.UserRepository;
+import com.carmel.common.dbservice.Base.UserPreference.Model.UserPreference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 

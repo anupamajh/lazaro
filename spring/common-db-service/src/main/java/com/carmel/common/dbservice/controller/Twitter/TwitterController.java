@@ -1,7 +1,6 @@
 package com.carmel.common.dbservice.controller.Twitter;
 
 import com.carmel.common.dbservice.component.UserInformation;
-import com.carmel.common.dbservice.controller.AccountHeadController;
 import com.carmel.common.dbservice.response.Twitter.TwitterResponse;
 import com.carmel.common.dbservice.services.Twitter.TwitterService;
 import org.slf4j.Logger;
@@ -24,7 +23,7 @@ import java.nio.file.Paths;
 @RestController
 @RequestMapping(value = "/twitter")
 public class TwitterController {
-    Logger logger = LoggerFactory.getLogger(AccountHeadController.class);
+    Logger logger = LoggerFactory.getLogger(TwitterController.class);
 
     @Autowired
     private Environment env;
