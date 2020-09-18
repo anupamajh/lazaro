@@ -1,32 +1,37 @@
 package com.carmel.common.dbservice.Base.User.Response;
 
+import com.carmel.common.dbservice.Base.User.DTO.UserDTO;
 import com.carmel.common.dbservice.Base.User.Model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UsersResponse {
-    private User user;
-    private List<User> userList;
+    private UserDTO user;
+    private List<UserDTO> userList;
     private long totalPages;
     private long totalRecords;
     private long currentRecords;
     private boolean success;
     private String error;
 
-    public User getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
     public void setUser(User user) {
-        this.user = user;
+        this.user = new UserDTO(user);
     }
 
-    public List<User> getUserList() {
+    public List<UserDTO> getUserList() {
         return userList;
     }
 
     public void setUserList(List<User> userList) {
-        this.userList = userList;
+        this.userList = new ArrayList<>();
+        userList.forEach(user1 -> {
+            this.userList.add(new UserDTO((user1)));
+        });
     }
 
     public long getTotalPages() {

@@ -1,5 +1,6 @@
 package com.carmel.common.dbservice.Base.User.Service;
 
+import com.carmel.common.dbservice.Base.AppFeature.Response.AppFeaturesResponse;
 import com.carmel.common.dbservice.Base.Client.Model.Client;
 import com.carmel.common.dbservice.Base.User.Response.UsersResponse;
 import com.carmel.common.dbservice.common.Search.SearchRequest;
@@ -56,15 +57,17 @@ public interface UserService {
 
     UsersResponse findUsersIn( List<String> userIds) throws Exception;
 
-    List<User> findAllByUserName(String userName);
+    UsersResponse findAllByUserName(String userName) throws Exception;
 
-    List<User> findAllByUserNameAndIdIsNot(String userName, String id);
+    UsersResponse findAllByUserNameAndIdIsNot(String userName, String id) throws Exception;
 
-    List<User> findAllByDeletionStatus(int isDeleted, Client client);
+    UsersResponse findAllByDeletionStatus(int isDeleted, Client client) throws Exception;
 
-    Page<User> findAllByClient(Pageable pageable, Client client);
+    UsersResponse findAllByClient(Pageable pageable, Client client) throws Exception;
 
-    Page<User> findAll(Specification<User> textInAllColumns, Pageable pageable);
+    UsersResponse findAll(Pageable pageable) throws Exception;
 
-    List<User> findAllByIdIn(List<String> userIds);
+    UsersResponse findAll(Specification<User> textInAllColumns, Pageable pageable) throws Exception;
+
+    UsersResponse findAllByIdIn(List<String> userIds) throws Exception;
 }

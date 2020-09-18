@@ -1,26 +1,31 @@
 package com.carmel.common.dbservice.Base.Organization.Responce;
 
+import com.carmel.common.dbservice.Base.Organization.DTO.OrganizationDTO;
 import com.carmel.common.dbservice.Base.Organization.Model.Organization;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class OrganizationResponse {
-    private List<Organization> organizationList;
+    private List<OrganizationDTO> organizationList;
     private long totalPages;
     private long totalRecords;
     private long currentRecords;
     private boolean success;
     private String error;
-    private Organization organization;
+    private OrganizationDTO organization;
 
 
-    public List<Organization> getOrganizationList() {
+    public List<OrganizationDTO> getOrganizationList() {
         return organizationList;
     }
 
     public void setOrganizationList(List<Organization> organizationList) {
-        this.organizationList = organizationList;
+        this.organizationList = new ArrayList<>();
+        organizationList.forEach(organization1 -> {
+            this.organizationList.add(new OrganizationDTO(organization1));
+        });
     }
 
     public long getTotalPages() {
@@ -63,11 +68,11 @@ public class OrganizationResponse {
         this.error = error;
     }
 
-    public Organization getOrganization() {
+    public OrganizationDTO getOrganization() {
         return organization;
     }
 
     public void setOrganization(Organization organization) {
-        this.organization = organization;
+        this.organization = new OrganizationDTO(organization);
     }
 }

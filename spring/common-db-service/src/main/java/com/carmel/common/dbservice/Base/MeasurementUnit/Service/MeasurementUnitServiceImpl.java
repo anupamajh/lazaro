@@ -2,7 +2,7 @@ package com.carmel.common.dbservice.Base.MeasurementUnit.Service;
 
 import com.carmel.common.dbservice.Base.MeasurementUnit.Model.MeasurementUnit;
 import com.carmel.common.dbservice.Base.MeasurementUnit.Repository.MeasurementUnitRepository;
-import com.carmel.common.dbservice.Base.MeasurementUnit.Service.Responce.MeasurementUnitResponse;
+import com.carmel.common.dbservice.Base.MeasurementUnit.Response.MeasurementUnitResponse;
 import com.carmel.common.dbservice.common.Search.SearchBuilder;
 import com.carmel.common.dbservice.common.Search.SearchRequest;
 import com.carmel.common.dbservice.component.UserInformation;

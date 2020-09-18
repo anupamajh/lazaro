@@ -292,4 +292,6 @@ public class User implements Serializable {
     public void setGender(int gender) {
         this.gender = gender;
     }
+
+
 }

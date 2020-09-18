@@ -1,5 +1,6 @@
 package com.carmel.common.dbservice.Base.User.Repository;
 
+import com.carmel.common.dbservice.Base.AppFeature.Model.AppFeatures;
 import com.carmel.common.dbservice.Base.Client.Model.Client;
 import com.carmel.common.dbservice.Base.User.Model.User;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,10 @@ public interface UserRepository extends JpaRepository<User, String> {
     List<User> findAllByUserName(String userName);
 
     List<User> findAllByUserNameAndIdIsNot(String userName, String id);
+
+    List<User> findAllByIsDeleted(int isDeleted);
+
+    Page<User> findAllByIsDeleted(int isDeleted, Pageable pageable);
 
     List<User> findAllByIsDeletedAndClient(int isDeleted, Client client);
 

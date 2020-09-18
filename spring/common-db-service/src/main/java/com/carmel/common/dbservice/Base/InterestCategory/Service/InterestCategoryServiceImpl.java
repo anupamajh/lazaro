@@ -1,9 +1,9 @@
 package com.carmel.common.dbservice.Base.InterestCategory.Service;
 
-import com.carmel.common.dbservice.Base.AddressBook.Specification.specifications.InterestCategorySpecification;
 import com.carmel.common.dbservice.Base.InterestCategory.Model.InterestCategory;
 import com.carmel.common.dbservice.Base.InterestCategory.Repository.InterestCategoryRepository;
 import com.carmel.common.dbservice.Base.InterestCategory.Responce.InterestCategoryResponse;
+import com.carmel.common.dbservice.Base.InterestCategory.Specification.InterestCategorySpecification;
 import com.carmel.common.dbservice.common.Search.SearchBuilder;
 import com.carmel.common.dbservice.common.Search.SearchRequest;
 import com.carmel.common.dbservice.component.UserInformation;

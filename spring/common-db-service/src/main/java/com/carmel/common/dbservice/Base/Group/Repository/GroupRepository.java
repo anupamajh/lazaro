@@ -1,5 +1,6 @@
 package com.carmel.common.dbservice.Base.Group.Repository;
 
+import com.carmel.common.dbservice.Base.AppFeature.Model.AppFeatures;
 import com.carmel.common.dbservice.Base.Group.Model.Group;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

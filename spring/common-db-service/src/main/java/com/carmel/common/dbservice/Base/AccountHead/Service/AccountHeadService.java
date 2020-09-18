@@ -1,13 +1,11 @@
 package com.carmel.common.dbservice.Base.AccountHead.Service;
 
 import com.carmel.common.dbservice.Base.AccountHead.Model.AccountHead;
-import com.carmel.common.dbservice.Base.AccountHead.Responce.AccountHeadResponse;
+import com.carmel.common.dbservice.Base.AccountHead.Response.AccountHeadResponse;
 import com.carmel.common.dbservice.common.Search.SearchRequest;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 

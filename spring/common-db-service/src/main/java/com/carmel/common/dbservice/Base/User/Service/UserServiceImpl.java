@@ -2,6 +2,7 @@ package com.carmel.common.dbservice.Base.User.Service;
 
 import com.carmel.common.dbservice.Base.AddressBook.Model.AddressBook;
 import com.carmel.common.dbservice.Base.AddressBook.Service.AddressBookService;
+import com.carmel.common.dbservice.Base.AppFeature.Response.AppFeaturesResponse;
 import com.carmel.common.dbservice.Base.Client.Model.Client;
 import com.carmel.common.dbservice.Base.User.Model.User;
 import com.carmel.common.dbservice.Base.User.Repository.UserRepository;
@@ -63,6 +64,11 @@ public class UserServiceImpl implements UserService {
     EntityManager entityManager;
 
     @Override
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
     public Optional<User> findByUserName(String userName) {
         return userRepository.findByUserName(userName);
     }
@@ -89,12 +95,12 @@ public class UserServiceImpl implements UserService {
                     user.setCreationTime(new Date());
                     user.setClient(userInfo.getClient());
                 } else {
-                    Optional<User> optionalUser = userService.findById(user.getId());
+                    Optional<User> optionalUser = userRepository.findById(user.getId());
                     user.setPassword(optionalUser.get().getPassword());
                     user.setLastModifiedBy(userInfo.getId());
                     user.setLastModifiedTime(new Date());
                 }
-                User savedUser = userService.save(user);
+                User savedUser = this.save(user);
                 AddressBook addressBook = new AddressBook();
                 Optional<AddressBook> optionalAddressBook = addressBookService.findByUserId(savedUser.getId());
                 if (optionalAddressBook.isPresent()) {
@@ -140,12 +146,12 @@ public class UserServiceImpl implements UserService {
                     user.setCreationTime(new Date());
                     user.setClient(userInfo.getClient());
                 } else {
-                    Optional<User> optionalUser = userService.findById(user.getId());
+                    Optional<User> optionalUser = userRepository.findById(user.getId());
                     user.setPassword(optionalUser.get().getPassword());
                     user.setLastModifiedBy(userInfo.getId());
                     user.setLastModifiedTime(new Date());
                 }
-                User savedUser = userService.save(user);
+                User savedUser = this.save(user);
                 AddressBook addressBook = new AddressBook();
                 Optional<AddressBook> optionalAddressBook = addressBookService.findByUserId(savedUser.getId());
                 if (optionalAddressBook.isPresent()) {
@@ -174,7 +180,7 @@ public class UserServiceImpl implements UserService {
         UsersResponse usersResponse = new UsersResponse();
         try {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
-            Optional<User> userOptional = userService.findById(formData.get("id"));
+            Optional<User> userOptional = userRepository.findById(formData.get("id"));
             if (userOptional != null) {
                 User user = userOptional.get();
                 user.setIsDeleted(1);
@@ -182,7 +188,7 @@ public class UserServiceImpl implements UserService {
                 user.setDeletedTime(new Date());
                 usersResponse.setSuccess(true);
                 usersResponse.setError("");
-                usersResponse.setUser(userService.save(user));
+                usersResponse.setUser(this.save(user));
             } else {
                 usersResponse.setSuccess(false);
                 usersResponse.setError("Error occurred while moving user to Trash!! Please try after sometime");
@@ -202,7 +208,7 @@ public class UserServiceImpl implements UserService {
         UsersResponse usersResponse = new UsersResponse();
         try {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
-            Optional<User> optionalUser = userService.findById(formData.get("id"));
+            Optional<User> optionalUser = userRepository.findById(formData.get("id"));
             if (optionalUser != null) {
                 User user = optionalUser.get();
                 usersResponse.setSuccess(true);
@@ -227,7 +233,7 @@ public class UserServiceImpl implements UserService {
         logger.trace("Entering");
         UsersResponse usersResponse = new UsersResponse();
         try {
-            usersResponse.setUserList(this.findAllByDeletionStatus(0, userInfo.getClient()));
+            usersResponse.setUserList(userRepository.findAllByIsDeleted(0));
             usersResponse.setSuccess(true);
             usersResponse.setError("");
             logger.trace("Completed Successfully");
@@ -246,7 +252,7 @@ public class UserServiceImpl implements UserService {
         logger.trace("Entering");
         UsersResponse usersResponse = new UsersResponse();
         try {
-            usersResponse.setUserList(this.findAllByDeletionStatus(1, userInfo.getClient()));
+            usersResponse.setUserList(userRepository.findAllByIsDeleted(1));
             usersResponse.setSuccess(true);
             usersResponse.setError("");
         } catch (Exception ex) {
@@ -267,7 +273,7 @@ public class UserServiceImpl implements UserService {
             int pageNumber = formData.get("current_page") == null ? 0 : Integer.parseInt(formData.get("current_page"));
             int pageSize = formData.get("page_size") == null ? 10 : Integer.parseInt(formData.get("page_size"));
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("fullName"));
-            Page<User> page = this.findAllByClient(pageable, userInfo.getClient());
+            Page<User> page = userRepository.findAllByIsDeleted(0, pageable);
             usersResponse.setTotalRecords(page.getTotalElements());
             usersResponse.setTotalPages(page.getTotalPages());
             usersResponse.setUserList(page.getContent());
@@ -296,10 +302,9 @@ public class UserServiceImpl implements UserService {
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("userName"));
             Page<User> page;
             if (searchText == null) {
-                page = this.findAllByClient(pageable, userInfo.getClient());
+                page = userRepository.findAll(pageable);
             } else {
-                page = this
-                        .findAll(textInAllColumns(searchText, userInfo.getClient()), pageable);
+                page = userRepository.findAll(textInAllColumns(searchText, userInfo.getClient()), pageable);
             }
             orgResponse.setTotalRecords(page.getTotalElements());
             orgResponse.setTotalPages(page.getTotalPages());
@@ -316,15 +321,16 @@ public class UserServiceImpl implements UserService {
         return orgResponse;
     }
 
+
     public boolean checkDuplicate(User user) throws Exception {
         List<User> userList;
         if (user.getId() == null) {
             user.setId("");
         }
         if (user.getId().isEmpty()) {
-            userList = this.findAllByUserName(user.getUserName());
+            userList = userRepository.findAllByUserName(user.getUserName());
         } else {
-            userList = this.findAllByUserNameAndIdIsNot(user.getUserName(), user.getId());
+            userList = userRepository.findAllByUserNameAndIdIsNot(user.getUserName(), user.getId());
         }
         if (userList.size() > 0) {
             return true;
@@ -340,9 +346,9 @@ public class UserServiceImpl implements UserService {
             user.setId("");
         }
         if (user.getId().isEmpty()) {
-            userList = this.findAllByUserName(user.getUserName());
+            userList = userRepository.findAllByUserName(user.getUserName());
         } else {
-            userList = this.findAllByUserNameAndIdIsNot(user.getUserName(), user.getId());
+            userList = userRepository.findAllByUserNameAndIdIsNot(user.getUserName(), user.getId());
         }
         if (userList.size() > 0) {
             return userList.get(0);
@@ -376,12 +382,12 @@ public class UserServiceImpl implements UserService {
     public UsersResponse activateAccount(Map<String, String> formData) throws Exception {
         UsersResponse usersResponse = new UsersResponse();
         try {
-            Optional<User> optionalUser = userService.findById(formData.get("id"));
+            Optional<User> optionalUser = userRepository.findById(formData.get("id"));
             if (optionalUser.isPresent()) {
                 User user = optionalUser.get();
                 user.setPassword(passwordEncoder.encode(formData.get("password")));
                 user.setAccountStatus(2);
-                User savedUser = userService.save(user);
+                User savedUser = this.save(user);
                 usersResponse.setUser(savedUser);
                 ;
                 usersResponse.setSuccess(true);
@@ -461,13 +467,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAllByUserName(String userName) {
-        return userRepository.findAllByUserName(userName);
+    public UsersResponse findAllByUserName(String userName) {
+        return null;
     }
 
     @Override
-    public List<User> findAllByUserNameAndIdIsNot(String userName, String id) {
-        return userRepository.findAllByUserNameAndIdIsNot(userName, id);
+    public UsersResponse findAllByUserNameAndIdIsNot(String userName, String id) {
+        return null;
     }
 
     @Override
@@ -475,28 +481,30 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id);
     }
 
+
+
     @Override
-    public User save(User user) {
-        return userRepository.save(user);
+    public UsersResponse findAllByDeletionStatus(int isDeleted, Client client) {
+        return null;
     }
 
     @Override
-    public List<User> findAllByDeletionStatus(int isDeleted, Client client) {
-        return userRepository.findAllByIsDeletedAndClient(isDeleted, client);
+    public UsersResponse findAllByClient(Pageable pageable, Client client) {
+        return null;
     }
 
     @Override
-    public Page<User> findAllByClient(Pageable pageable, Client client) {
-        return userRepository.findAllByIsDeletedAndClient(0, client, pageable);
+    public UsersResponse findAll(Pageable pageable) throws Exception {
+        return null;
     }
 
     @Override
-    public Page<User> findAll(Specification<User> textInAllColumns, Pageable pageable) {
-        return userRepository.findAll(textInAllColumns, pageable);
+    public UsersResponse findAll(Specification<User> textInAllColumns, Pageable pageable) throws Exception {
+        return null;
     }
 
     @Override
-    public List<User> findAllByIdIn(List<String> userIds) {
-        return userRepository.findAllByIdIn(userIds);
+    public UsersResponse findAllByIdIn(List<String> userIds) throws Exception {
+        return null;
     }
 }

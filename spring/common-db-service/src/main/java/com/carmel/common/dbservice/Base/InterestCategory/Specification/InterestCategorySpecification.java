@@ -1,10 +1,10 @@
-package com.carmel.common.dbservice.Base.AddressBook.Specification.specifications;
+package com.carmel.common.dbservice.Base.InterestCategory.Specification;
 
-import com.carmel.common.dbservice.Base.Group.Model.Group;
+import com.carmel.common.dbservice.Base.InterestCategory.Model.InterestCategory;
 import org.springframework.data.jpa.domain.Specification;
 
-public class GroupSpecification {
-    public static Specification<Group> textInAllColumns(String searchText, String client) {
+public class InterestCategorySpecification {
+    public static Specification<InterestCategory> textInAllColumns(String searchText, String clientId) {
         if (!searchText.contains("%")) {
             searchText = "%" + searchText + "%";
         }
@@ -14,7 +14,7 @@ public class GroupSpecification {
                 builder.like(root.get("description"), finalText)
                 ),
                 builder.equal(root.get("isDeleted"), 0),
-                builder.equal(root.get("client"), client)
+                builder.equal(root.get("clientId"), clientId)
         );
     }
 }

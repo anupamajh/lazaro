@@ -106,7 +106,7 @@ public class GroupServiceImpl implements GroupService {
                 groupResponse.setSuccess(false);
                 groupResponse.setError("Duplicate Group name!");
             } else {
-                Group savedGroup = groupService.save(group);
+                Group savedGroup = this.save(group);
                 if (group.getId().equals("")) {
                     GroupPeople groupPeople = new GroupPeople();
                     groupPeople.setCreatedBy(userInfo.getId());
@@ -141,7 +141,7 @@ public class GroupServiceImpl implements GroupService {
         GroupResponse groupResponse = new GroupResponse();
         try {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
-            Optional<Group> optionalInterest = groupService.findById(formData.get("id"));
+            Optional<Group> optionalInterest = groupRepository.findById(formData.get("id"));
             if (optionalInterest.isPresent()) {
                 Group group = optionalInterest.get();
                 group.setIsDeleted(1);
@@ -149,7 +149,7 @@ public class GroupServiceImpl implements GroupService {
                 group.setDeletedTime(new Date());
                 groupResponse.setSuccess(true);
                 groupResponse.setError("");
-                groupResponse.setGroup(groupService.save(group));
+                groupResponse.setGroup(this.save(group));
             } else {
                 groupResponse.setSuccess(false);
                 groupResponse.setError("Error occurred while moving group to Trash!! Please try after sometime");

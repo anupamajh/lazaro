@@ -1,7 +1,6 @@
 package com.carmel.common.dbservice.Base.MeasurementUnit.Repository;
 
 import com.carmel.common.dbservice.Base.MeasurementUnit.Model.MeasurementUnit;
-import com.carmel.common.dbservice.Base.MeasurementUnit.Service.Responce.MeasurementUnitResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;

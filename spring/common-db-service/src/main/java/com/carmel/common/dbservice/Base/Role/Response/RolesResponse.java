@@ -1,33 +1,39 @@
 package com.carmel.common.dbservice.Base.Role.Response;
 
+import com.carmel.common.dbservice.Base.Role.DTO.RoleDTO;
 import com.carmel.common.dbservice.Base.Role.Model.Role;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RolesResponse {
 
-    private Role role;
-    private List<Role> roleList;
+    private RoleDTO role;
+    private List<RoleDTO> roleList;
     private long totalPages;
     private long totalRecords;
     private long currentRecords;
     private boolean success;
     private String error;
 
-    public Role getRole() {
+    public RoleDTO getRole() {
         return role;
     }
 
     public void setRole(Role role) {
-        this.role = role;
+        this.role = new RoleDTO((role));
     }
 
-    public List<Role> getRoleList() {
+    public List<RoleDTO> getRoleList() {
         return roleList;
     }
 
     public void setRoleList(List<Role> roleList) {
-        this.roleList = roleList;
+        this.roleList = new ArrayList<>();
+        roleList.forEach(role1 ->{
+            this.roleList.add(new RoleDTO(role1));
+        });
+
     }
 
     public long getTotalPages() {

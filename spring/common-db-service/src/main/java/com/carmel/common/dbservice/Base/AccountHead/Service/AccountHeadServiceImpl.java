@@ -1,8 +1,7 @@
 package com.carmel.common.dbservice.Base.AccountHead.Service;
 
-import com.carmel.common.dbservice.Base.AccountHead.Controller.AccountHeadController;
 import com.carmel.common.dbservice.Base.AccountHead.Model.AccountHead;
-import com.carmel.common.dbservice.Base.AccountHead.Responce.AccountHeadResponse;
+import com.carmel.common.dbservice.Base.AccountHead.Response.AccountHeadResponse;
 import com.carmel.common.dbservice.Base.AccountHead.Respository.AccountHeadRepository;
 import com.carmel.common.dbservice.common.Search.SearchBuilder;
 import com.carmel.common.dbservice.common.Search.SearchRequest;

@@ -35,6 +35,23 @@ public class ClientDTO {
         this.clientDetails = client.getClientDetails() != null ? ClientDetailsDTO.getSimple(client.getClientDetails()) : null;
     }
 
+    public static ClientDTO getSimple(Client client) {
+        ClientDTO clientDTO = new ClientDTO();
+        clientDTO.clientId = client.getClientId();
+        clientDTO.clientSecrete = client.getClientSecrete();
+        clientDTO.webServerRedirectURL = client.getWebServerRedirectURL();
+        clientDTO.scope = client.getScope();
+        clientDTO.accessTokenValidity = client.getAccessTokenValidity();
+        clientDTO.refreshTokenValidity = client.getRefreshTokenValidity();
+        clientDTO.resourceIds = client.getResourceIds();
+        clientDTO.authorizedGrantTypes = client.getAuthorizedGrantTypes();
+        clientDTO.authorities = client.getAuthorities();
+        clientDTO.autoapprove = client.getAutoapprove();
+        clientDTO.clientDetails = client.getClientDetails() != null ? ClientDetailsDTO.getSimple(client.getClientDetails()) : null;
+        return clientDTO;
+    }
+
+
     public String getClientId() {
         return clientId;
     }

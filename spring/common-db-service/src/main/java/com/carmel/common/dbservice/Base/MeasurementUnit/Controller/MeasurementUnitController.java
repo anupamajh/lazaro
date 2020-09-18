@@ -1,37 +1,19 @@
 package com.carmel.common.dbservice.Base.MeasurementUnit.Controller;
 
-import com.carmel.common.dbservice.common.Search.SearchBuilder;
 import com.carmel.common.dbservice.common.Search.SearchRequest;
-import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.Base.MeasurementUnit.Model.MeasurementUnit;
-import com.carmel.common.dbservice.model.UserInfo;
-import com.carmel.common.dbservice.Base.MeasurementUnit.Service.Responce.MeasurementUnitResponse;
+import com.carmel.common.dbservice.Base.MeasurementUnit.Response.MeasurementUnitResponse;
 import com.carmel.common.dbservice.Base.MeasurementUnit.Service.MeasurementUnitService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-
-import static com.carmel.common.dbservice.Base.MeasurementUnit.Specification.MeasurementUnitSpecification.textInAllColumns;
 
 @RestController
 @RequestMapping(value = "/measurement-unit")
