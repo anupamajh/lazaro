@@ -68,7 +68,9 @@ public class UserDTO {
                 this.organizations.add(OrganizationDTO.getSimple(organization));
             });
         }
-        this.defaultOrganization = OrganizationDTO.getSimple(user.getDefaultOrganization());
+        if(user.getDefaultOrganization() != null) {
+            this.defaultOrganization = OrganizationDTO.getSimple(user.getDefaultOrganization());
+        }
         this.client = ClientDTO.getSimple(user.getClient());
     }
 
