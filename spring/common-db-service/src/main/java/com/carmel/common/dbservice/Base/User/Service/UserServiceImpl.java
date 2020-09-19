@@ -1,5 +1,6 @@
 package com.carmel.common.dbservice.Base.User.Service;
 
+import com.carmel.common.dbservice.Base.AddressBook.DTO.AddressBookDTO;
 import com.carmel.common.dbservice.Base.AddressBook.Model.AddressBook;
 import com.carmel.common.dbservice.Base.AddressBook.Service.AddressBookService;
 import com.carmel.common.dbservice.Base.AppFeature.Response.AppFeaturesResponse;
@@ -209,8 +210,12 @@ public class UserServiceImpl implements UserService {
         try {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
             Optional<User> optionalUser = userRepository.findById(formData.get("id"));
-            if (optionalUser != null) {
+            if (optionalUser.isPresent()) {
                 User user = optionalUser.get();
+                Optional<AddressBook> optionalAddressBook = addressBookService.findByUserId(user.getId());
+                if (optionalAddressBook.isPresent()) {
+                    usersResponse.setAddressBook(new AddressBookDTO(optionalAddressBook.get()));
+                }
                 usersResponse.setSuccess(true);
                 usersResponse.setError("");
                 usersResponse.setUser(user);

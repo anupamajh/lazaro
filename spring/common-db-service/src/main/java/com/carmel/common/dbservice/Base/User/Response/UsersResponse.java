@@ -1,5 +1,6 @@
 package com.carmel.common.dbservice.Base.User.Response;
 
+import com.carmel.common.dbservice.Base.AddressBook.DTO.AddressBookDTO;
 import com.carmel.common.dbservice.Base.User.DTO.UserDTO;
 import com.carmel.common.dbservice.Base.User.Model.User;
 
@@ -9,6 +10,7 @@ import java.util.List;
 public class UsersResponse {
     private UserDTO user;
     private List<UserDTO> userList;
+    private AddressBookDTO addressBook;
     private long totalPages;
     private long totalRecords;
     private long currentRecords;
@@ -32,6 +34,14 @@ public class UsersResponse {
         userList.forEach(user1 -> {
             this.userList.add(new UserDTO((user1)));
         });
+    }
+
+    public AddressBookDTO getAddressBook() {
+        return addressBook;
+    }
+
+    public void setAddressBook(AddressBookDTO addressBook) {
+        this.addressBook = addressBook;
     }
 
     public long getTotalPages() {
