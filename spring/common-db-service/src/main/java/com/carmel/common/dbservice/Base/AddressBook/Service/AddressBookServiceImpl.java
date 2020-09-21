@@ -145,11 +145,17 @@ public class AddressBookServiceImpl implements AddressBookService {
 
     @Override
     public AddressBookResponse findAllByIsDeleted(int isDeleted) {
-        return (AddressBookResponse) addressBookRepository.findAllByIsDeleted(isDeleted);
+        AddressBookResponse addressBookResponse = new AddressBookResponse();
+        addressBookResponse.setSuccess(true);
+        addressBookResponse.setAddressBookList(addressBookRepository.findAllByIsDeleted(isDeleted));
+        return addressBookResponse;
     }
 
     @Override
     public AddressBookResponse findAllByIsDeletedAndUserIdIsNot(int isDeleted, String userId) {
-        return (AddressBookResponse) addressBookRepository.findAllByIsDeletedAndUserIdIsNot(isDeleted, userId);
+        AddressBookResponse addressBookResponse = new AddressBookResponse();
+        addressBookResponse.setSuccess(true);
+        addressBookResponse.setAddressBookList(addressBookRepository.findAllByIsDeletedAndUserIdIsNot(isDeleted, userId));
+        return addressBookResponse;
     }
 }
