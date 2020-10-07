@@ -149,6 +149,7 @@ public class AddressBookServiceImpl implements AddressBookService {
         addressBookResponse.setSuccess(true);
         addressBookResponse.setAddressBookList(addressBookRepository.findAllByIsDeleted(isDeleted));
         return addressBookResponse;
+
     }
 
     @Override

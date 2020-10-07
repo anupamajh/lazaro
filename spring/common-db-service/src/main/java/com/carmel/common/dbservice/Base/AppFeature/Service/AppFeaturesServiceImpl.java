@@ -64,7 +64,6 @@ public class AppFeaturesServiceImpl implements AppFeaturesService {
     @Override
     public AppFeaturesResponse saveAppFeature(AppFeatures appFeatures) throws Exception {
         UserInfo userInfo = userInformation.getUserInfo();
-
         logger.trace("Entering");
         AppFeaturesResponse appFeatureResponse = new AppFeaturesResponse();
         try {
@@ -191,7 +190,6 @@ public class AppFeaturesServiceImpl implements AppFeaturesService {
 
     @Override
     public AppFeaturesResponse getPaginated(Map<String, String> formData) throws Exception {
-       ObjectMapper objectMapper = new ObjectMapper();
         logger.trace("Entering");
         AppFeaturesResponse appFeaturesResponse = new AppFeaturesResponse();
         try {
@@ -216,7 +214,7 @@ public class AppFeaturesServiceImpl implements AppFeaturesService {
 
     @Override
     public AppFeaturesResponse searchPaginated(Map<String, String> formData) throws Exception {
-       ObjectMapper objectMapper = new ObjectMapper();
+
         logger.trace("Entering");
         AppFeaturesResponse appFeaturesResponse = new AppFeaturesResponse();
         try {
@@ -372,7 +370,7 @@ public class AppFeaturesServiceImpl implements AppFeaturesService {
     }
 
     private List<AppFeatureTreeDTO> generateTree(String parentId, List<AppFeatureTreeDTO> treeData) {
-        List<AppFeatures> appFeaturesList = appFeaturesRepository.findAllByParentIdIs(parentId);
+        List<AppFeatures> appFeaturesList = appFeaturesRepository.findAllByParentIdIsAndIsDeleted(parentId,0);
         appFeaturesList.forEach(appFeatures -> {
             AppFeatureTreeDTO appFeatureTreeDTO = new AppFeatureTreeDTO(appFeatures);
             List<AppFeatureTreeDTO> treeDTOS = generateTree(appFeatureTreeDTO.getId(), new ArrayList<>());

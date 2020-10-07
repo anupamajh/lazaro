@@ -97,6 +97,9 @@ public class GroupConversationServiceImpl implements GroupConversationService {
 
     @Override
     public GroupConversationResponse findAllByGroupId(String groupId) {
-        return (GroupConversationResponse) groupConversationRepository.findAllByGroupId(groupId);
+        GroupConversationResponse groupConversationResponse = new GroupConversationResponse();
+        groupConversationResponse.setSuccess(true);
+        groupConversationResponse.setGroupConversationList(groupConversationRepository.findAllByGroupId(groupId));
+        return groupConversationResponse;
     }
 }

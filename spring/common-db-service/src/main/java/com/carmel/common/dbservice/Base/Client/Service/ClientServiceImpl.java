@@ -16,12 +16,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -59,6 +64,30 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Client save(Client client) {
         return clientRepository.save(client);
+    }
+
+    @Override
+    public ClientResponse get(Map<String, String> formData) throws Exception {
+        logger.trace("Entering");
+        ClientResponse clientResponse = new ClientResponse();
+        try {
+            Optional<Client> optionalClient = clientRepository.findById(formData.get("id"));
+            if (optionalClient != null) {
+                Client client = optionalClient.get();
+                clientResponse.setSuccess(true);
+                clientResponse.setError("");
+                clientResponse.setClient(this.save(client));
+            } else {
+                clientResponse.setSuccess(false);
+                clientResponse.setError("Error occurred while fetching application feature!! Please try after sometime");
+            }
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            throw ex;
+        }
+        logger.trace("Exiting");
+        return clientResponse;
     }
 
     @Override
@@ -141,6 +170,61 @@ public class ClientServiceImpl implements ClientService {
         }
         logger.trace("Exiting");
         return ClientsResponse;
+    }
+
+    @Override
+    public ClientResponse moveToTrash(Map<String, String> formData) throws Exception {
+        UserInfo userInfo = userInformation.getUserInfo();
+        logger.trace("Entering");
+        ClientResponse clientResponse = new ClientResponse();
+        try {
+            logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
+            Optional<Client> optionalClient = clientRepository.findById(formData.get("id"));
+            if (optionalClient != null) {
+                Client client = optionalClient.get();
+                ClientDetails clientDetails = client.getClientDetails();
+                clientDetails.setIsDeleted(1);
+                clientDetails.setDeletedBy(userInfo.getId());
+                clientDetails.setDeletedTime(new Date());
+                clientResponse.setSuccess(true);
+                clientResponse.setError("");
+                clientResponse.setClient(this.save(client));
+            } else {
+                clientResponse.setSuccess(false);
+                clientResponse.setError("Error occurred while moving role to Trash!! Please try after sometime");
+            }
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            throw ex;
+        }
+        logger.trace("Exiting");
+        return clientResponse;
+    }
+
+    @Override
+    public ClientResponse getPaginated(Map<String, String> formData) throws Exception {
+        UserInfo userInfo = userInformation.getUserInfo();
+        logger.trace("Entering");
+        ClientResponse clientResponse = new ClientResponse();
+        try {
+            logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
+            int pageNumber = formData.get("current_page") == null ? 0 : Integer.parseInt(formData.get("current_page"));
+            int pageSize = formData.get("page_size") == null ? 10 : Integer.parseInt(formData.get("page_size"));
+            Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("clientDetails"));
+            Page<Client> page = clientRepository.findByClientDetailsIsDeleted(0, pageable);
+            clientResponse.setTotalRecords(page.getTotalElements());
+            clientResponse.setTotalPages(page.getTotalPages());
+            clientResponse.setClientList(page.getContent());
+            clientResponse.setCurrentRecords(clientResponse.getClientList().size());
+            clientResponse.setSuccess(true);
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            throw ex;
+        }
+        logger.trace("Exiting");
+        return clientResponse;
     }
 
     private boolean checkDuplicate(Client client) {

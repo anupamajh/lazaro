@@ -48,6 +48,9 @@ public class AppFeatures implements Serializable {
     @Length(max = 1000)
     private String url;
 
+    @Column(name = "`group`")
+    private Integer group;
+
     @Column(name = "sequence")
     private Integer sequence;
 
@@ -125,6 +128,14 @@ public class AppFeatures implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Integer getGroup() {
+        return group;
+    }
+
+    public void setGroup(Integer group) {
+        this.group = group;
     }
 
     public Integer getSequence() {
@@ -214,4 +225,6 @@ public class AppFeatures implements Serializable {
     public void setChildrens(List<AppFeatures> childrens) {
         this.childrens = childrens;
     }
+
+
 }

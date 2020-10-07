@@ -1,7 +1,5 @@
 package com.carmel.common.dbservice.Base.Role.Service;
 
-import com.carmel.common.dbservice.Base.AppFeature.Model.AppFeatures;
-import com.carmel.common.dbservice.Base.AppFeature.Response.AppFeaturesResponse;
 import com.carmel.common.dbservice.Base.Client.Model.Client;
 import com.carmel.common.dbservice.Base.Role.Response.RolesResponse;
 import com.carmel.common.dbservice.common.Search.SearchRequest;

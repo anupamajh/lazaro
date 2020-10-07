@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/client")
@@ -40,6 +41,20 @@ public class ClientController {
 
     }
 
+    @RequestMapping(value = "/trash", method = RequestMethod.POST)
+    public ClientResponse moveToTrash(@RequestBody Map<String, String> formData) {
+        logger.trace("Entering");
+        ClientResponse clientResponse = new ClientResponse();
+        try {
+            clientResponse = clientService
+                    .moveToTrash(formData);
+        } catch (Exception ex) {
+            clientResponse.setSuccess(true);
+            clientResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return clientResponse;
+    }
 
     @RequestMapping(value = "/get-all", method = RequestMethod.GET)
     public ClientResponse getAll() {
@@ -54,6 +69,34 @@ public class ClientController {
         return clientResponse;
     }
 
+    @RequestMapping(value = "/get-clients", method = RequestMethod.POST)
+    public ClientResponse getPaginated(@RequestBody Map<String, String> formData) {
+        logger.trace("Entering");
+        ClientResponse clientResponse = new ClientResponse();
+        try {
+            clientResponse = clientService
+                    .getPaginated(formData);
+        } catch (Exception ex) {
+            clientResponse.setSuccess(true);
+            clientResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return clientResponse;
+    }
 
+    @RequestMapping(value = "/get", method = RequestMethod.POST)
+    public ClientResponse get(@RequestBody Map<String, String> formData) {
+        logger.trace("Entering");
+        ClientResponse clientResponse = new ClientResponse();
+        try {
+            clientResponse = clientService
+                    .get(formData);
+        } catch (Exception ex) {
+            clientResponse.setSuccess(true);
+            clientResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return clientResponse;
+    }
 
 }

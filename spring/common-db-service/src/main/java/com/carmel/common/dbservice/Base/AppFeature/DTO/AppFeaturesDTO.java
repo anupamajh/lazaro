@@ -12,6 +12,7 @@ public class AppFeaturesDTO {
     private String toolTip;
     private String systemRole;
     private String url;
+    private Integer group;
     private Integer sequence;
     private Integer isSystem;
     private String parentId;
@@ -35,6 +36,7 @@ public class AppFeaturesDTO {
         this.toolTip = appFeatures.getToolTip();
         this.systemRole = appFeatures.getSystemRole();
         this.url = appFeatures.getUrl();
+        this.group = appFeatures.getGroup();
         this.sequence = appFeatures.getSequence();
         this.isSystem = appFeatures.getIsSystem();
         this.createdBy = appFeatures.getCreatedBy();
@@ -59,6 +61,7 @@ public class AppFeaturesDTO {
         this.toolTip = appFeatures.getToolTip();
         this.systemRole = appFeatures.getSystemRole();
         this.url = appFeatures.getUrl();
+        this.group = appFeatures.getGroup();
         this.sequence = appFeatures.getSequence();
         this.isSystem = appFeatures.getIsSystem();
         this.createdBy = appFeatures.getCreatedBy();
@@ -86,6 +89,7 @@ public class AppFeaturesDTO {
         retValue.setToolTip(appFeatures.getToolTip());
         retValue.setSystemRole(appFeatures.getSystemRole());
         retValue.setUrl(appFeatures.getUrl());
+        retValue.setGroup(appFeatures.getGroup());
         retValue.setSequence(appFeatures.getSequence());
         retValue.setIsSystem(appFeatures.getIsSystem());
         retValue.setCreatedBy(appFeatures.getCreatedBy());
@@ -136,6 +140,14 @@ public class AppFeaturesDTO {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Integer getGroup() {
+        return group;
+    }
+
+    public void setGroup(Integer group) {
+        this.group = group;
     }
 
     public Integer getSequence() {

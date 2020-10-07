@@ -28,4 +28,6 @@ public interface AppFeaturesRepository extends JpaRepository<AppFeatures, String
     List<AppFeatures> findAllByParentIdIs(String parentId);
 
     List<AppFeatures> findAllByIdInAndIsDeleted(List<String> ids, int isDeleted);
+
+    List<AppFeatures> findAllByParentIdIsAndIsDeleted(String parentId, int isDeleted);
 }

@@ -48,9 +48,6 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     EntityManager entityManager;
 
-    @Autowired
-    OrganizationService organizationService;
-
     @Override
     public Role save(Role role) throws Exception {
         return roleRepository.save(role);
@@ -222,7 +219,6 @@ public class RoleServiceImpl implements RoleService {
             rolesResponse.setSuccess(true);
             logger.trace("Completed Successfully");
         } catch (Exception ex) {
-            logger.error(ex.getMessage(), ex);
             logger.error(ex.getMessage(), ex);
             throw ex;
         }

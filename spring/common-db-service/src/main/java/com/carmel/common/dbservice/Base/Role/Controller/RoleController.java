@@ -32,6 +32,7 @@ public class RoleController {
             rolesResponse = roleService
                     .saveRole(role);
         } catch (Exception ex) {
+            logger.error(ex.getMessage());
             rolesResponse.setSuccess(true);
             rolesResponse.setError(ex.getMessage());
         }

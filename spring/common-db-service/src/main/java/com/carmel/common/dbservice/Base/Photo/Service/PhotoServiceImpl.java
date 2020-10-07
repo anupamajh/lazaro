@@ -333,12 +333,18 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     public PhotoResponse findAllByClientIdAndAlbumIsNotAndName(String clientId, Album album, String name) {
-        return (PhotoResponse) photoRepository.findAllByClientIdAndAlbumIsNotAndNameAndIsDeleted(clientId, album, name, 0);
+        PhotoResponse photoResponse = new PhotoResponse();
+        photoResponse.setSuccess(true);
+        photoResponse.setPhotoList(photoRepository.findAllByClientIdAndAlbumIsNotAndName(clientId,album,name));
+        return photoResponse;
     }
 
     @Override
     public PhotoResponse findAllByClientIdAndAlbumIsNotAndNameAndIdIsNot(String clientId, Album album, String name, String id) {
-        return (PhotoResponse) photoRepository.findAllByClientIdAndAlbumIsNotAndNameAndIdIsNotAndIsDeleted(clientId, album, name, id, 0);
+        PhotoResponse photoResponse = new PhotoResponse();
+        photoResponse.setSuccess(true);
+        photoResponse.setPhotoList(photoRepository.findAllByClientIdAndAlbumIsNotAndNameAndIdIsNot(clientId,album,name,id));
+        return photoResponse;
     }
 
     @Override
@@ -348,16 +354,27 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     public PhotoResponse findAllByIsDeletedAndClientIdAndAlbum(int isDeleted, String clientId, Album album) {
-        return (PhotoResponse) photoRepository.findAllByIsDeletedAndClientIdAndAlbum(isDeleted, clientId, album);
+        PhotoResponse photoResponse = new PhotoResponse();
+        photoResponse.setSuccess(true);
+        photoResponse.setPhotoList(photoRepository.findAllByIsDeletedAndClientIdAndAlbum(isDeleted,clientId,album));
+        return photoResponse;
     }
 
     @Override
     public PhotoResponse findAllByIsDeletedAndClientIdAndAlbum(int isDeleted, String clientId, Album album, Pageable pageable) {
-        return (PhotoResponse) photoRepository.findAllByIsDeletedAndClientIdAndAlbum(isDeleted, clientId, album, pageable);
+        PhotoResponse photoResponse = new PhotoResponse();
+        photoResponse.setSuccess(true);
+        Page<Photo> page = photoRepository.findAllByIsDeletedAndClientIdAndAlbum(isDeleted, clientId, album, pageable);
+        photoResponse.setPhotoList(page.getContent());
+        return photoResponse;
     }
 
     @Override
     public PhotoResponse findAll(Specification<Photo> textInAllColumns, Pageable pageable) {
-        return (PhotoResponse) photoRepository.findAll(textInAllColumns, pageable);
+        PhotoResponse photoResponse = new PhotoResponse();
+        photoResponse.setSuccess(true);
+        Page<Photo> page = photoRepository.findAll(textInAllColumns, pageable);
+        photoResponse.setPhotoList(page.getContent());
+        return photoResponse;
     }
 }

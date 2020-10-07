@@ -1,9 +1,11 @@
 package com.carmel.common.dbservice.Base.InterestCategory.Service;
 
+import com.carmel.common.dbservice.Base.GroupConversation.Responce.GroupConversationResponse;
 import com.carmel.common.dbservice.Base.InterestCategory.Model.InterestCategory;
 import com.carmel.common.dbservice.Base.InterestCategory.Repository.InterestCategoryRepository;
 import com.carmel.common.dbservice.Base.InterestCategory.Responce.InterestCategoryResponse;
 import com.carmel.common.dbservice.Base.InterestCategory.Specification.InterestCategorySpecification;
+import com.carmel.common.dbservice.Base.Photo.Model.Photo;
 import com.carmel.common.dbservice.common.Search.SearchBuilder;
 import com.carmel.common.dbservice.common.Search.SearchRequest;
 import com.carmel.common.dbservice.component.UserInformation;
@@ -296,26 +298,43 @@ public class InterestCategoryServiceImpl implements InterestCategoryService {
 
     @Override
     public InterestCategoryResponse findAllByClientIdAndIsDeleted(String clientId, int isDeleted) {
-        return (InterestCategoryResponse) interestCategoryRepository.findAllByClientIdAndIsDeleted(clientId, isDeleted);
+        InterestCategoryResponse interestCategoryResponse = new InterestCategoryResponse();
+        interestCategoryResponse.setSuccess(true);
+        interestCategoryResponse.setInterestCategoryList(interestCategoryRepository.findAllByClientIdAndIsDeleted(clientId, isDeleted));
+        return interestCategoryResponse;
     }
 
     @Override
     public InterestCategoryResponse findAllByClientIdAndIsDeleted(String clientId, int isDeleted, Pageable pageable) {
-        return (InterestCategoryResponse) interestCategoryRepository.findAllByClientIdAndIsDeleted(clientId, isDeleted, pageable);
+        InterestCategoryResponse interestCategoryResponse = new InterestCategoryResponse();
+        interestCategoryResponse.setSuccess(true);
+        Page<InterestCategory> page = interestCategoryRepository.findAllByClientIdAndIsDeleted(clientId,isDeleted, pageable);
+        interestCategoryResponse.setInterestCategoryList(page.getContent());
+        return interestCategoryResponse;
     }
 
     @Override
     public InterestCategoryResponse findAll(Specification<InterestCategory> textInAllColumns, Pageable pageable) {
-        return (InterestCategoryResponse) interestCategoryRepository.findAll(textInAllColumns, pageable);
+        InterestCategoryResponse interestCategoryResponse = new InterestCategoryResponse();
+        interestCategoryResponse.setSuccess(true);
+        Page<InterestCategory> page = interestCategoryRepository.findAll(textInAllColumns,pageable);
+        interestCategoryResponse.setInterestCategoryList(page.getContent());
+        return interestCategoryResponse;
     }
 
     @Override
     public InterestCategoryResponse findAllByClientIdAndIsDeletedAndName(String clientId, int isDeleted, String name) {
-        return (InterestCategoryResponse) interestCategoryRepository.findAllByClientIdAndIsDeletedAndName(clientId, isDeleted, name);
+        InterestCategoryResponse interestCategoryResponse = new InterestCategoryResponse();
+        interestCategoryResponse.setSuccess(true);
+        interestCategoryResponse.setInterestCategoryList(interestCategoryRepository.findAllByClientIdAndIsDeletedAndName(clientId, isDeleted,name));
+        return interestCategoryResponse;
     }
 
     @Override
     public InterestCategoryResponse findAllByClientIdAndIsDeletedAndNameAndIdIsNot(String clientId, int isDeleted, String name, String id) {
-        return (InterestCategoryResponse) interestCategoryRepository.findAllByClientIdAndIsDeletedAndNameAndIdIsNot(clientId, isDeleted, name, id);
+        InterestCategoryResponse interestCategoryResponse = new InterestCategoryResponse();
+        interestCategoryResponse.setSuccess(true);
+        interestCategoryResponse.setInterestCategoryList(interestCategoryRepository.findAllByClientIdAndIsDeletedAndNameAndIdIsNot(clientId, isDeleted,name,id));
+        return interestCategoryResponse;
     }
 }

@@ -3,6 +3,8 @@ package com.carmel.common.dbservice.Base.AccountHead.Service;
 import com.carmel.common.dbservice.Base.AccountHead.Model.AccountHead;
 import com.carmel.common.dbservice.Base.AccountHead.Response.AccountHeadResponse;
 import com.carmel.common.dbservice.Base.AccountHead.Respository.AccountHeadRepository;
+import com.carmel.common.dbservice.Base.Photo.Model.Photo;
+import com.carmel.common.dbservice.Base.Photo.Responce.PhotoResponse;
 import com.carmel.common.dbservice.common.Search.SearchBuilder;
 import com.carmel.common.dbservice.common.Search.SearchRequest;
 import com.carmel.common.dbservice.component.UserInformation;
@@ -298,12 +300,18 @@ public class AccountHeadServiceImpl implements AccountHeadService {
 
     @Override
     public AccountHeadResponse findAllByClientIdAndTitle(String clientId, String title) {
-        return (AccountHeadResponse) accountHeadRepository.findAllByClientIdAndTitle(clientId, title);
+        AccountHeadResponse accountHeadResponse = new AccountHeadResponse();
+        accountHeadResponse.setSuccess(true);
+        accountHeadResponse.setAccountHeadList(accountHeadRepository.findAllByClientIdAndTitle(clientId,title));
+        return accountHeadResponse;
     }
 
     @Override
     public AccountHeadResponse findAllByClientIdAndTitleAndIdIsNot(String clientId, String title, String id) {
-        return (AccountHeadResponse) accountHeadRepository.findAllByClientIdAndTitleAndIdIsNot(clientId, title, id);
+        AccountHeadResponse accountHeadResponse = new AccountHeadResponse();
+        accountHeadResponse.setSuccess(true);
+        accountHeadResponse.setAccountHeadList(accountHeadRepository.findAllByClientIdAndTitleAndIdIsNot(clientId,title,id));
+        return accountHeadResponse;
     }
 
     @Override
@@ -313,16 +321,27 @@ public class AccountHeadServiceImpl implements AccountHeadService {
 
     @Override
     public AccountHeadResponse findAllByIsDeletedAndClientId(int isDeleted, String clientId) {
-        return (AccountHeadResponse) accountHeadRepository.findAllByIsDeletedAndClientId(isDeleted, clientId);
+        AccountHeadResponse accountHeadResponse = new AccountHeadResponse();
+        accountHeadResponse.setSuccess(true);
+        accountHeadResponse.setAccountHeadList(accountHeadRepository.findAllByIsDeletedAndClientId(isDeleted,clientId));
+        return accountHeadResponse;
     }
 
     @Override
     public AccountHeadResponse findAllByClientIdAndIsDeleted(String clientId, int isDeleted, Pageable pageable) {
-        return (AccountHeadResponse) accountHeadRepository.findAllByClientIdAndIsDeleted(clientId, isDeleted, pageable);
+        AccountHeadResponse accountHeadResponse = new AccountHeadResponse();
+        accountHeadResponse.setSuccess(true);
+        Page<AccountHead> page = accountHeadRepository.findAllByClientIdAndIsDeleted(clientId,isDeleted, pageable);
+        accountHeadResponse.setAccountHeadList(page.getContent());
+        return accountHeadResponse;
     }
 
     @Override
     public AccountHeadResponse findAll(Specification<AccountHead> textInAllColumns, Pageable pageable) {
-        return (AccountHeadResponse) accountHeadRepository.findAll(textInAllColumns, pageable);
+        AccountHeadResponse accountHeadResponse = new AccountHeadResponse();
+        accountHeadResponse.setSuccess(true);
+        Page<AccountHead> page = accountHeadRepository.findAll(textInAllColumns, pageable);
+        accountHeadResponse.setAccountHeadList(page.getContent());
+        return accountHeadResponse;
     }
 }

@@ -4,6 +4,8 @@ import com.carmel.common.dbservice.Base.Album.Controller.AlbumController;
 import com.carmel.common.dbservice.Base.Album.Model.Album;
 import com.carmel.common.dbservice.Base.Album.Repository.AlbumRepository;
 import com.carmel.common.dbservice.Base.Album.Responce.AlbumResponse;
+import com.carmel.common.dbservice.Base.Photo.Model.Photo;
+import com.carmel.common.dbservice.Base.Photo.Responce.PhotoResponse;
 import com.carmel.common.dbservice.common.Search.SearchBuilder;
 import com.carmel.common.dbservice.common.Search.SearchRequest;
 import com.carmel.common.dbservice.component.UserInformation;
@@ -306,7 +308,10 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public AlbumResponse findAllByClientIdAndTitleAndIdIsNot(String clientId, String title, String id) {
-        return (AlbumResponse) albumRepository.findAllByClientIdAndTitleAndIdIsNot(clientId, title, id);
+        AlbumResponse albumResponse = new AlbumResponse();
+        albumResponse.setSuccess(true);
+        albumResponse.setAlbumList(albumRepository.findAllByClientIdAndTitleAndIdIsNot(clientId,title,id));
+        return albumResponse;
     }
 
     @Override
@@ -316,16 +321,27 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public AlbumResponse findAllByIsDeletedAndClientId(int isDeleted, String clientId) {
-        return (AlbumResponse) albumRepository.findAllByIsDeletedAndClientId(isDeleted, clientId);
+        AlbumResponse albumResponse = new AlbumResponse();
+        albumResponse.setSuccess(true);
+        albumResponse.setAlbumList(albumRepository.findAllByIsDeletedAndClientId(isDeleted,clientId));
+        return albumResponse;
     }
 
     @Override
     public AlbumResponse findAllByClientIdAndIsDeleted(String clientId, int isDeleted, Pageable pageable) {
-        return (AlbumResponse) albumRepository.findAllByClientIdAndIsDeleted(clientId, isDeleted, pageable);
+        AlbumResponse albumResponse = new AlbumResponse();
+        albumResponse.setSuccess(true);
+        Page<Album> page = albumRepository.findAllByClientIdAndIsDeleted(clientId,isDeleted, pageable);
+        albumResponse.setAlbumList(page.getContent());
+        return albumResponse;
     }
 
     @Override
     public AlbumResponse findAll(Specification<Album> textInAllColumns, Pageable pageable) {
-        return (AlbumResponse) albumRepository.findAll(textInAllColumns, pageable);
+        AlbumResponse albumResponse = new AlbumResponse();
+        albumResponse.setSuccess(true);
+        Page<Album> page = albumRepository.findAll(textInAllColumns,pageable);
+        albumResponse.setAlbumList(page.getContent());
+        return albumResponse;
     }
 }
