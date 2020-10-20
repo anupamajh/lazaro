@@ -5,22 +5,29 @@ import com.carmel.common.dbservice.Base.AddressBook.Service.AddressBookService;
 import com.carmel.common.dbservice.Base.User.Model.User;
 import com.carmel.common.dbservice.Base.User.Response.UsersResponse;
 import com.carmel.common.dbservice.Base.User.Service.UserService;
+import com.carmel.common.dbservice.Base.UserPreference.Model.UserPreference;
+import com.carmel.common.dbservice.Base.UserPreference.Service.UserPreferenceService;
 import com.carmel.common.dbservice.common.Search.SearchRequest;
 import com.carmel.common.dbservice.component.MailClient;
 import com.carmel.common.dbservice.component.UserInformation;
 import com.carmel.common.dbservice.model.UserInfo;
-import com.carmel.common.dbservice.Base.UserPreference.Model.UserPreference;
 import com.carmel.common.dbservice.response.GenericResponse;
-import com.carmel.common.dbservice.Base.UserPreference.Service.UserPreferenceService;
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.FileInputStream;
@@ -51,6 +58,13 @@ public class UserController {
 
     @Autowired
     UserPreferenceService userPreferenceService;
+
+    @Autowired
+    TokenStore jdbcTokenStore;
+
+    @Autowired
+    RemoteTokenServices tokenServices;
+
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public UsersResponse save(@Valid @RequestBody User user) {
@@ -316,4 +330,17 @@ public class UserController {
         }
         logger.trace("Exiting");
         return usersResponse;
-}}
+    }
+
+    @GetMapping("/remove-access-token")
+    public UsersResponse revokeToken(HttpServletRequest request) {
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader != null) {
+            String tokenValue = authHeader.replace("Bearer", "").trim();
+            OAuth2AccessToken accessToken = jdbcTokenStore.readAccessToken(tokenValue);
+            jdbcTokenStore.removeAccessToken(accessToken);
+        }
+
+        return new UsersResponse();
+    }
+}

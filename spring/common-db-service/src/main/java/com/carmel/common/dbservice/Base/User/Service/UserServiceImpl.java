@@ -278,7 +278,7 @@ public class UserServiceImpl implements UserService {
             int pageNumber = formData.get("current_page") == null ? 0 : Integer.parseInt(formData.get("current_page"));
             int pageSize = formData.get("page_size") == null ? 10 : Integer.parseInt(formData.get("page_size"));
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("fullName"));
-            Page<User> page = userRepository.findAllByIsDeleted(0, pageable);
+            Page<User> page = userRepository.findAllByIsDeletedAndClient(0, userInfo.getClient(), pageable);
             usersResponse.setTotalRecords(page.getTotalElements());
             usersResponse.setTotalPages(page.getTotalPages());
             usersResponse.setUserList(page.getContent());

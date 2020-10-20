@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -174,5 +175,21 @@ public class AppFeaturesController {
         logger.trace("Exiting");
         return appFeaturesResponse;
     }
+
+    @RequestMapping(value = "/get-client-tree-data", method = RequestMethod.POST)
+    public AppFeaturesResponse getClientTreeData() {
+        logger.trace("Entering");
+        AppFeaturesResponse appFeaturesResponse = new AppFeaturesResponse();
+        try {
+            appFeaturesResponse = appFeaturesService
+                    .getClientTreeData(null);
+        } catch (Exception ex) {
+            appFeaturesResponse.setSuccess(true);
+            appFeaturesResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return appFeaturesResponse;
+    }
+
 
 }

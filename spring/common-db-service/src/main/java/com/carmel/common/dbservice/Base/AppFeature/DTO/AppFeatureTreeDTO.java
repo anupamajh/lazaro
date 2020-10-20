@@ -14,6 +14,7 @@ public class AppFeatureTreeDTO {
     private String url;
     private Integer sequence;
     private Integer isSystem;
+    private String parentId;
     private List<AppFeatureTreeDTO> children;
 
     public AppFeatureTreeDTO() {
@@ -28,6 +29,9 @@ public class AppFeatureTreeDTO {
         this.url = appFeatures.getUrl();
         this.sequence = appFeatures.getSequence();
         this.isSystem = appFeatures.getIsSystem();
+        if(appFeatures.getParent() !=  null){
+            this.parentId = appFeatures.getParent().getId();
+        }
     }
 
     public String getId() {

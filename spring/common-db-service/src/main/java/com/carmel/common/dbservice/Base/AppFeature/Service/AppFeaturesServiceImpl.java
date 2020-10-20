@@ -5,6 +5,8 @@ import com.carmel.common.dbservice.Base.AppFeature.Model.AppFeatures;
 import com.carmel.common.dbservice.Base.AppFeature.DTO.AppFeatureTreeDTO;
 import com.carmel.common.dbservice.Base.AppFeature.Repository.AppFeaturesRepository;
 import com.carmel.common.dbservice.Base.AppFeature.Response.AppFeaturesResponse;
+import com.carmel.common.dbservice.Base.Client.Model.Client;
+import com.carmel.common.dbservice.Base.Client.Service.ClientService;
 import com.carmel.common.dbservice.common.Search.SearchBuilder;
 import com.carmel.common.dbservice.common.Search.SearchRequest;
 import com.carmel.common.dbservice.component.UserInformation;
@@ -44,6 +46,9 @@ public class AppFeaturesServiceImpl implements AppFeaturesService {
 
     @Autowired
     UserInformation userInformation;
+
+    @Autowired
+    ClientService clientService;
 
     @Autowired
     UserService userService;
@@ -286,6 +291,34 @@ public class AppFeaturesServiceImpl implements AppFeaturesService {
         return appFeaturesResponse;
     }
 
+    @Override
+    public AppFeaturesResponse getClientTreeData(String parentId) throws Exception {
+        UserInfo userInfo = userInformation.getUserInfo();
+        Optional<Client> optionalClient = clientService.findById(userInfo.getClient().getClientId());
+        AppFeaturesResponse appFeaturesResponse = new AppFeaturesResponse();
+        if (optionalClient.isPresent()) {
+            List<AppFeatureTreeDTO> treeData = new ArrayList<>();
+            List<AppFeatureTreeDTO> clientTreeData = generateClientTree(parentId, treeData, optionalClient.get().getClientDetails().getAppFeatures());
+            appFeaturesResponse.setTreeData(clientTreeData);
+            appFeaturesResponse.setSuccess(true);
+        } else {
+            throw new Exception("Client not found");
+        }
+        return appFeaturesResponse;
+    }
+
+    private List<AppFeatureTreeDTO> generateClientTree(String parentId, List<AppFeatureTreeDTO> treeData, List<AppFeatures> clientAppFeatures) {
+        List<AppFeatures> appFeaturesList = appFeaturesRepository.findAllByParentIdIs(parentId);
+        appFeaturesList.forEach(appFeatures -> {
+            if (clientAppFeatures.contains(appFeatures)) {
+                AppFeatureTreeDTO appFeatureTreeDTO = new AppFeatureTreeDTO(appFeatures);
+                List<AppFeatureTreeDTO> treeDTOS = generateClientTree(appFeatureTreeDTO.getId(), new ArrayList<>(), clientAppFeatures);
+                appFeatureTreeDTO.setChildren(treeDTOS);
+                treeData.add(appFeatureTreeDTO);
+            }
+        });
+        return treeData;
+    }
     @Override
     public AppFeaturesResponse search(SearchRequest searchRequest) throws Exception {
         AppFeaturesResponse appFeaturesResponse = new AppFeaturesResponse();

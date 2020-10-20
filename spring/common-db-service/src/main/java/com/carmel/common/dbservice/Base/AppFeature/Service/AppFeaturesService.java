@@ -55,4 +55,6 @@ public interface AppFeaturesService {
     AppFeaturesResponse getTreeData(String parentId) throws Exception;
 
     AppFeaturesResponse findAllByIdInAndIsDeleted(List<String> ids, int isDeleted) throws Exception;
+
+    AppFeaturesResponse getClientTreeData(String parentId) throws Exception;
 }
