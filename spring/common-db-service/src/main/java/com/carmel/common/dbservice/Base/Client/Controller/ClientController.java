@@ -1,6 +1,7 @@
 package com.carmel.common.dbservice.Base.Client.Controller;
 
 import com.carmel.common.dbservice.Base.Client.Model.Client;
+import com.carmel.common.dbservice.Base.Client.Request.ClientRequest;
 import com.carmel.common.dbservice.Base.Client.Responce.ClientResponse;
 import com.carmel.common.dbservice.Base.Client.Service.ClientService;
 import org.slf4j.Logger;
@@ -33,6 +34,20 @@ public class ClientController {
         ClientResponse clientResponse = new ClientResponse();
         try{
             clientResponse = clientService.register(client);
+        }catch (Exception ex){
+            clientResponse.setSuccess(true);
+            clientResponse.setError(ex.getMessage());
+        }
+        return clientResponse;
+
+    }
+
+    @RequestMapping(value = "/register-client", method = RequestMethod.POST)
+    public ClientResponse registerClient(@Valid @RequestBody ClientRequest clientRequest) {
+        logger.trace("Entering");
+        ClientResponse clientResponse = new ClientResponse();
+        try{
+            clientResponse = clientService.registerClient(clientRequest);
         }catch (Exception ex){
             clientResponse.setSuccess(true);
             clientResponse.setError(ex.getMessage());

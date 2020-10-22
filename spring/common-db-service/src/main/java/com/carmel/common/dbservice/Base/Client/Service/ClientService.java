@@ -1,6 +1,7 @@
 package com.carmel.common.dbservice.Base.Client.Service;
 
 import com.carmel.common.dbservice.Base.Client.Model.Client;
+import com.carmel.common.dbservice.Base.Client.Request.ClientRequest;
 import com.carmel.common.dbservice.Base.Client.Responce.ClientResponse;
 
 import java.util.List;
@@ -23,4 +24,6 @@ public interface ClientService {
     ClientResponse moveToTrash(Map<String, String> formData) throws Exception;
 
     ClientResponse getPaginated(Map<String, String> formData) throws Exception;
+
+    ClientResponse registerClient(ClientRequest clientRequest) throws Exception;
 }

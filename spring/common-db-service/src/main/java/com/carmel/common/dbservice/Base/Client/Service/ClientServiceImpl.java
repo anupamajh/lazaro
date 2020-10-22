@@ -1,7 +1,9 @@
 package com.carmel.common.dbservice.Base.Client.Service;
 
+import com.carmel.common.dbservice.Base.Client.DTO.ClientDTO;
 import com.carmel.common.dbservice.Base.Client.Model.Client;
 import com.carmel.common.dbservice.Base.Client.Repository.ClientRepository;
+import com.carmel.common.dbservice.Base.Client.Request.ClientRequest;
 import com.carmel.common.dbservice.Base.Client.Responce.ClientResponse;
 import com.carmel.common.dbservice.Base.Role.Model.Role;
 import com.carmel.common.dbservice.Base.Role.Service.RoleService;
@@ -98,7 +100,6 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public ClientResponse register(Client client) throws Exception {
         UserInfo userInfo = userInformation.getUserInfo();
-
         logger.trace("Entering");
         ClientResponse clientResponse = new ClientResponse();
         if (client.getClientId() == null) {
@@ -132,6 +133,73 @@ public class ClientServiceImpl implements ClientService {
                     user.setFullName(clientDetails.getEmail());
                     user.setUserName(clientDetails.getEmail());
                     user.setPassword(savedClient.getClientSecrete());
+                    user.setAccountStatus(2);
+                    user.setIsDeleted(0);
+                    User savedUser = userService.save(user);
+                } else {
+                    Optional<Client> optionalClient = clientService.findById(client.getClientId());
+                    savedClient = optionalClient.get();
+                    client.setClientSecrete(optionalClient.get().getClientSecrete());
+                    clientDetails.setId(savedClient.getClientDetails().getId());
+                }
+                clientDetails.setClient(savedClient);
+                savedClient.setClientDetails(clientDetails);
+                clientResponse.setClient(clientService.save(savedClient));
+                clientResponse.setSuccess(true);
+                clientResponse.setError("");
+            }
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            throw ex;
+        }
+        logger.trace("Exiting");
+        return clientResponse;
+    }
+
+    @Override
+    public ClientResponse registerClient(ClientRequest clientRequest) throws Exception{
+        UserInfo userInfo = userInformation.getUserInfo();
+        logger.trace("Entering");
+        ClientResponse clientResponse = new ClientResponse();
+        Client client = clientRequest.getClient();
+        if (client.getClientId() == null) {
+            client.setClientId("");
+        }
+        try {
+            if (checkDuplicate(client)) {
+                clientResponse.setClient(client);
+                clientResponse.setSuccess(false);
+                clientResponse.setError("We found a client with same email id, Kindly contact administrator");
+            } else {
+                ClientDetails clientDetails = client.getClientDetails();
+                clientDetails.setCreatedBy(userInfo.getId());
+                clientDetails.setCreationTime(new Date());
+                Client savedClient;
+                if (client.getClientId().equals("")) {
+                    client.setClientDetails(null);
+                    client.setAccessTokenValidity(36000);
+                    client.setAccessTokenValidity(3600000);
+                    client.setResourceIds("");
+                    client.setAuthorizedGrantTypes("authorization_code,password,refresh_token,implicit,client_credentials");
+                    client.setAuthorities(null);
+                    client.setAdditionalInformation("");
+                    client.setAutoapprove("true");
+                    client.setClientSecrete(passwordEncoder.encode(client.getClientSecrete()));
+                    savedClient = clientService.save(client);
+                    Role role = new Role();
+                    role.setClient(savedClient);
+                    role.setRoleName("Super Admin");
+                    role.setDescription(clientDetails.getClientName());
+                    role.setIsDeleted(0);
+                    role.setCreatedBy(userInfo.getId());
+                    role.setCreationTime(new Date());
+                    role.setAppFeatures(clientDetails.getAppFeatures());
+                    Role savedRole = roleService.save(role);
+                    User user = new User(savedRole);
+                    user.setClient(savedClient);
+                    user.setFullName(clientRequest.getSuperAdminUserName());
+                    user.setUserName(clientRequest.getSuperAdminUserName());
+                    user.setPassword(clientRequest.getSuperAdminPassword());
                     user.setAccountStatus(2);
                     user.setIsDeleted(0);
                     User savedUser = userService.save(user);
