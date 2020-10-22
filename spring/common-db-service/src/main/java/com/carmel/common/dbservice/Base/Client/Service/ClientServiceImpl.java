@@ -199,7 +199,7 @@ public class ClientServiceImpl implements ClientService {
                     user.setClient(savedClient);
                     user.setFullName(clientRequest.getSuperAdminUserName());
                     user.setUserName(clientRequest.getSuperAdminUserName());
-                    user.setPassword(clientRequest.getSuperAdminPassword());
+                    user.setPassword(passwordEncoder.encode(clientRequest.getSuperAdminPassword()));
                     user.setAccountStatus(2);
                     user.setIsDeleted(0);
                     User savedUser = userService.save(user);
