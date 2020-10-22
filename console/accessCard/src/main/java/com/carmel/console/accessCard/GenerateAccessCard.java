@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,12 +23,14 @@ import java.util.Properties;
 
 public class GenerateAccessCard extends Frame {
 
-    private static int DETAIL_SEPERATOR_X = 70;
-    private static int DETAIL_TITLE_X = 5;
-    private static int DETAIL_START_X = 80;
-    private static int DETAIL_LINE_INCREMENT_Y = 13;
+    private static int MULTI_FACTOR = 3;
+    private static int DETAIL_SEPERATOR_X = 170;
+    private static int DETAIL_TITLE_X = 15;
+    private static int DETAIL_START_X = 190;
+    private static int DETAIL_LINE_INCREMENT_Y = 35;
     private java.util.List<AccessCard> accessCardList;
     private AccessCard currentAccessCard = null;
+    AffineTransform identity = new AffineTransform();
 
     private String imagePath = "";
     private String excelPath = "";
@@ -167,6 +170,7 @@ public class GenerateAccessCard extends Frame {
                     rowCount++;
                 }
 
+                //this.currentAccessCard = accessCardList.get(0);
                 for (AccessCard card : accessCardList) {
                     generateAccessCard(card);
                 }
@@ -186,7 +190,7 @@ public class GenerateAccessCard extends Frame {
     }
 
     private void prepareGUI() {
-        setSize(204, 325);
+        setSize(204*MULTI_FACTOR,325*MULTI_FACTOR);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
                 System.exit(0);
@@ -197,45 +201,47 @@ public class GenerateAccessCard extends Frame {
     @Override
     public void paint(Graphics g) {
         g2 = (Graphics2D) g;
+        //generateAccessCard(currentAccessCard);
 
     }
 
 
     private void generateAccessCard(AccessCard accessCard) {
-        BufferedImage bi = new BufferedImage(204, 325, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage bi = new BufferedImage(204*MULTI_FACTOR, 325*MULTI_FACTOR, BufferedImage.TYPE_INT_ARGB);
 
         Graphics2D g2 = bi.createGraphics();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
         try {
+            //g2.rotate(Math.toRadians(180));
             g2.setFont(new Font("Helvetica", Font.TRUETYPE_FONT, 13));
             Image image = ImageIO.read(new File(getClass().getResource("/logo.png").getFile()));
-            Stroke oldStroke = g2.getStroke();
-            g2.drawImage(image, 15, 30, 100, 40, null);
+             Stroke oldStroke = g2.getStroke();
+            g2.drawImage(image, 15, 30, 110*MULTI_FACTOR, 50*MULTI_FACTOR, null);
 
             g2.setColor(new Color(48, 53, 54));
-            g2.drawRect(0, 75, 204, 40);
-
+            g2.drawRect(0, 50*MULTI_FACTOR, 204*MULTI_FACTOR, 40*MULTI_FACTOR);
 
             g2.setColor(new Color(48, 53, 54));
-            g2.fillRect(0, 75, 204, 40);
+            g2.fillRect(0, 50*MULTI_FACTOR, 204*MULTI_FACTOR, 40*MULTI_FACTOR);
+
             image = ImageIO.read(new File((imagePath + accessCard.getImageUrl())));
-            g2.drawImage(image, (204 - (60 + 25)), 40, 80, 90, null);
-
-            g2.setStroke(new BasicStroke(2));
+            g2.drawImage(image, (204*MULTI_FACTOR - (60*MULTI_FACTOR + 25*MULTI_FACTOR)), 20 *MULTI_FACTOR, 80*MULTI_FACTOR, 90*MULTI_FACTOR, null);
+//
+            g2.setStroke(new BasicStroke(5));
             g2.setColor(new Color(112, 180, 47));
-            g2.drawRect((204 - (60 + 25)), 40, 80, 90);
+            g2.drawRect((204*MULTI_FACTOR - (60*MULTI_FACTOR + 25*MULTI_FACTOR)), 20 *MULTI_FACTOR, 80*MULTI_FACTOR, 90*MULTI_FACTOR);
             g2.setStroke(oldStroke);
-
+//
             g2.setColor(new Color(255, 255, 255));
-            g2.setFont(new Font("Helvetica", Font.TRUETYPE_FONT, 15));
-            g2.drawString(accessCard.getIdNumber(), 20, 100);
+            g2.setFont(new Font("Helvetica", Font.TRUETYPE_FONT, 30));
+            g2.drawString(accessCard.getIdNumber(), 50, 70*MULTI_FACTOR);
             g2.setColor(new Color(0, 0, 0));
-            int lastY = 145;
-            g2.setFont(new Font("Helvetica", Font.TRUETYPE_FONT, 9));
+            int lastY = 120*MULTI_FACTOR;
+            g2.setFont(new Font("Helvetica", Font.TRUETYPE_FONT, 25));
             g2.drawString("Name", DETAIL_TITLE_X, lastY);
             g2.drawString(":", DETAIL_SEPERATOR_X, lastY);
-            java.util.List<String> wrapped = StringUtils.wrap(accessCard.getName(), g2.getFontMetrics(), 110);
+            java.util.List<String> wrapped = StringUtils.wrap(accessCard.getName(), g2.getFontMetrics(), 110*MULTI_FACTOR);
             for (String text : wrapped) {
                 g2.drawString(text, DETAIL_START_X, lastY);
                 lastY += DETAIL_LINE_INCREMENT_Y;
@@ -260,43 +266,45 @@ public class GenerateAccessCard extends Frame {
 
             g2.drawString("Address", DETAIL_TITLE_X, lastY);
             g2.drawString(":", DETAIL_SEPERATOR_X, lastY);
-            wrapped = StringUtils.wrap(accessCard.getAddress(), g2.getFontMetrics(), 110);
-            for (int i = 0; i < 2; i++) {
+            wrapped = StringUtils.wrap(accessCard.getAddress(), g2.getFontMetrics(), 110*MULTI_FACTOR);
+            int MaxAddressLine = 4;
+            MaxAddressLine = (wrapped.size() > MaxAddressLine)?MaxAddressLine:wrapped.size();
+            for (int i = 0; i < MaxAddressLine; i++) {
                 g2.drawString(wrapped.get(i), DETAIL_START_X, lastY);
                 lastY += DETAIL_LINE_INCREMENT_Y;
             }
 
 
-            g2.drawString("Authorised Signatory", DETAIL_START_X + 30, (325 - 45));
+            g2.drawString("Authorised Signatory", DETAIL_START_X + 100, (325*MULTI_FACTOR - 200));
             image = ImageIO.read(new File(getClass().getResource("/signature.png").getFile()));
-            g2.drawImage(image, (DETAIL_START_X + 50), 245, 35, 25, null);
+            g2.drawImage(image, (DETAIL_START_X + 150), 220*MULTI_FACTOR+25, 140, 70, null);
 
             g2.setColor(new Color(48, 53, 54));
-            g2.fillRect(0, 325 - 40, 204, 40);
+            g2.fillRect(0, 325*MULTI_FACTOR - 120, 204*MULTI_FACTOR, 120);
             g2.setColor(new Color(255, 255, 255));
-            g2.setFont(new Font("Helvetica", Font.TRUETYPE_FONT, 15));
+            g2.setFont(new Font("Helvetica", Font.TRUETYPE_FONT, 35));
             String propertyName = accessCard.getPropertyName();
             FontMetrics fm = g2.getFontMetrics();
-            while (fm.stringWidth(propertyName) < 200) {
+            while (fm.stringWidth(propertyName) < 200*MULTI_FACTOR) {
                 propertyName = " " + propertyName + " ";
             }
 
-            g2.drawString(propertyName, 0, 325 - 25);
-            g2.setFont(new Font("Helvetica", Font.TRUETYPE_FONT, 8));
+            g2.drawString(propertyName, 0, 325 *MULTI_FACTOR - 80);
+            g2.setFont(new Font("Helvetica", Font.TRUETYPE_FONT, 25));
 
             propertyName = accessCard.getPropertyAddressLine1();
             fm = g2.getFontMetrics();
-            while (fm.stringWidth(propertyName) < 200) {
+            while (fm.stringWidth(propertyName) < 200*MULTI_FACTOR) {
                 propertyName = " " + propertyName + " ";
             }
-            g2.drawString(propertyName, 0, 325 - 15);
+            g2.drawString(propertyName, 0, 325*MULTI_FACTOR - 50);
 
             propertyName = accessCard.getPropertyAddressLine2();
             fm = g2.getFontMetrics();
-            while (fm.stringWidth(propertyName) < 200) {
+            while (fm.stringWidth(propertyName) < 200 *MULTI_FACTOR) {
                 propertyName = " " + propertyName + " ";
             }
-            g2.drawString(propertyName, 0, 325 - 5);
+            g2.drawString(propertyName, 0, 325*MULTI_FACTOR - 20);
             ImageIO.write(bi, "PNG", new File(accessCard.getIdNumber() + ".png"));
         } catch (Exception ex) {
             String s = ex.getMessage();
