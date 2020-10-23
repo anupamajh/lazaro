@@ -1,5 +1,6 @@
 package com.carmel.common.dbservice.Base.Role.Service;
 
+import com.carmel.common.dbservice.Base.AppFeature.Model.AppFeatures;
 import com.carmel.common.dbservice.Base.Client.Model.Client;
 import com.carmel.common.dbservice.Base.Organization.Service.OrganizationService;
 import com.carmel.common.dbservice.Base.Role.Model.Role;
@@ -66,6 +67,7 @@ public class RoleServiceImpl implements RoleService {
                 rolesResponse.setError("Duplicate role name!");
             } else {
                 if (role.getId() != null) {
+                    checkSuperAdmin(role, userInfo);
                     if (!role.getId().trim().equals("")) {
                         role.setLastModifiedBy(userInfo.getId());
                         role.setLastModifiedTime(new Date());
@@ -89,6 +91,24 @@ public class RoleServiceImpl implements RoleService {
         }
         logger.trace("Exiting");
         return rolesResponse;
+    }
+
+    private void checkSuperAdmin(Role role, UserInfo userInfo) throws Exception{
+        boolean hasAotherSuperAdmin = false;
+        List<AppFeatures> appFeatures = userInfo.getClient().getClientDetails().getAppFeatures();
+        if (role.getAppFeatures().size() == appFeatures.size()) {
+            List<Role> roles = roleRepository.findAllByIsDeletedAndClient(0, userInfo.getClient());
+            for (Role existingRole : roles) {
+                if (!existingRole.getId().equals(role.getId())) {
+                    if (existingRole.getAppFeatures().size() == appFeatures.size()) {
+                        hasAotherSuperAdmin = true;
+                    }
+                }
+            }
+        }
+        if (!hasAotherSuperAdmin) {
+            throw new Exception(role.getRoleName() + " cannot be modified unless another Super Admin role has been created");
+        }
     }
 
     @Override
@@ -121,6 +141,7 @@ public class RoleServiceImpl implements RoleService {
             Optional<Role> optionalRole = roleRepository.findById(formData.get("id"));
             if (optionalRole != null) {
                 Role role = optionalRole.get();
+                checkDelete(role, userInfo);
                 role.setIsDeleted(1);
                 role.setDeletedBy(userInfo.getId());
                 role.setDeletedTime(new Date());
@@ -138,6 +159,24 @@ public class RoleServiceImpl implements RoleService {
         }
         logger.trace("Exiting");
         return roleResponse;
+    }
+
+    private void checkDelete(Role role, UserInfo userInfo) throws Exception {
+        boolean hasSameRole = false;
+        List<AppFeatures> appFeatures = userInfo.getClient().getClientDetails().getAppFeatures();
+        if (role.getAppFeatures().size() == appFeatures.size()) {
+            List<Role> roles = roleRepository.findAllByIsDeletedAndClient(0, userInfo.getClient());
+            for (Role existingRole : roles) {
+                if (!existingRole.getId().equals(role.getId())) {
+                    if (existingRole.getAppFeatures().size() == appFeatures.size()) {
+                        hasSameRole = true;
+                    }
+                }
+            }
+        }
+        if (!hasSameRole) {
+            throw new Exception(role.getRoleName() + " cannot be deleted unless another Super Admin role has been created");
+        }
     }
 
     @Override
