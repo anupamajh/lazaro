@@ -68,6 +68,7 @@ import com.carmel.guestjini.Screens.Support.TicketDetail.TicketDetailsController
 import com.carmel.guestjini.Screens.Support.TicketList.TicketListController;
 import com.carmel.guestjini.Screens.Welcome.WelcomeController;
 import com.carmel.guestjini.TicketCategory.FetchTicketCategoryByParentIdUseCase;
+import com.carmel.guestjini.Tickets.DeleteTicketUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketCountUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketListUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketTaskNoteListUseCase;
@@ -323,6 +324,10 @@ public class ControllerCompositionRoot {
         return new FetchTicketCountUseCase(getAuthenticatedGuestJiniAPI());
     }
 
+    private DeleteTicketUseCase getDeleteTicketUseCase() {
+        return new DeleteTicketUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
     public SharedPreferenceHelper getSharedPreferenceHelper() {
         return new SharedPreferenceHelper(preferences, editor);
 
@@ -399,6 +404,7 @@ public class ControllerCompositionRoot {
         return new CreateTicketController(
                 getScreensNavigator(),
                 getSaveTicketUseCase(),
+                getDeleteTicketUseCase(),
                 getDialogsManager(),
                 getDialogsEventBus()
         );

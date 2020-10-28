@@ -213,4 +213,6 @@ public interface GuestJiniAPI {
     @POST("/guest-jini/task-ticket/get-count-by-status")
     Call<TicketCountDTO> getTicketCountByStatus();
 
+    @POST("/guest-jini/task-ticket/trash")
+    Call<TicketResponse> deleteTicket(@Body Map<String, String> postData);
 }

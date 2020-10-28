@@ -50,10 +50,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="25dp">
+                <RelativeLayout
+                    android:id="@+id/deleteDraftLayout"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content">
 
+                    <ImageView
+                        android:id="@+id/btnDeleteDraft"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:tint="@color/colorRed"
+                        android:contentDescription="@string/back_arrow_icon"
+                        android:src="@drawable/delete_cyan_icon" />
+
+                    <TextView
+                        android:id="@+id/txtDeleteDraftText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginEnd="20dp"
+                        android:letterSpacing="0.1"
+                        android:text="Delete Drafts"
+                        android:textColor="@color/colorGray44"
+                        android:textSize="14sp"
+                        android:layout_toStartOf="@id/btnDeleteDraft"
+                        app:fontFamily="@font/roboto_regular" />
+                </RelativeLayout>
                 <RelativeLayout
                     android:id="@+id/layoutTicketCategory"
                     android:layout_width="match_parent"
+                    android:layout_below="@id/deleteDraftLayout"
                     android:layout_height="wrap_content">
 
                     <TextView

@@ -32,6 +32,10 @@ public class CreateTicketViewMVCImpl
     private final RelativeLayout layoutTicketCategory;
     private final ImageView imgCategorySeparator;
 
+    private final RelativeLayout deleteDraftLayout;
+    private final ImageView btnDeleteDraft;
+
+
     private TicketCategory ticketCategory;
 
     private boolean isDraftEnabled = false;
@@ -43,6 +47,8 @@ public class CreateTicketViewMVCImpl
         setRootView(inflater.inflate(R.layout.layout_support_ticket_create, parent, false));
         txtNarration = findViewById(R.id.txtNarration);
         progressBar = findViewById(R.id.progress);
+        deleteDraftLayout = findViewById(R.id.deleteDraftLayout);
+        btnDeleteDraft = findViewById(R.id.btnDeleteDraft);
         txtTicketCategoryTitle = findViewById(R.id.txtTicketCategoryTitle);
         txtNarrationError = findViewById(R.id.txtNarrationError);
         txtMessageTitle = findViewById(R.id.txtMessageTitle);
@@ -111,6 +117,12 @@ public class CreateTicketViewMVCImpl
             }
         });
 
+        btnDeleteDraft.setOnClickListener(view -> {
+            for (Listener listener : getListeners()) {
+                listener.onDeleteDraftClicked();
+            }
+        });
+
         btnBackToCategory.setOnClickListener(view -> {
             for (Listener listener : getListeners()) {
                 listener.onBackToCategoryClicked();
@@ -155,6 +167,7 @@ public class CreateTicketViewMVCImpl
 
     @Override
     public void showDraftSaved() {
+        deleteDraftLayout.setVisibility(View.VISIBLE);
         Toast.makeText(getContext(),"Ticked saved as draft", Toast.LENGTH_LONG).show();
     }
 }

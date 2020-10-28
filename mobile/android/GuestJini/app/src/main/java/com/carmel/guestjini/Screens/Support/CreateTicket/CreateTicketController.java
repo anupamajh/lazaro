@@ -6,6 +6,7 @@ import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptDialogEvent;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
+import com.carmel.guestjini.Tickets.DeleteTicketUseCase;
 import com.carmel.guestjini.Tickets.SaveTicketUseCase;
 import com.google.gson.GsonBuilder;
 
@@ -13,14 +14,16 @@ import java.io.Serializable;
 
 public class CreateTicketController
         implements CreateTicketViewMVC.Listener,
+        DeleteTicketUseCase.Listener,
         SaveTicketUseCase.Listener,
         DialogsEventBus.Listener {
     private enum ScreenState {
-        IDLE, TICKET_SAVED, TICKET_SAVE_FAILED
+        IDLE, TICKET_SAVED, TICKET_SAVE_FAILED, TICKET_DELETED, TICKET_DELETE_FAILED
     }
 
     private final ScreensNavigator screensNavigator;
     private final SaveTicketUseCase saveTicketUseCase;
+    private final DeleteTicketUseCase deleteTicketUseCase;
     private final DialogsManager dialogsManager;
     private final DialogsEventBus dialogsEventBus;
     private TicketCategory parentTicketCategory = null;
@@ -40,6 +43,7 @@ public class CreateTicketController
             (
                     ScreensNavigator screensNavigator,
                     SaveTicketUseCase saveTicketUseCase,
+                    DeleteTicketUseCase deleteTicketUseCase,
                     DialogsManager dialogsManager,
                     DialogsEventBus dialogsEventBus
             ) {
@@ -48,6 +52,7 @@ public class CreateTicketController
         this.dialogsManager = dialogsManager;
         this.dialogsEventBus = dialogsEventBus;
         this.draftTicketId = "";
+        this.deleteTicketUseCase = deleteTicketUseCase;
     }
 
     public void onStart(String ticketCategoryData) {
@@ -55,12 +60,14 @@ public class CreateTicketController
         viewMVC.registerListener(this);
         saveTicketUseCase.registerListener(this);
         viewMVC.bindTicketCategoryData(parentTicketCategory);
+        deleteTicketUseCase.registerListener(this);
         this.draftTicketId = "";
     }
 
     public void onStop() {
         viewMVC.unregisterListener(this);
         saveTicketUseCase.unregisterListener(this);
+        deleteTicketUseCase.unregisterListener(this);
     }
 
     public void bindView(CreateTicketViewMVC createTicketViewMVC) {
@@ -142,19 +149,17 @@ public class CreateTicketController
     public void onTicketSaved(Ticket ticket) {
         viewMVC.hideProgressIndication();
         this.draftTicketId = ticket.getId();
-        if(this.saveStatus != 0) {
+        if (this.saveStatus != 0) {
             screensNavigator.toTicketList(this.saveStatus);
-        }else {
+        } else {
             viewMVC.showDraftSaved();
         }
-
     }
 
     @Override
     public void onTicketSaveFailed() {
         viewMVC.hideProgressIndication();
         dialogsManager.showUseCaseFailedDialog("Save Ticket", null);
-
     }
 
     @Override
@@ -185,4 +190,22 @@ public class CreateTicketController
         }
     }
 
+    @Override
+    public void onDeleteDraftClicked() {
+        if (!draftTicketId.equals("")) {
+            viewMVC.showProgressIndication();
+            deleteTicketUseCase.deleteTicketAndNotify(draftTicketId);
+        }
+    }
+
+    @Override
+    public void onTicketDeleted(Ticket ticket) {
+        screensNavigator.toSupportHome();
+    }
+
+    @Override
+    public void onTicketDeleteFailed() {
+        viewMVC.hideProgressIndication();
+        dialogsManager.showNetworkFailedInfoDialog(null, "Delete Ticket");
+    }
 }

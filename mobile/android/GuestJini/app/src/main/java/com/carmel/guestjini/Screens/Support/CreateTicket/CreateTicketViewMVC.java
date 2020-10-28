@@ -11,6 +11,8 @@ public interface CreateTicketViewMVC extends ObservableViewMvc<CreateTicketViewM
 
         void onBackToCategoryClicked();
 
+        void onDeleteDraftClicked();
+
         void onBackClicked();
     }
 
