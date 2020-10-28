@@ -13,6 +13,8 @@ import com.carmel.guestjini.Networking.KnowledgeBase.KBReview;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBReviewResponse;
 import com.carmel.guestjini.Networking.Tickets.TaskNote;
 import com.carmel.guestjini.Networking.Tickets.TaskNotesResponse;
+import com.carmel.guestjini.Networking.Tickets.TicketCategoryResponse;
+import com.carmel.guestjini.Networking.Tickets.TicketCountDTO;
 import com.carmel.guestjini.Networking.Tickets.TicketRequest;
 import com.carmel.guestjini.Networking.Tickets.TicketResponse;
 import com.carmel.guestjini.Networking.Users.AccessToken;
@@ -83,8 +85,8 @@ public interface GuestJiniAPI {
             @Body TicketRequest ticketRequest
     );
 
-    @POST("/guest-jini/task-ticket/get-all")
-    Call<TicketResponse> getTicketList();
+    @POST("/guest-jini/task-ticket/get-account-tickets-by-status")
+    Call<TicketResponse> getTicketList(@Body Map<String, String> requestData);
 
     @POST("/guest-jini/task-ticket/get")
     Call<TicketResponse> getTicketById(
@@ -202,5 +204,13 @@ public interface GuestJiniAPI {
     Call<GroupConversationResponse> saveGroupConversation(
             @Body Map<String, String> postData
     );
+
+    @POST("/guest-jini/task-ticket-categories/get-task-categories-by-parent-id")
+    Call<TicketCategoryResponse> getTicketCategoriesByParent(
+            @Body Map<String, String> postData
+    );
+
+    @POST("/guest-jini/task-ticket/get-count-by-status")
+    Call<TicketCountDTO> getTicketCountByStatus();
 
 }

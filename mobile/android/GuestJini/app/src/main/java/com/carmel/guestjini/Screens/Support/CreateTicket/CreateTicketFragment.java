@@ -10,13 +10,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
+import com.carmel.guestjini.Screens.Support.TicketCategory.TicketCategoryListFragment;
 
 public class CreateTicketFragment extends BaseFragment {
 
     private static final String SAVED_STATE_CREATE_TICKET_FRAGMENT = "SAVED_STATE_CREATE_TICKET_FRAGMENT";
+    private static final String ARG_TICKET_CATEGORY_DATA = "ARG_TICKET_CATEGORY_DATA";
 
-    public static Fragment createFragment() {
-        return new CreateTicketFragment();
+    public static Fragment createFragment(String ticketCategoryData) {
+        Bundle args = new Bundle();
+        args.putString(ARG_TICKET_CATEGORY_DATA, ticketCategoryData);
+        CreateTicketFragment fragment = new CreateTicketFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     private CreateTicketController createTicketController;
@@ -44,7 +50,7 @@ public class CreateTicketFragment extends BaseFragment {
     @Override
     public void onStart() {
         super.onStart();
-        createTicketController.onStart();
+        createTicketController.onStart(getTicketCategoryData());
     }
 
     @Override
@@ -57,5 +63,9 @@ public class CreateTicketFragment extends BaseFragment {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable(SAVED_STATE_CREATE_TICKET_FRAGMENT, createTicketController.getSavedState());
+    }
+
+    private String getTicketCategoryData() {
+        return getArguments().getString(ARG_TICKET_CATEGORY_DATA);
     }
 }

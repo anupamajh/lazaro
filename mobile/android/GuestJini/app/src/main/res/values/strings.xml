@@ -70,7 +70,7 @@
     <string name="alert_title">Alert Dailog Title</string>
 
     <!--    Support Screens-->
-    <string name="help_title">We’re here to help you</string>
+    <string name="help_title">Help &amp; Support</string>
     <string name="find_help">FIND HELP</string>
     <string name="search">Search..</string>
     <string name="Popular_Searches">Popular Searches</string>

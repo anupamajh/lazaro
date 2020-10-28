@@ -26,6 +26,7 @@ import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketFragment;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailFragment;
 import com.carmel.guestjini.Screens.Support.KBList.KBListFragment;
 import com.carmel.guestjini.Screens.Support.SupportHome.SupportHomeFragment;
+import com.carmel.guestjini.Screens.Support.TicketCategory.TicketCategoryListFragment;
 import com.carmel.guestjini.Screens.Support.TicketDetail.TicketDetailsFragment;
 import com.carmel.guestjini.Screens.Support.TicketList.TicketListFragment;
 import com.carmel.guestjini.Screens.Welcome.WelcomeFragment;
@@ -83,12 +84,12 @@ public class ScreensNavigator {
         mFragmentFrameHelper.replaceFragment(KBListFragment.createFragment(""));
     }
 
-    public void toCreateTicket() {
-        mFragmentFrameHelper.replaceFragment(CreateTicketFragment.createFragment());
+    public void toCreateTicket(String ticketCategoryData) {
+        mFragmentFrameHelper.replaceFragment(CreateTicketFragment.createFragment(ticketCategoryData));
     }
 
-    public void toTicketList() {
-        mFragmentFrameHelper.replaceFragment(TicketListFragment.createFragment());
+    public void toTicketList(int ticketStatus) {
+        mFragmentFrameHelper.replaceFragment(TicketListFragment.createFragment(ticketStatus));
     }
 
     public void toTicketDetails(String ticketId) {
@@ -188,4 +189,7 @@ public class ScreensNavigator {
         mFragmentFrameHelper.replaceFragment(GroupConversationFragment.createFragment(groupId, groupType));
     }
 
+    public void toTicketCategoryList(String parentId, String ticketCategoryData) {
+        mFragmentFrameHelper.replaceFragment(TicketCategoryListFragment.createFragment(parentId, ticketCategoryData));
+    }
 }

@@ -63,9 +63,12 @@ import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketController;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailController;
 import com.carmel.guestjini.Screens.Support.KBList.KBListController;
 import com.carmel.guestjini.Screens.Support.SupportHome.SupportHomeController;
+import com.carmel.guestjini.Screens.Support.TicketCategory.TicketCategoryListController;
 import com.carmel.guestjini.Screens.Support.TicketDetail.TicketDetailsController;
 import com.carmel.guestjini.Screens.Support.TicketList.TicketListController;
 import com.carmel.guestjini.Screens.Welcome.WelcomeController;
+import com.carmel.guestjini.TicketCategory.FetchTicketCategoryByParentIdUseCase;
+import com.carmel.guestjini.Tickets.FetchTicketCountUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketListUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketTaskNoteListUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketUseCase;
@@ -312,6 +315,14 @@ public class ControllerCompositionRoot {
         return new SubscribeToGroupUseCase(getAuthenticatedGuestJiniAPI());
     }
 
+    private FetchTicketCategoryByParentIdUseCase getFetchTicketCategoryByParentIdUseCase() {
+        return new FetchTicketCategoryByParentIdUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private FetchTicketCountUseCase getFetchTicketCountUseCase() {
+        return new FetchTicketCountUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
     public SharedPreferenceHelper getSharedPreferenceHelper() {
         return new SharedPreferenceHelper(preferences, editor);
 
@@ -342,7 +353,11 @@ public class ControllerCompositionRoot {
 
     public SupportHomeController getSupportHomeController() {
         return new SupportHomeController(
-                getScreensNavigator()
+                getScreensNavigator(),
+                getFetchTicketCategoryByParentIdUseCase(),
+                getFetchTicketCountUseCase(),
+                getDialogsManager(),
+                getDialogsEventBus()
         );
     }
 
@@ -558,6 +573,15 @@ public class ControllerCompositionRoot {
                 getAppAccessRequestUseCase(),
                 getScreensNavigator(),
                 getDialogsManager()
+        );
+    }
+
+    public TicketCategoryListController getTicketCategoryListController() {
+        return new TicketCategoryListController(
+                getFetchTicketCategoryByParentIdUseCase(),
+                getScreensNavigator(),
+                getDialogsManager(),
+                getDialogsEventBus()
         );
     }
 }

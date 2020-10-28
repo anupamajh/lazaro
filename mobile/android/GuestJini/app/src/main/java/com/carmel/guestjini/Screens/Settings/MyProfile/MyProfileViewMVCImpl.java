@@ -144,11 +144,11 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    btnProfileToggle.setImageResource(R.drawable.toggle_on_icon);
+                    btnProfileToggle.setImageResource(R.drawable.ic_toggle_btn_on);
                     isVisible = true;
                 } else {
                     flag = true;
-                    btnProfileToggle.setImageResource(R.drawable.toggle_off_icon);
+                    btnProfileToggle.setImageResource(R.drawable.ic_toggle_btn_off);
                     isVisible = false;
                 }
                 if (!isLoading) {
@@ -167,11 +167,11 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    btnGenderToggle.setImageResource(R.drawable.toggle_on_icon);
+                    btnGenderToggle.setImageResource(R.drawable.ic_toggle_btn_on);
                     isVisible = true;
                 } else {
                     flag = true;
-                    btnGenderToggle.setImageResource(R.drawable.toggle_off_icon);
+                    btnGenderToggle.setImageResource(R.drawable.ic_toggle_btn_off);
                     isVisible = false;
                 }
                 if (!isLoading) {
@@ -190,11 +190,11 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    btnAgeToggle.setImageResource(R.drawable.toggle_on_icon);
+                    btnAgeToggle.setImageResource(R.drawable.ic_toggle_btn_on);
                     isVisible = true;
                 } else {
                     flag = true;
-                    btnAgeToggle.setImageResource(R.drawable.toggle_off_icon);
+                    btnAgeToggle.setImageResource(R.drawable.ic_toggle_btn_off);
                     isVisible = false;
                 }
                 if (!isLoading) {
@@ -213,11 +213,11 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    btnMobileNumberToggle.setImageResource(R.drawable.toggle_on_icon);
+                    btnMobileNumberToggle.setImageResource(R.drawable.ic_toggle_btn_on);
                     isVisible = true;
                 } else {
                     flag = true;
-                    btnMobileNumberToggle.setImageResource(R.drawable.toggle_off_icon);
+                    btnMobileNumberToggle.setImageResource(R.drawable.ic_toggle_btn_off);
                     isVisible = false;
                 }
                 if (!isLoading) {
@@ -236,11 +236,11 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    btnEmailToggle.setImageResource(R.drawable.toggle_on_icon);
+                    btnEmailToggle.setImageResource(R.drawable.ic_toggle_btn_on);
                     isVisible = true;
                 } else {
                     flag = true;
-                    btnEmailToggle.setImageResource(R.drawable.toggle_off_icon);
+                    btnEmailToggle.setImageResource(R.drawable.ic_toggle_btn_off);
                     isVisible = false;
                 }
                 if (!isLoading) {
@@ -259,11 +259,11 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    btnPlaceOfOriginToggle.setImageResource(R.drawable.toggle_on_icon);
+                    btnPlaceOfOriginToggle.setImageResource(R.drawable.ic_toggle_btn_on);
                     isVisible = true;
                 } else {
                     flag = true;
-                    btnPlaceOfOriginToggle.setImageResource(R.drawable.toggle_off_icon);
+                    btnPlaceOfOriginToggle.setImageResource(R.drawable.ic_toggle_btn_off);
                     isVisible = false;
                 }
                 if (!isLoading) {

@@ -1,9 +1,12 @@
-package com.carmel.guestjini.Tickets;
+package com.carmel.guestjini.TicketCategory;
 
 import com.carmel.guestjini.Common.BaseObservable;
 import com.carmel.guestjini.Networking.GuestJiniAPI;
 import com.carmel.guestjini.Networking.Tickets.Ticket;
+import com.carmel.guestjini.Networking.Tickets.TicketCategory;
+import com.carmel.guestjini.Networking.Tickets.TicketCategoryResponse;
 import com.carmel.guestjini.Networking.Tickets.TicketResponse;
+import com.carmel.guestjini.Tickets.FetchTicketListUseCase;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,31 +16,30 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FetchTicketListUseCase extends BaseObservable<FetchTicketListUseCase.Listener> {
-
+public class FetchTicketCategoryByParentIdUseCase extends BaseObservable<FetchTicketCategoryByParentIdUseCase.Listener> {
     public interface Listener {
-        void onTicketListFetched(List<Ticket> ticketList);
+        void onTicketCategoryListFetched(List<TicketCategory> ticketCategoryList);
 
-        void onTicketListFetchFailed();
+        void onTicketCategoryListFetchFailed();
 
         void onNetworkFailed();
     }
 
     private final GuestJiniAPI guestJiniAPI;
 
-    public FetchTicketListUseCase(GuestJiniAPI guestJiniAPI) {
+    public FetchTicketCategoryByParentIdUseCase(GuestJiniAPI guestJiniAPI) {
         this.guestJiniAPI = guestJiniAPI;
     }
 
-    public void fetchTicketListAndNotify(int ticketStatus) {
+    public void fetchTicketTicketCategoryListAndNotify(String parentId) {
         Map<String, String> postData = new HashMap<>();
-        postData.put("ticket_status", String.valueOf(ticketStatus));
-        this.guestJiniAPI.getTicketList(postData).enqueue(new Callback<TicketResponse>() {
+        postData.put("parentId", parentId);
+        this.guestJiniAPI.getTicketCategoriesByParent(postData).enqueue(new Callback<TicketCategoryResponse>() {
             @Override
-            public void onResponse(Call<TicketResponse> call, Response<TicketResponse> response) {
+            public void onResponse(Call<TicketCategoryResponse> call, Response<TicketCategoryResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body().isSuccess()) {
-                        notifySuccess(response.body().getTaskTicketList());
+                        notifySuccess(response.body().getTaskTicketCategoriesList());
                     } else {
                         notifyFailure();
                     }
@@ -47,7 +49,7 @@ public class FetchTicketListUseCase extends BaseObservable<FetchTicketListUseCas
             }
 
             @Override
-            public void onFailure(Call<TicketResponse> call, Throwable t) {
+            public void onFailure(Call<TicketCategoryResponse> call, Throwable t) {
                 notifyNetworkFailure();
             }
         });
@@ -61,13 +63,13 @@ public class FetchTicketListUseCase extends BaseObservable<FetchTicketListUseCas
 
     private void notifyFailure() {
         for (Listener listener : getListeners()) {
-            listener.onTicketListFetchFailed();
+            listener.onTicketCategoryListFetchFailed();
         }
     }
 
-    private void notifySuccess(List<Ticket> ticketList) {
+    private void notifySuccess(List<TicketCategory> ticketCategoryList) {
         for (Listener listener : getListeners()) {
-            listener.onTicketListFetched(ticketList);
+            listener.onTicketCategoryListFetched(ticketCategoryList);
         }
     }
 }

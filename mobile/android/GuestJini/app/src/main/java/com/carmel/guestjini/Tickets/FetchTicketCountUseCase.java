@@ -3,41 +3,37 @@ package com.carmel.guestjini.Tickets;
 import com.carmel.guestjini.Common.BaseObservable;
 import com.carmel.guestjini.Networking.GuestJiniAPI;
 import com.carmel.guestjini.Networking.Tickets.Ticket;
+import com.carmel.guestjini.Networking.Tickets.TicketCountDTO;
 import com.carmel.guestjini.Networking.Tickets.TicketResponse;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FetchTicketListUseCase extends BaseObservable<FetchTicketListUseCase.Listener> {
-
+public class FetchTicketCountUseCase  extends BaseObservable<FetchTicketCountUseCase.Listener> {
     public interface Listener {
-        void onTicketListFetched(List<Ticket> ticketList);
+        void onTicketCountFetched(TicketCountDTO ticketCountDTO);
 
-        void onTicketListFetchFailed();
+        void onTicketCountFetchFailed();
 
         void onNetworkFailed();
     }
 
     private final GuestJiniAPI guestJiniAPI;
 
-    public FetchTicketListUseCase(GuestJiniAPI guestJiniAPI) {
+    public FetchTicketCountUseCase(GuestJiniAPI guestJiniAPI) {
         this.guestJiniAPI = guestJiniAPI;
     }
 
-    public void fetchTicketListAndNotify(int ticketStatus) {
-        Map<String, String> postData = new HashMap<>();
-        postData.put("ticket_status", String.valueOf(ticketStatus));
-        this.guestJiniAPI.getTicketList(postData).enqueue(new Callback<TicketResponse>() {
+    public void fetchTicketCountAndNotify() {
+        this.guestJiniAPI.getTicketCountByStatus().enqueue(new Callback<TicketCountDTO>() {
             @Override
-            public void onResponse(Call<TicketResponse> call, Response<TicketResponse> response) {
+            public void onResponse(Call<TicketCountDTO> call, Response<TicketCountDTO> response) {
                 if (response.isSuccessful()) {
                     if (response.body().isSuccess()) {
-                        notifySuccess(response.body().getTaskTicketList());
+                        notifySuccess(response.body());
                     } else {
                         notifyFailure();
                     }
@@ -47,7 +43,7 @@ public class FetchTicketListUseCase extends BaseObservable<FetchTicketListUseCas
             }
 
             @Override
-            public void onFailure(Call<TicketResponse> call, Throwable t) {
+            public void onFailure(Call<TicketCountDTO> call, Throwable t) {
                 notifyNetworkFailure();
             }
         });
@@ -61,13 +57,13 @@ public class FetchTicketListUseCase extends BaseObservable<FetchTicketListUseCas
 
     private void notifyFailure() {
         for (Listener listener : getListeners()) {
-            listener.onTicketListFetchFailed();
+            listener.onTicketCountFetchFailed();
         }
     }
 
-    private void notifySuccess(List<Ticket> ticketList) {
+    private void notifySuccess(TicketCountDTO ticketCountDTO) {
         for (Listener listener : getListeners()) {
-            listener.onTicketListFetched(ticketList);
+            listener.onTicketCountFetched(ticketCountDTO);
         }
     }
 }

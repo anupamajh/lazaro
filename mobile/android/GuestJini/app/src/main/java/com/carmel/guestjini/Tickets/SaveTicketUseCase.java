@@ -28,10 +28,12 @@ public class SaveTicketUseCase extends BaseObservable<SaveTicketUseCase.Listener
         this.guestJiniAPI = guestJiniAPI;
     }
 
-    public void saveTicketAndNotify(String ticketTitle, String ticketNarration) {
+    public void saveTicketAndNotify(String ticketTitle, String ticketNarration, String ticketCategoryId, int saveStatus) {
         Ticket ticket = new Ticket();
+        ticket.setTicketCategoryId(ticketCategoryId);
         ticket.setTicketTitle(ticketTitle);
         ticket.setTicketNarration(ticketNarration);
+        ticket.setTicketStatus(saveStatus);
         TicketRequest ticketRequest = new TicketRequest();
         ticketRequest.setTaskTicket(ticket);
         ticketRequest.setTaskAttachmentList(new ArrayList<>());

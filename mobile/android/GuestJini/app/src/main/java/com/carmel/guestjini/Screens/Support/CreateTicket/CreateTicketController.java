@@ -1,11 +1,13 @@
 package com.carmel.guestjini.Screens.Support.CreateTicket;
 
 import com.carmel.guestjini.Networking.Tickets.Ticket;
+import com.carmel.guestjini.Networking.Tickets.TicketCategory;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptDialogEvent;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
 import com.carmel.guestjini.Tickets.SaveTicketUseCase;
+import com.google.gson.GsonBuilder;
 
 import java.io.Serializable;
 
@@ -21,12 +23,17 @@ public class CreateTicketController
     private final SaveTicketUseCase saveTicketUseCase;
     private final DialogsManager dialogsManager;
     private final DialogsEventBus dialogsEventBus;
+    private TicketCategory parentTicketCategory = null;
 
     private CreateTicketViewMVC viewMVC;
     private ScreenState mScreenState = ScreenState.IDLE;
 
     private String strSubject;
     private String strNarration;
+    private String ticketCategoryId;
+    private int saveStatus = 0;
+
+    private TicketCategory ticketCategory;
 
     public CreateTicketController
             (
@@ -41,9 +48,11 @@ public class CreateTicketController
         this.dialogsEventBus = dialogsEventBus;
     }
 
-    public void onStart() {
+    public void onStart(String ticketCategoryData) {
+        parentTicketCategory = new GsonBuilder().create().fromJson(ticketCategoryData, TicketCategory.class);
         viewMVC.registerListener(this);
         saveTicketUseCase.registerListener(this);
+        viewMVC.bindTicketCategoryData(parentTicketCategory);
     }
 
     public void onStop() {
@@ -67,11 +76,49 @@ public class CreateTicketController
     @Override
     public void onCreateTicketClicked(String subject, String narration) {
         if (viewMVC.isValid()) {
+            viewMVC.showProgressIndication();
+            String ticketCategoryId = "";
+            if (parentTicketCategory != null) {
+                ticketCategoryId = parentTicketCategory.getId();
+                subject = parentTicketCategory.getCategoryDescription();
+                if (parentTicketCategory.getChild() != null) {
+                    ticketCategoryId = parentTicketCategory.getChild().getId();
+                    narration = parentTicketCategory.getChild().getCategoryDescription() + "\n" + narration;
+                }
+            }
+            this.ticketCategoryId = ticketCategoryId;
             this.strSubject = subject;
             this.strNarration = narration;
-            viewMVC.showProgressIndication();
-            saveTicketUseCase.saveTicketAndNotify(subject, narration);
+            this.saveStatus = 3;
+            saveTicketUseCase.saveTicketAndNotify(subject, narration, ticketCategoryId, saveStatus);
         }
+    }
+
+    @Override
+    public void onSaveDraftClicked(String subject, String narration) {
+        if (viewMVC.isValid()) {
+            viewMVC.showProgressIndication();
+            String ticketCategoryId = "";
+            if (parentTicketCategory != null) {
+                ticketCategoryId = parentTicketCategory.getId();
+                subject = parentTicketCategory.getCategoryDescription();
+                if (parentTicketCategory.getChild() != null) {
+                    ticketCategoryId = parentTicketCategory.getChild().getId();
+                    narration = parentTicketCategory.getChild().getCategoryDescription() + "\n" + narration;
+                }
+            }
+            this.ticketCategoryId = ticketCategoryId;
+            this.strSubject = subject;
+            this.strNarration = narration;
+            this.saveStatus = 0;
+            saveTicketUseCase.saveTicketAndNotify(subject, narration, ticketCategoryId, saveStatus);
+        }
+    }
+
+    @Override
+    public void onBackToCategoryClicked() {
+        String ticketCategoryData = new GsonBuilder().create().toJson(parentTicketCategory, TicketCategory.class);
+        screensNavigator.toTicketCategoryList(parentTicketCategory.getId(), ticketCategoryData);
     }
 
     @Override
@@ -82,7 +129,7 @@ public class CreateTicketController
     @Override
     public void onTicketSaved(Ticket ticket) {
         viewMVC.hideProgressIndication();
-        screensNavigator.toTicketList();
+        screensNavigator.toTicketList(this.saveStatus);
     }
 
     @Override
@@ -103,7 +150,7 @@ public class CreateTicketController
         if (event instanceof PromptDialogEvent) {
             switch (((PromptDialogEvent) event).getClickedButton()) {
                 case POSITIVE:
-                    saveTicketUseCase.saveTicketAndNotify(strSubject, strNarration);
+                    saveTicketUseCase.saveTicketAndNotify(strSubject, strNarration, ticketCategoryId, saveStatus);
                     break;
                 case NEGATIVE:
                     mScreenState = ScreenState.IDLE;

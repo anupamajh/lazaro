@@ -30,6 +30,8 @@ public class TicketListController implements
     private TicketListViewMVC viewMVC;
     private ScreenState mScreenState = ScreenState.IDLE;
 
+    private int ticketStatus;
+
     public TicketListController
             (
                     FetchTicketListUseCase fetchTicketListUseCase,
@@ -47,7 +49,8 @@ public class TicketListController implements
         this.viewMVC = ticketListViewMVC;
     }
 
-    public void onStart() {
+    public void onStart(int ticketStatus) {
+        this.ticketStatus = ticketStatus;
         viewMVC.registerListener(this);
         fetchTicketListUseCase.registerListener(this);
         dialogsEventBus.registerListener(this);
@@ -74,7 +77,7 @@ public class TicketListController implements
     private void fetchTicketListAndNotify() {
         mScreenState = ScreenState.FETCHING_TICKET_LIST;
         viewMVC.showProgressIndication();
-        fetchTicketListUseCase.fetchTicketListAndNotify();
+        fetchTicketListUseCase.fetchTicketListAndNotify(ticketStatus);
     }
 
     @Override
@@ -116,7 +119,7 @@ public class TicketListController implements
 
     @Override
     public void onCreateTicketClicked() {
-        screensNavigator.toCreateTicket();
+        //screensNavigator.toCreateTicket(ticketCategoryData);
     }
 
     @Override

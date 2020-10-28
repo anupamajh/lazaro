@@ -10,11 +10,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
+import com.carmel.guestjini.Screens.Support.TicketCategory.TicketCategoryListFragment;
 
 public class TicketListFragment
         extends BaseFragment {
-    public static Fragment createFragment() {
-        return new TicketListFragment();
+
+    private static final String ARG_TICKET_STATUS = "ARG_TICKET_STATUS";
+
+    public static Fragment createFragment(int ticketStatus) {
+        Bundle args = new Bundle();
+        args.putInt(ARG_TICKET_STATUS, ticketStatus);
+        TicketListFragment fragment = new TicketListFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     private static final String SAVED_STATE_TICKET_LIST_FRAGMENT = "SAVED_STATE_TICKET_LIST_FRAGMENT";
@@ -45,7 +53,7 @@ public class TicketListFragment
     @Override
     public void onStart() {
         super.onStart();
-        ticketListController.onStart();
+        ticketListController.onStart(getTicketStatus());
     }
 
     @Override
@@ -60,4 +68,7 @@ public class TicketListFragment
         outState.putSerializable(SAVED_STATE_TICKET_LIST_FRAGMENT, ticketListController.getSavedState());
     }
 
+    private int getTicketStatus() {
+        return getArguments().getInt(ARG_TICKET_STATUS);
+    }
 }

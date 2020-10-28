@@ -1,34 +1,74 @@
 package com.carmel.guestjini.Screens.Support.SupportHome;
 
+import com.carmel.guestjini.Networking.Tickets.TicketCategory;
+import com.carmel.guestjini.Networking.Tickets.TicketCountDTO;
+import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
+import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
+import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptDialogEvent;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
+import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketController;
+import com.carmel.guestjini.TicketCategory.FetchTicketCategoryByParentIdUseCase;
+import com.carmel.guestjini.Tickets.FetchTicketCountUseCase;
+import com.google.gson.GsonBuilder;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class SupportHomeController implements
-        SupportHomeViewMVC.Listener {
+        SupportHomeViewMVC.Listener,
+        FetchTicketCategoryByParentIdUseCase.Listener ,
+        FetchTicketCountUseCase.Listener,
+        DialogsEventBus.Listener
+{
 
     private enum ScreenState {
-        IDLE, NETWORK_ERROR
+        IDLE, NETWORK_ERROR, FETCHING_TICKET_CATEGORY_LIST, TICKET_CATEGORY_LIST_FETCHED, TICKET_CATEGORY_LIST_FETCH_FAILED
     }
 
+    private final FetchTicketCategoryByParentIdUseCase fetchTicketCategoryByParentIdUseCase;
+    private final FetchTicketCountUseCase fetchTicketCountUseCase;
     private final ScreensNavigator mScreensNavigator;
+    private final DialogsManager dialogsManager;
+    private final DialogsEventBus dialogsEventBus;
 
     private SupportHomeViewMVC viewMVC;
     private ScreenState mScreenState = ScreenState.IDLE;
 
 
     public SupportHomeController(
-            ScreensNavigator mScreensNavigator
+            ScreensNavigator mScreensNavigator,
+            FetchTicketCategoryByParentIdUseCase fetchTicketCategoryByParentIdUseCase,
+            FetchTicketCountUseCase fetchTicketCountUseCase,
+            DialogsManager dialogsManager,
+            DialogsEventBus dialogsEventBus
     ) {
         this.mScreensNavigator = mScreensNavigator;
+        this.fetchTicketCategoryByParentIdUseCase = fetchTicketCategoryByParentIdUseCase;
+        this.fetchTicketCountUseCase = fetchTicketCountUseCase;
+        this.dialogsManager = dialogsManager;
+        this.dialogsEventBus = dialogsEventBus;
     }
 
     public void onStart() {
         viewMVC.registerListener(this);
+        fetchTicketCategoryByParentIdUseCase.registerListener(this);
+        fetchTicketCountUseCase.registerListener(this);
+        if (mScreenState != ScreenState.NETWORK_ERROR) {
+            fetchTicketCountUseCase.fetchTicketCountAndNotify();
+        }
     }
 
     public void onStop() {
         viewMVC.unregisterListener(this);
+        fetchTicketCategoryByParentIdUseCase.unregisterListener(this);
+        fetchTicketCountUseCase.unregisterListener(this);
+
+    }
+
+    private void fetchTicketCategoryListListAndNotify() {
+        mScreenState = ScreenState.FETCHING_TICKET_CATEGORY_LIST;
+        viewMVC.showProgressIndication();
+        fetchTicketCategoryByParentIdUseCase.fetchTicketTicketCategoryListAndNotify(null);
     }
 
     public void bindView(SupportHomeViewMVC supportHomeViewMVC) {
@@ -46,7 +86,6 @@ public class SupportHomeController implements
 
     public static class SavedState implements Serializable {
         private final ScreenState mScreenState;
-
         public SavedState(ScreenState screenState) {
             mScreenState = screenState;
         }
@@ -65,11 +104,95 @@ public class SupportHomeController implements
 
     @Override
     public void onCreateTicketClicked() {
-        mScreensNavigator.toCreateTicket();
+        //mScreensNavigator.toCreateTicket(ticketCategoryData);
     }
 
     @Override
     public void onGotoTicketsClicked() {
-        mScreensNavigator.toTicketList();
+//        mScreensNavigator.toTicketList();
+    }
+
+    @Override
+    public void onActiveTicketClicked() {
+        mScreensNavigator.toTicketList(3);
+    }
+
+    @Override
+    public void onDraftTicketClicked() {
+        mScreensNavigator.toTicketList(0);
+    }
+
+    @Override
+    public void onArchivedTicketsClicked() {
+        mScreensNavigator.toTicketList(2);
+    }
+
+    @Override
+    public void onTicketCategoryItemClicked(TicketCategory ticketCategory) {
+        String ticketCategoryData = new GsonBuilder().create().toJson(ticketCategory, TicketCategory.class);
+        mScreensNavigator.toTicketCategoryList(ticketCategory.getId(), ticketCategoryData);
+    }
+
+    @Override
+    public void onTicketCategoryListFetched(List<TicketCategory> ticketCategoryList) {
+        viewMVC.hideProgressIndication();
+        viewMVC.bindTicketCategories(ticketCategoryList);
+    }
+
+    @Override
+    public void onTicketCategoryListFetchFailed() {
+        viewMVC.hideProgressIndication();
+        dialogsManager.showUseCaseFailedDialog("Ticket Category", null);
+    }
+
+    @Override
+    public void onNetworkFailed() {
+        viewMVC.hideProgressIndication();
+        dialogsManager.showNetworkFailedInfoDialog(null, "Ticket Category");
+    }
+
+    @Override
+    public void onTicketCountFetched(TicketCountDTO ticketCountDTO) {
+        viewMVC.hideProgressIndication();
+        if(ticketCountDTO.isSuccess()){
+            if(ticketCountDTO.getActiveTicketCount() > 0){
+                viewMVC.showActiveTicketLayout(true);
+            }else{
+                viewMVC.showActiveTicketLayout(false);
+            }
+
+            if(ticketCountDTO.getDraftTicketCount() > 0){
+                viewMVC.showDraftTicketLayout(true);
+            }else{
+                viewMVC.showDraftTicketLayout(false);
+            }
+
+            if(ticketCountDTO.getArchiveTicketCount() > 0){
+                viewMVC.showArchiveTicketLayout(true);
+            }else{
+                viewMVC.showArchiveTicketLayout(false);
+            }
+        }
+        fetchTicketCategoryListListAndNotify();
+    }
+
+    @Override
+    public void onTicketCountFetchFailed() {
+        viewMVC.hideProgressIndication();
+        fetchTicketCategoryListListAndNotify();
+    }
+
+    @Override
+    public void onDialogEvent(Object event) {
+        if (event instanceof PromptDialogEvent) {
+            switch (((PromptDialogEvent) event).getClickedButton()) {
+                case POSITIVE:
+                    fetchTicketCategoryListListAndNotify();
+                    break;
+                case NEGATIVE:
+                    mScreenState = ScreenState.IDLE;
+                    break;
+            }
+        }
     }
 }
