@@ -1,6 +1,7 @@
 package com.carmel.guestjini.Screens.Support.TicketCategory.TicketCategoryItem;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -27,7 +28,14 @@ public class TicketCategoryItemViewMVCImpl
         setRootView(inflater.inflate(R.layout.layout_support_ticket_category_list_item, parent, false));
         txtTicketCategoryName = findViewById(R.id.txtTicketCategoryName);
         btnExploreTicketCategories = findViewById(R.id.btnExploreTicketCategories);
-
+        getRootView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (Listener listener : getListeners()) {
+                    listener.onTicketCategoryItemClicked(ticketCategory);
+                }
+            }
+        });
         btnExploreTicketCategories.setOnClickListener(v -> {
             for (Listener listener : getListeners()) {
                 listener.onTicketCategoryItemClicked(ticketCategory);
