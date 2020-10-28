@@ -3,17 +3,23 @@ package com.carmel.guestjini.service.controller.HelpDesk;
 
 import com.carmel.guestjini.service.common.HelpDesk.TicketStatus;
 import com.carmel.guestjini.service.common.Search.SearchBuilder;
+import com.carmel.guestjini.service.components.MailClient;
 import com.carmel.guestjini.service.components.UserInformation;
 import com.carmel.guestjini.service.config.CarmelConfig;
+import com.carmel.guestjini.service.model.Booking.Guest;
+import com.carmel.guestjini.service.model.DTO.HelpDesk.TicketCountDTO;
 import com.carmel.guestjini.service.model.HelpDesk.TaskAttachment;
 import com.carmel.guestjini.service.model.HelpDesk.TaskTicket;
+import com.carmel.guestjini.service.model.Inventory.InventoryDetail;
 import com.carmel.guestjini.service.model.Principal.UserInfo;
 import com.carmel.guestjini.service.request.HelpDesk.TicketRequest;
 import com.carmel.guestjini.service.request.Search.SearchRequest;
 import com.carmel.guestjini.service.response.HelpDesk.TaskAttachmentResponse;
 import com.carmel.guestjini.service.response.HelpDesk.TaskTicketResponse;
+import com.carmel.guestjini.service.service.Booking.GuestService;
 import com.carmel.guestjini.service.service.HelpDesk.TaskAttachmentService;
 import com.carmel.guestjini.service.service.HelpDesk.TaskTicketService;
+import com.carmel.guestjini.service.service.Inventory.InventoryDetailService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +41,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.*;
+import java.util.stream.Stream;
 
 import static com.carmel.guestjini.service.specification.HelpDesk.TaskTicketSpecification.textInAllColumns;
 
@@ -59,18 +66,27 @@ public class TaskTicketController {
     @Autowired
     EntityManager entityManager;
 
+    @Autowired
+    MailClient mailClient;
+
+    @Autowired
+    GuestService guestService;
+
+    @Autowired
+    InventoryDetailService inventoryDetailService;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public TaskTicketResponse save(@Valid @RequestBody TicketRequest ticketRequest) {
         UserInfo userInfo = userInformation.getUserInfo();
         logger.trace("Entering");
-
+        boolean isNewTicket = false;
         TaskTicketResponse taskTicketResponse = new TaskTicketResponse();
         try {
             TaskTicket taskTicket = ticketRequest.getTaskTicket();
 
             if (taskTicket.getId() == null) {
                 taskTicket.setId("");
+                isNewTicket = true;
             }
             if (taskTicket.getOrgId() == null || taskTicket.getOrgId().isEmpty()) {
                 if (userInfo.getDefaultOrganization() != null)
@@ -103,12 +119,62 @@ public class TaskTicketController {
                 taskTicketResponse.setSuccess(true);
                 taskTicketResponse.setError("");
             }
+
+            if (isNewTicket) {
+                this.setNewTicketEmail(ticketRequest, userInfo);
+            }
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             taskTicketResponse.setSuccess(false);
             taskTicketResponse.setError(ex.getMessage());
         }
         return taskTicketResponse;
+    }
+
+    private boolean setNewTicketEmail(TicketRequest ticketRequest, UserInfo userInfo) {
+        Optional<Guest> optionalGuest = guestService.findByEmail(userInfo.getUserName());
+        String strInventory = "";
+        String strDelim = "";
+        if (optionalGuest.isPresent()) {
+            if (optionalGuest.get().getInventoryId() != null) {
+                Optional<InventoryDetail> optionalInventoryDetail = inventoryDetailService.findByInventoryId(optionalGuest.get().getInventoryId());
+                Optional<InventoryDetail> temp;
+                if (optionalInventoryDetail.isPresent()) {
+                    if (optionalInventoryDetail.get().getPodId() != null) {
+                        strInventory = optionalInventoryDetail.get().getTitle();
+                        strDelim = "->";
+                    }
+                    temp = inventoryDetailService.findByInventoryId(optionalInventoryDetail.get().getRoomId());
+                    if (temp.isPresent()) {
+                        strInventory = temp.get().getTitle() + strDelim + strInventory;
+                        strDelim = "->";
+                    }
+                    temp = inventoryDetailService.findByInventoryId(optionalInventoryDetail.get().getFlatId());
+                    if (temp.isPresent()) {
+                        strInventory = temp.get().getTitle() + strDelim + strInventory;
+                        strDelim = "->";
+                    }
+                    temp = inventoryDetailService.findByInventoryId(optionalInventoryDetail.get().getFloorId());
+                    if (temp.isPresent()) {
+                        strInventory = temp.get().getTitle() + strDelim + strInventory;
+                        strDelim = "->";
+                    }
+                    temp = inventoryDetailService.findByInventoryId(optionalInventoryDetail.get().getBlockId());
+                    if (temp.isPresent()) {
+                        strInventory = temp.get().getTitle() + strDelim + strInventory;
+                        strDelim = "->";
+                    }
+                    temp = inventoryDetailService.findByInventoryId(optionalInventoryDetail.get().getPropertyId());
+                    if (temp.isPresent()) {
+                        strInventory = temp.get().getTitle() + strDelim + strInventory;
+                        strDelim = "->";
+                    }
+
+                }
+            }
+        }
+        mailClient.setTicketEmail(ticketRequest, userInfo, strInventory);
+        return true;
     }
 
     @RequestMapping(value = "/trash", method = RequestMethod.POST)
@@ -236,6 +302,34 @@ public class TaskTicketController {
         return taskTicketResponse;
     }
 
+    @RequestMapping(value = "/get-account-tickets-by-status", method = RequestMethod.POST)
+    public TaskTicketResponse getTicketByStatus(@RequestBody Map<String, String> formData) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        TaskTicketResponse taskTicketResponse = new TaskTicketResponse();
+        try {
+            logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
+            int ticketStatus = formData.get("ticket_status") == null ? 3 : Integer.parseInt(formData.get("ticket_status"));
+            List<TaskTicket> page = taskTicketService.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, userInfo.getId(), ticketStatus);
+            if(page == null){
+                page = new ArrayList<>();
+            }
+            taskTicketResponse.setTotalRecords(page.size());
+            taskTicketResponse.setTaskTicketList(page);
+            taskTicketResponse.setCurrentRecords(taskTicketResponse.getTaskTicketList().size());
+            taskTicketResponse.setSuccess(true);
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            logger.error(ex.getMessage(), ex);
+            taskTicketResponse.setSuccess(false);
+            taskTicketResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return taskTicketResponse;
+    }
+
     @RequestMapping(value = "/search-account-tickets", method = RequestMethod.POST)
     public TaskTicketResponse searchPaginated(@RequestBody Map<String, String> formData) {
         UserInfo userInfo = userInformation.getUserInfo();
@@ -272,6 +366,26 @@ public class TaskTicketController {
     private boolean checkDuplicate(TaskTicket taskTicket) {
         return false;
     }
+
+    @RequestMapping(value = "/get-count-by-status", method = RequestMethod.POST)
+    public TicketCountDTO getTicketCountByStatus() {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        TicketCountDTO ticketCountDTO = new TicketCountDTO();
+        try {
+            ticketCountDTO = taskTicketService.getTicketCountByStatus(userInfo.getId());
+            ticketCountDTO.setSuccess(true);
+
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            ticketCountDTO.setSuccess(false);
+            ticketCountDTO.setError(ex.getMessage());
+        }
+
+        return ticketCountDTO;
+    }
+
 
     @RequestMapping(value = "/change-status", method = RequestMethod.POST)
     public TaskTicketResponse deleteTicketsByGuestId(@RequestBody Map<String, String> formData) {
@@ -322,12 +436,12 @@ public class TaskTicketController {
             );
 
             long totalRecords = SearchBuilder.getTotalRecordCount(
-                   entityManager,
+                    entityManager,
                     criteriaBuilder,
                     criteriaQuery,
                     root
             );
-             TypedQuery<TaskTicket> typedQuery = entityManager.createQuery(criteriaQuery);
+            TypedQuery<TaskTicket> typedQuery = entityManager.createQuery(criteriaQuery);
 
             typedQuery.setFirstResult((searchRequest.getCurrentPage() - 1) * searchRequest.getPageSize());
             typedQuery.setMaxResults(searchRequest.getPageSize());
@@ -337,7 +451,7 @@ public class TaskTicketController {
             taskTicketResponse.setSuccess(true);
             taskTicketResponse.setError("");
             taskTicketResponse.setTaskTicketList(taskTicketList);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             taskTicketResponse.setSuccess(false);
             taskTicketResponse.setError(ex.getMessage());

@@ -14,6 +14,7 @@ public class CarmelConfig {
     private String inventoryServiceURL;
     private String accountsServiceURL;
     private String imageSavePath;
+    private String ticketAgents;
 
     public CarmelConfig(){}
 
@@ -63,5 +64,13 @@ public class CarmelConfig {
 
     public void setBaseUrl(String baseUrl) {
         this.baseUrl = baseUrl;
+    }
+
+    public String getTicketAgents() {
+        return ticketAgents;
+    }
+
+    public void setTicketAgents(String ticketAgents) {
+        this.ticketAgents = ticketAgents;
     }
 }

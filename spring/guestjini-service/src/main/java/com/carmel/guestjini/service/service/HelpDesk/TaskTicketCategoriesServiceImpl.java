@@ -23,16 +23,6 @@ public class TaskTicketCategoriesServiceImpl implements  TaskTicketCategoriesSer
     }
 
     @Override
-    public List<TaskTicketCategories> findAllByTitleAndClientId(String title, String clientId) {
-        return taskTicketCategoriesRepository.findAllByTitleAndClientIdAndIsDeleted(title, clientId, 0);
-    }
-
-    @Override
-    public List<TaskTicketCategories> findAllByTitleAndClientIdAndId(String title, String clientId, String id) {
-        return taskTicketCategoriesRepository.findAllByTitleAndClientIdAndIdAndIsDeleted(title, clientId, id, 0);
-    }
-
-    @Override
     public Optional<TaskTicketCategories> findById(String id) {
         return taskTicketCategoriesRepository.findById(id);
     }
@@ -50,5 +40,20 @@ public class TaskTicketCategoriesServiceImpl implements  TaskTicketCategoriesSer
     @Override
     public Page<TaskTicketCategories> findAll(Specification<TaskTicketCategories> textInAllColumns, Pageable pageable) {
         return taskTicketCategoriesRepository.findAll(textInAllColumns, pageable);
+    }
+
+    @Override
+    public List<TaskTicketCategories> findAllByCategoryDescriptionAndClientIdAndParentId(String categoryDescription, String clientId, String parentId) {
+        return taskTicketCategoriesRepository.findAllByCategoryDescriptionAndClientIdAndParentId(categoryDescription, clientId,parentId);
+    }
+
+    @Override
+    public List<TaskTicketCategories> findAllByCategoryDescriptionAndClientIdAndIdAndParentId(String categoryDescription, String clientId, String id, String parentId) {
+        return taskTicketCategoriesRepository.findAllByCategoryDescriptionAndClientIdAndIdAndParentId(categoryDescription, clientId,id,parentId);
+    }
+
+    @Override
+    public List<TaskTicketCategories> getTaskCategoriesByParentId(String parentId, String clientId) {
+        return taskTicketCategoriesRepository.findAllByClientIdAndIsDeletedAndParentId(clientId, 0, parentId);
     }
 }

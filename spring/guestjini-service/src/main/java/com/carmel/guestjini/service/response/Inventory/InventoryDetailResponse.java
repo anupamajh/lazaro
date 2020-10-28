@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryDetailResponse {
+    private InventoryDetailDTO inventory;
     private InventoryDetailDTO inventoryDetail;
     private List<InventoryDetailDTO> inventoryDetailList;
     private long totalPages;
@@ -32,6 +33,14 @@ public class InventoryDetailResponse {
         inventoryDetailList.forEach(inventoryDetail1 -> {
             this.inventoryDetailList.add(new InventoryDetailDTO(inventoryDetail1));
         });
+    }
+
+    public InventoryDetailDTO getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(InventoryDetailDTO inventory) {
+        this.inventory = inventory;
     }
 
     public long getTotalPages() {

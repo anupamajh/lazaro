@@ -49,7 +49,7 @@ public class TaskTicketCategoriesController {
                 taskTicketCategories.setId("");
             }
             if (taskTicketCategories.getOrgId() == null || taskTicketCategories.getOrgId().isEmpty()) {
-                if(userInfo.getDefaultOrganization() != null) {
+                if (userInfo.getDefaultOrganization() != null) {
                     taskTicketCategories.setOrgId(userInfo.getDefaultOrganization().getId());
                 }
             }
@@ -89,7 +89,7 @@ public class TaskTicketCategoriesController {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
             Optional<TaskTicketCategories> optionalTaskTicketCategories =
                     taskTicketCategoriesService.findById(formData.get("id"));
-            if(optionalTaskTicketCategories.isPresent()){
+            if (optionalTaskTicketCategories.isPresent()) {
                 TaskTicketCategories taskTicketCategories = optionalTaskTicketCategories.get();
                 taskTicketCategories.setIsDeleted(1);
                 taskTicketCategories.setDeletedBy(userInfo.getId());
@@ -97,7 +97,7 @@ public class TaskTicketCategoriesController {
                 taskTicketCategoriesResponse.setSuccess(true);
                 taskTicketCategoriesResponse.setError("");
                 taskTicketCategoriesResponse.setTaskTicketCategories(taskTicketCategoriesService.save(taskTicketCategories));
-            }else{
+            } else {
                 taskTicketCategoriesResponse.setSuccess(false);
                 taskTicketCategoriesResponse.setError("Error occurred while moving Task Ticket Category to Trash!! Please try after sometime");
             }
@@ -118,7 +118,7 @@ public class TaskTicketCategoriesController {
         try {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
             Optional<TaskTicketCategories> optionalTaskTicketCategories = taskTicketCategoriesService.findById(formData.get("id"));
-            if(optionalTaskTicketCategories.isPresent()){
+            if (optionalTaskTicketCategories.isPresent()) {
                 TaskTicketCategories ticketCategories = optionalTaskTicketCategories.get();
                 taskTicketCategoriesResponse.setSuccess(true);
                 taskTicketCategoriesResponse.setError("");
@@ -198,7 +198,7 @@ public class TaskTicketCategoriesController {
             int pageNumber = formData.get("current_page") == null ? 0 : Integer.parseInt(formData.get("current_page"));
             int pageSize = formData.get("page_size") == null ? 10 : Integer.parseInt(formData.get("page_size"));
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("title"));
-            Page<TaskTicketCategories> page = taskTicketCategoriesService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(),0, pageable);
+            Page<TaskTicketCategories> page = taskTicketCategoriesService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(), 0, pageable);
             taskTicketCategoriesResponse.setTotalRecords(page.getTotalElements());
             taskTicketCategoriesResponse.setTotalPages(page.getTotalPages());
             taskTicketCategoriesResponse.setTaskTicketCategoriesList(page.getContent());
@@ -227,9 +227,9 @@ public class TaskTicketCategoriesController {
             String searchText = formData.get("search_text") == null ? null : String.valueOf(formData.get("search_text"));
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("title"));
             Page<TaskTicketCategories> page;
-            if (searchText == null ){
-                page = taskTicketCategoriesService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(),0,pageable);
-            } else  {
+            if (searchText == null) {
+                page = taskTicketCategoriesService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(), 0, pageable);
+            } else {
                 page = taskTicketCategoriesService.findAll(textInAllColumns(searchText, userInfo.getClient().getClientId()), pageable);
             }
 
@@ -248,21 +248,44 @@ public class TaskTicketCategoriesController {
         return taskTicketCategoriesResponse;
     }
 
+    @RequestMapping(value = "/get-task-categories-by-parent-id", method = RequestMethod.POST)
+    public TaskTicketCategoriesResponse getByParentId(@RequestBody Map<String, String> formData) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        TaskTicketCategoriesResponse taskTicketCategoriesResponse = new TaskTicketCategoriesResponse();
+        try {
+            logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
+            String parentId = formData.get("parentId") == null ? null : String.valueOf(formData.get("parentId"));
+            List<TaskTicketCategories> taskTicketCategories = taskTicketCategoriesService.getTaskCategoriesByParentId(parentId, userInfo.getClient().getClientId());
+            taskTicketCategoriesResponse.setTaskTicketCategoriesList(taskTicketCategories);
+            taskTicketCategoriesResponse.setSuccess(true);
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            taskTicketCategoriesResponse.setSuccess(false);
+            taskTicketCategoriesResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return taskTicketCategoriesResponse;
+    }
 
     private boolean checkDuplicate(TaskTicketCategories taskTicketCategories) {
         List<TaskTicketCategories> ticketCategoriesList;
         if (taskTicketCategories.getId() == "") {
             ticketCategoriesList = taskTicketCategoriesService
-                    .findAllByTitleAndClientId(
-                            taskTicketCategories.getTitle(),
-                            taskTicketCategories.getClientId()
+                    .findAllByCategoryDescriptionAndClientIdAndParentId(
+                            taskTicketCategories.getCategoryDescription(),
+                            taskTicketCategories.getClientId(),
+                            taskTicketCategories.getParentId()
                     );
         } else {
             ticketCategoriesList = taskTicketCategoriesService
-                    .findAllByTitleAndClientIdAndId(
-                            taskTicketCategories.getTitle(),
+                    .findAllByCategoryDescriptionAndClientIdAndIdAndParentId(
+                            taskTicketCategories.getCategoryDescription(),
                             taskTicketCategories.getClientId(),
-                            taskTicketCategories.getId()
+                            taskTicketCategories.getId(),
+                            taskTicketCategories.getParentId()
                     );
         }
         if (ticketCategoriesList.size() > 0) {

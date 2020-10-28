@@ -2,10 +2,7 @@ package com.carmel.guestjini.service.controller.Booking;
 
 import com.carmel.guestjini.service.common.Booking.BookingStatus;
 import com.carmel.guestjini.service.common.DateUtil;
-import com.carmel.guestjini.service.components.ApplicationConstantsService;
-import com.carmel.guestjini.service.components.MailClient;
-import com.carmel.guestjini.service.components.UserInformation;
-import com.carmel.guestjini.service.components.UserService;
+import com.carmel.guestjini.service.components.*;
 import com.carmel.guestjini.service.config.CarmelConfig;
 import com.carmel.guestjini.service.model.Accounts.AccountReceipts;
 import com.carmel.guestjini.service.model.Booking.Booking;
@@ -25,6 +22,7 @@ import com.carmel.guestjini.service.service.Booking.BookingService;
 import com.carmel.guestjini.service.service.Inventory.InventoryService;
 import com.carmel.guestjini.service.service.Inventory.PackageService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import gui.ava.html.image.generator.HtmlImageGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +79,9 @@ public class BookingController {
 
     @Autowired
     MailClient mailClient;
+
+    @Autowired
+    AccessCardImageBuilder accessCardImageBuilder;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public BookingResponse save(@Valid @RequestBody Booking booking) {
@@ -790,5 +791,16 @@ public class BookingController {
         mailClient.setGuestSignUpEmail(bookingRequest);
         return true;
     }
+
+    @RequestMapping(value = "/generate-id-card")
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS)
+    public String generateIDCard(){
+        String content = accessCardImageBuilder.buildAccessCardImage();
+        HtmlImageGenerator htmlImageGenerator = new HtmlImageGenerator();
+        htmlImageGenerator.loadHtml(content);
+        htmlImageGenerator.saveAsImage(carmelConfig.getImageSavePath() + "test.png");
+        return content;
+    }
+
 
 }

@@ -102,6 +102,11 @@ public class GuestServiceImpl implements GuestService {
     }
 
     @Override
+    public Optional<Guest> findByPhone(String phone) {
+        return guestRepository.findByPhone(phone);
+    }
+
+    @Override
     public GuestResponse getGuestById(String guestId) throws Exception {
         GuestResponse guestResponse = new GuestResponse();
         try {
@@ -127,7 +132,12 @@ public class GuestServiceImpl implements GuestService {
             if(optionalGuest.isPresent()){
                 guestResponse.setGuest(optionalGuest.get());
             }else{
-                throw new Exception("Guest not found");
+                optionalGuest = this.findByPhone(email);
+                if(optionalGuest.isPresent()){
+                    guestResponse.setGuest(optionalGuest.get());
+                }else {
+                    throw new Exception("Guest not found");
+                }
             }
             guestResponse.setSuccess(true);
             return guestResponse;

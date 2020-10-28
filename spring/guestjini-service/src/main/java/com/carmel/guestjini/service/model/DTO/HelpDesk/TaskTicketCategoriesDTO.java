@@ -1,9 +1,15 @@
 package com.carmel.guestjini.service.model.DTO.HelpDesk;
 
 
-
 import com.carmel.guestjini.service.model.HelpDesk.TaskTicketCategories;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class TaskTicketCategoriesDTO {
@@ -11,8 +17,11 @@ public class TaskTicketCategoriesDTO {
     private String clientId;
     private String orgId;
     private String parentId;
-    private String title;
-    private String description;
+    private String categoryDescription;
+    private int sequence;
+    private int isMessageMandatory;
+    private int isPhotoMandatory;
+    private int isVideoMandatory;
     private String createdBy;
     private Date creationTime;
     private String lastModifiedBy;
@@ -29,8 +38,11 @@ public class TaskTicketCategoriesDTO {
         this.clientId = taskTicketCategories.getClientId();
         this.orgId = taskTicketCategories.getOrgId();
         this.parentId = taskTicketCategories.getParentId();
-        this.title = taskTicketCategories.getTitle();
-        this.description = taskTicketCategories.getDescription();
+        this.categoryDescription = taskTicketCategories.getCategoryDescription();
+        this.sequence = taskTicketCategories.getSequence();
+        this.isMessageMandatory = taskTicketCategories.getIsMessageMandatory();
+        this.isPhotoMandatory = taskTicketCategories.getIsPhotoMandatory();
+        this.isVideoMandatory = taskTicketCategories.getIsVideoMandatory();
         this.createdBy = taskTicketCategories.getCreatedBy();
         this.creationTime = taskTicketCategories.getCreationTime();
         this.lastModifiedBy = taskTicketCategories.getLastModifiedBy();
@@ -72,20 +84,44 @@ public class TaskTicketCategoriesDTO {
         this.parentId = parentId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getCategoryDescription() {
+        return categoryDescription;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setCategoryDescription(String categoryDescription) {
+        this.categoryDescription = categoryDescription;
     }
 
-    public String getDescription() {
-        return description;
+    public int getSequence() {
+        return sequence;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSequence(int sequence) {
+        this.sequence = sequence;
+    }
+
+    public int getIsMessageMandatory() {
+        return isMessageMandatory;
+    }
+
+    public void setIsMessageMandatory(int isMessageMandatory) {
+        this.isMessageMandatory = isMessageMandatory;
+    }
+
+    public int getIsPhotoMandatory() {
+        return isPhotoMandatory;
+    }
+
+    public void setIsPhotoMandatory(int isPhotoMandatory) {
+        this.isPhotoMandatory = isPhotoMandatory;
+    }
+
+    public int getIsVideoMandatory() {
+        return isVideoMandatory;
+    }
+
+    public void setIsVideoMandatory(int isVideoMandatory) {
+        this.isVideoMandatory = isVideoMandatory;
     }
 
     public String getCreatedBy() {

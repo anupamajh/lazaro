@@ -1,6 +1,8 @@
 package com.carmel.guestjini.service.service.Inventory;
 
 import com.carmel.guestjini.service.model.Inventory.Inventory;
+import com.carmel.guestjini.service.model.Inventory.InventoryDetail;
+import com.carmel.guestjini.service.repository.Inventory.InventoryDetailRepository;
 import com.carmel.guestjini.service.repository.Inventory.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,9 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Autowired
     InventoryRepository inventoryRepository;
+
+    @Autowired
+    InventoryDetailRepository inventoryDetailRepository;
 
     @Override
     public List<Inventory> findAllByClientIdAndTitle(String clientId, String title) {
@@ -64,8 +69,8 @@ public class InventoryServiceImpl implements InventoryService {
                 inventories.addAll(getParentInventory(inventory.getParent().getId(), inventories));
             }
             inventories = removeDuplicates(inventories);
-            if(inventory.getChildrens().size() >0){
-                for(Inventory unit:inventory.getChildrens()){
+            if (inventory.getChildrens().size() > 0) {
+                for (Inventory unit : inventory.getChildrens()) {
                     inventories.add(unit);
                     inventories.addAll(getChildInventory(unit.getId(), inventories));
                 }
@@ -91,8 +96,8 @@ public class InventoryServiceImpl implements InventoryService {
     private List<Inventory> getChildInventory(String id, List<Inventory> inventories) {
         Optional<Inventory> optionalInventory = inventoryRepository.findById(id);
         if (optionalInventory.isPresent()) {
-            if(optionalInventory.get().getChildrens().size() >0){
-                for(Inventory unit:optionalInventory.get().getChildrens()){
+            if (optionalInventory.get().getChildrens().size() > 0) {
+                for (Inventory unit : optionalInventory.get().getChildrens()) {
                     inventories.add(unit);
                     inventories.addAll(getChildInventory(unit.getId(), inventories));
                 }
@@ -113,14 +118,26 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public String getParentIds(String inventoryId) {
-        List<Inventory> parents = this.getAllParents(inventoryId);
-        parents = removeDuplicates(parents);
         String parentIds = "";
         String delim = "";
-        for (Inventory inventory : parents) {
-            parentIds += delim + inventory.getId();
-            delim = ",";
+        Optional<InventoryDetail> optionalInventoryDetail =
+                inventoryDetailRepository.findByInventoryId(inventoryId);
+        if (optionalInventoryDetail.isPresent()) {
+            InventoryDetail inventoryDetail = optionalInventoryDetail.get();
+            parentIds = inventoryDetail.getInventoryId()
+                    + ((inventoryDetail.getPropertyId() == null)?"" :  ("," + inventoryDetail.getPropertyId()))
+                    + ((inventoryDetail.getBlockId() == null)?"" :  ("," + inventoryDetail.getBlockId()))
+                    + ((inventoryDetail.getFloorId() == null)?"" :  ("," + inventoryDetail.getFloorId()))
+                    + ((inventoryDetail.getFlatId() == null)?"" :  ("," + inventoryDetail.getFlatId()))
+                    + ((inventoryDetail.getRoomId() == null)?"" :  ("," + inventoryDetail.getRoomId()))
+                    + ((inventoryDetail.getPodId() == null)?"" :  ("," + inventoryDetail.getPodId()));
         }
+//        List<Inventory> parents = this.getAllParents(inventoryId);
+//        parents = removeDuplicates(parents);
+//        for (Inventory inventory : parents) {
+//            parentIds += delim + inventory.getId();
+//            delim = ",";
+//        }
         return parentIds;
     }
 

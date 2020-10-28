@@ -4,6 +4,7 @@ import com.carmel.guestjini.service.model.Inventory.InventoryDetail;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface InventoryDetailService {
     List<InventoryDetail> findAllByInventoryId(String inventoryId);
@@ -11,4 +12,6 @@ public interface InventoryDetailService {
     InventoryDetail save(InventoryDetail inventoryDetail);
 
     List<InventoryDetail> findAll(Specification<InventoryDetail> filterInventoryDetailByAvailability);
+
+    Optional<InventoryDetail> findByInventoryId(String selectedInventoryId);
 }

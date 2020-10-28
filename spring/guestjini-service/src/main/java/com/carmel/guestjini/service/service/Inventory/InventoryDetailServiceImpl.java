@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class InventoryDetailServiceImpl implements InventoryDetailService{
@@ -27,5 +28,10 @@ public class InventoryDetailServiceImpl implements InventoryDetailService{
     @Override
     public List<InventoryDetail> findAll(Specification<InventoryDetail> filterInventoryDetailByAvailability) {
         return inventoryDetailRepository.findAll(filterInventoryDetailByAvailability);
+    }
+
+    @Override
+    public Optional<InventoryDetail> findByInventoryId(String selectedInventoryId) {
+        return inventoryDetailRepository.findByInventoryId(selectedInventoryId);
     }
 }

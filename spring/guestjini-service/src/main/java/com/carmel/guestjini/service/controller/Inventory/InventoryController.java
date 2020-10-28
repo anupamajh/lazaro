@@ -6,11 +6,13 @@ import com.carmel.guestjini.service.components.UserInformation;
 import com.carmel.guestjini.service.config.PackageConstants;
 import com.carmel.guestjini.service.model.Booking.Booking;
 import com.carmel.guestjini.service.model.DTO.Common.ApplicationConstantDTO;
+import com.carmel.guestjini.service.model.DTO.Inventory.InventoryDetailDTO;
 import com.carmel.guestjini.service.model.Inventory.Inventory;
 import com.carmel.guestjini.service.model.Inventory.InventoryDetail;
 import com.carmel.guestjini.service.model.Inventory.InventoryLocation;
 import com.carmel.guestjini.service.model.Principal.UserInfo;
 import com.carmel.guestjini.service.request.Inventory.PaymentRequest;
+import com.carmel.guestjini.service.response.Inventory.InventoryDetailResponse;
 import com.carmel.guestjini.service.response.Inventory.InventoryResponse;
 import com.carmel.guestjini.service.service.Booking.BookingService;
 import com.carmel.guestjini.service.service.Inventory.InventoryDetailService;
@@ -325,8 +327,8 @@ public class InventoryController {
     }
 
     @RequestMapping(value = "/get-suitable-inventory")
-    public InventoryResponse getSuitableInventory(@RequestBody PaymentRequest paymentRequest) {
-        InventoryResponse inventoryResponse = new InventoryResponse();
+    public InventoryDetailResponse getSuitableInventory(@RequestBody PaymentRequest paymentRequest) {
+        InventoryDetailResponse inventoryResponse = new InventoryDetailResponse();
         try {
             String allowedInventoryTypes = "600";
             String packageName = paymentRequest.getStayPackage();
@@ -383,9 +385,9 @@ public class InventoryController {
                 }
             }
             if (hasInventory) {
-                Optional<Inventory> optionalInventory = inventoryService.findById(selectedInventoryId);
+                Optional<InventoryDetail> optionalInventory = inventoryDetailService.findByInventoryId(selectedInventoryId);
                 if (optionalInventory.isPresent()) {
-                    inventoryResponse.setInventory(optionalInventory.get());
+                    inventoryResponse.setInventory(new InventoryDetailDTO(optionalInventory.get()));
                     inventoryResponse.setSuccess(true);
                 } else {
                     inventoryResponse.setSuccess(false);

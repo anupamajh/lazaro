@@ -20,6 +20,8 @@ public interface GuestService {
 
     Optional<Guest> findByEmail(String email);
 
+    Optional<Guest> findByPhone(String phone);
+
     GuestResponse getGuestById(String guestId) throws Exception;
 
     GuestResponse getGuestByEmail(String userName) throws Exception;

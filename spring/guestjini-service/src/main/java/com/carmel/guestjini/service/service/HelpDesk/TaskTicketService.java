@@ -1,6 +1,7 @@
 package com.carmel.guestjini.service.service.HelpDesk;
 
 
+import com.carmel.guestjini.service.model.DTO.HelpDesk.TicketCountDTO;
 import com.carmel.guestjini.service.model.HelpDesk.TaskTicket;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,4 +20,8 @@ public interface TaskTicketService {
     Page<TaskTicket> findAll(Specification<TaskTicket> textInAllColumns, Pageable pageable);
 
     Page<TaskTicket> findAllByIsDeletedAndRequesterId(int isDeleted, String id, Pageable pageable);
+
+    TicketCountDTO getTicketCountByStatus(String requesterId) throws Exception;
+
+    List<TaskTicket> findAllByIsDeletedAndRequesterIdAndTicketStatus(int isDeleted, String id, int ticketStatus);
 }

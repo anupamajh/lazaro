@@ -32,14 +32,23 @@ public class TaskTicketCategories {
     @Length(max = 40)
     private String parentId;
 
-    @Column(name = "title")
-    @Length(max = 200, message = "Category title length should be less than 200")
+    @Column(name = "category_description")
+    @Length(max = 300, message = "Category description length should be less than 300")
     @NotNull(message = "Category title cannot be null")
     @NotEmpty(message = "Category title cannot be empty")
-    private String title;
+    private String categoryDescription;
 
-    @Column(name = "description", columnDefinition = "TEXT")
-    private String description;
+    @Column(name = "seq")
+    private int sequence;
+
+    @Column(name = "is_message_mandatory")
+    private int isMessageMandatory;
+
+    @Column(name = "is_photo_mandatory")
+    private int isPhotoMandatory;
+
+    @Column(name = "is_video_mandatory")
+    private int isVideoMandatory;
 
     @Column(name = "created_by")
     @Length(max = 40)
@@ -64,7 +73,6 @@ public class TaskTicketCategories {
 
     @Column(name = "deleted_time")
     private Date deletedTime;
-
 
     public String getId() {
         return id;
@@ -98,20 +106,44 @@ public class TaskTicketCategories {
         this.parentId = parentId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getCategoryDescription() {
+        return categoryDescription;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setCategoryDescription(String category_description) {
+        this.categoryDescription = category_description;
     }
 
-    public String getDescription() {
-        return description;
+    public int getSequence() {
+        return sequence;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSequence(int sequence) {
+        this.sequence = sequence;
+    }
+
+    public int getIsMessageMandatory() {
+        return isMessageMandatory;
+    }
+
+    public void setIsMessageMandatory(int isMessageMandatory) {
+        this.isMessageMandatory = isMessageMandatory;
+    }
+
+    public int getIsPhotoMandatory() {
+        return isPhotoMandatory;
+    }
+
+    public void setIsPhotoMandatory(int isPhotoMandatory) {
+        this.isPhotoMandatory = isPhotoMandatory;
+    }
+
+    public int getIsVideoMandatory() {
+        return isVideoMandatory;
+    }
+
+    public void setIsVideoMandatory(int isVideoMandatory) {
+        this.isVideoMandatory = isVideoMandatory;
     }
 
     public String getCreatedBy() {

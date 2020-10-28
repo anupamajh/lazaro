@@ -11,10 +11,6 @@ import java.util.Optional;
 public interface TaskTicketCategoriesService {
     TaskTicketCategories save(TaskTicketCategories taskTicketCategories);
 
-    List<TaskTicketCategories> findAllByTitleAndClientId(String title, String clientId);
-
-    List<TaskTicketCategories> findAllByTitleAndClientIdAndId(String title, String clientId, String id);
-
     Optional<TaskTicketCategories> findById(String id);
 
     List<TaskTicketCategories> findAllByDeletionStatus(int isDeleted, String clientId);
@@ -22,4 +18,10 @@ public interface TaskTicketCategoriesService {
     Page<TaskTicketCategories> findAllByClientIdAndIsDeleted(String clientId, int isDeleted, Pageable pageable);
 
     Page<TaskTicketCategories> findAll(Specification<TaskTicketCategories> textInAllColumns, Pageable pageable);
+
+    List<TaskTicketCategories> findAllByCategoryDescriptionAndClientIdAndParentId(String categoryDescription, String clientId, String parentId);
+
+    List<TaskTicketCategories> findAllByCategoryDescriptionAndClientIdAndIdAndParentId(String categoryDescription, String clientId, String id, String parentId);
+
+    List<TaskTicketCategories> getTaskCategoriesByParentId(String parentId, String clientId);
 }
