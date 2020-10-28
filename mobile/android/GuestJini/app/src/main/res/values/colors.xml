@@ -63,5 +63,9 @@
 
     <color name="otherInterestName">#909090</color>
 
+    <color name="helpTopicBtnBackground">#D3D091</color>
+    <color name="draftTicketBtnBackground">#EF767A</color>
+
+
 
 </resources>
