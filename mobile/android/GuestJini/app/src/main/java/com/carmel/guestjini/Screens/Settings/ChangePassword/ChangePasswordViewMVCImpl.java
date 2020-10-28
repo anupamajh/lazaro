@@ -112,28 +112,39 @@ public class ChangePasswordViewMVCImpl
 
             if (currentPassword.trim().equals("")) {
                 txtCurrentPasswordError.setVisibility(View.VISIBLE);
+                txtCurrentPasswordError.setText("This field is required");
                 isValid = false;
             } else {
                 txtCurrentPasswordError.setVisibility(View.GONE);
             }
             if (newPassword.trim().equals("")) {
                 txtNewPasswordError.setVisibility(View.VISIBLE);
+                txtNewPasswordError.setText("This field is required");
                 isValid = false;
             } else {
                 txtNewPasswordError.setVisibility(View.GONE);
             }
             if (confirmPassword.trim().equals("")) {
                 txtConfirmPasswordError.setVisibility(View.VISIBLE);
+                txtConfirmPasswordError.setText("This field is required");
                 isValid = false;
             } else {
-                txtConfirmPasswordError.setVisibility(View.GONE);
+                if (!confirmPassword.trim().equals(newPassword.trim())) {
+                    txtConfirmPasswordError.setVisibility(View.VISIBLE);
+                    txtConfirmPasswordError.setText("Passwords do not match");
+                    isValid = false;
+                } else {
+                    if(newPassword.length() <6){
+                        txtConfirmPasswordError.setVisibility(View.VISIBLE);
+                        txtConfirmPasswordError.setText("Passwords should be at least 6 characters long");
+                        isValid = false;
+                    }else {
+                        txtConfirmPasswordError.setVisibility(View.GONE);
+                    }
+                }
+              //  txtConfirmPasswordError.setVisibility(View.GONE);
             }
-            if (!confirmPassword.trim().equals(newPassword.trim())) {
-                txtConfirmPasswordError.setVisibility(View.VISIBLE);
-                isValid = false;
-            } else {
-                txtConfirmPasswordError.setVisibility(View.GONE);
-            }
+
             if (isValid) {
                 for (Listener listener : getListeners()) {
                     listener.onChangePasswordClicked(currentPassword.trim(), newPassword.trim());
