@@ -83,7 +83,7 @@ public class SettingsHomeController
         sharedPreferenceHelper.saveStringValue("token_type", "");
         sharedPreferenceHelper.saveLongValue("expires_in", 0);
         sharedPreferenceHelper.commit();
-        mScreensNavigator.toWelcomeScreen();
+        mScreensNavigator.toLoginScreen();
         loginEventBus.postEvent(0);
     }
 

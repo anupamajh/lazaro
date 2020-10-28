@@ -124,7 +124,7 @@ public class SupportHomeController implements
 
     @Override
     public void onArchivedTicketsClicked() {
-        mScreensNavigator.toTicketList(2);
+        mScreensNavigator.toTicketList(1);
     }
 
     @Override
