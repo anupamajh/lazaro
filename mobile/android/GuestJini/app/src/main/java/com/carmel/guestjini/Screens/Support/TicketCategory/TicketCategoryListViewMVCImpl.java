@@ -1,8 +1,10 @@
 package com.carmel.guestjini.Screens.Support.TicketCategory;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -26,6 +28,7 @@ public class TicketCategoryListViewMVCImpl
     private TicketCategoryRecyclerAdapter ticketCategoryRecyclerAdapter;
     private TextView txtParentCategoryTitle;
     private TicketCategory ticketCategory;
+    private ProgressBar progressBar;
 
     public TicketCategoryListViewMVCImpl(
             LayoutInflater inflater,
@@ -37,10 +40,12 @@ public class TicketCategoryListViewMVCImpl
         ticketCategoriesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         ticketCategoryRecyclerAdapter = new TicketCategoryRecyclerAdapter(this, viewMVCFactory);
         FloatingActionButton btnBackToSupport = findViewById(R.id.btnBackToSupport);
+        txtParentCategoryTitle = findViewById(R.id.txtParentCategoryTitle);
+        progressBar = findViewById(R.id.progress);
         ticketCategoriesRecyclerView.setAdapter(ticketCategoryRecyclerAdapter);
         btnBackToSupport.setOnClickListener(view -> {
             for (Listener listener : getListeners()) {
-                listener.onTicketCategoryItemClicked(ticketCategory);
+                listener.onBackClicked();
             }
         });
         ImageView btnBack = findViewById(R.id.btnBack);
@@ -52,18 +57,23 @@ public class TicketCategoryListViewMVCImpl
     }
 
     @Override
+    public void bindTicketCategoryTitle(TicketCategory ticketCategory) {
+        this.txtParentCategoryTitle.setText(ticketCategory.getCategoryDescription());
+    }
+
+    @Override
     public void bindTicketCategories(List<TicketCategory> ticketCategoryList) {
         ticketCategoryRecyclerAdapter.bindTicketCategories(ticketCategoryList);
     }
 
     @Override
     public void showProgressIndication() {
-        //TODO: Show Progress Indicator
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgressIndication() {
-        //TODO: Show Progress Indicator
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override

@@ -24,6 +24,7 @@ public class CreateTicketController
     private final DialogsManager dialogsManager;
     private final DialogsEventBus dialogsEventBus;
     private TicketCategory parentTicketCategory = null;
+    private String draftTicketId;
 
     private CreateTicketViewMVC viewMVC;
     private ScreenState mScreenState = ScreenState.IDLE;
@@ -46,6 +47,7 @@ public class CreateTicketController
         this.saveTicketUseCase = saveTicketUseCase;
         this.dialogsManager = dialogsManager;
         this.dialogsEventBus = dialogsEventBus;
+        this.draftTicketId = "";
     }
 
     public void onStart(String ticketCategoryData) {
@@ -53,6 +55,7 @@ public class CreateTicketController
         viewMVC.registerListener(this);
         saveTicketUseCase.registerListener(this);
         viewMVC.bindTicketCategoryData(parentTicketCategory);
+        this.draftTicketId = "";
     }
 
     public void onStop() {
@@ -90,7 +93,7 @@ public class CreateTicketController
             this.strSubject = subject;
             this.strNarration = narration;
             this.saveStatus = 3;
-            saveTicketUseCase.saveTicketAndNotify(subject, narration, ticketCategoryId, saveStatus);
+            saveTicketUseCase.saveTicketAndNotify(subject, narration, ticketCategoryId, saveStatus, draftTicketId);
         }
     }
 
@@ -111,25 +114,40 @@ public class CreateTicketController
             this.strSubject = subject;
             this.strNarration = narration;
             this.saveStatus = 0;
-            saveTicketUseCase.saveTicketAndNotify(subject, narration, ticketCategoryId, saveStatus);
+            saveTicketUseCase.saveTicketAndNotify(subject, narration, ticketCategoryId, saveStatus, draftTicketId);
         }
     }
 
     @Override
     public void onBackToCategoryClicked() {
         String ticketCategoryData = new GsonBuilder().create().toJson(parentTicketCategory, TicketCategory.class);
-        screensNavigator.toTicketCategoryList(parentTicketCategory.getId(), ticketCategoryData);
+        if (parentTicketCategory.getChild() == null) {
+            screensNavigator.toSupportHome();
+        } else {
+            screensNavigator.toTicketCategoryList(parentTicketCategory.getId(), ticketCategoryData);
+        }
     }
 
     @Override
     public void onBackClicked() {
-        screensNavigator.navigateUp();
+        String ticketCategoryData = new GsonBuilder().create().toJson(parentTicketCategory, TicketCategory.class);
+        if (parentTicketCategory.getChild() == null) {
+            screensNavigator.toSupportHome();
+        } else {
+            screensNavigator.toTicketCategoryList(parentTicketCategory.getId(), ticketCategoryData);
+        }
     }
 
     @Override
     public void onTicketSaved(Ticket ticket) {
         viewMVC.hideProgressIndication();
-        screensNavigator.toTicketList(this.saveStatus);
+        this.draftTicketId = ticket.getId();
+        if(this.saveStatus != 0) {
+            screensNavigator.toTicketList(this.saveStatus);
+        }else {
+            viewMVC.showDraftSaved();
+        }
+
     }
 
     @Override
@@ -150,7 +168,7 @@ public class CreateTicketController
         if (event instanceof PromptDialogEvent) {
             switch (((PromptDialogEvent) event).getClickedButton()) {
                 case POSITIVE:
-                    saveTicketUseCase.saveTicketAndNotify(strSubject, strNarration, ticketCategoryId, saveStatus);
+                    saveTicketUseCase.saveTicketAndNotify(strSubject, strNarration, ticketCategoryId, saveStatus, draftTicketId);
                     break;
                 case NEGATIVE:
                     mScreenState = ScreenState.IDLE;

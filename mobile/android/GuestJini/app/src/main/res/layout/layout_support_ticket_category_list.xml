@@ -4,12 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -47,59 +41,83 @@
                 app:fontFamily="@font/roboto_bold" />
 
         </RelativeLayout>
-        <RelativeLayout
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/browseHelpCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/layoutHeader"
-            android:id="@+id/layoutParentCategoryLayout">
-            <TextView
-                android:id="@+id/txtParentCategoryTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="32dp"
-                android:letterSpacing="0.1"
-                android:text="Help &amp; Support"
-                android:textAllCaps="true"
-                android:textColor="@color/colorZambezi"
-                android:textSize="14sp"
-                app:fontFamily="@font/roboto_bold" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btnBackToSupport"
-                android:layout_below="@+id/txtParentCategoryTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="2dp"
-                app:backgroundTint="@color/colorSummerSky"
-                app:fabCustomSize="26dp"
-                app:maxImageSize="16dp"
-                app:srcCompat="@drawable/ic_navigate_next_black_24dp"
-                app:tint="@color/colorWhite" />
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/layoutList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/layoutParentCategoryLayout"
-            android:layout_marginTop="10dp"
-            android:padding="5dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/lstTicketCategories"
+            android:layout_below="@id/layoutHeader"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="24dp"
+            app:cardBackgroundColor="@color/colorWhite"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true">
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true" />
-        </RelativeLayout>
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:id="@+id/layoutParentCategoryLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
+                    <TextView
+                        android:id="@+id/txtParentCategoryTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="32dp"
+                        android:letterSpacing="0.1"
+                        android:text="Help &amp; Support"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorZambezi"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/roboto_bold" />
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/btnBackToSupport"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtParentCategoryTitle"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="2dp"
+                        app:backgroundTint="@color/colorSummerSky"
+                        app:fabCustomSize="26dp"
+                        app:maxImageSize="16dp"
+                        app:srcCompat="@drawable/ic_navigate_next_black_24dp"
+                        app:tint="@color/colorWhite" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/layoutList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/layoutParentCategoryLayout"
+                    android:layout_marginTop="10dp"
+                    android:padding="15dp">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/lstTicketCategories"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
     </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
 </FrameLayout>

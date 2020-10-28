@@ -66,7 +66,7 @@ public class TicketCategoryListController
         viewMvc.registerListener(this);
         fetchTicketCategoryByParentIdUseCase.registerListener(this);
         dialogsEventBus.registerListener(this);
-
+        viewMvc.bindTicketCategoryTitle(parentTicketCategory);
         if (mScreenState != ScreenState.NETWORK_ERROR) {
             fetchTicketCategoryListListAndNotify();
         }
@@ -111,8 +111,13 @@ public class TicketCategoryListController
 
     @Override
     public void onTicketCategoryListFetched(List<TicketCategory> ticketCategoryList) {
-        viewMvc.bindTicketCategories(ticketCategoryList);
-        viewMvc.hideProgressIndication();
+        if(ticketCategoryList.size() == 0){
+            String ticketCategoryData = new GsonBuilder().create().toJson(parentTicketCategory, TicketCategory.class);
+            screensNavigator.toCreateTicket(ticketCategoryData);
+        }else {
+            viewMvc.bindTicketCategories(ticketCategoryList);
+            viewMvc.hideProgressIndication();
+        }
     }
 
     @Override
@@ -129,6 +134,7 @@ public class TicketCategoryListController
 
     public static class SavedState implements Serializable {
         private final ScreenState mScreenState;
+
         public SavedState(ScreenState screenState) {
             mScreenState = screenState;
         }

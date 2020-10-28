@@ -125,7 +125,23 @@
                         android:textColor="@color/colorSuvaGray"
                         android:textSize="10sp"
                         app:fontFamily="@font/roboto_medium" />
-
+                    <TextView
+                        android:id="@+id/txtNarrationError"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtNarration"
+                        android:layout_marginTop="16dp"
+                        android:gravity="start"
+                        android:letterSpacing="0.05"
+                        android:paddingLeft="12dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="12dp"
+                        android:paddingBottom="8dp"
+                        android:text="This field is required"
+                        android:textColor="@color/colorMabel"
+                        android:textSize="12sp"
+                        android:visibility="gone"
+                        app:fontFamily="@font/roboto_medium" />
 
                 </RelativeLayout>
 
@@ -156,9 +172,6 @@
                             android:layout_height="wrap_content"
                             android:elevation="5dp"
                             android:padding="10dp">
-
-
-
                             <TextView
                                 android:id="@+id/txtAttachmentText"
                                 android:layout_width="wrap_content"

@@ -35,6 +35,7 @@ public class SupportHomeViewMVCImpl extends BaseObservableViewMvc<SupportHomeVie
     private final CardView activeTicketLayout;
     private final CardView draftTicketLayout;
     private final CardView archiveTicketLayout;
+    private final CardView helpCardView;
 
     public SupportHomeViewMVCImpl(
             LayoutInflater inflater,
@@ -52,8 +53,15 @@ public class SupportHomeViewMVCImpl extends BaseObservableViewMvc<SupportHomeVie
         activeTicketLayout = findViewById(R.id.activeTicketCardView);
         draftTicketLayout = findViewById(R.id.draftTicketCardView);
         archiveTicketLayout = findViewById(R.id.archiveTicketCard);
+        helpCardView = findViewById(R.id.browseHelpCard);
         ticketCategoryRecyclerAdapter = new TicketCategoryRecyclerAdapter(this, viewMVCFactory);
         ticketCategoriesRecyclerView.setAdapter(ticketCategoryRecyclerAdapter);
+        activeTicketLayout.setOnClickListener(view -> {
+            for (Listener listener : getListeners()) {
+                listener.onActiveTicketClicked();
+            }
+        });
+
         btnExploreActiveTickets.setOnClickListener(view -> {
             for (Listener listener : getListeners()) {
                 listener.onActiveTicketClicked();
@@ -66,13 +74,31 @@ public class SupportHomeViewMVCImpl extends BaseObservableViewMvc<SupportHomeVie
             }
         });
 
+        draftTicketLayout.setOnClickListener(view -> {
+            for (Listener listener : getListeners()) {
+                listener.onDraftTicketClicked();
+            }
+        });
+
         btnExploreHelp.setOnClickListener(view -> {
             for (Listener listener : getListeners()) {
                 listener.onKBExploreClicked();
             }
         });
 
+        helpCardView.setOnClickListener(view -> {
+            for (Listener listener : getListeners()) {
+                listener.onKBExploreClicked();
+            }
+        });
+
         btnExploreArchive.setOnClickListener(view -> {
+            for (Listener listener : getListeners()) {
+                listener.onArchivedTicketsClicked();
+            }
+        });
+
+        archiveTicketLayout.setOnClickListener(view -> {
             for (Listener listener : getListeners()) {
                 listener.onArchivedTicketsClicked();
             }

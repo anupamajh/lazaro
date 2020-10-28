@@ -21,4 +21,7 @@ public interface CreateTicketViewMVC extends ObservableViewMvc<CreateTicketViewM
     void hideProgressIndication();
 
     void bindTicketCategoryData(TicketCategory parentTicketCategory);
+
+    void showDraftSaved();
+
 }

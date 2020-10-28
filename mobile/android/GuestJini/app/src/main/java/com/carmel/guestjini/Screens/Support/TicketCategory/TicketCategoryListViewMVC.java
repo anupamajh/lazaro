@@ -14,6 +14,8 @@ public interface TicketCategoryListViewMVC
         void onBackClicked();
     }
 
+    void bindTicketCategoryTitle(TicketCategory ticketCategory);
+
     void bindTicketCategories(List<TicketCategory> ticketCategoryList);
 
     void showProgressIndication();
