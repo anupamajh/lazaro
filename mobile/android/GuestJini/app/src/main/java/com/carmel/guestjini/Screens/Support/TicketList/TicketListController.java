@@ -114,7 +114,7 @@ public class TicketListController implements
 
     @Override
     public void onBackClicked() {
-        screensNavigator.navigateUp();
+        screensNavigator.toSupportHome();
     }
 
     @Override

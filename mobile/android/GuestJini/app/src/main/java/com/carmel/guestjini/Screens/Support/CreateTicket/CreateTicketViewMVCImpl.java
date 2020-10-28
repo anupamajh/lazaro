@@ -38,6 +38,8 @@ public class CreateTicketViewMVCImpl
 
     private TicketCategory ticketCategory;
 
+    private TicketCategory currentTicketCategory;
+
     private boolean isDraftEnabled = false;
 
     public CreateTicketViewMVCImpl(
@@ -68,12 +70,12 @@ public class CreateTicketViewMVCImpl
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() > 0) {
-                    if(!isDraftEnabled) {
+                    if (!isDraftEnabled) {
                         btnDraft.setEnabled(true);
                         isDraftEnabled = true;
                         btnDraft.setTextColor(getRootView().getResources().getColor(R.color.colorNewMidnightBlue));
                     }
-                }else{
+                } else {
                     isDraftEnabled = false;
                     btnDraft.setEnabled(false);
                     btnDraft.setTextColor(getRootView().getResources().getColor(R.color.colorWhisper1));
@@ -87,8 +89,17 @@ public class CreateTicketViewMVCImpl
         });
         btnSubmit.setOnClickListener(view -> {
             txtNarrationError.setVisibility(View.GONE);
-            if(txtNarration.getText().toString().trim().length() == 0){
-                txtNarrationError.setVisibility(View.VISIBLE);
+            if(this.currentTicketCategory.getIsMessageMandatory() == 1) {
+                if (txtNarration.getText().toString().trim().length() == 0) {
+                    txtNarrationError.setVisibility(View.VISIBLE);
+                }else {
+                    for (Listener listener : getListeners()) {
+                        listener.onCreateTicketClicked(
+                                "",
+                                txtNarration.getText().toString().trim()
+                        );
+                    }
+                }
             }else {
                 for (Listener listener : getListeners()) {
                     listener.onCreateTicketClicked(
@@ -99,9 +110,18 @@ public class CreateTicketViewMVCImpl
             }
         });
         btnDraft.setOnClickListener(view -> {
-           txtNarrationError.setVisibility(View.GONE);
-            if(txtNarration.getText().toString().trim().length() == 0){
-                txtNarrationError.setVisibility(View.VISIBLE);
+            txtNarrationError.setVisibility(View.GONE);
+            if(this.currentTicketCategory.getIsMessageMandatory() == 1) {
+                if (txtNarration.getText().toString().trim().length() == 0) {
+                    txtNarrationError.setVisibility(View.VISIBLE);
+                }else{
+                    for (Listener listener : getListeners()) {
+                        listener.onSaveDraftClicked(
+                                "",
+                                txtNarration.getText().toString().trim()
+                        );
+                    }
+                }
             }else {
                 for (Listener listener : getListeners()) {
                     listener.onSaveDraftClicked(
@@ -134,7 +154,11 @@ public class CreateTicketViewMVCImpl
     @Override
     public void bindTicketCategoryData(TicketCategory parentTicketCategory) {
         this.ticketCategory = parentTicketCategory;
-
+        if (parentTicketCategory.getChild() != null) {
+            this.currentTicketCategory = parentTicketCategory.getChild();
+        }else{
+            this.currentTicketCategory = parentTicketCategory;
+        }
         txtTicketCategoryTitle.setText("");
         txtSubTicketCategoryTitle.setText("");
         if (parentTicketCategory != null) {
@@ -146,6 +170,11 @@ public class CreateTicketViewMVCImpl
             }
         } else {
             layoutTicketCategory.setVisibility(View.GONE);
+        }
+        if(this.currentTicketCategory.getIsMessageMandatory() == 1){
+            txtMessageTitle.setText("(Required) Message");
+        }else{
+            txtMessageTitle.setText("(Optional) Message");
         }
     }
 
@@ -168,6 +197,16 @@ public class CreateTicketViewMVCImpl
     @Override
     public void showDraftSaved() {
         deleteDraftLayout.setVisibility(View.VISIBLE);
-        Toast.makeText(getContext(),"Ticked saved as draft", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Ticked saved as draft", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showTicketSaved() {
+        Toast.makeText(getContext(), "Ticked saved", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showTicketDeleted() {
+        Toast.makeText(getContext(), "Draft ticket deleted", Toast.LENGTH_LONG).show();
     }
 }

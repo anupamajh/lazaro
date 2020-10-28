@@ -142,6 +142,6 @@ public class TicketCategoryListController
 
     @Override
     public void onBackClicked() {
-        screensNavigator.navigateUp();
+        screensNavigator.toSupportHome();
     }
 }

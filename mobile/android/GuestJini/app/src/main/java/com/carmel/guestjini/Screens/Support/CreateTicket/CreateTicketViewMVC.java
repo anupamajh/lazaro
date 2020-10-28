@@ -4,6 +4,7 @@ import com.carmel.guestjini.Networking.Tickets.TicketCategory;
 import com.carmel.guestjini.Screens.Common.Views.ObservableViewMvc;
 
 public interface CreateTicketViewMVC extends ObservableViewMvc<CreateTicketViewMVC.Listener> {
+
     public interface Listener {
         void onCreateTicketClicked(String subject, String narration);
 
@@ -25,5 +26,9 @@ public interface CreateTicketViewMVC extends ObservableViewMvc<CreateTicketViewM
     void bindTicketCategoryData(TicketCategory parentTicketCategory);
 
     void showDraftSaved();
+
+    void showTicketSaved();
+
+    void showTicketDeleted();
 
 }

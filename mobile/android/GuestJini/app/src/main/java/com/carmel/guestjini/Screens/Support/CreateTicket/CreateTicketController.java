@@ -92,8 +92,9 @@ public class CreateTicketController
                 ticketCategoryId = parentTicketCategory.getId();
                 subject = parentTicketCategory.getCategoryDescription();
                 if (parentTicketCategory.getChild() != null) {
+                    subject = parentTicketCategory.getChild().getCategoryDescription();
                     ticketCategoryId = parentTicketCategory.getChild().getId();
-                    narration = parentTicketCategory.getChild().getCategoryDescription() + "\n" + narration;
+                    //narration = parentTicketCategory.getChild().getCategoryDescription() + "\n" + narration;
                 }
             }
             this.ticketCategoryId = ticketCategoryId;
@@ -113,8 +114,9 @@ public class CreateTicketController
                 ticketCategoryId = parentTicketCategory.getId();
                 subject = parentTicketCategory.getCategoryDescription();
                 if (parentTicketCategory.getChild() != null) {
+                    subject = parentTicketCategory.getChild().getCategoryDescription();
                     ticketCategoryId = parentTicketCategory.getChild().getId();
-                    narration = parentTicketCategory.getChild().getCategoryDescription() + "\n" + narration;
+                    //narration = parentTicketCategory.getChild().getCategoryDescription();
                 }
             }
             this.ticketCategoryId = ticketCategoryId;
@@ -151,6 +153,7 @@ public class CreateTicketController
         this.draftTicketId = ticket.getId();
         if (this.saveStatus != 0) {
             screensNavigator.toTicketList(this.saveStatus);
+            viewMVC.showTicketSaved();
         } else {
             viewMVC.showDraftSaved();
         }
@@ -200,6 +203,7 @@ public class CreateTicketController
 
     @Override
     public void onTicketDeleted(Ticket ticket) {
+        viewMVC.showTicketDeleted();
         screensNavigator.toSupportHome();
     }
 
