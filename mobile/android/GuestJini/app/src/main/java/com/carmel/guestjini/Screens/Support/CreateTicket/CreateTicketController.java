@@ -139,12 +139,7 @@ public class CreateTicketController
 
     @Override
     public void onBackClicked() {
-        String ticketCategoryData = new GsonBuilder().create().toJson(parentTicketCategory, TicketCategory.class);
-        if (parentTicketCategory.getChild() == null) {
-            screensNavigator.toSupportHome();
-        } else {
-            screensNavigator.toTicketCategoryList(parentTicketCategory.getId(), ticketCategoryData);
-        }
+        screensNavigator.toSupportHome();
     }
 
     @Override
