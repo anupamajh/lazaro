@@ -74,4 +74,6 @@ public interface UserService {
     UsersResponse phoneNumberSignUp(User user) throws Exception;
 
     UsersResponse checkPhoneNumber(User user) throws Exception;
+
+    Optional<User> findByPhone(String phone);
 }

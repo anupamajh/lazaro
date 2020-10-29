@@ -581,6 +581,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Optional<User> findByPhone(String phone) {
+        return userRepository.findByPhone(phone);
+    }
+
+    @Override
     public UsersResponse findAllByUserName(String userName) {
         return null;
     }

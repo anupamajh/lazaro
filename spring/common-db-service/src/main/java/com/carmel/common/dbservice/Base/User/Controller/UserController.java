@@ -333,6 +333,30 @@ public class UserController {
         return genericResponse;
     }
 
+    @RequestMapping(value = "/set-password", method = RequestMethod.POST)
+    public GenericResponse setPassword(@RequestBody Map<String, String> formData) throws Exception {
+        UserInfo userInfo = userInformation.getUserInfo();
+        GenericResponse genericResponse = new GenericResponse();
+        try {
+            Optional<User> optionalUser = userService.findByPhone(formData.get("phone"));
+            String newPasswordPassword = formData.get("password");
+            if (optionalUser.isPresent()) {
+                User user = optionalUser.get();
+                user.setPassword(passwordEncoder.encode(newPasswordPassword));
+                userService.save(user);
+                genericResponse.setSuccess(true);
+                genericResponse.setError("Password changed successfully");
+            } else {
+                genericResponse.setSuccess(false);
+                genericResponse.setError("User not found.");
+            }
+        } catch (Exception ex) {
+            genericResponse.setSuccess(false);
+            genericResponse.setError(ex.getMessage());
+        }
+        return genericResponse;
+    }
+
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public UsersResponse search(@RequestBody SearchRequest searchRequest) {
         logger.trace("Entering");
@@ -372,7 +396,7 @@ public class UserController {
             OAuth2AccessToken accessToken = jdbcTokenStore.readAccessToken(tokenValue);
             OAuth2RefreshToken refreshToken = jdbcTokenStore.readRefreshToken(tokenValue);
             jdbcTokenStore.removeAccessToken(accessToken);
-            if (refreshToken!=null){
+            if (refreshToken != null) {
                 jdbcTokenStore.removeRefreshToken(refreshToken);
             }
         }
