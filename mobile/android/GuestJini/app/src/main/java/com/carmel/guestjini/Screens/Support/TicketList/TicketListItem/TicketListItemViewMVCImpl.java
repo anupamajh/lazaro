@@ -26,8 +26,6 @@ public class TicketListItemViewMVCImpl
     private TextView txtTicketDate;
     private TextView txtTicketTitle;
     private TextView txtTicketNumber;
-    private TextView txtTicketAge;
-    private ImageView imgNotification;
 
     private Ticket ticket;
 
@@ -41,8 +39,6 @@ public class TicketListItemViewMVCImpl
         txtTicketDate = findViewById(R.id.txtTicketDate);
         txtTicketTitle = findViewById(R.id.txtTicketTitle);
         txtTicketNumber = findViewById(R.id.txtTicketNumber);
-        txtTicketAge = findViewById(R.id.txtTicketAge);
-        imgNotification = findViewById(R.id.imgNotification);
         getRootView().setOnClickListener(view -> {
             for (Listener listener : getListeners()) {
                 listener.onTicketClicked(ticket);
@@ -83,7 +79,6 @@ public class TicketListItemViewMVCImpl
         txtTicketDate.setText(DateUtil.getFormattedDate(creationDate));
         txtTicketTitle.setText(ticket.getTicketTitle());
         txtTicketNumber.setText(ticket.getTicketNo());
-        txtTicketAge.setText(String.valueOf(AgeCalculator.calculateAge(localCreationDate, localeToday)));
 
     }
 }
