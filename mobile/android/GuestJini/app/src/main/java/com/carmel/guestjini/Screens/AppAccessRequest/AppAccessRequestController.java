@@ -112,6 +112,8 @@ public class AppAccessRequestController implements
                 viewMVC.showHasUser();
             } else {
                 if (bookingResponse.isHasBooking()) {
+                    sharedPreferenceHelper.saveStringValue("full_name", bookingResponse.getBooking().getFullName());
+                    sharedPreferenceHelper.commit();
                     requestOTPUseCase.sendOTPAndNotify(mobileNumber);
                 } else {
                     viewMVC.showNoBooking();

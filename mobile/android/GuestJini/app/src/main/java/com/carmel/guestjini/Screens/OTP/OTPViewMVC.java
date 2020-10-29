@@ -25,4 +25,10 @@ public interface OTPViewMVC extends ObservableViewMvc<OTPViewMVC.Listener> {
 
     void showOTPFailedToast();
 
+    void showOTPVerified();
+
+    void showAccountCreated();
+
+    void showAccountCreationFailed();
+
 }

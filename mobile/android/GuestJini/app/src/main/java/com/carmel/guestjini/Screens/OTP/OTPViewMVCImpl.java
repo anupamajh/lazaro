@@ -174,4 +174,19 @@ public class OTPViewMVCImpl
     public void showOTPFailedToast() {
         Toast.makeText(getContext(), "There was a problem sending OTP, Kindly try after sometime", Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    public void showOTPVerified() {
+        Toast.makeText(getContext(), "OTP has been verified successfully", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showAccountCreated() {
+        Toast.makeText(getContext(), "Account has been created", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showAccountCreationFailed() {
+        Toast.makeText(getContext(), "There was a problem creating account, Kindly try after sometime", Toast.LENGTH_LONG).show();
+    }
 }

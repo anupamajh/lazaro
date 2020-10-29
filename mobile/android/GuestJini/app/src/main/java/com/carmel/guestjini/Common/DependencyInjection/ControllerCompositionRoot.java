@@ -81,6 +81,7 @@ import com.carmel.guestjini.Tickets.SaveTicketUseCase;
 import com.carmel.guestjini.Users.AppAccessRequestUseCase;
 import com.carmel.guestjini.Users.ChangePasswordUseCase;
 import com.carmel.guestjini.Users.CheckPhoneNumberUseCase;
+import com.carmel.guestjini.Users.CreateAccountUseCase;
 import com.carmel.guestjini.Users.FetchInterestCategoryListUseCase;
 import com.carmel.guestjini.Users.FetchInterestListUseCase;
 import com.carmel.guestjini.Users.FetchMyInterestsUseCase;
@@ -359,6 +360,10 @@ public class ControllerCompositionRoot {
         return new DeleteTicketUseCase(getAuthenticatedGuestJiniAPI());
     }
 
+    private CreateAccountUseCase getCreateAccountUseCase() {
+        return new CreateAccountUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
     public SharedPreferenceHelper getSharedPreferenceHelper() {
         return new SharedPreferenceHelper(preferences, editor);
 
@@ -629,6 +634,7 @@ public class ControllerCompositionRoot {
         return new OTPController(
               getVerifyOTPUseCase(),
               getRequestOTPUseCase(),
+              getCreateAccountUseCase(),
               getSharedPreferenceHelper(),
               getScreensNavigator(),
               getDialogsManager()

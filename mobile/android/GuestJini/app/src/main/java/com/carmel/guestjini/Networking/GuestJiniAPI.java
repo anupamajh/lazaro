@@ -29,6 +29,7 @@ import com.carmel.guestjini.Networking.Users.UserInfo;
 import com.carmel.guestjini.Networking.Users.UserInterests;
 import com.carmel.guestjini.Networking.Users.UserInterestsResponse;
 import com.carmel.guestjini.Networking.Users.UserPreferenceResponse;
+import com.carmel.guestjini.Networking.Users.UserResponse;
 
 import java.util.Map;
 
@@ -234,4 +235,7 @@ public interface GuestJiniAPI {
 
     @POST("/common/otp/verify-otp")
     Call<OTPResponse> verifyOTP(@Body Map<String, String> postData);
+
+    @POST("/common/user/phone-number-sign-up")
+    Call<UserResponse> createUserAccount(@Body Map<String, String> postData);
 }
