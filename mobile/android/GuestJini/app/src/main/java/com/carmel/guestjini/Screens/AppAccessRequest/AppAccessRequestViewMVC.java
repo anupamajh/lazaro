@@ -3,8 +3,9 @@ package com.carmel.guestjini.Screens.AppAccessRequest;
 import com.carmel.guestjini.Screens.Common.Views.ObservableViewMvc;
 
 public interface AppAccessRequestViewMVC extends ObservableViewMvc<AppAccessRequestViewMVC.Listener> {
+
     public interface Listener {
-        void onAppAccessRequestClicked(String email, String mobile);
+        void onAppAccessRequestClicked(String mobile);
 
         void onBackPressed();
     }
@@ -12,4 +13,14 @@ public interface AppAccessRequestViewMVC extends ObservableViewMvc<AppAccessRequ
     void showProgressIndication();
 
     void hideProgressIndication();
+
+    void showInvalidPhoneNumberError(boolean showError);
+
+    void showHasUser();
+
+    void showNoBooking();
+
+    void showOTPSentToast();
+
+    void showOTPFailedToast();
 }

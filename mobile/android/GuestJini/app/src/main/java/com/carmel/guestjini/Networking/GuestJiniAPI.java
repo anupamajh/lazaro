@@ -2,6 +2,7 @@ package com.carmel.guestjini.Networking;
 
 
 import com.carmel.guestjini.Networking.Accounts.AccountTicketResponse;
+import com.carmel.guestjini.Networking.Booking.BookingResponse;
 import com.carmel.guestjini.Networking.Group.Group;
 import com.carmel.guestjini.Networking.Group.GroupConversationResponse;
 import com.carmel.guestjini.Networking.Group.GroupResponse;
@@ -11,6 +12,7 @@ import com.carmel.guestjini.Networking.KnowledgeBase.KBRatingResponse;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBResponse;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBReview;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBReviewResponse;
+import com.carmel.guestjini.Networking.OTP.OTPResponse;
 import com.carmel.guestjini.Networking.Tickets.TaskNote;
 import com.carmel.guestjini.Networking.Tickets.TaskNotesResponse;
 import com.carmel.guestjini.Networking.Tickets.TicketCategoryResponse;
@@ -42,6 +44,14 @@ public interface GuestJiniAPI {
     @FormUrlEncoded
     @POST("/auth/oauth/token")
     Call<AccessToken> attemptLogin(
+            @Header("Authorization") String credentials,
+            @Field("grant_type") String grantType,
+            @Field("username") String userName,
+            @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("/auth/oauth/token")
+    Call<AccessToken> attemptClientLogin(
             @Header("Authorization") String credentials,
             @Field("grant_type") String grantType,
             @Field("username") String userName,
@@ -215,4 +225,13 @@ public interface GuestJiniAPI {
 
     @POST("/guest-jini/task-ticket/trash")
     Call<TicketResponse> deleteTicket(@Body Map<String, String> postData);
+
+    @POST("/guest-jini/booking/check-phone-number")
+    Call<BookingResponse> checkPhoneNumber(@Body Map<String, String> postData);
+
+    @POST("/common/otp/request-otp")
+    Call<OTPResponse> sendOTP(@Body Map<String, String> postData);
+
+    @POST("/common/otp/verify-otp")
+    Call<OTPResponse> verifyOTP(@Body Map<String, String> postData);
 }

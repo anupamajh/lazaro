@@ -9,7 +9,9 @@ import androidx.fragment.app.FragmentManager;
 
 import com.carmel.guestjini.Accounts.FetchMyRentInvoiceDetailsUseCase;
 import com.carmel.guestjini.Accounts.FetchMyRentInvoiceListUseCase;
+import com.carmel.guestjini.Authentication.AttemptClientLoginUseCase;
 import com.carmel.guestjini.Authentication.AttemptLoginUseCase;
+import com.carmel.guestjini.Common.Constants;
 import com.carmel.guestjini.Community.AddPersonToFavouriteUseCase;
 import com.carmel.guestjini.Community.FetchGroupByIdUseCase;
 import com.carmel.guestjini.Community.FetchGroupConversationByGroupUseCase;
@@ -77,15 +79,18 @@ import com.carmel.guestjini.Tickets.SaveTaskNoteUseCase;
 import com.carmel.guestjini.Tickets.SaveTicketUseCase;
 import com.carmel.guestjini.Users.AppAccessRequestUseCase;
 import com.carmel.guestjini.Users.ChangePasswordUseCase;
+import com.carmel.guestjini.Users.CheckPhoneNumberUseCase;
 import com.carmel.guestjini.Users.FetchInterestCategoryListUseCase;
 import com.carmel.guestjini.Users.FetchInterestListUseCase;
 import com.carmel.guestjini.Users.FetchMyInterestsUseCase;
 import com.carmel.guestjini.Users.FetchMyProfilePicUseCase;
 import com.carmel.guestjini.Users.FetchMyProfileUseCase;
+import com.carmel.guestjini.Users.RequestOTPUseCase;
 import com.carmel.guestjini.Users.ResetPasswordUseCase;
 import com.carmel.guestjini.Users.SaveMyInterestUseCase;
 import com.carmel.guestjini.Users.SaveProfilePicUseCase;
 import com.carmel.guestjini.Users.SaveUserPreferenceUseCase;
+import com.carmel.guestjini.Users.VerifyOTPUseCase;
 
 public class ControllerCompositionRoot {
     private final CompositionRoot compositionRoot;
@@ -107,6 +112,15 @@ public class ControllerCompositionRoot {
     private GuestJiniAPI getAuthenticatedGuestJiniAPI() {
         return compositionRoot.getAuthenticatedGuestJiniAPI(
                 preferences.getString("access_token", ""),
+                getActivity()
+        );
+
+    }
+
+    private GuestJiniAPI getClientAuthenticatedGuestJiniAPI() {
+        return compositionRoot.getClientAuthenticatedGuestJiniAPI(
+                Constants.CLIENT_ID,
+                Constants.CLIENT_SECRETE,
                 getActivity()
         );
 
@@ -160,6 +174,10 @@ public class ControllerCompositionRoot {
 
     public AttemptLoginUseCase getAttemptLoginUseCase() {
         return new AttemptLoginUseCase(getGuestJiniAPI());
+    }
+
+    public AttemptClientLoginUseCase getAttemptClientLoginUseCase() {
+        return new AttemptClientLoginUseCase(getGuestJiniAPI());
     }
 
     private FetchKBListUseCase getFetchKBListUseCase() {
@@ -322,6 +340,18 @@ public class ControllerCompositionRoot {
 
     private FetchTicketCountUseCase getFetchTicketCountUseCase() {
         return new FetchTicketCountUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private CheckPhoneNumberUseCase getCheckPhoneNumberUseCase() {
+        return new CheckPhoneNumberUseCase(getClientAuthenticatedGuestJiniAPI());
+    }
+
+    private RequestOTPUseCase getRequestOTPUseCase() {
+        return new RequestOTPUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private VerifyOTPUseCase getVerifyOTPUseCase() {
+        return new VerifyOTPUseCase(getAuthenticatedGuestJiniAPI());
     }
 
     private DeleteTicketUseCase getDeleteTicketUseCase() {
@@ -576,7 +606,10 @@ public class ControllerCompositionRoot {
 
     public AppAccessRequestController getAppAccessRequestController() {
         return new AppAccessRequestController(
-                getAppAccessRequestUseCase(),
+                getAttemptClientLoginUseCase(),
+                getRequestOTPUseCase(),
+                getCheckPhoneNumberUseCase(),
+                getSharedPreferenceHelper(),
                 getScreensNavigator(),
                 getDialogsManager()
         );

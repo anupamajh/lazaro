@@ -192,4 +192,7 @@ public class ScreensNavigator {
     public void toTicketCategoryList(String parentId, String ticketCategoryData) {
         mFragmentFrameHelper.replaceFragment(TicketCategoryListFragment.createFragment(parentId, ticketCategoryData));
     }
+
+    public void toOTPScreen() {
+    }
 }

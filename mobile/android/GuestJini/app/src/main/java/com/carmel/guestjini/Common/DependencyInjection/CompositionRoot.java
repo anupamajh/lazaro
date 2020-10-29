@@ -10,6 +10,7 @@ import com.carmel.guestjini.Networking.GuestJiniAPI;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Login.LoginEventBus;
 
+import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -19,6 +20,7 @@ public class CompositionRoot {
     private Retrofit mRetrofit;
     private DialogsEventBus mDialogsEventBus;
     private Retrofit authenticatedRetrofit;
+    private Retrofit clientAuthenticatedRetrofit;
     private LoginEventBus loginEventBus;
 
     private Retrofit getRetrofit() {
@@ -70,5 +72,27 @@ public class CompositionRoot {
 
     public GuestJiniAPI getAuthenticatedGuestJiniAPI(String accessToken, FragmentActivity activity) {
         return getAuthenticatedRetrofit(accessToken, activity).create(GuestJiniAPI.class);
+    }
+
+    public Retrofit getClientAuthenticatedRetrofit(String clientId, String clientSecrete, FragmentActivity activity) {
+        if (clientAuthenticatedRetrofit == null) {
+            AuthServiceHolder authServiceHolder = new AuthServiceHolder();
+            OkHttpClient okHttpClient = new OkHttpClientInstance.Builder(activity, authServiceHolder)
+                    .addHeader("Authorization", Credentials.basic(clientId, clientSecrete))
+                    .build();
+            clientAuthenticatedRetrofit = new Retrofit.Builder()
+                    .baseUrl(Constants.BASE_URL)
+                    .addConverterFactory(ScalarsConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .client(okHttpClient)
+                    .build();
+            AuthService authService = authenticatedRetrofit.create(AuthService.class);
+            authServiceHolder.set(authService);
+        }
+        return clientAuthenticatedRetrofit;
+    }
+
+    public GuestJiniAPI getClientAuthenticatedGuestJiniAPI(String clientId, String clientSecrete, FragmentActivity activity) {
+        return getClientAuthenticatedRetrofit(clientId, clientSecrete, activity).create(GuestJiniAPI.class);
     }
 }
