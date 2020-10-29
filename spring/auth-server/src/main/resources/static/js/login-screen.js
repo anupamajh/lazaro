@@ -1,3 +1,29 @@
+$(document).ready(function () {
+    $("#btnLogin").on("click", function () {
+        if (!validate()) {
+            $("form")[0].submit();
+        }
+    });
+
+});
+
+function validate() {
+    $("#loginError").hide();
+    $("#passwordError").hide();
+    let hasError = false;
+    if ($.trim($("#username").val()) === "") {
+        hasError = true;
+        $("#loginError").show();
+    }
+
+    if ($.trim($("#password").val()) === "") {
+        hasError = true;
+        $("#passwordError").show();
+    }
+
+    return hasError;
+}
+
 function nextNav(dest) {
     document.location.href = baseURL + dest;
 

@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/login-screen.css}">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap" rel="stylesheet">
-    <title>Guesture:Login</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;1,900&display=swap" rel="stylesheet">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-base64@2.5.2/base64.min.js"></script>
+    <title>Guesture:Login-Test</title>
 
 </head>
 
@@ -18,15 +25,15 @@
         <div class="loginTop">
             <p class="login">Login</p>
         </div>
-        <div id="invalid" class="credentials" style="display: none;">
-            <p class="invalid">
-                Invalid login credentials
+        <div th:if="${showError}" id="invalid" class="credentials" >
+            <p class="invalid" th:text="${errorMsg}">
+
             </p>
         </div>
         <form name="form-login" th:action="@{/login}" method="post">
             <div class="inputTop">
                 <input type="text" name="username" id="username" class="inputTxt" placeholder="Email or Mobile Number">
-                <p class="error" style="display: none;"> This field is required</p>
+                <p class="error" style="display: none;" id="loginError"> This field is required</p>
             </div>
             <div class="passwordPart">
                 <div class="password" id="pswdBorder">
@@ -39,13 +46,13 @@
                     </div>
                     <div class="clear"></div>
                 </div>
-                <p class="error" style="display: none;"> This field is required</p>
+                <p class="error" style="display: none;" id="passwordError"> This field is required</p>
             </div>
             <div class="forgotTop" id="forgot">
                 <span class="forgot" onclick="nextNav('/user/forgot-password')">Forgot password?</span>
             </div>
             <div class="btnTop">
-                <button class="loginBtn" type="submit">Login
+                <button class="loginBtn" type="button" id="btnLogin">Login
                 </button>
             </div>
         </form>
@@ -58,7 +65,7 @@
 <script th:inline="javascript">
     var baseURL = [[${baseURL}]];
 </script>
-<script src="js/login-screen.js"></script>
+<script src="/js/login-screen.js"></script>
 </body>
 
 </html>

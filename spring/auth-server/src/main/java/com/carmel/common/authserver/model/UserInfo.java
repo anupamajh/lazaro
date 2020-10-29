@@ -9,10 +9,11 @@ public class UserInfo implements Serializable {
     private String fullName;
     private String userName;
     private String phone;
+    private String email;
     private Date lastLogin;
     private String lastLoginFrom;
     private int accountStatus;
-    private int isOperator;
+    private int isGod;
     private String clientId;
 
     private Principal principal;
@@ -26,9 +27,10 @@ public class UserInfo implements Serializable {
         this.fullName = user.getUserName();
         this.userName = user.getUserName();
         this.phone = user.getPhone();
+        this.email = user.getEmail();
         this.lastLogin = user.getLastLogin();
         this.accountStatus = user.getAccountStatus();
-        this.isOperator = user.getIsOperator();
+        this.isGod = user.getIsGod();
         this.clientId = user.getClient().getClientId();
     }
 
@@ -88,14 +90,6 @@ public class UserInfo implements Serializable {
         this.accountStatus = accountStatus;
     }
 
-    public int getIsOperator() {
-        return isOperator;
-    }
-
-    public void setIsOperator(int isOperator) {
-        this.isOperator = isOperator;
-    }
-
     public String getClientId() {
         return clientId;
     }
@@ -110,5 +104,21 @@ public class UserInfo implements Serializable {
 
     public void setPrincipal(Principal principal) {
         this.principal = principal;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getIsGod() {
+        return isGod;
+    }
+
+    public void setIsGod(int isGod) {
+        this.isGod = isGod;
     }
 }

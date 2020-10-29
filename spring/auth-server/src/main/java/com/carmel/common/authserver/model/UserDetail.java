@@ -24,6 +24,10 @@ public class UserDetail extends User implements UserDetails {
             });
         });
         grantedAuthorities.add(new SimpleGrantedAuthority("USER"));
+        if(this.getIsGod() == 1){
+            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_GOD"));
+
+        }
         return grantedAuthorities;
     }
 

@@ -35,9 +35,11 @@ public class User implements Serializable {
         this.password = user.getPassword();
         this.phone = user.getPhone();
         this.accountStatus = user.getAccountStatus();
-        this.isOperator = user.getIsOperator();
+        this.isGod = user.getIsGod();
+        this.email = user.getEmail();
         this.isDeleted = user.getIsDeleted();
         this.roles = user.roles;
+        this.isGod = user.getIsGod();
     }
 
     @Id
@@ -69,6 +71,10 @@ public class User implements Serializable {
     @Length(max = 100)
     private String phone;
 
+    @Column(name = "email")
+    @Length(max = 100)
+    private String email;
+
     @Column(name = "last_login")
     private Date lastLogin;
 
@@ -79,8 +85,8 @@ public class User implements Serializable {
     @Column(name = "account_status")
     private int accountStatus;
 
-    @Column(name = "is_operator")
-    private int isOperator;
+    @Column(name = "is_god")
+    private int isGod;
 
     @Column(name = "created_by")
     @Length(max = 40)
@@ -203,14 +209,6 @@ public class User implements Serializable {
         this.accountStatus = accountStatus;
     }
 
-    public int getIsOperator() {
-        return isOperator;
-    }
-
-    public void setIsOperator(int isOperator) {
-        this.isOperator = isOperator;
-    }
-
     public String getCreatedBy() {
         return createdBy;
     }
@@ -297,5 +295,21 @@ public class User implements Serializable {
 
     public void setDefaultOrganization(Organization defaultOrganization) {
         this.defaultOrganization = defaultOrganization;
+    }
+
+    public int getIsGod() {
+        return isGod;
+    }
+
+    public void setIsGod(int isGod) {
+        this.isGod = isGod;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
