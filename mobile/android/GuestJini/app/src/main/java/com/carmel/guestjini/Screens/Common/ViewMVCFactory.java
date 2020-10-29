@@ -52,6 +52,8 @@ import com.carmel.guestjini.Screens.ForgotPassword.ForgotPasswordViewMVC;
 import com.carmel.guestjini.Screens.ForgotPassword.ForgotPasswordViewMVCImpl;
 import com.carmel.guestjini.Screens.Login.LoginViewMVC;
 import com.carmel.guestjini.Screens.Login.LoginViewMVCImpl;
+import com.carmel.guestjini.Screens.OTP.OTPViewMVC;
+import com.carmel.guestjini.Screens.OTP.OTPViewMVCImpl;
 import com.carmel.guestjini.Screens.Settings.ChangePassword.ChangePasswordViewMVC;
 import com.carmel.guestjini.Screens.Settings.ChangePassword.ChangePasswordViewMVCImpl;
 import com.carmel.guestjini.Screens.Settings.MyInterests.InterestCategoryItem.InterestCategoryItemViewMVC;
@@ -399,6 +401,13 @@ public class ViewMVCFactory {
                 layoutInflater,
                 parent,
                 this
+        );
+    }
+
+    public OTPViewMVC getOTPViewMVC(@Nullable ViewGroup parent) {
+        return new OTPViewMVCImpl(
+                layoutInflater,
+                parent
         );
     }
 }

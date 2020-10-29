@@ -131,7 +131,7 @@
                         android:paddingTop="8dp"
                         android:paddingRight="12dp"
                         android:paddingBottom="8dp"
-                        android:text="This phone number iss not registered."
+                        android:text="Invalid OTP"
                         android:textColor="@color/colorMabel"
                         android:textSize="12sp"
                         android:visibility="gone"
@@ -151,7 +151,7 @@
                             android:layout_marginTop="20dp"
                             android:background="@drawable/edit_textbox"
                             android:elevation="3dp"
-                             android:inputType="phone"
+                            android:inputType="phone"
                             android:letterSpacing="0.05"
                             android:paddingLeft="16dp"
                             android:paddingTop="16dp"
@@ -159,6 +159,7 @@
                             android:shadowColor="@color/colorBlackRussian"
                             android:textColorHint="@color/colorSuvaGray"
                             android:textSize="14dp"
+                            android:maxLength="1"
                             app:fontFamily="@font/roboto_medium" />
                         <EditText
                             android:id="@+id/txtOTP2"
@@ -177,6 +178,7 @@
                             android:shadowColor="@color/colorBlackRussian"
                             android:textColorHint="@color/colorSuvaGray"
                             android:textSize="14dp"
+                            android:maxLength="1"
                             app:fontFamily="@font/roboto_medium" />
                         <EditText
                             android:id="@+id/txtOTP3"
@@ -195,6 +197,7 @@
                             android:shadowColor="@color/colorBlackRussian"
                             android:textColorHint="@color/colorSuvaGray"
                             android:textSize="14dp"
+                            android:maxLength="1"
                             app:fontFamily="@font/roboto_medium" />
                         <EditText
                             android:id="@+id/txtOTP4"
@@ -213,16 +216,29 @@
                             android:shadowColor="@color/colorBlackRussian"
                             android:textColorHint="@color/colorSuvaGray"
                             android:textSize="14dp"
+                            android:maxLength="1"
                             app:fontFamily="@font/roboto_medium" />
                     </RelativeLayout>
 
-
-
                     <TextView
-                        android:id="@+id/mobileNumberErrorField"
+                        android:id="@+id/txtResendOTP"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/layoutOTPBoxes"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="25dp"
+                        android:background="@drawable/underline"
+                        android:fontFamily="@font/roboto_medium"
+                        android:letterSpacing="0.05"
+                        android:text="Resend OTP"
+                        android:textColor="@color/colorSummerSky"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txtOTPError"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtResendOTP"
                         android:layout_marginTop="5dp"
                         android:fontFamily="@font/roboto_medium"
                         android:letterSpacing="0.05"
@@ -237,7 +253,7 @@
                         style="@style/button"
                         android:layout_width="110dp"
                         android:layout_height="48dp"
-                        android:layout_below="@id/mobileNumberErrorField"
+                        android:layout_below="@id/txtOTPError"
                         android:layout_centerHorizontal="true"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="20dp"

@@ -55,6 +55,7 @@ import com.carmel.guestjini.Screens.Community.PersonDetail.PersonDetailControlle
 import com.carmel.guestjini.Screens.ForgotPassword.ForgotPasswordController;
 import com.carmel.guestjini.Screens.Login.LoginController;
 import com.carmel.guestjini.Screens.Login.LoginEventBus;
+import com.carmel.guestjini.Screens.OTP.OTPController;
 import com.carmel.guestjini.Screens.Settings.ChangePassword.ChangePasswordController;
 import com.carmel.guestjini.Screens.Settings.MyInterests.MyInterestController;
 import com.carmel.guestjini.Screens.Settings.MyProfile.MyProfileController;
@@ -621,6 +622,16 @@ public class ControllerCompositionRoot {
                 getScreensNavigator(),
                 getDialogsManager(),
                 getDialogsEventBus()
+        );
+    }
+
+    public OTPController getOTPController() {
+        return new OTPController(
+              getVerifyOTPUseCase(),
+              getRequestOTPUseCase(),
+              getSharedPreferenceHelper(),
+              getScreensNavigator(),
+              getDialogsManager()
         );
     }
 }

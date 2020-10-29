@@ -27,7 +27,7 @@ public class VerifyOTPUseCase extends BaseObservableViewMvc<VerifyOTPUseCase.Lis
         this.guestJiniAPI = guestJiniAPI;
     }
 
-    public void sendOTPAndNotify(
+    public void verifyOTPAndNotify(
             String sessionId,
             String otp
     ) {

@@ -156,6 +156,7 @@ public class AppAccessRequestController implements
     @Override
     public void onOTPRequestSuccess(OTPResponse otpResponse) {
         sharedPreferenceHelper.saveStringValue("session_id", otpResponse.getDetails());
+        sharedPreferenceHelper.saveStringValue("mobile", mobileNumber);
         sharedPreferenceHelper.commit();
         viewMVC.showOTPSentToast();
         viewMVC.hideProgressIndication();
