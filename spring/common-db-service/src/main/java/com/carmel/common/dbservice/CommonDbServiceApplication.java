@@ -21,6 +21,11 @@ public class CommonDbServiceApplication {
     @Autowired
     RestTemplate restTemplate;
 
+    @Bean
+    RestTemplate externalRestTemplate(){
+        return  new RestTemplate();
+    }
+
     @Autowired
     DataSource dataSource;
 

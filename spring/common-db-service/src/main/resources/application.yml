@@ -80,3 +80,5 @@ carmel:
   instagramConfigPath: /Users/pete/SVN/carmel/GuestJini-Development/spring/common-db-service/src/main/resources/instagram.yml
   twitterConfigPath: /Users/pete/SVN/carmel/GuestJini-Development/spring/common-db-service/src/main/resources/twitter.yml
   googleKey: AIzaSyAnt2NlFuXDQAimRh29sLvag5UrmjaQReo
+  OTPGatewayURL: https://2factor.in/API/V1/
+  OTPGateWayKey:  b3d3355a-199a-11eb-b380-0200cd936042

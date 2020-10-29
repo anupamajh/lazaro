@@ -20,6 +20,10 @@ public class YAMLConfig {
     private String twitterConfigPath;
     private String googleKey;
 
+    private String OTPGatewayURL;
+
+    private String OTPGateWayKey;
+
     public YAMLConfig() {
     }
 
@@ -109,5 +113,21 @@ public class YAMLConfig {
 
     public void setTwitterConfigPath(String twitterConfigPath) {
         this.twitterConfigPath = twitterConfigPath;
+    }
+
+    public String getOTPGatewayURL() {
+        return OTPGatewayURL;
+    }
+
+    public void setOTPGatewayURL(String OTPGatewayURL) {
+        this.OTPGatewayURL = OTPGatewayURL;
+    }
+
+    public String getOTPGateWayKey() {
+        return OTPGateWayKey;
+    }
+
+    public void setOTPGateWayKey(String OTPGateWayKey) {
+        this.OTPGateWayKey = OTPGateWayKey;
     }
 }
