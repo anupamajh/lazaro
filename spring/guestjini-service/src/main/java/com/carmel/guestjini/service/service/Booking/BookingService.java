@@ -2,12 +2,15 @@ package com.carmel.guestjini.service.service.Booking;
 
 import com.carmel.guestjini.service.model.Booking.Booking;
 import com.carmel.guestjini.service.model.Booking.Guest;
+import com.carmel.guestjini.service.model.Principal.UserInfo;
+import com.carmel.guestjini.service.response.Booking.BookingResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface BookingService {
@@ -28,4 +31,6 @@ public interface BookingService {
     Booking doCancelCheckIn(Booking booking)  throws Exception;
 
     Optional<Booking> findByPhoneAndBookingStatus(String mobileNumber, int bookingStatus);
+
+    BookingResponse checkPhoneNumber(Map<String, String> formData, UserInfo userInfo) throws Exception;
 }

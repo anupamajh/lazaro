@@ -19,4 +19,6 @@ public interface BookingRepository extends JpaRepository<Booking, String> {
     Page<Booking> findAll(Specification<Booking> textInAllColumns, Pageable pageable);
 
     Optional<Booking> findByPhoneAndBookingStatus(String mobileNumber, int BookingStatus);
+
+    List<Booking> findAllByIsDeletedAndClientIdAndPhone(int isDeleted, String clientId, String phone);
 }

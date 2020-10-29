@@ -97,7 +97,6 @@ public class TaskTicketController {
                 taskTicket.setCreatedBy(userInfo.getId());
                 taskTicket.setCreationTime(new Date());
                 taskTicket.setTicketNo(String.valueOf(System.nanoTime()));
-                taskTicket.setTicketStatus(TicketStatus.NOT_STARTED);
             } else {
                 taskTicket.setLastModifiedBy(userInfo.getId());
                 taskTicket.setLastModifiedTime(new Date());

@@ -29,8 +29,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: amazon@carmelsolutions.net
-    password: P@ssw0rd
+    username: prasanna.pete@carmelsolutions.net
+    password: TH_13rthahalli
     properties:
       mail:
         smtp:
@@ -71,12 +71,13 @@ eureka:
 security:
   oauth2:
     resource:
-#      token-info-uri: http://68.183.246.143:8000/auth/oauth/check_token
+#      token-info-uri: http://68.183.246.143:8000/auth/oauth/token
       token-info-uri: http://139.59.32.238:8000/auth/oauth/check_token
     client:
       client-id: 21e43c55-28ef-478a-ae65-dc896e5eaa34
       client-secret: P@ssw0rd
 carmel:
+  ticketAgents: 'chitrav@shanders.com,kariappa@guesture.in,nanjappa@guesture.in,prasanna.pete@gmail.com'
   baseUrl: http://localhost:8100
   imageSavePath: /opt/carmel/storage/images/
   userInfoURL: http://common-db-service/user/me
@@ -106,7 +107,7 @@ carmel:
   oauth2:
     client:
       grantType: client_credentials
-      clientId: 1ae3e919-0c52-4054-860f-0eaa79815734
+      clientId: 21e43c55-28ef-478a-ae65-dc896e5eaa34
       clientSecret: P@ssw0rd
-      accessTokenUri: http://139.59.32.238:8005/oauth/token
+      accessTokenUri: http://139.59.32.238:8000/auth/oauth/token
 

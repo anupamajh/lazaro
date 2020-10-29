@@ -13,9 +13,11 @@ import com.carmel.guestjini.service.model.Booking.Guest;
 import com.carmel.guestjini.service.model.Booking.KYC;
 import com.carmel.guestjini.service.model.DTO.Accounts.AccountTicketDTO;
 import com.carmel.guestjini.service.model.DTO.Common.UserDTO;
+import com.carmel.guestjini.service.model.Principal.UserInfo;
 import com.carmel.guestjini.service.repository.Booking.BookingRepository;
 import com.carmel.guestjini.service.response.Accounts.AccountReceiptsResponse;
 import com.carmel.guestjini.service.response.Accounts.AccountTicketResponse;
+import com.carmel.guestjini.service.response.Booking.BookingResponse;
 import com.carmel.guestjini.service.response.Common.UserResponse;
 import com.carmel.guestjini.service.service.Accounts.AccountReceiptService;
 import com.carmel.guestjini.service.service.Accounts.AccountTicketService;
@@ -26,10 +28,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static com.carmel.guestjini.service.specification.Booking.BookingSpecification.checkInventoryAvailability;
 
@@ -183,7 +182,7 @@ public class BookingServiceImpl implements BookingService {
             user.setPassword("");
             UserResponse userResponse = userService.saveUser(user);
             if (!userResponse.isSuccess()) {
-                if(!userResponse.getError().contains("Duplicate")) {
+                if (!userResponse.getError().contains("Duplicate")) {
                     throw new Exception(userResponse.getError());
                 }
             }
@@ -331,5 +330,29 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public Optional<Booking> findByPhoneAndBookingStatus(String mobileNumber, int bookingStatus) {
         return bookingRepository.findByPhoneAndBookingStatus(mobileNumber, bookingStatus);
+    }
+
+    @Override
+    public BookingResponse checkPhoneNumber(Map<String, String> formData, UserInfo userInfo) throws Exception {
+        BookingResponse bookingResponse = new BookingResponse();
+        try {
+            String phone = formData.get("phone") == null ? null : String.valueOf(formData.get("phone"));
+            if (phone == null) {
+                throw new Exception("Phone number not received");
+            }
+            List<Booking> bookings = bookingRepository.findAllByIsDeletedAndClientIdAndPhone(0, userInfo.getClient().getClientId(), phone);
+            if (bookings.size() > 0) {
+                throw new Exception("Phone number already used for booking");
+            }else{
+               UserResponse userResponse =  userService.checkPhoneNumber(formData);
+               if(userResponse.isSuccess() == false){
+                   throw new Exception("Phone number already registered");
+               }
+            }
+            bookingResponse.setSuccess(true);
+            return bookingResponse;
+        } catch (Exception ex) {
+            throw ex;
+        }
     }
 }

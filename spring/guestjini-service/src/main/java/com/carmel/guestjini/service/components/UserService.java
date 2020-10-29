@@ -16,6 +16,8 @@ import org.springframework.security.oauth2.provider.authentication.OAuth2Authent
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Map;
+
 @Component
 public class UserService {
 
@@ -30,7 +32,7 @@ public class UserService {
     @Autowired
     CarmelConfig carmelConfig;
 
-    public UserResponse saveUser(UserDTO user) throws Exception{
+    public UserResponse saveUser(UserDTO user) throws Exception {
         try {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             OAuth2AuthenticationDetails oAuth2AuthenticationDetails = (OAuth2AuthenticationDetails) auth.getDetails();
@@ -52,7 +54,7 @@ public class UserService {
         }
     }
 
-     public UserResponse signUpGuest(BookingRequest bookingRequest) throws Exception {
+    public UserResponse signUpGuest(BookingRequest bookingRequest) throws Exception {
         try {
             UserDTO userDTO = new UserDTO();
             userDTO.setFullName(bookingRequest.getFullName());
@@ -72,6 +74,31 @@ public class UserService {
             ResponseEntity<UserResponse> result =
                     clientAuthenticated.postForEntity(
                             carmelConfig.getDbServiceURL() + "/user/guest-sign-up",
+                            entity,
+                            UserResponse.class
+                    );
+            return result.getBody();
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
+    public UserResponse checkPhoneNumber(Map<String, String> formData) throws Exception {
+        try {
+            UserDTO userDTO = new UserDTO();
+            userDTO.setPhone(formData.get("phone"));
+            userDTO.setFullName(formData.get("fullName"));
+            userDTO.setPassword("");
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            ObjectMapper objectMapper = new ObjectMapper();
+            String postJsonString = objectMapper.writeValueAsString(userDTO);
+            JSONParser parser = new JSONParser(JSONParser.MODE_PERMISSIVE);
+            JSONObject postData = (JSONObject) parser.parse(postJsonString);
+            HttpEntity<String> entity = new HttpEntity<String>(postData.toJSONString(), headers);
+            ResponseEntity<UserResponse> result =
+                    clientAuthenticated.postForEntity(
+                            carmelConfig.getDbServiceURL() + "/user/check-phone-number",
                             entity,
                             UserResponse.class
                     );

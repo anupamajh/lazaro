@@ -145,6 +145,22 @@ public class BookingController {
         return bookingResponse;
     }
 
+    @RequestMapping(value = "/check-phone-number", method = RequestMethod.POST)
+    public BookingResponse checkPhoneNumber(@RequestBody Map<String, String> formData) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        logger.trace("Entering");
+        BookingResponse bookingResponse = new BookingResponse();
+        try {
+            bookingResponse = bookingService
+                    .checkPhoneNumber(formData, userInfo);
+        } catch (Exception ex) {
+            bookingResponse.setSuccess(false);
+            bookingResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return bookingResponse;
+    }
+
     @RequestMapping(value = "/assign-inventory", method = RequestMethod.POST)
     public BookingResponse assignInventory(@RequestBody Map<String, String> formData) {
         UserInfo userInfo = userInformation.getUserInfo();
