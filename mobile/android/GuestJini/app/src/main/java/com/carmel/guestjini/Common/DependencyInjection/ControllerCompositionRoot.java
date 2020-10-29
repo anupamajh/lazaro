@@ -56,6 +56,7 @@ import com.carmel.guestjini.Screens.ForgotPassword.ForgotPasswordController;
 import com.carmel.guestjini.Screens.Login.LoginController;
 import com.carmel.guestjini.Screens.Login.LoginEventBus;
 import com.carmel.guestjini.Screens.OTP.OTPController;
+import com.carmel.guestjini.Screens.SetPassword.SetPasswordController;
 import com.carmel.guestjini.Screens.Settings.ChangePassword.ChangePasswordController;
 import com.carmel.guestjini.Screens.Settings.MyInterests.MyInterestController;
 import com.carmel.guestjini.Screens.Settings.MyProfile.MyProfileController;
@@ -92,6 +93,7 @@ import com.carmel.guestjini.Users.ResetPasswordUseCase;
 import com.carmel.guestjini.Users.SaveMyInterestUseCase;
 import com.carmel.guestjini.Users.SaveProfilePicUseCase;
 import com.carmel.guestjini.Users.SaveUserPreferenceUseCase;
+import com.carmel.guestjini.Users.SetPasswordUseCase;
 import com.carmel.guestjini.Users.VerifyOTPUseCase;
 
 public class ControllerCompositionRoot {
@@ -364,6 +366,10 @@ public class ControllerCompositionRoot {
         return new CreateAccountUseCase(getAuthenticatedGuestJiniAPI());
     }
 
+    private SetPasswordUseCase getSetPasswordUseCase() {
+        return new SetPasswordUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
     public SharedPreferenceHelper getSharedPreferenceHelper() {
         return new SharedPreferenceHelper(preferences, editor);
 
@@ -632,12 +638,21 @@ public class ControllerCompositionRoot {
 
     public OTPController getOTPController() {
         return new OTPController(
-              getVerifyOTPUseCase(),
-              getRequestOTPUseCase(),
-              getCreateAccountUseCase(),
-              getSharedPreferenceHelper(),
-              getScreensNavigator(),
-              getDialogsManager()
+                getVerifyOTPUseCase(),
+                getRequestOTPUseCase(),
+                getCreateAccountUseCase(),
+                getSharedPreferenceHelper(),
+                getScreensNavigator(),
+                getDialogsManager()
+        );
+    }
+
+    public SetPasswordController getSetPasswordController() {
+        return new SetPasswordController(
+                getSetPasswordUseCase(),
+                getSharedPreferenceHelper(),
+                getScreensNavigator(),
+                getDialogsManager()
         );
     }
 }

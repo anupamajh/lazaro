@@ -2,7 +2,6 @@ package com.carmel.guestjini.Screens.Support.TicketCategory;
 
 import com.carmel.guestjini.Networking.Tickets.TicketCategory;
 import com.carmel.guestjini.Screens.Common.Views.ObservableViewMvc;
-import com.carmel.guestjini.Screens.Support.KBList.KBListViewMVC;
 
 import java.util.List;
 

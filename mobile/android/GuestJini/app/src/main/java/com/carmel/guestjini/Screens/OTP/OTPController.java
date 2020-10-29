@@ -140,7 +140,9 @@ public class OTPController
 
     @Override
     public void onAccountCrated(UserResponse userResponse) {
+        viewMVC.hideProgressIndication();
         viewMVC.showAccountCreated();
+        mScreensNavigator.toSetPasswordScreen();
     }
 
     @Override

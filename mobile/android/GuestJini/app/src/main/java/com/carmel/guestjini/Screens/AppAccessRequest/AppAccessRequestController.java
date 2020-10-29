@@ -4,11 +4,9 @@ import com.carmel.guestjini.Authentication.AttemptClientLoginUseCase;
 import com.carmel.guestjini.Networking.Booking.BookingResponse;
 import com.carmel.guestjini.Networking.OTP.OTPResponse;
 import com.carmel.guestjini.Networking.Users.AccessToken;
-import com.carmel.guestjini.Networking.Users.AppAccessRequestResponse;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
 import com.carmel.guestjini.Screens.Common.SharedPreference.SharedPreferenceHelper;
-import com.carmel.guestjini.Users.AppAccessRequestUseCase;
 import com.carmel.guestjini.Users.CheckPhoneNumberUseCase;
 import com.carmel.guestjini.Users.RequestOTPUseCase;
 
@@ -107,6 +105,7 @@ public class AppAccessRequestController implements
 
     @Override
     public void onCheckPhoneNumberSuccess(BookingResponse bookingResponse) {
+        viewMVC.hideProgressIndication();
         if (bookingResponse.isSuccess()) {
             if (bookingResponse.isHasUser()) {
                 viewMVC.showHasUser();

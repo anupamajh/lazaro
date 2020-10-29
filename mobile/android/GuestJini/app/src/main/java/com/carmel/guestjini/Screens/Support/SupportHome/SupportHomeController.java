@@ -6,7 +6,6 @@ import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptDialogEvent;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
-import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketController;
 import com.carmel.guestjini.TicketCategory.FetchTicketCategoryByParentIdUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketCountUseCase;
 import com.google.gson.GsonBuilder;

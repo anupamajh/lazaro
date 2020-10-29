@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
-import com.carmel.guestjini.Screens.Support.TicketCategory.TicketCategoryListFragment;
 
 public class TicketListFragment
         extends BaseFragment {

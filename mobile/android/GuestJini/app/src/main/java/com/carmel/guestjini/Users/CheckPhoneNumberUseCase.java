@@ -2,7 +2,6 @@ package com.carmel.guestjini.Users;
 
 import com.carmel.guestjini.Networking.Booking.BookingResponse;
 import com.carmel.guestjini.Networking.GuestJiniAPI;
-import com.carmel.guestjini.Networking.Users.AppAccessRequestResponse;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
 
 import java.util.HashMap;

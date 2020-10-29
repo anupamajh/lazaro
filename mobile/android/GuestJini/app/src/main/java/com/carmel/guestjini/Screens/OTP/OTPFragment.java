@@ -9,9 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.carmel.guestjini.Screens.AppAccessRequest.AppAccessRequestController;
-import com.carmel.guestjini.Screens.AppAccessRequest.AppAccessRequestFragment;
-import com.carmel.guestjini.Screens.AppAccessRequest.AppAccessRequestViewMVC;
 import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
 
 public class OTPFragment  extends BaseFragment {

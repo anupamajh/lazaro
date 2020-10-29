@@ -17,6 +17,7 @@ import com.carmel.guestjini.Screens.Community.PersonDetail.PersonDetailFragment;
 import com.carmel.guestjini.Screens.ForgotPassword.ForgotPasswordFragment;
 import com.carmel.guestjini.Screens.Login.LoginFragment;
 import com.carmel.guestjini.Screens.OTP.OTPFragment;
+import com.carmel.guestjini.Screens.SetPassword.SetPasswordFragment;
 import com.carmel.guestjini.Screens.Settings.ChangePassword.ChangePasswordFragment;
 import com.carmel.guestjini.Screens.Settings.MyInterests.MyInterestFragment;
 import com.carmel.guestjini.Screens.Settings.MyProfile.MyProfileFragment;
@@ -196,5 +197,9 @@ public class ScreensNavigator {
 
     public void toOTPScreen() {
         mFragmentFrameHelper.replaceFragment(OTPFragment.createFragment());
+    }
+
+    public void toSetPasswordScreen() {
+        mFragmentFrameHelper.replaceFragment(SetPasswordFragment.createFragment());
     }
 }

@@ -15,7 +15,6 @@ import com.carmel.guestjini.Networking.Tickets.TicketCategory;
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Screens.Common.ViewMVCFactory;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
-import com.carmel.guestjini.Screens.Support.SupportHome.SupportHomeViewMVC;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;

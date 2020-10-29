@@ -5,7 +5,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.carmel.guestjini.Networking.KnowledgeBase.KB;
 import com.carmel.guestjini.Networking.Tickets.TicketCategory;
 import com.carmel.guestjini.Screens.Common.ViewMVCFactory;
 import com.carmel.guestjini.Screens.Support.TicketCategory.TicketCategoryItem.TicketCategoryItemViewMVC;

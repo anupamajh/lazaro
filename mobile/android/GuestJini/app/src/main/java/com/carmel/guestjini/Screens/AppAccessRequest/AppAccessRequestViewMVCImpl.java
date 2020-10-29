@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class AppAccessRequestViewMVCImpl
         extends BaseObservableViewMvc<AppAccessRequestViewMVC.Listener>

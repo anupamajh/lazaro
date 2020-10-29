@@ -1,16 +1,11 @@
 package com.carmel.guestjini.Screens.Support.TicketCategory;
 
 
-import com.carmel.guestjini.KnowledgeBase.FetchKBListUseCase;
-import com.carmel.guestjini.Networking.KnowledgeBase.KB;
 import com.carmel.guestjini.Networking.Tickets.TicketCategory;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptDialogEvent;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
-import com.carmel.guestjini.Screens.Support.KBList.KBListController;
-import com.carmel.guestjini.Screens.Support.KBList.KBListViewMVC;
-import com.carmel.guestjini.Screens.Support.SupportHome.SupportHomeController;
 import com.carmel.guestjini.TicketCategory.FetchTicketCategoryByParentIdUseCase;
 import com.google.gson.GsonBuilder;
 

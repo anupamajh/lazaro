@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.FrameLayout;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.carmel.guestjini.Screens.Common.BaseActivityView.BaseActivityMVCView;
 import com.carmel.guestjini.Screens.Common.Controllers.ActivityResultDispatcher;
@@ -13,14 +12,12 @@ import com.carmel.guestjini.Screens.Common.Controllers.ActivityResultListener;
 import com.carmel.guestjini.Screens.Common.Controllers.BackPressDispatcher;
 import com.carmel.guestjini.Screens.Common.Controllers.BackPressedListener;
 import com.carmel.guestjini.Screens.Common.Controllers.BaseActivity;
-import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
 import com.carmel.guestjini.Screens.Common.FragmentHelper.FragmentFrameWrapper;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
 import com.carmel.guestjini.Screens.Common.SharedPreference.SharedPreferenceHelper;
 import com.carmel.guestjini.Screens.Login.LoginEventBus;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class MainActivity extends BaseActivity implements

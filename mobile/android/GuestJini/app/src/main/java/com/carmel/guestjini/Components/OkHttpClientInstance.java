@@ -3,7 +3,6 @@ package com.carmel.guestjini.Components;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-
 import com.carmel.guestjini.Networking.Common.AuthServiceHolder;
 
 import java.io.IOException;

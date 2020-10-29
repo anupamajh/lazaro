@@ -238,4 +238,7 @@ public interface GuestJiniAPI {
 
     @POST("/common/user/phone-number-sign-up")
     Call<UserResponse> createUserAccount(@Body Map<String, String> postData);
+
+    @POST("/common/user/set-password")
+    Call<GenericResponse> setPassword(@Body Map<String, String> postData);
 }

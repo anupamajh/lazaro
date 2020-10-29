@@ -2,11 +2,8 @@ package com.carmel.guestjini.TicketCategory;
 
 import com.carmel.guestjini.Common.BaseObservable;
 import com.carmel.guestjini.Networking.GuestJiniAPI;
-import com.carmel.guestjini.Networking.Tickets.Ticket;
 import com.carmel.guestjini.Networking.Tickets.TicketCategory;
 import com.carmel.guestjini.Networking.Tickets.TicketCategoryResponse;
-import com.carmel.guestjini.Networking.Tickets.TicketResponse;
-import com.carmel.guestjini.Tickets.FetchTicketListUseCase;
 
 import java.util.HashMap;
 import java.util.List;

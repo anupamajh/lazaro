@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-
 import com.carmel.guestjini.Common.Constants;
 import com.carmel.guestjini.Networking.Common.AuthServiceHolder;
 import com.carmel.guestjini.Networking.Users.AccessToken;
