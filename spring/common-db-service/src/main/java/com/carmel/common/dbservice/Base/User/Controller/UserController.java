@@ -22,6 +22,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.common.OAuth2RefreshToken;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -90,6 +91,37 @@ public class UserController {
                     .guestSignUp(user);
         } catch (Exception ex) {
             usersResponse.setSuccess(true);
+            usersResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return usersResponse;
+    }
+
+
+    @RequestMapping(value = "/phone-number-sign-up", method = RequestMethod.POST)
+    public UsersResponse phoneNumberSignUp(@Valid @RequestBody User user) {
+        logger.trace("Entering");
+        UsersResponse usersResponse = new UsersResponse();
+        try {
+            usersResponse = userService
+                    .phoneNumberSignUp(user);
+        } catch (Exception ex) {
+            usersResponse.setSuccess(false);
+            usersResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return usersResponse;
+    }
+
+    @RequestMapping(value = "/check-phone-number", method = RequestMethod.POST)
+    public UsersResponse checkPhoneNumber(@Valid @RequestBody User user) {
+        logger.trace("Entering");
+        UsersResponse usersResponse = new UsersResponse();
+        try {
+            usersResponse = userService
+                    .checkPhoneNumber(user);
+        } catch (Exception ex) {
+            usersResponse.setSuccess(false);
             usersResponse.setError(ex.getMessage());
         }
         logger.trace("Exiting");
@@ -338,7 +370,11 @@ public class UserController {
         if (authHeader != null) {
             String tokenValue = authHeader.replace("Bearer", "").trim();
             OAuth2AccessToken accessToken = jdbcTokenStore.readAccessToken(tokenValue);
+            OAuth2RefreshToken refreshToken = jdbcTokenStore.readRefreshToken(tokenValue);
             jdbcTokenStore.removeAccessToken(accessToken);
+            if (refreshToken!=null){
+                jdbcTokenStore.removeRefreshToken(refreshToken);
+            }
         }
 
         return new UsersResponse();

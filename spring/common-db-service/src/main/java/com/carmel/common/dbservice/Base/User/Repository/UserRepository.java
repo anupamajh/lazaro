@@ -30,4 +30,10 @@ public interface UserRepository extends JpaRepository<User, String> {
     Page<User> findAll(Specification<User> textInAllColumns, Pageable pageable);
 
     List<User> findAllByIdIn(List<String> userIds);
+
+    List<User> findAllByIsDeletedAndPhone(int isDeleted, String phone);
+
+    List<User> findAllByIsDeletedAndEmail(int isDeleted, String email);
+
+    List<User> findAllByIsDeletedAndUserName(int isDeleted, String userName);
 }

@@ -29,52 +29,70 @@ public class User implements Serializable {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
+    
     @Column(name = "full_name")
     @Length(max = 100, min = 1, message = "Full name length should be between 1 and 100")
     @NotEmpty(message = "Full Name cannot be empty")
     @NotBlank(message = "Full Name cannot be blank")
     @NotNull(message = "Full Name cannot be empty")
     private String fullName;
+
     @Column(name = "user_name")
     @Length(max = 100, min = 1, message = "User name length should be between 1 and 100")
-    @NotEmpty(message = "User Name cannot be empty")
-    @NotBlank(message = "User Name cannot be blank")
-    @NotNull(message = "User Name cannot be empty")
     private String userName;
+
     @Column(name = "password")
     @Length(max = 1000)
     private String password;
+
     @Column(name = "phone")
     @Length(max = 100)
     private String phone;
+
+    @Column(name = "email")
+    @Length(max = 100)
+    private String email;
+
     @Column(name = "last_login")
     private Date lastLogin;
+
     @Column(name = "last_login_from")
     @Length(max = 100)
     private String lastLoginFrom;
+
     @Column(name = "account_status")
     private int accountStatus;
-    @Column(name = "is_operator")
-    private int isOperator;
+
+    @Column(name = "is_god", columnDefinition = "int default 0")
+    private int isGod;
+
     @Column(name = "gender")
     private int gender;
+
     @Column(name = "created_by")
     @Length(max = 40)
     private String createdBy;
+
     @Column(name = "creation_time")
     private Date creationTime;
+
     @Column(name = "last_modified_by")
     @Length(max = 40)
     private String lastModifiedBy;
+
     @Column(name = "last_Modified_time")
     private Date lastModifiedTime;
+
     @Column(name = "is_deleted")
     private int isDeleted;
+
     @Column(name = "deleted_by")
     @Length(max = 40)
     private String deletedBy;
+
     @Column(name = "deleted_time")
     private Date deletedTime;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "g_role_accounts",
             joinColumns = {
@@ -86,6 +104,7 @@ public class User implements Serializable {
     )
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Role> roles;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "g_user_orgs",
             joinColumns = {
@@ -97,9 +116,11 @@ public class User implements Serializable {
     )
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Organization> organizations;
+
     @ManyToOne
     @JoinColumn(name = "org_id")
     private Organization defaultOrganization;
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
@@ -119,8 +140,9 @@ public class User implements Serializable {
         this.userName = user.getUserName();
         this.password = user.getPassword();
         this.phone = user.getPhone();
+        this.email = user.getEmail();
         this.accountStatus = user.getAccountStatus();
-        this.isOperator = user.getIsOperator();
+        this.isGod = user.getIsGod();
         this.isDeleted = user.getIsDeleted();
         this.roles = user.roles;
     }
@@ -187,14 +209,6 @@ public class User implements Serializable {
 
     public void setAccountStatus(int accountStatus) {
         this.accountStatus = accountStatus;
-    }
-
-    public int getIsOperator() {
-        return isOperator;
-    }
-
-    public void setIsOperator(int isOperator) {
-        this.isOperator = isOperator;
     }
 
     public String getCreatedBy() {
@@ -293,5 +307,19 @@ public class User implements Serializable {
         this.gender = gender;
     }
 
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getIsGod() {
+        return isGod;
+    }
+
+    public void setIsGod(int isGod) {
+        this.isGod = isGod;
+    }
 }

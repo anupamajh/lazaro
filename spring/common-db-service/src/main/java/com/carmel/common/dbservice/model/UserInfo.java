@@ -24,10 +24,11 @@ public class UserInfo {
     private String fullName;
     private String userName;
     private String phone;
+    private String email;
     private Date lastLogin;
     private String lastLoginFrom;
     private int accountStatus;
-    private int isOperator;
+    private int isGod;
     private int gender;
     private Client client;
     private Organization defaultOrganization;
@@ -46,9 +47,10 @@ public class UserInfo {
         this.fullName = user.getFullName();
         this.userName = user.getUserName();
         this.phone = user.getPhone();
+        this.email = user.getEmail();
         this.lastLogin = user.getLastLogin();
         this.accountStatus = user.getAccountStatus();
-        this.isOperator = user.getIsOperator();
+        this.isGod = user.getIsGod();
         this.client = user.getClient();
         this.defaultOrganization = user.getDefaultOrganization();
         this.organizations = user.getOrganizations();
@@ -66,9 +68,10 @@ public class UserInfo {
         this.fullName = user.getUserName();
         this.userName = user.getUserName();
         this.phone = user.getPhone();
+        this.email = user.getEmail();
         this.lastLogin = user.getLastLogin();
         this.accountStatus = user.getAccountStatus();
-        this.isOperator = user.getIsOperator();
+        this.isGod = user.getIsGod();
         this.client = user.getClient();
         this.defaultOrganization = user.getDefaultOrganization();
         this.organizations = user.getOrganizations();
@@ -131,14 +134,6 @@ public class UserInfo {
         this.accountStatus = accountStatus;
     }
 
-    public int getIsOperator() {
-        return isOperator;
-    }
-
-    public void setIsOperator(int isOperator) {
-        this.isOperator = isOperator;
-    }
-
     public Principal getPrincipal() {
         return principal;
     }
@@ -193,5 +188,21 @@ public class UserInfo {
 
     public void setGender(int gender) {
         this.gender = gender;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getIsGod() {
+        return isGod;
+    }
+
+    public void setIsGod(int isGod) {
+        this.isGod = isGod;
     }
 }

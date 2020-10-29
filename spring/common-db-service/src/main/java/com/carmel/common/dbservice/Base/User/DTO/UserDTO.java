@@ -18,10 +18,11 @@ public class UserDTO {
     private String userName;
     private String password;
     private String phone;
+    private String email;
     private Date lastLogin;
     private String lastLoginFrom;
     private int accountStatus;
-    private int isOperator;
+    private int isGod;
     private int gender;
     private String createdBy;
     private Date creationTime;
@@ -38,16 +39,17 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO(User user){
+    public UserDTO(User user) {
         this.id = user.getId();
         this.fullName = user.getFullName();
         this.userName = user.getUserName();
         this.password = user.getPassword();
         this.phone = user.getPhone();
+        this.email = user.getEmail();
         this.lastLogin = user.getLastLogin();
         this.lastLoginFrom = user.getLastLoginFrom();
         this.accountStatus = user.getAccountStatus();
-        this.isOperator = user.getIsOperator();
+        this.isGod = user.getIsGod();
         this.gender = user.getGender();
         this.createdBy = user.getCreatedBy();
         this.creationTime = user.getCreationTime();
@@ -57,18 +59,18 @@ public class UserDTO {
         this.deletedBy = user.getDeletedBy();
         this.deletedTime = user.getDeletedTime();
         this.roles = new ArrayList<>();
-        if(user.getRoles() != null){
+        if (user.getRoles() != null) {
             user.getRoles().forEach(role -> {
                 this.roles.add(RoleDTO.getSimple(role));
             });
         }
         this.organizations = new ArrayList<>();
-        if (user.getOrganizations() != null){
+        if (user.getOrganizations() != null) {
             user.getOrganizations().forEach(organization -> {
                 this.organizations.add(OrganizationDTO.getSimple(organization));
             });
         }
-        if(user.getDefaultOrganization() != null) {
+        if (user.getDefaultOrganization() != null) {
             this.defaultOrganization = OrganizationDTO.getSimple(user.getDefaultOrganization());
         }
         this.client = ClientDTO.getSimple(user.getClient());
@@ -136,14 +138,6 @@ public class UserDTO {
 
     public void setAccountStatus(int accountStatus) {
         this.accountStatus = accountStatus;
-    }
-
-    public int getIsOperator() {
-        return isOperator;
-    }
-
-    public void setIsOperator(int isOperator) {
-        this.isOperator = isOperator;
     }
 
     public int getGender() {
@@ -248,5 +242,21 @@ public class UserDTO {
 
     public void setClient(Client client) {
         this.client = ClientDTO.getSimple(client);
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getIsGod() {
+        return isGod;
+    }
+
+    public void setIsGod(int isGod) {
+        this.isGod = isGod;
     }
 }

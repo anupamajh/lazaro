@@ -32,11 +32,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.validation.Valid;
+import java.nio.charset.Charset;
 import java.security.Principal;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.security.SecureRandom;
+import java.util.*;
 
 import static com.carmel.common.dbservice.Base.User.Specification.UserSpecification.textInAllColumns;
 
@@ -49,12 +48,15 @@ public class UserServiceImpl implements UserService {
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
+    static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    static SecureRandom rnd = new SecureRandom();
+
     @Autowired
     UserService userService;
 
     @Autowired
     UserRepository userRepository;
-    
+
     @Autowired
     AddressBookService addressBookService;
 
@@ -173,6 +175,113 @@ public class UserServiceImpl implements UserService {
         }
         return usersResponse;
     }
+
+    @Override
+    public UsersResponse phoneNumberSignUp(User user) throws Exception {
+        UserInfo userInfo = userInformation.getUserInfo();
+        logger.trace("Entering");
+        UsersResponse usersResponse = new UsersResponse();
+        try {
+            if (user.getId() == null) {
+                user.setId("");
+            }
+            user.setClient(userInfo.getClient());
+            logger.trace("Data:{}", objectMapper.writeValueAsString(user));
+            if (user.getId() == "") {
+                user = isDuplicateUser(user);
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+                user.setCreatedBy(userInfo.getId());
+                user.setCreationTime(new Date());
+                user.setClient(userInfo.getClient());
+            } else {
+                Optional<User> optionalUser = userRepository.findById(user.getId());
+                user.setPassword(optionalUser.get().getPassword());
+                user.setLastModifiedBy(userInfo.getId());
+                user.setLastModifiedTime(new Date());
+            }
+            User savedUser = this.save(user);
+            AddressBook addressBook = new AddressBook();
+            Optional<AddressBook> optionalAddressBook = addressBookService.findByUserId(savedUser.getId());
+            if (optionalAddressBook.isPresent()) {
+                addressBook = optionalAddressBook.get();
+            }
+            addressBook.setEmail1(user.getEmail());
+            addressBook.setPhone1(user.getPhone());
+            addressBook.setDisplayName(user.getFullName());
+            addressBook.setUserId(savedUser.getId());
+            addressBookService.save(addressBook);
+            usersResponse.setUser(savedUser);
+            usersResponse.setSuccess(true);
+            usersResponse.setError("");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            throw ex;
+        }
+        return usersResponse;
+    }
+
+    @Override
+    public UsersResponse checkPhoneNumber(User user) throws Exception {
+        UserInfo userInfo = userInformation.getUserInfo();
+        logger.trace("Entering");
+        UsersResponse usersResponse = new UsersResponse();
+        try {
+            if (user.getId() == null) {
+                user.setId("");
+            }
+            user.setClient(userInfo.getClient());
+            logger.trace("Data:{}", objectMapper.writeValueAsString(user));
+            user = isDuplicateUser(user);
+            usersResponse.setSuccess(true);
+            usersResponse.setUser(user);
+        }catch (Exception ex){
+            throw ex;
+        }
+        return usersResponse;
+    }
+
+    private User isDuplicateUser(User user) throws Exception {
+        boolean hasError = false;
+        if(user.getPhone() == null){
+            throw new Exception("Phone number cannot be null");
+        }
+        if(user.getPhone().equals("")){
+            throw new Exception("Phone number cannot be empty");
+        }
+        List<User> users = userRepository.findAllByIsDeletedAndPhone(0, user.getPhone());
+        if (users.size() > 0) {
+            hasError = true;
+            throw new Exception("Phone number already registered");
+        }
+
+        if (user.getEmail() == null) {
+            user.setEmail("");
+        }
+        if (!user.getEmail().equals("")) {
+            users = userRepository.findAllByIsDeletedAndEmail(0, user.getEmail());
+            if (users.size() > 0) {
+                hasError = true;
+                throw new Exception("Email already registered");
+            }
+        }
+        user.setUserName(generateUserName().toUpperCase());
+        users = userRepository.findAllByIsDeletedAndUserName(0, user.getUserName());
+        while (users.size() != 0) {
+            user.setUserName(generateUserName().toUpperCase());
+            users = userRepository.findAllByIsDeletedAndUserName(0, user.getUserName());
+        }
+        user.setPassword(user.getUserName());
+        return user;
+    }
+
+    private String generateUserName() {
+        int len = 8;
+        StringBuilder sb = new StringBuilder( len );
+        for( int i = 0; i < len; i++ )
+            sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
+        return sb.toString();
+    }
+
 
     @Override
     public UsersResponse moveToTrash(Map<String, String> formData) throws Exception {
@@ -485,7 +594,6 @@ public class UserServiceImpl implements UserService {
     public Optional<User> findById(String id) {
         return userRepository.findById(id);
     }
-
 
 
     @Override

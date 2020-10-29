@@ -70,4 +70,8 @@ public interface UserService {
     UsersResponse findAll(Specification<User> textInAllColumns, Pageable pageable) throws Exception;
 
     UsersResponse findAllByIdIn(List<String> userIds) throws Exception;
+
+    UsersResponse phoneNumberSignUp(User user) throws Exception;
+
+    UsersResponse checkPhoneNumber(User user) throws Exception;
 }
