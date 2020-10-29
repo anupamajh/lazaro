@@ -351,6 +351,7 @@ public class BookingServiceImpl implements BookingService {
             if (bookings.size() > 0) {
                 bookingResponse.setHasUser(false);
                 bookingResponse.setHasBooking(true);
+                bookingResponse.setBooking(bookings.get(0));
                 bookingResponse.setSuccess(true);
             }else{
                 bookingResponse.setHasUser(false);
