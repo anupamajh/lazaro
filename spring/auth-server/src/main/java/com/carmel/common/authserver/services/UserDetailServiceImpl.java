@@ -22,10 +22,10 @@ public class UserDetailServiceImpl  implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         Optional<User> optionalUser = userRepository.findByUserNameAndIsDeletedIs(userName, 0);
-        if(optionalUser.isEmpty()){
+        if(!optionalUser.isPresent()){
             optionalUser = userRepository.findByPhoneAndIsDeletedIs(userName, 0);
         }
-        if(optionalUser.isEmpty()){
+        if(!optionalUser.isPresent()){
             optionalUser = userRepository.findByEmailAndIsDeletedIs(userName, 0);
         }
         optionalUser.orElseThrow(()->new UsernameNotFoundException("Username or password is wrong!"));
