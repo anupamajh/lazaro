@@ -337,19 +337,26 @@ public class BookingServiceImpl implements BookingService {
         BookingResponse bookingResponse = new BookingResponse();
         try {
             String phone = formData.get("phone") == null ? null : String.valueOf(formData.get("phone"));
+
             if (phone == null) {
                 throw new Exception("Phone number not received");
             }
+            UserResponse userResponse =  userService.checkPhoneNumber(formData);
+            if(userResponse.isSuccess() == false){
+                bookingResponse.setHasUser(true);
+                bookingResponse.setSuccess(true);
+                return bookingResponse;
+            }
             List<Booking> bookings = bookingRepository.findAllByIsDeletedAndClientIdAndPhone(0, userInfo.getClient().getClientId(), phone);
             if (bookings.size() > 0) {
-                throw new Exception("Phone number already used for booking");
+                bookingResponse.setHasUser(false);
+                bookingResponse.setHasBooking(true);
+                bookingResponse.setSuccess(true);
             }else{
-               UserResponse userResponse =  userService.checkPhoneNumber(formData);
-               if(userResponse.isSuccess() == false){
-                   throw new Exception("Phone number already registered");
-               }
+                bookingResponse.setHasUser(false);
+                bookingResponse.setHasBooking(false);
+                bookingResponse.setSuccess(true);
             }
-            bookingResponse.setSuccess(true);
             return bookingResponse;
         } catch (Exception ex) {
             throw ex;

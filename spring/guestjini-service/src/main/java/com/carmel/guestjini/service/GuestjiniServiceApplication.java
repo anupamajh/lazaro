@@ -37,8 +37,6 @@ public class GuestjiniServiceApplication {
 		return new OAuth2RestTemplate(carmelOAuthDetails());
 	}
 
-
-
 	@PostConstruct
 	public void setupServices(){
 

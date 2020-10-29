@@ -17,6 +17,8 @@ public class BookingResponse {
     private long totalRecords;
     private long currentRecords;
     private boolean success;
+    private boolean hasBooking;
+    private boolean hasUser;
     private String error;
     private String inventoryId;
 
@@ -93,5 +95,21 @@ public class BookingResponse {
 
     public void setInventoryId(String inventoryId) {
         this.inventoryId = inventoryId;
+    }
+
+    public boolean isHasBooking() {
+        return hasBooking;
+    }
+
+    public void setHasBooking(boolean hasBooking) {
+        this.hasBooking = hasBooking;
+    }
+
+    public boolean isHasUser() {
+        return hasUser;
+    }
+
+    public void setHasUser(boolean hasUser) {
+        this.hasUser = hasUser;
     }
 }
