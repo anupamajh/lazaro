@@ -11,6 +11,7 @@ import com.carmel.guestjini.Tickets.FetchTicketCountUseCase;
 import com.google.gson.GsonBuilder;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SupportHomeController implements
@@ -128,7 +129,9 @@ public class SupportHomeController implements
 
     @Override
     public void onTicketCategoryItemClicked(TicketCategory ticketCategory) {
-        String ticketCategoryData = new GsonBuilder().create().toJson(ticketCategory, TicketCategory.class);
+        List<TicketCategory> ticketCategories = new ArrayList<>();
+        ticketCategories.add(ticketCategory);
+        String ticketCategoryData = new GsonBuilder().create().toJson(ticketCategories);
         mScreensNavigator.toTicketCategoryList(ticketCategory.getId(), ticketCategoryData);
     }
 

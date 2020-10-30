@@ -7,9 +7,12 @@ import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptDialogEvent;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
 import com.carmel.guestjini.TicketCategory.FetchTicketCategoryByParentIdUseCase;
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,8 +60,11 @@ public class TicketCategoryListController
 
     public void onStart(String parentId, String ticketCategoryData) {
         this.parentId = parentId;
-        parentTicketCategory = new GsonBuilder().create().fromJson(ticketCategoryData, TicketCategory.class);
-        ticketCategories.add(parentTicketCategory);
+        Type listType = new TypeToken<ArrayList<TicketCategory>>() {
+        }.getType();
+        List<TicketCategory> ticketCategoryList = new Gson().fromJson(ticketCategoryData, listType);
+        ticketCategories = ticketCategoryList;
+        parentTicketCategory = ticketCategories.get(ticketCategories.size()-1);
         viewMvc.registerListener(this);
         fetchTicketCategoryByParentIdUseCase.registerListener(this);
         dialogsEventBus.registerListener(this);

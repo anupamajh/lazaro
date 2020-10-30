@@ -144,11 +144,11 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    btnProfileToggle.setImageResource(R.drawable.ic_toggle_btn_on);
+                    btnProfileToggle.setImageResource(R.drawable.ic_btn_toggle_on);
                     isVisible = true;
                 } else {
                     flag = true;
-                    btnProfileToggle.setImageResource(R.drawable.ic_toggle_btn_off);
+                    btnProfileToggle.setImageResource(R.drawable.ic_btn_toggle_off);
                     isVisible = false;
                 }
                 if (!isLoading) {
@@ -167,11 +167,11 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    btnGenderToggle.setImageResource(R.drawable.ic_toggle_btn_on);
+                    btnGenderToggle.setImageResource(R.drawable.ic_btn_toggle_on);
                     isVisible = true;
                 } else {
                     flag = true;
-                    btnGenderToggle.setImageResource(R.drawable.ic_toggle_btn_off);
+                    btnGenderToggle.setImageResource(R.drawable.ic_btn_toggle_off);
                     isVisible = false;
                 }
                 if (!isLoading) {
@@ -190,11 +190,11 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    btnAgeToggle.setImageResource(R.drawable.ic_toggle_btn_on);
+                    btnAgeToggle.setImageResource(R.drawable.ic_btn_toggle_on);
                     isVisible = true;
                 } else {
                     flag = true;
-                    btnAgeToggle.setImageResource(R.drawable.ic_toggle_btn_off);
+                    btnAgeToggle.setImageResource(R.drawable.ic_btn_toggle_off);
                     isVisible = false;
                 }
                 if (!isLoading) {
@@ -213,11 +213,11 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    btnMobileNumberToggle.setImageResource(R.drawable.ic_toggle_btn_on);
+                    btnMobileNumberToggle.setImageResource(R.drawable.ic_btn_toggle_on);
                     isVisible = true;
                 } else {
                     flag = true;
-                    btnMobileNumberToggle.setImageResource(R.drawable.ic_toggle_btn_off);
+                    btnMobileNumberToggle.setImageResource(R.drawable.ic_btn_toggle_off);
                     isVisible = false;
                 }
                 if (!isLoading) {
@@ -236,11 +236,11 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    btnEmailToggle.setImageResource(R.drawable.ic_toggle_btn_on);
+                    btnEmailToggle.setImageResource(R.drawable.ic_btn_toggle_on);
                     isVisible = true;
                 } else {
                     flag = true;
-                    btnEmailToggle.setImageResource(R.drawable.ic_toggle_btn_off);
+                    btnEmailToggle.setImageResource(R.drawable.ic_btn_toggle_off);
                     isVisible = false;
                 }
                 if (!isLoading) {
@@ -259,11 +259,11 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
             public void onClick(View view) {
                 if (flag) {
                     flag = false;
-                    btnPlaceOfOriginToggle.setImageResource(R.drawable.ic_toggle_btn_on);
+                    btnPlaceOfOriginToggle.setImageResource(R.drawable.ic_btn_toggle_on);
                     isVisible = true;
                 } else {
                     flag = true;
-                    btnPlaceOfOriginToggle.setImageResource(R.drawable.ic_toggle_btn_off);
+                    btnPlaceOfOriginToggle.setImageResource(R.drawable.ic_btn_toggle_off);
                     isVisible = false;
                 }
                 if (!isLoading) {
@@ -309,32 +309,34 @@ public class MyProfileViewMVCImpl extends BaseObservableViewMvc<MyProfileViewMVC
         txtMobileNumber.setText(userInfo.getPhone());
         txtEmail.setText(userInfo.getAddressBook().getEmail1());
         txtPlaceOfOrigin.setText("");
-        for (UserPreference userPreference : userInfo.getUserPreferences()) {
-            switch (userPreference.getPreferenceType()) {
-                case USER_PREFERENCE_SHOW_PROFILE_PIC: {
-                    btnProfileToggle.callOnClick();
+        if(userInfo.getUserPreferences()!=null) {
+            for (UserPreference userPreference : userInfo.getUserPreferences()) {
+                switch (userPreference.getPreferenceType()) {
+                    case USER_PREFERENCE_SHOW_PROFILE_PIC: {
+                        btnProfileToggle.callOnClick();
+                    }
+                    break;
+                    case USER_PREFERENCE_SHOW_GENDER: {
+                        btnGenderToggle.callOnClick();
+                    }
+                    break;
+                    case USER_PREFERENCE_SHOW_AGE: {
+                        btnAgeToggle.callOnClick();
+                    }
+                    break;
+                    case USER_PREFERENCE_SHOW_EMAIL: {
+                        btnEmailToggle.callOnClick();
+                    }
+                    break;
+                    case USER_PREFERENCE_SHOW_PLACE_OF_ORIGIN: {
+                        btnPlaceOfOriginToggle.callOnClick();
+                    }
+                    break;
+                    case USER_PREFERENCE_SHOW_MOBILE_NUMBER: {
+                        btnMobileNumberToggle.callOnClick();
+                    }
+                    break;
                 }
-                break;
-                case USER_PREFERENCE_SHOW_GENDER: {
-                    btnGenderToggle.callOnClick();
-                }
-                break;
-                case USER_PREFERENCE_SHOW_AGE: {
-                    btnAgeToggle.callOnClick();
-                }
-                break;
-                case USER_PREFERENCE_SHOW_EMAIL: {
-                    btnEmailToggle.callOnClick();
-                }
-                break;
-                case USER_PREFERENCE_SHOW_PLACE_OF_ORIGIN: {
-                    btnPlaceOfOriginToggle.callOnClick();
-                }
-                break;
-                case USER_PREFERENCE_SHOW_MOBILE_NUMBER: {
-                    btnMobileNumberToggle.callOnClick();
-                }
-                break;
             }
         }
         isLoading = false;
