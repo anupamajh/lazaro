@@ -10,6 +10,7 @@ import com.carmel.guestjini.service.model.Booking.Guest;
 import com.carmel.guestjini.service.model.DTO.HelpDesk.TicketCountDTO;
 import com.carmel.guestjini.service.model.HelpDesk.TaskAttachment;
 import com.carmel.guestjini.service.model.HelpDesk.TaskTicket;
+import com.carmel.guestjini.service.model.HelpDesk.TaskTicketCategories;
 import com.carmel.guestjini.service.model.Inventory.InventoryDetail;
 import com.carmel.guestjini.service.model.Principal.UserInfo;
 import com.carmel.guestjini.service.request.HelpDesk.TicketRequest;
@@ -18,6 +19,7 @@ import com.carmel.guestjini.service.response.HelpDesk.TaskAttachmentResponse;
 import com.carmel.guestjini.service.response.HelpDesk.TaskTicketResponse;
 import com.carmel.guestjini.service.service.Booking.GuestService;
 import com.carmel.guestjini.service.service.HelpDesk.TaskAttachmentService;
+import com.carmel.guestjini.service.service.HelpDesk.TaskTicketCategoriesService;
 import com.carmel.guestjini.service.service.HelpDesk.TaskTicketService;
 import com.carmel.guestjini.service.service.Inventory.InventoryDetailService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -74,6 +76,9 @@ public class TaskTicketController {
 
     @Autowired
     InventoryDetailService inventoryDetailService;
+
+    @Autowired
+    TaskTicketCategoriesService taskTicketCategoriesService;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public TaskTicketResponse save(@Valid @RequestBody TicketRequest ticketRequest) {
@@ -221,6 +226,12 @@ public class TaskTicketController {
                 taskTicketResponse.setTaskTicket(taskTicket);
                 List<TaskAttachment> taskAttachmentList = taskAttachmentService.findByTicketId(taskTicket.getId());
                 taskTicketResponse.setTaskAttachments(taskAttachmentList);
+                taskTicketResponse
+                        .setTaskTicketCategories(
+                        taskTicketCategoriesService
+                                .getAllParents(taskTicket.getTicketCategoryId()
+                                )
+                );
             } else {
                 taskTicketResponse.setSuccess(false);
                 taskTicketResponse.setError("Error occurred while Fetching taskTicket!! Please try after sometime");

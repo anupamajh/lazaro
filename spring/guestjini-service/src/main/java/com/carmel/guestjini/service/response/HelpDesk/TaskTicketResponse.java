@@ -3,9 +3,11 @@ package com.carmel.guestjini.service.response.HelpDesk;
 
 
 import com.carmel.guestjini.service.model.DTO.HelpDesk.TaskAttachmentDTO;
+import com.carmel.guestjini.service.model.DTO.HelpDesk.TaskTicketCategoriesDTO;
 import com.carmel.guestjini.service.model.DTO.HelpDesk.TaskTicketDTO;
 import com.carmel.guestjini.service.model.HelpDesk.TaskAttachment;
 import com.carmel.guestjini.service.model.HelpDesk.TaskTicket;
+import com.carmel.guestjini.service.model.HelpDesk.TaskTicketCategories;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,7 @@ public class TaskTicketResponse {
     private TaskTicketDTO taskTicket;
     private List<TaskTicketDTO> taskTicketList;
     private List<TaskAttachmentDTO> taskAttachments;
+    private List<TaskTicketCategoriesDTO> taskTicketCategories;
     private long totalPages;
     private long totalRecords;
     private long currentRecords;
@@ -48,7 +51,17 @@ public class TaskTicketResponse {
         taskAttachments.forEach(taskAttachment -> {
             this.taskAttachments.add(new TaskAttachmentDTO(taskAttachment));
         });
+    }
 
+    public List<TaskTicketCategoriesDTO> getTaskTicketCategories() {
+        return taskTicketCategories;
+    }
+
+    public void setTaskTicketCategories(List<TaskTicketCategories> taskTicketCategories) {
+        this.taskTicketCategories = new ArrayList<>();
+        taskTicketCategories.forEach(taskTicketCategories1 -> {
+            this.taskTicketCategories.add(new TaskTicketCategoriesDTO(taskTicketCategories1));
+        });
     }
 
     public long getTotalPages() {

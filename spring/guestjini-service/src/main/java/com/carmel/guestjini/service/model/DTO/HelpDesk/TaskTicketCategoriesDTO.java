@@ -29,6 +29,7 @@ public class TaskTicketCategoriesDTO {
     private int isDeleted;
     private String deletedBy;
     private Date deletedTime;
+    private TaskTicketCategoriesDTO child;
 
     public TaskTicketCategoriesDTO() {
     }
@@ -178,5 +179,13 @@ public class TaskTicketCategoriesDTO {
 
     public void setDeletedTime(Date deletedTime) {
         this.deletedTime = deletedTime;
+    }
+
+    public TaskTicketCategoriesDTO getChild() {
+        return child;
+    }
+
+    public void setChild(TaskTicketCategoriesDTO child) {
+        this.child = child;
     }
 }
