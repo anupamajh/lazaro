@@ -23,7 +23,7 @@ public class AppAccessRequestViewMVCImpl
     private final TextView mobileNumberErrorField;
     private final TextView txtInvalidMobileNumberError;
     private final ProgressBar mProgressBar;
-
+    private final MaterialButton btnAppAccessRequest;
 
     public AppAccessRequestViewMVCImpl(LayoutInflater inflater,
                                        @Nullable ViewGroup parent) {
@@ -35,7 +35,7 @@ public class AppAccessRequestViewMVCImpl
 
         ImageView btnBack = findViewById(R.id.btnBack);
         TextView txtSignUp = findViewById(R.id.txtSignUp);
-        MaterialButton btnAppAccessRequest = findViewById(R.id.btnAppAccessRequest);
+        btnAppAccessRequest = findViewById(R.id.btnAppAccessRequest);
         btnAppAccessRequest.setOnClickListener(view -> {
             String mobile = txtMobile.getText().toString().trim();
             boolean hasError = false;
@@ -73,15 +73,17 @@ public class AppAccessRequestViewMVCImpl
 
     @Override
     public void showInvalidPhoneNumberError(boolean showError) {
-        if(showError){
+        if (showError) {
             txtInvalidMobileNumberError.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             txtInvalidMobileNumberError.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void showHasUser() {
+        txtMobile.setVisibility(View.GONE);
+        btnAppAccessRequest.setVisibility(View.GONE);
         txtInvalidMobileNumberError.setText("Your account is already activated. Please login with your credentials");
         txtInvalidMobileNumberError.setVisibility(View.VISIBLE);
     }

@@ -1,6 +1,7 @@
 package com.carmel.guestjini.Screens.AppAccessRequest;
 
 import com.carmel.guestjini.Authentication.AttemptClientLoginUseCase;
+import com.carmel.guestjini.Common.Constants;
 import com.carmel.guestjini.Networking.Booking.BookingResponse;
 import com.carmel.guestjini.Networking.OTP.OTPResponse;
 import com.carmel.guestjini.Networking.Users.AccessToken;
@@ -161,7 +162,7 @@ public class AppAccessRequestController implements
         sharedPreferenceHelper.commit();
         viewMVC.showOTPSentToast();
         viewMVC.hideProgressIndication();
-        mScreensNavigator.toOTPScreen();
+        mScreensNavigator.toOTPScreen(Constants.SCREEN_APP_ACCESS);
     }
 
     @Override

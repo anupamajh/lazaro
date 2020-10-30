@@ -195,8 +195,8 @@ public class ScreensNavigator {
         mFragmentFrameHelper.replaceFragment(TicketCategoryListFragment.createFragment(parentId, ticketCategoryData));
     }
 
-    public void toOTPScreen() {
-        mFragmentFrameHelper.replaceFragment(OTPFragment.createFragment());
+    public void toOTPScreen(int screen) {
+        mFragmentFrameHelper.replaceFragment(OTPFragment.createFragment(screen));
     }
 
     public void toSetPasswordScreen() {

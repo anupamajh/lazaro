@@ -8,4 +8,8 @@ public class Constants {
     public static String CLIENT_SECRETE = "P@ssw0rd";
     public static String GRANT_TYPE_PASSWORD = "password";
     public static String GRANT_TYPE_CLIENT = "client_credentials";
+
+    public static int SCREEN_FORGOT_PASSWORD = 10001;
+    public static int SCREEN_APP_ACCESS = 10002;
+
 }

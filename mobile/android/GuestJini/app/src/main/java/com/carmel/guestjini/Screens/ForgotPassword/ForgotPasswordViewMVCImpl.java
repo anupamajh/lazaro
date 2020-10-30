@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -21,13 +22,14 @@ public class ForgotPasswordViewMVCImpl
     private final EditText txtLoginId;
     private final TextView txtEmailErrorField;
     private final ProgressBar mProgressBar;
-
+    private final TextView txtInvalidCredentialsError;
 
     public ForgotPasswordViewMVCImpl(LayoutInflater inflater,
                                      @Nullable ViewGroup parent) {
         setRootView(inflater.inflate(R.layout.layout_base_forgot_password, parent, false));
         txtLoginId = findViewById(R.id.txtLoginId);
         txtEmailErrorField = findViewById(R.id.txtEmailErrorField);
+        txtInvalidCredentialsError = findViewById(R.id.txtInvalidCredentialsError);
         mProgressBar = findViewById(R.id.progress);
 
         Button btnResetPassword = findViewById(R.id.btnResetPassword);
@@ -68,5 +70,24 @@ public class ForgotPasswordViewMVCImpl
         mProgressBar.setVisibility(View.GONE);
     }
 
+    @Override
+    public void showInvalidUser(boolean show) {
+        if (show) {
+            txtInvalidCredentialsError.setVisibility(View.VISIBLE);
+        } else {
+            txtInvalidCredentialsError.setVisibility(View.GONE);
+        }
+    }
 
+    @Override
+    public void showOTPSentToast() {
+        Toast.makeText(getContext(), "OTP has been sent to your registered mobile number", Toast.LENGTH_LONG).show();
+
+    }
+
+
+    @Override
+    public void showOTPFailedToast() {
+        Toast.makeText(getContext(), "There was a problem sending OTP, Kindly try after sometime", Toast.LENGTH_LONG).show();
+    }
 }

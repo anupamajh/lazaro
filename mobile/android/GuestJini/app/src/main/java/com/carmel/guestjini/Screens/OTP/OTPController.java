@@ -1,5 +1,6 @@
 package com.carmel.guestjini.Screens.OTP;
 
+import com.carmel.guestjini.Common.Constants;
 import com.carmel.guestjini.Networking.OTP.OTPResponse;
 import com.carmel.guestjini.Networking.Users.UserResponse;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
@@ -30,6 +31,8 @@ public class OTPController
     private OTPViewMVC viewMVC;
     private ScreenState mScreenState = ScreenState.IDLE;
 
+    private int screenType = 0;
+
     public OTPController(
             VerifyOTPUseCase verifyOTPUseCase,
             RequestOTPUseCase requestOTPUseCase,
@@ -46,7 +49,8 @@ public class OTPController
         this.mDialogsManager = mDialogsManager;
     }
 
-    public void onStart() {
+    public void onStart(int screenType) {
+        this.screenType = screenType;
         viewMVC.registerListener(this);
         verifyOTPUseCase.registerListener(this);
         requestOTPUseCase.registerListener(this);
@@ -107,10 +111,15 @@ public class OTPController
     @Override
     public void onOTPVerificationSuccess(OTPResponse otpResponse) {
         viewMVC.showOTPVerified();
-        createAccountUseCase.createAccountAndNotify(
-                sharedPreferenceHelper.readStringValue("mobile"),
-                sharedPreferenceHelper.readStringValue("full_name")
-        );
+        if(screenType == Constants.SCREEN_APP_ACCESS) {
+            createAccountUseCase.createAccountAndNotify(
+                    sharedPreferenceHelper.readStringValue("mobile"),
+                    sharedPreferenceHelper.readStringValue("full_name")
+            );
+        }else{
+            viewMVC.hideProgressIndication();
+            mScreensNavigator.toSetPasswordScreen();
+        }
     }
 
     @Override

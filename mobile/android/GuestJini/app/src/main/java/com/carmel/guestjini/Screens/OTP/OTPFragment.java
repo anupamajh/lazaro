@@ -10,11 +10,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
+import com.carmel.guestjini.Screens.Support.TicketCategory.TicketCategoryListFragment;
 
 public class OTPFragment  extends BaseFragment {
+    private static final String ARG_SCREEN_TYPE = "ARG_SCREEN_TYPE";
 
-    public static Fragment createFragment() {
-        return new OTPFragment();
+    public static Fragment createFragment(int screen) {
+        Bundle args = new Bundle();
+        args.putInt(ARG_SCREEN_TYPE, screen);
+        OTPFragment fragment = new OTPFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     private static final String SAVED_STATE_OTP_FRAGMENT = "SAVED_STATE_OTP_FRAGMENT";
@@ -32,7 +38,7 @@ public class OTPFragment  extends BaseFragment {
     @Override
     public void onStart() {
         super.onStart();
-        otpController.onStart();
+        otpController.onStart(getScreenType());
     }
 
     @Override
@@ -52,5 +58,8 @@ public class OTPFragment  extends BaseFragment {
                 (OTPController.SavedState)
                         savedInstanceState.getSerializable(SAVED_STATE_OTP_FRAGMENT)
         );
+    }
+    private int getScreenType() {
+        return getArguments().getInt(ARG_SCREEN_TYPE);
     }
 }

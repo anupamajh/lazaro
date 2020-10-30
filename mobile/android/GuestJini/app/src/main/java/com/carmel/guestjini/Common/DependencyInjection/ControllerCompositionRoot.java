@@ -610,7 +610,11 @@ public class ControllerCompositionRoot {
 
     public ForgotPasswordController getForgotPasswordController() {
         return new ForgotPasswordController(
+                getAttemptClientLoginUseCase(),
+                getRequestOTPUseCase(),
+                getCheckPhoneNumberUseCase(),
                 getResetPasswordUseCase(),
+                getSharedPreferenceHelper(),
                 getScreensNavigator(),
                 getDialogsManager()
         );
