@@ -5,6 +5,7 @@ import java.util.List;
 public class TicketResponse {
     private Ticket taskTicket;
     private List<Ticket> taskTicketList;
+    private List<TicketCategory> taskTicketCategories;
     private int totalPages;
     private int totalRecords;
     private int currentRecords;
@@ -65,5 +66,13 @@ public class TicketResponse {
 
     public void setError(String error) {
         this.error = error;
+    }
+
+    public List<TicketCategory> getTaskTicketCategories() {
+        return taskTicketCategories;
+    }
+
+    public void setTaskTicketCategories(List<TicketCategory> taskTicketCategories) {
+        this.taskTicketCategories = taskTicketCategories;
     }
 }

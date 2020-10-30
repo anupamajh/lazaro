@@ -15,7 +15,7 @@ import retrofit2.Response;
 public class FetchTicketUseCase extends BaseObservable<FetchTicketUseCase.Listener> {
 
     public interface Listener {
-        void onTicketFetched(Ticket ticket);
+        void onTicketFetched(TicketResponse ticketResponse);
 
         void onTicketFetchFailed();
 
@@ -36,7 +36,7 @@ public class FetchTicketUseCase extends BaseObservable<FetchTicketUseCase.Listen
             public void onResponse(Call<TicketResponse> call, Response<TicketResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body().isSuccess()) {
-                        notifySuccess(response.body().getTaskTicket());
+                        notifySuccess(response.body());
                     } else {
                         notifyFailure();
                     }
@@ -64,9 +64,9 @@ public class FetchTicketUseCase extends BaseObservable<FetchTicketUseCase.Listen
         }
     }
 
-    private void notifySuccess(Ticket ticket) {
+    private void notifySuccess(TicketResponse ticketResponse) {
         for (Listener listener : getListeners()) {
-            listener.onTicketFetched(ticket);
+            listener.onTicketFetched(ticketResponse);
         }
     }
 }

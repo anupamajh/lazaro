@@ -2,6 +2,7 @@ package com.carmel.guestjini.Screens.Support.TicketDetail;
 
 import com.carmel.guestjini.Networking.Tickets.TaskNote;
 import com.carmel.guestjini.Networking.Tickets.Ticket;
+import com.carmel.guestjini.Networking.Tickets.TicketResponse;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptDialogEvent;
@@ -127,11 +128,12 @@ public class TicketDetailsController
     }
 
     @Override
-    public void onTicketFetched(Ticket ticket) {
+    public void onTicketFetched(TicketResponse ticketResponse) {
         mScreenState = ScreenState.IDLE;
-        viewMvc.bindTicket(ticket);
+        viewMvc.bindTicket(ticketResponse.getTaskTicket());
+        viewMvc.bindTicketCategories(ticketResponse.getTaskTicketCategories());
         viewMvc.hideProgressIndication();
-        fetchTicketComments(ticket.getId());
+        fetchTicketComments(ticketResponse.getTaskTicket().getId());
     }
 
     @Override

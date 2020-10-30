@@ -58,6 +58,7 @@ public class TicketCategoryListController
     public void onStart(String parentId, String ticketCategoryData) {
         this.parentId = parentId;
         parentTicketCategory = new GsonBuilder().create().fromJson(ticketCategoryData, TicketCategory.class);
+        ticketCategories.add(parentTicketCategory);
         viewMvc.registerListener(this);
         fetchTicketCategoryByParentIdUseCase.registerListener(this);
         dialogsEventBus.registerListener(this);
@@ -99,15 +100,18 @@ public class TicketCategoryListController
 
     @Override
     public void onTicketCategoryItemClicked(TicketCategory ticketCategory) {
-        parentTicketCategory.setChild(ticketCategory);
-        String ticketCategoryData = new GsonBuilder().create().toJson(parentTicketCategory, TicketCategory.class);
-        screensNavigator.toCreateTicket(ticketCategoryData);
+        ticketCategories.add(ticketCategory);
+        this.parentId = ticketCategory.getId();
+        fetchTicketCategoryListListAndNotify();
+//        parentTicketCategory.setChild(ticketCategory);
+//        String ticketCategoryData = new GsonBuilder().create().toJson(parentTicketCategory, TicketCategory.class);
+//        screensNavigator.toCreateTicket(ticketCategoryData);
     }
 
     @Override
     public void onTicketCategoryListFetched(List<TicketCategory> ticketCategoryList) {
         if(ticketCategoryList.size() == 0){
-            String ticketCategoryData = new GsonBuilder().create().toJson(parentTicketCategory, TicketCategory.class);
+            String ticketCategoryData = new GsonBuilder().create().toJson(ticketCategories);
             screensNavigator.toCreateTicket(ticketCategoryData);
         }else {
             viewMvc.bindTicketCategories(ticketCategoryList);

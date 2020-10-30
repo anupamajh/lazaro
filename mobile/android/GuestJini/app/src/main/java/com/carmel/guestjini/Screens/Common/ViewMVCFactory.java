@@ -88,6 +88,8 @@ import com.carmel.guestjini.Screens.Support.TicketCategory.TicketCategoryItem.Ti
 import com.carmel.guestjini.Screens.Support.TicketCategory.TicketCategoryItem.TicketCategoryItemViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.TicketCategory.TicketCategoryListViewMVC;
 import com.carmel.guestjini.Screens.Support.TicketCategory.TicketCategoryListViewMVCImpl;
+import com.carmel.guestjini.Screens.Support.TicketDetail.TaskTicketCategory.TaskTicketCategoryViewMVC;
+import com.carmel.guestjini.Screens.Support.TicketDetail.TaskTicketCategory.TaskTicketCategoryViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.TicketDetail.TicketComments.TicketCommentsViewMVC;
 import com.carmel.guestjini.Screens.Support.TicketDetail.TicketComments.TicketCommentsViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.TicketDetail.TicketDetailsViewMVC;
@@ -174,7 +176,8 @@ public class ViewMVCFactory {
     public CreateTicketViewMVC getCreateTicketViewMVC(@Nullable ViewGroup parent) {
         return new CreateTicketViewMVCImpl(
                 layoutInflater,
-                parent
+                parent,
+                this
         );
     }
 
@@ -415,6 +418,13 @@ public class ViewMVCFactory {
 
     public SetPasswordMVC getSetPasswordMVC(@Nullable ViewGroup parent) {
         return new SetPasswordMVCImpl(
+                layoutInflater,
+                parent
+        );
+    }
+
+    public TaskTicketCategoryViewMVC getTaskTicketCategoryViewMVC(@Nullable ViewGroup parent) {
+        return new TaskTicketCategoryViewMVCImpl(
                 layoutInflater,
                 parent
         );

@@ -3,6 +3,8 @@ package com.carmel.guestjini.Screens.Support.CreateTicket;
 import com.carmel.guestjini.Networking.Tickets.TicketCategory;
 import com.carmel.guestjini.Screens.Common.Views.ObservableViewMvc;
 
+import java.util.List;
+
 public interface CreateTicketViewMVC extends ObservableViewMvc<CreateTicketViewMVC.Listener> {
 
     public interface Listener {
@@ -23,7 +25,7 @@ public interface CreateTicketViewMVC extends ObservableViewMvc<CreateTicketViewM
 
     void hideProgressIndication();
 
-    void bindTicketCategoryData(TicketCategory parentTicketCategory);
+    void bindTicketCategoryData(List<TicketCategory> ticketCategories);
 
     void showDraftSaved();
 

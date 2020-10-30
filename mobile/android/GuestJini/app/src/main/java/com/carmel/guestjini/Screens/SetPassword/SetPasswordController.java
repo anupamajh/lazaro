@@ -4,12 +4,7 @@ import com.carmel.guestjini.Networking.GenericResponse;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
 import com.carmel.guestjini.Screens.Common.SharedPreference.SharedPreferenceHelper;
-import com.carmel.guestjini.Screens.OTP.OTPController;
-import com.carmel.guestjini.Screens.OTP.OTPViewMVC;
-import com.carmel.guestjini.Users.CreateAccountUseCase;
-import com.carmel.guestjini.Users.RequestOTPUseCase;
 import com.carmel.guestjini.Users.SetPasswordUseCase;
-import com.carmel.guestjini.Users.VerifyOTPUseCase;
 
 import java.io.Serializable;
 

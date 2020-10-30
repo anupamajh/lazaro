@@ -10,9 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
-import com.carmel.guestjini.Screens.OTP.OTPController;
-import com.carmel.guestjini.Screens.OTP.OTPFragment;
-import com.carmel.guestjini.Screens.OTP.OTPViewMVC;
 
 public class SetPasswordFragment   extends BaseFragment {
 

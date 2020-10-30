@@ -3,14 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -40,7 +32,7 @@
                 android:layout_marginTop="32dp"
                 android:layout_toEndOf="@+id/btnBack"
                 android:letterSpacing="0.1"
-                android:text="@string/Explore"
+                android:text="TICKET"
                 android:textAllCaps="true"
                 android:textColor="@color/colorZambezi"
                 android:textSize="14sp"
@@ -58,87 +50,91 @@
                 android:padding="20dp">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/ticketStatusCardView"
+                    android:id="@+id/ticketCardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="40dp"
-                    app:cardBackgroundColor="@color/colorWhisper1"
-                    app:cardCornerRadius="6dp"
-                    app:cardElevation="5dp">
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="26dp"
+                    app:cardBackgroundColor="@color/colorWhite"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="5dp"
+                    android:padding="10dp"
+                    android:background="@drawable/rectangle_border"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:padding="10dp">
 
                         <RelativeLayout
-                            android:id="@+id/layoutTicketStatus"
+                            android:id="@+id/layoutNewTicketIndicator"
+                            android:layout_width="5dp"
+                            android:layout_height="5dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/red_small_circle"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/txtTicketStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="22dp"
+                            android:layout_alignParentEnd="true"
+                            android:background="@drawable/rectangle_border"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="center"
+                            android:letterSpacing="0.08"
+                            android:text="@string/ticketsStatus"
+                            android:textColor="@color/colorRed"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:id="@+id/txtTicketDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_below="@id/layoutNewTicketIndicator"
                             android:layout_alignParentStart="true"
-                            android:layout_centerVertical="true">
+                            android:layout_marginTop="24dp"
+                            android:letterSpacing="0.07"
+                            android:text="@string/tickestsDateAndTime"
+                            android:textColor="@color/colorDimGray"
+                            android:textSize="10sp"
+                            app:fontFamily="@font/roboto_medium" />
 
-                            <TextView
-                                android:id="@+id/txtTicketStatus"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="26dp"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:background="@drawable/open_status"
-                                android:fontFamily="@font/roboto_bold"
-                                android:gravity="center"
-                                android:letterSpacing="0.08"
-                                android:paddingStart="10dp"
-                                android:paddingTop="5dp"
-                                android:paddingEnd="10dp"
-                                android:paddingBottom="5dp"
-                                android:text="@string/open"
-                                android:textColor="@color/colorWhite"
-                                android:textSize="12sp" />
-                        </RelativeLayout>
-
-                        <RelativeLayout
+                        <TextView
+                            android:id="@+id/txtTicketTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:layout_toEndOf="@id/layoutTicketStatus"
-                            android:padding="20dp">
+                            android:layout_below="@id/txtTicketDate"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="10dp"
+                            android:letterSpacing="0.05"
+                            android:text="@string/ticketsName"
+                            android:textColor="@color/colorCharcoal"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/roboto_medium" />
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtTicketTitle"
+                            android:layout_marginTop="15dp"
+                            android:background="@drawable/rectangle_border">
 
                             <TextView
-                                android:id="@+id/txtTicketDateText"
+                                android:id="@+id/txtTicketNumberTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
-                                android:layout_alignParentTop="true"
-                                android:text="@string/submittedOn"
-                                android:textColor="@color/colorDimGray"
-                                android:textSize="12sp"
-                                app:fontFamily="@font/roboto_medium" />
-
-                            <TextView
-                                android:id="@+id/txtTicketDate"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/txtTicketDateText"
-                                android:layout_alignParentStart="true"
-                                android:layout_marginTop="4dp"
-                                android:letterSpacing="0.07"
-                                android:textColor="@color/colorCharcoal"
-                                android:textSize="12sp"
-                                app:fontFamily="@font/roboto_medium" />
-
-                            <TextView
-                                android:id="@+id/txtTicketNumberText"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/txtTicketDate"
-                                android:layout_alignParentStart="true"
-                                android:layout_marginTop="23dp"
                                 android:letterSpacing="0.05"
-                                android:text="@string/ticketsNo"
-                                android:textColor="@color/colorDimGray"
+                                android:text="Ticket #"
+                                android:textColor="@color/ticketNumberBorder"
                                 android:textSize="12sp"
                                 app:fontFamily="@font/roboto_medium" />
 
@@ -146,172 +142,223 @@
                                 android:id="@+id/txtTicketNumber"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@id/txtTicketNumberText"
-                                android:layout_alignParentStart="true"
-                                android:layout_marginTop="4dp"
+                                android:layout_marginStart="20dp"
+                                android:layout_toEndOf="@id/txtTicketNumberTitle"
                                 android:letterSpacing="0.05"
+                                android:text="@string/ticketsValue"
                                 android:textColor="@color/colorCharcoal"
                                 android:textSize="12sp"
                                 app:fontFamily="@font/roboto_medium" />
                         </RelativeLayout>
-                    </RelativeLayout>
 
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ticketCategoryCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ticketCardView"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="26dp"
+                    app:cardBackgroundColor="@color/colorWhite"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="5dp"
+                    android:padding="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/lstTicketCategories"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ticketRatingCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ticketCategoryCard"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="26dp"
+                    app:cardBackgroundColor="@color/colorWhite"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="5dp"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:padding="10dp"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/ticketRatingTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_bold"
+                            android:layout_marginBottom="10dp"
+                            android:text="How satisfied are you?" />
+
+                        <RelativeLayout
+                            android:id="@+id/layoutRatingStars"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/ratingStar1"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="15dp"
+                                android:tag="@drawable/star_white_icon"
+                                android:src="@drawable/star_white_icon" />
+
+                            <ImageView
+                                android:id="@+id/ratingStar2"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="15dp"
+                                android:layout_toEndOf="@id/ratingStar1"
+                                android:tag="@drawable/star_white_icon"
+                                android:src="@drawable/star_white_icon" />
+
+                            <ImageView
+                                android:id="@+id/ratingStar3"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="15dp"
+                                android:layout_toEndOf="@id/ratingStar2"
+                                android:tag="@drawable/star_white_icon"
+                                android:src="@drawable/star_white_icon" />
+
+                            <ImageView
+                                android:id="@+id/ratingStar4"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="15dp"
+                                android:layout_toEndOf="@id/ratingStar3"
+                                android:tag="@drawable/star_white_icon"
+                                android:src="@drawable/star_white_icon" />
+
+                            <ImageView
+                                android:id="@+id/ratingStar5"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="15dp"
+                                android:layout_toEndOf="@id/ratingStar4"
+                                android:tag="@drawable/star_white_icon"
+                                android:src="@drawable/star_white_icon" />
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ticketMessageCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ticketRatingCard"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="26dp"
+                    app:cardBackgroundColor="@color/colorWhite"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/txtYouTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginStart="26dp"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:letterSpacing="0.05"
+                            android:text="MESSAGE"
+                            android:textColor="@color/colorDimGray"
+                            android:textSize="12sp" />
+
+                        <EditText
+                            android:id="@+id/txtTicketComment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtYouTitle"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="26dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="26dp"
+                            android:background="@drawable/review_edit_box"
+                            android:inputType="textMultiLine"
+                            android:paddingStart="6dp"
+                            android:paddingTop="14dp"
+                            android:paddingEnd="6dp"
+                            android:paddingBottom="62dp"
+                            android:textColor="@color/colorSuvaGray"
+                            android:textSize="12sp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSubmitComment"
+                            android:layout_width="76dp"
+                            android:layout_height="36dp"
+                            android:layout_below="@id/txtTicketComment"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="26dp"
+                            android:layout_marginBottom="10dp"
+                            android:backgroundTint="@color/colorSummerSky"
+                            android:fontFamily="@font/roboto_bold"
+                            android:letterSpacing="0.06"
+                            android:text="@string/submit"
+                            android:textSize="10sp"
+                            app:cornerRadius="@dimen/submit_button_radius" />
+
+                    </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
                 <RelativeLayout
-                    android:id="@+id/layoutTicketDetails"
+                    android:id="@+id/layoutCommentList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/ticketStatusCardView"
-                    android:layout_marginTop="50dp">
-
-                    <TextView
-                        android:id="@+id/txtTicketTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:letterSpacing="0.05"
-                        android:textColor="@color/colorCharcoal"
-                        android:textSize="12sp"
-                        app:fontFamily="@font/roboto_medium" />
-
-                    <TextView
-                        android:id="@+id/txtTicketNarration"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/txtTicketTitle"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginTop="13dp"
-                        android:letterSpacing="0.016"
-                        android:lineSpacingExtra="5dp"
-                        android:textColor="@color/colorDimGray"
-                        android:textSize="12sp" />
-
-                    <View
-                        android:id="@+id/viewDivider"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_below="@id/txtTicketNarration"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginTop="28dp"
-                        android:background="@color/colorWhisper2" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/layoutTicketComments"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/layoutTicketDetails"
+                    android:layout_below="@+id/ticketMessageCard"
                     android:layout_alignParentStart="true">
 
-                    <TextView
-                        android:id="@+id/txtActivityTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:fontFamily="@font/roboto_medium"
-                        android:letterSpacing="0.06"
-                        android:text="@string/activityTitle"
-                        android:textColor="@color/colorZambezi1"
-                        android:textSize="13sp" />
-
-                    <RelativeLayout
-                        android:id="@+id/layoutTicketCommentCard"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/lstTaskNotes"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginTop="20dp"
-                        android:paddingBottom="40dp"
-                        android:visibility="visible"
-                        android:layout_below="@+id/txtActivityTitle">
-
-                        <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/cardTicketComment"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/colorAzure"
-                            app:cardCornerRadius="6dp">
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <TextView
-                                    android:id="@+id/txtYouTitle"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="26dp"
-                                    android:layout_marginTop="16dp"
-                                    android:fontFamily="@font/roboto_bold"
-                                    android:letterSpacing="0.05"
-                                    android:text="You"
-                                    android:textColor="@color/colorDimGray"
-                                    android:textSize="12sp"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                                <EditText
-                                    android:id="@+id/txtTicketComment"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="26dp"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginEnd="26dp"
-                                    android:background="@drawable/review_edit_box"
-                                    android:inputType="textMultiLine"
-                                    android:paddingStart="6dp"
-                                    android:paddingTop="14dp"
-                                    android:paddingEnd="6dp"
-                                    android:paddingBottom="62dp"
-                                    android:textColor="@color/colorSuvaGray"
-                                    android:textSize="12sp"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/txtYouTitle" />
-
-                                <com.google.android.material.button.MaterialButton
-                                    android:id="@+id/btnSubmitComment"
-                                    android:layout_width="76dp"
-                                    android:layout_height="36dp"
-                                    android:layout_marginStart="26dp"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginBottom="10dp"
-                                    android:backgroundTint="@color/colorSummerSky"
-                                    android:fontFamily="@font/roboto_bold"
-                                    android:letterSpacing="0.06"
-                                    android:text="@string/submit"
-                                    android:textSize="10sp"
-                                    app:cornerRadius="@dimen/submit_button_radius"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@+id/txtTicketComment" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-                        </com.google.android.material.card.MaterialCardView>
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/layoutCommentList"
-                        android:layout_alignParentStart="true"
-                        android:layout_below="@+id/layoutTicketCommentCard">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/lstTaskNotes"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </RelativeLayout>
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </RelativeLayout>
             </RelativeLayout>
         </ScrollView>
     </RelativeLayout>
 
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
 </FrameLayout>

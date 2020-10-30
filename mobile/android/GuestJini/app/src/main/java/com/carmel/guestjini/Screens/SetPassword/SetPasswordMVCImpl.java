@@ -15,8 +15,6 @@ import androidx.annotation.Nullable;
 
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
-import com.carmel.guestjini.Screens.Common.Views.ObservableViewMvc;
-import com.carmel.guestjini.Screens.OTP.OTPViewMVC;
 import com.google.android.material.button.MaterialButton;
 
 public class SetPasswordMVCImpl

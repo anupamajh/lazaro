@@ -13,11 +13,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.carmel.guestjini.Networking.Tickets.TicketCategory;
 import com.carmel.guestjini.R;
+import com.carmel.guestjini.Screens.Common.ViewMVCFactory;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
+import com.carmel.guestjini.Screens.Support.TicketDetail.TaskTicketCategoryRecycleAdapter;
 import com.google.android.material.button.MaterialButton;
+
+import java.util.List;
 
 public class CreateTicketViewMVCImpl
         extends BaseObservableViewMvc<CreateTicketViewMVC.Listener>
@@ -25,12 +31,10 @@ public class CreateTicketViewMVCImpl
 
     private final ProgressBar progressBar;
     private final EditText txtNarration;
-    private final TextView txtTicketCategoryTitle;
     private final TextView txtNarrationError;
     private final TextView txtMessageTitle;
-    private final TextView txtSubTicketCategoryTitle;
     private final RelativeLayout layoutTicketCategory;
-    private final ImageView imgCategorySeparator;
+    private final RecyclerView lstTicketCategories;
 
     private final RelativeLayout deleteDraftLayout;
     private final ImageView btnDeleteDraft;
@@ -39,28 +43,34 @@ public class CreateTicketViewMVCImpl
     private TicketCategory ticketCategory;
 
     private TicketCategory currentTicketCategory;
+    private final TaskTicketCategoryRecycleAdapter taskTicketCategoryRecycleAdapter;
 
     private boolean isDraftEnabled = false;
 
     public CreateTicketViewMVCImpl(
             LayoutInflater inflater,
-            @Nullable ViewGroup parent
+            @Nullable ViewGroup parent,
+            ViewMVCFactory viewMVCFactory
     ) {
         setRootView(inflater.inflate(R.layout.layout_support_ticket_create, parent, false));
         txtNarration = findViewById(R.id.txtNarration);
         progressBar = findViewById(R.id.progress);
         deleteDraftLayout = findViewById(R.id.deleteDraftLayout);
         btnDeleteDraft = findViewById(R.id.btnDeleteDraft);
-        txtTicketCategoryTitle = findViewById(R.id.txtTicketCategoryTitle);
         txtNarrationError = findViewById(R.id.txtNarrationError);
         txtMessageTitle = findViewById(R.id.txtMessageTitle);
-        txtSubTicketCategoryTitle = findViewById(R.id.txtSubTicketCategoryTitle);
         layoutTicketCategory = findViewById(R.id.layoutTicketCategory);
-        imgCategorySeparator = findViewById(R.id.imgCategorySeparator);
+        lstTicketCategories = findViewById(R.id.lstTicketCategories);
         MaterialButton btnSubmit = findViewById(R.id.btnSubmit);
         MaterialButton btnDraft = findViewById(R.id.btnSaveDraft);
         ImageView btnBack = findViewById(R.id.btnBack);
         ImageView btnBackToCategory = findViewById(R.id.btnBackToCategory);
+
+        lstTicketCategories.setLayoutManager(new LinearLayoutManager(getContext()));
+        taskTicketCategoryRecycleAdapter = new TaskTicketCategoryRecycleAdapter(viewMVCFactory);
+        lstTicketCategories.setAdapter(taskTicketCategoryRecycleAdapter);
+
+
         txtNarration.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -152,30 +162,9 @@ public class CreateTicketViewMVCImpl
     }
 
     @Override
-    public void bindTicketCategoryData(TicketCategory parentTicketCategory) {
-        this.ticketCategory = parentTicketCategory;
-        if (parentTicketCategory.getChild() != null) {
-            this.currentTicketCategory = parentTicketCategory.getChild();
-        }else{
-            this.currentTicketCategory = parentTicketCategory;
-        }
-        txtTicketCategoryTitle.setText("");
-        txtSubTicketCategoryTitle.setText("");
-        if (parentTicketCategory != null) {
-            txtTicketCategoryTitle.setText(parentTicketCategory.getCategoryDescription());
-            if (parentTicketCategory.getChild() != null) {
-                txtSubTicketCategoryTitle.setText(parentTicketCategory.getChild().getCategoryDescription());
-            } else {
-                imgCategorySeparator.setVisibility(View.GONE);
-            }
-        } else {
-            layoutTicketCategory.setVisibility(View.GONE);
-        }
-        if(this.currentTicketCategory.getIsMessageMandatory() == 1){
-            txtMessageTitle.setText("(Required) Message");
-        }else{
-            txtMessageTitle.setText("(Optional) Message");
-        }
+    public void bindTicketCategoryData(List<TicketCategory> ticketCategories) {
+        taskTicketCategoryRecycleAdapter.bindTicketCategories(ticketCategories);
+        this.currentTicketCategory = ticketCategories.get(ticketCategories.size()-1);
     }
 
     @Override

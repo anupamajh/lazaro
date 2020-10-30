@@ -8,9 +8,14 @@ import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptDialogEven
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
 import com.carmel.guestjini.Tickets.DeleteTicketUseCase;
 import com.carmel.guestjini.Tickets.SaveTicketUseCase;
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateTicketController
         implements CreateTicketViewMVC.Listener,
@@ -38,6 +43,7 @@ public class CreateTicketController
     private int saveStatus = 0;
 
     private TicketCategory ticketCategory;
+    private List<TicketCategory> ticketCategories;
 
     public CreateTicketController
             (
@@ -56,10 +62,16 @@ public class CreateTicketController
     }
 
     public void onStart(String ticketCategoryData) {
-        parentTicketCategory = new GsonBuilder().create().fromJson(ticketCategoryData, TicketCategory.class);
+        Type listType = new TypeToken<ArrayList<TicketCategory>>() {
+        }.getType();
+        List<TicketCategory> ticketCategoryList = new Gson().fromJson(ticketCategoryData, listType);
+        ticketCategories = ticketCategoryList;
+        if (ticketCategories.size() > 0) {
+            this.ticketCategoryId = ticketCategories.get(ticketCategories.size() - 1).getId();
+        }
         viewMVC.registerListener(this);
         saveTicketUseCase.registerListener(this);
-        viewMVC.bindTicketCategoryData(parentTicketCategory);
+        viewMVC.bindTicketCategoryData(ticketCategoryList);
         deleteTicketUseCase.registerListener(this);
         this.draftTicketId = "";
     }
@@ -88,14 +100,18 @@ public class CreateTicketController
         if (viewMVC.isValid()) {
             viewMVC.showProgressIndication();
             String ticketCategoryId = "";
-            if (parentTicketCategory != null) {
-                ticketCategoryId = parentTicketCategory.getId();
-                subject = parentTicketCategory.getCategoryDescription();
-                if (parentTicketCategory.getChild() != null) {
-                    subject = parentTicketCategory.getChild().getCategoryDescription();
-                    ticketCategoryId = parentTicketCategory.getChild().getId();
-                    //narration = parentTicketCategory.getChild().getCategoryDescription() + "\n" + narration;
-                }
+//            if (parentTicketCategory != null) {
+//                ticketCategoryId = parentTicketCategory.getId();
+//                subject = parentTicketCategory.getCategoryDescription();
+//                if (parentTicketCategory.getChild() != null) {
+//                    subject = parentTicketCategory.getChild().getCategoryDescription();
+//                    ticketCategoryId = parentTicketCategory.getChild().getId();
+//                    //narration = parentTicketCategory.getChild().getCategoryDescription() + "\n" + narration;
+//                }
+//            }
+            if (ticketCategories.size() > 0) {
+                ticketCategoryId = ticketCategories.get(ticketCategories.size() - 1).getId();
+                subject = ticketCategories.get(ticketCategories.size() - 1).getCategoryDescription();
             }
             this.ticketCategoryId = ticketCategoryId;
             this.strSubject = subject;
@@ -110,14 +126,18 @@ public class CreateTicketController
         if (viewMVC.isValid()) {
             viewMVC.showProgressIndication();
             String ticketCategoryId = "";
-            if (parentTicketCategory != null) {
-                ticketCategoryId = parentTicketCategory.getId();
-                subject = parentTicketCategory.getCategoryDescription();
-                if (parentTicketCategory.getChild() != null) {
-                    subject = parentTicketCategory.getChild().getCategoryDescription();
-                    ticketCategoryId = parentTicketCategory.getChild().getId();
-                    //narration = parentTicketCategory.getChild().getCategoryDescription();
-                }
+//            if (parentTicketCategory != null) {
+//                ticketCategoryId = parentTicketCategory.getId();
+//                subject = parentTicketCategory.getCategoryDescription();
+//                if (parentTicketCategory.getChild() != null) {
+//                    subject = parentTicketCategory.getChild().getCategoryDescription();
+//                    ticketCategoryId = parentTicketCategory.getChild().getId();
+//                    //narration = parentTicketCategory.getChild().getCategoryDescription();
+//                }
+//            }
+            if (ticketCategories.size() > 0) {
+                ticketCategoryId = ticketCategories.get(ticketCategories.size() - 1).getId();
+                subject = ticketCategories.get(ticketCategories.size() - 1).getCategoryDescription();
             }
             this.ticketCategoryId = ticketCategoryId;
             this.strSubject = subject;

@@ -6,9 +6,12 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.carmel.guestjini.Common.DateUtil;
 import com.carmel.guestjini.Networking.Tickets.TaskNote;
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
+
+import java.util.Date;
 
 public class TicketCommentsViewMVCImpl
         extends BaseObservableViewMvc<TicketCommentsViewMVC.Listener>
@@ -31,7 +34,8 @@ public class TicketCommentsViewMVCImpl
     @Override
     public void bindTaskNote(TaskNote taskNote) {
         txtAuthorName.setText(taskNote.getUserName());
-        txtCommentDate.setText(taskNote.getCreationTime());//TODO: Format the date Here
+        Date creationDate = DateUtil.convertToDate(taskNote.getCreationTime());
+        txtCommentDate.setText(DateUtil.getFormattedDate(creationDate));
         txtComment.setText(taskNote.getNotes());
     }
 }

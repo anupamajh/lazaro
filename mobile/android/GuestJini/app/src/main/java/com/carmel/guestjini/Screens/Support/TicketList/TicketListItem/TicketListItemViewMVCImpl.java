@@ -1,14 +1,11 @@
 package com.carmel.guestjini.Screens.Support.TicketList.TicketListItem;
 
-import android.graphics.drawable.LayerDrawable;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.carmel.guestjini.Common.AgeCalculator;
 import com.carmel.guestjini.Common.DateUtil;
 import com.carmel.guestjini.Networking.Tickets.Ticket;
 import com.carmel.guestjini.R;
