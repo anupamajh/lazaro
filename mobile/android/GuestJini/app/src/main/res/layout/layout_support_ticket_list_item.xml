@@ -34,7 +34,7 @@
                 android:background="@drawable/red_small_circle" />
             <TextView
                 android:id="@+id/txtTicketStatus"
-                android:layout_width="54dp"
+                android:layout_width="wrap_content"
                 android:layout_height="22dp"
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:letterSpacing="0.05"
                     android:text="Ticket #"
-                    android:textColor="@color/colorCharcoal"
+                    android:textColor="@color/ticketNumberBorder"
                     android:textSize="12sp"
                     app:fontFamily="@font/roboto_medium"
                     android:layout_alignParentStart="true"

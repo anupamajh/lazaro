@@ -66,6 +66,13 @@
     <color name="helpTopicBtnBackground">#D3D091</color>
     <color name="draftTicketBtnBackground">#EF767A</color>
 
+    <color name="openTicketText">#d57578</color>
+    <color name="openTicketBorder">#e5b4b6</color>
+    <color name="draftTicketText">#e0932f</color>
+    <color name="draftTicketBorder">#edc487</color>
+    <color name="closedTicketText">#8e98b0</color>
+    <color name="closedTicketBorder">#c2c7d6</color>
+    <color name="ticketNumberBorder">#ebebeb</color>
 
 
 </resources>

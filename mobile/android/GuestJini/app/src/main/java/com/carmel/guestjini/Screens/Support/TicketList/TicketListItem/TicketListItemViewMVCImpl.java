@@ -1,5 +1,6 @@
 package com.carmel.guestjini.Screens.Support.TicketList.TicketListItem;
 
+import android.graphics.drawable.LayerDrawable;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -50,25 +51,55 @@ public class TicketListItemViewMVCImpl
     public void bindTicket(Ticket ticket) {
         this.ticket = ticket;
         String strTicketStatus = "OPEN";
+        int drawableResourceId = 0;
+        int colorResourceId = 0;
         switch (ticket.getTicketStatus()) {
-            case 3: {
-                strTicketStatus = "OPEN";
+            case 0:{
+                strTicketStatus = "DRAFT";
+                drawableResourceId = R.drawable.rectangle_border_draft_ticket;
+                colorResourceId = R.color.draftTicketText;
+            }
+            break;
+            case 1: {
+                strTicketStatus = "COMPLETED";
+                drawableResourceId = R.drawable.rectangle_border_open_ticket;
+                colorResourceId = R.color.openTicketText;
             }
             break;
             case 2: {
                 strTicketStatus = "STARTED";
+                drawableResourceId = R.drawable.rectangle_border_open_ticket;
+                colorResourceId = R.color.openTicketText;
             }
             break;
-            case 1: {
+            case 3: {
+                strTicketStatus = "NOT STARTED";
+                drawableResourceId = R.drawable.rectangle_border_open_ticket;
+                colorResourceId = R.color.openTicketText;
+            }
+            break;
+            case 4: {
+                strTicketStatus = "ON HOLD";
+                drawableResourceId = R.drawable.rectangle_border_open_ticket;
+                colorResourceId = R.color.openTicketText;
+            }
+            break;
+            case 5: {
                 strTicketStatus = "CLOSED";
+                drawableResourceId = R.drawable.rectangle_border_closed_ticket;
+                colorResourceId = R.color.closedTicketText;
             }
             break;
             default: {
                 strTicketStatus = "NEW";
+                drawableResourceId = R.drawable.rectangle_border_open_ticket;
+                colorResourceId = R.color.openTicketText;
             }
             break;
 
         }
+        txtTicketStatus.setBackground(getContext().getDrawable(drawableResourceId));
+        txtTicketStatus.setTextColor(getContext().getResources().getColor(colorResourceId));
         Date creationDate = DateUtil.convertToDate(ticket.getCreationTime());
         LocalDate localCreationDate = Instant.ofEpochMilli(creationDate.getTime())
                 .atZone(ZoneId.systemDefault())
