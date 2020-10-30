@@ -59,8 +59,12 @@ public class TaskTicketServiceImpl implements TaskTicketService {
             ticketCountDTO.setActiveTicketCount(taskTicketList.size());
             taskTicketList = taskTicketRepository.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, requesterId, TicketStatus.NOT_STARTED);
             ticketCountDTO.setActiveTicketCount(taskTicketList.size() + ticketCountDTO.getActiveTicketCount());
+            taskTicketList = taskTicketRepository.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, requesterId, TicketStatus.COMPLETED);
+            ticketCountDTO.setActiveTicketCount(taskTicketList.size() + ticketCountDTO.getActiveTicketCount());
+            taskTicketList = taskTicketRepository.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, requesterId, TicketStatus.ON_HOLD);
+            ticketCountDTO.setActiveTicketCount(taskTicketList.size() + ticketCountDTO.getActiveTicketCount());
             taskTicketList =
-                    taskTicketRepository.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, requesterId, TicketStatus.COMPLETED);
+                    taskTicketRepository.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, requesterId, TicketStatus.CLOSED);
             ticketCountDTO.setArchiveTicketCount(taskTicketList.size());
 
         } catch (Exception ex) {
@@ -73,14 +77,15 @@ public class TaskTicketServiceImpl implements TaskTicketService {
     public List<TaskTicket> findAllByIsDeletedAndRequesterIdAndTicketStatus(int isDeleted, String id, int ticketStatus) {
         List<TaskTicket> tickets ;
         tickets =   taskTicketRepository.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, id,ticketStatus);
-        if(ticketStatus == TicketStatus.WORK_IN_PROGRESS){
-            ticketStatus = TicketStatus.NOT_STARTED;
-            tickets.addAll(taskTicketRepository.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, id,ticketStatus));
-        }
         if(ticketStatus == TicketStatus.NOT_STARTED){
             ticketStatus = TicketStatus.WORK_IN_PROGRESS;
             tickets.addAll(taskTicketRepository.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, id,ticketStatus));
+            ticketStatus = TicketStatus.COMPLETED;
+            tickets.addAll(taskTicketRepository.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, id,ticketStatus));
+            ticketStatus = TicketStatus.ON_HOLD ;
+            tickets.addAll(taskTicketRepository.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, id,ticketStatus));
         }
+
         return tickets;
     }
 }
