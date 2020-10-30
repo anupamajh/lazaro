@@ -368,11 +368,11 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="2dp"
-                        app:backgroundTint="@color/colorWhite"
+                        app:backgroundTint="@color/colorSummerSky"
                         app:fabCustomSize="26dp"
                         app:maxImageSize="16dp"
                         app:srcCompat="@drawable/ic_navigate_next_black_24dp"
-                        app:tint="@color/colorBlackRussian" />
+                        app:tint="@color/colorWhite" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
         </RelativeLayout>

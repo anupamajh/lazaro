@@ -64,7 +64,7 @@
     <string name="edit_icon">edit icon</string>
     <string name="menu_camera">Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit. .</string>
     <string name="menu_gallery">Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit. .</string>
-    <string name="back_arrow_icon">Back Arrow Icon</string>
+    <string name="ic_btn_back_arrow_circle_bg_white">Back Arrow Icon</string>
     <string name="red_star">*</string>
     <string name="alert_message">Alert Dailog Message</string>
     <string name="alert_title">Alert Dailog Title</string>

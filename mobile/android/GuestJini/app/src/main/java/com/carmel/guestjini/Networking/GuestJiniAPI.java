@@ -17,6 +17,8 @@ import com.carmel.guestjini.Networking.Tickets.TaskNote;
 import com.carmel.guestjini.Networking.Tickets.TaskNotesResponse;
 import com.carmel.guestjini.Networking.Tickets.TicketCategoryResponse;
 import com.carmel.guestjini.Networking.Tickets.TicketCountDTO;
+import com.carmel.guestjini.Networking.Tickets.TicketFeedBack;
+import com.carmel.guestjini.Networking.Tickets.TicketFeedBackResponse;
 import com.carmel.guestjini.Networking.Tickets.TicketRequest;
 import com.carmel.guestjini.Networking.Tickets.TicketResponse;
 import com.carmel.guestjini.Networking.Users.AccessToken;
@@ -241,4 +243,10 @@ public interface GuestJiniAPI {
 
     @POST("/common/user/set-password")
     Call<GenericResponse> setPassword(@Body Map<String, String> postData);
+
+    @POST("/guest-jini/ticket-feedback/save")
+    Call<TicketFeedBackResponse> saveTicketFeedback(@Body TicketFeedBack ticketFeedBack);
+
+    @POST("/guest-jini/ticket-feedback/get-by-ticket-id")
+    Call<TicketFeedBackResponse> getTicketFeedbackByTicketId(@Body Map<String, String> postData);
 }

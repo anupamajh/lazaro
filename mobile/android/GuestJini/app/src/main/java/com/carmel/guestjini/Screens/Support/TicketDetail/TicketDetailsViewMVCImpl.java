@@ -8,8 +8,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +19,8 @@ import com.carmel.guestjini.Common.DateUtil;
 import com.carmel.guestjini.Networking.Tickets.TaskNote;
 import com.carmel.guestjini.Networking.Tickets.Ticket;
 import com.carmel.guestjini.Networking.Tickets.TicketCategory;
+import com.carmel.guestjini.Networking.Tickets.TicketFeedBack;
+import com.carmel.guestjini.Networking.Tickets.TicketFeedBackResponse;
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Screens.Common.ViewMVCFactory;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
@@ -28,7 +32,7 @@ import java.util.List;
 public class TicketDetailsViewMVCImpl
         extends BaseObservableViewMvc<TicketDetailsViewMVC.Listener>
         implements TicketDetailsViewMVC,
-        TicketCommentsRecyclerAdapter.Listener{
+        TicketCommentsRecyclerAdapter.Listener {
 
     private final RelativeLayout layoutNewTicketIndicator;
     private final TextView txtTicketStatus;
@@ -42,15 +46,21 @@ public class TicketDetailsViewMVCImpl
     private final ImageView ratingStar3;
     private final ImageView ratingStar4;
     private final ImageView ratingStar5;
+    private final CardView ticketMessageCard;
 
     private final ImageView btnBack;
     private final EditText txtTicketComment;
     private final MaterialButton btnSubmitComment;
     private final ProgressBar progressBar;
 
+    private final EditText txtFeedBack;
+    private final MaterialButton btnSubmitFeedback;
+
+
     private final TicketCommentsRecyclerAdapter ticketCommentsRecyclerAdapter;
     private final TaskTicketCategoryRecycleAdapter taskTicketCategoryRecycleAdapter;
     private Ticket ticket;
+    private int rating = 0;
 
     public TicketDetailsViewMVCImpl(LayoutInflater inflater,
                                     @Nullable ViewGroup parent,
@@ -73,8 +83,10 @@ public class TicketDetailsViewMVCImpl
         btnBack = findViewById(R.id.btnBack);
         txtTicketComment = findViewById(R.id.txtTicketComment);
         btnSubmitComment = findViewById(R.id.btnSubmitComment);
+        txtFeedBack = findViewById(R.id.txtFeedBack);
+        btnSubmitFeedback = findViewById(R.id.btnSubmitFeedback);
         progressBar = findViewById(R.id.progress);
-
+        ticketMessageCard = findViewById(R.id.ticketMessageCard);
         lstTaskNotes.setLayoutManager(new LinearLayoutManager(getContext()));
         ticketCommentsRecyclerAdapter = new TicketCommentsRecyclerAdapter(this, viewMVCFactory);
         lstTaskNotes.setAdapter(ticketCommentsRecyclerAdapter);
@@ -83,6 +95,11 @@ public class TicketDetailsViewMVCImpl
         taskTicketCategoryRecycleAdapter = new TaskTicketCategoryRecycleAdapter(viewMVCFactory);
         lstTicketCategories.setAdapter(taskTicketCategoryRecycleAdapter);
 
+        btnSubmitFeedback.setOnClickListener(view -> {
+            for (Listener listener : getListeners()) {
+                listener.onSubmitFeedbackClicked(rating, txtFeedBack.getText().toString());
+            }
+        });
 
         btnBack.setOnClickListener(view -> {
             for (Listener listener : getListeners()) {
@@ -102,9 +119,11 @@ public class TicketDetailsViewMVCImpl
             if (ratingStar1.getTag().toString().contains("white")) {
                 ratingStar1.setImageResource((R.drawable.star_yellow_icon));
                 ratingStar1.setTag("yellow");
-            }else{
+                rating = 1;
+            } else {
                 ratingStar1.setImageResource((R.drawable.star_white_icon));
                 ratingStar1.setTag("white");
+                rating = 0;
             }
             ratingStar2.setImageResource((R.drawable.star_white_icon));
             ratingStar2.setTag("white");
@@ -122,9 +141,11 @@ public class TicketDetailsViewMVCImpl
                 ratingStar2.setTag("yellow");
                 ratingStar1.setImageResource((R.drawable.star_yellow_icon));
                 ratingStar1.setTag("yellow");
-            }else{
+                rating = 2;
+            } else {
                 ratingStar2.setImageResource((R.drawable.star_white_icon));
                 ratingStar2.setTag("white");
+                rating = 1;
             }
             ratingStar3.setImageResource((R.drawable.star_white_icon));
             ratingStar3.setTag("white");
@@ -142,9 +163,11 @@ public class TicketDetailsViewMVCImpl
                 ratingStar2.setTag("yellow");
                 ratingStar1.setImageResource((R.drawable.star_yellow_icon));
                 ratingStar1.setTag("yellow");
-            }else{
+                rating = 3;
+            } else {
                 ratingStar3.setImageResource((R.drawable.star_white_icon));
                 ratingStar3.setTag("white");
+                rating = 2;
             }
             ratingStar4.setImageResource((R.drawable.star_white_icon));
             ratingStar4.setTag("white");
@@ -162,9 +185,11 @@ public class TicketDetailsViewMVCImpl
                 ratingStar2.setTag("yellow");
                 ratingStar1.setImageResource((R.drawable.star_yellow_icon));
                 ratingStar1.setTag("yellow");
-            }else{
+                rating = 4;
+            } else {
                 ratingStar4.setImageResource((R.drawable.star_white_icon));
                 ratingStar4.setTag("white");
+                rating = 3;
             }
             ratingStar5.setImageResource((R.drawable.star_white_icon));
             ratingStar5.setTag("white");
@@ -182,9 +207,11 @@ public class TicketDetailsViewMVCImpl
                 ratingStar2.setTag("yellow");
                 ratingStar1.setImageResource((R.drawable.star_yellow_icon));
                 ratingStar1.setTag("yellow");
-            }else{
+                rating = 5;
+            } else {
                 ratingStar5.setImageResource((R.drawable.star_white_icon));
                 ratingStar5.setTag("white");
+                rating = 4;
             }
         });
     }
@@ -197,6 +224,16 @@ public class TicketDetailsViewMVCImpl
     @Override
     public void bindTicket(Ticket ticket) {
         this.ticket = ticket;
+        if(this.ticket.getTicketStatus() == 5){
+            txtFeedBack.setEnabled(false);
+            btnSubmitFeedback.setVisibility(View.GONE);
+            ticketMessageCard.setVisibility(View.GONE);
+            ratingStar1.setEnabled(false);
+            ratingStar2.setEnabled(false);
+            ratingStar3.setEnabled(false);
+            ratingStar4.setEnabled(false);
+            ratingStar5.setEnabled(false);
+        }
         String strTicketStatus = "OPEN";
         int drawableResourceId = 0;
         int colorResourceId = 0;
@@ -272,5 +309,52 @@ public class TicketDetailsViewMVCImpl
     @Override
     public void hideProgressIndication() {
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void bindTicketFeedback(TicketFeedBackResponse ticketFeedBackResponse) {
+        if(ticketFeedBackResponse.isSuccess()) {
+            if (ticketFeedBackResponse.getTicketFeedBack() != null) {
+                TicketFeedBack ticketFeedBack = ticketFeedBackResponse.getTicketFeedBack();
+                txtFeedBack.setText(ticketFeedBack.getFeedback());
+                switch (ticketFeedBack.getRating()) {
+                    case 1: {
+                        ratingStar1.setTag("white");
+                        ratingStar1.callOnClick();
+                    }
+                    break;
+                    case 2: {
+                        ratingStar2.setTag("white");
+                        ratingStar2.callOnClick();
+                    }
+                    break;
+                    case 3: {
+                        ratingStar3.setTag("white");
+                        ratingStar3.callOnClick();
+                    }
+                    break;
+                    case 4: {
+                        ratingStar4.setTag("white");
+                        ratingStar4.callOnClick();
+                    }
+                    break;
+                    case 5: {
+                        ratingStar5.setTag("white");
+                        ratingStar5.callOnClick();
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    @Override
+    public void showFeedbackSaved() {
+        Toast.makeText(getContext(), "Your feedback has been saved.", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showFeedbackSaveFailed() {
+        Toast.makeText(getContext(), "There was an error saving feedback, Kindly try after sometime.", Toast.LENGTH_LONG).show();
     }
 }

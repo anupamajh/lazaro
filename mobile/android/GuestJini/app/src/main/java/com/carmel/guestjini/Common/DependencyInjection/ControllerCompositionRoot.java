@@ -77,7 +77,9 @@ import com.carmel.guestjini.Tickets.FetchTicketCountUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketListUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketTaskNoteListUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketUseCase;
+import com.carmel.guestjini.Tickets.GetTicketFeedBackUseCase;
 import com.carmel.guestjini.Tickets.SaveTaskNoteUseCase;
+import com.carmel.guestjini.Tickets.SaveTicketFeedbackUseCase;
 import com.carmel.guestjini.Tickets.SaveTicketUseCase;
 import com.carmel.guestjini.Users.AppAccessRequestUseCase;
 import com.carmel.guestjini.Users.ChangePasswordUseCase;
@@ -370,6 +372,14 @@ public class ControllerCompositionRoot {
         return new SetPasswordUseCase(getAuthenticatedGuestJiniAPI());
     }
 
+    private GetTicketFeedBackUseCase getGetTicketFeedBackUseCase() {
+        return new GetTicketFeedBackUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private SaveTicketFeedbackUseCase getSaveTicketFeedbackUseCase() {
+        return new SaveTicketFeedbackUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
     public SharedPreferenceHelper getSharedPreferenceHelper() {
         return new SharedPreferenceHelper(preferences, editor);
 
@@ -457,6 +467,8 @@ public class ControllerCompositionRoot {
                 getFetchTicketUseCase(),
                 getFetchTicketTaskNoteListUseCase(),
                 getSaveTaskNoteUseCase(),
+                getGetTicketFeedBackUseCase(),
+                getSaveTicketFeedbackUseCase(),
                 getScreensNavigator(),
                 getDialogsManager(),
                 getDialogsEventBus()

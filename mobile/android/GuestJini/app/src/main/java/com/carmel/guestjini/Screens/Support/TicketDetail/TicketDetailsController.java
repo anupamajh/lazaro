@@ -2,6 +2,7 @@ package com.carmel.guestjini.Screens.Support.TicketDetail;
 
 import com.carmel.guestjini.Networking.Tickets.TaskNote;
 import com.carmel.guestjini.Networking.Tickets.Ticket;
+import com.carmel.guestjini.Networking.Tickets.TicketFeedBackResponse;
 import com.carmel.guestjini.Networking.Tickets.TicketResponse;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
@@ -9,7 +10,9 @@ import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptDialogEven
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
 import com.carmel.guestjini.Tickets.FetchTicketTaskNoteListUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketUseCase;
+import com.carmel.guestjini.Tickets.GetTicketFeedBackUseCase;
 import com.carmel.guestjini.Tickets.SaveTaskNoteUseCase;
+import com.carmel.guestjini.Tickets.SaveTicketFeedbackUseCase;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,6 +21,8 @@ public class TicketDetailsController
         implements TicketDetailsViewMVC.Listener,
         FetchTicketUseCase.Listener,
         FetchTicketTaskNoteListUseCase.Listener,
+        GetTicketFeedBackUseCase.Listener,
+        SaveTicketFeedbackUseCase.Listener,
         SaveTaskNoteUseCase.Listener,
         DialogsEventBus.Listener {
 
@@ -29,6 +34,8 @@ public class TicketDetailsController
     private final FetchTicketUseCase fetchTicket;
     private final FetchTicketTaskNoteListUseCase fetchTicketTaskNoteListUseCase;
     private final SaveTaskNoteUseCase saveTaskNoteUseCase;
+    private final GetTicketFeedBackUseCase getTicketFeedBackUseCase;
+    private final SaveTicketFeedbackUseCase saveTicketFeedbackUseCase;
     private final ScreensNavigator screensNavigator;
     private final DialogsManager dialogsManager;
     private final DialogsEventBus dialogsEventBus;
@@ -42,6 +49,8 @@ public class TicketDetailsController
             FetchTicketUseCase fetchTicket,
             FetchTicketTaskNoteListUseCase fetchTicketTaskNoteListUseCase,
             SaveTaskNoteUseCase saveTaskNoteUseCase,
+            GetTicketFeedBackUseCase getTicketFeedBackUseCase,
+            SaveTicketFeedbackUseCase saveTicketFeedbackUseCase,
             ScreensNavigator screensNavigator,
             DialogsManager dialogsManager,
             DialogsEventBus dialogsEventBus
@@ -49,6 +58,8 @@ public class TicketDetailsController
         this.fetchTicket = fetchTicket;
         this.fetchTicketTaskNoteListUseCase = fetchTicketTaskNoteListUseCase;
         this.saveTaskNoteUseCase = saveTaskNoteUseCase;
+        this.getTicketFeedBackUseCase = getTicketFeedBackUseCase;
+        this.saveTicketFeedbackUseCase = saveTicketFeedbackUseCase;
         this.screensNavigator = screensNavigator;
         this.dialogsManager = dialogsManager;
         this.dialogsEventBus = dialogsEventBus;
@@ -72,6 +83,8 @@ public class TicketDetailsController
         fetchTicket.registerListener(this);
         fetchTicketTaskNoteListUseCase.registerListener(this);
         saveTaskNoteUseCase.registerListener(this);
+        getTicketFeedBackUseCase.registerListener(this);
+        saveTicketFeedbackUseCase.registerListener(this);
         dialogsEventBus.registerListener(this);
 
         if (mScreenState != ScreenState.NETWORK_ERROR) {
@@ -85,6 +98,8 @@ public class TicketDetailsController
         fetchTicket.unregisterListener(this);
         fetchTicketTaskNoteListUseCase.unregisterListener(this);
         saveTaskNoteUseCase.unregisterListener(this);
+        getTicketFeedBackUseCase.unregisterListener(this);
+        saveTicketFeedbackUseCase.unregisterListener(this);
         dialogsEventBus.unregisterListener(this);
     }
 
@@ -130,6 +145,7 @@ public class TicketDetailsController
     @Override
     public void onTicketFetched(TicketResponse ticketResponse) {
         mScreenState = ScreenState.IDLE;
+        this.ticketId = ticketResponse.getTaskTicket().getId();
         viewMvc.bindTicket(ticketResponse.getTaskTicket());
         viewMvc.bindTicketCategories(ticketResponse.getTaskTicketCategories());
         viewMvc.hideProgressIndication();
@@ -146,7 +162,7 @@ public class TicketDetailsController
     @Override
     public void onTaskNoteListFetched(List<TaskNote> taskNoteList) {
         viewMvc.bindTaskNotes(taskNoteList);
-        viewMvc.hideProgressIndication();
+        getTicketFeedBackUseCase.fetchKTicketFeedbackByIdAndNotify(this.ticketId);
     }
 
     @Override
@@ -184,4 +200,43 @@ public class TicketDetailsController
         }
     }
 
+    @Override
+    public void onSubmitFeedbackClicked(int rating, String feedback) {
+        viewMvc.showProgressIndication();
+        saveTicketFeedbackUseCase.saveTicketFeedbackAndNotify(
+                ticketId,
+                rating,
+                feedback
+        );
+    }
+
+    @Override
+    public void onTicketFeedbackFetched(TicketFeedBackResponse ticketFeedBackResponse) {
+        viewMvc.hideProgressIndication();
+        viewMvc.bindTicketFeedback(ticketFeedBackResponse);
+    }
+
+    @Override
+    public void onTicketFeedbackFetchFailed() {
+        viewMvc.hideProgressIndication();
+
+    }
+
+    @Override
+    public void onTicketFeedbackSaved(TicketFeedBackResponse ticketFeedBackResponse) {
+        viewMvc.hideProgressIndication();
+        if(ticketFeedBackResponse.isSuccess()) {
+            viewMvc.showFeedbackSaved();
+            viewMvc.bindTicketFeedback(ticketFeedBackResponse);
+            screensNavigator.toSupportHome();
+        }else{
+            viewMvc.showFeedbackSaveFailed();
+        }
+    }
+
+    @Override
+    public void onTicketFeedbackSaveFailed() {
+        viewMvc.hideProgressIndication();
+
+    }
 }
