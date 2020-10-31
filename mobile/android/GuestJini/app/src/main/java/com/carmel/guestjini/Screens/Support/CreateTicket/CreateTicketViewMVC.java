@@ -1,11 +1,13 @@
 package com.carmel.guestjini.Screens.Support.CreateTicket;
 
+import com.carmel.guestjini.Networking.Tickets.Ticket;
 import com.carmel.guestjini.Networking.Tickets.TicketCategory;
 import com.carmel.guestjini.Screens.Common.Views.ObservableViewMvc;
 
 import java.util.List;
 
 public interface CreateTicketViewMVC extends ObservableViewMvc<CreateTicketViewMVC.Listener> {
+
 
     public interface Listener {
         void onCreateTicketClicked(String subject, String narration);
@@ -32,5 +34,9 @@ public interface CreateTicketViewMVC extends ObservableViewMvc<CreateTicketViewM
     void showTicketSaved();
 
     void showTicketDeleted();
+
+    void bindTicket(Ticket taskTicket);
+
+    void showTicketFetchFailed();
 
 }

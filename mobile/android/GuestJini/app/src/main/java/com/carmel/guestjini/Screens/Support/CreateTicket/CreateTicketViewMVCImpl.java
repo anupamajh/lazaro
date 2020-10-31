@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.carmel.guestjini.Networking.Tickets.Ticket;
 import com.carmel.guestjini.Networking.Tickets.TicketCategory;
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Screens.Common.ViewMVCFactory;
@@ -99,10 +100,10 @@ public class CreateTicketViewMVCImpl
         });
         btnSubmit.setOnClickListener(view -> {
             txtNarrationError.setVisibility(View.GONE);
-            if(this.currentTicketCategory.getIsMessageMandatory() == 1) {
+            if (this.currentTicketCategory.getIsMessageMandatory() == 1) {
                 if (txtNarration.getText().toString().trim().length() == 0) {
                     txtNarrationError.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     for (Listener listener : getListeners()) {
                         listener.onCreateTicketClicked(
                                 "",
@@ -110,7 +111,7 @@ public class CreateTicketViewMVCImpl
                         );
                     }
                 }
-            }else {
+            } else {
                 for (Listener listener : getListeners()) {
                     listener.onCreateTicketClicked(
                             "",
@@ -121,10 +122,10 @@ public class CreateTicketViewMVCImpl
         });
         btnDraft.setOnClickListener(view -> {
             txtNarrationError.setVisibility(View.GONE);
-            if(this.currentTicketCategory.getIsMessageMandatory() == 1) {
+            if (this.currentTicketCategory.getIsMessageMandatory() == 1) {
                 if (txtNarration.getText().toString().trim().length() == 0) {
                     txtNarrationError.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     for (Listener listener : getListeners()) {
                         listener.onSaveDraftClicked(
                                 "",
@@ -132,7 +133,7 @@ public class CreateTicketViewMVCImpl
                         );
                     }
                 }
-            }else {
+            } else {
                 for (Listener listener : getListeners()) {
                     listener.onSaveDraftClicked(
                             "",
@@ -164,8 +165,15 @@ public class CreateTicketViewMVCImpl
     @Override
     public void bindTicketCategoryData(List<TicketCategory> ticketCategories) {
         taskTicketCategoryRecycleAdapter.bindTicketCategories(ticketCategories);
-        this.currentTicketCategory = ticketCategories.get(ticketCategories.size()-1);
+        this.currentTicketCategory = ticketCategories.get(ticketCategories.size() - 1);
     }
+
+
+    @Override
+    public void bindTicket(Ticket taskTicket) {
+        this.txtNarration.setText(taskTicket.getTicketNarration());
+    }
+
 
     @Override
     public void showProgressIndication() {
@@ -197,5 +205,10 @@ public class CreateTicketViewMVCImpl
     @Override
     public void showTicketDeleted() {
         Toast.makeText(getContext(), "Draft ticket deleted", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showTicketFetchFailed() {
+        Toast.makeText(getContext(), "Error occurred while fetching the draft, Kindly try after sometime.", Toast.LENGTH_LONG).show();
     }
 }

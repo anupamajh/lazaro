@@ -1,5 +1,7 @@
 package com.carmel.guestjini.Networking.Tickets;
 
+import java.util.Date;
+
 public class Ticket {
     private String id;
     private String clientId;
@@ -19,7 +21,13 @@ public class Ticket {
     private Integer ticketStatus;
     private Integer requesterType;
     private String requesterId;
+    private String createdBy;
     private String creationTime;
+    private String lastModifiedBy;
+    private String lastModifiedTime;
+    private int isDeleted;
+    private String deletedBy;
+    private Date deletedTime;
 
     public String getId() {
         return id;
@@ -171,5 +179,53 @@ public class Ticket {
 
     public void setCreationTime(String creationTime) {
         this.creationTime = creationTime;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
+    public String getLastModifiedTime() {
+        return lastModifiedTime;
+    }
+
+    public void setLastModifiedTime(String lastModifiedTime) {
+        this.lastModifiedTime = lastModifiedTime;
+    }
+
+    public int getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public String getDeletedBy() {
+        return deletedBy;
+    }
+
+    public void setDeletedBy(String deletedBy) {
+        this.deletedBy = deletedBy;
+    }
+
+    public Date getDeletedTime() {
+        return deletedTime;
+    }
+
+    public void setDeletedTime(Date deletedTime) {
+        this.deletedTime = deletedTime;
     }
 }

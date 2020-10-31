@@ -3,6 +3,7 @@ package com.carmel.guestjini.Screens.Support.TicketCategory.TicketCategoryItem;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -17,7 +18,7 @@ public class TicketCategoryItemViewMVCImpl
         implements TicketCategoryItemViewMVC {
 
     TextView txtTicketCategoryName;
-    FloatingActionButton btnExploreTicketCategories;
+    ImageView btnExploreTicketCategories;
 
     private TicketCategory ticketCategory;
 

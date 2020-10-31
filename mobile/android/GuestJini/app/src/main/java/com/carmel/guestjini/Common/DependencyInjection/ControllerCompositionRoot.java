@@ -457,6 +457,7 @@ public class ControllerCompositionRoot {
                 getScreensNavigator(),
                 getSaveTicketUseCase(),
                 getDeleteTicketUseCase(),
+                getFetchTicketUseCase(),
                 getDialogsManager(),
                 getDialogsEventBus()
         );

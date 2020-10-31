@@ -96,7 +96,11 @@ public class TicketListController implements
 
     @Override
     public void onTicketClicked(Ticket ticket) {
-        screensNavigator.toTicketDetails(ticket.getId());
+        if(ticket.getTicketStatus() != 0) {
+            screensNavigator.toTicketDetails(ticket.getId());
+        }else{
+            screensNavigator.toCreateTicket(null, ticket.getId());
+        }
     }
 
     @Override

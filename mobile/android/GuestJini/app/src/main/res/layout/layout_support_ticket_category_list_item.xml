@@ -23,18 +23,15 @@
             android:textSize="16sp"
             app:fontFamily="@font/roboto_medium" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <ImageView
             android:id="@+id/btnExploreTicketCategories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="20dp"
             android:layout_marginTop="2dp"
-            app:backgroundTint="@color/colorWhite"
-            app:fabCustomSize="26dp"
-            app:maxImageSize="16dp"
-            app:srcCompat="@drawable/ic_navigate_next_black_24dp"
-            app:tint="@color/colorBlackRussian" />
+            android:src="@drawable/ic_btn_next_teal"
+            />
     </RelativeLayout>
 </FrameLayout>

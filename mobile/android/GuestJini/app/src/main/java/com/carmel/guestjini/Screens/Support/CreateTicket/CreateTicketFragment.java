@@ -15,16 +15,27 @@ public class CreateTicketFragment extends BaseFragment {
 
     private static final String SAVED_STATE_CREATE_TICKET_FRAGMENT = "SAVED_STATE_CREATE_TICKET_FRAGMENT";
     private static final String ARG_TICKET_CATEGORY_DATA = "ARG_TICKET_CATEGORY_DATA";
+    private static final String ARG_TICKET_ID = "ARG_TICKET_ID";
 
     public static Fragment createFragment(String ticketCategoryData) {
         Bundle args = new Bundle();
         args.putString(ARG_TICKET_CATEGORY_DATA, ticketCategoryData);
+        args.putString(ARG_TICKET_ID, "");
         CreateTicketFragment fragment = new CreateTicketFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     private CreateTicketController createTicketController;
+
+    public static Fragment createFragment(String ticketCategoryData, String ticketId) {
+        Bundle args = new Bundle();
+        args.putString(ARG_TICKET_CATEGORY_DATA, ticketCategoryData);
+        args.putString(ARG_TICKET_ID, ticketId);
+        CreateTicketFragment fragment = new CreateTicketFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Nullable
     @Override
@@ -49,7 +60,11 @@ public class CreateTicketFragment extends BaseFragment {
     @Override
     public void onStart() {
         super.onStart();
-        createTicketController.onStart(getTicketCategoryData());
+        if(getTicketId().trim() != ""){
+            createTicketController.onStart(getTicketCategoryData(), getTicketId());
+        }else{
+            createTicketController.onStart(getTicketCategoryData());
+        }
     }
 
     @Override
@@ -66,5 +81,8 @@ public class CreateTicketFragment extends BaseFragment {
 
     private String getTicketCategoryData() {
         return getArguments().getString(ARG_TICKET_CATEGORY_DATA);
+    }
+    private String getTicketId() {
+        return getArguments().getString(ARG_TICKET_ID);
     }
 }

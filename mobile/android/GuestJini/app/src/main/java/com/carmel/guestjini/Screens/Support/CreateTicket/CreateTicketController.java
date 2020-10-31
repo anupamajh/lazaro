@@ -2,11 +2,13 @@ package com.carmel.guestjini.Screens.Support.CreateTicket;
 
 import com.carmel.guestjini.Networking.Tickets.Ticket;
 import com.carmel.guestjini.Networking.Tickets.TicketCategory;
+import com.carmel.guestjini.Networking.Tickets.TicketResponse;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptDialogEvent;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
 import com.carmel.guestjini.Tickets.DeleteTicketUseCase;
+import com.carmel.guestjini.Tickets.FetchTicketUseCase;
 import com.carmel.guestjini.Tickets.SaveTicketUseCase;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -20,6 +22,7 @@ import java.util.List;
 public class CreateTicketController
         implements CreateTicketViewMVC.Listener,
         DeleteTicketUseCase.Listener,
+        FetchTicketUseCase.Listener,
         SaveTicketUseCase.Listener,
         DialogsEventBus.Listener {
     private enum ScreenState {
@@ -29,6 +32,7 @@ public class CreateTicketController
     private final ScreensNavigator screensNavigator;
     private final SaveTicketUseCase saveTicketUseCase;
     private final DeleteTicketUseCase deleteTicketUseCase;
+    private final FetchTicketUseCase fetchTicketUseCase;
     private final DialogsManager dialogsManager;
     private final DialogsEventBus dialogsEventBus;
     private TicketCategory parentTicketCategory = null;
@@ -50,15 +54,47 @@ public class CreateTicketController
                     ScreensNavigator screensNavigator,
                     SaveTicketUseCase saveTicketUseCase,
                     DeleteTicketUseCase deleteTicketUseCase,
+                    FetchTicketUseCase fetchTicketUseCase,
                     DialogsManager dialogsManager,
                     DialogsEventBus dialogsEventBus
             ) {
         this.screensNavigator = screensNavigator;
         this.saveTicketUseCase = saveTicketUseCase;
+        this.fetchTicketUseCase = fetchTicketUseCase;
         this.dialogsManager = dialogsManager;
         this.dialogsEventBus = dialogsEventBus;
         this.draftTicketId = "";
         this.deleteTicketUseCase = deleteTicketUseCase;
+    }
+
+    public void onStart(String ticketCategoryData, String ticketId) {
+        viewMVC.registerListener(this);
+        fetchTicketUseCase.registerListener(this);
+        saveTicketUseCase.registerListener(this);
+        deleteTicketUseCase.registerListener(this);
+        viewMVC.showProgressIndication();
+        this.draftTicketId = ticketId;
+        if (mScreenState == ScreenState.IDLE) {
+            fetchTicketUseCase.fetchKTicketByIdAndNotify(ticketId);
+        }
+    }
+
+
+    @Override
+    public void onTicketFetched(TicketResponse ticketResponse) {
+        viewMVC.hideProgressIndication();
+        ticketCategories = ticketResponse.getTaskTicketCategories();
+        if (ticketCategories.size() > 0) {
+            this.ticketCategoryId = ticketCategories.get(ticketCategories.size() - 1).getId();
+        }
+        viewMVC.bindTicket(ticketResponse.getTaskTicket());
+        viewMVC.bindTicketCategoryData(this.ticketCategories);
+    }
+
+    @Override
+    public void onTicketFetchFailed() {
+        viewMVC.hideProgressIndication();
+        viewMVC.showTicketFetchFailed();
     }
 
     public void onStart(String ticketCategoryData) {
@@ -152,8 +188,8 @@ public class CreateTicketController
         if (ticketCategories.size() == 0) {
             screensNavigator.toSupportHome();
         } else {
-             String parentId = ticketCategories.get(ticketCategories.size()-1).getParentId();
-             ticketCategories.remove(ticketCategories.size()-1);
+            String parentId = ticketCategories.get(ticketCategories.size() - 1).getParentId();
+            ticketCategories.remove(ticketCategories.size() - 1);
             String ticketCategoryData = new GsonBuilder().create().toJson(ticketCategories);
             screensNavigator.toTicketCategoryList(parentId, ticketCategoryData);
         }
@@ -229,4 +265,5 @@ public class CreateTicketController
         viewMVC.hideProgressIndication();
         dialogsManager.showNetworkFailedInfoDialog(null, "Delete Ticket");
     }
+
 }

@@ -202,4 +202,9 @@ public class ScreensNavigator {
     public void toSetPasswordScreen() {
         mFragmentFrameHelper.replaceFragment(SetPasswordFragment.createFragment());
     }
+
+    public void toCreateTicket(String ticketCategoryData, String ticketId) {
+        mFragmentFrameHelper.replaceFragment(CreateTicketFragment.createFragment(ticketCategoryData, ticketId));
+
+    }
 }
