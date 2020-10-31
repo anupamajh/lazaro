@@ -47,6 +47,7 @@ public class TicketDetailsViewMVCImpl
     private final ImageView ratingStar4;
     private final ImageView ratingStar5;
     private final CardView ticketMessageCard;
+    private final CardView ticketRatingCard;
 
     private final ImageView btnBack;
     private final EditText txtTicketComment;
@@ -87,6 +88,7 @@ public class TicketDetailsViewMVCImpl
         btnSubmitFeedback = findViewById(R.id.btnSubmitFeedback);
         progressBar = findViewById(R.id.progress);
         ticketMessageCard = findViewById(R.id.ticketMessageCard);
+        ticketRatingCard = findViewById(R.id.ticketRatingCard);
         lstTaskNotes.setLayoutManager(new LinearLayoutManager(getContext()));
         ticketCommentsRecyclerAdapter = new TicketCommentsRecyclerAdapter(this, viewMVCFactory);
         lstTaskNotes.setAdapter(ticketCommentsRecyclerAdapter);
@@ -94,6 +96,8 @@ public class TicketDetailsViewMVCImpl
         lstTicketCategories.setLayoutManager(new LinearLayoutManager(getContext()));
         taskTicketCategoryRecycleAdapter = new TaskTicketCategoryRecycleAdapter(viewMVCFactory);
         lstTicketCategories.setAdapter(taskTicketCategoryRecycleAdapter);
+
+
 
         btnSubmitFeedback.setOnClickListener(view -> {
             for (Listener listener : getListeners()) {
@@ -225,14 +229,11 @@ public class TicketDetailsViewMVCImpl
     public void bindTicket(Ticket ticket) {
         this.ticket = ticket;
         if(this.ticket.getTicketStatus() == 5){
-            txtFeedBack.setEnabled(false);
-            btnSubmitFeedback.setVisibility(View.GONE);
             ticketMessageCard.setVisibility(View.GONE);
-            ratingStar1.setEnabled(false);
-            ratingStar2.setEnabled(false);
-            ratingStar3.setEnabled(false);
-            ratingStar4.setEnabled(false);
-            ratingStar5.setEnabled(false);
+            ticketRatingCard.setVisibility(View.VISIBLE);
+        }else {
+            ticketMessageCard.setVisibility(View.VISIBLE);
+            ticketRatingCard.setVisibility(View.GONE);
         }
         String strTicketStatus = "OPEN";
         int drawableResourceId = 0;
