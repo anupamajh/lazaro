@@ -87,9 +87,9 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="2dp"
                         app:backgroundTint="@color/colorSummerSky"
-                        app:fabCustomSize="26dp"
-                        app:maxImageSize="16dp"
-                        app:srcCompat="@drawable/ic_navigate_next_black_24dp"
+                        app:fabCustomSize="35dp"
+                        app:maxImageSize="30dp"
+                        app:srcCompat="@drawable/ic_btn_back_no_bg"
                         app:tint="@color/colorWhite" />
                 </RelativeLayout>
                 <RelativeLayout
