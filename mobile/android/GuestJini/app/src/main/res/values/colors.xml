@@ -73,6 +73,8 @@
     <color name="closedTicketText">#8e98b0</color>
     <color name="closedTicketBorder">#c2c7d6</color>
     <color name="ticketNumberBorder">#ebebeb</color>
+    <color name="ticketNumberTitleColor">#464646</color>
+    <color name="colorTeal">#72bcd0</color>
 
 
 </resources>

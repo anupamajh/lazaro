@@ -54,6 +54,10 @@ public class TicketCategoryRecyclerAdapter
     @Override
     public void onBindViewHolder(@NonNull TicketCategoryViewHolder holder, int position) {
         holder.viewMVC.bindTicketCategory(this.ticketCategoryList.get(position));
+        if(position == ticketCategoryList.size()-1){
+            holder.viewMVC.removeBorder(true);
+
+        }
     }
 
     @Override

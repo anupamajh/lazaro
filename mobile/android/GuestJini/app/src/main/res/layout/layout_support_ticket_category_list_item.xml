@@ -6,6 +6,7 @@
     >
 
     <RelativeLayout
+        android:id="@+id/layoutTicketCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/border_top_bottom"
@@ -25,8 +26,8 @@
 
         <ImageView
             android:id="@+id/btnExploreTicketCategories"
-            android:layout_width="30dp"
-            android:layout_height="50dp"
+            android:layout_width="20dp"
+            android:layout_height="30dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="20dp"

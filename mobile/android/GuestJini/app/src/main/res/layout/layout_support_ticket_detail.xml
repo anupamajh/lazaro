@@ -54,12 +54,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
                     android:layout_marginBottom="26dp"
-                    app:cardBackgroundColor="@color/colorWhite"
                     app:cardCornerRadius="5dp"
                     app:cardElevation="5dp"
                     android:padding="10dp"
-                    android:background="@drawable/rectangle_border"
+                    android:background="@drawable/card_view_border"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -121,6 +122,7 @@
                             app:fontFamily="@font/roboto_medium" />
 
                         <RelativeLayout
+                            android:id="@+id/layoutTicketNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/txtTicketTitle"
@@ -134,7 +136,7 @@
                                 android:layout_alignParentStart="true"
                                 android:letterSpacing="0.05"
                                 android:text="Ticket #"
-                                android:textColor="@color/ticketNumberBorder"
+                                android:textColor="@color/ticketNumberTitleColor"
                                 android:textSize="12sp"
                                 app:fontFamily="@font/roboto_medium" />
 
@@ -151,7 +153,50 @@
                                 app:fontFamily="@font/roboto_medium" />
                         </RelativeLayout>
 
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/lstTicketCategories"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="10dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_below="@+id/layoutTicketNumber"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <RelativeLayout
+                            android:id="@+id/layoutTicketNarration"
+                            android:layout_below="@id/lstTicketCategories"
+                            android:paddingTop="10dp"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp"
+                            android:layout_width="wrap_content"
+                            android:visibility="gone"
+                            android:layout_height="wrap_content">
+                            <RelativeLayout
+                                android:id="@+id/layoutCategorySeparator"
+                                android:layout_width="25dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentStart="true"
+                                android:background="@drawable/ic_bullet_down_arrow_head"
+                                android:visibility="visible" />
+                            <TextView
+                                android:id="@+id/txtTicketNarration"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/layoutCategorySeparator"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginTop="10dp"
+                                android:fontFamily="@font/roboto_bold"
+                                android:letterSpacing="0.05"
+                                android:text="INBOX"
+                                android:textColor="@color/colorGray44"
+                                android:textSize="12sp" />
+                        </RelativeLayout>
+
                     </RelativeLayout>
+
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -160,6 +205,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/ticketCardView"
                     android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
                     android:layout_marginBottom="26dp"
                     app:cardBackgroundColor="@color/colorWhite"
                     app:cardCornerRadius="5dp"
@@ -170,15 +217,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/lstTicketCategories"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="10dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -187,6 +226,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/ticketCategoryCard"
                     android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
                     android:layout_marginBottom="26dp"
                     app:cardBackgroundColor="@color/colorWhite"
                     app:cardCornerRadius="5dp"
@@ -301,6 +342,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/ticketRatingCard"
                     android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
                     android:layout_marginBottom="26dp"
                     app:cardBackgroundColor="@color/colorWhite"
                     app:cardCornerRadius="5dp"
@@ -339,6 +382,7 @@
                             android:layout_marginEnd="26dp"
                             android:background="@drawable/review_edit_box"
                             android:inputType="textMultiLine"
+                            android:hint="You can write a message here to the support team."
                             android:paddingStart="6dp"
                             android:paddingTop="14dp"
                             android:paddingEnd="6dp"
@@ -358,7 +402,7 @@
                             android:backgroundTint="@color/colorSummerSky"
                             android:fontFamily="@font/roboto_bold"
                             android:letterSpacing="0.06"
-                            android:text="@string/submit"
+                            android:text="SEND"
                             android:textSize="10sp"
                             app:cornerRadius="@dimen/submit_button_radius" />
 

@@ -189,9 +189,13 @@ public class CreateTicketController
             screensNavigator.toSupportHome();
         } else {
             String parentId = ticketCategories.get(ticketCategories.size() - 1).getParentId();
-            ticketCategories.remove(ticketCategories.size() - 1);
-            String ticketCategoryData = new GsonBuilder().create().toJson(ticketCategories);
-            screensNavigator.toTicketCategoryList(parentId, ticketCategoryData);
+            if(parentId == null){
+                screensNavigator.toSupportHome();
+            }else {
+                ticketCategories.remove(ticketCategories.size() - 1);
+                String ticketCategoryData = new GsonBuilder().create().toJson(ticketCategories);
+                screensNavigator.toTicketCategoryList(parentId, ticketCategoryData);
+            }
         }
     }
 

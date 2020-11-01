@@ -1,6 +1,7 @@
 package com.carmel.guestjini.Screens.Support.TicketList.TicketListItem;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ public class TicketListItemViewMVCImpl
     private TextView txtTicketDate;
     private TextView txtTicketTitle;
     private TextView txtTicketNumber;
+    private TextView txtTicketNarration;
 
     private Ticket ticket;
 
@@ -37,6 +39,7 @@ public class TicketListItemViewMVCImpl
         txtTicketDate = findViewById(R.id.txtTicketDate);
         txtTicketTitle = findViewById(R.id.txtTicketTitle);
         txtTicketNumber = findViewById(R.id.txtTicketNumber);
+        txtTicketNarration = findViewById(R.id.txtTicketNarration);
         getRootView().setOnClickListener(view -> {
             for (Listener listener : getListeners()) {
                 listener.onTicketClicked(ticket);
@@ -58,26 +61,11 @@ public class TicketListItemViewMVCImpl
                     colorResourceId = R.color.draftTicketText;
                 }
                 break;
+                case 4:
+                case 3:
+                case 2:
                 case 1: {
-                    strTicketStatus = "COMPLETED";
-                    drawableResourceId = R.drawable.rectangle_border_open_ticket;
-                    colorResourceId = R.color.openTicketText;
-                }
-                break;
-                case 2: {
-                    strTicketStatus = "STARTED";
-                    drawableResourceId = R.drawable.rectangle_border_open_ticket;
-                    colorResourceId = R.color.openTicketText;
-                }
-                break;
-                case 3: {
-                    strTicketStatus = "NOT STARTED";
-                    drawableResourceId = R.drawable.rectangle_border_open_ticket;
-                    colorResourceId = R.color.openTicketText;
-                }
-                break;
-                case 4: {
-                    strTicketStatus = "ON HOLD";
+                    strTicketStatus = "OPEN";
                     drawableResourceId = R.drawable.rectangle_border_open_ticket;
                     colorResourceId = R.color.openTicketText;
                 }
@@ -111,6 +99,16 @@ public class TicketListItemViewMVCImpl
             txtTicketDate.setText(DateUtil.getFormattedDate(creationDate));
             txtTicketTitle.setText(ticket.getTicketTitle());
             txtTicketNumber.setText(ticket.getTicketNo());
+            if(ticket.getTicketNarration() == null){
+                ticket.setTicketNarration("");
+            }
+
+            if(!ticket.getTicketNarration().equals("")){
+                txtTicketNarration.setVisibility(View.VISIBLE);
+                txtTicketNarration.setText(ticket.getTicketNarration());
+            }else{
+                txtTicketNarration.setVisibility(View.GONE);
+            }
         }catch (Exception ex){
 
         }

@@ -61,7 +61,7 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void onCommunityClicked() {
-        mScreensNavigator.toCommunityHome();
+        mScreensNavigator.toPeopleList();
     }
 
     @Override

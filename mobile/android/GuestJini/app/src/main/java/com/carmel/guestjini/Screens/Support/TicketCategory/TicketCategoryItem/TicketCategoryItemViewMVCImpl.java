@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -19,6 +20,7 @@ public class TicketCategoryItemViewMVCImpl
 
     TextView txtTicketCategoryName;
     ImageView btnExploreTicketCategories;
+    RelativeLayout layoutTicketCategory;
 
     private TicketCategory ticketCategory;
 
@@ -29,6 +31,7 @@ public class TicketCategoryItemViewMVCImpl
         setRootView(inflater.inflate(R.layout.layout_support_ticket_category_list_item, parent, false));
         txtTicketCategoryName = findViewById(R.id.txtTicketCategoryName);
         btnExploreTicketCategories = findViewById(R.id.btnExploreTicketCategories);
+        layoutTicketCategory = findViewById(R.id.layoutTicketCategory);
         getRootView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,5 +51,14 @@ public class TicketCategoryItemViewMVCImpl
     public void bindTicketCategory(TicketCategory ticketCategory) {
         this.ticketCategory = ticketCategory;
         this.txtTicketCategoryName.setText(ticketCategory.getCategoryDescription().trim());
+    }
+
+    @Override
+    public void removeBorder(boolean remove) {
+
+        if(remove){
+            layoutTicketCategory.setBackgroundResource(0);
+        }
+
     }
 }

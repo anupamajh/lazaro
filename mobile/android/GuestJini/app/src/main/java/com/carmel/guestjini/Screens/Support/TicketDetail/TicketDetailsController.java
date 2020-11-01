@@ -182,6 +182,7 @@ public class TicketDetailsController
         mScreenState = ScreenState.IDLE;
         viewMvc.hideProgressIndication();
         viewMvc.clearComment();
+        viewMvc.showTaskNotesSaved();
         fetchTicketComments(ticketId);
     }
 
@@ -189,6 +190,7 @@ public class TicketDetailsController
     public void onTaskNoteSaveFailed() {
         mScreenState = ScreenState.NETWORK_ERROR;
         viewMvc.hideProgressIndication();
+        viewMvc.showTaskNotesSaveFailed();
         dialogsManager.showUseCaseFailedDialog("Ticket Notes", null);
     }
 

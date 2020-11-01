@@ -3,22 +3,23 @@
     <item
         android:id="@+id/suppotIcon"
         android:icon="@drawable/support_grey_icon"
-        android:title="@string/support"></item>
+        android:title="@string/support" />
     <item
         android:id="@+id/communityIcon"
         android:icon="@drawable/community_grey_icon"
-        android:title="@string/community"></item>
+        android:title="@string/community" />
     <item
         android:id="@+id/accountsIcon"
         android:icon="@drawable/accounts_grey_icon"
-        android:title="@string/accounts"></item>
+        android:visible="false"
+        android:title="@string/accounts" />
     <item
         android:id="@+id/rewardsIcon"
-        android:visible="false"
         android:icon="@drawable/rewards_grey_icon"
-        android:title="@string/rewards"></item>
+        android:title="@string/rewards"
+        android:visible="false" />
     <item
         android:id="@+id/settingsIcon"
         android:icon="@drawable/settings_grey_icon"
-        android:title="@string/settings"></item>
+        android:title="@string/settings" />
 </menu>

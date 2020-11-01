@@ -1,6 +1,7 @@
 package com.carmel.guestjini.Screens.Support.SupportHome;
 
 import com.carmel.guestjini.Networking.Tickets.TicketCategory;
+import com.carmel.guestjini.Networking.Tickets.TicketCountDTO;
 import com.carmel.guestjini.Screens.Common.Views.ObservableViewMvc;
 
 import java.util.List;
@@ -37,5 +38,7 @@ public interface SupportHomeViewMVC extends ObservableViewMvc<SupportHomeViewMVC
     void showDraftTicketLayout(boolean show);
 
     void showArchiveTicketLayout(boolean show);
+
+    void bindTicketCounts(TicketCountDTO ticketCountDTO);
 
 }

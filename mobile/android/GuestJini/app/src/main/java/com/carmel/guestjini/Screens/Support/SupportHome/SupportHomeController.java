@@ -157,23 +157,7 @@ public class SupportHomeController implements
     public void onTicketCountFetched(TicketCountDTO ticketCountDTO) {
         viewMVC.hideProgressIndication();
         if(ticketCountDTO.isSuccess()){
-            if(ticketCountDTO.getActiveTicketCount() > 0){
-                viewMVC.showActiveTicketLayout(true);
-            }else{
-                viewMVC.showActiveTicketLayout(false);
-            }
-
-            if(ticketCountDTO.getDraftTicketCount() > 0){
-                viewMVC.showDraftTicketLayout(true);
-            }else{
-                viewMVC.showDraftTicketLayout(false);
-            }
-
-            if(ticketCountDTO.getArchiveTicketCount() > 0){
-                viewMVC.showArchiveTicketLayout(true);
-            }else{
-                viewMVC.showArchiveTicketLayout(false);
-            }
+            viewMVC.bindTicketCounts(ticketCountDTO);
         }
         fetchTicketCategoryListListAndNotify();
     }

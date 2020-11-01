@@ -35,10 +35,12 @@ public class TicketDetailsViewMVCImpl
         TicketCommentsRecyclerAdapter.Listener {
 
     private final RelativeLayout layoutNewTicketIndicator;
+    private final RelativeLayout layoutTicketNarration;
     private final TextView txtTicketStatus;
     private final TextView txtTicketDate;
     private final TextView txtTicketTitle;
     private final TextView txtTicketNumber;
+    private final TextView txtTicketNarration;
     private final RecyclerView lstTicketCategories;
     private final RecyclerView lstTaskNotes;
     private final ImageView ratingStar1;
@@ -70,10 +72,12 @@ public class TicketDetailsViewMVCImpl
         setRootView(inflater.inflate(R.layout.layout_support_ticket_detail, parent, false));
 
         layoutNewTicketIndicator = findViewById(R.id.layoutNewTicketIndicator);
+        layoutTicketNarration = findViewById(R.id.layoutTicketNarration);
         txtTicketStatus = findViewById(R.id.txtTicketStatus);
         txtTicketDate = findViewById(R.id.txtTicketDate);
         txtTicketTitle = findViewById(R.id.txtTicketTitle);
         txtTicketNumber = findViewById(R.id.txtTicketNumber);
+        txtTicketNarration = findViewById(R.id.txtTicketNarration);
         lstTicketCategories = findViewById(R.id.lstTicketCategories);
         lstTaskNotes = findViewById(R.id.lstTaskNotes);
         ratingStar1 = findViewById(R.id.ratingStar1);
@@ -96,7 +100,6 @@ public class TicketDetailsViewMVCImpl
         lstTicketCategories.setLayoutManager(new LinearLayoutManager(getContext()));
         taskTicketCategoryRecycleAdapter = new TaskTicketCategoryRecycleAdapter(viewMVCFactory);
         lstTicketCategories.setAdapter(taskTicketCategoryRecycleAdapter);
-
 
 
         btnSubmitFeedback.setOnClickListener(view -> {
@@ -228,10 +231,10 @@ public class TicketDetailsViewMVCImpl
     @Override
     public void bindTicket(Ticket ticket) {
         this.ticket = ticket;
-        if(this.ticket.getTicketStatus() == 5){
+        if (this.ticket.getTicketStatus() == 5) {
             ticketMessageCard.setVisibility(View.GONE);
             ticketRatingCard.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             ticketMessageCard.setVisibility(View.VISIBLE);
             ticketRatingCard.setVisibility(View.GONE);
         }
@@ -245,30 +248,15 @@ public class TicketDetailsViewMVCImpl
                 colorResourceId = R.color.draftTicketText;
             }
             break;
+            case 4:
+            case 3:
+            case 2:
             case 1: {
-                strTicketStatus = "COMPLETED";
+                strTicketStatus = "OPEN";
                 drawableResourceId = R.drawable.rectangle_border_open_ticket;
                 colorResourceId = R.color.openTicketText;
             }
-            break;
-            case 2: {
-                strTicketStatus = "STARTED";
-                drawableResourceId = R.drawable.rectangle_border_open_ticket;
-                colorResourceId = R.color.openTicketText;
-            }
-            break;
-            case 3: {
-                strTicketStatus = "NOT STARTED";
-                drawableResourceId = R.drawable.rectangle_border_open_ticket;
-                colorResourceId = R.color.openTicketText;
-            }
-            break;
-            case 4: {
-                strTicketStatus = "ON HOLD";
-                drawableResourceId = R.drawable.rectangle_border_open_ticket;
-                colorResourceId = R.color.openTicketText;
-            }
-            break;
+
             case 5: {
                 strTicketStatus = "CLOSED";
                 drawableResourceId = R.drawable.rectangle_border_closed_ticket;
@@ -290,6 +278,15 @@ public class TicketDetailsViewMVCImpl
         txtTicketDate.setText(DateUtil.getFormattedDate(creationDate));
         txtTicketNumber.setText(ticket.getTicketNo());
         txtTicketTitle.setText(ticket.getTicketTitle());
+        if (ticket.getTicketNarration() == null) {
+            ticket.setTicketNarration("");
+        }
+        if (!ticket.getTicketNarration().equals("")) {
+            txtTicketNarration.setText(ticket.getTicketNarration());
+            layoutTicketNarration.setVisibility(View.VISIBLE);
+        } else {
+            layoutTicketNarration.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -314,7 +311,7 @@ public class TicketDetailsViewMVCImpl
 
     @Override
     public void bindTicketFeedback(TicketFeedBackResponse ticketFeedBackResponse) {
-        if(ticketFeedBackResponse.isSuccess()) {
+        if (ticketFeedBackResponse.isSuccess()) {
             if (ticketFeedBackResponse.getTicketFeedBack() != null) {
                 TicketFeedBack ticketFeedBack = ticketFeedBackResponse.getTicketFeedBack();
                 txtFeedBack.setText(ticketFeedBack.getFeedback());
@@ -357,5 +354,15 @@ public class TicketDetailsViewMVCImpl
     @Override
     public void showFeedbackSaveFailed() {
         Toast.makeText(getContext(), "There was an error saving feedback, Kindly try after sometime.", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showTaskNotesSaved() {
+        Toast.makeText(getContext(), "Your message has been send.", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showTaskNotesSaveFailed() {
+        Toast.makeText(getContext(), "There was an error sending your message, Kindly try after sometime.", Toast.LENGTH_LONG).show();
     }
 }

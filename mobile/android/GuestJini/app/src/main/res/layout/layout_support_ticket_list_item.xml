@@ -73,19 +73,34 @@
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/txtTicketDate"
                 />
+            <TextView
+                android:id="@+id/txtTicketNarration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:letterSpacing="0.05"
+                android:text="@string/ticketsName"
+                android:textColor="@color/colorCharcoal"
+                android:textSize="12sp"
+                app:fontFamily="@font/roboto_medium"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:visibility="gone"
+                android:layout_below="@id/txtTicketTitle"
+                />
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/rectangle_border"
-                android:layout_below="@id/txtTicketTitle">
+                android:layout_below="@id/txtTicketNarration">
                 <TextView
                     android:id="@+id/txtTicketNumberTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:letterSpacing="0.05"
                     android:text="Ticket #"
-                    android:textColor="@color/ticketNumberBorder"
+                    android:textColor="@color/ticketNumberTitleColor"
                     android:textSize="12sp"
                     app:fontFamily="@font/roboto_medium"
                     android:layout_alignParentStart="true"

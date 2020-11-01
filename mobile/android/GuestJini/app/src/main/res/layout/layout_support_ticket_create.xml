@@ -50,117 +50,167 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="25dp">
-                <RelativeLayout
-                    android:id="@+id/deleteDraftLayout"
-                    android:layout_width="match_parent"
-                    android:visibility="gone"
-                    android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:id="@+id/btnDeleteDraft"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentEnd="true"
-                        android:tint="@color/colorRed"
-                        android:contentDescription="@string/ic_btn_back_arrow_circle_bg_white"
-                        android:src="@drawable/delete_cyan_icon" />
-
-                    <TextView
-                        android:id="@+id/txtDeleteDraftText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginEnd="20dp"
-                        android:letterSpacing="0.1"
-                        android:text="Delete Draft"
-                        android:textColor="@color/colorGray44"
-                        android:textSize="14sp"
-                        android:layout_toStartOf="@id/btnDeleteDraft"
-                        app:fontFamily="@font/roboto_regular" />
-                </RelativeLayout>
-                <RelativeLayout
-                    android:id="@+id/layoutTicketCategory"
-                    android:layout_width="match_parent"
-                    android:layout_below="@id/deleteDraftLayout"
-                    android:layout_height="wrap_content">
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/lstTicketCategories"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </RelativeLayout>
-                <ImageView
-                    android:id="@+id/btnBackToCategory"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_below="@id/layoutTicketCategory"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:src="@drawable/ic_btn_back_circle_bg_teal" />
-                <RelativeLayout
-                    android:id="@+id/layoutTicketForm"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/taskCategoriesCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/btnBackToCategory">
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginBottom="26dp"
+                    android:padding="10dp"
+                    app:cardBackgroundColor="@color/colorWhite"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
-                        android:id="@+id/txtMessageTitle"
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="(Optional) Message"
-                        android:textSize="15sp" />
+                        android:layout_margin="10dp">
 
-                    <EditText
-                        android:id="@+id/txtNarration"
+                        <RelativeLayout
+                            android:id="@+id/deleteDraftLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone">
+
+                            <ImageView
+                                android:id="@+id/btnDeleteDraft"
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
+                                android:contentDescription="@string/ic_btn_back_arrow_circle_bg_white"
+                                android:src="@drawable/delete_cyan_icon"
+                                android:tint="@color/colorRed" />
+
+                            <TextView
+                                android:id="@+id/txtDeleteDraftText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_marginEnd="20dp"
+                                android:layout_toStartOf="@id/btnDeleteDraft"
+                                android:letterSpacing="0.1"
+                                android:text="Delete Draft"
+                                android:textColor="@color/colorGray44"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/roboto_regular" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/layoutTicketCategory"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/deleteDraftLayout">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/lstTicketCategories"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </RelativeLayout>
+
+                        <ImageView
+                            android:id="@+id/btnBackToCategory"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_below="@id/layoutTicketCategory"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:src="@drawable/ic_btn_back_circle_bg_teal" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ticketMessageCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/taskCategoriesCard"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginBottom="26dp"
+                    android:padding="10dp"
+                    app:cardBackgroundColor="@color/colorWhite"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <RelativeLayout
+                        android:id="@+id/layoutTicketForm"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/txtMessageTitle"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginTop="16dp"
-                        android:background="@drawable/subject_editbox"
-                        android:elevation="3dp"
-                        android:gravity="top|left"
-                        android:hint="@string/subject_hint"
-                        android:inputType="textMultiLine"
-                        android:letterSpacing="0.05"
-                        android:minLines="10"
-                        android:paddingStart="16dp"
-                        android:paddingTop="8dp"
-                        android:paddingEnd="16dp"
-                        android:shadowColor="@color/colorBlackRussian"
-                        android:textColor="@color/colorSuvaGray"
-                        android:textSize="10sp"
-                        app:fontFamily="@font/roboto_medium" />
-                    <TextView
-                        android:id="@+id/txtNarrationError"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/txtNarration"
-                        android:layout_marginTop="16dp"
-                        android:gravity="start"
-                        android:letterSpacing="0.05"
-                        android:paddingLeft="12dp"
-                        android:paddingTop="8dp"
-                        android:paddingRight="12dp"
-                        android:paddingBottom="8dp"
-                        android:text="This field is required"
-                        android:textColor="@color/colorMabel"
-                        android:textSize="12sp"
-                        android:visibility="gone"
-                        app:fontFamily="@font/roboto_medium" />
+                        android:layout_below="@id/btnBackToCategory"
+                        android:layout_margin="10dp">
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/txtMessageTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="(Optional) Message"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/txtNarration"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txtMessageTitle"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginTop="16dp"
+                            android:background="@drawable/subject_editbox"
+                            android:elevation="3dp"
+                            android:gravity="top|left"
+                            android:hint="@string/subject_hint"
+                            android:inputType="textMultiLine"
+                            android:letterSpacing="0.05"
+                            android:minLines="10"
+                            android:paddingStart="16dp"
+                            android:paddingTop="8dp"
+                            android:paddingEnd="16dp"
+                            android:shadowColor="@color/colorBlackRussian"
+                            android:textColor="@color/colorSuvaGray"
+                            android:textSize="13sp"
+                            app:fontFamily="@font/roboto_medium" />
+
+                        <TextView
+                            android:id="@+id/txtNarrationError"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txtNarration"
+                            android:layout_marginTop="16dp"
+                            android:gravity="start"
+                            android:letterSpacing="0.05"
+                            android:paddingLeft="12dp"
+                            android:paddingTop="8dp"
+                            android:paddingRight="12dp"
+                            android:paddingBottom="8dp"
+                            android:text="This field is required"
+                            android:textColor="@color/colorMabel"
+                            android:textSize="12sp"
+                            android:visibility="gone"
+                            app:fontFamily="@font/roboto_medium" />
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
 
                 <RelativeLayout
                     android:id="@+id/layoutAttachment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/layoutTicketForm">
+                    android:layout_below="@id/ticketMessageCard">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/attachmentCardView"
@@ -171,10 +221,10 @@
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="28dp"
                         android:layout_marginEnd="24dp"
+                        android:visibility="gone"
                         app:cardBackgroundColor="@color/colorWhisper1"
                         app:cardCornerRadius="5dp"
                         app:cardElevation="5dp"
-                        android:visibility="gone"
                         app:cardUseCompatPadding="true">
 
                         <RelativeLayout
@@ -183,20 +233,21 @@
                             android:layout_height="wrap_content"
                             android:elevation="5dp"
                             android:padding="10dp">
+
                             <TextView
                                 android:id="@+id/txtAttachmentText"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
                                 android:layout_alignParentStart="true"
+                                android:layout_marginLeft="10dp"
                                 android:text="ATTACHMENTS (0)" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@id/txtAttachmentText"
-                                android:layout_marginLeft="10dp"
                                 android:layout_alignParentStart="true"
+                                android:layout_marginLeft="10dp"
                                 android:layout_marginTop="5dp"
                                 android:layout_toStartOf="@id/btnShowAttachmentScreen"
                                 android:text="You can attach photos, videos or any other files here"
@@ -263,6 +314,7 @@
             </RelativeLayout>
         </ScrollView>
     </RelativeLayout>
+
     <ProgressBar
         android:id="@+id/progress"
         android:layout_width="match_parent"

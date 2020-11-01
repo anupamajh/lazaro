@@ -166,6 +166,11 @@ public class CreateTicketViewMVCImpl
     public void bindTicketCategoryData(List<TicketCategory> ticketCategories) {
         taskTicketCategoryRecycleAdapter.bindTicketCategories(ticketCategories);
         this.currentTicketCategory = ticketCategories.get(ticketCategories.size() - 1);
+        if(this.currentTicketCategory.getIsMessageMandatory() == 1){
+            txtMessageTitle.setText("(Required) Message");
+        }else{
+            txtMessageTitle.setText("(Optional) Message");
+        }
     }
 
 

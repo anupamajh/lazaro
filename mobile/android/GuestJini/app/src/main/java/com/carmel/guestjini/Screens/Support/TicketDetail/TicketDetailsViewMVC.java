@@ -36,4 +36,9 @@ public interface TicketDetailsViewMVC
     void showFeedbackSaved();
 
     void showFeedbackSaveFailed();
+
+    void showTaskNotesSaved();
+
+    void showTaskNotesSaveFailed();
+
 }

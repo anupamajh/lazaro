@@ -32,7 +32,7 @@ public class SaveUserPreferenceUseCase extends BaseObservableViewMvc<SaveUserPre
     ) {
         Map<String, String> postData = new HashMap<>();
         postData.put("preferenceType", String.valueOf(preferenceType));
-        postData.put("isHidden", String.valueOf(preferenceType));
+        postData.put("isHidden", String.valueOf(isHidden));
         this.guestJiniAPI.saveUserPreference(postData).enqueue(new Callback<UserPreferenceResponse>() {
             @Override
             public void onResponse(Call<UserPreferenceResponse> call, Response<UserPreferenceResponse> response) {
