@@ -11,6 +11,7 @@ public interface AddressBookRepository extends JpaRepository<AddressBook, String
 
     List<AddressBook> findAllByIsDeleted(int isDeleted);
 
-    List<AddressBook> findAllByIsDeletedAndUserIdIsNot(int isDeleted, String userId);
+    List<AddressBook> findAllByIsDeletedAndUserIdIsNotNull(int isDeleted);
 
+    List<AddressBook> findAllByIsDeletedAndUserIdIsNot(int isDeleted, String userId);
 }

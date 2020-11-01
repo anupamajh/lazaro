@@ -341,7 +341,11 @@ public class InterestServiceImpl implements InterestService {
 
     @Override
     public InterestResponse findAllByClientIdAndIsDeleted(String clientId, int isDeleted) {
-        return null;
+        InterestResponse interestResponse = new InterestResponse();
+        List<Interest> interests =  interestRepository.findAllByClientIdAndIsDeleted(clientId, isDeleted);
+        interestResponse.setSuccess(true);
+        interestResponse.setInterestList(interests);
+        return interestResponse;
     }
 
     @Override
@@ -366,7 +370,7 @@ public class InterestServiceImpl implements InterestService {
 
     @Override
     public int countByIsDeleted(int isDeleted) {
-        return this.countByIsDeleted(isDeleted);
+        return interestRepository.countByIsDeleted(isDeleted);
     }
 
     private boolean checkDuplicate(Interest interest) {

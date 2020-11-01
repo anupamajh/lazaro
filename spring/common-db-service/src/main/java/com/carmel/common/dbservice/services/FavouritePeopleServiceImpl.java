@@ -27,4 +27,5 @@ public class FavouritePeopleServiceImpl implements FavouritePeopleService {
     public List<FavouritePeople> findByUserIdAndIsFavourite(String userId, int isFavourite) {
         return favouritePeopleRepository.findByUserIdAndIsFavourite(userId, isFavourite);
     }
+
 }

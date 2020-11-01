@@ -189,6 +189,7 @@ public class UserServiceImpl implements UserService {
             logger.trace("Data:{}", objectMapper.writeValueAsString(user));
             if (user.getId() == "") {
                 user = isDuplicateUser(user);
+                user.setAccountStatus(2);
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
                 user.setCreatedBy(userInfo.getId());
                 user.setCreationTime(new Date());

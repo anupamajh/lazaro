@@ -51,12 +51,20 @@ public class UserInterestsServiceImpl implements UserInterestsService {
 
     @Override
     public UserInterestsResponse findByUserId(String id) {
-        return (UserInterestsResponse) userInterestsRepository.findByUserId(id);
+        List<UserInterests> userInterests = userInterestsRepository.findByUserId(id);
+        UserInterestsResponse userInterestsResponse = new UserInterestsResponse();
+        userInterestsResponse.setSuccess(true);
+        userInterestsResponse.setUserInterestsList(userInterests);
+        return userInterestsResponse;
     }
 
     @Override
     public UserInterestsResponse findAll() {
-        return (UserInterestsResponse) userInterestsRepository.findAll();
+        List<UserInterests> userInterests = userInterestsRepository.findAll();
+        UserInterestsResponse userInterestsResponse = new UserInterestsResponse();
+        userInterestsResponse.setSuccess(true);
+        userInterestsResponse.setUserInterestsList(userInterests);
+        return userInterestsResponse;
     }
 
     @Override

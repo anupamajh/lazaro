@@ -99,7 +99,7 @@ public class UserPreferenceServiceImpl implements UserPreferenceService {
 
     @Override
     public List<UserPreference> findAllByUserId(String id) throws Exception {
-        return null;
+        return userPreferenceRepository.findAllByUserId(id);
     }
 
 

@@ -147,7 +147,7 @@ public class AddressBookServiceImpl implements AddressBookService {
     public AddressBookResponse findAllByIsDeleted(int isDeleted) {
         AddressBookResponse addressBookResponse = new AddressBookResponse();
         addressBookResponse.setSuccess(true);
-        addressBookResponse.setAddressBookList(addressBookRepository.findAllByIsDeleted(isDeleted));
+        addressBookResponse.setAddressBookList(addressBookRepository.findAllByIsDeletedAndUserIdIsNotNull(isDeleted));
         return addressBookResponse;
 
     }
