@@ -45,4 +45,6 @@ public interface InterestService {
     InterestResponse findAllByClientIdAndIsDeletedAndNameAndIdIsNot(String clientId, int isDeleted, String name, String id) throws Exception;
 
     int countByIsDeleted(int i) throws Exception;
+
+    List<Interest> findAllByInterestCategoryId(String categoryId);
 }

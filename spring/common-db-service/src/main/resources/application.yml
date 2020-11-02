@@ -3,10 +3,15 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://139.59.32.238:3306/spring_dev?createDatabaseIfNotExist=true&useSSL=false
+    url: jdbc:mysql://68.183.246.143:3306/guestjini?createDatabaseIfNotExist=true&useSSL=false
     username: jacksparrow
-    password: TH_12rthahalli
+    password: c@rmel@p1rat3s@hub11
     driver-class-name: com.mysql.cj.jdbc.Driver
+#  datasource:
+#    url: jdbc:mysql://139.59.32.238:3306/spring_dev?createDatabaseIfNotExist=true&useSSL=false
+#    username: jacksparrow
+#    password: TH_12rthahalli
+#    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       naming:
@@ -60,12 +65,14 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://139.59.32.238:8001/eureka/
+      defaultZone: http://68.183.246.143:8001/eureka/
+#      defaultZone: http://139.59.32.238:8001/eureka/
 
 security:
   oauth2:
     resource:
-      token-info-uri: http://139.59.32.238:8000/auth/oauth/check_token
+      token-info-uri: http://68.183.246.143:8000/auth/oauth/check_token
+#      token-info-uri: http://139.59.32.238:8000/auth/oauth/check_token
     client:
       client-id: 21e43c55-28ef-478a-ae65-dc896e5eaa34
       client-secret: P@ssw0rd

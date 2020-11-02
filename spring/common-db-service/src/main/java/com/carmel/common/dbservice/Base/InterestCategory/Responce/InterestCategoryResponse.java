@@ -73,4 +73,8 @@ public class InterestCategoryResponse {
     public void setError(String error) {
         this.error = error;
     }
+
+    public void setInterestCategoryDTOList(List<InterestCategoryDTO> interestCategoryDTOS) {
+        this.interestCategoryList = interestCategoryDTOS;
+    }
 }

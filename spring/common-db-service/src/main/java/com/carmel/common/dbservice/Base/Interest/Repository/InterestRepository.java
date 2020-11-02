@@ -20,4 +20,6 @@ public interface InterestRepository extends JpaRepository<Interest, String> {
     List<Interest> findAllByClientIdAndIsDeletedAndNameAndIdIsNot(String clientId, int isDeleted, String name, String id);
 
     int countByIsDeleted(int isDeleted);
+
+    List<Interest> findAllByInterestCategoryId(String categoryId);
 }

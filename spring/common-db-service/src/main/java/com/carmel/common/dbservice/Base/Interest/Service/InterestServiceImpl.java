@@ -387,4 +387,9 @@ public class InterestServiceImpl implements InterestService {
             return false;
         }
     }
+
+    @Override
+    public List<Interest> findAllByInterestCategoryId(String categoryId) {
+        return interestRepository.findAllByInterestCategoryId(categoryId);
+    }
 }

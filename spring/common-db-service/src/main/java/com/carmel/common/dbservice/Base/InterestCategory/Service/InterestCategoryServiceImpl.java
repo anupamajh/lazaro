@@ -1,6 +1,9 @@
 package com.carmel.common.dbservice.Base.InterestCategory.Service;
 
 import com.carmel.common.dbservice.Base.GroupConversation.Responce.GroupConversationResponse;
+import com.carmel.common.dbservice.Base.Interest.Model.Interest;
+import com.carmel.common.dbservice.Base.Interest.Service.InterestService;
+import com.carmel.common.dbservice.Base.InterestCategory.DTO.InterestCategoryDTO;
 import com.carmel.common.dbservice.Base.InterestCategory.Model.InterestCategory;
 import com.carmel.common.dbservice.Base.InterestCategory.Repository.InterestCategoryRepository;
 import com.carmel.common.dbservice.Base.InterestCategory.Responce.InterestCategoryResponse;
@@ -26,10 +29,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 
 @Service
@@ -46,6 +46,9 @@ public class InterestCategoryServiceImpl implements InterestCategoryService {
 
     @Autowired
     InterestCategoryService interestCategoryService;
+
+    @Autowired
+    InterestService interestService;
 
     @Autowired
     EntityManager entityManager;
@@ -170,7 +173,22 @@ public class InterestCategoryServiceImpl implements InterestCategoryService {
         logger.trace("Entering");
         InterestCategoryResponse interestCategoryResponse = new InterestCategoryResponse();
         try {
-            interestCategoryResponse.setInterestCategoryList(interestCategoryRepository.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(), 0));
+            List<InterestCategoryDTO> interestCategoryDTOS = new ArrayList<>();
+            List<InterestCategory> interestCategories
+                    = interestCategoryRepository
+                    .findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(), 0);
+
+            for(InterestCategory interestCategory: interestCategories){
+                List<Interest> interests =
+                        interestService.findAllByInterestCategoryId(
+                                interestCategory.getId()
+                        );
+                InterestCategoryDTO interestCategoryDTO = new InterestCategoryDTO(interestCategory);
+                interestCategoryDTO.setInterestList(interests);
+                interestCategoryDTOS.add(interestCategoryDTO);
+            }
+
+            interestCategoryResponse.setInterestCategoryDTOList(interestCategoryDTOS);
             interestCategoryResponse.setSuccess(true);
             interestCategoryResponse.setError("");
             logger.trace("Completed Successfully");

@@ -135,4 +135,12 @@ public class InterestCategoryDTO {
     public void setDeletedTime(Date deletedTime) {
         this.deletedTime = deletedTime;
     }
+
+    public List<Interest> getInterestList() {
+        return interestList;
+    }
+
+    public void setInterestList(List<Interest> interestList) {
+        this.interestList = interestList;
+    }
 }
