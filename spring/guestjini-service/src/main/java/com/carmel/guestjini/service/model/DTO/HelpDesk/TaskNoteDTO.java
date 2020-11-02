@@ -14,6 +14,7 @@ public class TaskNoteDTO {
     private String ticketId;
     private String notes;
     private int isRead;
+    private int isMine;
     private String createdBy;
     private Date creationTime;
     private String lastModifiedBy;
@@ -153,5 +154,13 @@ public class TaskNoteDTO {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public int getIsMine() {
+        return isMine;
+    }
+
+    public void setIsMine(int isMine) {
+        this.isMine = isMine;
     }
 }

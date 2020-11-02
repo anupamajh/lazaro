@@ -100,6 +100,11 @@ public class TaskNoteController {
                         ).findFirst();
                 if(optionalUserDTO.isPresent()){
                     taskNoteDTO.setUserName(optionalUserDTO.get().getFullName());
+                    if(optionalUserDTO.get().getId().equals(userInfo.getId())){
+                        taskNoteDTO.setIsMine(1);
+                    }else{
+                        taskNoteDTO.setIsMine(0);
+                    }
                 }
                 taskNoteDTOS.add(taskNoteDTO);
             });
