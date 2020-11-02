@@ -256,7 +256,7 @@ public class TicketDetailsViewMVCImpl
                 drawableResourceId = R.drawable.rectangle_border_open_ticket;
                 colorResourceId = R.color.openTicketText;
             }
-
+            break;
             case 5: {
                 strTicketStatus = "CLOSED";
                 drawableResourceId = R.drawable.rectangle_border_closed_ticket;

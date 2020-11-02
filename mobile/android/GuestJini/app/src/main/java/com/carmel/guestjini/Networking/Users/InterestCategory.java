@@ -1,5 +1,7 @@
 package com.carmel.guestjini.Networking.Users;
 
+import java.util.List;
+
 public class InterestCategory {
     private String id;
     private String clientId;
@@ -7,6 +9,7 @@ public class InterestCategory {
     private String name;
     private String description;
     private String creationTime;
+    private List<Interest> interestList;
 
     public String getId() {
         return id;
@@ -54,5 +57,13 @@ public class InterestCategory {
 
     public void setCreationTime(String creationTime) {
         this.creationTime = creationTime;
+    }
+
+    public List<Interest> getInterestList() {
+        return interestList;
+    }
+
+    public void setInterestList(List<Interest> interestList) {
+        this.interestList = interestList;
     }
 }

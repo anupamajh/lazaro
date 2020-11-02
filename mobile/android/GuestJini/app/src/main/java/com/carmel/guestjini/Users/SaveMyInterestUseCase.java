@@ -25,7 +25,7 @@ public class SaveMyInterestUseCase extends BaseObservableViewMvc<SaveMyInterestU
     }
 
 
-    public void fetchInterestListAndNotify(
+    public void saveMyInterestAndNotify(
             String interestId,
             int isInterested
     ) {

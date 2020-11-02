@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -47,13 +48,8 @@ public class MyInterestViewMVCImpl
     }
 
     @Override
-    public void bindInterestCategories(List<InterestCategory> interestCategoryList) {
-        interestCategoryRecycleAdapter.bindInterestCategories(interestCategoryList);
-    }
-
-    @Override
-    public void bindInterests(List<Interest> interestList) {
-        interestCategoryRecycleAdapter.bindInterests(interestList);
+    public void bindInterestCategories(List<InterestCategory> interestCategoryList, List<UserInterests> userInterests) {
+        interestCategoryRecycleAdapter.bindInterestCategories(interestCategoryList, userInterests);
     }
 
     @Override
@@ -75,5 +71,17 @@ public class MyInterestViewMVCImpl
     @Override
     public void onInterestCategoryClicked(InterestCategory interestCategory) {
         //TODO: Do i need this?
+    }
+
+    @Override
+    public void onInterestClicked(Interest interest, int isInterested) {
+        for (Listener listener : getListeners()) {
+            listener.onInterestClicked(interest, isInterested);
+        }
+    }
+
+    @Override
+    public void showUserInterestSaved() {
+        Toast.makeText(getContext(), "Your interest preference has been saved.", Toast.LENGTH_LONG).show();
     }
 }

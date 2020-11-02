@@ -7,45 +7,85 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:background="@drawable/add_to_favourite">
+        android:padding="10dp">
 
-        <TextView
-            android:id="@+id/txtCategoryName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="6dp"
-            android:letterSpacing="0.1"
-            android:text="TextView"
-            android:textColor="#747474"
-            android:textSize="12dp"
-            app:fontFamily="@font/roboto_medium" />
-
-        <ImageView
-            android:id="@+id/btnShowCategories"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="6dp"
-            app:srcCompat="@drawable/dropdown_grey_icon" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lstInterests"
+        <RelativeLayout
+            android:id="@+id/layoutInterestCategory"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="0dp"
-            app:layout_constraintHorizontal_bias="0.0"
-            android:layout_below="@id/btnShowCategories" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/add_to_favourite"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:id="@+id/txtCategoryName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="6dp"
+                android:letterSpacing="0.1"
+                android:text="TextView"
+                android:textColor="#747474"
+                android:textSize="12dp"
+                app:fontFamily="@font/roboto_medium" />
+
+            <RelativeLayout
+                android:id="@+id/layoutBtnShowCategories"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true">
+
+                <ImageView
+                    android:id="@+id/btnShowCategories"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="6dp"
+                    app:srcCompat="@drawable/dropdown_grey_icon" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layoutInterestList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layoutInterestCategory"
+            android:background="@color/colorWhite">
+            <TableLayout
+                android:id="@+id/lstInterests"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:paddingTop="10dp"
+                />
+<!--            <ListView-->
+<!--                android:id="@+id/lstInterests"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentStart="true"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:layout_marginStart="0dp"-->
+<!--                android:layout_marginEnd="0dp"-->
+<!--                />-->
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/lstInterests"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentStart="true"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:layout_marginStart="0dp"-->
+<!--                android:layout_marginEnd="0dp"-->
+<!--                app:layout_constraintHorizontal_bias="0.0" />-->
+        </RelativeLayout>
     </RelativeLayout>
 
 </FrameLayout>

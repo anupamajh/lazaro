@@ -9,17 +9,19 @@ import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptDialogEvent;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
 import com.carmel.guestjini.Users.FetchInterestCategoryListUseCase;
-import com.carmel.guestjini.Users.FetchInterestListUseCase;
 import com.carmel.guestjini.Users.FetchMyInterestsUseCase;
 import com.carmel.guestjini.Users.SaveMyInterestUseCase;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyInterestController
         implements MyInterestViewMVC.Listener,
         DialogsEventBus.Listener,
-        FetchInterestCategoryListUseCase.Listener, FetchInterestListUseCase.Listener, FetchMyInterestsUseCase.Listener, SaveMyInterestUseCase.Listener {
+        FetchInterestCategoryListUseCase.Listener,
+        FetchMyInterestsUseCase.Listener,
+        SaveMyInterestUseCase.Listener {
 
 
     private enum ScreenState {
@@ -32,12 +34,13 @@ public class MyInterestController
     }
 
     private final FetchInterestCategoryListUseCase fetchInterestCategoryListUseCase;
-    private final FetchInterestListUseCase fetchInterestListUseCase;
     private final FetchMyInterestsUseCase fetchMyInterestsUseCase;
     private final SaveMyInterestUseCase saveMyInterestUseCase;
     private final ScreensNavigator screensNavigator;
     private final DialogsManager dialogsManager;
     private final DialogsEventBus dialogsEventBus;
+
+    private List<UserInterests> userInterests = new ArrayList<>();
 
     private MyInterestViewMVC viewMvc;
 
@@ -45,7 +48,6 @@ public class MyInterestController
 
     public MyInterestController(
             FetchInterestCategoryListUseCase fetchInterestCategoryListUseCase,
-            FetchInterestListUseCase fetchInterestListUseCase,
             FetchMyInterestsUseCase fetchMyInterestsUseCase,
             SaveMyInterestUseCase saveMyInterestUseCase,
             ScreensNavigator screensNavigator,
@@ -53,7 +55,6 @@ public class MyInterestController
             DialogsEventBus dialogsEventBus
     ) {
         this.fetchInterestCategoryListUseCase = fetchInterestCategoryListUseCase;
-        this.fetchInterestListUseCase = fetchInterestListUseCase;
         this.fetchMyInterestsUseCase = fetchMyInterestsUseCase;
         this.saveMyInterestUseCase = saveMyInterestUseCase;
         this.screensNavigator = screensNavigator;
@@ -76,19 +77,17 @@ public class MyInterestController
     public void onStart() {
         viewMvc.registerListener(this);
         fetchInterestCategoryListUseCase.registerListener(this);
-        fetchInterestListUseCase.registerListener(this);
         fetchMyInterestsUseCase.registerListener(this);
         saveMyInterestUseCase.registerListener(this);
         dialogsEventBus.registerListener(this);
         if (mScreenState != ScreenState.NETWORK_ERROR) {
-            fetchInterestCategoriesAndNotify();
+            fetchMyInterestsAndNotify();
         }
     }
 
     public void onStop() {
         viewMvc.unregisterListener(this);
         fetchInterestCategoryListUseCase.unregisterListener(this);
-        fetchInterestListUseCase.unregisterListener(this);
         fetchMyInterestsUseCase.unregisterListener(this);
         saveMyInterestUseCase.unregisterListener(this);
         dialogsEventBus.unregisterListener(this);
@@ -97,11 +96,6 @@ public class MyInterestController
     private void fetchInterestCategoriesAndNotify() {
         mScreenState = ScreenState.FETCHING_INTEREST_CATEGORY_LIST;
         fetchInterestCategoryListUseCase.fetchInterestCategoryListAndNotify();
-    }
-
-    private void fetchInterestsAndNotify() {
-        mScreenState = ScreenState.FETCHING_INTEREST_LIST;
-        fetchInterestListUseCase.fetchInterestListAndNotify();
     }
 
     private void fetchMyInterestsAndNotify() {
@@ -132,8 +126,7 @@ public class MyInterestController
     public void onInterestCategoryListFetched(List<InterestCategory> response) {
         mScreenState = ScreenState.INTEREST_CATEGORY_LIST_SHOWN;
         viewMvc.hideProgressIndication();
-        viewMvc.bindInterestCategories(response);
-        fetchInterestsAndNotify();
+        viewMvc.bindInterestCategories(response, userInterests);
     }
 
     @Override
@@ -141,22 +134,6 @@ public class MyInterestController
         mScreenState = ScreenState.NETWORK_ERROR;
         viewMvc.hideProgressIndication();
         dialogsManager.showUseCaseFailedDialog("Interest Categories", null);
-
-    }
-
-    @Override
-    public void onInterestListFetched(List<Interest> response) {
-        mScreenState = ScreenState.INTEREST_LIST_SHOWN;
-        viewMvc.hideProgressIndication();
-        viewMvc.bindInterests(response);
-        fetchMyInterestsAndNotify();
-    }
-
-    @Override
-    public void onInterestListFetchFailed() {
-        mScreenState = ScreenState.NETWORK_ERROR;
-        viewMvc.hideProgressIndication();
-        dialogsManager.showUseCaseFailedDialog("Interests", null);
     }
 
     @Override
@@ -164,6 +141,8 @@ public class MyInterestController
         mScreenState = ScreenState.MY_INTEREST_LIST_SHOWN;
         viewMvc.hideProgressIndication();
         viewMvc.bindUserInterests(response);
+        this.userInterests = response;
+        fetchInterestCategoriesAndNotify();
     }
 
     @Override
@@ -177,6 +156,7 @@ public class MyInterestController
     public void onUserInterestSaved(UserInterestsResponse response) {
         mScreenState = ScreenState.MY_INTEREST_SAVED;
         viewMvc.hideProgressIndication();
+        viewMvc.showUserInterestSaved();
     }
 
     @Override
@@ -197,5 +177,14 @@ public class MyInterestController
         public SavedState(ScreenState screenState) {
             mScreenState = screenState;
         }
+    }
+
+    @Override
+    public void onInterestClicked(Interest interest, int isInterested) {
+        viewMvc.showProgressIndication();
+        saveMyInterestUseCase.saveMyInterestAndNotify(
+                interest.getId(),
+                isInterested
+        );
     }
 }

@@ -487,7 +487,6 @@ public class ControllerCompositionRoot {
     public MyInterestController getMyInterestController() {
         return new MyInterestController(
                 getFetchInterestCategoryListUseCase(),
-                getFetchInterestListUseCase(),
                 getFetchMyInterestsUseCase(),
                 getSaveMyInterestsUseCase(),
                 getScreensNavigator(),

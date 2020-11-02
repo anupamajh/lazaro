@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.carmel.guestjini.Networking.Users.Interest;
 import com.carmel.guestjini.Networking.Users.InterestCategory;
+import com.carmel.guestjini.Networking.Users.UserInterests;
 import com.carmel.guestjini.Screens.Common.ViewMVCFactory;
 import com.carmel.guestjini.Screens.Settings.MyInterests.InterestCategoryItem.InterestCategoryItemViewMVC;
 
@@ -19,6 +20,8 @@ public class InterestCategoryRecycleAdapter
 
     public interface Listener {
         void onInterestCategoryClicked(InterestCategory interestCategory);
+
+        void onInterestClicked(Interest interest, int isInterested);
     }
 
     static class InterestCategoryViewHolder extends RecyclerView.ViewHolder {
@@ -33,6 +36,7 @@ public class InterestCategoryRecycleAdapter
     private final Listener listener;
     private final ViewMVCFactory viewMVCFactory;
     private InterestCategoryItemViewMVC viewMvc;
+    private List<UserInterests> userInterests;
 
     private ArrayList<InterestCategory> interestCategories = new ArrayList<>();
 
@@ -41,14 +45,15 @@ public class InterestCategoryRecycleAdapter
         this.viewMVCFactory = viewMVCFactory;
     }
 
-    public void bindInterestCategories(List<InterestCategory> interestCategoryList) {
+    public void bindInterestCategories(List<InterestCategory> interestCategoryList, List<UserInterests> userInterests) {
+        this.userInterests = userInterests;
         this.interestCategories = new ArrayList<>(interestCategoryList);
         notifyDataSetChanged();
     }
 
-    public void bindInterests(List<Interest> interestList) {
+    /*public void bindInterests(List<Interest> interestList) {
         viewMvc.bindInterests(interestList);
-    }
+    }*/
 
     @NonNull
     @Override
@@ -60,7 +65,7 @@ public class InterestCategoryRecycleAdapter
 
     @Override
     public void onBindViewHolder(@NonNull InterestCategoryViewHolder holder, int position) {
-        holder.viewMVC.bindInterestCategory(this.interestCategories.get(position));
+        holder.viewMVC.bindInterestCategory(this.interestCategories.get(position),userInterests);
     }
 
     @Override
@@ -71,5 +76,10 @@ public class InterestCategoryRecycleAdapter
     @Override
     public void onInterestCategoryClicked(InterestCategory interestCategory) {
         listener.onInterestCategoryClicked(interestCategory);
+    }
+
+    @Override
+    public void onInterestClicked(Interest interest, int isInterested) {
+        listener.onInterestClicked(interest, isInterested);
     }
 }

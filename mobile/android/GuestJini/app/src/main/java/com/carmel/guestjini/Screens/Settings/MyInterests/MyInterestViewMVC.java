@@ -12,13 +12,15 @@ public interface MyInterestViewMVC
 
     void bindUserInterests(List<UserInterests> response);
 
+    void showUserInterestSaved();
+
     public interface Listener {
         void onBackClicked();
+
+        void onInterestClicked(Interest interest, int isInterested);
     }
 
-    void bindInterestCategories(List<InterestCategory> interestCategoryList);
-
-    void bindInterests(List<Interest> response);
+    void bindInterestCategories(List<InterestCategory> interestCategoryList, List<UserInterests> userInterests);
 
     void showProgressIndication();
 
