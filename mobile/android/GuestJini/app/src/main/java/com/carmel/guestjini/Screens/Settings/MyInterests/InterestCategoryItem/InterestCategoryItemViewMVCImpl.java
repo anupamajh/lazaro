@@ -67,8 +67,10 @@ public class InterestCategoryItemViewMVCImpl
             public void onClick(View view) {
                 if (layoutInterestList.getVisibility() == View.VISIBLE) {
                     layoutInterestList.setVisibility(View.GONE);
+                    btnShowCategories.setImageResource(R.drawable.dropdown_grey_icon);
                 } else {
                     layoutInterestList.setVisibility(View.VISIBLE);
+                    btnShowCategories.setImageResource(R.drawable.collapse_grey_icon);
                 }
             }
         });
@@ -77,8 +79,9 @@ public class InterestCategoryItemViewMVCImpl
     @Override
     public void bindInterestCategory(InterestCategory interestCategory, List<UserInterests> userInterests) {
         this.interestCategory = interestCategory;
-        txtCategoryName.setText(interestCategory.getName());
+        txtCategoryName.setText(interestCategory.getName() + "(" + interestCategory.getInterestList().size() + ")");
         this.bindInterestRows(interestCategory.getInterestList(), userInterests);
+        layoutBtnShowCategories.callOnClick();
         //interestListAdapter.setInterests(interestCategory.getInterestList());
         //interestRecycleAdapter.bindInterests(interestCategory.getInterestList());
     }

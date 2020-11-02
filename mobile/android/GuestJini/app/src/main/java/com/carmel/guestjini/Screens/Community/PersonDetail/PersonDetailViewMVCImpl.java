@@ -65,11 +65,11 @@ public class PersonDetailViewMVCImpl extends
         btnAddFavourite.setOnClickListener(v -> {
             int isFavourite = 0;
             if (peopleResponse.getIsFavourite() != 0) {
-                btnAddFavourite.setImageResource(R.drawable.favourite_select_icon);
+                btnAddFavourite.setImageResource(R.drawable.star_white_icon);
                 addToFavouriteTitle.setText("Add to favourites");
                 isFavourite = 0;
             } else {
-                btnAddFavourite.setImageResource(R.drawable.favourite_selected_icon);
+                btnAddFavourite.setImageResource(R.drawable.star_yellow_icon);
                 addToFavouriteTitle.setText("Remove from favourites");
                 isFavourite = 1;
             }
@@ -95,10 +95,10 @@ public class PersonDetailViewMVCImpl extends
         txtMobileNumber.setText(this.peopleResponse.getOthersAddressBook().getPhone1());
         txtEmail.setText(this.peopleResponse.getOthersAddressBook().getEmail1());
         if (this.peopleResponse.getIsFavourite() == 0) {
-            btnAddFavourite.setImageResource(R.drawable.favourite_select_icon);
+            btnAddFavourite.setImageResource(R.drawable.star_white_icon);
             addToFavouriteTitle.setText("Add to favourites");
         } else {
-            btnAddFavourite.setImageResource(R.drawable.favourite_selected_icon);
+            btnAddFavourite.setImageResource(R.drawable.star_yellow_icon);
             addToFavouriteTitle.setText("Remove from favourites");
         }
 

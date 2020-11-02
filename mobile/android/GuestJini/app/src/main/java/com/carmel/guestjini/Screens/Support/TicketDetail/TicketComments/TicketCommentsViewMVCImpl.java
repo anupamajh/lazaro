@@ -20,6 +20,7 @@ public class TicketCommentsViewMVCImpl
     private final TextView txtAuthorName;
     private final TextView txtCommentDate;
     private final TextView txtComment;
+    private final TextView txtItemTitle;
 
     public TicketCommentsViewMVCImpl(
             LayoutInflater inflater,
@@ -29,6 +30,7 @@ public class TicketCommentsViewMVCImpl
         txtAuthorName = findViewById(R.id.txtAuthorName);
         txtCommentDate = findViewById(R.id.txtCommentDate);
         txtComment = findViewById(R.id.txtComment);
+        txtItemTitle = findViewById(R.id.txtItemTitle);
     }
 
     @Override
@@ -37,5 +39,10 @@ public class TicketCommentsViewMVCImpl
         Date creationDate = DateUtil.convertToDate(taskNote.getCreationTime());
         txtCommentDate.setText(DateUtil.getFormattedDate(creationDate));
         txtComment.setText(taskNote.getNotes());
+        if(taskNote.getIsMine() == 1){
+            txtItemTitle.setText("YOU WROTE");
+        }else{
+            txtItemTitle.setText("INBOX");
+        }
     }
 }

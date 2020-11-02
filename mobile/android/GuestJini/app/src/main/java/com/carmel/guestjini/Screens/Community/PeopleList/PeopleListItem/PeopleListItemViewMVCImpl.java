@@ -46,10 +46,13 @@ public class PeopleListItemViewMVCImpl
         });
 
         btnFavourite.setOnClickListener(v -> {
-
             int isFavourite = 0;
-            if (person.getIsFavourite() != 0) {
+            if (person.getIsFavourite() == 0) {
                 isFavourite = 1;
+                btnFavourite.setImageResource(R.drawable.star_yellow_icon);
+            }else{
+                isFavourite = 0;
+                btnFavourite.setImageResource(R.drawable.star_white_icon);
             }
             for (Listener listener : getListeners()) {
                 listener.onFavouriteClicked(person, isFavourite);
@@ -63,9 +66,9 @@ public class PeopleListItemViewMVCImpl
         peopleName.setText(person.getAddressBook().getDisplayName());
         peopleGender.setVisibility(View.GONE);
         if (person.getIsFavourite() == 0) {
-            btnFavourite.setImageResource(R.drawable.favourite_select_icon);
+            btnFavourite.setImageResource(R.drawable.star_white_icon);
         } else {
-            btnFavourite.setImageResource(R.drawable.favourite_selected_icon);
+            btnFavourite.setImageResource(R.drawable.star_yellow_icon);
         }
         setCompatibilityMeter(totalInterestCount, person.getUserInterestsList().size());
     }

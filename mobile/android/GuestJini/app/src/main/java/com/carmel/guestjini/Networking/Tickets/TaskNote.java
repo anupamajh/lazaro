@@ -9,6 +9,7 @@ public class TaskNote {
     private String notes;
     private String userName;
     private String isRead;
+    private int isMine;
     private String creationTime;
 
     public String getId() {
@@ -81,5 +82,13 @@ public class TaskNote {
 
     public void setCreationTime(String creationTime) {
         this.creationTime = creationTime;
+    }
+
+    public int getIsMine() {
+        return isMine;
+    }
+
+    public void setIsMine(int isMine) {
+        this.isMine = isMine;
     }
 }
