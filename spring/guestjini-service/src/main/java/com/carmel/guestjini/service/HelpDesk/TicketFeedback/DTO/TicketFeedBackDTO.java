@@ -1,12 +1,7 @@
 package com.carmel.guestjini.service.HelpDesk.TicketFeedback.DTO;
 
 import com.carmel.guestjini.service.HelpDesk.TicketFeedback.Model.TicketFeedBack;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.util.Date;
 
 public class TicketFeedBackDTO {

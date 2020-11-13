@@ -3,9 +3,6 @@ package com.carmel.guestjini.service.common.Search;
 
 
 import com.carmel.guestjini.service.common.DateUtil;
-import com.carmel.guestjini.service.request.Search.SearchCriteria;
-import com.carmel.guestjini.service.request.Search.SearchRequest;
-import com.carmel.guestjini.service.request.Search.SearchUnit;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.*;

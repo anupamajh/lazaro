@@ -1,46 +1,62 @@
-package com.carmel.guestjini.service.model.DTO.HelpDesk;
+package com.carmel.guestjini.service.model.HelpDesk;
 
-import com.carmel.guestjini.service.model.HelpDesk.TaskForce;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.envers.Audited;
+import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.*;
 import java.util.Date;
 
-public class TaskForceDTO {
+@Entity
+@Table(name = "g_task_force_group")
+@Audited
+public class TaskForceGroup {
+    @Id
+    @Column(name = "id")
+    @Length(max = 40)
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
+
+    @Column(name = "client_id")
+    @Length(max = 40)
     private String clientId;
+
+    @Column(name = "org_id")
+    @Length(max = 40)
     private String orgId;
-    private String userId;
-    private String phone;
-    private String groupId;
-    private int isGroupAdmin;
-    private int isSuperAdmin;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "descripiton")
+    private String description;
+
+
+    @Column(name = "created_by")
+    @Length(max = 40)
     private String createdBy;
+
+    @Column(name = "creation_time")
     private Date creationTime;
+
+    @Column(name = "last_modified_by")
+    @Length(max = 40)
     private String lastModifiedBy;
+
+    @Column(name = "last_Modified_time")
     private Date lastModifiedTime;
+
+    @Column(name = "is_deleted")
     private int isDeleted;
+
+    @Column(name = "deleted_by")
+    @Length(max = 40)
     private String deletedBy;
+
+    @Column(name = "deleted_time")
     private Date deletedTime;
-
-    public TaskForceDTO() {
-    }
-
-    public TaskForceDTO(TaskForce taskForce) {
-        this.id = taskForce.getId();
-        this.clientId = taskForce.getClientId();
-        this.orgId = taskForce.getOrgId();
-        this.userId = taskForce.getUserId();
-        this.phone = taskForce.getPhone();
-        this.groupId = taskForce.getGroupId();
-        this.isGroupAdmin = taskForce.getIsGroupAdmin();
-        this.isSuperAdmin = taskForce.getIsSuperAdmin();
-        this.createdBy = taskForce.getCreatedBy();
-        this.creationTime = taskForce.getCreationTime();
-        this.lastModifiedBy = taskForce.getLastModifiedBy();
-        this.lastModifiedTime = taskForce.getLastModifiedTime();
-        this.isDeleted = taskForce.getIsDeleted();
-        this.deletedBy = taskForce.getDeletedBy();
-        this.deletedTime = taskForce.getDeletedTime();
-    }
 
     public String getId() {
         return id;
@@ -66,44 +82,20 @@ public class TaskForceDTO {
         this.orgId = orgId;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getName() {
+        return name;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
-    }
-
-    public int getIsGroupAdmin() {
-        return isGroupAdmin;
-    }
-
-    public void setIsGroupAdmin(int isGroupAdmin) {
-        this.isGroupAdmin = isGroupAdmin;
-    }
-
-    public int getIsSuperAdmin() {
-        return isSuperAdmin;
-    }
-
-    public void setIsSuperAdmin(int isSuperAdmin) {
-        this.isSuperAdmin = isSuperAdmin;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCreatedBy() {

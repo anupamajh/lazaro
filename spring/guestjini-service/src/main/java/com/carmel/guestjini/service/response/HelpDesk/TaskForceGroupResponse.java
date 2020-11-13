@@ -1,32 +1,32 @@
 package com.carmel.guestjini.service.response.HelpDesk;
 
-import com.carmel.guestjini.service.model.DTO.HelpDesk.TaskForceDTO;
+import com.carmel.guestjini.service.model.DTO.HelpDesk.TaskForceGroupDTO;
 
 import java.util.List;
 
-public class TaskForceResponse {
-    private TaskForceDTO taskForce;
-    private List<TaskForceDTO> taskForceList;
+public class TaskForceGroupResponse {
+    private TaskForceGroupDTO taskForceGroup;
+    private List<TaskForceGroupDTO> taskForceGroupList;
     private long totalPages;
     private long totalRecords;
     private long currentRecords;
     private boolean success;
     private String error;
 
-    public TaskForceDTO getTaskForce() {
-        return taskForce;
+    public TaskForceGroupDTO getTaskForceGroup() {
+        return taskForceGroup;
     }
 
-    public void setTaskForce(TaskForceDTO taskForce) {
-        this.taskForce = taskForce;
+    public void setTaskForceGroup(TaskForceGroupDTO taskForceGroup) {
+        this.taskForceGroup = taskForceGroup;
     }
 
-    public List<TaskForceDTO> getTaskForceList() {
-        return taskForceList;
+    public List<TaskForceGroupDTO> getTaskForceGroupList() {
+        return taskForceGroupList;
     }
 
-    public void setTaskForceList(List<TaskForceDTO> taskForceList) {
-        this.taskForceList = taskForceList;
+    public void setTaskForceGroupList(List<TaskForceGroupDTO> taskForceGroupList) {
+        this.taskForceGroupList = taskForceGroupList;
     }
 
     public long getTotalPages() {

@@ -1,18 +1,15 @@
 package com.carmel.guestjini.service.model.DTO.HelpDesk;
 
-import com.carmel.guestjini.service.model.HelpDesk.TaskForce;
+import com.carmel.guestjini.service.model.HelpDesk.TaskForceGroup;
 
 import java.util.Date;
 
-public class TaskForceDTO {
+public class TaskForceGroupDTO {
     private String id;
     private String clientId;
     private String orgId;
-    private String userId;
-    private String phone;
-    private String groupId;
-    private int isGroupAdmin;
-    private int isSuperAdmin;
+    private String name;
+    private String description;
     private String createdBy;
     private Date creationTime;
     private String lastModifiedBy;
@@ -21,25 +18,22 @@ public class TaskForceDTO {
     private String deletedBy;
     private Date deletedTime;
 
-    public TaskForceDTO() {
+    public TaskForceGroupDTO() {
     }
 
-    public TaskForceDTO(TaskForce taskForce) {
-        this.id = taskForce.getId();
-        this.clientId = taskForce.getClientId();
-        this.orgId = taskForce.getOrgId();
-        this.userId = taskForce.getUserId();
-        this.phone = taskForce.getPhone();
-        this.groupId = taskForce.getGroupId();
-        this.isGroupAdmin = taskForce.getIsGroupAdmin();
-        this.isSuperAdmin = taskForce.getIsSuperAdmin();
-        this.createdBy = taskForce.getCreatedBy();
-        this.creationTime = taskForce.getCreationTime();
-        this.lastModifiedBy = taskForce.getLastModifiedBy();
-        this.lastModifiedTime = taskForce.getLastModifiedTime();
-        this.isDeleted = taskForce.getIsDeleted();
-        this.deletedBy = taskForce.getDeletedBy();
-        this.deletedTime = taskForce.getDeletedTime();
+    public TaskForceGroupDTO(TaskForceGroup taskForceGroup) {
+        this.id = taskForceGroup.getId();
+        this.clientId = taskForceGroup.getClientId();
+        this.orgId = taskForceGroup.getOrgId();
+        this.name = taskForceGroup.getName();
+        this.description = taskForceGroup.getDescription();
+        this.createdBy = taskForceGroup.getCreatedBy();
+        this.creationTime = taskForceGroup.getCreationTime();
+        this.lastModifiedBy = taskForceGroup.getLastModifiedBy();
+        this.lastModifiedTime = taskForceGroup.getLastModifiedTime();
+        this.isDeleted = taskForceGroup.getIsDeleted();
+        this.deletedBy = taskForceGroup.getDeletedBy();
+        this.deletedTime = taskForceGroup.getDeletedTime();
     }
 
     public String getId() {
@@ -66,44 +60,20 @@ public class TaskForceDTO {
         this.orgId = orgId;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getName() {
+        return name;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
-    }
-
-    public int getIsGroupAdmin() {
-        return isGroupAdmin;
-    }
-
-    public void setIsGroupAdmin(int isGroupAdmin) {
-        this.isGroupAdmin = isGroupAdmin;
-    }
-
-    public int getIsSuperAdmin() {
-        return isSuperAdmin;
-    }
-
-    public void setIsSuperAdmin(int isSuperAdmin) {
-        this.isSuperAdmin = isSuperAdmin;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCreatedBy() {

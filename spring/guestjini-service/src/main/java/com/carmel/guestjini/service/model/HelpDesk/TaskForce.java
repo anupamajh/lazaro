@@ -30,6 +30,18 @@ public class TaskForce {
     @Length(max = 40)
     private String userId;
 
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "group_id")
+    private String groupId;
+
+    @Column(name = "is_group_admin")
+    private int isGroupAdmin;
+
+    @Column(name = "is_super_admin")
+    private int isSuperAdmin;
+
     @Column(name = "created_by")
     @Length(max = 40)
     private String createdBy;
@@ -50,6 +62,9 @@ public class TaskForce {
     @Column(name = "deleted_by")
     @Length(max = 40)
     private String deletedBy;
+
+    @Column(name = "deleted_time")
+    private Date deletedTime;
 
     public String getId() {
         return id;
@@ -81,6 +96,38 @@ public class TaskForce {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
+    public int getIsGroupAdmin() {
+        return isGroupAdmin;
+    }
+
+    public void setIsGroupAdmin(int isGroupAdmin) {
+        this.isGroupAdmin = isGroupAdmin;
+    }
+
+    public int getIsSuperAdmin() {
+        return isSuperAdmin;
+    }
+
+    public void setIsSuperAdmin(int isSuperAdmin) {
+        this.isSuperAdmin = isSuperAdmin;
     }
 
     public String getCreatedBy() {
@@ -129,5 +176,13 @@ public class TaskForce {
 
     public void setDeletedBy(String deletedBy) {
         this.deletedBy = deletedBy;
+    }
+
+    public Date getDeletedTime() {
+        return deletedTime;
+    }
+
+    public void setDeletedTime(Date deletedTime) {
+        this.deletedTime = deletedTime;
     }
 }

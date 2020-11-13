@@ -1,6 +1,5 @@
 package com.carmel.guestjini.service.components;
 
-import com.carmel.guestjini.service.request.Booking.BookingRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;

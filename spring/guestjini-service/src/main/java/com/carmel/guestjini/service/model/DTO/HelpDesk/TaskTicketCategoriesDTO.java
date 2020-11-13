@@ -2,14 +2,7 @@ package com.carmel.guestjini.service.model.DTO.HelpDesk;
 
 
 import com.carmel.guestjini.service.model.HelpDesk.TaskTicketCategories;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class TaskTicketCategoriesDTO {

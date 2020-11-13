@@ -1,4 +1,4 @@
-package com.carmel.guestjini.service.request.Search;
+package com.carmel.guestjini.service.common.Search;
 
 public class OrderUnit {
     private String orderBy;

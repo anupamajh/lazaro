@@ -1,7 +1,6 @@
 package com.carmel.guestjini.service.service.HelpDesk;
 
 
-import com.carmel.guestjini.service.model.DTO.HelpDesk.TaskTicketCategoriesDTO;
 import com.carmel.guestjini.service.model.HelpDesk.TaskTicketCategories;
 import com.carmel.guestjini.service.repository.HelpDesk.TaskTicketCategoriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TaskTicketCategoriesServiceImpl implements TaskTicketCategoriesService {

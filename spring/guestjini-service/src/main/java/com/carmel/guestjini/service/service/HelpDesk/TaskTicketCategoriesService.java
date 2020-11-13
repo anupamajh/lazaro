@@ -1,6 +1,5 @@
 package com.carmel.guestjini.service.service.HelpDesk;
 
-import com.carmel.guestjini.service.model.DTO.HelpDesk.TaskTicketCategoriesDTO;
 import com.carmel.guestjini.service.model.HelpDesk.TaskTicketCategories;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
