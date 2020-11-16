@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TaskForceRepository extends JpaRepository<TaskForce, String> {
     List<TaskForce> findAllByClientIdAndIsDeleted(String clientId, int isDeleted);
@@ -19,4 +20,6 @@ public interface TaskForceRepository extends JpaRepository<TaskForce, String> {
     List<TaskForce> findAllByClientIdAndIsDeletedAndPhone(String clientId, int isDeleted, String phone);
 
     List<TaskForce> findAllByClientIdAndIsDeletedAndPhoneAndIdIsNot(String clientId, int isDeleted, String phone, String id);
+
+    Optional<TaskForce> findByPhone(String phone);
 }

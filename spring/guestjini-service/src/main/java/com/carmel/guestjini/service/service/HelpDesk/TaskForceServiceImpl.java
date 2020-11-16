@@ -301,4 +301,9 @@ public class TaskForceServiceImpl implements TaskForceService {
         }
         return !taskForceGroups.isEmpty();
     }
+
+    @Override
+    public Optional<TaskForce> findByPhone(String phone) {
+        return  taskForceRepository.findByPhone(phone);
+    }
 }

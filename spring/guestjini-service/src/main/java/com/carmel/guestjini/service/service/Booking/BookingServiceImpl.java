@@ -13,6 +13,7 @@ import com.carmel.guestjini.service.model.Booking.Guest;
 import com.carmel.guestjini.service.model.Booking.KYC;
 import com.carmel.guestjini.service.model.DTO.Accounts.AccountTicketDTO;
 import com.carmel.guestjini.service.model.DTO.Common.UserDTO;
+import com.carmel.guestjini.service.model.HelpDesk.TaskForce;
 import com.carmel.guestjini.service.model.Principal.UserInfo;
 import com.carmel.guestjini.service.repository.Booking.BookingRepository;
 import com.carmel.guestjini.service.response.Accounts.AccountReceiptsResponse;
@@ -21,6 +22,7 @@ import com.carmel.guestjini.service.response.Booking.BookingResponse;
 import com.carmel.guestjini.service.response.Common.UserResponse;
 import com.carmel.guestjini.service.service.Accounts.AccountReceiptService;
 import com.carmel.guestjini.service.service.Accounts.AccountTicketService;
+import com.carmel.guestjini.service.service.HelpDesk.TaskForceService;
 import com.carmel.guestjini.service.service.Inventory.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -59,6 +61,9 @@ public class BookingServiceImpl implements BookingService {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    TaskForceService taskForceService;
 
     @Override
     public Booking save(Booking booking) {
@@ -341,10 +346,11 @@ public class BookingServiceImpl implements BookingService {
             if (phone == null) {
                 throw new Exception("Phone number not received");
             }
-            UserResponse userResponse =  userService.checkPhoneNumber(formData);
-            if(userResponse.isSuccess() == false){
+            UserResponse userResponse = userService.checkPhoneNumber(formData);
+            if (userResponse.isSuccess() == false) {
                 bookingResponse.setHasUser(true);
                 bookingResponse.setSuccess(true);
+                bookingResponse.setError("You already have an account");
                 return bookingResponse;
             }
             List<Booking> bookings = bookingRepository.findAllByIsDeletedAndClientIdAndPhone(0, userInfo.getClient().getClientId(), phone);
@@ -353,11 +359,40 @@ public class BookingServiceImpl implements BookingService {
                 bookingResponse.setHasBooking(true);
                 bookingResponse.setBooking(bookings.get(0));
                 bookingResponse.setSuccess(true);
-            }else{
+                Optional<Guest> optionalGuest = guestService.findByBooking(bookings.get(0));
+                if (optionalGuest.isPresent()) {
+                    Guest guest = optionalGuest.get();
+                    bookingResponse.setCustomer(true);
+                    if (guest.getGuestStatus() == GuestStatus.RESIDING) {
+                        bookingResponse.setResiding(true);
+                    } else {
+                        bookingResponse.setResiding(false);
+                        bookingResponse.setError("You are not residing guest");
+                    }
+                }
+            } else {
                 bookingResponse.setHasUser(false);
                 bookingResponse.setHasBooking(false);
+
+                Optional<TaskForce> optionalTaskForce =
+                        taskForceService.findByPhone(phone);
+                if (optionalTaskForce.isPresent()) {
+                    TaskForce taskForce = optionalTaskForce.get();
+                    bookingResponse.setSupportTeamMember(true);
+                    if (taskForce.getUserId() == null) {
+                        bookingResponse.setHasSupportAccount(true);
+                    }else{
+                        bookingResponse.setHasSupportAccount(false);
+                    }
+                } else {
+                    bookingResponse.setSupportTeamMember(false);
+                    bookingResponse.setHasSupportAccount(false);
+                    bookingResponse.setError("Your phone number is not registered with us.");
+                }
+
                 bookingResponse.setSuccess(true);
             }
+
             return bookingResponse;
         } catch (Exception ex) {
             throw ex;

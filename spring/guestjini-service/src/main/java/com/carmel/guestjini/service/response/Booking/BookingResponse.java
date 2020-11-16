@@ -21,6 +21,10 @@ public class BookingResponse {
     private boolean hasUser;
     private String error;
     private String inventoryId;
+    private boolean isCustomer;
+    private boolean isSupportTeamMember;
+    private boolean isResiding;
+    private boolean hasSupportAccount;
 
     public BookingDTO getBooking() {
         return booking;
@@ -111,5 +115,37 @@ public class BookingResponse {
 
     public void setHasUser(boolean hasUser) {
         this.hasUser = hasUser;
+    }
+
+    public boolean isCustomer() {
+        return isCustomer;
+    }
+
+    public void setCustomer(boolean customer) {
+        isCustomer = customer;
+    }
+
+    public boolean isSupportTeamMember() {
+        return isSupportTeamMember;
+    }
+
+    public void setSupportTeamMember(boolean supportTeamMember) {
+        isSupportTeamMember = supportTeamMember;
+    }
+
+    public boolean isResiding() {
+        return isResiding;
+    }
+
+    public void setResiding(boolean residing) {
+        isResiding = residing;
+    }
+
+    public boolean isHasSupportAccount() {
+        return hasSupportAccount;
+    }
+
+    public void setHasSupportAccount(boolean hasSupportAccount) {
+        this.hasSupportAccount = hasSupportAccount;
     }
 }

@@ -24,4 +24,6 @@ public interface TaskForceService {
     TaskForceResponse getPaginated(Map<String, String> formData) throws Exception;
 
     TaskForceResponse searchPaginated(Map<String, String> formData) throws Exception;
+
+    Optional<TaskForce> findByPhone(String phone);
 }
