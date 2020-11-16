@@ -1,7 +1,6 @@
 package com.carmel.guestjini.Screens.Support.TicketDetail;
 
 import com.carmel.guestjini.Networking.Tickets.TaskNote;
-import com.carmel.guestjini.Networking.Tickets.Ticket;
 import com.carmel.guestjini.Networking.Tickets.TicketFeedBackResponse;
 import com.carmel.guestjini.Networking.Tickets.TicketResponse;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;

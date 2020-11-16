@@ -84,6 +84,10 @@ import com.carmel.guestjini.Screens.Support.KBList.KBListViewMVC;
 import com.carmel.guestjini.Screens.Support.KBList.KBListViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.SupportHome.SupportHomeViewMVC;
 import com.carmel.guestjini.Screens.Support.SupportHome.SupportHomeViewMVCImpl;
+import com.carmel.guestjini.Screens.Support.TicketAttachment.AttachmentListItem.AttachmentListItemViewMVC;
+import com.carmel.guestjini.Screens.Support.TicketAttachment.AttachmentListItem.AttachmentListItemViewMVCImpl;
+import com.carmel.guestjini.Screens.Support.TicketAttachment.TicketAttachmentViewMVC;
+import com.carmel.guestjini.Screens.Support.TicketAttachment.TicketAttachmentViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.TicketCategory.TicketCategoryItem.TicketCategoryItemViewMVC;
 import com.carmel.guestjini.Screens.Support.TicketCategory.TicketCategoryItem.TicketCategoryItemViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.TicketCategory.TicketCategoryListViewMVC;
@@ -427,6 +431,21 @@ public class ViewMVCFactory {
         return new TaskTicketCategoryViewMVCImpl(
                 layoutInflater,
                 parent
+        );
+    }
+
+    public AttachmentListItemViewMVC getAttachmentListItemViewMVC(@Nullable ViewGroup parent) {
+        return new AttachmentListItemViewMVCImpl(
+                layoutInflater,
+                parent
+        );
+    }
+
+    public TicketAttachmentViewMVC getTicketAttachmentViewMVC(@Nullable ViewGroup parent) {
+        return new TicketAttachmentViewMVCImpl(
+                layoutInflater,
+                parent,
+                this
         );
     }
 }

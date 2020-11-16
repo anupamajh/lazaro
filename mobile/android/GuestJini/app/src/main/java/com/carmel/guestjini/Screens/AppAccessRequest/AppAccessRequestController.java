@@ -108,18 +108,32 @@ public class AppAccessRequestController implements
     public void onCheckPhoneNumberSuccess(BookingResponse bookingResponse) {
         viewMVC.hideProgressIndication();
         if (bookingResponse.isSuccess()) {
-            if (bookingResponse.isHasUser()) {
+            if(bookingResponse.isHasUser()){
                 viewMVC.showHasUser();
-            } else {
-                if (bookingResponse.isHasBooking()) {
+                return;
+            }
+            if(bookingResponse.isCustomer()){
+                if(bookingResponse.isResiding()) {
                     sharedPreferenceHelper.saveStringValue("full_name", bookingResponse.getBooking().getFullName());
                     sharedPreferenceHelper.commit();
                     requestOTPUseCase.sendOTPAndNotify(mobileNumber);
-                } else {
-                    viewMVC.showNoBooking();
+                }else{
+                    viewMVC.showNotResiding();
                 }
-            }
 
+                return;
+            }
+            if(bookingResponse.isSupportTeamMember()){
+                if(bookingResponse.isHasSupportAccount()){
+                    viewMVC.showHasUser();
+                }else{
+                    sharedPreferenceHelper.saveStringValue("full_name", bookingResponse.getBooking().getFullName());
+                    sharedPreferenceHelper.commit();
+                    requestOTPUseCase.sendOTPAndNotify(mobileNumber);
+                }
+                return;
+            }
+            viewMVC.showNoBooking();
         } else {
             viewMVC.showInvalidPhoneNumberError(true);
         }

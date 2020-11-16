@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,6 +40,8 @@ public class CreateTicketViewMVCImpl
 
     private final RelativeLayout deleteDraftLayout;
     private final ImageView btnDeleteDraft;
+
+    private final CardView attachmentCardView;
 
 
     private TicketCategory ticketCategory;
@@ -70,6 +73,17 @@ public class CreateTicketViewMVCImpl
         lstTicketCategories.setLayoutManager(new LinearLayoutManager(getContext()));
         taskTicketCategoryRecycleAdapter = new TaskTicketCategoryRecycleAdapter(viewMVCFactory);
         lstTicketCategories.setAdapter(taskTicketCategoryRecycleAdapter);
+
+        attachmentCardView = findViewById(R.id.attachmentCardView);
+
+        attachmentCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (Listener listener : getListeners()) {
+                    listener.onAttachmentClicked();
+                }
+            }
+        });
 
 
         txtNarration.addTextChangedListener(new TextWatcher() {

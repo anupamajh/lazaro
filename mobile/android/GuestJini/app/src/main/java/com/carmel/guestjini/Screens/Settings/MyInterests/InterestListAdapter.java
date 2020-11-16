@@ -2,10 +2,7 @@ package com.carmel.guestjini.Screens.Settings.MyInterests;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-
-import androidx.annotation.Nullable;
 
 import com.carmel.guestjini.Networking.Users.Interest;
 import com.carmel.guestjini.Screens.Common.ViewMVCFactory;

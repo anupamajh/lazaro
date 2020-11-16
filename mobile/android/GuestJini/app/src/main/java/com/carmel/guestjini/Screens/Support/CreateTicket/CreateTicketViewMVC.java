@@ -19,6 +19,8 @@ public interface CreateTicketViewMVC extends ObservableViewMvc<CreateTicketViewM
         void onDeleteDraftClicked();
 
         void onBackClicked();
+
+        void onAttachmentClicked();
     }
 
     boolean isValid();

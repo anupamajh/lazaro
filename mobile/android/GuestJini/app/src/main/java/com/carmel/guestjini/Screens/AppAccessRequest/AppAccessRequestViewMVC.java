@@ -23,4 +23,6 @@ public interface AppAccessRequestViewMVC extends ObservableViewMvc<AppAccessRequ
     void showOTPSentToast();
 
     void showOTPFailedToast();
+
+    void showNotResiding();
 }

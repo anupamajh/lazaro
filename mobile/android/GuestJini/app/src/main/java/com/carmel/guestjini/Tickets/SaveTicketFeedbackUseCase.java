@@ -2,13 +2,8 @@ package com.carmel.guestjini.Tickets;
 
 import com.carmel.guestjini.Common.BaseObservable;
 import com.carmel.guestjini.Networking.GuestJiniAPI;
-import com.carmel.guestjini.Networking.Tickets.Ticket;
 import com.carmel.guestjini.Networking.Tickets.TicketFeedBack;
 import com.carmel.guestjini.Networking.Tickets.TicketFeedBackResponse;
-import com.carmel.guestjini.Networking.Tickets.TicketRequest;
-import com.carmel.guestjini.Networking.Tickets.TicketFeedBackResponse;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;

@@ -28,6 +28,7 @@ import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketFragment;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailFragment;
 import com.carmel.guestjini.Screens.Support.KBList.KBListFragment;
 import com.carmel.guestjini.Screens.Support.SupportHome.SupportHomeFragment;
+import com.carmel.guestjini.Screens.Support.TicketAttachment.TicketAttachmentFragment;
 import com.carmel.guestjini.Screens.Support.TicketCategory.TicketCategoryListFragment;
 import com.carmel.guestjini.Screens.Support.TicketDetail.TicketDetailsFragment;
 import com.carmel.guestjini.Screens.Support.TicketList.TicketListFragment;
@@ -206,5 +207,9 @@ public class ScreensNavigator {
     public void toCreateTicket(String ticketCategoryData, String ticketId) {
         mFragmentFrameHelper.replaceFragment(CreateTicketFragment.createFragment(ticketCategoryData, ticketId));
 
+    }
+
+    public void toTicketAttachmentScreen() {
+        mFragmentFrameHelper.replaceFragment(TicketAttachmentFragment.createFragment());
     }
 }

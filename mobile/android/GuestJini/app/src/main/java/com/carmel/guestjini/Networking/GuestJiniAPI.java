@@ -13,6 +13,7 @@ import com.carmel.guestjini.Networking.KnowledgeBase.KBResponse;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBReview;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBReviewResponse;
 import com.carmel.guestjini.Networking.OTP.OTPResponse;
+import com.carmel.guestjini.Networking.Tickets.TaskAttachmentResponse;
 import com.carmel.guestjini.Networking.Tickets.TaskNote;
 import com.carmel.guestjini.Networking.Tickets.TaskNotesResponse;
 import com.carmel.guestjini.Networking.Tickets.TicketCategoryResponse;
@@ -35,13 +36,17 @@ import com.carmel.guestjini.Networking.Users.UserResponse;
 
 import java.util.Map;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public interface GuestJiniAPI {
     @FormUrlEncoded
@@ -249,4 +254,12 @@ public interface GuestJiniAPI {
 
     @POST("/guest-jini/ticket-feedback/get-by-ticket-id")
     Call<TicketFeedBackResponse> getTicketFeedbackByTicketId(@Body Map<String, String> postData);
+
+    @Multipart
+    @POST("/guest-jini/task-ticket/upload")
+    Call<TaskAttachmentResponse> uploadTicketAttachment(
+            @Part MultipartBody.Part file,
+            @Part("fileName") RequestBody fileName
+    );
+
 }

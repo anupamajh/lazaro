@@ -84,13 +84,13 @@ public class AppAccessRequestViewMVCImpl
     public void showHasUser() {
         txtMobile.setVisibility(View.GONE);
         btnAppAccessRequest.setVisibility(View.GONE);
-        txtInvalidMobileNumberError.setText("Your account is already activated. Please login with your credentials");
+        txtInvalidMobileNumberError.setText("You already have an account");
         txtInvalidMobileNumberError.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showNoBooking() {
-        txtInvalidMobileNumberError.setText("This phone number is not registered");
+        txtInvalidMobileNumberError.setText("Your phone number is not registered with us");
         txtInvalidMobileNumberError.setVisibility(View.VISIBLE);
     }
 
@@ -102,5 +102,11 @@ public class AppAccessRequestViewMVCImpl
     @Override
     public void showOTPFailedToast() {
         Toast.makeText(getContext(), "There was a problem sending OTP, Kindly try after sometime", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showNotResiding() {
+        txtInvalidMobileNumberError.setText("You are not residing guest.");
+        txtInvalidMobileNumberError.setVisibility(View.VISIBLE);
     }
 }

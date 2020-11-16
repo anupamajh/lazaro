@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/attachmentDrawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/layoutHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="22dp"
+                    android:contentDescription="@string/ic_btn_back_arrow_circle_bg_white"
+                    android:src="@drawable/ic_btn_back_arrow_circle_bg_white" />
+
+                <TextView
+                    android:id="@+id/txtHeaderTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_toEndOf="@+id/btnBack"
+                    android:letterSpacing="0.1"
+                    android:text="ATTACHMENTS"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorZambezi"
+                    android:textSize="14sp"
+                    app:fontFamily="@font/roboto_bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutAttachmentAction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layoutHeader">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/showAttachOptions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    app:backgroundTint="@color/colorSummerSky"
+                    app:fabCustomSize="40dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:maxImageSize="20dp"
+                    app:srcCompat="@drawable/attachment_grey_icon"
+                    app:tint="@color/colorWhite" />
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lstAttachments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layoutAttachmentAction" />
+        </RelativeLayout>
+        <com.google.android.material.navigation.NavigationView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_marginEnd="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/attachmentSideDrawer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:id="@+id/cameraLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/cameraIcon"
+                        style="@style/Widget.MaterialComponents.Button.Icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="56dp"
+                        app:backgroundTint="@color/colorSummerSky"
+                        app:fabCustomSize="38dp"
+                        app:iconSize="24dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:maxImageSize="15dp"
+                        app:srcCompat="@drawable/ic_camera"
+                        app:tint="@color/colorWhite">
+
+                    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+                    <TextView
+                        android:id="@+id/cameraDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="23dp"
+                        android:layout_marginTop="66dp"
+                        android:layout_marginEnd="40dp"
+                        android:layout_toEndOf="@+id/cameraIcon"
+                        android:letterSpacing="0.04"
+                        android:lineSpacingExtra="3dp"
+                        android:text="@string/cameraDescription"
+                        android:textColor="@color/colorDimGray"
+                        android:textSize="10sp"
+                        app:fontFamily="@font/roboto_medium"
+                        app:layout_constraintStart_toEndOf="@+id/cameraIcon"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/cameraDivider"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.7dp"
+                        android:layout_below="@+id/cameraDescription"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="36dp"
+                        android:layout_marginEnd="0dp"
+                        android:background="@color/colorVeryLightGray"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"></View>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/galleryLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cameraLayout">
+
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/galleryIcon"
+                        style="@style/Widget.MaterialComponents.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="34dp"
+                        android:layout_marginBottom="27dp"
+                        app:backgroundTint="@color/colorSummerSky"
+                        app:fabCustomSize="40dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:maxImageSize="18dp"
+                        app:srcCompat="@drawable/ic_insert_photo_black_24dp"
+                        app:tint="@color/colorWhite">
+
+                    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+                    <TextView
+                        android:id="@+id/galleryDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="23dp"
+                        android:layout_marginTop="44dp"
+                        android:layout_marginEnd="38dp"
+                        android:layout_toEndOf="@+id/galleryIcon"
+                        android:letterSpacing="0.04"
+                        android:text="@string/galleryDescription"
+                        android:textColor="@color/colorSuvaGray"
+                        android:textSize="10sp"
+                        app:fontFamily="@font/roboto_medium"
+                        android:lineSpacingExtra="3dp"
+                        app:layout_constraintStart_toEndOf="@+id/galleryIcon"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/fileLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/galleryLayout">
+
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fileIcon"
+                        style="@style/Widget.MaterialComponents.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="34dp"
+                        android:layout_marginBottom="27dp"
+                        app:backgroundTint="@color/colorSummerSky"
+                        app:fabCustomSize="40dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:maxImageSize="18dp"
+                        app:srcCompat="@drawable/attachment_grey_icon"
+                        app:tint="@color/colorWhite">
+
+                    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+                    <TextView
+                        android:id="@+id/fileDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="23dp"
+                        android:layout_marginTop="44dp"
+                        android:layout_marginEnd="38dp"
+                        android:layout_toEndOf="@+id/fileIcon"
+                        android:letterSpacing="0.04"
+                        android:text="@string/galleryDescription"
+                        android:textColor="@color/colorSuvaGray"
+                        android:textSize="10sp"
+                        app:fontFamily="@font/roboto_medium"
+                        android:lineSpacingExtra="3dp"
+                        app:layout_constraintStart_toEndOf="@+id/fileIcon"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </RelativeLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.navigation.NavigationView>
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+</FrameLayout>

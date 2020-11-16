@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 import com.carmel.guestjini.Networking.Tickets.TicketCategory;
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class TicketCategoryItemViewMVCImpl
         extends BaseObservableViewMvc<TicketCategoryItemViewMVC.Listener>

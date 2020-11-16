@@ -200,6 +200,11 @@ public class CreateTicketController
     }
 
     @Override
+    public void onAttachmentClicked() {
+        screensNavigator.toTicketAttachmentScreen();
+    }
+
+    @Override
     public void onBackClicked() {
         screensNavigator.toSupportHome();
     }

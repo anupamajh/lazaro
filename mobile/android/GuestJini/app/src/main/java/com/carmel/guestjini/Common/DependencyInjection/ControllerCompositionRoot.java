@@ -67,6 +67,7 @@ import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketController;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailController;
 import com.carmel.guestjini.Screens.Support.KBList.KBListController;
 import com.carmel.guestjini.Screens.Support.SupportHome.SupportHomeController;
+import com.carmel.guestjini.Screens.Support.TicketAttachment.TicketAttachmentController;
 import com.carmel.guestjini.Screens.Support.TicketCategory.TicketCategoryListController;
 import com.carmel.guestjini.Screens.Support.TicketDetail.TicketDetailsController;
 import com.carmel.guestjini.Screens.Support.TicketList.TicketListController;
@@ -81,6 +82,7 @@ import com.carmel.guestjini.Tickets.GetTicketFeedBackUseCase;
 import com.carmel.guestjini.Tickets.SaveTaskNoteUseCase;
 import com.carmel.guestjini.Tickets.SaveTicketFeedbackUseCase;
 import com.carmel.guestjini.Tickets.SaveTicketUseCase;
+import com.carmel.guestjini.Tickets.UploadFileUseCase;
 import com.carmel.guestjini.Users.AppAccessRequestUseCase;
 import com.carmel.guestjini.Users.ChangePasswordUseCase;
 import com.carmel.guestjini.Users.CheckPhoneNumberUseCase;
@@ -380,6 +382,10 @@ public class ControllerCompositionRoot {
         return new SaveTicketFeedbackUseCase(getAuthenticatedGuestJiniAPI());
     }
 
+    private UploadFileUseCase getUploadFileUseCase() {
+        return new UploadFileUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
     public SharedPreferenceHelper getSharedPreferenceHelper() {
         return new SharedPreferenceHelper(preferences, editor);
 
@@ -669,6 +675,15 @@ public class ControllerCompositionRoot {
                 getSharedPreferenceHelper(),
                 getScreensNavigator(),
                 getDialogsManager()
+        );
+    }
+
+    public TicketAttachmentController getTicketAttachmentController() {
+        return new TicketAttachmentController(
+                getUploadFileUseCase(),
+                getScreensNavigator(),
+                getDialogsManager(),
+                getDialogsEventBus()
         );
     }
 }
