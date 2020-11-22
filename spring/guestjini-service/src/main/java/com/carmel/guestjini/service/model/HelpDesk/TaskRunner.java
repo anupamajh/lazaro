@@ -40,6 +40,9 @@ public class TaskRunner {
     @Column(name = "task_status")
     private int taskStatus;
 
+    @Column(name = "task_force_group_id")
+    private String taskForceGroupId;
+
     @Column(name = "created_by")
     @Length(max = 40)
     private String createdBy;

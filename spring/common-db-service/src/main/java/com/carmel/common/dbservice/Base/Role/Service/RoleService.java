@@ -42,4 +42,8 @@ public interface RoleService {
     RolesResponse findAllByClientAndIsDeleted(Client client, int isDeleted, Pageable pageable) throws Exception;
 
     RolesResponse findAll(Specification<Role> textInAllColumns, Pageable pageable) throws Exception;
+
+    Role getGuestRole();
+
+    Role getSupportRole();
 }

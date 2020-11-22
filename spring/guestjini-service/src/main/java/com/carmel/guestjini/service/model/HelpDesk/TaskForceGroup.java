@@ -27,7 +27,8 @@ public class TaskForceGroup {
     @Length(max = 40)
     private String orgId;
 
-    @Column(name = "name")
+    @Column(name = "group_name")
+    @Length(max = 300)
     private String name;
 
     @Column(name = "descripiton")

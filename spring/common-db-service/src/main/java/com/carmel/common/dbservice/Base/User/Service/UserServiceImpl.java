@@ -5,6 +5,9 @@ import com.carmel.common.dbservice.Base.AddressBook.Model.AddressBook;
 import com.carmel.common.dbservice.Base.AddressBook.Service.AddressBookService;
 import com.carmel.common.dbservice.Base.AppFeature.Response.AppFeaturesResponse;
 import com.carmel.common.dbservice.Base.Client.Model.Client;
+import com.carmel.common.dbservice.Base.Role.Model.Role;
+import com.carmel.common.dbservice.Base.Role.Response.RolesResponse;
+import com.carmel.common.dbservice.Base.Role.Service.RoleService;
 import com.carmel.common.dbservice.Base.User.Model.User;
 import com.carmel.common.dbservice.Base.User.Repository.UserRepository;
 import com.carmel.common.dbservice.Base.User.Response.UsersResponse;
@@ -65,6 +68,10 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     EntityManager entityManager;
+
+    @Autowired
+    RoleService roleService;
+
 
     @Override
     public User save(User user) {
@@ -194,6 +201,67 @@ public class UserServiceImpl implements UserService {
                 user.setCreatedBy(userInfo.getId());
                 user.setCreationTime(new Date());
                 user.setClient(userInfo.getClient());
+                Role role = roleService.getGuestRole();
+                if(role != null){
+                    List<Role> roles = new ArrayList<>();
+                    roles.add(role);
+                    user.setRoles(roles);
+                }else{
+                    throw new Exception("Guest role is not configured");
+                }
+            } else {
+                Optional<User> optionalUser = userRepository.findById(user.getId());
+                user.setPassword(optionalUser.get().getPassword());
+                user.setLastModifiedBy(userInfo.getId());
+                user.setLastModifiedTime(new Date());
+            }
+            User savedUser = this.save(user);
+            AddressBook addressBook = new AddressBook();
+            Optional<AddressBook> optionalAddressBook = addressBookService.findByUserId(savedUser.getId());
+            if (optionalAddressBook.isPresent()) {
+                addressBook = optionalAddressBook.get();
+            }
+            addressBook.setEmail1(user.getEmail());
+            addressBook.setPhone1(user.getPhone());
+            addressBook.setDisplayName(user.getFullName());
+            addressBook.setUserId(savedUser.getId());
+            addressBookService.save(addressBook);
+            usersResponse.setUser(savedUser);
+            usersResponse.setSuccess(true);
+            usersResponse.setError("");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            throw ex;
+        }
+        return usersResponse;
+    }
+
+    @Override
+    public UsersResponse phoneNumberSignUpTaskForce(User user) throws Exception {
+        UserInfo userInfo = userInformation.getUserInfo();
+        logger.trace("Entering");
+        UsersResponse usersResponse = new UsersResponse();
+        try {
+            if (user.getId() == null) {
+                user.setId("");
+            }
+            user.setClient(userInfo.getClient());
+            logger.trace("Data:{}", objectMapper.writeValueAsString(user));
+            if (user.getId() == "") {
+                user = isDuplicateUser(user);
+                user.setAccountStatus(2);
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+                user.setCreatedBy(userInfo.getId());
+                user.setCreationTime(new Date());
+                user.setClient(userInfo.getClient());
+                Role role = roleService.getSupportRole();
+                if(role != null){
+                    List<Role> roles = new ArrayList<>();
+                    roles.add(role);
+                    user.setRoles(roles);
+                }else{
+                    throw new Exception("Guest role is not configured");
+                }
             } else {
                 Optional<User> optionalUser = userRepository.findById(user.getId());
                 user.setPassword(optionalUser.get().getPassword());

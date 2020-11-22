@@ -17,6 +17,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.nio.Buffer;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Properties;
@@ -40,6 +43,7 @@ public class GenerateAccessCard extends Frame {
     private Properties properties;
 
     private Integer ID_NUMBER_COL = null;
+    private Integer UNIT_COL = null;
     private Integer NAME_COL = null;
     private Integer IMAGE_URL_COL = null;
     private Integer BLOOD_GROUPS_COL = null;
@@ -49,6 +53,7 @@ public class GenerateAccessCard extends Frame {
     private Integer PROPERTY_NAME_COL = null;
     private Integer PROPERTY_ADDRESS_LINE_1_COL = null;
     private Integer PROPERTY_ADDRESS_LINE_2_COL = null;
+    private Integer CHECKOUT_DATE_COL = null;
 
     public GenerateAccessCard() {
         super("Guesture Access Card");
@@ -78,6 +83,9 @@ public class GenerateAccessCard extends Frame {
                                     case "idno":
                                         ID_NUMBER_COL = i;
                                         break;
+                                    case "unit":
+                                        UNIT_COL = i;
+                                        break;
                                     case "student name":
                                         NAME_COL = i;
                                         break;
@@ -105,13 +113,16 @@ public class GenerateAccessCard extends Frame {
                                     case "property address 2":
                                         PROPERTY_ADDRESS_LINE_2_COL = i;
                                         break;
+                                    case "checkout date":
+                                        CHECKOUT_DATE_COL = i;
+                                        break;
                                 }
                             }
                             i++;
                         }
-                    }else{
+                    } else {
                         accessCard = new AccessCard();
-                        if(currentRow.getCell(NAME_COL)!=null) {
+                        if (currentRow.getCell(NAME_COL) != null) {
                             if (NAME_COL != null) {
                                 if (currentRow.getCell(NAME_COL).getStringCellValue() != null) {
                                     accessCard.setName(currentRow.getCell(NAME_COL).getStringCellValue().trim());
@@ -121,6 +132,11 @@ public class GenerateAccessCard extends Frame {
                             if (ID_NUMBER_COL != null) {
                                 if (currentRow.getCell(ID_NUMBER_COL).getStringCellValue() != null) {
                                     accessCard.setIdNumber(currentRow.getCell(ID_NUMBER_COL).getStringCellValue().trim());
+                                }
+                            }
+                            if (UNIT_COL != null) {
+                                if (currentRow.getCell(UNIT_COL).getStringCellValue() != null) {
+                                    accessCard.setUnit(currentRow.getCell(UNIT_COL).getStringCellValue().trim());
                                 }
                             }
                             if (IMAGE_URL_COL != null) {
@@ -163,6 +179,11 @@ public class GenerateAccessCard extends Frame {
                                     accessCard.setPropertyAddressLine2(currentRow.getCell(PROPERTY_ADDRESS_LINE_2_COL).getStringCellValue().trim());
                                 }
                             }
+                            if (CHECKOUT_DATE_COL != null) {
+                                if (currentRow.getCell(CHECKOUT_DATE_COL).getDateCellValue() != null) {
+                                    accessCard.setCheckoutDate(currentRow.getCell(CHECKOUT_DATE_COL).getDateCellValue());
+                                }
+                            }
                             this.accessCardList.add(accessCard);
                         }
 
@@ -170,7 +191,7 @@ public class GenerateAccessCard extends Frame {
                     rowCount++;
                 }
 
-                //this.currentAccessCard = accessCardList.get(0);
+               // this.currentAccessCard = accessCardList.get(0);
                 for (AccessCard card : accessCardList) {
                     generateAccessCard(card);
                 }
@@ -190,7 +211,7 @@ public class GenerateAccessCard extends Frame {
     }
 
     private void prepareGUI() {
-        setSize(204*MULTI_FACTOR,325*MULTI_FACTOR);
+        setSize(204 * MULTI_FACTOR, 325 * MULTI_FACTOR);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent) {
                 System.exit(0);
@@ -207,22 +228,97 @@ public class GenerateAccessCard extends Frame {
 
 
     private void generateAccessCard(AccessCard accessCard) {
-        BufferedImage bi = new BufferedImage(204*MULTI_FACTOR, 325*MULTI_FACTOR, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage bi = new BufferedImage(204 * MULTI_FACTOR, 325 * MULTI_FACTOR, BufferedImage.TYPE_INT_ARGB);
 
         Graphics2D g2 = bi.createGraphics();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
         try {
+            Stroke oldStroke = g2.getStroke();
+            g2.setStroke(new BasicStroke(5));
+            g2.setColor(new Color(0, 0, 0));
+            g2.drawRect(15, 15, 204 * MULTI_FACTOR - 30, 325 * MULTI_FACTOR -30);
+            g2.setStroke(oldStroke);
+
             //g2.rotate(Math.toRadians(180));
             g2.setFont(new Font("Helvetica", Font.TRUETYPE_FONT, 13));
             Image image = ImageIO.read(new File(getClass().getResource("/logo.png").getFile()));
-             Stroke oldStroke = g2.getStroke();
-            g2.drawImage(image, 15, 30, 110*MULTI_FACTOR, 50*MULTI_FACTOR, null);
 
-            g2.setColor(new Color(48, 53, 54));
+            g2.drawImage(image, 194, 80, 224, 70, null);
+
+
+            BufferedImage orginalImage = ImageIO.read(new File((imagePath + accessCard.getImageUrl())));
+            BufferedImage blackAndWhiteImg = new BufferedImage(
+                    orginalImage.getWidth(), orginalImage.getHeight(),
+                    BufferedImage.TYPE_BYTE_GRAY);
+
+            Graphics2D graphics = blackAndWhiteImg.createGraphics();
+            graphics.drawImage(orginalImage, 0, 0, null);
+
+            g2.drawImage(blackAndWhiteImg, 216, 70 * MULTI_FACTOR, 60 * MULTI_FACTOR, 70 * MULTI_FACTOR, null);
+            g2.setStroke(new BasicStroke(5));
+            g2.setColor(new Color(0, 0, 0));
+            g2.drawRect(216, 70 * MULTI_FACTOR, 60 * MULTI_FACTOR, 70 * MULTI_FACTOR);
+            g2.setStroke(oldStroke);
+
+            g2.setFont(new Font("Helvetica", Font.TRUETYPE_FONT, 28));
+            String text = accessCard.getName();
+            FontMetrics fm = g2.getFontMetrics();
+            while (fm.stringWidth(text) < 200 * MULTI_FACTOR) {
+                text = " " + text + " ";
+            }
+
+            g2.drawString(text, 0, 470);
+
+            g2.setFont(new Font("Helvetica", Font.PLAIN, 18));
+            text = "EMERGENCY CONTACT PHONE";
+            fm = g2.getFontMetrics();
+            while (fm.stringWidth(text) < 200 * MULTI_FACTOR) {
+                text = " " + text + " ";
+            }
+
+            g2.drawString(text, 0, 600);
+
+            g2.setFont(new Font("Helvetica", Font.PLAIN, 35));
+            text = accessCard.getEmergencyNumber();
+            fm = g2.getFontMetrics();
+            while (fm.stringWidth(text) < 200 * MULTI_FACTOR) {
+                text = " " + text + " ";
+            }
+
+            g2.drawString(text, 0, 640);
+
+            int CardHeight = 325 * MULTI_FACTOR + 100;
+            g2.setColor(new Color(0, 0, 0));
+            g2.drawRect(50, CardHeight - 250, 60, 30);
+
+            g2.setColor(new Color(0, 0, 0));
+            g2.fillRect(50, CardHeight - 250, 60, 30);
+
+            g2.setColor(new Color(255, 255, 255));
+            g2.setFont(new Font("Helvetica", Font.PLAIN, 13));
+            g2.drawString("GUEST", 58, CardHeight - 230);
+
+            g2.setColor(new Color(0, 0, 0));
+            g2.drawString(accessCard.getIdNumber(), 54, CardHeight - 190);
+
+
+            g2.setFont(new Font("Helvetica", Font.PLAIN, 18));
+            g2.setColor(new Color(0, 0, 0));
+            g2.drawString(accessCard.getUnit(), 54, CardHeight - 170);
+            g2.drawString("Valid Thru", 204 * MULTI_FACTOR - 150, CardHeight - 250);
+            SimpleDateFormat myFormatObj = new  SimpleDateFormat("dd MMM yyyy");
+
+            g2.drawString(myFormatObj.format(accessCard.getCheckoutDate()), 204 * MULTI_FACTOR - 150, CardHeight - 231);
+
+
+
+
+     /*
+            g2.setColor(new Color(0, 0, 0));
             g2.drawRect(0, 50*MULTI_FACTOR, 204*MULTI_FACTOR, 40*MULTI_FACTOR);
 
-            g2.setColor(new Color(48, 53, 54));
+            g2.setColor(new Color(0, 0, 0));
             g2.fillRect(0, 50*MULTI_FACTOR, 204*MULTI_FACTOR, 40*MULTI_FACTOR);
 
             image = ImageIO.read(new File((imagePath + accessCard.getImageUrl())));
@@ -305,6 +401,9 @@ public class GenerateAccessCard extends Frame {
                 propertyName = " " + propertyName + " ";
             }
             g2.drawString(propertyName, 0, 325*MULTI_FACTOR - 20);
+
+
+      */
             ImageIO.write(bi, "PNG", new File(accessCard.getIdNumber() + ".png"));
         } catch (Exception ex) {
             String s = ex.getMessage();
@@ -317,6 +416,7 @@ public class GenerateAccessCard extends Frame {
 
          */
     }
+
 }
 
 

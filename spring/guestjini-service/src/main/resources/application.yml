@@ -71,7 +71,7 @@ eureka:
 security:
   oauth2:
     resource:
-#      token-info-uri: http://68.183.246.143:8000/auth/oauth/token
+#      token-info-uri: http://68.183.246.143:8000/auth/oauth/check_token
       token-info-uri: http://139.59.32.238:8000/auth/oauth/check_token
     client:
       client-id: 21e43c55-28ef-478a-ae65-dc896e5eaa34
@@ -109,5 +109,6 @@ carmel:
       grantType: client_credentials
       clientId: 21e43c55-28ef-478a-ae65-dc896e5eaa34
       clientSecret: P@ssw0rd
+#      accessTokenUri: http://68.183.246.143:8000/auth/oauth/token
       accessTokenUri: http://139.59.32.238:8000/auth/oauth/token
 

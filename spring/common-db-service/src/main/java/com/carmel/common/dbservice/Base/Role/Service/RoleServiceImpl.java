@@ -9,6 +9,7 @@ import com.carmel.common.dbservice.Base.Role.Response.RolesResponse;
 import com.carmel.common.dbservice.common.Search.SearchBuilder;
 import com.carmel.common.dbservice.common.Search.SearchRequest;
 import com.carmel.common.dbservice.component.UserInformation;
+import com.carmel.common.dbservice.config.YAMLConfig;
 import com.carmel.common.dbservice.model.UserInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -39,6 +40,9 @@ public class RoleServiceImpl implements RoleService {
     private Logger logger = LoggerFactory.getLogger(RoleServiceImpl.class);
 
     private ObjectMapper objectMapper = new ObjectMapper();
+
+    @Autowired
+    YAMLConfig carmelConfig;
 
     @Autowired
     RoleRepository roleRepository;
@@ -345,6 +349,24 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RolesResponse findAll(Specification<Role> textInAllColumns, Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public Role getGuestRole() {
+        Optional<Role> optionalRole = roleRepository.findById(carmelConfig.getGuestRoleId());
+        if(optionalRole.isPresent()){
+            return optionalRole.get();
+        }
+        return null;
+    }
+
+    @Override
+    public Role getSupportRole() {
+        Optional<Role> optionalRole = roleRepository.findById(carmelConfig.getSupportRoleId());
+        if(optionalRole.isPresent()){
+            return optionalRole.get();
+        }
         return null;
     }
 

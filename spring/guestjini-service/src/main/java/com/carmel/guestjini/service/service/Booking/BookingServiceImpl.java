@@ -183,14 +183,14 @@ public class BookingServiceImpl implements BookingService {
             guest.setActualCheckout(null);
             guest.setGuestStatus(GuestStatus.RESIDING);
             guest = guestService.save(guest);
-            UserDTO user = new UserDTO(guest);
-            user.setPassword("");
-            UserResponse userResponse = userService.saveUser(user);
-            if (!userResponse.isSuccess()) {
-                if (!userResponse.getError().contains("Duplicate")) {
-                    throw new Exception(userResponse.getError());
-                }
-            }
+//            UserDTO user = new UserDTO(guest);
+//            user.setPassword("");
+//            UserResponse userResponse = userService.saveUser(user);
+//            if (!userResponse.isSuccess()) {
+//                if (!userResponse.getError().contains("Duplicate")) {
+//                    throw new Exception(userResponse.getError());
+//                }
+//            }
             return guest;
         } catch (Exception ex) {
             throw ex;
@@ -377,19 +377,14 @@ public class BookingServiceImpl implements BookingService {
                 Optional<TaskForce> optionalTaskForce =
                         taskForceService.findByPhone(phone);
                 if (optionalTaskForce.isPresent()) {
+                    bookingResponse.setHasSupportAccount(false);
                     TaskForce taskForce = optionalTaskForce.get();
                     bookingResponse.setSupportTeamMember(true);
-                    if (taskForce.getUserId() == null) {
-                        bookingResponse.setHasSupportAccount(true);
-                    }else{
-                        bookingResponse.setHasSupportAccount(false);
-                    }
                 } else {
                     bookingResponse.setSupportTeamMember(false);
                     bookingResponse.setHasSupportAccount(false);
                     bookingResponse.setError("Your phone number is not registered with us.");
                 }
-
                 bookingResponse.setSuccess(true);
             }
 

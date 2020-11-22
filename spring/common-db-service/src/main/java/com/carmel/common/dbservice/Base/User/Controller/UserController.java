@@ -2,6 +2,7 @@ package com.carmel.common.dbservice.Base.User.Controller;
 
 import com.carmel.common.dbservice.Base.AddressBook.Model.AddressBook;
 import com.carmel.common.dbservice.Base.AddressBook.Service.AddressBookService;
+import com.carmel.common.dbservice.Base.Role.Service.RoleService;
 import com.carmel.common.dbservice.Base.User.Model.User;
 import com.carmel.common.dbservice.Base.User.Response.UsersResponse;
 import com.carmel.common.dbservice.Base.User.Service.UserService;
@@ -66,7 +67,6 @@ public class UserController {
     @Autowired
     RemoteTokenServices tokenServices;
 
-
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public UsersResponse save(@Valid @RequestBody User user) {
         logger.trace("Entering");
@@ -105,6 +105,21 @@ public class UserController {
         try {
             usersResponse = userService
                     .phoneNumberSignUp(user);
+        } catch (Exception ex) {
+            usersResponse.setSuccess(false);
+            usersResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return usersResponse;
+    }
+
+    @RequestMapping(value = "/phone-number-sign-up-task-force", method = RequestMethod.POST)
+    public UsersResponse phoneNumberSignUpTaskForce(@Valid @RequestBody User user) {
+        logger.trace("Entering");
+        UsersResponse usersResponse = new UsersResponse();
+        try {
+            usersResponse = userService
+                    .phoneNumberSignUpTaskForce(user);
         } catch (Exception ex) {
             usersResponse.setSuccess(false);
             usersResponse.setError(ex.getMessage());

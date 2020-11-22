@@ -19,7 +19,8 @@ public class YAMLConfig {
     private String instagramConfigPath;
     private String twitterConfigPath;
     private String googleKey;
-
+    private String GuestRoleId;
+    private String SupportRoleId;
     private String OTPGatewayURL;
 
     private String OTPGateWayKey;
@@ -129,5 +130,21 @@ public class YAMLConfig {
 
     public void setOTPGateWayKey(String OTPGateWayKey) {
         this.OTPGateWayKey = OTPGateWayKey;
+    }
+
+    public String getGuestRoleId() {
+        return GuestRoleId;
+    }
+
+    public void setGuestRoleId(String guestRoleId) {
+        GuestRoleId = guestRoleId;
+    }
+
+    public String getSupportRoleId() {
+        return SupportRoleId;
+    }
+
+    public void setSupportRoleId(String supportRoleId) {
+        SupportRoleId = supportRoleId;
     }
 }

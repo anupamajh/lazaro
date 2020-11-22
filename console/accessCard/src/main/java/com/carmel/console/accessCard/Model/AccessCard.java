@@ -1,5 +1,7 @@
 package com.carmel.console.accessCard.Model;
 
+import java.util.Date;
+
 public class AccessCard {
     private String idNumber;
     private String imageUrl;
@@ -11,6 +13,8 @@ public class AccessCard {
     private String propertyName;
     private String propertyAddressLine1;
     private String propertyAddressLine2;
+    private String unit;
+    private Date checkoutDate;
 
     public String getIdNumber() {
         return idNumber;
@@ -90,5 +94,21 @@ public class AccessCard {
 
     public void setPropertyAddressLine2(String propertyAddressLine2) {
         this.propertyAddressLine2 = propertyAddressLine2;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public Date getCheckoutDate() {
+        return checkoutDate;
+    }
+
+    public void setCheckoutDate(Date checkoutDate) {
+        this.checkoutDate = checkoutDate;
     }
 }
