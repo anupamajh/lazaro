@@ -2,16 +2,21 @@ package com.carmel.guestjini.Screens.Login;
 
 import com.carmel.guestjini.Authentication.AttemptLoginUseCase;
 import com.carmel.guestjini.Networking.Users.AccessToken;
+import com.carmel.guestjini.Networking.Users.UserGrants;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
 import com.carmel.guestjini.Screens.Common.SharedPreference.SharedPreferenceHelper;
 import com.carmel.guestjini.Screens.Common.ViewMVCFactory;
+import com.carmel.guestjini.Users.FetchGrantsUseCase;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 public class LoginController implements
         LoginViewMVC.Listener,
-        AttemptLoginUseCase.Listener {
+        AttemptLoginUseCase.Listener,
+        FetchGrantsUseCase.Listener {
 
     private enum ScreenState {
         IDLE, ATTEMPTING_LOGIN, LOGIN_COMPLETED, NETWORK_ERROR
@@ -20,6 +25,7 @@ public class LoginController implements
     private final ScreensNavigator mScreensNavigator;
     private final SharedPreferenceHelper sharedPreferenceHelper;
     private final AttemptLoginUseCase attemptLoginUseCase;
+    private final FetchGrantsUseCase fetchGrantsUseCase;
     private final DialogsManager mDialogsManager;
     private ViewMVCFactory viewMVCFactory;
 
@@ -31,6 +37,7 @@ public class LoginController implements
     public LoginController(
             ScreensNavigator mScreensNavigator,
             AttemptLoginUseCase attemptLoginUseCase,
+            FetchGrantsUseCase fetchGrantsUseCase,
             SharedPreferenceHelper sharedPreferenceHelper,
             DialogsManager mDialogsManager,
             ViewMVCFactory viewMVCFactory,
@@ -39,6 +46,7 @@ public class LoginController implements
         this.mScreensNavigator = mScreensNavigator;
         this.sharedPreferenceHelper = sharedPreferenceHelper;
         this.attemptLoginUseCase = attemptLoginUseCase;
+        this.fetchGrantsUseCase = fetchGrantsUseCase;
         this.mDialogsManager = mDialogsManager;
         this.viewMVCFactory = viewMVCFactory;
         this.loginEventBus = loginEventBus;
@@ -47,11 +55,13 @@ public class LoginController implements
     public void onStart() {
         viewMVC.registerListener(this);
         attemptLoginUseCase.registerListener(this);
+        fetchGrantsUseCase.registerListener(this);
     }
 
     public void onStop() {
         viewMVC.unregisterListener(this);
         attemptLoginUseCase.unregisterListener(this);
+        fetchGrantsUseCase.registerListener(this);
     }
 
     public void bindView(LoginViewMVC loginViewMVC) {
@@ -113,12 +123,51 @@ public class LoginController implements
         }
         if (hasError) {
             sharedPreferenceHelper.saveBooleanValue("isLoggedIn", false);
+            sharedPreferenceHelper.commit();
             viewMVC.showAuthenticationFailure();
         } else {
-            mScreensNavigator.toSupportHome();
-            loginEventBus.postEvent(1);
+            fetchGrantsUseCase.fetchGrantsAndNotify(accessToken.getAccessToken());
         }
 
+    }
+
+    @Override
+    public void onGrantFetched(UserGrants userGrants) {
+        boolean hasError = true;
+        if (userGrants.getUser_name() != null) {
+            Set<String> grants = new HashSet<>();
+            for (String authority : userGrants.getAuthorities()) {
+                grants.add(authority);
+            }
+            sharedPreferenceHelper.saveStringSetValue("user_grants", grants);
+            if (grants.size() > 0) {
+                sharedPreferenceHelper.saveBooleanValue("isGrantFetched", true);
+                hasError = false;
+            } else {
+                sharedPreferenceHelper.saveBooleanValue("isGrantFetched", false);
+                hasError = true;
+            }
+            sharedPreferenceHelper.commit();
+
+        } else {
+            sharedPreferenceHelper.saveBooleanValue("isGrantFetched", false);
+            sharedPreferenceHelper.commit();
+            hasError = true;
+        }
+        if (hasError) {
+            sharedPreferenceHelper.saveBooleanValue("isLoggedIn", false);
+            sharedPreferenceHelper.commit();
+            viewMVC.showAuthenticationFailure();
+        } else {
+            mScreensNavigator.toHome();
+            loginEventBus.postEvent(1);
+        }
+    }
+
+    @Override
+    public void onGrantFetchFailed() {
+        viewMVC.hideProgressIndication();
+        viewMVC.showAuthenticationFailure();
     }
 
     @Override

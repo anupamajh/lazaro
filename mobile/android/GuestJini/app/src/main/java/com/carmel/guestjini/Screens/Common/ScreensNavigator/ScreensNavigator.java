@@ -15,6 +15,7 @@ import com.carmel.guestjini.Screens.Community.GroupList.GroupListFragment;
 import com.carmel.guestjini.Screens.Community.PeopleList.PeopleListFragment;
 import com.carmel.guestjini.Screens.Community.PersonDetail.PersonDetailFragment;
 import com.carmel.guestjini.Screens.ForgotPassword.ForgotPasswordFragment;
+import com.carmel.guestjini.Screens.Home.HomeFragment;
 import com.carmel.guestjini.Screens.Login.LoginFragment;
 import com.carmel.guestjini.Screens.OTP.OTPFragment;
 import com.carmel.guestjini.Screens.SetPassword.SetPasswordFragment;
@@ -25,6 +26,8 @@ import com.carmel.guestjini.Screens.Settings.PrivacyPolicy.PrivacyPolicyFragment
 import com.carmel.guestjini.Screens.Settings.SettingsHome.SettingsHomeFragment;
 import com.carmel.guestjini.Screens.Settings.TermsAndConditions.TermsAndConditionsFragment;
 import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketFragment;
+import com.carmel.guestjini.Screens.Support.Inbox.InboxFragment;
+import com.carmel.guestjini.Screens.Support.InboxList.InboxListFragment;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailFragment;
 import com.carmel.guestjini.Screens.Support.KBList.KBListFragment;
 import com.carmel.guestjini.Screens.Support.SupportHome.SupportHomeFragment;
@@ -211,5 +214,17 @@ public class ScreensNavigator {
 
     public void toTicketAttachmentScreen() {
         mFragmentFrameHelper.replaceFragment(TicketAttachmentFragment.createFragment());
+    }
+
+    public void toHome() {
+        mFragmentFrameHelper.replaceFragment(HomeFragment.createFragment());
+    }
+
+    public void toInboxScreen() {
+        mFragmentFrameHelper.replaceFragment(InboxFragment.createFragment());
+    }
+
+    public void toInboxTicketList(int inboxType) {
+        mFragmentFrameHelper.replaceFragment(InboxListFragment.createFragment(inboxType));
     }
 }

@@ -114,7 +114,8 @@ public class OTPController
         if(screenType == Constants.SCREEN_APP_ACCESS) {
             createAccountUseCase.createAccountAndNotify(
                     sharedPreferenceHelper.readStringValue("mobile"),
-                    sharedPreferenceHelper.readStringValue("full_name")
+                    sharedPreferenceHelper.readStringValue("full_name"),
+                    sharedPreferenceHelper.readBooleanValue("is_support_team_member")
             );
         }else{
             viewMVC.hideProgressIndication();

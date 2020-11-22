@@ -13,6 +13,8 @@ import com.carmel.guestjini.R;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Set;
+
 public class BaseActivityMVCViewImpl extends BaseObservableViewMvc<BaseActivityMVCView.Listener>
         implements BaseActivityMVCView {
     private final FrameLayout baseLayout;
@@ -28,10 +30,25 @@ public class BaseActivityMVCViewImpl extends BaseObservableViewMvc<BaseActivityM
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                for (Listener listener : getListeners()) {
+                    listener.onNavigationItemClicked();
+                }
                 switch (item.getItemId()) {
-                    case R.id.suppotIcon: {
+                    case R.id.homeIcon: {
+                        for (Listener listener : getListeners()) {
+                            listener.onHomeClicked();
+                        }
+                    }
+                    break;
+                    case R.id.supportIcon: {
                         for (Listener listener : getListeners()) {
                             listener.onSupportClicked();
+                        }
+                    }
+                    break;
+                    case R.id.inboxIcon: {
+                        for (Listener listener : getListeners()) {
+                            listener.onInboxClicked();
                         }
                     }
                     break;
@@ -41,18 +58,18 @@ public class BaseActivityMVCViewImpl extends BaseObservableViewMvc<BaseActivityM
                         }
                     }
                     break;
-                    case R.id.accountsIcon: {
-                        for (Listener listener : getListeners()) {
-                            listener.onAccountsClicked();
-                        }
-                    }
-                    break;
-                    case R.id.rewardsIcon: {
-                        for (Listener listener : getListeners()) {
-                            listener.onRewardsClicked();
-                        }
-                    }
-                    break;
+//                    case R.id.accountsIcon: {
+//                        for (Listener listener : getListeners()) {
+//                            listener.onAccountsClicked();
+//                        }
+//                    }
+//                    break;
+//                    case R.id.rewardsIcon: {
+//                        for (Listener listener : getListeners()) {
+//                            listener.onRewardsClicked();
+//                        }
+//                    }
+//                    break;
                     case R.id.settingsIcon: {
                         for (Listener listener : getListeners()) {
                             listener.onSettingsClicked();
@@ -64,6 +81,11 @@ public class BaseActivityMVCViewImpl extends BaseObservableViewMvc<BaseActivityM
                 return true;
             }
         });
+    }
+
+    @Override
+    public void setupNavigationGrants(Set<String> grants) {
+
     }
 
     @Override
@@ -83,6 +105,11 @@ public class BaseActivityMVCViewImpl extends BaseObservableViewMvc<BaseActivityM
 
     @Override
     public void setSupportSelected() {
-        bottomNavigationView.setSelectedItemId(R.id.suppotIcon);
+        bottomNavigationView.setSelectedItemId(R.id.supportIcon);
+    }
+
+    @Override
+    public void setHomeSelected() {
+        bottomNavigationView.setSelectedItemId(R.id.homeIcon);
     }
 }

@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp">
+
+            <RelativeLayout
+                android:id="@+id/layoutHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+                <TextView
+                    android:id="@+id/txtUserFullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="INBOX"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/txtWelcomeText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtUserFullName"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Find and manage your tasks"
+                    android:textSize="13sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutLucky"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layoutHeader">
+
+                <ImageView
+                    android:id="@+id/imgLucky"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/guesture_logo" />
+
+                <TextView
+                    android:id="@+id/txtLuckyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imgLucky"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Your lucky day, there is nothing here."
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardSharedInbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layoutLucky"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/colorWhite"
+                android:padding="10dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="4dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/txtSharedInbox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="SHARED INBOX"
+                        android:textColor="@color/colorGrey" />
+
+                    <TextView
+                        android:id="@+id/txtSharedInboxDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtSharedInbox"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Tickets that were submitted by the customers."
+                        android:textColor="@color/colorGrey"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txtSharedNewCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtSharedInboxDescription"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/rounded_shape_red"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp"
+                        android:text="3 New"
+                        android:textColor="@color/colorWhite"
+                        android:visibility="gone" />
+
+                    <RelativeLayout
+                        android:id="@+id/layoutSharedUnassigned"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtSharedNewCount"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/txtSharedInboxUnassignedHeading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="UNASSIGNED"
+                            android:textColor="@color/colorGrey" />
+
+                        <TextView
+                            android:id="@+id/txtSharedInboxUnassignedCount"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_below="@id/txtSharedInboxUnassignedHeading"
+                            android:background="@drawable/square_shape_red"
+                            android:fontFamily="@font/roboto_bold"
+                            android:padding="10dp"
+                            android:text="2"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/txtSharedInboxUnassignedDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtSharedInboxUnassignedHeading"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_toEndOf="@+id/txtSharedInboxUnassignedCount"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Tickets that have not been assigned to anybody"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="16dp" />
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/red_small_circle"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layoutSharedOpen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/layoutSharedUnassigned"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/txtSharedInboxOpenHeading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="OPEN"
+                            android:textColor="@color/colorGrey" />
+
+                        <TextView
+                            android:id="@+id/txtSharedInboxOpenCount"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_below="@id/txtSharedInboxOpenHeading"
+                            android:background="@drawable/square_shape_grey"
+                            android:fontFamily="@font/roboto_bold"
+                            android:padding="10dp"
+                            android:text="2"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorWhisper1"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/txtSharedInboxOpenDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtSharedInboxOpenHeading"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_toEndOf="@+id/txtSharedInboxOpenCount"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Tickets that are pending with support team"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="16dp" />
+
+                        <RelativeLayout
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/red_small_circle"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layoutSharedClosed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/layoutSharedOpen"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/txtSharedInboxClosedHeading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="CLOSED"
+                            android:textColor="@color/colorGrey" />
+
+                        <TextView
+                            android:id="@+id/txtSharedInboxClosedCount"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_below="@id/txtSharedInboxClosedHeading"
+                            android:background="@drawable/square_shape_grey"
+                            android:fontFamily="@font/roboto_bold"
+                            android:padding="10dp"
+                            android:text="2"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorWhisper1"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/txtSharedInboxClosedDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtSharedInboxClosedHeading"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_toEndOf="@+id/txtSharedInboxClosedCount"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Archived Tickets tha were closed."
+                            android:textColor="@color/colorGrey"
+                            android:textSize="16dp" />
+
+                        <RelativeLayout
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/red_small_circle"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardYourInbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cardSharedInbox"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/colorWhite"
+                android:padding="10dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="4dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/txtYourInbox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="YOUR INBOX"
+                        android:textColor="@color/colorGrey" />
+
+                    <TextView
+                        android:id="@+id/txtYourInboxDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtYourInbox"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Tickets that were assigned to you."
+                        android:textColor="@color/colorGrey"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txtYourNewCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtYourInboxDescription"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/rounded_shape_red"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp"
+                        android:text="1 New"
+                        android:textColor="@color/colorWhite"
+                        android:visibility="gone" />
+
+                    <RelativeLayout
+                        android:id="@+id/layoutYourOpen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtYourNewCount"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/txtYourInboxOpenHeading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="OPEN"
+                            android:textColor="@color/colorGrey" />
+
+                        <TextView
+                            android:id="@+id/txtYourInboxOpenCount"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_below="@id/txtYourInboxOpenHeading"
+                            android:background="@drawable/square_shape_grey"
+                            android:fontFamily="@font/roboto_bold"
+                            android:padding="10dp"
+                            android:text="2"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorWhisper1"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/txtYourInboxOpenDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtYourInboxOpenHeading"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_toEndOf="@+id/txtYourInboxOpenCount"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Tickets that are pending with you"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="16dp" />
+
+                        <RelativeLayout
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/red_small_circle"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layoutYourClosed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/layoutYourOpen"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/txtYourInboxClosedHeading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="CLOSED"
+                            android:textColor="@color/colorGrey" />
+
+                        <TextView
+                            android:id="@+id/txtYourInboxClosedCount"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_below="@id/txtYourInboxClosedHeading"
+                            android:background="@drawable/square_shape_grey"
+                            android:fontFamily="@font/roboto_bold"
+                            android:padding="10dp"
+                            android:text="2"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorWhisper1"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/txtYourInboxClosedDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtYourInboxClosedHeading"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_toEndOf="@+id/txtYourInboxClosedCount"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Archived tickets that are closed by you"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="16dp" />
+
+                        <RelativeLayout
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/red_small_circle"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardTeamInbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cardYourInbox"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/colorWhite"
+                android:padding="10dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="4dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/txtTeamInbox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="TEAM INBOX"
+                        android:textColor="@color/colorGrey" />
+
+                    <TextView
+                        android:id="@+id/txtTeamInboxDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtTeamInbox"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Tickets that were assigned to your team."
+                        android:textColor="@color/colorGrey"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txtTeamNewCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtTeamInboxDescription"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/rounded_shape_red"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp"
+                        android:text="3 New"
+                        android:textColor="@color/colorWhite"
+                        android:visibility="gone" />
+
+                    <RelativeLayout
+                        android:id="@+id/layoutTeamUnassigned"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtTeamNewCount"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/txtTeamInboxUnassignedHeading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="UNASSIGNED"
+                            android:textColor="@color/colorGrey" />
+
+                        <TextView
+                            android:id="@+id/txtTeamInboxUnassignedCount"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_below="@id/txtTeamInboxUnassignedHeading"
+                            android:background="@drawable/square_shape_red"
+                            android:fontFamily="@font/roboto_bold"
+                            android:padding="10dp"
+                            android:text="2"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/txtTeamInboxUnassignedDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtTeamInboxUnassignedHeading"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_toEndOf="@+id/txtTeamInboxUnassignedCount"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Tickets that have not been assigned to anybody"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="16dp" />
+
+                        <RelativeLayout
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/red_small_circle"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layoutTeamOpen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/layoutTeamUnassigned"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/txtTeamInboxOpenHeading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="OPEN"
+                            android:textColor="@color/colorGrey" />
+
+                        <TextView
+                            android:id="@+id/txtTeamInboxOpenCount"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_below="@id/txtTeamInboxOpenHeading"
+                            android:background="@drawable/square_shape_grey"
+                            android:fontFamily="@font/roboto_bold"
+                            android:padding="10dp"
+                            android:text="2"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorWhisper1"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/txtTeamInboxOpenDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtTeamInboxOpenHeading"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_toEndOf="@+id/txtTeamInboxOpenCount"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Tickets that are pending with the team"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="16dp" />
+
+                        <RelativeLayout
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/red_small_circle"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layoutTeamClosed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/layoutTeamOpen"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/txtTeamInboxClosedHeading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="CLOSED"
+                            android:textColor="@color/colorGrey" />
+
+                        <TextView
+                            android:id="@+id/txtTeamInboxClosedCount"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_below="@id/txtTeamInboxClosedHeading"
+                            android:background="@drawable/square_shape_grey"
+                            android:fontFamily="@font/roboto_bold"
+                            android:padding="10dp"
+                            android:text="2"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorWhisper1"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/txtTeamInboxClosedDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtTeamInboxClosedHeading"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_toEndOf="@+id/txtTeamInboxClosedCount"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Archived Tickets tha were closed by team."
+                            android:textColor="@color/colorGrey"
+                            android:textSize="16dp" />
+
+                        <RelativeLayout
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/red_small_circle"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </RelativeLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="20dp"
+        android:visibility="gone" />
+</FrameLayout>

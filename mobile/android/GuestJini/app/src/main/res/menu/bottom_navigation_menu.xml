@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/suppotIcon"
+        android:id="@+id/homeIcon"
+        android:icon="@drawable/support_grey_icon"
+        android:title="Home" />
+    <item
+        android:id="@+id/supportIcon"
         android:icon="@drawable/support_grey_icon"
         android:title="@string/support" />
     <item
@@ -9,15 +13,18 @@
         android:icon="@drawable/community_grey_icon"
         android:title="@string/community" />
     <item
-        android:id="@+id/accountsIcon"
-        android:icon="@drawable/accounts_grey_icon"
-        android:visible="false"
-        android:title="@string/accounts" />
-    <item
-        android:id="@+id/rewardsIcon"
-        android:icon="@drawable/rewards_grey_icon"
-        android:title="@string/rewards"
-        android:visible="false" />
+        android:id="@+id/inboxIcon"
+        android:icon="@drawable/community_grey_icon"
+        android:title="Inbox" />
+<!--    <item-->
+<!--        android:id="@+id/teamIcon"-->
+<!--        android:icon="@drawable/community_grey_icon"-->
+<!--        android:title="Team" />-->
+<!--    <item-->
+<!--        android:id="@+id/cConnectIcon"-->
+<!--        android:icon="@drawable/community_grey_icon"-->
+<!--        android:title="C-Connect" />-->
+
     <item
         android:id="@+id/settingsIcon"
         android:icon="@drawable/settings_grey_icon"

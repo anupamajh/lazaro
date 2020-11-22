@@ -29,31 +29,58 @@ public class CreateAccountUseCase  extends BaseObservableViewMvc<CreateAccountUs
 
     public void createAccountAndNotify(
             String mobile,
-            String fullName
+            String fullName,
+            Boolean isSupportTeamMember
     ) {
         Map<String, String> postData = new HashMap<>();
+        if(fullName.trim().equals("")){
+            fullName = mobile;
+        }
         postData.put("fullName", fullName);
         postData.put("phone", mobile);
-
-        this.guestJiniAPI.createUserAccount(postData).enqueue(new Callback<UserResponse>() {
-            @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        notifySuccess(response.body());
+        if(isSupportTeamMember){
+            this.guestJiniAPI.createSupportUserAccount(postData).enqueue(new Callback<UserResponse>() {
+                @Override
+                public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                    if (response.isSuccessful()) {
+                        if (response.body() != null) {
+                            notifySuccess(response.body());
+                        } else {
+                            notifyFailure();
+                        }
                     } else {
                         notifyFailure();
                     }
-                } else {
-                    notifyFailure();
                 }
-            }
 
-            @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
-                notifyNetworkFailure();
-            }
-        });
+                @Override
+                public void onFailure(Call<UserResponse> call, Throwable t) {
+                    notifyNetworkFailure();
+                }
+            });
+        }else{
+            this.guestJiniAPI.createUserAccount(postData).enqueue(new Callback<UserResponse>() {
+                @Override
+                public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                    if (response.isSuccessful()) {
+                        if (response.body() != null) {
+                            notifySuccess(response.body());
+                        } else {
+                            notifyFailure();
+                        }
+                    } else {
+                        notifyFailure();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<UserResponse> call, Throwable t) {
+                    notifyNetworkFailure();
+                }
+            });
+        }
+
+
     }
 
     private void notifyNetworkFailure() {

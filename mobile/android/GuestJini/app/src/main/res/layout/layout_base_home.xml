@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <RelativeLayout
+            android:id="@+id/layoutHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            >
+
+            <TextView
+                android:id="@+id/txtUserFullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Ronald Philip"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/txtWelcomeText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtUserFullName"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Good Morning"
+                android:textSize="13sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layoutGuestStayDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+             android:layout_below="@id/layoutHeader">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgUserProfilePic"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/default_user_icon"
+                android:layout_centerHorizontal="true"/>
+
+            <RelativeLayout
+                android:id="@+id/layoutGuestDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imgUserProfilePic"
+                android:layout_marginTop="-40dp"
+                android:padding="15dp"
+                android:background="@drawable/background_border">
+                <TextView
+                    android:id="@+id/txtUnitHeading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="45dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="You are staying at"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/txtUnitName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtUnitHeading"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Alta Vista / D Block / 7th Floor / D7091 / R2/ POD 1"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/txtGuestNumberHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_below="@id/txtUnitName"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="Your Guest #"
+                    android:layout_marginEnd="65dp"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/txtGuestNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_below="@id/txtUnitName"
+                    android:layout_toEndOf="@id/txtGuestNumberHeading"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="10056"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/txtEmergencyContactHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/txtGuestNumberHeading"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="Emergency Contact"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/txtEmergencyContact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/txtGuestNumber"
+
+                    android:layout_alignStart="@id/txtGuestNumber"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="9886393685"
+                    android:textSize="13sp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+</FrameLayout>

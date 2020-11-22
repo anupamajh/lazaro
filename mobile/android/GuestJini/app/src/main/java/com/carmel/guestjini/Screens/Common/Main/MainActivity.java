@@ -2,10 +2,12 @@ package com.carmel.guestjini.Screens.Common.Main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import androidx.annotation.Nullable;
 
+import com.carmel.guestjini.R;
 import com.carmel.guestjini.Screens.Common.BaseActivityView.BaseActivityMVCView;
 import com.carmel.guestjini.Screens.Common.Controllers.ActivityResultDispatcher;
 import com.carmel.guestjini.Screens.Common.Controllers.ActivityResultListener;
@@ -44,14 +46,25 @@ public class MainActivity extends BaseActivity implements
         setContentView(viewMVC.getRootView());
         if (savedInstanceState == null) {
             if (sharedPreferenceHelper.readBooleanValue("isLoggedIn")) {
-                mScreensNavigator.toSupportHome();
+                mScreensNavigator.toHome();
                 viewMVC.showBottomNavigationView();
+                setupGrants();
             } else {
                 mScreensNavigator.toLoginScreen();
                 viewMVC.hideBottomNavigationView();
             }
         }
 
+    }
+
+    @Override
+    public void onHomeClicked() {
+        mScreensNavigator.toHome();
+    }
+
+    @Override
+    public void onNavigationItemClicked() {
+        setupGrants();
     }
 
     @Override
@@ -77,6 +90,11 @@ public class MainActivity extends BaseActivity implements
     @Override
     public void onSettingsClicked() {
         mScreensNavigator.toSettingsHome();
+    }
+
+    @Override
+    public void onInboxClicked() {
+        mScreensNavigator.toInboxScreen();
     }
 
     @Override
@@ -129,7 +147,8 @@ public class MainActivity extends BaseActivity implements
             switch (((Integer) event)) {
                 case 1:
                     viewMVC.showBottomNavigationView();
-                    viewMVC.setSupportSelected();
+                    viewMVC.setHomeSelected();
+                    setupGrants();
                     break;
                 case 0:
                     viewMVC.hideBottomNavigationView();
@@ -137,6 +156,34 @@ public class MainActivity extends BaseActivity implements
             }
         }
 
+    }
+
+
+
+    private void setupGrants() {
+        hideAllBottomMenus();
+        Set<String> grants = sharedPreferenceHelper.readStringSetValue("user_grants");
+        findViewById(R.id.homeIcon).setVisibility(View.VISIBLE);
+        findViewById(R.id.supportIcon).setVisibility(View.VISIBLE);
+        findViewById(R.id.settingsIcon).setVisibility(View.GONE);
+        if (grants.contains("ROLE_GUEST")) {
+            findViewById(R.id.communityIcon).setVisibility(View.VISIBLE);
+        }
+        if (grants.contains("ROLE_GUEST_SUPPORT")) {
+            findViewById(R.id.inboxIcon).setVisibility(View.VISIBLE);
+//            findViewById(R.id.cConnectIcon).setVisibility(View.VISIBLE);
+//            findViewById(R.id.teamIcon).setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void hideAllBottomMenus() {
+//        findViewById(R.id.homeIcon).setVisibility(View.GONE);
+//        findViewById(R.id.supportIcon).setVisibility(View.GONE);
+//        findViewById(R.id.communityIcon).setVisibility(View.GONE);
+//        findViewById(R.id.inboxIcon).setVisibility(View.GONE);
+////        findViewById(R.id.cConnectIcon).setVisibility(View.GONE);
+////        findViewById(R.id.teamIcon).setVisibility(View.GONE);
+//        findViewById(R.id.settingsIcon).setVisibility(View.GONE);
     }
 
     @Override

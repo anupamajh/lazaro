@@ -365,4 +365,14 @@
     <string name="people">PEOPLE</string>
     <string name="people_description">Meet the community members and make new friends.</string>
     <string name="groups_description">Join the groups and catch all the action. You will get suggestions based on your profile.</string>
+
+    <string-array name="date_filter_options">
+        <item>Everything</item>
+        <item>Today</item>
+        <item>Yesterday</item>
+        <item>Last Week</item>s
+        <item>Last Month</item>
+        <item>Specific Date</item>
+        <item>Date Range</item>
+    </string-array>
 </resources>

@@ -1,6 +1,5 @@
 package com.carmel.guestjini.Screens.Support.TicketAttachment;
 
-import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
@@ -8,13 +7,10 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.util.Base64;
 import android.webkit.MimeTypeMap;
 
 import androidx.fragment.app.FragmentActivity;
-import androidx.loader.content.CursorLoader;
 
 import com.carmel.guestjini.Networking.Tickets.TaskAttachment;
 import com.carmel.guestjini.Networking.Tickets.TaskAttachmentResponse;
@@ -23,7 +19,6 @@ import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
 import com.carmel.guestjini.Tickets.UploadFileUseCase;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;

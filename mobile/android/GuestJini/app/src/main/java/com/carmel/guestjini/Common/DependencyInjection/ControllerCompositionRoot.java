@@ -53,6 +53,7 @@ import com.carmel.guestjini.Screens.Community.GroupList.GroupListController;
 import com.carmel.guestjini.Screens.Community.PeopleList.PeopleListController;
 import com.carmel.guestjini.Screens.Community.PersonDetail.PersonDetailController;
 import com.carmel.guestjini.Screens.ForgotPassword.ForgotPasswordController;
+import com.carmel.guestjini.Screens.Home.HomeController;
 import com.carmel.guestjini.Screens.Login.LoginController;
 import com.carmel.guestjini.Screens.Login.LoginEventBus;
 import com.carmel.guestjini.Screens.OTP.OTPController;
@@ -64,6 +65,8 @@ import com.carmel.guestjini.Screens.Settings.PrivacyPolicy.PrivacyPolicyControll
 import com.carmel.guestjini.Screens.Settings.SettingsHome.SettingsHomeController;
 import com.carmel.guestjini.Screens.Settings.TermsAndConditions.TermsAndConditionsController;
 import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketController;
+import com.carmel.guestjini.Screens.Support.Inbox.InboxController;
+import com.carmel.guestjini.Screens.Support.InboxList.InboxListController;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailController;
 import com.carmel.guestjini.Screens.Support.KBList.KBListController;
 import com.carmel.guestjini.Screens.Support.SupportHome.SupportHomeController;
@@ -74,6 +77,7 @@ import com.carmel.guestjini.Screens.Support.TicketList.TicketListController;
 import com.carmel.guestjini.Screens.Welcome.WelcomeController;
 import com.carmel.guestjini.TicketCategory.FetchTicketCategoryByParentIdUseCase;
 import com.carmel.guestjini.Tickets.DeleteTicketUseCase;
+import com.carmel.guestjini.Tickets.FetchInboxCountUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketCountUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketListUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketTaskNoteListUseCase;
@@ -87,6 +91,7 @@ import com.carmel.guestjini.Users.AppAccessRequestUseCase;
 import com.carmel.guestjini.Users.ChangePasswordUseCase;
 import com.carmel.guestjini.Users.CheckPhoneNumberUseCase;
 import com.carmel.guestjini.Users.CreateAccountUseCase;
+import com.carmel.guestjini.Users.FetchGrantsUseCase;
 import com.carmel.guestjini.Users.FetchInterestCategoryListUseCase;
 import com.carmel.guestjini.Users.FetchInterestListUseCase;
 import com.carmel.guestjini.Users.FetchMyInterestsUseCase;
@@ -182,6 +187,10 @@ public class ControllerCompositionRoot {
 
     public AttemptLoginUseCase getAttemptLoginUseCase() {
         return new AttemptLoginUseCase(getGuestJiniAPI());
+    }
+
+    public FetchGrantsUseCase getFetchGrantsUseCase() {
+        return new FetchGrantsUseCase(getGuestJiniAPI());
     }
 
     public AttemptClientLoginUseCase getAttemptClientLoginUseCase() {
@@ -386,6 +395,10 @@ public class ControllerCompositionRoot {
         return new UploadFileUseCase(getAuthenticatedGuestJiniAPI());
     }
 
+    private FetchInboxCountUseCase getFetchInboxCountUseCase() {
+        return new FetchInboxCountUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
     public SharedPreferenceHelper getSharedPreferenceHelper() {
         return new SharedPreferenceHelper(preferences, editor);
 
@@ -395,6 +408,7 @@ public class ControllerCompositionRoot {
         return new LoginController(
                 getScreensNavigator(),
                 getAttemptLoginUseCase(),
+                getFetchGrantsUseCase(),
                 getSharedPreferenceHelper(),
                 getDialogsManager(),
                 getViewMVCFactory(),
@@ -681,6 +695,35 @@ public class ControllerCompositionRoot {
     public TicketAttachmentController getTicketAttachmentController() {
         return new TicketAttachmentController(
                 getUploadFileUseCase(),
+                getScreensNavigator(),
+                getDialogsManager(),
+                getDialogsEventBus()
+        );
+    }
+
+    public HomeController getHomeController() {
+        return new HomeController(
+                getFetchMyProfileUseCase(),
+                getFetchMyProfilePicUseCase(),
+                getScreensNavigator(),
+                getDialogsManager(),
+                getDialogsEventBus()
+        );
+    }
+
+    public InboxController getInboxController() {
+        return new InboxController(
+                getFetchInboxCountUseCase(),
+                getSharedPreferenceHelper(),
+                getScreensNavigator(),
+                getDialogsManager(),
+                getDialogsEventBus()
+        );
+    }
+
+    public InboxListController getInboxListController() {
+        return new InboxListController(
+                getFetchTicketListUseCase(),
                 getScreensNavigator(),
                 getDialogsManager(),
                 getDialogsEventBus()

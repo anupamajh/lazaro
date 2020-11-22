@@ -108,26 +108,31 @@ public class AppAccessRequestController implements
     public void onCheckPhoneNumberSuccess(BookingResponse bookingResponse) {
         viewMVC.hideProgressIndication();
         if (bookingResponse.isSuccess()) {
-            if(bookingResponse.isHasUser()){
+            if (bookingResponse.isHasUser()) {
                 viewMVC.showHasUser();
                 return;
             }
-            if(bookingResponse.isCustomer()){
-                if(bookingResponse.isResiding()) {
+            if (bookingResponse.isCustomer()) {
+                if (bookingResponse.isResiding()) {
                     sharedPreferenceHelper.saveStringValue("full_name", bookingResponse.getBooking().getFullName());
+                    sharedPreferenceHelper.saveBooleanValue("is_support_team_member", false);
                     sharedPreferenceHelper.commit();
                     requestOTPUseCase.sendOTPAndNotify(mobileNumber);
-                }else{
+                } else {
                     viewMVC.showNotResiding();
                 }
 
                 return;
             }
-            if(bookingResponse.isSupportTeamMember()){
-                if(bookingResponse.isHasSupportAccount()){
+            if (bookingResponse.isSupportTeamMember()) {
+                if (bookingResponse.isHasSupportAccount()) {
                     viewMVC.showHasUser();
-                }else{
-                    sharedPreferenceHelper.saveStringValue("full_name", bookingResponse.getBooking().getFullName());
+                } else {
+                    if (bookingResponse.getBooking() != null)
+                        sharedPreferenceHelper.saveStringValue("full_name", bookingResponse.getBooking().getFullName());
+                    else
+                        sharedPreferenceHelper.saveStringValue("full_name", "");
+                    sharedPreferenceHelper.saveBooleanValue("is_support_team_member", true);
                     sharedPreferenceHelper.commit();
                     requestOTPUseCase.sendOTPAndNotify(mobileNumber);
                 }

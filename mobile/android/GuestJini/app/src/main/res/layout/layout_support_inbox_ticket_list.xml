@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/profileDrawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/layoutHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="22dp"
+                    android:contentDescription="@string/ic_btn_back_arrow_circle_bg_white"
+                    android:src="@drawable/ic_btn_back_arrow_circle_bg_white" />
+
+                <TextView
+                    android:id="@+id/txtHeaderTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_toEndOf="@+id/btnBack"
+                    android:letterSpacing="0.1"
+                    android:text="TICKETS"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorCharcoal"
+                    android:textSize="14sp"
+                    app:fontFamily="@font/roboto_bold" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btnNewTicket"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:visibility="gone"
+                    app:backgroundTint="@color/colorSummerSky"
+                    app:fabCustomSize="36dp"
+                    app:maxImageSize="25dp"
+                    app:srcCompat="@drawable/ic_add_black_24dp"
+                    app:tint="@color/colorWhite" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/btnFilter"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/layoutHeader"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="32dp"
+                android:src="@drawable/filter_with_rounded_box_icon" />
+
+            <RelativeLayout
+                android:id="@+id/layoutSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layoutHeader"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/search"
+                android:padding="5dp">
+
+                <EditText
+                    android:id="@+id/txtSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_toLeftOf="@+id/btnSearch"
+                    android:background="@color/colorWhite"
+                    android:ems="18"
+                    android:hint="@string/search"
+                    android:inputType="text"
+                    android:letterSpacing="0.07"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:textColorHint="@color/colorSuvaGray"
+                    android:textSize="10sp" />
+
+                <ImageView
+                    android:id="@+id/btnSearch"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="9dp"
+                    android:src="@drawable/search_icon" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutNoResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layoutSearch"
+                android:layout_marginTop="40dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/imgNoResult"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/no_results_icon">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgNoResult"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:letterSpacing="0.1"
+                    android:text="No match found for your search query."
+                    android:textColor="@color/colorZambezi"
+                    android:textSize="14sp"
+                    app:fontFamily="@font/roboto_medium" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/layoutSearch"
+                android:layout_marginTop="15dp"
+                android:padding="5dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/lstTickets"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/inboxListDrawer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_marginEnd="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/filterHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/imgFilter"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="25dp"
+                            android:src="@drawable/filter__grey_icon" />
+
+                        <TextView
+                            android:id="@+id/txtFilterTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="32dp"
+                            android:layout_toEndOf="@+id/imgFilter"
+                            android:letterSpacing="0.1"
+                            android:text="FILTER"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorCharcoal"
+                            android:textSize="14sp"
+                            app:fontFamily="@font/roboto_bold" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layoutClearAll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/filterHeader"
+                        android:layout_marginTop="10dp"
+                        android:padding="15dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorWhisper1"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:id="@+id/txtClearAllHeading"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_marginStart="20dp"
+                                android:letterSpacing="0.1"
+                                android:text="CLEAR ALL"
+                                android:textAllCaps="true"
+                                android:textColor="@color/colorGrey"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/roboto_bold" />
+
+                            <TextView
+                                android:id="@+id/txtClearAllDescription"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/txtClearAllHeading"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="5dp"
+                                android:letterSpacing="0.1"
+                                android:text="You have not applied any filter"
+                                android:textAllCaps="true"
+                                android:textColor="@color/colorDimGray"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/roboto_bold" />
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layoutTicketStatusFilter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/layoutClearAll">
+
+                        <TextView
+                            android:id="@+id/txtStatusFilterHeading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="32dp"
+                            android:letterSpacing="0.1"
+                            android:text="STATUS"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorCharcoal"
+                            android:textSize="14sp"
+                            app:fontFamily="@font/roboto_bold" />
+
+                        <RelativeLayout
+                            android:id="@+id/layoutStatusTextDivider"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_below="@id/txtStatusFilterHeading"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/divider_line" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layoutTicketStatusOpen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:layout_below="@id/layoutTicketStatusFilter">
+
+                        <RelativeLayout
+                            android:id="@+id/chkTicketStatusOpen"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/check_box_unchecked" />
+
+                        <TextView
+                            android:id="@+id/txtTicketStatusOpen"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_toEndOf="@+id/chkTicketStatusOpen"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="3dp"
+                            android:letterSpacing="0.1"
+                            android:text="OPEN"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorCharcoal"
+                            android:textSize="14sp"
+                            app:fontFamily="@font/roboto_medium" />
+                        <TextView
+                            android:id="@+id/txtTicketStatusOpenDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@+id/chkTicketStatusOpen"
+                            android:layout_below="@+id/txtTicketStatusOpen"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="3dp"
+                            android:letterSpacing="0.1"
+                            android:text="Tickets that are assigned but not closed"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorCharcoal"
+                            android:textSize="11sp"
+                            app:fontFamily="@font/roboto_medium" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layoutTicketStatusClosed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:layout_below="@id/layoutTicketStatusOpen">
+
+                        <RelativeLayout
+                            android:id="@+id/chkTicketStatusClosed"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/check_box_unchecked" />
+
+                        <TextView
+                            android:id="@+id/txtTicketStatusClosed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_toEndOf="@+id/chkTicketStatusClosed"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="3dp"
+                            android:letterSpacing="0.1"
+                            android:text="CLOSED"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorCharcoal"
+                            android:textSize="14sp"
+                            app:fontFamily="@font/roboto_medium" />
+                        <TextView
+                            android:id="@+id/txtTicketStatusClosedDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@+id/chkTicketStatusClosed"
+                            android:layout_below="@+id/txtTicketStatusClosed"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="3dp"
+                            android:letterSpacing="0.1"
+                            android:text="Tickets that have been closed."
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorCharcoal"
+                            android:textSize="11sp"
+                            app:fontFamily="@font/roboto_medium" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layoutTicketStatusDraft"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:layout_below="@id/layoutTicketStatusClosed">
+
+                        <RelativeLayout
+                            android:id="@+id/chkTicketStatusDraft"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/check_box_unchecked" />
+
+                        <TextView
+                            android:id="@+id/txtTicketStatusDraft"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_toEndOf="@+id/chkTicketStatusDraft"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="3dp"
+                            android:letterSpacing="0.1"
+                            android:text="DRAFT"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorCharcoal"
+                            android:textSize="14sp"
+                            app:fontFamily="@font/roboto_medium" />
+                        <TextView
+                            android:id="@+id/txtTicketStatusDraftDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@+id/chkTicketStatusDraft"
+                            android:layout_below="@+id/txtTicketStatusDraft"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="3dp"
+                            android:letterSpacing="0.1"
+                            android:text="Tickets that have been Draft."
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorCharcoal"
+                            android:textSize="11sp"
+                            app:fontFamily="@font/roboto_medium" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layoutDateFilterHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/layoutTicketStatusDraft">
+
+                        <TextView
+                            android:id="@+id/txtDateFilterText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="32dp"
+                            android:letterSpacing="0.1"
+                            android:text="SUBMITTED DATE"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorCharcoal"
+                            android:textSize="14sp"
+                            app:fontFamily="@font/roboto_bold" />
+
+                        <RelativeLayout
+                            android:id="@+id/layoutDateFilterTextDivider"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_below="@id/txtDateFilterText"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/divider_line" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+            </ScrollView>
+        </com.google.android.material.navigation.NavigationView>
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+</FrameLayout>

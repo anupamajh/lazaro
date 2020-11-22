@@ -13,10 +13,10 @@ public class BookingResponse {
     private boolean hasUser;
     private String error;
     private String inventoryId;
-    private boolean isCustomer;
-    private boolean isSupportTeamMember;
-    private boolean isResiding;
     private boolean hasSupportAccount;
+    private boolean customer;
+    private boolean residing;
+    private boolean supportTeamMember;
 
     public Booking getBooking() {
         return booking;
@@ -66,22 +66,6 @@ public class BookingResponse {
         this.success = success;
     }
 
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
-
-    public String getInventoryId() {
-        return inventoryId;
-    }
-
-    public void setInventoryId(String inventoryId) {
-        this.inventoryId = inventoryId;
-    }
-
     public boolean isHasBooking() {
         return hasBooking;
     }
@@ -98,28 +82,20 @@ public class BookingResponse {
         this.hasUser = hasUser;
     }
 
-    public boolean isCustomer() {
-        return isCustomer;
+    public String getError() {
+        return error;
     }
 
-    public void setCustomer(boolean customer) {
-        isCustomer = customer;
+    public void setError(String error) {
+        this.error = error;
     }
 
-    public boolean isSupportTeamMember() {
-        return isSupportTeamMember;
+    public String getInventoryId() {
+        return inventoryId;
     }
 
-    public void setSupportTeamMember(boolean supportTeamMember) {
-        isSupportTeamMember = supportTeamMember;
-    }
-
-    public boolean isResiding() {
-        return isResiding;
-    }
-
-    public void setResiding(boolean residing) {
-        isResiding = residing;
+    public void setInventoryId(String inventoryId) {
+        this.inventoryId = inventoryId;
     }
 
     public boolean isHasSupportAccount() {
@@ -128,5 +104,29 @@ public class BookingResponse {
 
     public void setHasSupportAccount(boolean hasSupportAccount) {
         this.hasSupportAccount = hasSupportAccount;
+    }
+
+    public boolean isCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(boolean customer) {
+        this.customer = customer;
+    }
+
+    public boolean isResiding() {
+        return residing;
+    }
+
+    public void setResiding(boolean residing) {
+        this.residing = residing;
+    }
+
+    public boolean isSupportTeamMember() {
+        return supportTeamMember;
+    }
+
+    public void setSupportTeamMember(boolean supportTeamMember) {
+        this.supportTeamMember = supportTeamMember;
     }
 }

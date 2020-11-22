@@ -14,6 +14,7 @@ import com.carmel.guestjini.Networking.KnowledgeBase.KBReview;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBReviewResponse;
 import com.carmel.guestjini.Networking.OTP.OTPResponse;
 import com.carmel.guestjini.Networking.Tickets.TaskAttachmentResponse;
+import com.carmel.guestjini.Networking.Tickets.TaskCountResponse;
 import com.carmel.guestjini.Networking.Tickets.TaskNote;
 import com.carmel.guestjini.Networking.Tickets.TaskNotesResponse;
 import com.carmel.guestjini.Networking.Tickets.TicketCategoryResponse;
@@ -28,6 +29,7 @@ import com.carmel.guestjini.Networking.Users.ForgotPasswordResponse;
 import com.carmel.guestjini.Networking.Users.InterestCategoryResponse;
 import com.carmel.guestjini.Networking.Users.InterestResponse;
 import com.carmel.guestjini.Networking.Users.PeopleResponse;
+import com.carmel.guestjini.Networking.Users.UserGrants;
 import com.carmel.guestjini.Networking.Users.UserInfo;
 import com.carmel.guestjini.Networking.Users.UserInterests;
 import com.carmel.guestjini.Networking.Users.UserInterestsResponse;
@@ -47,6 +49,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface GuestJiniAPI {
     @FormUrlEncoded
@@ -71,6 +74,12 @@ public interface GuestJiniAPI {
             @Header("Authorization") String credentials,
             @Field("grant_type") String grantType,
             @Field("refresh_token") String refreshToken
+    );
+
+    @GET("/auth/oauth/check_token")
+    Call<UserGrants> getGrants(
+            @Header("Authorization") String credentials,
+            @Query("token") String token
     );
 
     @POST("/guest-jini/kb/get-all")
@@ -246,6 +255,9 @@ public interface GuestJiniAPI {
     @POST("/common/user/phone-number-sign-up")
     Call<UserResponse> createUserAccount(@Body Map<String, String> postData);
 
+    @POST("/common/user/phone-number-sign-up-task-force")
+    Call<UserResponse> createSupportUserAccount(@Body Map<String, String> postData);
+
     @POST("/common/user/set-password")
     Call<GenericResponse> setPassword(@Body Map<String, String> postData);
 
@@ -262,4 +274,7 @@ public interface GuestJiniAPI {
             @Part("fileName") RequestBody fileName
     );
 
+
+    @POST("/guest-jini/task-ticket/get-task-count")
+    Call<TaskCountResponse> getTaskCount();
 }

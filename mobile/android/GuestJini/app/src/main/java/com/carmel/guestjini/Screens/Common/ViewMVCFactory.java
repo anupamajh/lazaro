@@ -50,6 +50,8 @@ import com.carmel.guestjini.Screens.Community.PersonDetail.PersonDetailViewMVC;
 import com.carmel.guestjini.Screens.Community.PersonDetail.PersonDetailViewMVCImpl;
 import com.carmel.guestjini.Screens.ForgotPassword.ForgotPasswordViewMVC;
 import com.carmel.guestjini.Screens.ForgotPassword.ForgotPasswordViewMVCImpl;
+import com.carmel.guestjini.Screens.Home.HomeViewMVC;
+import com.carmel.guestjini.Screens.Home.HomeViewMVCImpl;
 import com.carmel.guestjini.Screens.Login.LoginViewMVC;
 import com.carmel.guestjini.Screens.Login.LoginViewMVCImpl;
 import com.carmel.guestjini.Screens.OTP.OTPViewMVC;
@@ -74,6 +76,12 @@ import com.carmel.guestjini.Screens.Settings.TermsAndConditions.TermsAndConditio
 import com.carmel.guestjini.Screens.Settings.TermsAndConditions.TermsAndConditionsViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketViewMVC;
 import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketViewMVCImpl;
+import com.carmel.guestjini.Screens.Support.Inbox.InboxViewMVC;
+import com.carmel.guestjini.Screens.Support.Inbox.InboxViewMVCImpl;
+import com.carmel.guestjini.Screens.Support.InboxList.InboxListViewMVC;
+import com.carmel.guestjini.Screens.Support.InboxList.InboxListViewMVCImpl;
+import com.carmel.guestjini.Screens.Support.InboxList.TicketListItem.InboxListItemViewMVC;
+import com.carmel.guestjini.Screens.Support.InboxList.TicketListItem.InboxListItemViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailViewMVC;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBReviewItem.KBReviewItemViewMVC;
@@ -447,5 +455,21 @@ public class ViewMVCFactory {
                 parent,
                 this
         );
+    }
+
+    public HomeViewMVC getHomeViewMVC(@Nullable ViewGroup parent) {
+        return new HomeViewMVCImpl(layoutInflater, parent);
+    }
+
+    public InboxViewMVC getInboxViewMVC(@Nullable ViewGroup parent) {
+        return new InboxViewMVCImpl(layoutInflater, parent);
+    }
+
+    public InboxListViewMVC getInboxListViewMVC(@Nullable ViewGroup parent) {
+        return new InboxListViewMVCImpl(layoutInflater, parent, this);
+    }
+
+    public InboxListItemViewMVC getInboxListItemViewMVC(@Nullable ViewGroup parent) {
+        return new InboxListItemViewMVCImpl(layoutInflater, parent);
     }
 }
