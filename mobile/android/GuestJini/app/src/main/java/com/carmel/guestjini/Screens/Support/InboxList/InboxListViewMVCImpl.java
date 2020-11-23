@@ -12,6 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +35,7 @@ public class InboxListViewMVCImpl
     private final InboxListRecyclerAdapter inboxListRecyclerAdapter;
     private final ProgressBar progressBar;
     private final RelativeLayout layoutNoResult;
+    private final DrawerLayout inboxListDrawerLayout;
     private final ImageView btnFilter;
 
 
@@ -45,6 +48,7 @@ public class InboxListViewMVCImpl
         btnFilter = findViewById(R.id.btnFilter);
         progressBar = findViewById(R.id.progress);
         layoutNoResult = findViewById(R.id.layoutNoResult);
+        inboxListDrawerLayout = findViewById(R.id.inboxListDrawerLayout);
         RecyclerView ticketRecyclerView = findViewById(R.id.lstTickets);
         ticketRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         inboxListRecyclerAdapter = new InboxListRecyclerAdapter(this, viewMVCFactory);
@@ -87,7 +91,7 @@ public class InboxListViewMVCImpl
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                inboxListDrawerLayout.openDrawer(GravityCompat.START);
             }
         });
 
