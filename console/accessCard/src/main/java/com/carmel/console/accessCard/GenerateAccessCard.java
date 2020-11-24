@@ -86,7 +86,7 @@ public class GenerateAccessCard extends Frame {
                                     case "unit":
                                         UNIT_COL = i;
                                         break;
-                                    case "student name":
+                                    case "guest name":
                                         NAME_COL = i;
                                         break;
                                     case "photo":
@@ -307,7 +307,7 @@ public class GenerateAccessCard extends Frame {
             g2.setColor(new Color(0, 0, 0));
             g2.drawString(accessCard.getUnit(), 54, CardHeight - 170);
             g2.drawString("Valid Thru", 204 * MULTI_FACTOR - 150, CardHeight - 250);
-            SimpleDateFormat myFormatObj = new  SimpleDateFormat("dd MMM yyyy");
+            SimpleDateFormat myFormatObj = new  SimpleDateFormat("MMM yyyy");
 
             g2.drawString(myFormatObj.format(accessCard.getCheckoutDate()), 204 * MULTI_FACTOR - 150, CardHeight - 231);
 
