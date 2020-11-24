@@ -1,7 +1,6 @@
 package com.carmel.guestjini.service.common.Search;
 
 
-
 import com.carmel.guestjini.service.common.DateUtil;
 
 import javax.persistence.EntityManager;
@@ -66,21 +65,23 @@ public class SearchBuilder {
     ) {
         List<Predicate> andPredicates = new ArrayList<>();
         List<Predicate> orPredicates = new ArrayList<>();
-        for (SearchCriteria searchCriteria : searchRequest.getSearchCriteria()) {
-            Predicate predicate = processSearchUnits(
-                    entityManager,
-                    criteriaBuilder,
-                    criteriaQuery,
-                    root,
-                    cls,
-                    searchCriteria.getSearchUnitCondition(),
-                    searchCriteria.getSearchUnits()
-            );
+        if (searchRequest.getSearchCriteria() != null) {
+            for (SearchCriteria searchCriteria : searchRequest.getSearchCriteria()) {
+                Predicate predicate = processSearchUnits(
+                        entityManager,
+                        criteriaBuilder,
+                        criteriaQuery,
+                        root,
+                        cls,
+                        searchCriteria.getSearchUnitCondition(),
+                        searchCriteria.getSearchUnits()
+                );
 
-            if (searchCriteria.getCondition().trim().toLowerCase().equals("and")) {
-                andPredicates.add(predicate);
-            } else {
-                orPredicates.add(predicate);
+                if (searchCriteria.getCondition().trim().toLowerCase().equals("and")) {
+                    andPredicates.add(predicate);
+                } else {
+                    orPredicates.add(predicate);
+                }
             }
         }
         Predicate andPredicate = null;
@@ -134,55 +135,54 @@ public class SearchBuilder {
     ) {
         List<Predicate> predicates = new ArrayList<>();
         List<Field> fields = Arrays.asList(cls.getDeclaredFields());
-        for (SearchUnit searchUnit : searchUnits) {
-            Optional<Field> optionalField = fields.stream().filter(
-                    f -> f.getName()
-                            .toLowerCase()
-                            .trim()
-                            .equals(
-                                    searchUnit.getField()
-                                            .toLowerCase()
-                                            .trim()
-                            )
-            )
-                    .findFirst();
-            if (optionalField.isPresent()) {
-                Field field = optionalField.get();
-                Predicate predicate = null;
-                if (String.class.equals(field.getType())) {
-                    predicate = processStringPredicate(
-                            criteriaBuilder,
-                            root,
-                            searchUnit
-                    );
-                } else if (int.class.equals(field.getType())) {
-                    predicate = processIntPredicate(
-                            criteriaBuilder,
-                            root,
-                            searchUnit
-                    );
-                } else if (Date.class.equals(field.getType())) {
-                    predicate = processDatePredicate(
-                            criteriaBuilder,
-                            root,
-                            searchUnit
-                    );
-                }
-                if (predicate != null) {
-                    predicates.add(predicate);
+        if(searchUnits !=null) {
+            for (SearchUnit searchUnit : searchUnits) {
+                Optional<Field> optionalField = fields.stream().filter(
+                        f -> f.getName()
+                                .toLowerCase()
+                                .trim()
+                                .equals(
+                                        searchUnit.getField()
+                                                .toLowerCase()
+                                                .trim()
+                                )
+                )
+                        .findFirst();
+                if (optionalField.isPresent()) {
+                    Field field = optionalField.get();
+                    Predicate predicate = null;
+                    if (String.class.equals(field.getType())) {
+                        predicate = processStringPredicate(
+                                criteriaBuilder,
+                                root,
+                                searchUnit
+                        );
+                    } else if (int.class.equals(field.getType())) {
+                        predicate = processIntPredicate(
+                                criteriaBuilder,
+                                root,
+                                searchUnit
+                        );
+                    } else if (Date.class.equals(field.getType())) {
+                        predicate = processDatePredicate(
+                                criteriaBuilder,
+                                root,
+                                searchUnit
+                        );
+                    }
+                    if (predicate != null) {
+                        predicates.add(predicate);
+                    }
                 }
             }
         }
-        predicates.add(criteriaBuilder
-                .equal(
-                        root.get("isDeleted"),
-                        0
-                ));
+        Predicate retVal;
         if (searchUnitCondition.trim().toLowerCase().equals("and")) {
-            return criteriaBuilder.and(predicates.stream().toArray(Predicate[]::new));
+            retVal= criteriaBuilder.and(predicates.stream().toArray(Predicate[]::new));
         } else {
-            return criteriaBuilder.or(predicates.stream().toArray(Predicate[]::new));
+            retVal = criteriaBuilder.or(predicates.stream().toArray(Predicate[]::new));
         }
+        return retVal;
     }
 
     private static Predicate processDatePredicate(CriteriaBuilder criteriaBuilder, Root<?> root, SearchUnit searchUnit) {

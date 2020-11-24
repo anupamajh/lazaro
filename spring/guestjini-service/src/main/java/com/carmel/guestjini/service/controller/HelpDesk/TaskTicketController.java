@@ -43,6 +43,7 @@ import java.io.FileOutputStream;
 import java.util.*;
 
 import static com.carmel.guestjini.service.specification.HelpDesk.TaskTicketSpecification.textInAllColumns;
+import static com.carmel.guestjini.service.specification.HelpDesk.TaskTicketSpecification.textInAllColumnsSharedInbox;
 
 
 @RestController
@@ -520,5 +521,50 @@ public class TaskTicketController {
         logger.trace("Exiting");
         return taskAttachmentResponse;
     }
+
+    @RequestMapping(value = "/search-shared-inbox", method = RequestMethod.POST)
+    public TaskTicketResponse searchSharedInbox(@RequestBody SearchRequest searchRequest) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        TaskTicketResponse taskTicketResponse = new TaskTicketResponse();
+        try {
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<TaskTicket> criteriaQuery = criteriaBuilder.createQuery(TaskTicket.class);
+            Root<TaskTicket> root = criteriaQuery.from(TaskTicket.class);
+            criteriaQuery = SearchBuilder.buildSearch(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root,
+                    TaskTicket.class,
+                    searchRequest
+            );
+            long totalRecords = SearchBuilder.getTotalRecordCount(
+                    entityManager,
+                    criteriaBuilder,
+                    criteriaQuery,
+                    root
+            );
+            TypedQuery<TaskTicket> typedQuery = entityManager.createQuery(criteriaQuery);
+            typedQuery.setFirstResult((searchRequest.getCurrentPage() - 1) * searchRequest.getPageSize());
+            typedQuery.setMaxResults(searchRequest.getPageSize());
+            List<TaskTicket> taskTickets = typedQuery.getResultList();
+            taskTicketResponse.setCurrentRecords(taskTickets.size());
+            taskTicketResponse.setTotalRecords(totalRecords);
+            taskTicketResponse.setSuccess(true);
+            taskTicketResponse.setError("");
+            taskTicketResponse.setTaskTicketList(taskTickets);
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            logger.error(ex.getMessage(), ex);
+            taskTicketResponse.setSuccess(false);
+            taskTicketResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return taskTicketResponse;
+    }
+
+
 
 }

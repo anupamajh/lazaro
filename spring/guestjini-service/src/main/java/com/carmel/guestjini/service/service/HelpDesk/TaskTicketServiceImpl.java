@@ -88,4 +88,9 @@ public class TaskTicketServiceImpl implements TaskTicketService {
 
         return tickets;
     }
+
+    @Override
+    public Page<TaskTicket> findAllByIsDeleted(int isDeleted, Pageable pageable) {
+        return taskTicketRepository.findAllByIsDeleted(isDeleted, pageable);
+    }
 }

@@ -3,6 +3,10 @@ package com.carmel.guestjini.service.common.Search;
 import java.util.List;
 
 public class SearchUnit {
+    /**
+     * Operators :  lessthan,lessthanorequal,greaterthan,greaterthanorequal
+     *              notequal,between
+     */
     private String operator;
     private String field;
     private String value;

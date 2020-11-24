@@ -19,4 +19,18 @@ public class TaskTicketSpecification {
                 builder.equal(root.get("requesterId"), requesterId)
         );
     }
+
+    public static Specification<TaskTicket> textInAllColumnsSharedInbox(String searchText) {
+        if (!searchText.contains("%")) {
+            searchText = "%" + searchText + "%";
+        }
+        String finalText = searchText;
+        return (Specification<TaskTicket>) (root, query, builder) -> builder.and(builder.or(
+                builder.like(root.get("ticketNumber"), finalText),
+                builder.like(root.get("ticketNarration"), finalText),
+                builder.like(root.get("ticketTitle"), finalText)
+                ),
+                builder.equal(root.get("isDeleted"), 0)
+        );
+    }
 }

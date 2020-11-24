@@ -24,4 +24,6 @@ public interface TaskTicketService {
     TicketCountDTO getTicketCountByStatus(String requesterId) throws Exception;
 
     List<TaskTicket> findAllByIsDeletedAndRequesterIdAndTicketStatus(int isDeleted, String id, int ticketStatus);
+
+    Page<TaskTicket> findAllByIsDeleted(int isDeleted, Pageable pageable);
 }
