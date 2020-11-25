@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/layoutHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="22dp"
+                android:contentDescription="@string/ic_btn_back_arrow_circle_bg_white"
+                android:src="@drawable/ic_btn_back_arrow_circle_bg_white" />
+
+            <TextView
+                android:id="@+id/txtHeaderTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="32dp"
+                android:layout_toEndOf="@+id/btnBack"
+                android:letterSpacing="0.1"
+                android:text="TICKET"
+                android:textAllCaps="true"
+                android:textColor="@color/colorZambezi"
+                android:textSize="14sp"
+                app:fontFamily="@font/roboto_bold" />
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutHeader">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp">
+
+                <RelativeLayout
+                    android:id="@+id/layoutTicketDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_border"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/txtStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/rectangle_border"
+                        android:padding="10dp"
+                        android:text="UNASSIGNED"
+                        android:textColor="@color/colorFlamingo" />
+
+                    <TextView
+                        android:id="@+id/txtTicketDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtStatus"
+                        android:layout_marginTop="20dp"
+                        android:text="26 July 2019 03:42 PM" />
+
+                    <TextView
+                        android:id="@+id/txtCreatorName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtTicketDate"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="Sameer Rawat" />
+
+                    <TextView
+                        android:id="@+id/txtGuestPod"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtCreatorName"
+                        android:text="Alta Vista / B Block / 6 Floor / 603 / R1 / Pod 2" />
+
+
+                    <TextView
+                        android:id="@+id/txtTicketNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtGuestPod"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/rectangle_border"
+                        android:text="Ticket #  TT/AV/004/2016" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/lstTicketCategories"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/txtTicketNumber"
+                        android:layout_marginTop="15dp"
+                        android:padding="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutAssignTicketDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layoutTicketDetails"
+                    android:padding="20dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardAssignTicket"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="15dp"
+                        android:backgroundTint="@color/colorWhite"
+                        android:padding="10dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="4dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="20dp">
+
+                            <TextView
+                                android:id="@+id/txtAssignTicketTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="Assign Ticket" />
+
+                            <TextView
+                                android:id="@+id/txtAssignTicketDescription"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/txtAssignTicketTitle"
+                                android:layout_marginRight="10dp"
+                                android:layout_toStartOf="@+id/btnAssignTicket"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="Assign this ticket to an agent or a support group." />
+
+                            <ImageView
+                                android:id="@+id/btnAssignTicket"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/right_arrow_with_cyan_circle_icon" />
+                        </RelativeLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutAssignedGroupDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layoutAssignTicketDetails"
+                    android:padding="20dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardAssignedGroupDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="15dp"
+                        android:backgroundTint="@color/colorWhite"
+                        android:padding="10dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="4dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="20dp">
+
+                            <TextView
+                                android:id="@+id/txtAssignedGroupTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="Assigned Group" />
+
+                            <RelativeLayout
+                                android:id="@+id/layoutAssignedGroupHeadingDivider"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_below="@+id/txtAssignedGroupTitle"
+                                android:layout_marginTop="5dp"
+                                android:background="@drawable/horizontal_line" />
+
+                            <TextView
+                                android:id="@+id/txtAssignedGroupNameTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_regular"
+                                android:layout_below="@+id/layoutAssignedGroupHeadingDivider"
+                                android:text="[Group]" />
+                            <TextView
+                                android:id="@+id/txtAssignedGroupName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_bold"
+                                android:layout_toEndOf="@+id/txtAssignedGroupNameTitle"
+                                android:layout_below="@+id/layoutAssignedGroupHeadingDivider"
+                                android:text="Plumbing" />
+                            <TextView
+                                android:id="@+id/txtAssignedGroupAssignmentDetails"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_regular"
+                                android:layout_below="@+id/txtAssignedGroupNameTitle"
+                                android:text="Assigned on 26 April 2020 03:27 PM" />
+                            <TextView
+                                android:id="@+id/txtAssignedGroupAssignedSince"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_regular"
+                                android:layout_below="@+id/txtAssignedGroupAssignmentDetails"
+                                android:text="2 days ago by Jagjit Singh" />
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:layout_below="@+id/txtAssignedGroupAssignedSince"
+                                android:id="@+id/layoutAssignedGroupWithdrawal">
+                                <TextView
+                                    android:id="@+id/txtWithdrawTitle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:textSize="10sp"
+                                    android:layout_alignParentEnd="true"
+                                    android:text="You can withdraw this ticket from group" />
+                                <Button
+                                    android:id="@+id/btnWithdrawFromGroup"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="40dp"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_marginTop="12dp"
+                                    android:backgroundTint="@color/colorSummerSky"
+                                    android:text="WITHDRAW"
+                                    android:textColor="@color/colorWhite"
+                                    android:textSize="11sp"
+                                    android:visibility="visible"
+                                    app:fontFamily="@font/roboto_bold"
+                                    android:layout_alignParentEnd="true" />
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutAssignTicketDetailsToAgent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layoutAssignedGroupDetails"
+                    android:padding="20dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardAssignTicketToAgent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="15dp"
+                        android:backgroundTint="@color/colorWhite"
+                        android:padding="10dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="4dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="20dp">
+
+                            <TextView
+                                android:id="@+id/txtAssignTicketToAgentTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="Assign Ticket" />
+
+                            <TextView
+                                android:id="@+id/txtAssignTicketToAgentDescription"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/txtAssignTicketToAgentTitle"
+                                android:layout_marginRight="10dp"
+                                android:layout_toStartOf="@+id/btnAssignTicketToAgent"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="Assign this ticket to a team member of your group." />
+
+                            <ImageView
+                                android:id="@+id/btnAssignTicketToAgent"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/right_arrow_with_cyan_circle_icon" />
+                        </RelativeLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutAssignedAgentDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layoutAssignTicketDetailsToAgent"
+                    android:padding="20dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardAssignedToAgentDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="15dp"
+                        android:backgroundTint="@color/colorWhite"
+                        android:padding="10dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="4dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="20dp">
+
+                            <TextView
+                                android:id="@+id/txtAssignedToAgentTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="Assigned Agent" />
+
+                            <RelativeLayout
+                                android:id="@+id/layoutAssignedToAgentHeadingDivider"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_below="@+id/txtAssignedToAgentTitle"
+                                android:layout_marginTop="5dp"
+                                android:background="@drawable/horizontal_line" />
+
+                            <TextView
+                                android:id="@+id/txtAssignedToAgentNameTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_regular"
+                                android:layout_below="@+id/layoutAssignedToAgentHeadingDivider"
+                                android:text="[Agent]" />
+                            <TextView
+                                android:id="@+id/txtAssignedToAgentName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_bold"
+                                android:layout_toEndOf="@+id/txtAssignedToAgentNameTitle"
+                                android:layout_below="@+id/layoutAssignedToAgentHeadingDivider"
+                                android:text="Ronald Philip" />
+                            <TextView
+                                android:id="@+id/txtAssignedToAgentAssignmentDetails"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_regular"
+                                android:layout_below="@+id/txtAssignedToAgentNameTitle"
+                                android:text="Assigned on 26 April 2020 03:27 PM" />
+                            <TextView
+                                android:id="@+id/txtAssignedToAgentAssignedSince"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_regular"
+                                android:layout_below="@+id/txtAssignedToAgentAssignmentDetails"
+                                android:text="2 days ago by Jagjit Singh" />
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:layout_below="@+id/txtAssignedToAgentAssignedSince"
+                                android:id="@+id/layoutAssignedToAgentWithdrawal">
+                                <TextView
+                                    android:id="@+id/txtToAgentWithdrawTitle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:textSize="10sp"
+                                    android:layout_alignParentEnd="true"
+                                    android:text="You can withdraw this ticket from Agent" />
+                                <Button
+                                    android:id="@+id/btnWithdrawFromAgent"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="40dp"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_marginTop="12dp"
+                                    android:backgroundTint="@color/colorSummerSky"
+                                    android:text="WITHDRAW"
+                                    android:textColor="@color/colorWhite"
+                                    android:textSize="11sp"
+                                    android:visibility="visible"
+                                    app:fontFamily="@font/roboto_bold"
+                                    android:layout_alignParentEnd="true" />
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutCloseTicketDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layoutAssignedAgentDetails"
+                    android:padding="20dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardCloseTicket"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="15dp"
+                        android:backgroundTint="@color/colorRed"
+                        android:padding="10dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="4dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="20dp">
+
+                            <TextView
+                                android:id="@+id/txtCloseTicketTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorWhite"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="Close Ticket" />
+
+                            <TextView
+                                android:id="@+id/txtCloseTicketDescription"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/txtCloseTicketTitle"
+                                android:layout_marginRight="10dp"
+                                android:textColor="@color/colorWhite"
+                                android:layout_toStartOf="@+id/btnCloseTicket"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="You can close this ticket now." />
+
+                            <ImageView
+                                android:id="@+id/btnCloseTicket"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/right_arrow_with_rounded_box_icon" />
+                        </RelativeLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutCustomerFeedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layoutCloseTicketDetails"
+                    android:padding="20dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardCustomerFeedbackDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="15dp"
+                        android:backgroundTint="@color/colorWhite"
+                        android:padding="10dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="4dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="20dp">
+
+                            <TextView
+                                android:id="@+id/txtCustomerFeedbackTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="Customer Feedback" />
+
+                            <RelativeLayout
+                                android:id="@+id/layoutCustomerFeedbackDivider"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_below="@+id/txtCustomerFeedbackTitle"
+                                android:layout_marginTop="5dp"
+                                android:background="@drawable/horizontal_line" />
+
+                            <TextView
+                                android:id="@+id/txtCustomerFeedbackDate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_regular"
+                                android:layout_below="@+id/layoutCustomerFeedbackDivider"
+                                android:text="26 July 2020 08:22 PM" />
+
+                            <TextView
+                                android:id="@+id/txtCustomerFeedbackRatingTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_bold"
+                                android:layout_below="@+id/txtCustomerFeedbackDate"
+                                android:text="How Satisfied Are you?" />
+                            <RelativeLayout
+                                android:id="@+id/layoutRatingStars"
+                                android:layout_width="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_below="@+id/txtCustomerFeedbackRatingTitle"
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:id="@+id/ratingStar1"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="15dp"
+                                    android:tag="@drawable/star_white_icon"
+                                    android:src="@drawable/star_white_icon" />
+
+                                <ImageView
+                                    android:id="@+id/ratingStar2"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="15dp"
+                                    android:layout_toEndOf="@id/ratingStar1"
+                                    android:tag="@drawable/star_white_icon"
+                                    android:src="@drawable/star_white_icon" />
+
+                                <ImageView
+                                    android:id="@+id/ratingStar3"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="15dp"
+                                    android:layout_toEndOf="@id/ratingStar2"
+                                    android:tag="@drawable/star_white_icon"
+                                    android:src="@drawable/star_white_icon" />
+
+                                <ImageView
+                                    android:id="@+id/ratingStar4"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="15dp"
+                                    android:layout_toEndOf="@id/ratingStar3"
+                                    android:tag="@drawable/star_white_icon"
+                                    android:src="@drawable/star_white_icon" />
+
+                                <ImageView
+                                    android:id="@+id/ratingStar5"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="15dp"
+                                    android:layout_toEndOf="@id/ratingStar4"
+                                    android:tag="@drawable/star_white_icon"
+                                    android:src="@drawable/star_white_icon" />
+                            </RelativeLayout>
+                            <TextView
+                                android:id="@+id/txtCustomerFeedback"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_regular"
+                                android:layout_below="@+id/layoutRatingStars"
+                                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vulputate rutrum dolor, at venenatis dui suscipit nec. Nam massa magna, finibus sed tellus quis, semper varius turpis. Nam congue pretium risus, vitae suscipit turpis luctus sed. Aenean laoreet vulputate quam, eget commodo diam tristique eu. Praesent eu egestas odio. Sed suscipit mauris ut mi hendrerit lacinia. Nam mattis sem at neque eleifend, sed sollicitudin sapien semper. Mauris dolor dolor, vestibulum ut mi id, efficitur pharetra quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." />
+
+
+                        </RelativeLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutCommentList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layoutCustomerFeedback"
+                    android:layout_alignParentStart="true">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/lstTaskNotes"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="20dp"
+        android:visibility="gone" />
+</FrameLayout>

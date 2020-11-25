@@ -1,11 +1,13 @@
 package com.carmel.guestjini.Screens.Support.InboxList;
 
+import com.carmel.guestjini.Common.Search.SearchRequest;
 import com.carmel.guestjini.Networking.Tickets.Ticket;
+import com.carmel.guestjini.Networking.Tickets.TicketResponse;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptDialogEvent;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
-import com.carmel.guestjini.Tickets.FetchTicketListUseCase;
+import com.carmel.guestjini.Tickets.FetchInboxTicketListUseCase;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,14 +16,14 @@ import java.util.stream.Collectors;
 
 public class InboxListController implements
         InboxListViewMVC.Listener,
-        FetchTicketListUseCase.Listener,
+        FetchInboxTicketListUseCase.Listener,
         DialogsEventBus.Listener {
 
     private enum ScreenState {
         IDLE, FETCHING_TICKET_LIST, TICKET_LIST_SHOWN, NETWORK_ERROR
     }
 
-    private FetchTicketListUseCase fetchTicketListUseCase;
+    private final FetchInboxTicketListUseCase fetchInboxTicketListUseCase;
     private final ScreensNavigator screensNavigator;
     private final DialogsManager dialogsManager;
     private final DialogsEventBus dialogsEventBus;
@@ -34,12 +36,12 @@ public class InboxListController implements
 
     public InboxListController
             (
-                    FetchTicketListUseCase fetchTicketListUseCase,
+                    FetchInboxTicketListUseCase fetchInboxTicketListUseCase,
                     ScreensNavigator screensNavigator,
                     DialogsManager dialogsManager,
                     DialogsEventBus dialogsEventBus
             ) {
-        this.fetchTicketListUseCase = fetchTicketListUseCase;
+        this.fetchInboxTicketListUseCase = fetchInboxTicketListUseCase;
         this.screensNavigator = screensNavigator;
         this.dialogsManager = dialogsManager;
         this.dialogsEventBus = dialogsEventBus;
@@ -52,7 +54,7 @@ public class InboxListController implements
     public void onStart(int ticketStatus) {
         this.ticketStatus = ticketStatus;
         viewMVC.registerListener(this);
-        fetchTicketListUseCase.registerListener(this);
+        fetchInboxTicketListUseCase.registerListener(this);
         dialogsEventBus.registerListener(this);
         if (mScreenState != ScreenState.NETWORK_ERROR) {
             fetchTicketListAndNotify();
@@ -62,7 +64,7 @@ public class InboxListController implements
     public void onStop() {
         viewMVC.unregisterListener(this);
         dialogsEventBus.unregisterListener(this);
-        fetchTicketListUseCase.unregisterListener(this);
+        fetchInboxTicketListUseCase.unregisterListener(this);
     }
 
     public SavedState getSavedState() {
@@ -77,7 +79,10 @@ public class InboxListController implements
     private void fetchTicketListAndNotify() {
         mScreenState = ScreenState.FETCHING_TICKET_LIST;
         viewMVC.showProgressIndication();
-        fetchTicketListUseCase.fetchTicketListAndNotify(ticketStatus);
+        SearchRequest searchRequest = new SearchRequest();
+        searchRequest.setCurrentPage(1);
+        searchRequest.setPageSize(30);
+        fetchInboxTicketListUseCase.fetchTicketListAndNotify(searchRequest);
     }
 
     @Override
@@ -127,8 +132,8 @@ public class InboxListController implements
     }
 
     @Override
-    public void onTicketListFetched(List<Ticket> ticketList) {
-        this.ticketList = ticketList;
+    public void onTicketListFetched(TicketResponse ticketResponse) {
+        this.ticketList = ticketResponse.getTaskTicketList();
         mScreenState = ScreenState.TICKET_LIST_SHOWN;
         viewMVC.hideProgressIndication();
         viewMVC.bindTickets(ticketList, ticketList.size());

@@ -82,6 +82,10 @@ import com.carmel.guestjini.Screens.Support.InboxList.InboxListViewMVC;
 import com.carmel.guestjini.Screens.Support.InboxList.InboxListViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.InboxList.TicketListItem.InboxListItemViewMVC;
 import com.carmel.guestjini.Screens.Support.InboxList.TicketListItem.InboxListItemViewMVCImpl;
+import com.carmel.guestjini.Screens.Support.InboxTicketDetail.InboxTicketCategoryItem.InboxTicketCategoryItemViewMVC;
+import com.carmel.guestjini.Screens.Support.InboxTicketDetail.InboxTicketCategoryItem.InboxTicketCategoryItemViewMVCImpl;
+import com.carmel.guestjini.Screens.Support.InboxTicketDetail.InboxTicketComments.InboxTicketCommentViewMVC;
+import com.carmel.guestjini.Screens.Support.InboxTicketDetail.InboxTicketComments.InboxTicketCommentViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailViewMVC;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBReviewItem.KBReviewItemViewMVC;
@@ -472,4 +476,13 @@ public class ViewMVCFactory {
     public InboxListItemViewMVC getInboxListItemViewMVC(@Nullable ViewGroup parent) {
         return new InboxListItemViewMVCImpl(layoutInflater, parent);
     }
+
+    public InboxTicketCategoryItemViewMVC getInboxTicketCategoryItemViewMVC(@Nullable ViewGroup parent) {
+        return new InboxTicketCategoryItemViewMVCImpl(layoutInflater, parent);
+    }
+
+    public InboxTicketCommentViewMVC getInboxTicketCommentViewMVC(@Nullable ViewGroup parent) {
+        return new InboxTicketCommentViewMVCImpl(layoutInflater, parent);
+    }
+
 }

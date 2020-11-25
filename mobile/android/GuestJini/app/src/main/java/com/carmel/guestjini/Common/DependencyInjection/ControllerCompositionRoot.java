@@ -78,6 +78,7 @@ import com.carmel.guestjini.Screens.Welcome.WelcomeController;
 import com.carmel.guestjini.TicketCategory.FetchTicketCategoryByParentIdUseCase;
 import com.carmel.guestjini.Tickets.DeleteTicketUseCase;
 import com.carmel.guestjini.Tickets.FetchInboxCountUseCase;
+import com.carmel.guestjini.Tickets.FetchInboxTicketListUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketCountUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketListUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketTaskNoteListUseCase;
@@ -231,6 +232,10 @@ public class ControllerCompositionRoot {
 
     private FetchTicketListUseCase getFetchTicketListUseCase() {
         return new FetchTicketListUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private FetchInboxTicketListUseCase getFetchInboxTicketListUseCase() {
+        return new FetchInboxTicketListUseCase(getAuthenticatedGuestJiniAPI());
     }
 
 
@@ -723,7 +728,7 @@ public class ControllerCompositionRoot {
 
     public InboxListController getInboxListController() {
         return new InboxListController(
-                getFetchTicketListUseCase(),
+                getFetchInboxTicketListUseCase(),
                 getScreensNavigator(),
                 getDialogsManager(),
                 getDialogsEventBus()

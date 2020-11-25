@@ -1,6 +1,7 @@
 package com.carmel.guestjini.Networking;
 
 
+import com.carmel.guestjini.Common.Search.SearchRequest;
 import com.carmel.guestjini.Networking.Accounts.AccountTicketResponse;
 import com.carmel.guestjini.Networking.Booking.BookingResponse;
 import com.carmel.guestjini.Networking.Group.Group;
@@ -277,4 +278,7 @@ public interface GuestJiniAPI {
 
     @POST("/guest-jini/task-ticket/get-task-count")
     Call<TaskCountResponse> getTaskCount();
+
+    @POST("/guest-jini/task-ticket/search-shared-inbox")
+    Call<TicketResponse> getSharedInboxList(@Body SearchRequest searchRequest);
 }
