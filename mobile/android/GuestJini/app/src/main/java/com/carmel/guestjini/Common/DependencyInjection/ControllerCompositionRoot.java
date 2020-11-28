@@ -64,9 +64,11 @@ import com.carmel.guestjini.Screens.Settings.MyProfile.MyProfileController;
 import com.carmel.guestjini.Screens.Settings.PrivacyPolicy.PrivacyPolicyController;
 import com.carmel.guestjini.Screens.Settings.SettingsHome.SettingsHomeController;
 import com.carmel.guestjini.Screens.Settings.TermsAndConditions.TermsAndConditionsController;
+import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketSheetController;
 import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketController;
 import com.carmel.guestjini.Screens.Support.Inbox.InboxController;
 import com.carmel.guestjini.Screens.Support.InboxList.InboxListController;
+import com.carmel.guestjini.Screens.Support.InboxTicketDetail.InboxTicketDetailController;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailController;
 import com.carmel.guestjini.Screens.Support.KBList.KBListController;
 import com.carmel.guestjini.Screens.Support.SupportHome.SupportHomeController;
@@ -729,6 +731,23 @@ public class ControllerCompositionRoot {
     public InboxListController getInboxListController() {
         return new InboxListController(
                 getFetchInboxTicketListUseCase(),
+                getScreensNavigator(),
+                getDialogsManager(),
+                getDialogsEventBus()
+        );
+    }
+
+    public InboxTicketDetailController getInboxTicketDetailController() {
+        return new InboxTicketDetailController(
+                getFetchTicketUseCase(),
+                getScreensNavigator(),
+                getDialogsManager(),
+                getDialogsEventBus()
+        );
+    }
+
+    public AssignTicketSheetController getAssignTicketSheetController() {
+        return new AssignTicketSheetController(
                 getScreensNavigator(),
                 getDialogsManager(),
                 getDialogsEventBus()

@@ -74,6 +74,8 @@ import com.carmel.guestjini.Screens.Settings.SettingsHome.SettingsHomeViewMVC;
 import com.carmel.guestjini.Screens.Settings.SettingsHome.SettingsHomeViewMVCImpl;
 import com.carmel.guestjini.Screens.Settings.TermsAndConditions.TermsAndConditionsViewMVC;
 import com.carmel.guestjini.Screens.Settings.TermsAndConditions.TermsAndConditionsViewMVCImpl;
+import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketSheetViewMVC;
+import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketSheetViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketViewMVC;
 import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.Inbox.InboxViewMVC;
@@ -86,6 +88,8 @@ import com.carmel.guestjini.Screens.Support.InboxTicketDetail.InboxTicketCategor
 import com.carmel.guestjini.Screens.Support.InboxTicketDetail.InboxTicketCategoryItem.InboxTicketCategoryItemViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.InboxTicketDetail.InboxTicketComments.InboxTicketCommentViewMVC;
 import com.carmel.guestjini.Screens.Support.InboxTicketDetail.InboxTicketComments.InboxTicketCommentViewMVCImpl;
+import com.carmel.guestjini.Screens.Support.InboxTicketDetail.InboxTicketDetailViewMVC;
+import com.carmel.guestjini.Screens.Support.InboxTicketDetail.InboxTicketDetailViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailViewMVC;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBDetailViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.KBDetail.KBReviewItem.KBReviewItemViewMVC;
@@ -485,4 +489,11 @@ public class ViewMVCFactory {
         return new InboxTicketCommentViewMVCImpl(layoutInflater, parent);
     }
 
+    public InboxTicketDetailViewMVC getInboxTicketDetailViewMVC(@Nullable ViewGroup parent) {
+        return new InboxTicketDetailViewMVCImpl(layoutInflater, parent, this);
+    }
+
+    public AssignTicketSheetViewMVC getAssignTicketSheetViewMVC(@Nullable ViewGroup parent) {
+        return new AssignTicketSheetViewMVCImpl(layoutInflater, parent);
+    }
 }

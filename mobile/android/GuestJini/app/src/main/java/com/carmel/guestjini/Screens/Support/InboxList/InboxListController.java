@@ -102,7 +102,7 @@ public class InboxListController implements
     @Override
     public void onTicketClicked(Ticket ticket) {
         if(ticket.getTicketStatus() != 0) {
-            screensNavigator.toTicketDetails(ticket.getId());
+            screensNavigator.toInboxTicketDetails(ticket.getId());
         }else{
             screensNavigator.toCreateTicket(null, ticket.getId());
         }
