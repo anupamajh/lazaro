@@ -26,4 +26,6 @@ public interface TaskForceService {
     TaskForceResponse searchPaginated(Map<String, String> formData) throws Exception;
 
     Optional<TaskForce> findByPhone(String phone);
+
+    TaskForceResponse getByGroup(String groupId);
 }

@@ -22,4 +22,6 @@ public interface TaskForceRepository extends JpaRepository<TaskForce, String> {
     List<TaskForce> findAllByClientIdAndIsDeletedAndPhoneAndIdIsNot(String clientId, int isDeleted, String phone, String id);
 
     Optional<TaskForce> findByPhone(String phone);
+
+    List<TaskForce> findAllByClientIdAndIsDeletedAndGroupId(String clientId, int isDeleted, String groupId);
 }

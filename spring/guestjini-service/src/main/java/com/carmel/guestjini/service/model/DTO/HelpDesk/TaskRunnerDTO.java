@@ -12,6 +12,7 @@ public class TaskRunnerDTO {
     private String orgId;
     private String userId;
     private String ticketId;
+    private String taskForceGroupId;
     /**
      * 1-Completed2-Work in progress3-Not Started
      */
@@ -33,6 +34,7 @@ public class TaskRunnerDTO {
         this.orgId = taskRunner.getOrgId();
         this.userId = taskRunner.getUserId();
         this.ticketId = taskRunner.getTicketId();
+        this.taskForceGroupId = taskRunner.getTaskForceGroupId();
         this.taskStatus = taskRunner.getTaskStatus();
         this.createdBy = taskRunner.getCreatedBy();
         this.creationTime = taskRunner.getCreationTime();
@@ -145,5 +147,13 @@ public class TaskRunnerDTO {
 
     public void setDeletedTime(Date deletedTime) {
         this.deletedTime = deletedTime;
+    }
+
+    public String getTaskForceGroupId() {
+        return taskForceGroupId;
+    }
+
+    public void setTaskForceGroupId(String taskForceGroupId) {
+        this.taskForceGroupId = taskForceGroupId;
     }
 }

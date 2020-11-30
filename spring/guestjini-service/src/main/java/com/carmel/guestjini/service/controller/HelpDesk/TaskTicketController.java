@@ -1,24 +1,30 @@
 package com.carmel.guestjini.service.controller.HelpDesk;
 
 
+import com.carmel.guestjini.service.HelpDesk.TaskTicket.DTO.TaskAssigneeDTO;
+import com.carmel.guestjini.service.HelpDesk.TaskTicket.Response.TaskAssigneeResponse;
 import com.carmel.guestjini.service.common.Search.SearchBuilder;
 import com.carmel.guestjini.service.common.Search.SearchRequest;
 import com.carmel.guestjini.service.components.MailClient;
 import com.carmel.guestjini.service.components.UserInformation;
+import com.carmel.guestjini.service.components.UserService;
 import com.carmel.guestjini.service.config.CarmelConfig;
 import com.carmel.guestjini.service.model.Booking.Guest;
+import com.carmel.guestjini.service.model.DTO.HelpDesk.TaskForceDTO;
+import com.carmel.guestjini.service.model.DTO.HelpDesk.TaskForceGroupDTO;
 import com.carmel.guestjini.service.model.DTO.HelpDesk.TicketCountDTO;
 import com.carmel.guestjini.service.model.HelpDesk.TaskAttachment;
+import com.carmel.guestjini.service.model.HelpDesk.TaskRunner;
 import com.carmel.guestjini.service.model.HelpDesk.TaskTicket;
 import com.carmel.guestjini.service.model.Inventory.InventoryDetail;
 import com.carmel.guestjini.service.model.Principal.UserInfo;
 import com.carmel.guestjini.service.request.HelpDesk.TicketRequest;
 import com.carmel.guestjini.service.response.HelpDesk.TaskAttachmentResponse;
+import com.carmel.guestjini.service.response.HelpDesk.TaskForceGroupResponse;
+import com.carmel.guestjini.service.response.HelpDesk.TaskForceResponse;
 import com.carmel.guestjini.service.response.HelpDesk.TaskTicketResponse;
 import com.carmel.guestjini.service.service.Booking.GuestService;
-import com.carmel.guestjini.service.service.HelpDesk.TaskAttachmentService;
-import com.carmel.guestjini.service.service.HelpDesk.TaskTicketCategoriesService;
-import com.carmel.guestjini.service.service.HelpDesk.TaskTicketService;
+import com.carmel.guestjini.service.service.HelpDesk.*;
 import com.carmel.guestjini.service.service.Inventory.InventoryDetailService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -43,7 +49,6 @@ import java.io.FileOutputStream;
 import java.util.*;
 
 import static com.carmel.guestjini.service.specification.HelpDesk.TaskTicketSpecification.textInAllColumns;
-import static com.carmel.guestjini.service.specification.HelpDesk.TaskTicketSpecification.textInAllColumnsSharedInbox;
 
 
 @RestController
@@ -78,6 +83,18 @@ public class TaskTicketController {
     @Autowired
     TaskTicketCategoriesService taskTicketCategoriesService;
 
+    @Autowired
+    TaskForceGroupService taskForceGroupService;
+
+    @Autowired
+    TaskForceService taskForceService;
+
+    @Autowired
+    TaskRunnerService taskRunnerService;
+
+    @Autowired
+    UserService userService;
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public TaskTicketResponse save(@Valid @RequestBody TicketRequest ticketRequest) {
         UserInfo userInfo = userInformation.getUserInfo();
@@ -90,7 +107,7 @@ public class TaskTicketController {
             if (taskTicket.getId() == null) {
                 taskTicket.setId("");
                 isNewTicket = true;
-            }else{
+            } else {
                 Optional<TaskTicket> optionalTaskTicket = taskTicketService.findById(
                         taskTicket.getId()
                 );
@@ -231,10 +248,10 @@ public class TaskTicketController {
                 taskTicketResponse.setTaskAttachments(taskAttachmentList);
                 taskTicketResponse
                         .setTaskTicketCategories(
-                        taskTicketCategoriesService
-                                .getAllParents(taskTicket.getTicketCategoryId()
-                                )
-                );
+                                taskTicketCategoriesService
+                                        .getAllParents(taskTicket.getTicketCategoryId()
+                                        )
+                        );
             } else {
                 taskTicketResponse.setSuccess(false);
                 taskTicketResponse.setError("Error occurred while Fetching taskTicket!! Please try after sometime");
@@ -325,7 +342,7 @@ public class TaskTicketController {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
             int ticketStatus = formData.get("ticket_status") == null ? 3 : Integer.parseInt(formData.get("ticket_status"));
             List<TaskTicket> page = taskTicketService.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, userInfo.getId(), ticketStatus);
-            if(page == null){
+            if (page == null) {
                 page = new ArrayList<>();
             }
             taskTicketResponse.setTotalRecords(page.size());
@@ -565,6 +582,102 @@ public class TaskTicketController {
         return taskTicketResponse;
     }
 
+    @RequestMapping(value = "/get-assignee", method = RequestMethod.POST)
+    public TaskAssigneeResponse getAssignee() {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        TaskAssigneeResponse taskAssigneeResponse = new TaskAssigneeResponse();
+        try {
+
+            List<TaskAssigneeDTO> taskAssigneeDTOS = new ArrayList<>();
+            TaskForceGroupResponse taskForceGroupResponse =
+                    taskForceGroupService.getAll();
+            if (taskForceGroupResponse.isSuccess()) {
+                List<TaskForceGroupDTO> taskForceGroups =
+                        taskForceGroupResponse.getTaskForceGroupList();
+                for (TaskForceGroupDTO taskForceGroup : taskForceGroups) {
+                    TaskAssigneeDTO taskAssigneeDTO = new TaskAssigneeDTO();
+                    taskAssigneeDTO.setIsGroup(1);
+                    taskAssigneeDTO.setName(taskForceGroup.getName());
+                    taskAssigneeDTO.setId(taskForceGroup.getId());
+                    taskAssigneeDTOS.add(taskAssigneeDTO);
+                }
+            }
+            TaskForceResponse taskForceResponse = taskForceService.getAll();
+            List<TaskForceDTO> taskForces = taskForceResponse.getTaskForceList();
+            for (TaskForceDTO taskForce : taskForces) {
+                if (taskForce.getUserId() != null) {
+                    if (taskForce.getUserId() != "") {
+                        TaskAssigneeDTO taskAssigneeDTO = new TaskAssigneeDTO();
+                        taskAssigneeDTO.setIsGroup(0);
+                        taskAssigneeDTO.setName(taskForce.getPhone());
+                        taskAssigneeDTO.setId(taskForce.getUserId());
+                        taskAssigneeDTOS.add(taskAssigneeDTO);
+                    }
+                }
+            }
+            taskAssigneeResponse.setSuccess(true);
+            taskAssigneeResponse.setTaskAssigneeList(taskAssigneeDTOS);
+        } catch (Exception ex) {
+            logger.error(ex.toString());
+            taskAssigneeResponse.setSuccess(false);
+            taskAssigneeResponse.setError(ex.getMessage());
+        }
+        return taskAssigneeResponse;
+    }
+
+    @RequestMapping(value = "/get-assignee-by-group", method = RequestMethod.POST)
+    public TaskAssigneeResponse getAssigneeByGroup(@RequestBody Map<String, String> formData) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        TaskAssigneeResponse taskAssigneeResponse = new TaskAssigneeResponse();
+        try {
+            String groupId = formData.get("groupId");
+            String ticketId = formData.get("ticketId");
+            if (groupId == null) {
+                groupId = "";
+            }
+
+            if (groupId.equals("")) {
+                TaskRunner taskRunner = taskRunnerService.getByTicketId(ticketId);
+                if (taskRunner.getTaskForceGroupId() != null) {
+                    groupId = taskRunner.getTaskForceGroupId();
+                }
+            }
+            if (groupId == null) {
+                groupId = "";
+            }
+
+            List<TaskAssigneeDTO> taskAssigneeDTOS = new ArrayList<>();
+            TaskForceResponse taskForceResponse;
+            if (groupId.equals("")) {
+                taskForceResponse = taskForceService.getAll();
+            } else {
+                taskForceResponse = taskForceService.getByGroup(groupId);
+            }
+            List<TaskForceDTO> taskForces = taskForceResponse.getTaskForceList();
+            for (TaskForceDTO taskForce : taskForces) {
+                if (taskForce.getUserId() != null) {
+                    if (taskForce.getUserId() != "") {
+                        TaskAssigneeDTO taskAssigneeDTO = new TaskAssigneeDTO();
+                        taskAssigneeDTO.setIsGroup(0);
+                        taskAssigneeDTO.setName(taskForce.getPhone());
+                        taskAssigneeDTO.setId(taskForce.getUserId());
+                        taskAssigneeDTOS.add(taskAssigneeDTO);
+                    }
+                }
+            }
+            taskAssigneeResponse.setSuccess(true);
+            taskAssigneeResponse.setTaskAssigneeList(taskAssigneeDTOS);
+        } catch (Exception ex) {
+            logger.error(ex.toString());
+            taskAssigneeResponse.setSuccess(false);
+            taskAssigneeResponse.setError(ex.getMessage());
+        }
+        return taskAssigneeResponse;
+    }
 
 
 }

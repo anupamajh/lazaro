@@ -3,6 +3,7 @@ package com.carmel.guestjini.service.components;
 import com.carmel.guestjini.service.config.CarmelConfig;
 import com.carmel.guestjini.service.model.DTO.Common.UserDTO;
 import com.carmel.guestjini.service.request.Booking.BookingRequest;
+import com.carmel.guestjini.service.response.Common.PhotoResponse;
 import com.carmel.guestjini.service.response.Common.UserResponse;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
@@ -106,5 +107,23 @@ public class UserService {
         } catch (Exception ex) {
             throw ex;
         }
+    }
+
+    public UserResponse findUserById(String userId) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        OAuth2AuthenticationDetails oAuth2AuthenticationDetails = (OAuth2AuthenticationDetails) auth.getDetails();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", "Bearer "+ oAuth2AuthenticationDetails.getTokenValue());
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        JSONObject postData = new JSONObject();
+        postData.put("id", userId);
+        HttpEntity<String> entity = new HttpEntity<>(postData.toJSONString(), headers);
+        ResponseEntity<UserResponse> result =restTemplate.exchange(
+                carmelConfig.getDbServiceURL() + "/user/get",
+                HttpMethod.POST, entity,
+                UserResponse.class
+        );
+        return result.getBody();
     }
 }

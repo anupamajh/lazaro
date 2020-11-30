@@ -306,4 +306,30 @@ public class TaskForceServiceImpl implements TaskForceService {
     public Optional<TaskForce> findByPhone(String phone) {
         return  taskForceRepository.findByPhone(phone);
     }
+
+    @Override
+    public TaskForceResponse getByGroup(String groupId) {
+        logger.trace("Entering");
+        UserInfo userInfo = userInformationService.getUserInfo();
+        TaskForceResponse taskForceResponse = new TaskForceResponse();
+        try {
+            taskForceResponse.setTaskForceList(
+                    getTaskForceDTOS(taskForceRepository
+                            .findAllByClientIdAndIsDeletedAndGroupId(
+                                    userInfo.getClient().getClientId(),
+                                    0,
+                                    groupId
+                            )
+                    ));
+            taskForceResponse.setSuccess(true);
+            taskForceResponse.setError("");
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            taskForceResponse.setSuccess(true);
+            taskForceResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return taskForceResponse;
+    }
 }

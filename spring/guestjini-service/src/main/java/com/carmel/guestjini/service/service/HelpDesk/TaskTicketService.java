@@ -1,6 +1,7 @@
 package com.carmel.guestjini.service.service.HelpDesk;
 
 
+import com.carmel.guestjini.service.HelpDesk.TaskTicket.Response.TaskAssigneeResponse;
 import com.carmel.guestjini.service.model.DTO.HelpDesk.TicketCountDTO;
 import com.carmel.guestjini.service.model.HelpDesk.TaskTicket;
 import org.springframework.data.domain.Page;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface TaskTicketService {

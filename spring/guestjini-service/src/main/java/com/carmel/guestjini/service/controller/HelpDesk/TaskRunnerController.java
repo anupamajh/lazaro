@@ -1,6 +1,8 @@
 package com.carmel.guestjini.service.controller.HelpDesk;
 
 
+import com.carmel.guestjini.service.HelpDesk.TaskTicket.DTO.TaskAssigneeDTO;
+import com.carmel.guestjini.service.HelpDesk.TaskTicket.Response.TaskAssigneeResponse;
 import com.carmel.guestjini.service.components.UserInformation;
 import com.carmel.guestjini.service.model.HelpDesk.TaskRunner;
 import com.carmel.guestjini.service.model.Principal.UserInfo;
@@ -49,7 +51,7 @@ public class TaskRunnerController {
                 taskRunner.setId("");
             }
             if (taskRunner.getOrgId() == null || taskRunner.getOrgId().isEmpty()) {
-                if(userInfo.getDefaultOrganization() != null) {
+                if (userInfo.getDefaultOrganization() != null) {
                     taskRunner.setOrgId(userInfo.getDefaultOrganization().getId());
                 }
             }
@@ -89,7 +91,7 @@ public class TaskRunnerController {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
             Optional<TaskRunner> optionalTaskRunner =
                     taskRunnerService.findById(formData.get("id"));
-            if(optionalTaskRunner.isPresent()){
+            if (optionalTaskRunner.isPresent()) {
                 TaskRunner taskRunner = optionalTaskRunner.get();
                 taskRunner.setIsDeleted(1);
                 taskRunner.setDeletedBy(userInfo.getId());
@@ -97,7 +99,7 @@ public class TaskRunnerController {
                 taskRunnerResponse.setSuccess(true);
                 taskRunnerResponse.setError("");
                 taskRunnerResponse.setTaskRunner(taskRunnerService.save(taskRunner));
-            }else{
+            } else {
                 taskRunnerResponse.setSuccess(false);
                 taskRunnerResponse.setError("Error occurred while moving Task Runner to Trash!! Please try after sometime");
             }
@@ -118,7 +120,7 @@ public class TaskRunnerController {
         try {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
             Optional<TaskRunner> optionalTaskRunner = taskRunnerService.findById(formData.get("id"));
-            if(optionalTaskRunner.isPresent()){
+            if (optionalTaskRunner.isPresent()) {
                 TaskRunner ticketCategories = optionalTaskRunner.get();
                 taskRunnerResponse.setSuccess(true);
                 taskRunnerResponse.setError("");
@@ -198,7 +200,7 @@ public class TaskRunnerController {
             int pageNumber = formData.get("current_page") == null ? 0 : Integer.parseInt(formData.get("current_page"));
             int pageSize = formData.get("page_size") == null ? 10 : Integer.parseInt(formData.get("page_size"));
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("title"));
-            Page<TaskRunner> page = taskRunnerService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(),0, pageable);
+            Page<TaskRunner> page = taskRunnerService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(), 0, pageable);
             taskRunnerResponse.setTotalRecords(page.getTotalElements());
             taskRunnerResponse.setTotalPages(page.getTotalPages());
             taskRunnerResponse.setTaskRunnerList(page.getContent());
@@ -227,9 +229,9 @@ public class TaskRunnerController {
             String searchText = formData.get("search_text") == null ? null : String.valueOf(formData.get("search_text"));
             Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("title"));
             Page<TaskRunner> page;
-            if (searchText == null ){
-                page = taskRunnerService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(),0,pageable);
-            } else  {
+            if (searchText == null) {
+                page = taskRunnerService.findAllByClientIdAndIsDeleted(userInfo.getClient().getClientId(), 0, pageable);
+            } else {
                 page = taskRunnerService.findAll(textInAllColumns(searchText, userInfo.getClient().getClientId()), pageable);
             }
 
@@ -250,6 +252,42 @@ public class TaskRunnerController {
 
 
     private boolean checkDuplicate(TaskRunner taskRunner) {
-            return false;
+        return false;
     }
+
+
+    @RequestMapping(value = "/assign-ticket", method = RequestMethod.POST)
+    public TaskRunnerResponse assignTicket(@RequestBody TaskAssigneeDTO taskAssigneeDTO) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        TaskRunnerResponse taskRunnerResponse = new TaskRunnerResponse();
+        try {
+            taskRunnerResponse = taskRunnerService.assignTicket(taskAssigneeDTO);
+
+        } catch (Exception ex) {
+            taskRunnerResponse.setSuccess(false);
+            taskRunnerResponse.setError(ex.getMessage());
+            logger.error(ex.toString());
+        }
+        return taskRunnerResponse;
+    }
+
+    @RequestMapping(value = "/get-assignment-details", method = RequestMethod.POST)
+    public TaskAssigneeResponse getAssignmentDetails(@RequestBody Map<String, String> formData) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        TaskAssigneeResponse taskAssigneeResponse = new TaskAssigneeResponse();
+        try {
+            taskAssigneeResponse = taskRunnerService.getTaskAssignmentDetails(formData);
+        }catch (Exception ex) {
+            logger.error(ex.toString());
+            taskAssigneeResponse.setSuccess(false);
+            taskAssigneeResponse.setError(ex.getMessage());
+        }
+        return taskAssigneeResponse;
+    }
+
+
 }

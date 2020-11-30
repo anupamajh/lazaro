@@ -170,4 +170,12 @@ public class TaskRunner {
     public void setDeletedTime(Date deletedTime) {
         this.deletedTime = deletedTime;
     }
+
+    public String getTaskForceGroupId() {
+        return taskForceGroupId;
+    }
+
+    public void setTaskForceGroupId(String taskForceGroupId) {
+        this.taskForceGroupId = taskForceGroupId;
+    }
 }
