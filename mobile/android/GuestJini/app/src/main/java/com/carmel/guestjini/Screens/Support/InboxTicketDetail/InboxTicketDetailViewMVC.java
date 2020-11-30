@@ -1,5 +1,6 @@
 package com.carmel.guestjini.Screens.Support.InboxTicketDetail;
 
+import com.carmel.guestjini.Networking.Tickets.TaskAssigneeResponse;
 import com.carmel.guestjini.Networking.Tickets.Ticket;
 import com.carmel.guestjini.Networking.Tickets.TicketCategory;
 import com.carmel.guestjini.Screens.Common.Views.ObservableViewMvc;
@@ -14,7 +15,7 @@ public interface InboxTicketDetailViewMVC
         void onBackClicked();
         void onAssignTicketClicked();
         void onWithdrawFromGroupClicked();
-        void onAssignTicketToAgentClicked();
+        void onAssignTicketToAgentClicked(String groupId, String ticketId);
         void onWithdrawFromAgentClicked();
         void onCloseTicketClicked();
     }
@@ -27,5 +28,6 @@ public interface InboxTicketDetailViewMVC
 
     void hideProgressIndication();
 
+    void bindTicketAssignmentDetails(TaskAssigneeResponse taskAssigneeResponse);
 
 }

@@ -1,4 +1,4 @@
-package com.carmel.guestjini.Screens.Support.AssignTicketSheet;
+package com.carmel.guestjini.Screens.Support.AssignTicketToAgentSheet;
 
 import com.carmel.guestjini.Networking.Tickets.TaskAssignee;
 import com.carmel.guestjini.Networking.Tickets.TaskAssigneeResponse;
@@ -7,38 +7,38 @@ import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
 import com.carmel.guestjini.Tickets.AssignTaskTicketUseCase;
-import com.carmel.guestjini.Tickets.FetchTaskAssigneeUseCase;
-
+import com.carmel.guestjini.Tickets.FetchTaskAssigneeByGroupUseCase;
 import java.io.Serializable;
 
-public class AssignTicketSheetController
-        implements AssignTicketSheetViewMVC.Listener,
-        FetchTaskAssigneeUseCase.Listener,
+public class AssignTicketToAgentSheetController
+        implements AssignTicketToAgentSheetViewMVC.Listener,
+        FetchTaskAssigneeByGroupUseCase.Listener,
         AssignTaskTicketUseCase.Listener {
 
     private String ticketId;
+    private String groupId;
 
     private enum ScreenState {
         IDLE, FETCHING_TICKET_ASSIGNEE, TICKET_SHOWN, SAVING_TICKET_NOTES, TICKET_NOTES_SAVED, FETCHING_TICKET_NOTES, TICKET_NOTES_SHOWN, NETWORK_ERROR
     }
 
-    private final FetchTaskAssigneeUseCase fetchTaskAssigneeUseCase;
+    private final FetchTaskAssigneeByGroupUseCase fetchTaskAssigneeByGroupUseCase;
     private final AssignTaskTicketUseCase assignTaskTicketUseCase;
     private final ScreensNavigator screensNavigator;
     private final DialogsManager dialogsManager;
     private final DialogsEventBus dialogsEventBus;
 
-    private AssignTicketSheetViewMVC viewMvc;
+    private AssignTicketToAgentSheetViewMVC viewMvc;
     private ScreenState mScreenState = ScreenState.IDLE;
 
-    public AssignTicketSheetController(
-            FetchTaskAssigneeUseCase fetchTaskAssigneeUseCase,
+    public AssignTicketToAgentSheetController(
+            FetchTaskAssigneeByGroupUseCase fetchTaskAssigneeByGroupUseCase,
             AssignTaskTicketUseCase assignTaskTicketUseCase,
             ScreensNavigator screensNavigator,
             DialogsManager dialogsManager,
             DialogsEventBus dialogsEventBus
     ) {
-        this.fetchTaskAssigneeUseCase = fetchTaskAssigneeUseCase;
+        this.fetchTaskAssigneeByGroupUseCase = fetchTaskAssigneeByGroupUseCase;
         this.assignTaskTicketUseCase = assignTaskTicketUseCase;
         this.screensNavigator = screensNavigator;
         this.dialogsManager = dialogsManager;
@@ -61,10 +61,11 @@ public class AssignTicketSheetController
         }
     }
 
-    public void onStart(String ticketId) {
+    public void onStart(String groupId, String ticketId) {
         this.ticketId = ticketId;
+        this.groupId = groupId;
         viewMvc.registerListener(this);
-        fetchTaskAssigneeUseCase.registerListener(this);
+        fetchTaskAssigneeByGroupUseCase.registerListener(this);
         assignTaskTicketUseCase.registerListener(this);
         if (mScreenState == ScreenState.IDLE) {
             fetchTaskAssigneeAndNotify();
@@ -74,18 +75,18 @@ public class AssignTicketSheetController
 
     private void fetchTaskAssigneeAndNotify() {
         viewMvc.showProgressIndication();
-        fetchTaskAssigneeUseCase.fetchAssigneeAndNotify();
+        fetchTaskAssigneeByGroupUseCase.fetchAssigneeAndNotify(groupId, ticketId);
 
     }
 
     public void onStop() {
         viewMvc.unregisterListener(this);
         assignTaskTicketUseCase.unregisterListener(this);
-        fetchTaskAssigneeUseCase.unregisterListener(this);
+        fetchTaskAssigneeByGroupUseCase.unregisterListener(this);
 
     }
 
-    public void bindView(AssignTicketSheetViewMVC viewMvc) {
+    public void bindView(AssignTicketToAgentSheetViewMVC viewMvc) {
         this.viewMvc = viewMvc;
     }
 
@@ -128,4 +129,6 @@ public class AssignTicketSheetController
     public void onAssignTicketFailed() {
         viewMvc.showTicketAssignFailed();
     }
+
+
 }

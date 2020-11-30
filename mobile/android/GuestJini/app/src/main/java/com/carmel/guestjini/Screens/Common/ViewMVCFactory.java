@@ -76,6 +76,10 @@ import com.carmel.guestjini.Screens.Settings.TermsAndConditions.TermsAndConditio
 import com.carmel.guestjini.Screens.Settings.TermsAndConditions.TermsAndConditionsViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketSheetViewMVC;
 import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketSheetViewMVCImpl;
+import com.carmel.guestjini.Screens.Support.AssignTicketToAgentSheet.AssignTicketToAgentSheetViewMVC;
+import com.carmel.guestjini.Screens.Support.AssignTicketToAgentSheet.AssignTicketToAgentToAgentSheetViewMVCImpl;
+import com.carmel.guestjini.Screens.Support.CloseTicketSheet.CloseTicketSheetViewMVC;
+import com.carmel.guestjini.Screens.Support.CloseTicketSheet.CloseTicketSheetViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketViewMVC;
 import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketViewMVCImpl;
 import com.carmel.guestjini.Screens.Support.Inbox.InboxViewMVC;
@@ -495,5 +499,13 @@ public class ViewMVCFactory {
 
     public AssignTicketSheetViewMVC getAssignTicketSheetViewMVC(@Nullable ViewGroup parent) {
         return new AssignTicketSheetViewMVCImpl(layoutInflater, parent);
+    }
+
+    public AssignTicketToAgentSheetViewMVC getAssignTicketToAgentSheetViewMVC(@Nullable ViewGroup parent) {
+        return new AssignTicketToAgentToAgentSheetViewMVCImpl(layoutInflater, parent);
+    }
+
+    public CloseTicketSheetViewMVC getCloseTicketSheetViewMVC(@Nullable ViewGroup parent) {
+        return new CloseTicketSheetViewMVCImpl(layoutInflater, parent);
     }
 }

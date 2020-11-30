@@ -166,13 +166,15 @@ public class MainActivity extends BaseActivity implements
         findViewById(R.id.homeIcon).setVisibility(View.VISIBLE);
         findViewById(R.id.supportIcon).setVisibility(View.VISIBLE);
         findViewById(R.id.settingsIcon).setVisibility(View.GONE);
-        if (grants.contains("ROLE_GUEST")) {
-            findViewById(R.id.communityIcon).setVisibility(View.VISIBLE);
-        }
-        if (grants.contains("ROLE_GUEST_SUPPORT")) {
-            findViewById(R.id.inboxIcon).setVisibility(View.VISIBLE);
+        if(grants != null) {
+            if (grants.contains("ROLE_GUEST")) {
+                findViewById(R.id.communityIcon).setVisibility(View.VISIBLE);
+            }
+            if (grants.contains("ROLE_GUEST_SUPPORT")) {
+                findViewById(R.id.inboxIcon).setVisibility(View.VISIBLE);
 //            findViewById(R.id.cConnectIcon).setVisibility(View.VISIBLE);
 //            findViewById(R.id.teamIcon).setVisibility(View.VISIBLE);
+            }
         }
     }
 

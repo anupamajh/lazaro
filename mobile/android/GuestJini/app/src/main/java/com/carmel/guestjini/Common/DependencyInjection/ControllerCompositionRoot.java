@@ -65,6 +65,8 @@ import com.carmel.guestjini.Screens.Settings.PrivacyPolicy.PrivacyPolicyControll
 import com.carmel.guestjini.Screens.Settings.SettingsHome.SettingsHomeController;
 import com.carmel.guestjini.Screens.Settings.TermsAndConditions.TermsAndConditionsController;
 import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketSheetController;
+import com.carmel.guestjini.Screens.Support.AssignTicketToAgentSheet.AssignTicketToAgentSheetController;
+import com.carmel.guestjini.Screens.Support.CloseTicketSheet.CloseTicketSheetController;
 import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketController;
 import com.carmel.guestjini.Screens.Support.Inbox.InboxController;
 import com.carmel.guestjini.Screens.Support.InboxList.InboxListController;
@@ -78,9 +80,13 @@ import com.carmel.guestjini.Screens.Support.TicketDetail.TicketDetailsController
 import com.carmel.guestjini.Screens.Support.TicketList.TicketListController;
 import com.carmel.guestjini.Screens.Welcome.WelcomeController;
 import com.carmel.guestjini.TicketCategory.FetchTicketCategoryByParentIdUseCase;
+import com.carmel.guestjini.Tickets.AssignTaskTicketUseCase;
 import com.carmel.guestjini.Tickets.DeleteTicketUseCase;
 import com.carmel.guestjini.Tickets.FetchInboxCountUseCase;
 import com.carmel.guestjini.Tickets.FetchInboxTicketListUseCase;
+import com.carmel.guestjini.Tickets.FetchTaskAssigneeByGroupUseCase;
+import com.carmel.guestjini.Tickets.FetchTaskAssigneeUseCase;
+import com.carmel.guestjini.Tickets.FetchTicketAssigneeDetailsUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketCountUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketListUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketTaskNoteListUseCase;
@@ -247,6 +253,23 @@ public class ControllerCompositionRoot {
 
     private FetchTicketUseCase getFetchTicketUseCase() {
         return new FetchTicketUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private FetchTaskAssigneeUseCase getFetchTaskAssigneeUseCase() {
+        return new FetchTaskAssigneeUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+
+    private AssignTaskTicketUseCase getAssignTaskTicketUseCase() {
+        return new AssignTaskTicketUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private FetchTicketAssigneeDetailsUseCase getFetchTicketAssigneeDetailsUseCase() {
+        return new FetchTicketAssigneeDetailsUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private FetchTaskAssigneeByGroupUseCase getFetchTaskAssigneeByGroupUseCase() {
+        return new FetchTaskAssigneeByGroupUseCase(getAuthenticatedGuestJiniAPI());
     }
 
 
@@ -740,6 +763,7 @@ public class ControllerCompositionRoot {
     public InboxTicketDetailController getInboxTicketDetailController() {
         return new InboxTicketDetailController(
                 getFetchTicketUseCase(),
+                getFetchTicketAssigneeDetailsUseCase(),
                 getScreensNavigator(),
                 getDialogsManager(),
                 getDialogsEventBus()
@@ -748,6 +772,26 @@ public class ControllerCompositionRoot {
 
     public AssignTicketSheetController getAssignTicketSheetController() {
         return new AssignTicketSheetController(
+                getFetchTaskAssigneeUseCase(),
+                getAssignTaskTicketUseCase(),
+                getScreensNavigator(),
+                getDialogsManager(),
+                getDialogsEventBus()
+        );
+    }
+
+    public AssignTicketToAgentSheetController getAssignTicketToAgentSheetController() {
+        return new AssignTicketToAgentSheetController(
+                getFetchTaskAssigneeByGroupUseCase(),
+                getAssignTaskTicketUseCase(),
+                getScreensNavigator(),
+                getDialogsManager(),
+                getDialogsEventBus()
+        );
+    }
+
+    public CloseTicketSheetController getCloseTicketSheetController() {
+        return new CloseTicketSheetController(
                 getScreensNavigator(),
                 getDialogsManager(),
                 getDialogsEventBus()

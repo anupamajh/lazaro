@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/square_shape_red">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp">
+
+        <TextView
+            android:id="@+id/txtCloseTicketTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Close Ticket"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp" />
+
+
+        <EditText
+            android:id="@+id/txtFeedBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtCloseTicketTitle"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/colorWhite"
+            android:hint="(Optional) You can write a message here to the support team. Your message can be seen by customer and support team memmber"
+            android:inputType="textMultiLine"
+            android:paddingStart="6dp"
+            android:paddingTop="14dp"
+            android:paddingEnd="6dp"
+            android:paddingBottom="62dp"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btnCloseTicket"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@id/txtFeedBack"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/colorWhite"
+            android:text="CLOSE"
+            android:textColor="@color/colorFlamingo"
+            android:textSize="11sp"
+            android:visibility="visible"
+            app:fontFamily="@font/roboto_bold" />
+
+    </RelativeLayout>
+</FrameLayout>

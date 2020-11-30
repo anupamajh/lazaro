@@ -1,4 +1,4 @@
-package com.carmel.guestjini.Screens.Support.AssignTicketSheet;
+package com.carmel.guestjini.Screens.Support.AssignTicketToAgentSheet;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,34 +7,31 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.carmel.guestjini.Screens.Common.Controllers.BaseBottomSheetFragment;
-import com.carmel.guestjini.Screens.Support.InboxTicketDetail.InboxTicketDetailController;
-import com.carmel.guestjini.Screens.Support.InboxTicketDetail.InboxTicketDetailFragment;
-import com.carmel.guestjini.Screens.Support.InboxTicketDetail.InboxTicketDetailViewMVC;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-public class AssignTicketSheetFragment extends BaseBottomSheetFragment {
+public class AssignTicketToAgentSheetFragment extends BaseBottomSheetFragment {
     private static final String ARG_TICKET_ID = "ARG_TICKET_ID";
+    private static final String ARG_GROUP_ID = "ARG_GROUP_ID";
 
-    public static AssignTicketSheetFragment createFragment(String ticketId) {
+    public static AssignTicketToAgentSheetFragment createFragment(String groupId, String ticketId) {
         Bundle args = new Bundle();
         args.putString(ARG_TICKET_ID, ticketId);
-        AssignTicketSheetFragment fragment = new AssignTicketSheetFragment();
+        args.putString(ARG_GROUP_ID, groupId);
+        AssignTicketToAgentSheetFragment fragment = new AssignTicketToAgentSheetFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     private static final String SAVED_STATE_ASSIGN_TICKET_FRAGMENT = "SAVED_STATE_ASSIGN_TICKET_FRAGMENT";
 
-    private AssignTicketSheetController assignTicketSheetController;
+    private AssignTicketToAgentSheetController assignTicketSheetController;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        AssignTicketSheetViewMVC viewMvc = getCompositionRoot().getViewMVCFactory().getAssignTicketSheetViewMVC(container);
-        assignTicketSheetController = getCompositionRoot().getAssignTicketSheetController();
+        AssignTicketToAgentSheetViewMVC viewMvc = getCompositionRoot().getViewMVCFactory().getAssignTicketToAgentSheetViewMVC(container);
+        assignTicketSheetController = getCompositionRoot().getAssignTicketToAgentSheetController();
         if (savedInstanceState != null) {
             restoreControllerState(savedInstanceState);
         }
@@ -45,7 +42,7 @@ public class AssignTicketSheetFragment extends BaseBottomSheetFragment {
 
     private void restoreControllerState(Bundle savedInstanceState) {
         assignTicketSheetController.restoreSavedState(
-                (AssignTicketSheetController.SavedState)
+                (AssignTicketToAgentSheetController.SavedState)
                         savedInstanceState.getSerializable(SAVED_STATE_ASSIGN_TICKET_FRAGMENT)
         );
     }
@@ -53,7 +50,7 @@ public class AssignTicketSheetFragment extends BaseBottomSheetFragment {
     @Override
     public void onStart() {
         super.onStart();
-        assignTicketSheetController.onStart(getTicketId());
+        assignTicketSheetController.onStart(getGroupId(),getTicketId());
     }
 
     @Override
@@ -71,5 +68,9 @@ public class AssignTicketSheetFragment extends BaseBottomSheetFragment {
 
     private String getTicketId() {
         return getArguments().getString(ARG_TICKET_ID);
+    }
+
+    private String getGroupId() {
+        return getArguments().getString(ARG_GROUP_ID);
     }
 }

@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.carmel.guestjini.Common.DateUtil;
+import com.carmel.guestjini.Networking.Tickets.TaskAssigneeResponse;
+import com.carmel.guestjini.Networking.Tickets.TaskForceGroup;
 import com.carmel.guestjini.Networking.Tickets.Ticket;
 import com.carmel.guestjini.Networking.Tickets.TicketCategory;
 import com.carmel.guestjini.R;
@@ -134,6 +136,15 @@ extends BaseObservableViewMvc<InboxTicketDetailViewMVC.Listener>
                 }
             }
         });
+
+        btnAssignTicketToAgent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for(Listener listener:getListeners()){
+                    listener.onAssignTicketToAgentClicked("", ticket.getId());
+                }
+            }
+        });
     }
 
     @Override
@@ -189,11 +200,20 @@ extends BaseObservableViewMvc<InboxTicketDetailViewMVC.Listener>
 
     @Override
     public void showProgressIndication() {
-
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgressIndication() {
+        progressBar.setVisibility(View.GONE);
+    }
 
+    @Override
+    public void bindTicketAssignmentDetails(TaskAssigneeResponse taskAssigneeResponse) {
+        if(taskAssigneeResponse.getTaskForceGroup() != null){
+            TaskForceGroup taskForceGroup = taskAssigneeResponse.getTaskForceGroup();
+            txtAssignedGroupName.setText(taskForceGroup.getName());
+            //TODO: Complete the assignment details
+        }
     }
 }

@@ -26,6 +26,8 @@ import com.carmel.guestjini.Screens.Settings.PrivacyPolicy.PrivacyPolicyFragment
 import com.carmel.guestjini.Screens.Settings.SettingsHome.SettingsHomeFragment;
 import com.carmel.guestjini.Screens.Settings.TermsAndConditions.TermsAndConditionsFragment;
 import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketSheetFragment;
+import com.carmel.guestjini.Screens.Support.AssignTicketToAgentSheet.AssignTicketToAgentSheetFragment;
+import com.carmel.guestjini.Screens.Support.CloseTicketSheet.CloseTicketSheetFragment;
 import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketFragment;
 import com.carmel.guestjini.Screens.Support.Inbox.InboxFragment;
 import com.carmel.guestjini.Screens.Support.InboxList.InboxListFragment;
@@ -235,7 +237,15 @@ public class ScreensNavigator {
 
     }
 
-    public AssignTicketSheetFragment getAssignSheetFragment() {
-        return  AssignTicketSheetFragment.createFragment("");
+    public AssignTicketSheetFragment getAssignSheetFragment(String ticketId) {
+        return  AssignTicketSheetFragment.createFragment(ticketId);
+    }
+
+    public AssignTicketToAgentSheetFragment getAssignTicketToAgentSheetFragment(String groupId, String ticketId) {
+        return  AssignTicketToAgentSheetFragment.createFragment(groupId, ticketId);
+    }
+
+    public CloseTicketSheetFragment getCloseTicketSheetFragment(String ticketId) {
+        return  CloseTicketSheetFragment.createFragment(ticketId);
     }
 }

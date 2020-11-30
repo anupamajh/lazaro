@@ -1,4 +1,4 @@
-package com.carmel.guestjini.Screens.Support.AssignTicketSheet;
+package com.carmel.guestjini.Screens.Support.AssignTicketToAgentSheet;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,16 +12,14 @@ import androidx.annotation.Nullable;
 
 import com.carmel.guestjini.Networking.Tickets.TaskAssignee;
 import com.carmel.guestjini.R;
-import com.carmel.guestjini.Screens.Common.ViewMVCFactory;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
-import com.carmel.guestjini.Screens.Support.InboxTicketDetail.InboxTicketDetailViewMVC;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AssignTicketSheetViewMVCImpl
-        extends BaseObservableViewMvc<AssignTicketSheetViewMVC.Listener>
-        implements AssignTicketSheetViewMVC
+public class AssignTicketToAgentToAgentSheetViewMVCImpl
+        extends BaseObservableViewMvc<AssignTicketToAgentSheetViewMVC.Listener>
+        implements AssignTicketToAgentSheetViewMVC
 {
 
     private final Spinner cmbGroup;
@@ -30,8 +28,8 @@ public class AssignTicketSheetViewMVCImpl
     private List<TaskAssignee> taskAssigneeList;
     private ArrayAdapter<TaskAssignee> assigneeArrayAdapter;
 
-    public AssignTicketSheetViewMVCImpl(LayoutInflater inflater,
-                                        @Nullable ViewGroup parent
+    public AssignTicketToAgentToAgentSheetViewMVCImpl(LayoutInflater inflater,
+                                                      @Nullable ViewGroup parent
     ) {
         setRootView(inflater.inflate(R.layout.layout_support_inbox_assign_ticket_sheet, parent, false));
         cmbGroup = findViewById(R.id.cmbGroup);

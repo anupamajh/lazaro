@@ -14,10 +14,13 @@ import com.carmel.guestjini.Networking.KnowledgeBase.KBResponse;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBReview;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBReviewResponse;
 import com.carmel.guestjini.Networking.OTP.OTPResponse;
+import com.carmel.guestjini.Networking.Tickets.TaskAssignee;
+import com.carmel.guestjini.Networking.Tickets.TaskAssigneeResponse;
 import com.carmel.guestjini.Networking.Tickets.TaskAttachmentResponse;
 import com.carmel.guestjini.Networking.Tickets.TaskCountResponse;
 import com.carmel.guestjini.Networking.Tickets.TaskNote;
 import com.carmel.guestjini.Networking.Tickets.TaskNotesResponse;
+import com.carmel.guestjini.Networking.Tickets.TaskRunnerResponse;
 import com.carmel.guestjini.Networking.Tickets.TicketCategoryResponse;
 import com.carmel.guestjini.Networking.Tickets.TicketCountDTO;
 import com.carmel.guestjini.Networking.Tickets.TicketFeedBack;
@@ -281,4 +284,16 @@ public interface GuestJiniAPI {
 
     @POST("/guest-jini/task-ticket/search-shared-inbox")
     Call<TicketResponse> getSharedInboxList(@Body SearchRequest searchRequest);
+
+    @POST("/guest-jini/task-ticket/get-assignee")
+    Call<TaskAssigneeResponse> getTaskAssignee();
+
+    @POST("/guest-jini/task-runner/assign-ticket")
+    Call<TaskRunnerResponse> assignTaskTicket(@Body TaskAssignee taskAssignee);
+
+    @POST("/guest-jini/task-ticket/get-assignee-by-group")
+    Call<TaskAssigneeResponse> getTaskAssignee(@Body Map<String, String> postData);
+
+    @POST("/guest-jini/task-runner/get-assignment-details")
+    Call<TaskAssigneeResponse> fetchTaskAssignee(@Body Map<String, String> postData);
 }
