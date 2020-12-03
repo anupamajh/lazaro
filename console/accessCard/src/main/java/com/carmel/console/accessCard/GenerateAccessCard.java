@@ -270,7 +270,7 @@ public class GenerateAccessCard extends Frame {
 
             g2.drawString(text, 0, 470);
 
-            g2.setFont(new Font("Helvetica", Font.PLAIN, 18));
+            g2.setFont(new Font("Helvetica", Font.TRUETYPE_FONT, 18));
             text = "EMERGENCY CONTACT PHONE";
             fm = g2.getFontMetrics();
             while (fm.stringWidth(text) < 200 * MULTI_FACTOR) {
@@ -279,7 +279,7 @@ public class GenerateAccessCard extends Frame {
 
             g2.drawString(text, 0, 600);
 
-            g2.setFont(new Font("Helvetica", Font.PLAIN, 35));
+            g2.setFont(new Font("Helvetica", Font.TRUETYPE_FONT, 35));
             text = accessCard.getEmergencyNumber();
             fm = g2.getFontMetrics();
             while (fm.stringWidth(text) < 200 * MULTI_FACTOR) {
@@ -289,27 +289,29 @@ public class GenerateAccessCard extends Frame {
             g2.drawString(text, 0, 640);
 
             int CardHeight = 325 * MULTI_FACTOR + 100;
-            g2.setColor(new Color(0, 0, 0));
-            g2.drawRect(50, CardHeight - 250, 60, 30);
+            //g2.setColor(new Color(0, 0, 0));
+            //g2.drawRect(50, CardHeight - 250, 60, 30);
+
+            //g2.setColor(new Color(0, 0, 0));
+            //g2.fillRect(50, CardHeight - 250, 60, 30);
 
             g2.setColor(new Color(0, 0, 0));
-            g2.fillRect(50, CardHeight - 250, 60, 30);
+            g2.setFont(new Font("Helvetica", Font.TRUETYPE_FONT, 24));
+            g2.drawString("GUEST", 58, CardHeight - 250);
 
-            g2.setColor(new Color(255, 255, 255));
-            g2.setFont(new Font("Helvetica", Font.PLAIN, 13));
-            g2.drawString("GUEST", 58, CardHeight - 230);
-
+            g2.setFont(new Font("Helvetica", Font.TRUETYPE_FONT, 26));
             g2.setColor(new Color(0, 0, 0));
-            g2.drawString(accessCard.getIdNumber(), 54, CardHeight - 190);
+            g2.drawString(accessCard.getIdNumber(), 54, CardHeight - 210);
 
 
-            g2.setFont(new Font("Helvetica", Font.PLAIN, 18));
+            SimpleDateFormat myFormatObj = new  SimpleDateFormat("MMM yyyy");
+            g2.setFont(new Font("Helvetica", Font.TRUETYPE_FONT, 26));
             g2.setColor(new Color(0, 0, 0));
             g2.drawString(accessCard.getUnit(), 54, CardHeight - 170);
-            g2.drawString("Valid Thru", 204 * MULTI_FACTOR - 150, CardHeight - 250);
-            SimpleDateFormat myFormatObj = new  SimpleDateFormat("MMM yyyy");
+            g2.drawString("Valid Thru " + myFormatObj.format(accessCard.getCheckoutDate()),
+                    204 * MULTI_FACTOR - 300, CardHeight - 250);
 
-            g2.drawString(myFormatObj.format(accessCard.getCheckoutDate()), 204 * MULTI_FACTOR - 150, CardHeight - 231);
+            //g2.drawString(myFormatObj.format(accessCard.getCheckoutDate()), 204 * MULTI_FACTOR - 150, CardHeight - 231);
 
 
 
@@ -409,7 +411,7 @@ public class GenerateAccessCard extends Frame {
             String s = ex.getMessage();
         }
         /*
-        Font font = new Font("Serif", Font.PLAIN, 24);
+        Font font = new Font("Serif", Font.TRUETYPE_FONT, 24);
         g2.dra
         g2.setFont(font);
         g2.drawString("Welcome to TutorialsPoint", 50, 70);
