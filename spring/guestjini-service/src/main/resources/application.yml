@@ -51,7 +51,7 @@ logging:
     com:
       carmel:
         guestjini:
-          helpdesk: trace
+          helpdesk: info
   pattern:
     console: '%d{"yyyy/MM/dd HH:mm:ss,SSS"} [%p] [%t] %M\(%F:%L\) - %msg%n'
   file:

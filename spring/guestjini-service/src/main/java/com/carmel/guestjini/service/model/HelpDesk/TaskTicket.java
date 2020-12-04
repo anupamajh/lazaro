@@ -85,6 +85,24 @@ public class TaskTicket {
     @Length(max = 40)
     private String requesterId;
 
+    @Column(name = "requester_name")
+    private String requesterName;
+
+    @Column(name = "requester_inventory_id")
+    @Length(max = 40)
+    private String requesterInventoryId;
+
+    @Column(name = "requester_inventory_title")
+    private String requesterInventoryTitle;
+
+    @Column(name = "task_runner_id")
+    @Length(max = 40)
+    private String taskRunnerId;
+
+    @Column(name = "task_force_group_id")
+    @Length(max = 40)
+    private String taskForceGroupId;
+
     @Column(name = "created_by")
     @Length(max = 40)
     private String createdBy;
@@ -308,5 +326,45 @@ public class TaskTicket {
 
     public void setDeletedTime(Date deletedTime) {
         this.deletedTime = deletedTime;
+    }
+
+    public String getTaskRunnerId() {
+        return taskRunnerId;
+    }
+
+    public void setTaskRunnerId(String taskRunnerId) {
+        this.taskRunnerId = taskRunnerId;
+    }
+
+    public String getTaskForceGroupId() {
+        return taskForceGroupId;
+    }
+
+    public void setTaskForceGroupId(String taskForceGroupId) {
+        this.taskForceGroupId = taskForceGroupId;
+    }
+
+    public String getRequesterName() {
+        return requesterName;
+    }
+
+    public void setRequesterName(String requesterName) {
+        this.requesterName = requesterName;
+    }
+
+    public String getRequesterInventoryId() {
+        return requesterInventoryId;
+    }
+
+    public void setRequesterInventoryId(String requesterInventoryId) {
+        this.requesterInventoryId = requesterInventoryId;
+    }
+
+    public String getRequesterInventoryTitle() {
+        return requesterInventoryTitle;
+    }
+
+    public void setRequesterInventoryTitle(String requesterInventoryTitle) {
+        this.requesterInventoryTitle = requesterInventoryTitle;
     }
 }

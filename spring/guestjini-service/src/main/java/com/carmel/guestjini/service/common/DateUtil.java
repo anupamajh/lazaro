@@ -2,9 +2,14 @@ package com.carmel.guestjini.service.common;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
+
+import static java.time.ZoneOffset.UTC;
 
 public class DateUtil {
     private static List<SimpleDateFormat>
@@ -24,12 +29,13 @@ public class DateUtil {
     };
 
     public static Date convertToDate(String input) {
-        Date date = null;
+         Date date = null;
         if(null == input) {
             return null;
         }
         for (SimpleDateFormat format : dateFormats) {
             try {
+                format.setTimeZone(TimeZone.getTimeZone("IST"));
                 format.setLenient(false);
                 date = format.parse(input);
             } catch (ParseException e) {

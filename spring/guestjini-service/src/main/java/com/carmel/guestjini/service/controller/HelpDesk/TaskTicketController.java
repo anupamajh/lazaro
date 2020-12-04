@@ -4,7 +4,9 @@ package com.carmel.guestjini.service.controller.HelpDesk;
 import com.carmel.guestjini.service.HelpDesk.TaskTicket.DTO.TaskAssigneeDTO;
 import com.carmel.guestjini.service.HelpDesk.TaskTicket.Response.TaskAssigneeResponse;
 import com.carmel.guestjini.service.common.Search.SearchBuilder;
+import com.carmel.guestjini.service.common.Search.SearchCriteria;
 import com.carmel.guestjini.service.common.Search.SearchRequest;
+import com.carmel.guestjini.service.common.Search.SearchUnit;
 import com.carmel.guestjini.service.components.MailClient;
 import com.carmel.guestjini.service.components.UserInformation;
 import com.carmel.guestjini.service.components.UserService;
@@ -15,15 +17,13 @@ import com.carmel.guestjini.service.model.DTO.HelpDesk.TaskForceDTO;
 import com.carmel.guestjini.service.model.DTO.HelpDesk.TaskForceGroupDTO;
 import com.carmel.guestjini.service.model.DTO.HelpDesk.TicketCountDTO;
 import com.carmel.guestjini.service.model.HelpDesk.TaskAttachment;
+import com.carmel.guestjini.service.model.HelpDesk.TaskForce;
 import com.carmel.guestjini.service.model.HelpDesk.TaskRunner;
 import com.carmel.guestjini.service.model.HelpDesk.TaskTicket;
 import com.carmel.guestjini.service.model.Inventory.InventoryDetail;
 import com.carmel.guestjini.service.model.Principal.UserInfo;
 import com.carmel.guestjini.service.request.HelpDesk.TicketRequest;
-import com.carmel.guestjini.service.response.HelpDesk.TaskAttachmentResponse;
-import com.carmel.guestjini.service.response.HelpDesk.TaskForceGroupResponse;
-import com.carmel.guestjini.service.response.HelpDesk.TaskForceResponse;
-import com.carmel.guestjini.service.response.HelpDesk.TaskTicketResponse;
+import com.carmel.guestjini.service.response.HelpDesk.*;
 import com.carmel.guestjini.service.service.Booking.GuestService;
 import com.carmel.guestjini.service.service.HelpDesk.*;
 import com.carmel.guestjini.service.service.Inventory.InventoryDetailService;
@@ -547,6 +547,52 @@ public class TaskTicketController {
         logger.trace("Entering");
         TaskTicketResponse taskTicketResponse = new TaskTicketResponse();
         try {
+            String userId = searchRequest.getUserId();
+            String groupId = searchRequest.getGroupId();
+            if(userId == null){
+                userId = "";
+            }
+            if(groupId == null){
+                groupId = "";
+            }
+            if(!userId.equals("") && groupId.equals("")){
+                List<SearchUnit> searchUnits = new ArrayList<>();
+                searchUnits = new ArrayList<>();
+                SearchUnit searchUnit = new SearchUnit();
+                searchUnit.setField("taskRunnerId");
+                searchUnit.setOperator("equal");
+                searchUnit.setValue(userId);
+                searchUnits.add(searchUnit);
+                SearchCriteria searchCriteria = new SearchCriteria();
+                searchCriteria.setCondition("and");
+                searchCriteria.setSearchUnitCondition("and");
+                searchCriteria.setSearchUnits(searchUnits);
+                List<SearchCriteria> searchCriteriaList = searchRequest.getSearchCriteria();
+                searchCriteriaList.add(searchCriteria);
+                searchRequest.setSearchCriteria(searchCriteriaList);
+            }
+
+            if(!groupId.equals("")){
+                TaskForceResponse taskForceResponse = taskForceService.findByUserId(userId);
+                if(taskForceResponse.isSuccess()){
+                    groupId = taskForceResponse.getTaskForce().getGroupId();
+                }
+                List<SearchUnit> searchUnits = new ArrayList<>();
+                searchUnits = new ArrayList<>();
+                SearchUnit searchUnit = new SearchUnit();
+                searchUnit.setField("taskForceGroupId");
+                searchUnit.setOperator("equal");
+                searchUnit.setValue(groupId);
+                searchUnits.add(searchUnit);
+                SearchCriteria searchCriteria = new SearchCriteria();
+                searchCriteria.setCondition("and");
+                searchCriteria.setSearchUnitCondition("and");
+                searchCriteria.setSearchUnits(searchUnits);
+                List<SearchCriteria> searchCriteriaList = searchRequest.getSearchCriteria();
+                searchCriteriaList.add(searchCriteria);
+                searchRequest.setSearchCriteria(searchCriteriaList);
+            }
+
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             CriteriaQuery<TaskTicket> criteriaQuery = criteriaBuilder.createQuery(TaskTicket.class);
             Root<TaskTicket> root = criteriaQuery.from(TaskTicket.class);

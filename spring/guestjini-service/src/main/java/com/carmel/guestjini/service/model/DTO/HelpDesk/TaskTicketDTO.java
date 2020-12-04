@@ -3,7 +3,9 @@ package com.carmel.guestjini.service.model.DTO.HelpDesk;
 
 
 import com.carmel.guestjini.service.model.HelpDesk.TaskTicket;
+import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.Column;
 import java.util.Date;
 
 public class TaskTicketDTO {
@@ -25,6 +27,11 @@ public class TaskTicketDTO {
     private int ticketStatus;
     private int requesterType;
     private String requesterId;
+    private String requesterName;
+    private String requesterInventoryId;
+    private String requesterInventoryTitle;
+    private String taskRunnerId;
+    private String taskForceGroupId;
     private String createdBy;
     private Date creationTime;
     private String lastModifiedBy;
@@ -56,6 +63,11 @@ public class TaskTicketDTO {
         this.ticketStatus = taskTicket.getTicketStatus();
         this.requesterType = taskTicket.getRequesterType();
         this.requesterId = taskTicket.getRequesterId();
+        this.requesterName = taskTicket.getRequesterName();
+        this.requesterInventoryId = taskTicket.getRequesterInventoryId();
+        this.requesterInventoryTitle = taskTicket.getRequesterInventoryTitle();
+        this.taskRunnerId = taskTicket.getTaskRunnerId();
+        this.taskForceGroupId = taskTicket.getTaskForceGroupId();
         this.createdBy = taskTicket.getCreatedBy();
         this.creationTime = taskTicket.getCreationTime();
         this.lastModifiedBy = taskTicket.getLastModifiedBy();
@@ -263,5 +275,45 @@ public class TaskTicketDTO {
 
     public void setDeletedTime(Date deletedTime) {
         this.deletedTime = deletedTime;
+    }
+
+    public String getTaskRunnerId() {
+        return taskRunnerId;
+    }
+
+    public void setTaskRunnerId(String taskRunnerId) {
+        this.taskRunnerId = taskRunnerId;
+    }
+
+    public String getTaskForceGroupId() {
+        return taskForceGroupId;
+    }
+
+    public void setTaskForceGroupId(String taskForceGroupId) {
+        this.taskForceGroupId = taskForceGroupId;
+    }
+
+    public String getRequesterName() {
+        return requesterName;
+    }
+
+    public void setRequesterName(String requesterName) {
+        this.requesterName = requesterName;
+    }
+
+    public String getRequesterInventoryId() {
+        return requesterInventoryId;
+    }
+
+    public void setRequesterInventoryId(String requesterInventoryId) {
+        this.requesterInventoryId = requesterInventoryId;
+    }
+
+    public String getRequesterInventoryTitle() {
+        return requesterInventoryTitle;
+    }
+
+    public void setRequesterInventoryTitle(String requesterInventoryTitle) {
+        this.requesterInventoryTitle = requesterInventoryTitle;
     }
 }

@@ -104,6 +104,11 @@ public class TaskRunnerServiceImpl implements TaskRunnerService {
             if (optionalTaskTicket.isPresent()) {
                 TaskTicket taskTicket = optionalTaskTicket.get();
                 taskTicket.setTicketStatus(TicketStatus.WORK_IN_PROGRESS);
+                if (taskAssigneeDTO.getIsGroup() == 1) {
+                    taskTicket.setTaskForceGroupId(taskAssigneeDTO.getId());
+                } else {
+                    taskTicket.setTaskRunnerId(taskAssigneeDTO.getId());
+                }
                 taskTicketService.save(taskTicket);
             }
             taskRunnerResponse.setSuccess(true);
