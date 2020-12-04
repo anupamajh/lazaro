@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.carmel.guestjini.Networking.Tickets.InboxCount;
 import com.carmel.guestjini.Networking.Tickets.TaskCountResponse;
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
@@ -107,7 +108,7 @@ public class InboxViewMVCImpl
             @Override
             public void onClick(View v) {
                 for (Listener listener : getListeners()) {
-                    listener.onSharedUnassignedClicked();
+                    listener.onSharedInboxClicked();
                 }
             }
         });
@@ -116,7 +117,7 @@ public class InboxViewMVCImpl
             @Override
             public void onClick(View v) {
                 for (Listener listener : getListeners()) {
-                    listener.onSharedOpenClicked();
+                    listener.onSharedInboxClicked();
                 }
             }
         });
@@ -125,7 +126,7 @@ public class InboxViewMVCImpl
             @Override
             public void onClick(View v) {
                 for (Listener listener : getListeners()) {
-                    listener.onSharedClosedClicked();
+                    listener.onSharedInboxClicked();
                 }
             }
         });
@@ -135,7 +136,7 @@ public class InboxViewMVCImpl
             @Override
             public void onClick(View v) {
                 for (Listener listener : getListeners()) {
-                    listener.onYourOpenClicked();
+                    listener.onYourInboxClicked();
                 }
             }
         });
@@ -144,7 +145,7 @@ public class InboxViewMVCImpl
             @Override
             public void onClick(View v) {
                 for (Listener listener : getListeners()) {
-                    listener.onYourUnassignedClicked();
+                    listener.onYourInboxClicked();
                 }
             }
         });
@@ -154,7 +155,7 @@ public class InboxViewMVCImpl
             @Override
             public void onClick(View v) {
                 for (Listener listener : getListeners()) {
-                    listener.onSharedUnassignedClicked();
+                    listener.onTeamInboxClicked();
                 }
             }
         });
@@ -163,7 +164,7 @@ public class InboxViewMVCImpl
             @Override
             public void onClick(View v) {
                 for (Listener listener : getListeners()) {
-                    listener.onSharedUnassignedClicked();
+                    listener.onTeamInboxClicked();
                 }
             }
         });
@@ -172,10 +173,15 @@ public class InboxViewMVCImpl
             @Override
             public void onClick(View v) {
                 for (Listener listener : getListeners()) {
-                    listener.onSharedUnassignedClicked();
+                    listener.onTeamInboxClicked();
                 }
             }
         });
+
+        cardSharedInbox.setVisibility(View.GONE);
+        cardTeamInbox.setVisibility(View.GONE);
+        cardYourInbox.setVisibility(View.GONE);
+        layoutLucky.setVisibility(View.GONE);
     }
 
     @Override
@@ -194,88 +200,100 @@ public class InboxViewMVCImpl
     }
 
     @Override
-    public void bindData(TaskCountResponse taskCountResponse) {
-        if (taskCountResponse.getSharedInboxUnassignedCount()
-                + taskCountResponse.getSharedInboxOpenCount()
-                + taskCountResponse.getYourInboxOpenCount()
-                + taskCountResponse.getTeamInboxUnassignedCount()
-                + taskCountResponse.getTeamInboxOpenCount()
+    public void bindData(InboxCount inboxCount) {
+        inboxCount.setGroupAdmin(true);//TODO: Remove this
+        if(inboxCount.isGroupAdmin() ){
+            cardSharedInbox.setVisibility(View.VISIBLE);
+            if (inboxCount.getSharedUnAssigned() > 0) {
+                layoutSharedUnassigned.setVisibility(View.VISIBLE);
+                txtSharedInboxUnassignedCount.setText(
+                        String.valueOf(inboxCount.getSharedUnAssigned())
+                );
+            }else{
+                layoutSharedUnassigned.setVisibility(View.GONE);
+            }
+
+            if (inboxCount.getSharedOpen() > 0) {
+                layoutSharedOpen.setVisibility(View.VISIBLE);
+                txtSharedInboxOpenCount.setText(
+                        String.valueOf(inboxCount.getSharedOpen())
+                );
+            }else{
+                layoutSharedOpen.setVisibility(View.GONE);
+            }
+
+            if (inboxCount.getSharedClosed() > 0) {
+                layoutSharedClosed.setVisibility(View.VISIBLE);
+                txtSharedInboxClosedCount.setText(
+                        String.valueOf(inboxCount.getSharedClosed())
+                );
+            }else{
+                layoutSharedClosed.setVisibility(View.GONE);
+            }
+
+        }else{
+            cardSharedInbox.setVisibility(View.GONE);
+        }
+        if (inboxCount.getSharedUnAssigned()
+                + inboxCount.getSharedOpen()
+                + inboxCount.getMyOpen()
+                + inboxCount.getTeamUnassigned()
+                + inboxCount.getTeamOpen()
                 == 0
         ) {
-            layoutLucky.setVisibility(View.GONE);
-        } else {
             layoutLucky.setVisibility(View.VISIBLE);
-        }
-
-        if (taskCountResponse.getSharedInboxUnassignedCount() > 0) {
-            layoutSharedUnassigned.setVisibility(View.VISIBLE);
-            txtSharedInboxUnassignedCount.setText(
-                    String.valueOf(taskCountResponse.getSharedInboxUnassignedCount())
-            );
-        }else{
-            layoutSharedUnassigned.setVisibility(View.GONE);
-        }
-
-        if (taskCountResponse.getSharedInboxOpenCount() > 0) {
-            layoutSharedOpen.setVisibility(View.VISIBLE);
-            txtSharedInboxOpenCount.setText(
-                    String.valueOf(taskCountResponse.getSharedInboxOpenCount())
-            );
-        }else{
-            layoutSharedOpen.setVisibility(View.GONE);
-        }
-
-        if (taskCountResponse.getSharedInboxClosedCount() > 0) {
-            layoutSharedClosed.setVisibility(View.VISIBLE);
-            txtSharedInboxClosedCount.setText(
-                    String.valueOf(taskCountResponse.getSharedInboxClosedCount())
-            );
-        }else{
-            layoutSharedClosed.setVisibility(View.GONE);
+        } else {
+            layoutLucky.setVisibility(View.GONE);
         }
 
 
-        if (taskCountResponse.getYourInboxOpenCount() > 0) {
+
+        if (inboxCount.getMyOpen() > 0) {
+            cardYourInbox.setVisibility(View.VISIBLE);
             layoutYourOpen.setVisibility(View.VISIBLE);
             txtYourInboxOpenCount.setText(
-                    String.valueOf(taskCountResponse.getYourInboxOpenCount())
+                    String.valueOf(inboxCount.getMyOpen())
             );
         }else{
             layoutYourOpen.setVisibility(View.GONE);
         }
 
-        if (taskCountResponse.getYourInboxClosedCount() > 0) {
+        if (inboxCount.getMyClosed() > 0) {
+            cardYourInbox.setVisibility(View.VISIBLE);
             layoutYourClosed.setVisibility(View.VISIBLE);
             txtYourInboxClosedCount.setText(
-                    String.valueOf(taskCountResponse.getYourInboxClosedCount())
+                    String.valueOf(inboxCount.getMyClosed())
             );
         }else{
             layoutYourClosed.setVisibility(View.GONE);
         }
 
-        if (taskCountResponse.getTeamInboxUnassignedCount() > 0) {
+        if (inboxCount.getTeamUnassigned() > 0) {
+            cardTeamInbox.setVisibility(View.VISIBLE);
             layoutTeamUnassigned.setVisibility(View.VISIBLE);
             txtTeamInboxUnassignedCount.setText(
-                    String.valueOf(taskCountResponse.getTeamInboxUnassignedCount())
+                    String.valueOf(inboxCount.getTeamUnassigned())
             );
 
         }else{
             layoutTeamUnassigned.setVisibility(View.GONE);
         }
 
-        if (taskCountResponse.getTeamInboxOpenCount() > 0) {
+        if (inboxCount.getTeamOpen() > 0) {
+            cardTeamInbox.setVisibility(View.VISIBLE);
             layoutTeamOpen.setVisibility(View.VISIBLE);
             txtTeamInboxOpenCount.setText(
-                    String.valueOf(taskCountResponse.getTeamInboxOpenCount())
+                    String.valueOf(inboxCount.getTeamOpen())
             );
         }else{
             layoutTeamOpen.setVisibility(View.GONE);
         }
 
-        if (taskCountResponse.getTeamInboxClosedCount() > 0) {
+        if (inboxCount.getTeamClosed() > 0) {
+            cardTeamInbox.setVisibility(View.VISIBLE);
             layoutTeamClosed.setVisibility(View.VISIBLE);
             txtTeamInboxClosedCount.setText(
-                    String.valueOf(taskCountResponse.getTeamInboxClosedCount())
+                    String.valueOf(inboxCount.getTeamClosed())
             );
         }else{
             layoutTeamClosed.setVisibility(View.GONE);

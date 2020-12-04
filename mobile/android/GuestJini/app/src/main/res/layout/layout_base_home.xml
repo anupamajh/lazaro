@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
-                android:text="Ronald Philip"
+                android:text=""
                 android:textSize="30sp" />
 
             <TextView
@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtUserFullName"
                 android:fontFamily="@font/roboto_regular"
-                android:text="Good Morning"
+                android:text=""
                 android:textSize="13sp" />
 
         </RelativeLayout>
@@ -43,6 +43,7 @@
                 android:id="@+id/imgUserProfilePic"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:visibility="gone"
                 android:src="@drawable/default_user_icon"
                 android:layout_centerHorizontal="true"/>
 
@@ -53,6 +54,7 @@
                 android:layout_below="@id/imgUserProfilePic"
                 android:layout_marginTop="-40dp"
                 android:padding="15dp"
+                android:visibility="gone"
                 android:background="@drawable/background_border">
                 <TextView
                     android:id="@+id/txtUnitHeading"

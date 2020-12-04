@@ -1,5 +1,7 @@
 package com.carmel.guestjini.Screens.Home;
 
+import com.carmel.guestjini.Guest.FetchGuestDetailsByPhoneUseCase;
+import com.carmel.guestjini.Networking.Guest.GuestResponse;
 import com.carmel.guestjini.Networking.Users.UserInfo;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
@@ -13,6 +15,7 @@ public class HomeController
 implements HomeViewMVC.Listener,
         FetchMyProfileUseCase.Listener,
         FetchMyProfilePicUseCase.Listener,
+        FetchGuestDetailsByPhoneUseCase.Listener,
         DialogsEventBus.Listener
 {
     private enum ScreenState {
@@ -24,6 +27,7 @@ implements HomeViewMVC.Listener,
 
     private final FetchMyProfileUseCase fetchMyProfileUseCase;
     private final FetchMyProfilePicUseCase fetchMyProfilePicUseCase;
+    private final FetchGuestDetailsByPhoneUseCase fetchGuestDetailsByPhoneUseCase;
     private final ScreensNavigator screensNavigator;
     private final DialogsManager dialogsManager;
     private final DialogsEventBus dialogsEventBus;
@@ -36,11 +40,13 @@ implements HomeViewMVC.Listener,
             (
                     FetchMyProfileUseCase fetchMyProfileUseCase,
                     FetchMyProfilePicUseCase fetchMyProfilePicUseCase,
+                    FetchGuestDetailsByPhoneUseCase fetchGuestDetailsByPhoneUseCase,
                     ScreensNavigator screensNavigator,
                     DialogsManager dialogsManager,
                     DialogsEventBus dialogsEventBus) {
         this.fetchMyProfileUseCase = fetchMyProfileUseCase;
         this.fetchMyProfilePicUseCase = fetchMyProfilePicUseCase;
+        this.fetchGuestDetailsByPhoneUseCase = fetchGuestDetailsByPhoneUseCase;
         this.screensNavigator = screensNavigator;
         this.dialogsManager = dialogsManager;
         this.dialogsEventBus = dialogsEventBus;
@@ -54,6 +60,7 @@ implements HomeViewMVC.Listener,
         viewMVC.registerListener(this);
         fetchMyProfileUseCase.registerListener(this);
         fetchMyProfilePicUseCase.registerListener(this);
+        fetchGuestDetailsByPhoneUseCase.registerListener(this);
         dialogsEventBus.registerListener(this);
         if (mScreenState != ScreenState.NETWORK_ERROR) {
             fetchMyProfileAndNotify();
@@ -64,6 +71,7 @@ implements HomeViewMVC.Listener,
         viewMVC.unregisterListener(this);
         fetchMyProfileUseCase.unregisterListener(this);
         fetchMyProfilePicUseCase.unregisterListener(this);
+        fetchGuestDetailsByPhoneUseCase.unregisterListener(this);
         dialogsEventBus.unregisterListener(this);
     }
 
@@ -97,8 +105,9 @@ implements HomeViewMVC.Listener,
 
     @Override
     public void onProfileFetched(UserInfo response) {
-        viewMVC.hideProgressIndication();
         viewMVC.bindUserInfo(response);
+        fetchMyProfilePicUseCase.fetchProfilePicAndNotify();
+        fetchGuestDetailsByPhoneUseCase.fetchGuestDetailsAndNotify(response.getPhone());
     }
 
     @Override
@@ -120,5 +129,17 @@ implements HomeViewMVC.Listener,
     @Override
     public void onNetworkFailed() {
         viewMVC.hideProgressIndication();
+    }
+
+    @Override
+    public void onGuestDetailsFetched(GuestResponse response) {
+        viewMVC.hideProgressIndication();
+        viewMVC.bindGuestDetails(response);
+    }
+
+    @Override
+    public void onGuestDetailsFetchFailed() {
+        viewMVC.hideProgressIndication();
+
     }
 }

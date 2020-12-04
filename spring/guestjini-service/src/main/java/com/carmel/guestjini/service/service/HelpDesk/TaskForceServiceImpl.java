@@ -332,4 +332,18 @@ public class TaskForceServiceImpl implements TaskForceService {
         logger.trace("Exiting");
         return taskForceResponse;
     }
+
+    @Override
+    public TaskForceResponse findByUserId(String userId) throws Exception {
+            Optional<TaskForce> optionalTaskForce =   taskForceRepository.findByUserId(userId);
+            if(optionalTaskForce.isPresent()){
+
+                TaskForceResponse taskForceResponse = new TaskForceResponse();
+                taskForceResponse.setTaskForce(new TaskForceDTO(optionalTaskForce.get()));
+                taskForceResponse.setSuccess(true);
+                return taskForceResponse;
+            }else{
+                throw new Exception("User does not belong to Task force");
+            }
+    }
 }

@@ -1,5 +1,7 @@
 package com.carmel.guestjini.Screens.Support.Inbox;
 
+import com.carmel.guestjini.Common.Search.SearchRequest;
+import com.carmel.guestjini.Networking.Tickets.InboxCount;
 import com.carmel.guestjini.Networking.Tickets.TaskCountResponse;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
@@ -40,7 +42,6 @@ public class InboxController
         this.screensNavigator = screensNavigator;
         this.dialogsManager = dialogsManager;
         this.dialogsEventBus = dialogsEventBus;
-
     }
 
     public void onStart() {
@@ -146,9 +147,9 @@ public class InboxController
     }
 
     @Override
-    public void onInboxCountFetched(TaskCountResponse taskCountResponse) {
+    public void onInboxCountFetched(InboxCount inboxCount) {
         viewMVC.hideProgressIndication();
-        viewMVC.bindData(taskCountResponse);
+        viewMVC.bindData(inboxCount);
     }
 
     @Override

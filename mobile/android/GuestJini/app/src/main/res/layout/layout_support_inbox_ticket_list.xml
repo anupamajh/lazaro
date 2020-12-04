@@ -454,6 +454,7 @@
                             android:id="@+id/cmbDateFilter"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_below="@id/layoutDateFilterTextDivider"
                             android:entries="@array/date_filter_options" />
 
                         <TextView
@@ -472,7 +473,7 @@
 
                         <TextView
                             android:id="@+id/txtSelectDate"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/txtSelectDateHeading"
                             android:layout_marginStart="20dp"
@@ -541,7 +542,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginStart="20dp"
-                                android:layout_marginTop="32dp"
+                                android:layout_marginTop="22dp"
                                 android:letterSpacing="0.1"
                                 android:text="Ascending"
                                 android:textAllCaps="true"
@@ -549,6 +550,7 @@
                                 android:textSize="10sp"
                                 app:fontFamily="@font/roboto_regular" />
                             <RadioGroup
+                                android:id="@+id/rdgSordOptions"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/txtSortDirection"
@@ -556,6 +558,7 @@
                                 <RadioButton android:id="@+id/rdbSubmittedDate"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="true"
                                     android:text="SUBMITTED DATE &amp; TIME"/>
                                 <RadioButton android:id="@+id/rdbSubject"
                                     android:layout_width="wrap_content"

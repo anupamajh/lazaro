@@ -4,12 +4,16 @@ import com.carmel.guestjini.Screens.Common.Views.ObservableViewMvc;
 
 public interface CloseTicketSheetViewMVC
         extends ObservableViewMvc<CloseTicketSheetViewMVC.Listener> {
-    public interface Listener {
+     public interface Listener {
         void onCloseTicketClicked(String message);
     }
 
     void showProgressIndication();
 
     void hideProgressIndication();
+
+    void showTicketClosed();
+
+    void showTicketCloseFailed();
 
 }

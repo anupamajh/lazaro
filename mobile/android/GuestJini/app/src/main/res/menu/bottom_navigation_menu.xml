@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/homeIcon"
-        android:icon="@drawable/support_grey_icon"
+        android:icon="@drawable/ic_home"
         android:title="Home" />
     <item
         android:id="@+id/supportIcon"
@@ -10,11 +10,11 @@
         android:title="@string/support" />
     <item
         android:id="@+id/communityIcon"
-        android:icon="@drawable/community_grey_icon"
+        android:icon="@drawable/ic_group"
         android:title="@string/community" />
     <item
         android:id="@+id/inboxIcon"
-        android:icon="@drawable/community_grey_icon"
+        android:icon="@drawable/ic_email"
         android:title="Inbox" />
 <!--    <item-->
 <!--        android:id="@+id/teamIcon"-->

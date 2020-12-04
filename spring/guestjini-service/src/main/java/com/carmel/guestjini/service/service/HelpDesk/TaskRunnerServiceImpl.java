@@ -200,4 +200,74 @@ public class TaskRunnerServiceImpl implements TaskRunnerService {
             return new TaskRunner();
         }
     }
+
+    @Override
+    public TaskRunnerResponse findAllByUserIdAndTaskStatus(String userId, int taskStatus) throws Exception {
+        TaskRunnerResponse taskRunnerResponse = new TaskRunnerResponse();
+        try {
+            List<TaskRunner> taskRunners = taskRunnerRepository
+                    .findAllByUserIdAndTaskStatus(userId, taskStatus);
+            taskRunnerResponse.setSuccess(true);
+            taskRunnerResponse.setTaskRunnerList(taskRunners);
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return taskRunnerResponse;
+    }
+
+    @Override
+    public TaskRunnerResponse findAllByUserIdAndTaskStatusIsNot(String userId, int taskStatus) throws Exception {
+        TaskRunnerResponse taskRunnerResponse = new TaskRunnerResponse();
+        try {
+            List<TaskRunner> taskRunners = taskRunnerRepository
+                    .findAllByUserIdAndTaskStatusIsNot(userId, taskStatus);
+            taskRunnerResponse.setSuccess(true);
+            taskRunnerResponse.setTaskRunnerList(taskRunners);
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return taskRunnerResponse;
+    }
+
+    @Override
+    public TaskRunnerResponse findAllByTaskForceGroupIdAndTaskStatus(String groupId, int taskStatus) throws Exception {
+        TaskRunnerResponse taskRunnerResponse = new TaskRunnerResponse();
+        try {
+            List<TaskRunner> taskRunners = taskRunnerRepository
+                    .findAllByTaskForceGroupIdAndTaskStatus(groupId, taskStatus);
+            taskRunnerResponse.setSuccess(true);
+            taskRunnerResponse.setTaskRunnerList(taskRunners);
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return taskRunnerResponse;
+    }
+
+    @Override
+    public TaskRunnerResponse findAllByTaskForceGroupIdAndTaskStatusIsNot(String groupId, int taskStatus) throws Exception {
+        TaskRunnerResponse taskRunnerResponse = new TaskRunnerResponse();
+        try {
+            List<TaskRunner> taskRunners = taskRunnerRepository
+                    .findAllByTaskForceGroupIdAndTaskStatusIsNot(groupId, taskStatus);
+            taskRunnerResponse.setSuccess(true);
+            taskRunnerResponse.setTaskRunnerList(taskRunners);
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return taskRunnerResponse;
+    }
+
+    @Override
+    public TaskRunnerResponse findAllByTaskForceGroupIdAndUserId(String groupId, String userId) throws Exception {
+        TaskRunnerResponse taskRunnerResponse = new TaskRunnerResponse();
+        try {
+            List<TaskRunner> taskRunners = taskRunnerRepository
+                    .findAllByTaskForceGroupIdAndUserId(groupId, userId);
+            taskRunnerResponse.setSuccess(true);
+            taskRunnerResponse.setTaskRunnerList(taskRunners);
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return taskRunnerResponse;
+    }
 }

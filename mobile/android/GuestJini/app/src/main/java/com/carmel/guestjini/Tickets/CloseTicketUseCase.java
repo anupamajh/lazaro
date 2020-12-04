@@ -2,31 +2,39 @@ package com.carmel.guestjini.Tickets;
 
 import com.carmel.guestjini.Common.BaseObservable;
 import com.carmel.guestjini.Networking.GuestJiniAPI;
-import com.carmel.guestjini.Networking.Tickets.InboxCount;
+import com.carmel.guestjini.Networking.Tickets.TicketResponse;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FetchInboxCountUseCase  extends BaseObservable<FetchInboxCountUseCase.Listener> {
+public class CloseTicketUseCase extends BaseObservable<CloseTicketUseCase.Listener> {
     public interface Listener {
-        void onInboxCountFetched(InboxCount inboxCount);
+        void onTicketClosed(TicketResponse ticketResponse);
 
-        void onTicketCountFetchFailed();
+        void onCloseTicketFailed();
 
         void onNetworkFailed();
     }
 
+
     private final GuestJiniAPI guestJiniAPI;
 
-    public FetchInboxCountUseCase(GuestJiniAPI guestJiniAPI) {
+    public CloseTicketUseCase(GuestJiniAPI guestJiniAPI) {
         this.guestJiniAPI = guestJiniAPI;
     }
 
-    public void fetchTaskCountAndNotify() {
-        this.guestJiniAPI.getInboxCount().enqueue(new Callback<InboxCount>() {
+    public void closeTaskNoteAndNotify(String ticketId, String userId, String message) {
+        Map<String, String> postData = new HashMap<>();
+        postData.put("ticketId", ticketId);
+        postData.put("userId", userId);
+        postData.put("message", message);
+        this.guestJiniAPI.closeTicket(postData).enqueue(new Callback<TicketResponse>() {
             @Override
-            public void onResponse(Call<InboxCount> call, Response<InboxCount> response) {
+            public void onResponse(Call<TicketResponse> call, Response<TicketResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body().isSuccess()) {
                         notifySuccess(response.body());
@@ -39,7 +47,7 @@ public class FetchInboxCountUseCase  extends BaseObservable<FetchInboxCountUseCa
             }
 
             @Override
-            public void onFailure(Call<InboxCount> call, Throwable t) {
+            public void onFailure(Call<TicketResponse> call, Throwable t) {
                 notifyNetworkFailure();
             }
         });
@@ -53,13 +61,13 @@ public class FetchInboxCountUseCase  extends BaseObservable<FetchInboxCountUseCa
 
     private void notifyFailure() {
         for (Listener listener : getListeners()) {
-            listener.onTicketCountFetchFailed();
+            listener.onCloseTicketFailed();
         }
     }
 
-    private void notifySuccess(InboxCount inboxCount) {
+    private void notifySuccess(TicketResponse taskAssigneeResponse) {
         for (Listener listener : getListeners()) {
-            listener.onInboxCountFetched(inboxCount);
+            listener.onTicketClosed(taskAssigneeResponse);
         }
     }
 }

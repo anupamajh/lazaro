@@ -1,11 +1,16 @@
 package com.carmel.guestjini.Common.Search;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchCriteria {
     private String condition;
     private String searchUnitCondition;
     private List<SearchUnit> searchUnits;
+
+    public SearchCriteria() {
+        searchUnits = new ArrayList<>();
+    }
 
     public String getCondition() {
         return condition;

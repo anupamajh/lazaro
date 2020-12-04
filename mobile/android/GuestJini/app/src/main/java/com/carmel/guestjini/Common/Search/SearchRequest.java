@@ -1,5 +1,6 @@
 package com.carmel.guestjini.Common.Search;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchRequest {
@@ -7,6 +8,13 @@ public class SearchRequest {
     private List<OrderUnit> orderUnits;
     private int pageSize;
     private int currentPage;
+
+    public SearchRequest() {
+        searchCriteria = new ArrayList<>();
+        orderUnits = new ArrayList<>();
+        pageSize = 5000;
+        currentPage = 1;
+    }
 
     public List<SearchCriteria> getSearchCriteria() {
         return searchCriteria;

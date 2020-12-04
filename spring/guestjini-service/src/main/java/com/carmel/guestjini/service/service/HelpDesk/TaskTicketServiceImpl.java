@@ -1,20 +1,23 @@
 package com.carmel.guestjini.service.service.HelpDesk;
 
 
-import com.carmel.guestjini.service.HelpDesk.TaskTicket.Response.TaskAssigneeResponse;
 import com.carmel.guestjini.service.common.HelpDesk.TicketStatus;
-import com.carmel.guestjini.service.components.UserService;
+import com.carmel.guestjini.service.model.DTO.HelpDesk.InboxCount;
 import com.carmel.guestjini.service.model.DTO.HelpDesk.TicketCountDTO;
+import com.carmel.guestjini.service.model.HelpDesk.TaskNote;
 import com.carmel.guestjini.service.model.HelpDesk.TaskTicket;
 import com.carmel.guestjini.service.repository.HelpDesk.TaskTicketRepository;
+import com.carmel.guestjini.service.response.HelpDesk.TaskForceResponse;
+import com.carmel.guestjini.service.response.HelpDesk.TaskRunnerResponse;
+import com.carmel.guestjini.service.response.HelpDesk.TaskTicketResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -22,6 +25,15 @@ public class TaskTicketServiceImpl implements TaskTicketService {
 
     @Autowired
     TaskTicketRepository taskTicketRepository;
+
+    @Autowired
+    TaskNoteService taskNoteService;
+
+    @Autowired
+    TaskForceService taskForceService;
+
+    @Autowired
+    TaskRunnerService taskRunnerService;
 
 
     @Override
@@ -55,8 +67,8 @@ public class TaskTicketServiceImpl implements TaskTicketService {
         try {
 
             //Get Draft Ticket Count
-           List<TaskTicket> taskTicketList =
-                   taskTicketRepository.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, requesterId, TicketStatus.DRAFT);
+            List<TaskTicket> taskTicketList =
+                    taskTicketRepository.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, requesterId, TicketStatus.DRAFT);
             ticketCountDTO.setDraftTicketCount(taskTicketList.size());
             taskTicketList =
                     taskTicketRepository.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, requesterId, TicketStatus.WORK_IN_PROGRESS);
@@ -79,15 +91,15 @@ public class TaskTicketServiceImpl implements TaskTicketService {
 
     @Override
     public List<TaskTicket> findAllByIsDeletedAndRequesterIdAndTicketStatus(int isDeleted, String id, int ticketStatus) {
-        List<TaskTicket> tickets ;
-        tickets =   taskTicketRepository.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, id,ticketStatus);
-        if(ticketStatus == TicketStatus.NOT_STARTED){
+        List<TaskTicket> tickets;
+        tickets = taskTicketRepository.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, id, ticketStatus);
+        if (ticketStatus == TicketStatus.NOT_STARTED) {
             ticketStatus = TicketStatus.WORK_IN_PROGRESS;
-            tickets.addAll(taskTicketRepository.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, id,ticketStatus));
+            tickets.addAll(taskTicketRepository.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, id, ticketStatus));
             ticketStatus = TicketStatus.COMPLETED;
-            tickets.addAll(taskTicketRepository.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, id,ticketStatus));
-            ticketStatus = TicketStatus.ON_HOLD ;
-            tickets.addAll(taskTicketRepository.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, id,ticketStatus));
+            tickets.addAll(taskTicketRepository.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, id, ticketStatus));
+            ticketStatus = TicketStatus.ON_HOLD;
+            tickets.addAll(taskTicketRepository.findAllByIsDeletedAndRequesterIdAndTicketStatus(0, id, ticketStatus));
         }
 
         return tickets;
@@ -96,5 +108,84 @@ public class TaskTicketServiceImpl implements TaskTicketService {
     @Override
     public Page<TaskTicket> findAllByIsDeleted(int isDeleted, Pageable pageable) {
         return taskTicketRepository.findAllByIsDeleted(isDeleted, pageable);
+    }
+
+    @Override
+    public TaskTicketResponse closeTicket(String ticketId, String userId, String message) throws Exception {
+        TaskTicketResponse taskTicketResponse = new TaskTicketResponse();
+        try {
+
+            Optional<TaskTicket> optionalTaskTicket = taskTicketRepository.findById(ticketId);
+            if (optionalTaskTicket.isPresent()) {
+                TaskTicket taskTicket = optionalTaskTicket.get();
+                taskTicket.setTicketStatus(TicketStatus.CLOSED);
+                taskTicket.setLastModifiedBy(userId);
+                taskTicket.setLastModifiedTime(new Date());
+                taskTicketRepository.save(taskTicket);
+                TaskNote taskNote = new TaskNote();
+                taskNote.setTicketId(ticketId);
+                taskNote.setNotes("Ticket Closed \n" + message);
+                taskNote.setUserId(userId);
+                taskNoteService.save(taskNote);
+            } else {
+                throw new Exception("Ticket not found");
+            }
+
+        } catch (Exception ex) {
+            throw ex;
+        }
+
+        taskTicketResponse.setSuccess(true);
+        return taskTicketResponse;
+    }
+
+    @Override
+    public InboxCount getInboxCount(String userId) throws Exception {
+        InboxCount inboxCount = new InboxCount();
+        try {
+            TaskForceResponse taskForceResponse = taskForceService.findByUserId(userId);
+            inboxCount.setGroupAdmin(taskForceResponse.getTaskForce().getIsGroupAdmin() == 1);
+            String groupId = taskForceResponse.getTaskForce().getGroupId();
+            List<TaskTicket> taskTicketList = taskTicketRepository
+                    .findAllByIsDeletedAndTicketStatus(0, TicketStatus.NOT_STARTED);
+            inboxCount.setSharedUnAssigned(taskTicketList.size());
+            taskTicketList = taskTicketRepository
+                    .findAllByIsDeletedAndTicketStatus(0, TicketStatus.CLOSED);
+            inboxCount.setSharedClosed(taskTicketList.size());
+            taskTicketList = taskTicketRepository
+                    .findAllByIsDeletedAndTicketStatus(0, TicketStatus.ON_HOLD);
+            inboxCount.setSharedOpen(taskTicketList.size());
+            taskTicketList = taskTicketRepository
+                    .findAllByIsDeletedAndTicketStatus(0, TicketStatus.WORK_IN_PROGRESS);
+            inboxCount.setSharedOpen(inboxCount.getSharedOpen() + taskTicketList.size());
+            taskTicketList = taskTicketRepository
+                    .findAllByIsDeletedAndTicketStatus(0, TicketStatus.COMPLETED);
+            inboxCount.setSharedOpen(inboxCount.getSharedOpen() + taskTicketList.size());
+            taskTicketList = taskTicketRepository
+                    .findAllByIsDeletedAndTicketStatus(0, TicketStatus.ON_HOLD);
+            inboxCount.setSharedOpen(inboxCount.getSharedOpen() + taskTicketList.size());
+
+            TaskRunnerResponse taskRunnerResponse =
+                    taskRunnerService.findAllByUserIdAndTaskStatus(userId, TicketStatus.CLOSED);
+            inboxCount.setMyClosed(taskRunnerResponse.getTaskRunnerList().size());
+            taskRunnerResponse =
+                    taskRunnerService.findAllByUserIdAndTaskStatusIsNot(userId, TicketStatus.CLOSED);
+            inboxCount.setMyOpen(taskRunnerResponse.getTaskRunnerList().size());
+
+            taskRunnerResponse =
+                    taskRunnerService.findAllByTaskForceGroupIdAndTaskStatus(groupId, TicketStatus.CLOSED);
+            inboxCount.setTeamClosed(taskRunnerResponse.getTaskRunnerList().size());
+            taskRunnerResponse =
+                    taskRunnerService.findAllByTaskForceGroupIdAndTaskStatusIsNot(groupId, TicketStatus.CLOSED);
+            inboxCount.setTeamOpen(taskRunnerResponse.getTaskRunnerList().size());
+
+            taskRunnerResponse =
+                    taskRunnerService.findAllByTaskForceGroupIdAndUserId(groupId,null);
+            inboxCount.setTeamUnassigned(taskRunnerResponse.getTaskRunnerList().size());
+            inboxCount.setSuccess(true);
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return inboxCount;
     }
 }

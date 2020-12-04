@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.carmel.guestjini.R;
+import com.carmel.guestjini.Screens.Common.AuthorityConstants;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -85,6 +86,18 @@ public class BaseActivityMVCViewImpl extends BaseObservableViewMvc<BaseActivityM
 
     @Override
     public void setupNavigationGrants(Set<String> grants) {
+        if(grants != null) {
+            if (grants.contains(AuthorityConstants.ROLE_GUEST)) {
+                //findViewById(R.id.communityIcon).setVisibility(View.VISIBLE);
+            }else{
+                bottomNavigationView.getMenu().removeItem(R.id.communityIcon);
+            }
+            if (grants.contains(AuthorityConstants.ROLE_SUPPORT_TEAM)) {
+               // findViewById(R.id.inboxIcon).setVisibility(View.VISIBLE);
+            }else{
+                bottomNavigationView.getMenu().removeItem(R.id.inboxIcon);
+            }
+        }
 
     }
 

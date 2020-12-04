@@ -31,8 +31,10 @@ public class InboxListController implements
 
     private InboxListViewMVC viewMVC;
     private ScreenState mScreenState = ScreenState.IDLE;
+    private SearchRequest searchRequest;
 
-    private int ticketStatus;
+
+    private int inboxType;
 
     public InboxListController
             (
@@ -45,15 +47,17 @@ public class InboxListController implements
         this.screensNavigator = screensNavigator;
         this.dialogsManager = dialogsManager;
         this.dialogsEventBus = dialogsEventBus;
+        searchRequest = new SearchRequest();
     }
 
     public void bindView(InboxListViewMVC inboxListViewMVC) {
         this.viewMVC = inboxListViewMVC;
     }
 
-    public void onStart(int ticketStatus) {
-        this.ticketStatus = ticketStatus;
+    public void onStart(int inboxType) {
+        this.inboxType = inboxType;
         viewMVC.registerListener(this);
+        viewMVC.bindListTitle(inboxType);
         fetchInboxTicketListUseCase.registerListener(this);
         dialogsEventBus.registerListener(this);
         if (mScreenState != ScreenState.NETWORK_ERROR) {
@@ -79,10 +83,7 @@ public class InboxListController implements
     private void fetchTicketListAndNotify() {
         mScreenState = ScreenState.FETCHING_TICKET_LIST;
         viewMVC.showProgressIndication();
-        SearchRequest searchRequest = new SearchRequest();
-        searchRequest.setCurrentPage(1);
-        searchRequest.setPageSize(30);
-        fetchInboxTicketListUseCase.fetchTicketListAndNotify(searchRequest);
+           fetchInboxTicketListUseCase.fetchTicketListAndNotify(searchRequest);
     }
 
     @Override
@@ -123,7 +124,7 @@ public class InboxListController implements
 
     @Override
     public void onBackClicked() {
-        screensNavigator.toSupportHome();
+        screensNavigator.toInboxScreen();
     }
 
     @Override
@@ -159,4 +160,12 @@ public class InboxListController implements
             mScreenState = screenState;
         }
     }
+
+    @Override
+    public void onFilterApplied(SearchRequest searchRequest) {
+        this.searchRequest =searchRequest;
+        fetchTicketListAndNotify();
+    }
 }
+
+

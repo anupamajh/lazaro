@@ -15,6 +15,7 @@ public class GuestResponse {
     private long currentRecords;
     private boolean success;
     private String error;
+    private String inventoryPath;
 
     public GuestDTO getGuest() {
         return guest;
@@ -73,5 +74,13 @@ public class GuestResponse {
 
     public void setError(String error) {
         this.error = error;
+    }
+
+    public String getInventoryPath() {
+        return inventoryPath;
+    }
+
+    public void setInventoryPath(String inventoryPath) {
+        this.inventoryPath = inventoryPath;
     }
 }

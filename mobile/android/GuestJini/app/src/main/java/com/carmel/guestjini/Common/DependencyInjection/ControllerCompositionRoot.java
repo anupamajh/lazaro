@@ -22,6 +22,7 @@ import com.carmel.guestjini.Community.InviteToGroupUseCase;
 import com.carmel.guestjini.Community.SaveGroupConversationUseCase;
 import com.carmel.guestjini.Community.SaveGroupUseCase;
 import com.carmel.guestjini.Community.SubscribeToGroupUseCase;
+import com.carmel.guestjini.Guest.FetchGuestDetailsByPhoneUseCase;
 import com.carmel.guestjini.KnowledgeBase.FetchKBDetailsUseCase;
 import com.carmel.guestjini.KnowledgeBase.FetchKBListUseCase;
 import com.carmel.guestjini.KnowledgeBase.FetchKBRatingPercentageUseCase;
@@ -81,6 +82,7 @@ import com.carmel.guestjini.Screens.Support.TicketList.TicketListController;
 import com.carmel.guestjini.Screens.Welcome.WelcomeController;
 import com.carmel.guestjini.TicketCategory.FetchTicketCategoryByParentIdUseCase;
 import com.carmel.guestjini.Tickets.AssignTaskTicketUseCase;
+import com.carmel.guestjini.Tickets.CloseTicketUseCase;
 import com.carmel.guestjini.Tickets.DeleteTicketUseCase;
 import com.carmel.guestjini.Tickets.FetchInboxCountUseCase;
 import com.carmel.guestjini.Tickets.FetchInboxTicketListUseCase;
@@ -429,6 +431,14 @@ public class ControllerCompositionRoot {
         return new FetchInboxCountUseCase(getAuthenticatedGuestJiniAPI());
     }
 
+    private CloseTicketUseCase getCloseTicketUseCase() {
+        return new CloseTicketUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private FetchGuestDetailsByPhoneUseCase getFetchGuestDetailsByPhoneUseCase() {
+        return new FetchGuestDetailsByPhoneUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
     public SharedPreferenceHelper getSharedPreferenceHelper() {
         return new SharedPreferenceHelper(preferences, editor);
 
@@ -735,6 +745,7 @@ public class ControllerCompositionRoot {
         return new HomeController(
                 getFetchMyProfileUseCase(),
                 getFetchMyProfilePicUseCase(),
+                getFetchGuestDetailsByPhoneUseCase(),
                 getScreensNavigator(),
                 getDialogsManager(),
                 getDialogsEventBus()
@@ -792,6 +803,7 @@ public class ControllerCompositionRoot {
 
     public CloseTicketSheetController getCloseTicketSheetController() {
         return new CloseTicketSheetController(
+                getCloseTicketUseCase(),
                 getScreensNavigator(),
                 getDialogsManager(),
                 getDialogsEventBus()

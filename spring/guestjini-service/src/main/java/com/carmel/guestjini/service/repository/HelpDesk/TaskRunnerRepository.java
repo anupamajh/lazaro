@@ -17,4 +17,14 @@ public interface TaskRunnerRepository extends JpaRepository<TaskRunner, String> 
     Page<TaskRunner> findAll(Specification<TaskRunner> textInAllColumns, Pageable pageable);
 
     Optional<TaskRunner> findByTicketId(String ticketId);
+
+    List<TaskRunner> findAllByUserIdAndTaskStatus(String userId, int taskStatus);
+
+    List<TaskRunner> findAllByUserIdAndTaskStatusIsNot(String userId, int taskStatus);
+
+    List<TaskRunner> findAllByTaskForceGroupIdAndTaskStatus(String groupId, int taskStatus);
+
+    List<TaskRunner> findAllByTaskForceGroupIdAndTaskStatusIsNot(String groupId, int taskStatus);
+
+    List<TaskRunner> findAllByTaskForceGroupIdAndUserId(String groupId, String userId);
 }

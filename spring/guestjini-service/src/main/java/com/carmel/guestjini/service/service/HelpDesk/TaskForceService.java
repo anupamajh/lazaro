@@ -28,4 +28,6 @@ public interface TaskForceService {
     Optional<TaskForce> findByPhone(String phone);
 
     TaskForceResponse getByGroup(String groupId);
+
+    TaskForceResponse findByUserId(String userId) throws Exception;
 }

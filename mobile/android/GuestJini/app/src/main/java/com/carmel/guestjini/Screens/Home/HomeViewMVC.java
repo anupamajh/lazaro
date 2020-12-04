@@ -1,6 +1,7 @@
 package com.carmel.guestjini.Screens.Home;
 
 import com.carmel.guestjini.Networking.Booking.Booking;
+import com.carmel.guestjini.Networking.Guest.GuestResponse;
 import com.carmel.guestjini.Networking.Users.UserInfo;
 import com.carmel.guestjini.Screens.Common.Views.ObservableViewMvc;
 
@@ -13,7 +14,7 @@ public interface HomeViewMVC  extends ObservableViewMvc<HomeViewMVC.Listener> {
 
     void hideProgressIndication();
 
-    void bindGuestDetails(Booking booking);
+    void bindGuestDetails(GuestResponse guestResponse);
 
     void bindUserInfo(UserInfo userInfo);
 

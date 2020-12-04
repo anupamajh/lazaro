@@ -1,23 +1,27 @@
 package com.carmel.guestjini.Screens.Support.CloseTicketSheet;
 
+import com.carmel.guestjini.Networking.Tickets.TicketResponse;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
 import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketSheetController;
 import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketSheetViewMVC;
 import com.carmel.guestjini.Tickets.AssignTaskTicketUseCase;
+import com.carmel.guestjini.Tickets.CloseTicketUseCase;
 import com.carmel.guestjini.Tickets.FetchTaskAssigneeUseCase;
 
 import java.io.Serializable;
 
 public class CloseTicketSheetController
-        implements CloseTicketSheetViewMVC.Listener {
+        implements CloseTicketSheetViewMVC.Listener,
+        CloseTicketUseCase.Listener {
     private String ticketId;
 
     private enum ScreenState {
         IDLE, FETCHING_TICKET_ASSIGNEE, TICKET_SHOWN, SAVING_TICKET_NOTES, TICKET_NOTES_SAVED, FETCHING_TICKET_NOTES, TICKET_NOTES_SHOWN, NETWORK_ERROR
     }
 
+    private final CloseTicketUseCase closeTicketUseCase;
     private final ScreensNavigator screensNavigator;
     private final DialogsManager dialogsManager;
     private final DialogsEventBus dialogsEventBus;
@@ -26,11 +30,13 @@ public class CloseTicketSheetController
     private ScreenState mScreenState = ScreenState.IDLE;
 
     public CloseTicketSheetController(
+            CloseTicketUseCase closeTicketUseCase,
             ScreensNavigator screensNavigator,
             DialogsManager dialogsManager,
             DialogsEventBus dialogsEventBus
     ) {
-         this.screensNavigator = screensNavigator;
+        this.closeTicketUseCase = closeTicketUseCase;
+        this.screensNavigator = screensNavigator;
         this.dialogsManager = dialogsManager;
         this.dialogsEventBus = dialogsEventBus;
     }
@@ -53,10 +59,12 @@ public class CloseTicketSheetController
 
     public void onStart(String ticketId) {
         this.ticketId = ticketId;
+        closeTicketUseCase.registerListener(this);
         viewMvc.registerListener(this);
     }
 
     public void onStop() {
+        closeTicketUseCase.unregisterListener(this);
         viewMvc.unregisterListener(this);
     }
 
@@ -66,6 +74,23 @@ public class CloseTicketSheetController
 
     @Override
     public void onCloseTicketClicked(String message) {
+        viewMvc.showProgressIndication();
+        closeTicketUseCase.closeTaskNoteAndNotify(this.ticketId, null, message);
+    }
 
+    @Override
+    public void onTicketClosed(TicketResponse ticketResponse) {
+        viewMvc.hideProgressIndication();
+        viewMvc.showTicketClosed();
+    }
+
+    @Override
+    public void onCloseTicketFailed() {
+        viewMvc.showTicketCloseFailed();
+    }
+
+    @Override
+    public void onNetworkFailed() {
+        viewMvc.showTicketCloseFailed();
     }
 }

@@ -10,6 +10,7 @@ import com.carmel.guestjini.service.components.UserInformation;
 import com.carmel.guestjini.service.components.UserService;
 import com.carmel.guestjini.service.config.CarmelConfig;
 import com.carmel.guestjini.service.model.Booking.Guest;
+import com.carmel.guestjini.service.model.DTO.HelpDesk.InboxCount;
 import com.carmel.guestjini.service.model.DTO.HelpDesk.TaskForceDTO;
 import com.carmel.guestjini.service.model.DTO.HelpDesk.TaskForceGroupDTO;
 import com.carmel.guestjini.service.model.DTO.HelpDesk.TicketCountDTO;
@@ -679,5 +680,47 @@ public class TaskTicketController {
         return taskAssigneeResponse;
     }
 
+    @RequestMapping(value = "/close", method = RequestMethod.POST)
+    public TaskTicketResponse closeTicket(@RequestBody Map<String, String> formData) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        TaskTicketResponse taskTicketResponse = new TaskTicketResponse();
+        try {
+            String ticketId = formData.get("ticketId");
+            String userId = formData.get("userId");
+            String message = formData.get("message");
+            if(userId == null){
+                userId = userInfo.getId();
+            }
+            taskTicketResponse = taskTicketService.closeTicket(
+                    ticketId,
+                    userId,
+                    message
+            );
+        } catch (Exception ex) {
+            logger.error(ex.toString());
+            taskTicketResponse.setSuccess(false);
+            taskTicketResponse.setError(ex.getMessage());
+        }
+        return taskTicketResponse;
+    }
+
+    @RequestMapping(value = "/get-inbox-count", method = RequestMethod.POST)
+    public InboxCount getInboxCount(){
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        InboxCount inboxCount = new InboxCount();
+        try {
+            String userId  = userInfo.getId();
+            inboxCount = taskTicketService.getInboxCount(userId);
+        } catch (Exception ex) {
+            logger.error(ex.toString());
+            inboxCount.setSuccess(false);
+            inboxCount.setError(ex.getMessage());
+        }
+        return inboxCount;
+    }
 
 }

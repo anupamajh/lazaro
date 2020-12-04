@@ -14,4 +14,6 @@ public interface InventoryDetailService {
     List<InventoryDetail> findAll(Specification<InventoryDetail> filterInventoryDetailByAvailability);
 
     Optional<InventoryDetail> findByInventoryId(String selectedInventoryId);
+
+    String getInventoryPath(String inventoryId);
 }

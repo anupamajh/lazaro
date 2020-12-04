@@ -372,7 +372,7 @@
         <item>Yesterday</item>
         <item>Last Week</item>s
         <item>Last Month</item>
-        <item>Specific Date</item>
-        <item>Date Range</item>
+<!--        <item>Specific Date</item>-->
+<!--        <item>Date Range</item>-->
     </string-array>
 </resources>

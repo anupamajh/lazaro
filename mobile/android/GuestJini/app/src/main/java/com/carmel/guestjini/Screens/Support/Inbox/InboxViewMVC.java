@@ -1,5 +1,6 @@
 package com.carmel.guestjini.Screens.Support.Inbox;
 
+import com.carmel.guestjini.Networking.Tickets.InboxCount;
 import com.carmel.guestjini.Networking.Tickets.TaskCountResponse;
 import com.carmel.guestjini.Screens.Common.Views.ObservableViewMvc;
 
@@ -27,6 +28,6 @@ public interface InboxViewMVC  extends ObservableViewMvc<InboxViewMVC.Listener> 
 
     void bindRoles(Set<String> grants);
 
-    void bindData(TaskCountResponse taskCountResponse);
+    void bindData(InboxCount inboxCount);
 
 }

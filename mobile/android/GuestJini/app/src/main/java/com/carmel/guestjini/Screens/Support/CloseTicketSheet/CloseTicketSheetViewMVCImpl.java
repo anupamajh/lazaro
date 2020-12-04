@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -45,5 +46,15 @@ public class CloseTicketSheetViewMVCImpl
     @Override
     public void hideProgressIndication() {
 
+    }
+
+    @Override
+    public void showTicketClosed() {
+        Toast.makeText(getContext(), "Ticket has been closed.", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showTicketCloseFailed() {
+        Toast.makeText(getContext(), "There was an error closing ticket, Kindly try after sometime.", Toast.LENGTH_LONG).show();
     }
 }

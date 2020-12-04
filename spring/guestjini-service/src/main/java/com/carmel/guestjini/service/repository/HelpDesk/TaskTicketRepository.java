@@ -18,4 +18,8 @@ public interface TaskTicketRepository extends JpaRepository<TaskTicket, String >
     List<TaskTicket> findAllByIsDeletedAndRequesterIdAndTicketStatus(int isDeleted, String requesterId, int status);
 
     Page<TaskTicket> findAllByIsDeleted(int isDeleted, Pageable pageable);
+
+    List<TaskTicket> findAllByIsDeletedAndTicketStatusIsNot(int isDeleted, int ticketStatus);
+
+    List<TaskTicket> findAllByIsDeletedAndTicketStatus(int isDeleted, int ticketStatus);
 }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.carmel.guestjini.Networking.Booking.Booking;
+import com.carmel.guestjini.Networking.Guest.GuestResponse;
 import com.carmel.guestjini.Networking.Users.UserInfo;
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
@@ -47,6 +48,7 @@ public class HomeViewMVCImpl extends BaseObservableViewMvc<HomeViewMVC.Listener>
         txtUnitName = findViewById(R.id.txtUnitName);
         txtGuestNumber = findViewById(R.id.txtGuestNumber);
         txtEmergencyContact = findViewById(R.id.txtEmergencyContact);
+        layoutGuestDetails.setVisibility(View.GONE);
 
     }
 
@@ -62,8 +64,11 @@ public class HomeViewMVCImpl extends BaseObservableViewMvc<HomeViewMVC.Listener>
     }
 
     @Override
-    public void bindGuestDetails(Booking booking) {
-
+    public void bindGuestDetails(GuestResponse guestResponse) {
+        layoutGuestDetails.setVisibility(View.VISIBLE);
+        txtUnitName.setText(guestResponse.getInventoryPath());
+        txtGuestNumber.setText(guestResponse.getGuest().getGuestNo());
+        txtEmergencyContact.setText(guestResponse.getGuest().getPhone());
     }
 
     @Override
@@ -93,7 +98,7 @@ public class HomeViewMVCImpl extends BaseObservableViewMvc<HomeViewMVC.Listener>
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
-        RelativeLayout.LayoutParams txtUnitHeading = new RelativeLayout.LayoutParams(
+        RelativeLayout.LayoutParams txtUnitHeadingParams = new RelativeLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
@@ -102,12 +107,14 @@ public class HomeViewMVCImpl extends BaseObservableViewMvc<HomeViewMVC.Listener>
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             imgUserProfilePic.setImageBitmap(decodedByte);
             imgUserProfilePic.setVisibility(View.VISIBLE);
-            layoutGuestDetailsParams.setMargins(0, -40, 0, 0);
-            txtUnitHeading.setMargins(0, 45, 0, 0);
+           // layoutGuestDetailsParams.setMargins(0, -40, 0, 0);
+            //txtUnitHeading.setMargins(0, 45, 0, 0);
         } else {
             imgUserProfilePic.setVisibility(View.GONE);
             layoutGuestDetailsParams.setMargins(0, 0, 0, 0);
-            txtUnitHeading.setMargins(0, 0, 0, 0);
+            txtUnitHeadingParams.setMargins(0, 0, 0, 0);
+            layoutGuestDetails.setLayoutParams(layoutGuestDetailsParams);
+            txtUnitHeading.setLayoutParams(txtUnitHeadingParams);
 
         }
 

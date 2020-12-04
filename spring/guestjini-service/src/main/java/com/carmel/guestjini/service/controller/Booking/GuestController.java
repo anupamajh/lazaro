@@ -10,6 +10,7 @@ import com.carmel.guestjini.service.model.Booking.Guest;
 import com.carmel.guestjini.service.model.Principal.UserInfo;
 import com.carmel.guestjini.service.response.Booking.GuestResponse;
 import com.carmel.guestjini.service.service.Booking.GuestService;
+import com.carmel.guestjini.service.service.Inventory.InventoryDetailService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,9 @@ public class GuestController {
 
     @Autowired
     GuestService guestService;
+
+    @Autowired
+    InventoryDetailService inventoryDetailService;
 
     @Autowired
     EntityManager entityManager;
@@ -110,6 +114,37 @@ public class GuestController {
             Optional<Guest> optionalGuest = guestService.findByEmail(formData.get("email"));
             if (optionalGuest.isPresent()) {
                 Guest guest = optionalGuest.get();
+                guestResponse.setSuccess(true);
+                guestResponse.setError("");
+                guestResponse.setGuest(guest);
+            } else {
+                guestResponse.setSuccess(false);
+                guestResponse.setError("Error occurred while Fetching Guest!! Please try after sometime");
+            }
+            logger.trace("Completed Successfully");
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            guestResponse.setSuccess(false);
+            guestResponse.setError(ex.getMessage());
+        }
+        logger.trace("Exiting");
+        return guestResponse;
+    }
+
+
+    @RequestMapping(value = "/get-by-phone", method = RequestMethod.POST)
+    public GuestResponse getGuestByPhone(@RequestBody Map<String, String> formData){
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        GuestResponse guestResponse = new GuestResponse();
+        try {
+            logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
+            Optional<Guest> optionalGuest = guestService.findByPhone(formData.get("phone"));
+            if (optionalGuest.isPresent()) {
+                Guest guest = optionalGuest.get();
+                String inventoryPath = inventoryDetailService.getInventoryPath(guest.getInventoryId());
+                guestResponse.setInventoryPath(inventoryPath);
                 guestResponse.setSuccess(true);
                 guestResponse.setError("");
                 guestResponse.setGuest(guest);

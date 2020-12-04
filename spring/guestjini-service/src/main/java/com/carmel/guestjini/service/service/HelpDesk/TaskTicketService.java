@@ -2,8 +2,10 @@ package com.carmel.guestjini.service.service.HelpDesk;
 
 
 import com.carmel.guestjini.service.HelpDesk.TaskTicket.Response.TaskAssigneeResponse;
+import com.carmel.guestjini.service.model.DTO.HelpDesk.InboxCount;
 import com.carmel.guestjini.service.model.DTO.HelpDesk.TicketCountDTO;
 import com.carmel.guestjini.service.model.HelpDesk.TaskTicket;
+import com.carmel.guestjini.service.response.HelpDesk.TaskTicketResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -28,4 +30,8 @@ public interface TaskTicketService {
     List<TaskTicket> findAllByIsDeletedAndRequesterIdAndTicketStatus(int isDeleted, String id, int ticketStatus);
 
     Page<TaskTicket> findAllByIsDeleted(int isDeleted, Pageable pageable);
+
+    TaskTicketResponse closeTicket(String ticketId, String userId, String message) throws Exception;
+
+    InboxCount getInboxCount(String userId) throws Exception;
 }

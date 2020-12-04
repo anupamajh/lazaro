@@ -7,6 +7,7 @@ import com.carmel.guestjini.Networking.Booking.BookingResponse;
 import com.carmel.guestjini.Networking.Group.Group;
 import com.carmel.guestjini.Networking.Group.GroupConversationResponse;
 import com.carmel.guestjini.Networking.Group.GroupResponse;
+import com.carmel.guestjini.Networking.Guest.GuestResponse;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBRating;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBRatingPercentResponse;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBRatingResponse;
@@ -14,6 +15,7 @@ import com.carmel.guestjini.Networking.KnowledgeBase.KBResponse;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBReview;
 import com.carmel.guestjini.Networking.KnowledgeBase.KBReviewResponse;
 import com.carmel.guestjini.Networking.OTP.OTPResponse;
+import com.carmel.guestjini.Networking.Tickets.InboxCount;
 import com.carmel.guestjini.Networking.Tickets.TaskAssignee;
 import com.carmel.guestjini.Networking.Tickets.TaskAssigneeResponse;
 import com.carmel.guestjini.Networking.Tickets.TaskAttachmentResponse;
@@ -296,4 +298,14 @@ public interface GuestJiniAPI {
 
     @POST("/guest-jini/task-runner/get-assignment-details")
     Call<TaskAssigneeResponse> fetchTaskAssignee(@Body Map<String, String> postData);
+
+    @POST("/guest-jini/task-ticket/close")
+    Call<TicketResponse> closeTicket(@Body Map<String, String> postData);
+
+    @POST("/guest-jini/guest/get-by-phone")
+    Call<GuestResponse> getGuestDetails(@Body Map<String, String> postData);
+
+    @POST("/guest-jini/task-ticket/get-inbox-count")
+    Call<InboxCount> getInboxCount();
+
 }

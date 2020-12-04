@@ -29,4 +29,14 @@ public interface TaskRunnerService {
     TaskAssigneeResponse getTaskAssignmentDetails(Map<String, String> formData) throws Exception;
 
     TaskRunner getByTicketId(String ticketId);
+
+    TaskRunnerResponse findAllByUserIdAndTaskStatus(String userId, int taskStatus) throws Exception;
+
+    TaskRunnerResponse findAllByUserIdAndTaskStatusIsNot(String userId, int taskStatus) throws Exception;
+
+    TaskRunnerResponse findAllByTaskForceGroupIdAndTaskStatus(String userId, int taskStatus) throws Exception;
+
+    TaskRunnerResponse findAllByTaskForceGroupIdAndTaskStatusIsNot(String userId,  int taskStatus) throws Exception;
+
+    TaskRunnerResponse findAllByTaskForceGroupIdAndUserId(String groupId, String userId) throws Exception;
 }
