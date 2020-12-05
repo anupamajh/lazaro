@@ -98,6 +98,8 @@ import com.carmel.guestjini.Tickets.SaveTaskNoteUseCase;
 import com.carmel.guestjini.Tickets.SaveTicketFeedbackUseCase;
 import com.carmel.guestjini.Tickets.SaveTicketUseCase;
 import com.carmel.guestjini.Tickets.UploadFileUseCase;
+import com.carmel.guestjini.Tickets.WithdrawTicketFromAgentUseCase;
+import com.carmel.guestjini.Tickets.WithdrawTicketFromGroupUseCase;
 import com.carmel.guestjini.Users.AppAccessRequestUseCase;
 import com.carmel.guestjini.Users.ChangePasswordUseCase;
 import com.carmel.guestjini.Users.CheckPhoneNumberUseCase;
@@ -439,6 +441,14 @@ public class ControllerCompositionRoot {
         return new FetchGuestDetailsByPhoneUseCase(getAuthenticatedGuestJiniAPI());
     }
 
+    private WithdrawTicketFromAgentUseCase getWithdrawTicketFromAgentUseCase() {
+        return new WithdrawTicketFromAgentUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
+    private WithdrawTicketFromGroupUseCase getWithdrawTicketFromGroupUseCase() {
+        return new WithdrawTicketFromGroupUseCase(getAuthenticatedGuestJiniAPI());
+    }
+
     public SharedPreferenceHelper getSharedPreferenceHelper() {
         return new SharedPreferenceHelper(preferences, editor);
 
@@ -518,6 +528,7 @@ public class ControllerCompositionRoot {
                 getSaveTicketUseCase(),
                 getDeleteTicketUseCase(),
                 getFetchTicketUseCase(),
+                getSharedPreferenceHelper(),
                 getDialogsManager(),
                 getDialogsEventBus()
         );
@@ -746,6 +757,7 @@ public class ControllerCompositionRoot {
                 getFetchMyProfileUseCase(),
                 getFetchMyProfilePicUseCase(),
                 getFetchGuestDetailsByPhoneUseCase(),
+                getSharedPreferenceHelper(),
                 getScreensNavigator(),
                 getDialogsManager(),
                 getDialogsEventBus()
@@ -765,6 +777,7 @@ public class ControllerCompositionRoot {
     public InboxListController getInboxListController() {
         return new InboxListController(
                 getFetchInboxTicketListUseCase(),
+                getSharedPreferenceHelper(),
                 getScreensNavigator(),
                 getDialogsManager(),
                 getDialogsEventBus()
@@ -775,6 +788,8 @@ public class ControllerCompositionRoot {
         return new InboxTicketDetailController(
                 getFetchTicketUseCase(),
                 getFetchTicketAssigneeDetailsUseCase(),
+                getWithdrawTicketFromAgentUseCase(),
+                getWithdrawTicketFromGroupUseCase(),
                 getScreensNavigator(),
                 getDialogsManager(),
                 getDialogsEventBus()

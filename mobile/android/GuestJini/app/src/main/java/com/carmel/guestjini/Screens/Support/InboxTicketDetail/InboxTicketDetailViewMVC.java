@@ -9,8 +9,6 @@ import java.util.List;
 
 public interface InboxTicketDetailViewMVC
         extends ObservableViewMvc<InboxTicketDetailViewMVC.Listener> {
-
-
     public interface Listener {
         void onBackClicked();
         void onAssignTicketClicked();
@@ -29,5 +27,15 @@ public interface InboxTicketDetailViewMVC
     void hideProgressIndication();
 
     void bindTicketAssignmentDetails(TaskAssigneeResponse taskAssigneeResponse);
+
+    void setupView(int inboxType);
+
+    void showTicketWithdrawnFromAgent();
+
+    void showTicketWithdrawFromAgentFailed();
+
+    void showTicketWithdrawnFromGroup();
+
+    void showTicketWithdrawFromGroupFailed();
 
 }

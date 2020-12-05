@@ -2,13 +2,10 @@ package com.carmel.guestjini.Screens.Common.Main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.FrameLayout;
 
 import androidx.annotation.Nullable;
 
-import com.carmel.guestjini.R;
-import com.carmel.guestjini.Screens.Common.AuthorityConstants;
 import com.carmel.guestjini.Screens.Common.BaseActivityView.BaseActivityMVCView;
 import com.carmel.guestjini.Screens.Common.Controllers.ActivityResultDispatcher;
 import com.carmel.guestjini.Screens.Common.Controllers.ActivityResultListener;

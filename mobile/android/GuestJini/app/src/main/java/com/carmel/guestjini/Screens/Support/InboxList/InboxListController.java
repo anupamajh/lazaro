@@ -7,6 +7,7 @@ import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptDialogEvent;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
+import com.carmel.guestjini.Screens.Common.SharedPreference.SharedPreferenceHelper;
 import com.carmel.guestjini.Tickets.FetchInboxTicketListUseCase;
 
 import java.io.Serializable;
@@ -24,6 +25,7 @@ public class InboxListController implements
     }
 
     private final FetchInboxTicketListUseCase fetchInboxTicketListUseCase;
+    private final SharedPreferenceHelper sharedPreferenceHelper;
     private final ScreensNavigator screensNavigator;
     private final DialogsManager dialogsManager;
     private final DialogsEventBus dialogsEventBus;
@@ -39,11 +41,13 @@ public class InboxListController implements
     public InboxListController
             (
                     FetchInboxTicketListUseCase fetchInboxTicketListUseCase,
+                    SharedPreferenceHelper sharedPreferenceHelper,
                     ScreensNavigator screensNavigator,
                     DialogsManager dialogsManager,
                     DialogsEventBus dialogsEventBus
             ) {
         this.fetchInboxTicketListUseCase = fetchInboxTicketListUseCase;
+        this.sharedPreferenceHelper = sharedPreferenceHelper;
         this.screensNavigator = screensNavigator;
         this.dialogsManager = dialogsManager;
         this.dialogsEventBus = dialogsEventBus;
@@ -83,7 +87,14 @@ public class InboxListController implements
     private void fetchTicketListAndNotify() {
         mScreenState = ScreenState.FETCHING_TICKET_LIST;
         viewMVC.showProgressIndication();
-           fetchInboxTicketListUseCase.fetchTicketListAndNotify(searchRequest);
+        if (this.inboxType == 2) {
+            searchRequest.setUserId(sharedPreferenceHelper.readStringValue("user_id"));
+        }
+        if (this.inboxType == 3) {
+            searchRequest.setUserId(sharedPreferenceHelper.readStringValue("user_id"));
+            searchRequest.setGroupId(sharedPreferenceHelper.readStringValue("user_id"));
+        }
+        fetchInboxTicketListUseCase.fetchTicketListAndNotify(searchRequest);
     }
 
     @Override
@@ -102,9 +113,9 @@ public class InboxListController implements
 
     @Override
     public void onTicketClicked(Ticket ticket) {
-        if(ticket.getTicketStatus() != 0) {
-            screensNavigator.toInboxTicketDetails(ticket.getId());
-        }else{
+        if (ticket.getTicketStatus() != 0) {
+            screensNavigator.toInboxTicketDetails(ticket.getId(), this.inboxType);
+        } else {
             screensNavigator.toCreateTicket(null, ticket.getId());
         }
     }
@@ -163,7 +174,7 @@ public class InboxListController implements
 
     @Override
     public void onFilterApplied(SearchRequest searchRequest) {
-        this.searchRequest =searchRequest;
+        this.searchRequest = searchRequest;
         fetchTicketListAndNotify();
     }
 }

@@ -7,6 +7,7 @@ import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptDialogEvent;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
+import com.carmel.guestjini.Screens.Common.SharedPreference.SharedPreferenceHelper;
 import com.carmel.guestjini.Tickets.DeleteTicketUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketUseCase;
 import com.carmel.guestjini.Tickets.SaveTicketUseCase;
@@ -33,6 +34,7 @@ public class CreateTicketController
     private final SaveTicketUseCase saveTicketUseCase;
     private final DeleteTicketUseCase deleteTicketUseCase;
     private final FetchTicketUseCase fetchTicketUseCase;
+    private final SharedPreferenceHelper sharedPreferenceHelper;
     private final DialogsManager dialogsManager;
     private final DialogsEventBus dialogsEventBus;
     private TicketCategory parentTicketCategory = null;
@@ -55,6 +57,7 @@ public class CreateTicketController
                     SaveTicketUseCase saveTicketUseCase,
                     DeleteTicketUseCase deleteTicketUseCase,
                     FetchTicketUseCase fetchTicketUseCase,
+                    SharedPreferenceHelper sharedPreferenceHelper,
                     DialogsManager dialogsManager,
                     DialogsEventBus dialogsEventBus
             ) {
@@ -62,6 +65,7 @@ public class CreateTicketController
         this.saveTicketUseCase = saveTicketUseCase;
         this.fetchTicketUseCase = fetchTicketUseCase;
         this.dialogsManager = dialogsManager;
+        this.sharedPreferenceHelper = sharedPreferenceHelper;
         this.dialogsEventBus = dialogsEventBus;
         this.draftTicketId = "";
         this.deleteTicketUseCase = deleteTicketUseCase;
@@ -153,7 +157,16 @@ public class CreateTicketController
             this.strSubject = subject;
             this.strNarration = narration;
             this.saveStatus = 3;
-            saveTicketUseCase.saveTicketAndNotify(subject, narration, ticketCategoryId, saveStatus, draftTicketId);
+            saveTicketUseCase.saveTicketAndNotify(
+                    subject,
+                    narration,
+                    ticketCategoryId,
+                    saveStatus,
+                    draftTicketId,
+                    sharedPreferenceHelper.readStringValue("guest_name"),
+                    sharedPreferenceHelper.readStringValue("inventory_id"),
+                    sharedPreferenceHelper.readStringValue("inventory_path")
+            );
         }
     }
 
@@ -179,7 +192,11 @@ public class CreateTicketController
             this.strSubject = subject;
             this.strNarration = narration;
             this.saveStatus = 0;
-            saveTicketUseCase.saveTicketAndNotify(subject, narration, ticketCategoryId, saveStatus, draftTicketId);
+            saveTicketUseCase.saveTicketAndNotify(subject, narration, ticketCategoryId, saveStatus, draftTicketId,
+                    sharedPreferenceHelper.readStringValue("guest_name"),
+                    sharedPreferenceHelper.readStringValue("inventory_id"),
+                    sharedPreferenceHelper.readStringValue("inventory_path")
+            );
         }
     }
 
@@ -238,7 +255,11 @@ public class CreateTicketController
         if (event instanceof PromptDialogEvent) {
             switch (((PromptDialogEvent) event).getClickedButton()) {
                 case POSITIVE:
-                    saveTicketUseCase.saveTicketAndNotify(strSubject, strNarration, ticketCategoryId, saveStatus, draftTicketId);
+                    saveTicketUseCase.saveTicketAndNotify(strSubject, strNarration, ticketCategoryId, saveStatus, draftTicketId,
+                            sharedPreferenceHelper.readStringValue("guest_name"),
+                            sharedPreferenceHelper.readStringValue("inventory_id"),
+                            sharedPreferenceHelper.readStringValue("inventory_path")
+                    );
                     break;
                 case NEGATIVE:
                     mScreenState = ScreenState.IDLE;

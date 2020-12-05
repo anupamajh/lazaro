@@ -1,8 +1,6 @@
 package com.carmel.guestjini.Screens.Support.Inbox;
 
-import com.carmel.guestjini.Common.Search.SearchRequest;
 import com.carmel.guestjini.Networking.Tickets.InboxCount;
-import com.carmel.guestjini.Networking.Tickets.TaskCountResponse;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;

@@ -5,14 +5,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
-import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketSheetViewMVC;
 
 public class CloseTicketSheetViewMVCImpl
         extends BaseObservableViewMvc<CloseTicketSheetViewMVC.Listener>

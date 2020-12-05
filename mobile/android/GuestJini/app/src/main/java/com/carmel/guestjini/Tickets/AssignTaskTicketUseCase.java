@@ -4,8 +4,6 @@ import com.carmel.guestjini.Common.BaseObservable;
 import com.carmel.guestjini.Networking.GuestJiniAPI;
 import com.carmel.guestjini.Networking.Tickets.TaskAssignee;
 import com.carmel.guestjini.Networking.Tickets.TaskRunnerResponse;
-import com.carmel.guestjini.Networking.Tickets.TaskNote;
-import com.carmel.guestjini.Networking.Tickets.TaskRunnerResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;

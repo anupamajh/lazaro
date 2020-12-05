@@ -4,11 +4,7 @@ import com.carmel.guestjini.Networking.Tickets.TicketResponse;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
-import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketSheetController;
-import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketSheetViewMVC;
-import com.carmel.guestjini.Tickets.AssignTaskTicketUseCase;
 import com.carmel.guestjini.Tickets.CloseTicketUseCase;
-import com.carmel.guestjini.Tickets.FetchTaskAssigneeUseCase;
 
 import java.io.Serializable;
 

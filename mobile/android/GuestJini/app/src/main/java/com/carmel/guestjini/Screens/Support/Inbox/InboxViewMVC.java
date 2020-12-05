@@ -1,7 +1,6 @@
 package com.carmel.guestjini.Screens.Support.Inbox;
 
 import com.carmel.guestjini.Networking.Tickets.InboxCount;
-import com.carmel.guestjini.Networking.Tickets.TaskCountResponse;
 import com.carmel.guestjini.Screens.Common.Views.ObservableViewMvc;
 
 import java.util.Set;

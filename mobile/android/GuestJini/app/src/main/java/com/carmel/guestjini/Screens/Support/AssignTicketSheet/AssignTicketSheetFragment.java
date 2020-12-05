@@ -7,13 +7,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.carmel.guestjini.Screens.Common.Controllers.BaseBottomSheetFragment;
-import com.carmel.guestjini.Screens.Support.InboxTicketDetail.InboxTicketDetailController;
-import com.carmel.guestjini.Screens.Support.InboxTicketDetail.InboxTicketDetailFragment;
-import com.carmel.guestjini.Screens.Support.InboxTicketDetail.InboxTicketDetailViewMVC;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class AssignTicketSheetFragment extends BaseBottomSheetFragment {
     private static final String ARG_TICKET_ID = "ARG_TICKET_ID";

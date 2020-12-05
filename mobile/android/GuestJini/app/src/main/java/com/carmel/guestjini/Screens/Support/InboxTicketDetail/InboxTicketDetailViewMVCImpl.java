@@ -8,21 +8,26 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.carmel.guestjini.Common.AgeCalculator;
 import com.carmel.guestjini.Common.DateUtil;
 import com.carmel.guestjini.Networking.Tickets.TaskAssigneeResponse;
 import com.carmel.guestjini.Networking.Tickets.TaskForceGroup;
 import com.carmel.guestjini.Networking.Tickets.Ticket;
 import com.carmel.guestjini.Networking.Tickets.TicketCategory;
+import com.carmel.guestjini.Networking.Users.User;
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Screens.Common.ViewMVCFactory;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
-import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketSheetFragment;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -71,6 +76,8 @@ extends BaseObservableViewMvc<InboxTicketDetailViewMVC.Listener>
     private final ImageView ratingStar5;
     private final TextView txtCustomerFeedback;
 
+    private final RelativeLayout layoutTicketDetails;
+
     private final RelativeLayout layoutCommentList;
     private final RecyclerView lstTaskNotes;
 
@@ -79,6 +86,7 @@ extends BaseObservableViewMvc<InboxTicketDetailViewMVC.Listener>
 
     private Ticket ticket;
     private int rating = 0;
+    private int inboxType = 0;
 
     public InboxTicketDetailViewMVCImpl(LayoutInflater inflater,
                                     @Nullable ViewGroup parent,
@@ -120,6 +128,8 @@ extends BaseObservableViewMvc<InboxTicketDetailViewMVC.Listener>
         layoutCommentList = findViewById(R.id.layoutCommentList);
         lstTaskNotes = findViewById(R.id.lstTaskNotes);
 
+        layoutTicketDetails = findViewById(R.id.layoutTicketDetails);
+
         lstTaskNotes.setLayoutManager(new LinearLayoutManager(getContext()));
         inboxTicketCommentsRecyclerAdapter = new InboxTicketCommentsRecyclerAdapter(this, viewMVCFactory);
         lstTaskNotes.setAdapter(inboxTicketCommentsRecyclerAdapter);
@@ -145,11 +155,39 @@ extends BaseObservableViewMvc<InboxTicketDetailViewMVC.Listener>
                 }
             }
         });
+
+        btnWithdrawFromAgent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for(Listener listener:getListeners()){
+                    listener.onWithdrawFromAgentClicked();
+                }
+            }
+        });
+
+        btnWithdrawFromGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for(Listener listener:getListeners()){
+                    listener.onWithdrawFromGroupClicked();
+                }
+            }
+        });
+
+        layoutTicketDetails.setVisibility(View.GONE);
+        layoutAssignTicketDetails.setVisibility(View.GONE);
+        layoutAssignedGroupDetails.setVisibility(View.GONE);
+        layoutAssignTicketDetailsToAgent.setVisibility(View.GONE);
+        layoutAssignedAgentDetails.setVisibility(View.GONE);
+        layoutCloseTicketDetails.setVisibility(View.GONE);
+        layoutCustomerFeedback.setVisibility(View.GONE);
+        layoutCommentList.setVisibility(View.GONE);
     }
 
     @Override
     public void bindTicket(Ticket ticket) {
         this.ticket = ticket;
+        layoutTicketDetails.setVisibility(View.VISIBLE);
         String strTicketStatus = "OPEN";
         int drawableResourceId = 0;
         int colorResourceId = 0;
@@ -189,7 +227,24 @@ extends BaseObservableViewMvc<InboxTicketDetailViewMVC.Listener>
         txtStatus.setText(strTicketStatus);
         Date creationDate = DateUtil.convertToDate(ticket.getCreationTime());
         txtTicketDate.setText(DateUtil.getFormattedDate(creationDate));
-        txtTicketNumber.setText(ticket.getTicketNo());
+        txtTicketNumber.setText("Ticket #  " + ticket.getTicketNo());
+        txtCreatorName.setText(ticket.getRequesterName());
+        txtGuestPod.setText(ticket.getRequesterInventoryTitle());
+        if(inboxType == 1){
+            if(ticket.getTaskForceGroupId() == null || ticket.getTaskForceGroupId().equals("")) {
+                layoutAssignTicketDetails.setVisibility(View.VISIBLE);
+            }else{
+                layoutAssignTicketDetails.setVisibility(View.GONE);
+            }
+            if(ticket.getTaskRunnerId() == null || ticket.getTaskRunnerId().equals("")) {
+                layoutAssignTicketDetailsToAgent.setVisibility(View.VISIBLE);
+            }else {
+                layoutAssignTicketDetailsToAgent.setVisibility(View.GONE);
+            }
+        }else{
+            layoutAssignTicketDetails.setVisibility(View.GONE);
+            layoutAssignTicketDetailsToAgent.setVisibility(View.GONE);
+        }
 
     }
 
@@ -213,7 +268,56 @@ extends BaseObservableViewMvc<InboxTicketDetailViewMVC.Listener>
         if(taskAssigneeResponse.getTaskForceGroup() != null){
             TaskForceGroup taskForceGroup = taskAssigneeResponse.getTaskForceGroup();
             txtAssignedGroupName.setText(taskForceGroup.getName());
-            //TODO: Complete the assignment details
+            txtAssignedGroupAssignmentDetails.setText("Assigned on " + DateUtil.getFormattedDate(taskAssigneeResponse.getCreationTime()));
+            Date today = new Date();
+            LocalDate assignedDate = Instant.ofEpochMilli(taskAssigneeResponse.getCreationTime().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate localeToday = Instant.ofEpochMilli(today.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+            txtAssignedGroupAssignedSince.setText(
+                    AgeCalculator.calculateDateLapse(
+                            assignedDate, localeToday
+                    ) + " days ago by " + taskAssigneeResponse.getCreatedBy().getFullName()
+            );
+            layoutAssignedGroupDetails.setVisibility(View.VISIBLE);
         }
+
+        if(taskAssigneeResponse.getUserDTO() != null){
+            User user = taskAssigneeResponse.getUserDTO();
+            txtAssignedToAgentName.setText(user.getFullName());
+            txtAssignedToAgentAssignmentDetails.setText("Assigned on " + DateUtil.getFormattedDate(taskAssigneeResponse.getCreationTime()));
+            Date today = new Date();
+            LocalDate assignedDate = Instant.ofEpochMilli(taskAssigneeResponse.getCreationTime().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate localeToday = Instant.ofEpochMilli(today.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+            txtAssignedToAgentAssignedSince.setText(
+                    AgeCalculator.calculateDateLapse(
+                            assignedDate, localeToday
+                    ) + " days ago by " + taskAssigneeResponse.getCreatedBy().getFullName()
+            );
+            layoutAssignedAgentDetails.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void setupView(int inboxType) {
+        this.inboxType = inboxType;
+    }
+
+    @Override
+    public void showTicketWithdrawnFromAgent() {
+        Toast.makeText(getContext(), "Ticket has been withdrawn from agent successfully.", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showTicketWithdrawFromAgentFailed() {
+        Toast.makeText(getContext(), "There was an error withdrawing ticket.", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showTicketWithdrawnFromGroup() {
+        Toast.makeText(getContext(), "Ticket has been withdrawn from group successfully.", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showTicketWithdrawFromGroupFailed() {
+        Toast.makeText(getContext(), "There was an error withdrawing ticket.", Toast.LENGTH_LONG).show();
     }
 }

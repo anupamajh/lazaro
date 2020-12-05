@@ -21,6 +21,11 @@ public class Ticket {
     private Integer ticketStatus;
     private Integer requesterType;
     private String requesterId;
+    private String requesterName;
+    private String requesterInventoryId;
+    private String requesterInventoryTitle;
+    private String taskRunnerId;
+    private String taskForceGroupId;
     private String createdBy;
     private String creationTime;
     private String lastModifiedBy;
@@ -227,5 +232,45 @@ public class Ticket {
 
     public void setDeletedTime(Date deletedTime) {
         this.deletedTime = deletedTime;
+    }
+
+    public String getTaskRunnerId() {
+        return taskRunnerId;
+    }
+
+    public void setTaskRunnerId(String taskRunnerId) {
+        this.taskRunnerId = taskRunnerId;
+    }
+
+    public String getTaskForceGroupId() {
+        return taskForceGroupId;
+    }
+
+    public void setTaskForceGroupId(String taskForceGroupId) {
+        this.taskForceGroupId = taskForceGroupId;
+    }
+
+    public String getRequesterName() {
+        return requesterName;
+    }
+
+    public void setRequesterName(String requesterName) {
+        this.requesterName = requesterName;
+    }
+
+    public String getRequesterInventoryId() {
+        return requesterInventoryId;
+    }
+
+    public void setRequesterInventoryId(String requesterInventoryId) {
+        this.requesterInventoryId = requesterInventoryId;
+    }
+
+    public String getRequesterInventoryTitle() {
+        return requesterInventoryTitle;
+    }
+
+    public void setRequesterInventoryTitle(String requesterInventoryTitle) {
+        this.requesterInventoryTitle = requesterInventoryTitle;
     }
 }

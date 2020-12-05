@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.carmel.guestjini.Networking.Booking.Booking;
 import com.carmel.guestjini.Networking.Guest.GuestResponse;
 import com.carmel.guestjini.Networking.Users.UserInfo;
 import com.carmel.guestjini.R;

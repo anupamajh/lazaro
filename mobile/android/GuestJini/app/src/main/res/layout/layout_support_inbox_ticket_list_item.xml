@@ -58,12 +58,11 @@
                 android:layout_below="@id/layoutNewTicketIndicator"
                 android:layout_alignParentStart="true"
                 />
-
             <TextView
-                android:id="@+id/txtTicketTitle"
+                android:id="@+id/txtRequesterName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:letterSpacing="0.05"
                 android:text="@string/ticketsName"
                 android:textColor="@color/colorCharcoal"
@@ -72,6 +71,34 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/txtTicketDate"
+                />
+            <TextView
+                android:id="@+id/txtRequesterInventory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:letterSpacing="0.05"
+                android:text="@string/ticketsName"
+                android:textColor="@color/colorCharcoal"
+                android:textSize="12sp"
+                app:fontFamily="@font/roboto_medium"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/txtRequesterName"
+                />
+            <TextView
+                android:id="@+id/txtTicketTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:letterSpacing="0.05"
+                android:text="@string/ticketsName"
+                android:textColor="@color/colorCharcoal"
+                android:textSize="12sp"
+                app:fontFamily="@font/roboto_medium"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/txtRequesterInventory"
                 />
             <TextView
                 android:id="@+id/txtTicketNarration"

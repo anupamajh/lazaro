@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.carmel.guestjini.Screens.Common.Controllers.BaseBottomSheetFragment;
-import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketSheetViewMVC;
 
 public class CloseTicketSheetFragment  extends BaseBottomSheetFragment {
     private static final String ARG_TICKET_ID = "ARG_TICKET_ID";

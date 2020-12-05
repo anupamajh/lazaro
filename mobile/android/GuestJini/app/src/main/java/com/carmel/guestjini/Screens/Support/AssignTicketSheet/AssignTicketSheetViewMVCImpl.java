@@ -12,9 +12,7 @@ import androidx.annotation.Nullable;
 
 import com.carmel.guestjini.Networking.Tickets.TaskAssignee;
 import com.carmel.guestjini.R;
-import com.carmel.guestjini.Screens.Common.ViewMVCFactory;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
-import com.carmel.guestjini.Screens.Support.InboxTicketDetail.InboxTicketDetailViewMVC;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -232,8 +232,8 @@ public class ScreensNavigator {
         mFragmentFrameHelper.replaceFragment(InboxListFragment.createFragment(inboxType));
     }
 
-    public void toInboxTicketDetails(String ticketId) {
-        mFragmentFrameHelper.replaceFragment(InboxTicketDetailFragment.createFragment(ticketId));
+    public void toInboxTicketDetails(String ticketId, int inboxType) {
+        mFragmentFrameHelper.replaceFragment(InboxTicketDetailFragment.createFragment(ticketId, inboxType));
 
     }
 

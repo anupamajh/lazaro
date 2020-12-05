@@ -6,6 +6,7 @@ import com.carmel.guestjini.Networking.Users.UserInfo;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
+import com.carmel.guestjini.Screens.Common.SharedPreference.SharedPreferenceHelper;
 import com.carmel.guestjini.Users.FetchMyProfilePicUseCase;
 import com.carmel.guestjini.Users.FetchMyProfileUseCase;
 
@@ -28,6 +29,7 @@ implements HomeViewMVC.Listener,
     private final FetchMyProfileUseCase fetchMyProfileUseCase;
     private final FetchMyProfilePicUseCase fetchMyProfilePicUseCase;
     private final FetchGuestDetailsByPhoneUseCase fetchGuestDetailsByPhoneUseCase;
+    private final SharedPreferenceHelper sharedPreferenceHelper;
     private final ScreensNavigator screensNavigator;
     private final DialogsManager dialogsManager;
     private final DialogsEventBus dialogsEventBus;
@@ -41,12 +43,14 @@ implements HomeViewMVC.Listener,
                     FetchMyProfileUseCase fetchMyProfileUseCase,
                     FetchMyProfilePicUseCase fetchMyProfilePicUseCase,
                     FetchGuestDetailsByPhoneUseCase fetchGuestDetailsByPhoneUseCase,
+                    SharedPreferenceHelper sharedPreferenceHelper,
                     ScreensNavigator screensNavigator,
                     DialogsManager dialogsManager,
                     DialogsEventBus dialogsEventBus) {
         this.fetchMyProfileUseCase = fetchMyProfileUseCase;
         this.fetchMyProfilePicUseCase = fetchMyProfilePicUseCase;
         this.fetchGuestDetailsByPhoneUseCase = fetchGuestDetailsByPhoneUseCase;
+        this.sharedPreferenceHelper = sharedPreferenceHelper;
         this.screensNavigator = screensNavigator;
         this.dialogsManager = dialogsManager;
         this.dialogsEventBus = dialogsEventBus;
@@ -106,6 +110,8 @@ implements HomeViewMVC.Listener,
     @Override
     public void onProfileFetched(UserInfo response) {
         viewMVC.bindUserInfo(response);
+        sharedPreferenceHelper.saveStringValue("user_id",response.getId());
+        sharedPreferenceHelper.commit();
         fetchMyProfilePicUseCase.fetchProfilePicAndNotify();
         fetchGuestDetailsByPhoneUseCase.fetchGuestDetailsAndNotify(response.getPhone());
     }
@@ -134,6 +140,11 @@ implements HomeViewMVC.Listener,
     @Override
     public void onGuestDetailsFetched(GuestResponse response) {
         viewMVC.hideProgressIndication();
+        sharedPreferenceHelper.saveStringValue("guest_name",response.getGuest().getFullName());
+        sharedPreferenceHelper.saveStringValue("inventory_path",response.getInventoryPath());
+        sharedPreferenceHelper.saveStringValue("inventory_id",response.getGuest().getInventoryId());
+        sharedPreferenceHelper.commit();
+
         viewMVC.bindGuestDetails(response);
     }
 

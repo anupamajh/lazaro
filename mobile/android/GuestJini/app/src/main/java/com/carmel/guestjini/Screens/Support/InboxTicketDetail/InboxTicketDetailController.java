@@ -3,6 +3,7 @@ package com.carmel.guestjini.Screens.Support.InboxTicketDetail;
 import androidx.fragment.app.FragmentManager;
 
 import com.carmel.guestjini.Networking.Tickets.TaskAssigneeResponse;
+import com.carmel.guestjini.Networking.Tickets.TaskRunnerResponse;
 import com.carmel.guestjini.Networking.Tickets.TicketResponse;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
@@ -10,16 +11,21 @@ import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
 import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketSheetFragment;
 import com.carmel.guestjini.Screens.Support.AssignTicketToAgentSheet.AssignTicketToAgentSheetFragment;
 import com.carmel.guestjini.Screens.Support.CloseTicketSheet.CloseTicketSheetFragment;
-import com.carmel.guestjini.Screens.Support.CloseTicketSheet.CloseTicketSheetViewMVC;
 import com.carmel.guestjini.Tickets.FetchTicketAssigneeDetailsUseCase;
 import com.carmel.guestjini.Tickets.FetchTicketUseCase;
+import com.carmel.guestjini.Tickets.WithdrawTicketFromAgentUseCase;
+import com.carmel.guestjini.Tickets.WithdrawTicketFromGroupUseCase;
 
 import java.io.Serializable;
 
 public class InboxTicketDetailController
         implements InboxTicketDetailViewMVC.Listener,
         FetchTicketUseCase.Listener,
-        FetchTicketAssigneeDetailsUseCase.Listener {
+        FetchTicketAssigneeDetailsUseCase.Listener,
+        WithdrawTicketFromAgentUseCase.Listener,
+        WithdrawTicketFromGroupUseCase.Listener
+{
+
 
 
     private enum ScreenState {
@@ -28,11 +34,14 @@ public class InboxTicketDetailController
 
     private final FetchTicketUseCase fetchTicket;
     private final FetchTicketAssigneeDetailsUseCase fetchTicketAssigneeDetailsUseCase;
+    private final WithdrawTicketFromAgentUseCase withdrawTicketFromAgentUseCase;
+    private final WithdrawTicketFromGroupUseCase withdrawTicketFromGroupUseCase;
     private final ScreensNavigator screensNavigator;
     private final DialogsManager dialogsManager;
     private final DialogsEventBus dialogsEventBus;
 
     private String ticketId;
+    private int inboxType;
     private InboxTicketDetailViewMVC viewMvc;
     private ScreenState mScreenState = ScreenState.IDLE;
     private FragmentManager fragmentManager;
@@ -40,12 +49,16 @@ public class InboxTicketDetailController
     public InboxTicketDetailController(
             FetchTicketUseCase fetchTicket,
             FetchTicketAssigneeDetailsUseCase fetchTicketAssigneeDetailsUseCase,
+            WithdrawTicketFromAgentUseCase withdrawTicketFromAgentUseCase,
+            WithdrawTicketFromGroupUseCase withdrawTicketFromGroupUseCase,
             ScreensNavigator screensNavigator,
             DialogsManager dialogsManager,
             DialogsEventBus dialogsEventBus
     ) {
         this.fetchTicket = fetchTicket;
         this.fetchTicketAssigneeDetailsUseCase = fetchTicketAssigneeDetailsUseCase;
+        this.withdrawTicketFromAgentUseCase = withdrawTicketFromAgentUseCase;
+        this.withdrawTicketFromGroupUseCase = withdrawTicketFromGroupUseCase;
         this.screensNavigator = screensNavigator;
         this.dialogsManager = dialogsManager;
         this.dialogsEventBus = dialogsEventBus;
@@ -67,11 +80,15 @@ public class InboxTicketDetailController
         }
     }
 
-    public void onStart(String ticketId) {
+    public void onStart(String ticketId, int inboxType) {
         this.ticketId = ticketId;
+        this.inboxType = inboxType;
+        viewMvc.setupView(inboxType);
         viewMvc.registerListener(this);
         fetchTicket.registerListener(this);
         fetchTicketAssigneeDetailsUseCase.registerListener(this);
+        withdrawTicketFromAgentUseCase.registerListener(this);
+        withdrawTicketFromGroupUseCase.registerListener(this);
         if (mScreenState != ScreenState.NETWORK_ERROR) {
             fetchTicket(ticketId);
         }
@@ -86,6 +103,8 @@ public class InboxTicketDetailController
         viewMvc.unregisterListener(this);
         fetchTicket.unregisterListener(this);
         fetchTicketAssigneeDetailsUseCase.unregisterListener(this);
+        withdrawTicketFromAgentUseCase.unregisterListener(this);
+        withdrawTicketFromGroupUseCase.unregisterListener(this);
 
     }
 
@@ -112,18 +131,21 @@ public class InboxTicketDetailController
 
     @Override
     public void onWithdrawFromGroupClicked() {
+        viewMvc.showProgressIndication();
+        withdrawTicketFromGroupUseCase.withdrawTicketFromGroupAndNotify(ticketId);
 
     }
 
     @Override
     public void onAssignTicketToAgentClicked(String groupId, String ticketId) {
         AssignTicketToAgentSheetFragment assignTicketSheetFragment = screensNavigator.getAssignTicketToAgentSheetFragment(groupId, ticketId);
-        assignTicketSheetFragment.show(fragmentManager, "ASSIGN_TICKET_SHEET");
+        assignTicketSheetFragment.show(fragmentManager, "ASSIGN_TICKET_TO_AGENT_SHEET");
     }
 
     @Override
     public void onWithdrawFromAgentClicked() {
-
+        viewMvc.showProgressIndication();
+        withdrawTicketFromAgentUseCase.withdrawTicketFromAgentAndNotify(ticketId);
     }
 
     @Override
@@ -163,5 +185,35 @@ public class InboxTicketDetailController
     @Override
     public void onTicketAssigneeDetailFetchFailed() {
         viewMvc.hideProgressIndication();
+    }
+
+    @Override
+    public void onTicketWithdrawnFromAgent(TaskRunnerResponse taskAssigneeResponse) {
+        viewMvc.hideProgressIndication();
+        viewMvc.showTicketWithdrawnFromAgent();
+        fetchTicket(ticketId);
+
+    }
+
+    @Override
+    public void onTicketWithdrawFromAgentFailed() {
+        viewMvc.hideProgressIndication();
+        viewMvc.showTicketWithdrawFromAgentFailed();
+
+    }
+
+    @Override
+    public void onTicketWithdrawnFromGroup(TaskRunnerResponse taskAssigneeResponse) {
+        viewMvc.hideProgressIndication();
+        fetchTicket(ticketId);
+        viewMvc.showTicketWithdrawnFromGroup();
+        fetchTicket(ticketId);
+    }
+
+    @Override
+    public void onTicketWithdrawFromGroupFailed() {
+        viewMvc.hideProgressIndication();
+        viewMvc.showTicketWithdrawFromGroupFailed();
+
     }
 }

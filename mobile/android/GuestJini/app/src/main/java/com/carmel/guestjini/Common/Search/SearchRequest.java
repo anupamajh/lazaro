@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchRequest {
-    private List<SearchCriteria>  searchCriteria;
+    private List<SearchCriteria> searchCriteria;
     private List<OrderUnit> orderUnits;
     private int pageSize;
     private int currentPage;
+    private String userId;
+    private String groupId;
 
     public SearchRequest() {
         searchCriteria = new ArrayList<>();
@@ -46,5 +48,21 @@ public class SearchRequest {
 
     public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
     }
 }

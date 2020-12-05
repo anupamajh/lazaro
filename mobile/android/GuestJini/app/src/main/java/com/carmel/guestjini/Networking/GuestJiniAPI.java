@@ -308,4 +308,10 @@ public interface GuestJiniAPI {
     @POST("/guest-jini/task-ticket/get-inbox-count")
     Call<InboxCount> getInboxCount();
 
+    @POST("/guest-jini/task-runner/withdraw-ticket-from-group")
+    Call<TaskRunnerResponse> withdrawTicketFromGroup(@Body TaskAssignee taskAssignee);
+
+    @POST("/guest-jini/task-runner/withdraw-ticket-from-agent")
+    Call<TaskRunnerResponse> withdrawTicketFromAgent(@Body TaskAssignee taskAssignee);
+
 }

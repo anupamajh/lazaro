@@ -24,6 +24,8 @@ public class InboxListItemViewMVCImpl
     private TextView txtTicketStatus;
     private TextView txtTicketDate;
     private TextView txtTicketTitle;
+    private TextView txtRequesterName;
+    private TextView txtRequesterInventory;
     private TextView txtTicketNumber;
     private TextView txtTicketNarration;
 
@@ -36,6 +38,8 @@ public class InboxListItemViewMVCImpl
         setRootView(inflater.inflate(R.layout.layout_support_inbox_ticket_list_item, parent, false));
         txtTicketStatus = findViewById(R.id.txtTicketStatus);
         txtTicketDate = findViewById(R.id.txtTicketDate);
+        txtRequesterName = findViewById(R.id.txtRequesterName);
+        txtRequesterInventory = findViewById(R.id.txtRequesterInventory);
         txtTicketTitle = findViewById(R.id.txtTicketTitle);
         txtTicketNumber = findViewById(R.id.txtTicketNumber);
         txtTicketNarration = findViewById(R.id.txtTicketNarration);
@@ -97,6 +101,8 @@ public class InboxListItemViewMVCImpl
             txtTicketStatus.setText(strTicketStatus);
             txtTicketDate.setText(DateUtil.getFormattedDate(creationDate));
             txtTicketTitle.setText(ticket.getTicketTitle());
+            txtRequesterName.setText(ticket.getRequesterName());
+            txtRequesterInventory.setText(ticket.getRequesterInventoryTitle());
             txtTicketNumber.setText(ticket.getTicketNo());
             if(ticket.getTicketNarration() == null){
                 ticket.setTicketNarration("");

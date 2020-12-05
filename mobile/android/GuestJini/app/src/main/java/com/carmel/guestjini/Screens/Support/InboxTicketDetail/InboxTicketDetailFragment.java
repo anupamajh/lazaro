@@ -14,10 +14,12 @@ import com.carmel.guestjini.Screens.Common.Controllers.BaseFragment;
 public class InboxTicketDetailFragment
         extends BaseFragment {
     private static final String ARG_TICKET_ID = "ARG_TICKET_ID";
+    private static final String ARG_INBOX_TYPE = "ARG_INBOX_TYPE";
 
-    public static Fragment createFragment(String ticketId) {
+    public static Fragment createFragment(String ticketId, int inboxType) {
         Bundle args = new Bundle();
         args.putString(ARG_TICKET_ID, ticketId);
+        args.putInt(ARG_INBOX_TYPE, inboxType);
         InboxTicketDetailFragment fragment = new InboxTicketDetailFragment();
         fragment.setArguments(args);
         return fragment;
@@ -50,7 +52,7 @@ public class InboxTicketDetailFragment
     @Override
     public void onStart() {
         super.onStart();
-        inboxTicketDetailController.onStart(getTicketId());
+        inboxTicketDetailController.onStart(getTicketId(), getInboxType());
         inboxTicketDetailController.setFragmentManager(getFragmentManager());
     }
 
@@ -69,5 +71,9 @@ public class InboxTicketDetailFragment
 
     private String getTicketId() {
         return getArguments().getString(ARG_TICKET_ID);
+    }
+
+    private int getInboxType() {
+        return getArguments().getInt(ARG_INBOX_TYPE);
     }
 }

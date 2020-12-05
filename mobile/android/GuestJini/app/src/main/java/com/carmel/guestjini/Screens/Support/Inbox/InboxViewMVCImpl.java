@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.carmel.guestjini.Networking.Tickets.InboxCount;
-import com.carmel.guestjini.Networking.Tickets.TaskCountResponse;
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
 import com.google.android.material.card.MaterialCardView;

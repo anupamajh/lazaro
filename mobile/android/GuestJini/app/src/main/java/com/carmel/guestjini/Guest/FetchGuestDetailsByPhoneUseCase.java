@@ -3,7 +3,6 @@ package com.carmel.guestjini.Guest;
 import com.carmel.guestjini.Networking.Guest.GuestResponse;
 import com.carmel.guestjini.Networking.GuestJiniAPI;
 import com.carmel.guestjini.Screens.Common.Views.BaseObservableViewMvc;
-import com.carmel.guestjini.Users.FetchMyProfileUseCase;
 
 import java.util.HashMap;
 import java.util.Map;
