@@ -11,8 +11,14 @@ import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.Dialogs.PromptDialog.PromptDialogEvent;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
+import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketEvent;
+import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketEventBus;
 import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketSheetFragment;
+import com.carmel.guestjini.Screens.Support.AssignTicketToAgentSheet.AssignTicketToAgentEvent;
+import com.carmel.guestjini.Screens.Support.AssignTicketToAgentSheet.AssignTicketToAgentEventBus;
 import com.carmel.guestjini.Screens.Support.AssignTicketToAgentSheet.AssignTicketToAgentSheetFragment;
+import com.carmel.guestjini.Screens.Support.CloseTicketSheet.CloseTicketEvent;
+import com.carmel.guestjini.Screens.Support.CloseTicketSheet.CloseTicketEventBus;
 import com.carmel.guestjini.Screens.Support.CloseTicketSheet.CloseTicketSheetFragment;
 import com.carmel.guestjini.Screens.Support.TicketDetail.TicketDetailsController;
 import com.carmel.guestjini.Tickets.FetchTicketAssigneeDetailsUseCase;
@@ -33,9 +39,10 @@ public class InboxTicketDetailController
         WithdrawTicketFromGroupUseCase.Listener,
         FetchTicketTaskNoteListUseCase.Listener,
         GetTicketFeedBackUseCase.Listener,
-        DialogsEventBus.Listener
-{
-
+        DialogsEventBus.Listener,
+        AssignTicketEventBus.Listener ,
+        AssignTicketToAgentEventBus.Listener,
+        CloseTicketEventBus.Listener {
 
 
     private enum ScreenState {
@@ -51,12 +58,19 @@ public class InboxTicketDetailController
     private final ScreensNavigator screensNavigator;
     private final DialogsManager dialogsManager;
     private final DialogsEventBus dialogsEventBus;
+    private final AssignTicketEventBus assignTicketEventBus;
+    private final AssignTicketToAgentEventBus assignTicketToAgentEventBus;
+    private final CloseTicketEventBus closeTicketEventBus;
 
     private String ticketId;
     private int inboxType;
     private InboxTicketDetailViewMVC viewMvc;
     private ScreenState mScreenState = ScreenState.IDLE;
     private FragmentManager fragmentManager;
+
+    private AssignTicketSheetFragment assignTicketSheetFragment;
+    private AssignTicketToAgentSheetFragment assignTicketToAgentSheetFragment;
+    private CloseTicketSheetFragment closeTicketSheetFragment;
 
     public InboxTicketDetailController(
             FetchTicketUseCase fetchTicket,
@@ -67,7 +81,10 @@ public class InboxTicketDetailController
             GetTicketFeedBackUseCase getTicketFeedBackUseCase,
             ScreensNavigator screensNavigator,
             DialogsManager dialogsManager,
-            DialogsEventBus dialogsEventBus
+            DialogsEventBus dialogsEventBus,
+            AssignTicketEventBus assignTicketEventBus,
+            AssignTicketToAgentEventBus assignTicketToAgentEventBus,
+            CloseTicketEventBus closeTicketEventBus
     ) {
         this.fetchTicket = fetchTicket;
         this.fetchTicketAssigneeDetailsUseCase = fetchTicketAssigneeDetailsUseCase;
@@ -78,6 +95,9 @@ public class InboxTicketDetailController
         this.screensNavigator = screensNavigator;
         this.dialogsManager = dialogsManager;
         this.dialogsEventBus = dialogsEventBus;
+        this.assignTicketEventBus = assignTicketEventBus;
+        this.assignTicketToAgentEventBus = assignTicketToAgentEventBus;
+        this.closeTicketEventBus = closeTicketEventBus;
     }
 
     public SavedState getSavedState() {
@@ -107,6 +127,9 @@ public class InboxTicketDetailController
         withdrawTicketFromGroupUseCase.registerListener(this);
         fetchTicketTaskNoteListUseCase.registerListener(this);
         getTicketFeedBackUseCase.registerListener(this);
+        assignTicketEventBus.registerListener(this);
+        assignTicketToAgentEventBus.registerListener(this);
+        closeTicketEventBus.registerListener(this);
         if (mScreenState != ScreenState.NETWORK_ERROR) {
             fetchTicket(ticketId);
         }
@@ -125,6 +148,9 @@ public class InboxTicketDetailController
         withdrawTicketFromGroupUseCase.unregisterListener(this);
         fetchTicketTaskNoteListUseCase.unregisterListener(this);
         getTicketFeedBackUseCase.unregisterListener(this);
+        assignTicketEventBus.unregisterListener(this);
+        assignTicketToAgentEventBus.unregisterListener(this);
+        closeTicketEventBus.unregisterListener(this);
     }
 
     private void fetchTicket(String ticketId) {
@@ -144,7 +170,7 @@ public class InboxTicketDetailController
 
     @Override
     public void onAssignTicketClicked() {
-        AssignTicketSheetFragment assignTicketSheetFragment = screensNavigator.getAssignSheetFragment(ticketId);
+        assignTicketSheetFragment = screensNavigator.getAssignSheetFragment(ticketId);
         assignTicketSheetFragment.show(fragmentManager, "ASSIGN_TICKET_SHEET");
     }
 
@@ -157,8 +183,8 @@ public class InboxTicketDetailController
 
     @Override
     public void onAssignTicketToAgentClicked(String groupId, String ticketId) {
-        AssignTicketToAgentSheetFragment assignTicketSheetFragment = screensNavigator.getAssignTicketToAgentSheetFragment(groupId, ticketId);
-        assignTicketSheetFragment.show(fragmentManager, "ASSIGN_TICKET_TO_AGENT_SHEET");
+        assignTicketToAgentSheetFragment = screensNavigator.getAssignTicketToAgentSheetFragment(groupId, ticketId);
+        assignTicketToAgentSheetFragment.show(fragmentManager, "ASSIGN_TICKET_TO_AGENT_SHEET");
     }
 
     @Override
@@ -169,7 +195,7 @@ public class InboxTicketDetailController
 
     @Override
     public void onCloseTicketClicked() {
-        CloseTicketSheetFragment closeTicketSheetFragment = screensNavigator.getCloseTicketSheetFragment(ticketId);
+        closeTicketSheetFragment = screensNavigator.getCloseTicketSheetFragment(ticketId);
         closeTicketSheetFragment.show(fragmentManager, "CLOSE_TICKET_SHEET");
     }
 
@@ -266,5 +292,73 @@ public class InboxTicketDetailController
     @Override
     public void onTicketFeedbackFetchFailed() {
         viewMvc.hideProgressIndication();
+    }
+
+    @Override
+    public void onAssignTicket(Object event) {
+        if (event instanceof AssignTicketEvent) {
+            switch (((AssignTicketEvent) event).getCurrentStatus()) {
+                case FETCHING_ASSIGNEE:
+                case ASSIGNING:
+                    viewMvc.showProgressIndication();
+                    break;
+                case ASSIGNED:
+                    viewMvc.hideProgressIndication();
+                    assignTicketSheetFragment.dismiss();
+                    fetchTicket(ticketId);
+                    break;
+                case ASSIGNEE_FETCHED:
+                    viewMvc.hideProgressIndication();
+                    break;
+                case FAILED:
+                    viewMvc.hideProgressIndication();
+                    assignTicketSheetFragment.dismiss();
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public void onAssignToAgentTicket(Object event) {
+        if (event instanceof AssignTicketToAgentEvent) {
+            switch (((AssignTicketToAgentEvent) event).getCurrentStatus()) {
+                case FETCHING_ASSIGNEE:
+                case ASSIGNING:
+                    viewMvc.showProgressIndication();
+                    break;
+                case ASSIGNED:
+                    viewMvc.hideProgressIndication();
+                    assignTicketToAgentSheetFragment.dismiss();
+                    fetchTicket(ticketId);
+                    break;
+                case ASSIGNEE_FETCHED:
+                    viewMvc.hideProgressIndication();
+                    break;
+                case FAILED:
+                    viewMvc.hideProgressIndication();
+                    assignTicketToAgentSheetFragment.dismiss();
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public void onCloseTicket(Object event) {
+        if (event instanceof CloseTicketEvent) {
+            switch (((CloseTicketEvent) event).getCurrentStatus()) {
+                case CLOSING:
+                    viewMvc.showProgressIndication();
+                    break;
+                case CLOSED:
+                    viewMvc.hideProgressIndication();
+                    closeTicketSheetFragment.dismiss();
+                    fetchTicket(ticketId);
+                    break;
+                case FAILED:
+                    viewMvc.hideProgressIndication();
+                    closeTicketSheetFragment.dismiss();
+                    break;
+            }
+        }
     }
 }

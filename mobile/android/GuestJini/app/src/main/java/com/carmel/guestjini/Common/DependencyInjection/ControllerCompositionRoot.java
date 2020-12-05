@@ -65,8 +65,12 @@ import com.carmel.guestjini.Screens.Settings.MyProfile.MyProfileController;
 import com.carmel.guestjini.Screens.Settings.PrivacyPolicy.PrivacyPolicyController;
 import com.carmel.guestjini.Screens.Settings.SettingsHome.SettingsHomeController;
 import com.carmel.guestjini.Screens.Settings.TermsAndConditions.TermsAndConditionsController;
+import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketEvent;
+import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketEventBus;
 import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketSheetController;
+import com.carmel.guestjini.Screens.Support.AssignTicketToAgentSheet.AssignTicketToAgentEventBus;
 import com.carmel.guestjini.Screens.Support.AssignTicketToAgentSheet.AssignTicketToAgentSheetController;
+import com.carmel.guestjini.Screens.Support.CloseTicketSheet.CloseTicketEventBus;
 import com.carmel.guestjini.Screens.Support.CloseTicketSheet.CloseTicketSheetController;
 import com.carmel.guestjini.Screens.Support.CreateTicket.CreateTicketController;
 import com.carmel.guestjini.Screens.Support.Inbox.InboxController;
@@ -474,6 +478,19 @@ public class ControllerCompositionRoot {
         return compositionRoot.getDialogsEventBus();
     }
 
+
+    public AssignTicketEventBus getAssignTicketEventBus() {
+        return compositionRoot.getAssignTicketEventBus();
+    }
+
+    public AssignTicketToAgentEventBus getAssignTicketToAgentEventBus() {
+        return compositionRoot.getAssignTicketToAgentEventBus();
+    }
+
+    public CloseTicketEventBus getCloseTicketEventBus() {
+        return compositionRoot.getCloseTicketEventBus();
+    }
+
     public LoginEventBus getLoginEventBus() {
         return compositionRoot.getLoginEventBus();
     }
@@ -794,7 +811,10 @@ public class ControllerCompositionRoot {
                 getGetTicketFeedBackUseCase(),
                 getScreensNavigator(),
                 getDialogsManager(),
-                getDialogsEventBus()
+                getDialogsEventBus(),
+                getAssignTicketEventBus(),
+                getAssignTicketToAgentEventBus(),
+                getCloseTicketEventBus()
         );
     }
 
@@ -804,7 +824,8 @@ public class ControllerCompositionRoot {
                 getAssignTaskTicketUseCase(),
                 getScreensNavigator(),
                 getDialogsManager(),
-                getDialogsEventBus()
+                getDialogsEventBus(),
+                getAssignTicketEventBus()
         );
     }
 
@@ -814,7 +835,8 @@ public class ControllerCompositionRoot {
                 getAssignTaskTicketUseCase(),
                 getScreensNavigator(),
                 getDialogsManager(),
-                getDialogsEventBus()
+                getDialogsEventBus(),
+                getAssignTicketToAgentEventBus()
         );
     }
 
@@ -823,7 +845,8 @@ public class ControllerCompositionRoot {
                 getCloseTicketUseCase(),
                 getScreensNavigator(),
                 getDialogsManager(),
-                getDialogsEventBus()
+                getDialogsEventBus(),
+                getCloseTicketEventBus()
         );
     }
 }

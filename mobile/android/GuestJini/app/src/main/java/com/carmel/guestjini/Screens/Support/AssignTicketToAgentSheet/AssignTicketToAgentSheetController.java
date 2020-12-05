@@ -28,6 +28,7 @@ public class AssignTicketToAgentSheetController
     private final ScreensNavigator screensNavigator;
     private final DialogsManager dialogsManager;
     private final DialogsEventBus dialogsEventBus;
+    private final AssignTicketToAgentEventBus assignTicketToAgentEventBus;
 
     private AssignTicketToAgentSheetViewMVC viewMvc;
     private ScreenState mScreenState = ScreenState.IDLE;
@@ -37,13 +38,15 @@ public class AssignTicketToAgentSheetController
             AssignTaskTicketUseCase assignTaskTicketUseCase,
             ScreensNavigator screensNavigator,
             DialogsManager dialogsManager,
-            DialogsEventBus dialogsEventBus
+            DialogsEventBus dialogsEventBus,
+            AssignTicketToAgentEventBus assignTicketToAgentEventBus
     ) {
         this.fetchTaskAssigneeByGroupUseCase = fetchTaskAssigneeByGroupUseCase;
         this.assignTaskTicketUseCase = assignTaskTicketUseCase;
         this.screensNavigator = screensNavigator;
         this.dialogsManager = dialogsManager;
         this.dialogsEventBus = dialogsEventBus;
+        this.assignTicketToAgentEventBus = assignTicketToAgentEventBus;
     }
 
     public SavedState getSavedState() {
@@ -76,6 +79,7 @@ public class AssignTicketToAgentSheetController
 
     private void fetchTaskAssigneeAndNotify() {
         viewMvc.showProgressIndication();
+        assignTicketToAgentEventBus.postEvent(new AssignTicketToAgentEvent(AssignTicketToAgentEvent.Status.FETCHING_ASSIGNEE));
         fetchTaskAssigneeByGroupUseCase.fetchAssigneeAndNotify(groupId, ticketId);
 
     }
@@ -94,6 +98,7 @@ public class AssignTicketToAgentSheetController
     @Override
     public void onAssignTicketClicked(TaskAssignee taskAssignee) {
         viewMvc.showProgressIndication();
+        assignTicketToAgentEventBus.postEvent(new AssignTicketToAgentEvent(AssignTicketToAgentEvent.Status.ASSIGNING));
         assignTaskTicketUseCase
                 .saveTaskNoteAndNotify(
                         taskAssignee.getId(),
@@ -107,28 +112,34 @@ public class AssignTicketToAgentSheetController
     public void onTaskAssigneeFetched(TaskAssigneeResponse taskAssigneeResponse) {
         viewMvc.hideProgressIndication();
         viewMvc.bindTaskAssignees(taskAssigneeResponse.getTaskAssigneeList());
+        assignTicketToAgentEventBus.postEvent(new AssignTicketToAgentEvent(AssignTicketToAgentEvent.Status.ASSIGNEE_FETCHED));
 
     }
 
     @Override
     public void onTaskAssigneeFetchFailed() {
         viewMvc.hideProgressIndication();
+        assignTicketToAgentEventBus.postEvent(new AssignTicketToAgentEvent(AssignTicketToAgentEvent.Status.FAILED));
+
     }
 
     @Override
     public void onNetworkFailed() {
         viewMvc.hideProgressIndication();
+        assignTicketToAgentEventBus.postEvent(new AssignTicketToAgentEvent(AssignTicketToAgentEvent.Status.FAILED));
     }
 
     @Override
     public void onTicketAssigned(TaskRunnerResponse taskAssigneeResponse) {
         viewMvc.hideProgressIndication();
         viewMvc.showTicketAssigned();
+        assignTicketToAgentEventBus.postEvent(new AssignTicketToAgentEvent(AssignTicketToAgentEvent.Status.ASSIGNED));
     }
 
     @Override
     public void onAssignTicketFailed() {
         viewMvc.showTicketAssignFailed();
+        assignTicketToAgentEventBus.postEvent(new AssignTicketToAgentEvent(AssignTicketToAgentEvent.Status.FAILED));
     }
 
 

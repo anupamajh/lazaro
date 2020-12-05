@@ -4,6 +4,7 @@ import com.carmel.guestjini.Networking.Tickets.TicketResponse;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsManager;
 import com.carmel.guestjini.Screens.Common.ScreensNavigator.ScreensNavigator;
+import com.carmel.guestjini.Screens.Support.AssignTicketToAgentSheet.AssignTicketToAgentEvent;
 import com.carmel.guestjini.Tickets.CloseTicketUseCase;
 
 import java.io.Serializable;
@@ -21,6 +22,7 @@ public class CloseTicketSheetController
     private final ScreensNavigator screensNavigator;
     private final DialogsManager dialogsManager;
     private final DialogsEventBus dialogsEventBus;
+    private final CloseTicketEventBus closeTicketEventBus;
 
     private CloseTicketSheetViewMVC viewMvc;
     private ScreenState mScreenState = ScreenState.IDLE;
@@ -29,12 +31,14 @@ public class CloseTicketSheetController
             CloseTicketUseCase closeTicketUseCase,
             ScreensNavigator screensNavigator,
             DialogsManager dialogsManager,
-            DialogsEventBus dialogsEventBus
+            DialogsEventBus dialogsEventBus,
+            CloseTicketEventBus closeTicketEventBus
     ) {
         this.closeTicketUseCase = closeTicketUseCase;
         this.screensNavigator = screensNavigator;
         this.dialogsManager = dialogsManager;
         this.dialogsEventBus = dialogsEventBus;
+        this.closeTicketEventBus = closeTicketEventBus;
     }
 
     public SavedState getSavedState() {
@@ -72,21 +76,25 @@ public class CloseTicketSheetController
     public void onCloseTicketClicked(String message) {
         viewMvc.showProgressIndication();
         closeTicketUseCase.closeTaskNoteAndNotify(this.ticketId, null, message);
+        closeTicketEventBus.postEvent(new CloseTicketEvent(CloseTicketEvent.Status.CLOSING));
     }
 
     @Override
     public void onTicketClosed(TicketResponse ticketResponse) {
         viewMvc.hideProgressIndication();
         viewMvc.showTicketClosed();
+        closeTicketEventBus.postEvent(new CloseTicketEvent(CloseTicketEvent.Status.CLOSED));
     }
 
     @Override
     public void onCloseTicketFailed() {
         viewMvc.showTicketCloseFailed();
+        closeTicketEventBus.postEvent(new CloseTicketEvent(CloseTicketEvent.Status.FAILED));
     }
 
     @Override
     public void onNetworkFailed() {
         viewMvc.showTicketCloseFailed();
+        closeTicketEventBus.postEvent(new CloseTicketEvent(CloseTicketEvent.Status.FAILED));
     }
 }

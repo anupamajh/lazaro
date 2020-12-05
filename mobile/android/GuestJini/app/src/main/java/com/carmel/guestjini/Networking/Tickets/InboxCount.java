@@ -9,7 +9,7 @@ public class InboxCount {
     private int teamUnassigned;
     private int teamOpen;
     private int teamClosed;
-    private boolean isGroupAdmin;
+    private int isGroupAdmin;
     private boolean success;
     private String error;
 
@@ -77,12 +77,12 @@ public class InboxCount {
         this.teamClosed = teamClosed;
     }
 
-    public boolean isGroupAdmin() {
+    public int getIsGroupAdmin() {
         return isGroupAdmin;
     }
 
-    public void setGroupAdmin(boolean groupAdmin) {
-        isGroupAdmin = groupAdmin;
+    public void setIsGroupAdmin(int isGroupAdmin) {
+        this.isGroupAdmin = isGroupAdmin;
     }
 
     public boolean isSuccess() {

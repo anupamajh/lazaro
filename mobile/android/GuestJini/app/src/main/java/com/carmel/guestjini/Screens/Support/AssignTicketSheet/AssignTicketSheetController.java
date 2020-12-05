@@ -27,6 +27,7 @@ public class AssignTicketSheetController
     private final ScreensNavigator screensNavigator;
     private final DialogsManager dialogsManager;
     private final DialogsEventBus dialogsEventBus;
+    private final AssignTicketEventBus assignTicketEventBus;
 
     private AssignTicketSheetViewMVC viewMvc;
     private ScreenState mScreenState = ScreenState.IDLE;
@@ -36,13 +37,15 @@ public class AssignTicketSheetController
             AssignTaskTicketUseCase assignTaskTicketUseCase,
             ScreensNavigator screensNavigator,
             DialogsManager dialogsManager,
-            DialogsEventBus dialogsEventBus
+            DialogsEventBus dialogsEventBus,
+            AssignTicketEventBus assignTicketEventBus
     ) {
         this.fetchTaskAssigneeUseCase = fetchTaskAssigneeUseCase;
         this.assignTaskTicketUseCase = assignTaskTicketUseCase;
         this.screensNavigator = screensNavigator;
         this.dialogsManager = dialogsManager;
         this.dialogsEventBus = dialogsEventBus;
+        this.assignTicketEventBus = assignTicketEventBus;
     }
 
     public SavedState getSavedState() {
@@ -67,6 +70,7 @@ public class AssignTicketSheetController
         fetchTaskAssigneeUseCase.registerListener(this);
         assignTaskTicketUseCase.registerListener(this);
         if (mScreenState == ScreenState.IDLE) {
+            assignTicketEventBus.postEvent(new AssignTicketEvent(AssignTicketEvent.Status.FETCHING_ASSIGNEE));
             fetchTaskAssigneeAndNotify();
         }
 
@@ -92,6 +96,7 @@ public class AssignTicketSheetController
     @Override
     public void onAssignTicketClicked(TaskAssignee taskAssignee) {
         viewMvc.showProgressIndication();
+        assignTicketEventBus.postEvent(new AssignTicketEvent(AssignTicketEvent.Status.ASSIGNING));
         assignTaskTicketUseCase
                 .saveTaskNoteAndNotify(
                         taskAssignee.getId(),
@@ -105,27 +110,32 @@ public class AssignTicketSheetController
     public void onTaskAssigneeFetched(TaskAssigneeResponse taskAssigneeResponse) {
         viewMvc.hideProgressIndication();
         viewMvc.bindTaskAssignees(taskAssigneeResponse.getTaskAssigneeList());
+        assignTicketEventBus.postEvent(new AssignTicketEvent(AssignTicketEvent.Status.ASSIGNEE_FETCHED));
 
     }
 
     @Override
     public void onTaskAssigneeFetchFailed() {
         viewMvc.hideProgressIndication();
+        assignTicketEventBus.postEvent(new AssignTicketEvent(AssignTicketEvent.Status.FAILED));
     }
 
     @Override
     public void onNetworkFailed() {
         viewMvc.hideProgressIndication();
+        assignTicketEventBus.postEvent(new AssignTicketEvent(AssignTicketEvent.Status.FAILED));
     }
 
     @Override
     public void onTicketAssigned(TaskRunnerResponse taskAssigneeResponse) {
         viewMvc.hideProgressIndication();
         viewMvc.showTicketAssigned();
+        assignTicketEventBus.postEvent(new AssignTicketEvent(AssignTicketEvent.Status.ASSIGNED));
     }
 
     @Override
     public void onAssignTicketFailed() {
         viewMvc.showTicketAssignFailed();
+        assignTicketEventBus.postEvent(new AssignTicketEvent(AssignTicketEvent.Status.FAILED));
     }
 }

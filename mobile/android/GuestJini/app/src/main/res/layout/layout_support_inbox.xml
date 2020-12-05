@@ -70,6 +70,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="15dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:backgroundTint="@color/colorWhite"
                 android:padding="10dp"
                 app:cardCornerRadius="5dp"
@@ -129,16 +131,16 @@
 
                         <TextView
                             android:id="@+id/txtSharedInboxUnassignedCount"
-                            android:layout_width="40dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:layout_below="@id/txtSharedInboxUnassignedHeading"
                             android:background="@drawable/square_shape_red"
                             android:fontFamily="@font/roboto_bold"
                             android:padding="10dp"
-                            android:text="2"
+                            android:text="151"
                             android:textAlignment="center"
                             android:textColor="@color/colorWhite"
-                            android:textSize="16dp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/txtSharedInboxUnassignedDescription"
@@ -181,7 +183,7 @@
 
                         <TextView
                             android:id="@+id/txtSharedInboxOpenCount"
-                            android:layout_width="40dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:layout_below="@id/txtSharedInboxOpenHeading"
                             android:background="@drawable/square_shape_grey"
@@ -232,7 +234,7 @@
 
                         <TextView
                             android:id="@+id/txtSharedInboxClosedCount"
-                            android:layout_width="40dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:layout_below="@id/txtSharedInboxClosedHeading"
                             android:background="@drawable/square_shape_grey"
@@ -277,6 +279,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="15dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:backgroundTint="@color/colorWhite"
                 android:padding="10dp"
                 app:cardCornerRadius="5dp"
@@ -336,7 +340,7 @@
 
                         <TextView
                             android:id="@+id/txtYourInboxOpenCount"
-                            android:layout_width="40dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:layout_below="@id/txtYourInboxOpenHeading"
                             android:background="@drawable/square_shape_grey"
@@ -387,7 +391,7 @@
 
                         <TextView
                             android:id="@+id/txtYourInboxClosedCount"
-                            android:layout_width="40dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:layout_below="@id/txtYourInboxClosedHeading"
                             android:background="@drawable/square_shape_grey"
@@ -431,6 +435,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="15dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:backgroundTint="@color/colorWhite"
                 android:padding="10dp"
                 app:cardCornerRadius="5dp"
@@ -490,7 +496,7 @@
 
                         <TextView
                             android:id="@+id/txtTeamInboxUnassignedCount"
-                            android:layout_width="40dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:layout_below="@id/txtTeamInboxUnassignedHeading"
                             android:background="@drawable/square_shape_red"
@@ -541,7 +547,7 @@
 
                         <TextView
                             android:id="@+id/txtTeamInboxOpenCount"
-                            android:layout_width="40dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:layout_below="@id/txtTeamInboxOpenHeading"
                             android:background="@drawable/square_shape_grey"
@@ -592,7 +598,7 @@
 
                         <TextView
                             android:id="@+id/txtTeamInboxClosedCount"
-                            android:layout_width="40dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:layout_below="@id/txtTeamInboxClosedHeading"
                             android:background="@drawable/square_shape_grey"

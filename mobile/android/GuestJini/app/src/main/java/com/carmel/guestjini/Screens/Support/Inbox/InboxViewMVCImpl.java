@@ -200,8 +200,7 @@ public class InboxViewMVCImpl
 
     @Override
     public void bindData(InboxCount inboxCount) {
-        inboxCount.setGroupAdmin(true);//TODO: Remove this
-        if(inboxCount.isGroupAdmin() ){
+        if(inboxCount.getIsGroupAdmin() == 1 ){
             cardSharedInbox.setVisibility(View.VISIBLE);
             if (inboxCount.getSharedUnAssigned() > 0) {
                 layoutSharedUnassigned.setVisibility(View.VISIBLE);

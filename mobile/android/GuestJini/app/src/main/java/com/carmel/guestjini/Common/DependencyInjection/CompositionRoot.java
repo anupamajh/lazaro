@@ -9,6 +9,10 @@ import com.carmel.guestjini.Networking.Common.AuthServiceHolder;
 import com.carmel.guestjini.Networking.GuestJiniAPI;
 import com.carmel.guestjini.Screens.Common.Dialogs.DialogsEventBus;
 import com.carmel.guestjini.Screens.Login.LoginEventBus;
+import com.carmel.guestjini.Screens.Support.AssignTicketSheet.AssignTicketEventBus;
+import com.carmel.guestjini.Screens.Support.AssignTicketToAgentSheet.AssignTicketToAgentEvent;
+import com.carmel.guestjini.Screens.Support.AssignTicketToAgentSheet.AssignTicketToAgentEventBus;
+import com.carmel.guestjini.Screens.Support.CloseTicketSheet.CloseTicketEventBus;
 
 import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
@@ -22,6 +26,9 @@ public class CompositionRoot {
     private Retrofit authenticatedRetrofit;
     private Retrofit clientAuthenticatedRetrofit;
     private LoginEventBus loginEventBus;
+    private AssignTicketEventBus assignTicketEventBus;
+    private AssignTicketToAgentEventBus assignTicketToAgentEventBus;
+    private CloseTicketEventBus closeTicketEventBus;
 
     private Retrofit getRetrofit() {
         if (mRetrofit == null) {
@@ -94,5 +101,26 @@ public class CompositionRoot {
 
     public GuestJiniAPI getClientAuthenticatedGuestJiniAPI(String clientId, String clientSecrete, FragmentActivity activity) {
         return getClientAuthenticatedRetrofit(clientId, clientSecrete, activity).create(GuestJiniAPI.class);
+    }
+
+    public AssignTicketEventBus getAssignTicketEventBus() {
+        if (assignTicketEventBus == null) {
+            assignTicketEventBus = new AssignTicketEventBus();
+        }
+        return assignTicketEventBus;
+    }
+
+    public AssignTicketToAgentEventBus getAssignTicketToAgentEventBus() {
+        if (assignTicketToAgentEventBus == null) {
+            assignTicketToAgentEventBus = new AssignTicketToAgentEventBus();
+        }
+        return assignTicketToAgentEventBus;
+    }
+
+    public CloseTicketEventBus getCloseTicketEventBus() {
+        if (closeTicketEventBus == null) {
+            closeTicketEventBus = new CloseTicketEventBus();
+        }
+        return closeTicketEventBus;
     }
 }
