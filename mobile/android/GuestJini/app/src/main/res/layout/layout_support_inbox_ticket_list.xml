@@ -219,44 +219,95 @@
                         android:id="@+id/layoutClearAll"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/filterHeader"
-                        android:layout_marginTop="10dp"
-                        android:padding="15dp">
+                        android:layout_below="@id/filterHeader">
 
                         <RelativeLayout
+                            android:id="@+id/layoutClearAllDisabled"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/colorWhisper1"
-                            android:padding="10dp">
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="10dp"
+                            android:padding="15dp">
 
-                            <TextView
-                                android:id="@+id/txtClearAllHeading"
-                                android:layout_width="wrap_content"
+                            <RelativeLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentTop="true"
-                                android:layout_marginStart="20dp"
-                                android:letterSpacing="0.1"
-                                android:text="CLEAR ALL"
-                                android:textAllCaps="true"
-                                android:textColor="@color/colorGrey"
-                                android:textSize="14sp"
-                                app:fontFamily="@font/roboto_bold" />
+                                android:background="@color/colorWhisper1"
+                                android:padding="10dp">
 
-                            <TextView
-                                android:id="@+id/txtClearAllDescription"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/txtClearAllHeading"
-                                android:layout_marginStart="20dp"
-                                android:layout_marginTop="5dp"
-                                android:letterSpacing="0.1"
-                                android:text="You have not applied any filter"
-                                android:textAllCaps="true"
-                                android:textColor="@color/colorDimGray"
-                                android:textSize="14sp"
-                                app:fontFamily="@font/roboto_bold" />
+                                <TextView
+                                    android:id="@+id/txtClearAllHeading"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_marginStart="20dp"
+                                    android:letterSpacing="0.1"
+                                    android:text="CLEAR ALL"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/colorGrey"
+                                    android:textSize="14sp"
+                                    app:fontFamily="@font/roboto_bold" />
+
+                                <TextView
+                                    android:id="@+id/txtClearAllDescription"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/txtClearAllHeading"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginTop="5dp"
+                                    android:letterSpacing="0.1"
+                                    android:text="You have not applied any filter"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/colorDimGray"
+                                    android:textSize="14sp"
+                                    app:fontFamily="@font/roboto_bold" />
+                            </RelativeLayout>
+
                         </RelativeLayout>
 
+                        <RelativeLayout
+                            android:id="@+id/layoutClearAllEnabled"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="10dp"
+                            android:padding="15dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/colorSummerSky"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:id="@+id/txtClearAllHeadingEnabled"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_marginStart="20dp"
+                                    android:letterSpacing="0.1"
+                                    android:text="CLEAR ALL"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/colorWhite"
+                                    android:textSize="14sp"
+                                    app:fontFamily="@font/roboto_bold" />
+
+                                <TextView
+                                    android:id="@+id/txtClearAllDescriptionEnabled"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/txtClearAllHeadingEnabled"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginTop="5dp"
+                                    android:letterSpacing="0.1"
+                                    android:text="You have not applied any filter"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/colorWhite"
+                                    android:textSize="14sp"
+                                    app:fontFamily="@font/roboto_bold" />
+                            </RelativeLayout>
+
+                        </RelativeLayout>
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -425,8 +476,8 @@
                         android:id="@+id/layoutDateFilterHeader"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_below="@id/layoutTicketStatusDraft">
+                        android:layout_below="@id/layoutTicketStatusDraft"
+                        android:layout_marginTop="20dp">
 
                         <TextView
                             android:id="@+id/txtDateFilterText"
@@ -484,6 +535,34 @@
                             android:textColor="@color/colorCharcoal"
                             android:textSize="11sp"
                             app:fontFamily="@font/roboto_medium" />
+
+                        <TextView
+                            android:id="@+id/txtSelectToDateHeading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtSelectDate"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="32dp"
+                            android:letterSpacing="0.1"
+                            android:text="Select To Date"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorCharcoal"
+                            android:textSize="11sp"
+                            app:fontFamily="@font/roboto_regular" />
+
+                        <TextView
+                            android:id="@+id/txtSelectToDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtSelectToDateHeading"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:letterSpacing="0.1"
+                            android:text="17 JAN 2020"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorCharcoal"
+                            android:textSize="11sp"
+                            app:fontFamily="@font/roboto_medium" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -491,17 +570,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/layoutDateFilterHeader">
+
                         <RelativeLayout
                             android:id="@+id/layoutSortDivider"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
                             android:layout_marginTop="5dp"
                             android:background="@drawable/divider_line" />
+
                         <RelativeLayout
                             android:id="@+id/layoutSortHeader"
                             android:layout_width="match_parent"
-                            android:layout_below="@+id/layoutSortDivider"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/layoutSortDivider">
 
                             <ImageView
                                 android:id="@+id/imgFilterSort"
@@ -549,25 +630,32 @@
                                 android:textColor="@color/colorCharcoal"
                                 android:textSize="10sp"
                                 app:fontFamily="@font/roboto_regular" />
+
                             <RadioGroup
                                 android:id="@+id/rdgSordOptions"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/txtSortDirection"
                                 android:orientation="vertical">
-                                <RadioButton android:id="@+id/rdbSubmittedDate"
+
+                                <RadioButton
+                                    android:id="@+id/rdbSubmittedDate"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="true"
-                                    android:text="SUBMITTED DATE &amp; TIME"/>
-                                <RadioButton android:id="@+id/rdbSubject"
+                                    android:text="SUBMITTED DATE &amp; TIME" />
+
+                                <RadioButton
+                                    android:id="@+id/rdbSubject"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="SUBJECT"/>
-                                <RadioButton android:id="@+id/rdbStatus"
+                                    android:text="SUBJECT" />
+
+                                <RadioButton
+                                    android:id="@+id/rdbStatus"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="STATUS"/>
+                                    android:text="STATUS" />
                             </RadioGroup>
                         </RelativeLayout>
 

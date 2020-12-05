@@ -55,6 +55,8 @@ public class InboxListViewMVCImpl
     private final InboxListRecyclerAdapter inboxListRecyclerAdapter;
     private final ProgressBar progressBar;
     private final RelativeLayout layoutNoResult;
+    private final RelativeLayout layoutClearAllEnabled;
+    private final RelativeLayout layoutClearAllDisabled;
     private final DrawerLayout inboxListDrawerLayout;
     private final ImageView btnFilter;
     private final ImageView btnSortOption;
@@ -65,6 +67,8 @@ public class InboxListViewMVCImpl
     private final TextView txtSelectDate;
     private final TextView txtSortDirection;
     private final TextView txtSelectDateHeading;
+    private final TextView txtSelectToDate;
+    private final TextView txtSelectToDateHeading;
     private final Spinner cmbDateFilter;
     private final RadioButton rdbSubmittedDate;
     private final RadioButton rdbSubject;
@@ -76,6 +80,8 @@ public class InboxListViewMVCImpl
     private boolean isOpenSelected = false;
     private boolean isClosedSelected = false;
     private int mYear, mMonth, mDay, mHour, mMinute;
+    private int mToYear, mToMonth, mToDay, mToHour, mToMinute;
+
 
     public InboxListViewMVCImpl(LayoutInflater inflater,
                                 @Nullable ViewGroup parent,
@@ -83,6 +89,8 @@ public class InboxListViewMVCImpl
     ) {
         setRootView(inflater.inflate(R.layout.layout_support_inbox_ticket_list, parent, false));
         txtSelectDateHeading = findViewById(R.id.txtSelectDateHeading);
+        txtSelectToDate = findViewById(R.id.txtSelectToDate);
+        txtSelectToDateHeading = findViewById(R.id.txtSelectToDateHeading);
         rdgSordOptions = findViewById(R.id.rdgSordOptions);
         rdbSubject = findViewById(R.id.rdbSubject);
         rdbSubmittedDate = findViewById(R.id.rdbSubmittedDate);
@@ -100,6 +108,8 @@ public class InboxListViewMVCImpl
         progressBar = findViewById(R.id.progress);
         layoutNoResult = findViewById(R.id.layoutNoResult);
         inboxListDrawerLayout = findViewById(R.id.inboxListDrawerLayout);
+        layoutClearAllDisabled = findViewById(R.id.layoutClearAllDisabled);
+        layoutClearAllEnabled = findViewById(R.id.layoutClearAllEnabled);
         RecyclerView ticketRecyclerView = findViewById(R.id.lstTickets);
         ticketRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         inboxListRecyclerAdapter = new InboxListRecyclerAdapter(this, viewMVCFactory);
@@ -117,9 +127,24 @@ public class InboxListViewMVCImpl
         mYear = calendar.get(Calendar.YEAR);
         mMonth = calendar.get(Calendar.MONTH);
         mDay = calendar.get(Calendar.DAY_OF_MONTH);
+        mToYear = calendar.get(Calendar.YEAR);
+        mToMonth = calendar.get(Calendar.MONTH);
+        mToDay = calendar.get(Calendar.DAY_OF_MONTH);
         txtSelectDate.setText(mDay + "-" + (mMonth + 1) + "-" + mYear);
         txtSelectDate.setVisibility(View.GONE);
         txtSelectDateHeading.setVisibility(View.GONE);
+
+        txtSelectToDate.setText(mToDay + "-" + (mToMonth + 1) + "-" + mToYear);
+        txtSelectToDate.setVisibility(View.GONE);
+        txtSelectToDateHeading.setVisibility(View.GONE);
+
+        layoutClearAllEnabled.setVisibility(View.GONE);
+        layoutClearAllEnabled.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearAllFilters();
+            }
+        });
 
         txtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -226,8 +251,31 @@ public class InboxListViewMVCImpl
                             @Override
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
+                                mMonth = monthOfYear;
+                                mYear = year;
+                                mDay = dayOfMonth;
 
                                 txtSelectDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                for (Listener listener : getListeners()) {
+                                    listener.onFilterApplied(collectSearchRequest());
+                                }
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
+        });
+        txtSelectToDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                mToDay = monthOfYear;
+                                mToDay = year;
+                                mToDay = dayOfMonth;
+                                txtSelectToDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                                 for (Listener listener : getListeners()) {
                                     listener.onFilterApplied(collectSearchRequest());
                                 }
@@ -258,13 +306,22 @@ public class InboxListViewMVCImpl
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 5:
+                        txtSelectDate.setVisibility(View.VISIBLE);
+                        txtSelectDateHeading.setVisibility(View.VISIBLE);
+                        txtSelectToDate.setVisibility(View.GONE);
+                        txtSelectToDateHeading.setVisibility(View.GONE);
+                        break;
                     case 6:
                         txtSelectDate.setVisibility(View.VISIBLE);
                         txtSelectDateHeading.setVisibility(View.VISIBLE);
+                        txtSelectToDate.setVisibility(View.VISIBLE);
+                        txtSelectToDateHeading.setVisibility(View.VISIBLE);
                         break;
                     default:
                         txtSelectDate.setVisibility(View.GONE);
                         txtSelectDateHeading.setVisibility(View.GONE);
+                        txtSelectToDate.setVisibility(View.GONE);
+                        txtSelectToDateHeading.setVisibility(View.GONE);
                 }
                 for (Listener listener : getListeners()) {
                     listener.onFilterApplied(collectSearchRequest());
@@ -330,7 +387,28 @@ public class InboxListViewMVCImpl
         progressBar.setVisibility(View.GONE);
     }
 
+    private void clearAllFilters(){
+        cmbDateFilter.setSelection(0);
+        if(isClosedSelected){
+            chkTicketStatusClosed.callOnClick();
+        }
+        if(isDraftSelected){
+            chkTicketStatusDraft.callOnClick();
+        }
+        if(isOpenSelected){
+            chkTicketStatusOpen.callOnClick();
+        }
+        rdbSubmittedDate.setChecked(true);
+        txtSortDirection.setText("Ascending");
+        btnSortOption.setImageResource(R.drawable.collapse_cyan_icon);
+        for (Listener listener : getListeners()) {
+            listener.onFilterApplied(collectSearchRequest());
+        }
+
+    }
+
     private SearchRequest collectSearchRequest() {
+        boolean hasFilter = false;
         SearchRequest searchRequest = new SearchRequest();
         String sortColumn = "creationTime";
         String sortDirection = "ASC";
@@ -370,6 +448,7 @@ public class InboxListViewMVCImpl
             searchCriteria.setSearchUnitCondition("or");
             searchCriteria.setSearchUnits(searchUnits);
             searchCriteriaList.add(searchCriteria);
+            hasFilter = true;
         }
 
         if (isDraftSelected) {
@@ -384,6 +463,7 @@ public class InboxListViewMVCImpl
             searchCriteria.setSearchUnitCondition("or");
             searchCriteria.setSearchUnits(searchUnits);
             searchCriteriaList.add(searchCriteria);
+            hasFilter = true;
         }
 
         if (isOpenSelected) {
@@ -414,6 +494,7 @@ public class InboxListViewMVCImpl
             searchCriteria.setSearchUnitCondition("or");
             searchCriteria.setSearchUnits(searchUnits);
             searchCriteriaList.add(searchCriteria);
+            hasFilter = true;
         }
         DateTimeFormatter dtfStart = DateTimeFormatter.ofPattern("yyyy-MM-dd 00:00:00");
          switch (cmbDateFilter.getSelectedItemPosition()) {
@@ -440,6 +521,7 @@ public class InboxListViewMVCImpl
                 searchCriteria.setSearchUnitCondition("and");
                 searchCriteria.setSearchUnits(searchUnits);
                 searchCriteriaList.add(searchCriteria);
+                hasFilter = true;
             }
             break;
              case 2: {
@@ -463,6 +545,7 @@ public class InboxListViewMVCImpl
                  searchCriteria.setSearchUnitCondition("and");
                  searchCriteria.setSearchUnits(searchUnits);
                  searchCriteriaList.add(searchCriteria);
+                 hasFilter = true;
              }
              break;
              case 3: {
@@ -486,6 +569,7 @@ public class InboxListViewMVCImpl
                  searchCriteria.setSearchUnitCondition("and");
                  searchCriteria.setSearchUnits(searchUnits);
                  searchCriteriaList.add(searchCriteria);
+                 hasFilter = true;
              }
              break;
              case 4: {
@@ -509,10 +593,68 @@ public class InboxListViewMVCImpl
                  searchCriteria.setSearchUnitCondition("and");
                  searchCriteria.setSearchUnits(searchUnits);
                  searchCriteriaList.add(searchCriteria);
+                 hasFilter = true;
              }
              break;
-        }
+
+             case 5: {
+                 LocalDateTime today = LocalDateTime.now().withMonth(mMonth).withYear(mYear).withDayOfMonth(mDay);
+                 LocalDateTime tomorrow = LocalDateTime.now().withMonth(mMonth).withYear(mYear).withDayOfMonth(mDay).plusDays(1);
+
+                 searchUnits = new ArrayList<>();
+                 SearchUnit searchUnit = new SearchUnit();
+                 searchUnit.setField("creationTime");
+                 searchUnit.setOperator("lessthanorequal");
+                 searchUnit.setValue(dtfStart.format(tomorrow));
+                 searchUnits.add(searchUnit);
+
+                 searchUnit = new SearchUnit();
+                 searchUnit.setField("creationTime");
+                 searchUnit.setOperator("greaterthanorequal");
+                 searchUnit.setValue(dtfStart.format(today));
+                 searchUnits.add(searchUnit);
+                 searchCriteria = new SearchCriteria();
+                 searchCriteria.setCondition("and");
+                 searchCriteria.setSearchUnitCondition("and");
+                 searchCriteria.setSearchUnits(searchUnits);
+                 searchCriteriaList.add(searchCriteria);
+                 hasFilter = true;
+             }
+             break;
+             case 6: {
+                 LocalDateTime today = LocalDateTime.now().withMonth(mMonth).withYear(mYear).withDayOfMonth(mDay);
+                 LocalDateTime tomorrow = LocalDateTime.now().withMonth(mToMonth).withYear(mToYear).withDayOfMonth(mToMonth).plusDays(1);
+
+                 searchUnits = new ArrayList<>();
+                 SearchUnit searchUnit = new SearchUnit();
+                 searchUnit.setField("creationTime");
+                 searchUnit.setOperator("lessthanorequal");
+                 searchUnit.setValue(dtfStart.format(tomorrow));
+                 searchUnits.add(searchUnit);
+
+                 searchUnit = new SearchUnit();
+                 searchUnit.setField("creationTime");
+                 searchUnit.setOperator("greaterthanorequal");
+                 searchUnit.setValue(dtfStart.format(today));
+                 searchUnits.add(searchUnit);
+                 searchCriteria = new SearchCriteria();
+                 searchCriteria.setCondition("and");
+                 searchCriteria.setSearchUnitCondition("and");
+                 searchCriteria.setSearchUnits(searchUnits);
+                 searchCriteriaList.add(searchCriteria);
+                 hasFilter = true;
+             }
+             break;
+
+         }
         searchRequest.setSearchCriteria(searchCriteriaList);
+         if(hasFilter){
+             layoutClearAllDisabled.setVisibility(View.GONE);
+             layoutClearAllEnabled.setVisibility(View.VISIBLE);
+         }else{
+             layoutClearAllDisabled.setVisibility(View.VISIBLE);
+             layoutClearAllEnabled.setVisibility(View.GONE);
+         }
         return searchRequest;
     }
 
