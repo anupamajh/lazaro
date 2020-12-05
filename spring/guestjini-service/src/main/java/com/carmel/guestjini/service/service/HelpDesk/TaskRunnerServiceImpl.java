@@ -275,4 +275,82 @@ public class TaskRunnerServiceImpl implements TaskRunnerService {
         }
         return taskRunnerResponse;
     }
+
+    @Override
+    public TaskRunnerResponse withdrawTicketFromGroup(TaskAssigneeDTO taskAssigneeDTO) throws Exception {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        TaskRunnerResponse taskRunnerResponse = new TaskRunnerResponse();
+        try {
+            TaskRunner taskRunner;
+            Optional<TaskRunner> optionalTaskRunner = taskRunnerRepository.findByTicketId(taskAssigneeDTO.getTicketId());
+            if (optionalTaskRunner.isPresent()) {
+                taskRunner = optionalTaskRunner.get();
+            } else {
+                throw new Exception("Task is not assigned");
+            }
+            taskRunner.setTaskForceGroupId(null);
+            taskRunner.setUserId(null);
+            taskRunner.setTaskStatus(3);
+            taskRunner.setTicketId(taskAssigneeDTO.getTicketId());
+            taskRunner.setIsDeleted(0);
+            taskRunner.setCreatedBy(userInfo.getId());
+            taskRunner.setCreationTime(new Date());
+            taskRunner.setLastModifiedBy(userInfo.getId());
+            taskRunner.setLastModifiedTime(new Date());
+            taskRunner = taskRunnerRepository.save(taskRunner);
+
+            Optional<TaskTicket> optionalTaskTicket = taskTicketService.findById(taskRunner.getTicketId());
+            if (optionalTaskTicket.isPresent()) {
+                TaskTicket taskTicket = optionalTaskTicket.get();
+                taskTicket.setTicketStatus(TicketStatus.WORK_IN_PROGRESS);
+                taskTicket.setTaskForceGroupId(null);
+                taskTicket.setTaskRunnerId(null);
+                taskTicketService.save(taskTicket);
+            }
+            taskRunnerResponse.setSuccess(true);
+            taskRunnerResponse.setTaskRunner(taskRunner);
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return taskRunnerResponse;
+    }
+
+    @Override
+    public TaskRunnerResponse withdrawTicketFromAgent(TaskAssigneeDTO taskAssigneeDTO) throws Exception {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        TaskRunnerResponse taskRunnerResponse = new TaskRunnerResponse();
+        try {
+            TaskRunner taskRunner;
+            Optional<TaskRunner> optionalTaskRunner = taskRunnerRepository.findByTicketId(taskAssigneeDTO.getTicketId());
+            if (optionalTaskRunner.isPresent()) {
+                taskRunner = optionalTaskRunner.get();
+            } else {
+                throw new Exception("Task is not assigned");
+            }
+            taskRunner.setUserId(null);
+            taskRunner.setTaskStatus(3);
+            taskRunner.setTicketId(taskAssigneeDTO.getTicketId());
+            taskRunner.setIsDeleted(0);
+            taskRunner.setCreatedBy(userInfo.getId());
+            taskRunner.setCreationTime(new Date());
+            taskRunner.setLastModifiedBy(userInfo.getId());
+            taskRunner.setLastModifiedTime(new Date());
+            taskRunner = taskRunnerRepository.save(taskRunner);
+
+            Optional<TaskTicket> optionalTaskTicket = taskTicketService.findById(taskRunner.getTicketId());
+            if (optionalTaskTicket.isPresent()) {
+                TaskTicket taskTicket = optionalTaskTicket.get();
+                taskTicket.setTicketStatus(TicketStatus.WORK_IN_PROGRESS);
+                taskTicket.setTaskRunnerId(null);
+                taskTicketService.save(taskTicket);
+            }
+            taskRunnerResponse.setSuccess(true);
+            taskRunnerResponse.setTaskRunner(taskRunner);
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return taskRunnerResponse;
+    }
 }

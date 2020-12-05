@@ -1,8 +1,10 @@
 package com.carmel.guestjini.Screens.Support.InboxTicketDetail;
 
 import com.carmel.guestjini.Networking.Tickets.TaskAssigneeResponse;
+import com.carmel.guestjini.Networking.Tickets.TaskNote;
 import com.carmel.guestjini.Networking.Tickets.Ticket;
 import com.carmel.guestjini.Networking.Tickets.TicketCategory;
+import com.carmel.guestjini.Networking.Tickets.TicketFeedBackResponse;
 import com.carmel.guestjini.Screens.Common.Views.ObservableViewMvc;
 
 import java.util.List;
@@ -37,5 +39,9 @@ public interface InboxTicketDetailViewMVC
     void showTicketWithdrawnFromGroup();
 
     void showTicketWithdrawFromGroupFailed();
+
+    void bindTaskNotes(List<TaskNote> taskNoteList);
+
+    void bindTicketFeedback(TicketFeedBackResponse ticketFeedBackResponse);
 
 }

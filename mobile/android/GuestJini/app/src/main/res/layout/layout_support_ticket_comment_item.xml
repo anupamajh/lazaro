@@ -28,6 +28,7 @@
             android:fontFamily="@font/roboto_bold"
             android:letterSpacing="0.05"
             android:text="INBOX"
+            android:visibility="gone"
             android:textColor="@color/colorGray44"
             android:textSize="12sp" />
 
@@ -62,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtAuthorName"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="25dp"
             android:fontFamily="@font/roboto_medium"
             android:letterSpacing="0.05"
             android:lineSpacingExtra="3dp"

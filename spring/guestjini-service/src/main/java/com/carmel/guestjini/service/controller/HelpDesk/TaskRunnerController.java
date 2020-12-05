@@ -281,12 +281,46 @@ public class TaskRunnerController {
         TaskAssigneeResponse taskAssigneeResponse = new TaskAssigneeResponse();
         try {
             taskAssigneeResponse = taskRunnerService.getTaskAssignmentDetails(formData);
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             logger.error(ex.toString());
             taskAssigneeResponse.setSuccess(false);
             taskAssigneeResponse.setError(ex.getMessage());
         }
         return taskAssigneeResponse;
+    }
+
+    @RequestMapping(value = "/withdraw-ticket-from-group", method = RequestMethod.POST)
+    public TaskRunnerResponse withdrawTicketFromGroup(@RequestBody TaskAssigneeDTO taskAssigneeDTO) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        TaskRunnerResponse taskRunnerResponse = new TaskRunnerResponse();
+        try {
+            taskRunnerResponse = taskRunnerService.withdrawTicketFromGroup(taskAssigneeDTO);
+
+        } catch (Exception ex) {
+            taskRunnerResponse.setSuccess(false);
+            taskRunnerResponse.setError(ex.getMessage());
+            logger.error(ex.toString());
+        }
+        return taskRunnerResponse;
+    }
+
+    @RequestMapping(value = "/withdraw-ticket-from-agent", method = RequestMethod.POST)
+    public TaskRunnerResponse withdrawTicketFromAgent(@RequestBody TaskAssigneeDTO taskAssigneeDTO) {
+        UserInfo userInfo = userInformation.getUserInfo();
+        ObjectMapper objectMapper = new ObjectMapper();
+        logger.trace("Entering");
+        TaskRunnerResponse taskRunnerResponse = new TaskRunnerResponse();
+        try {
+            taskRunnerResponse = taskRunnerService.withdrawTicketFromAgent(taskAssigneeDTO);
+
+        } catch (Exception ex) {
+            taskRunnerResponse.setSuccess(false);
+            taskRunnerResponse.setError(ex.getMessage());
+            logger.error(ex.toString());
+        }
+        return taskRunnerResponse;
     }
 
 

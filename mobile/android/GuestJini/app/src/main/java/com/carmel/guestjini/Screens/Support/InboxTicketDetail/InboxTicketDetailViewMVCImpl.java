@@ -18,8 +18,11 @@ import com.carmel.guestjini.Common.AgeCalculator;
 import com.carmel.guestjini.Common.DateUtil;
 import com.carmel.guestjini.Networking.Tickets.TaskAssigneeResponse;
 import com.carmel.guestjini.Networking.Tickets.TaskForceGroup;
+import com.carmel.guestjini.Networking.Tickets.TaskNote;
 import com.carmel.guestjini.Networking.Tickets.Ticket;
 import com.carmel.guestjini.Networking.Tickets.TicketCategory;
+import com.carmel.guestjini.Networking.Tickets.TicketFeedBack;
+import com.carmel.guestjini.Networking.Tickets.TicketFeedBackResponse;
 import com.carmel.guestjini.Networking.Users.User;
 import com.carmel.guestjini.R;
 import com.carmel.guestjini.Screens.Common.ViewMVCFactory;
@@ -53,6 +56,8 @@ extends BaseObservableViewMvc<InboxTicketDetailViewMVC.Listener>
     private final TextView txtAssignedGroupAssignmentDetails;
     private final TextView txtAssignedGroupAssignedSince;
     private final Button btnWithdrawFromGroup;
+    private final TextView txtToAgentWithdrawTitle;
+    private final TextView txtWithdrawTitle;
 
     private final RelativeLayout layoutAssignTicketDetailsToAgent;
     private final ImageView btnAssignTicketToAgent;
@@ -95,6 +100,8 @@ extends BaseObservableViewMvc<InboxTicketDetailViewMVC.Listener>
         setRootView(inflater.inflate(R.layout.layout_support_inbox_ticket_detail, parent, false));
         progressBar = findViewById(R.id.progress);
         btnBack = findViewById(R.id.btnBack);
+        txtToAgentWithdrawTitle = findViewById(R.id.txtToAgentWithdrawTitle);
+        txtWithdrawTitle = findViewById(R.id.txtWithdrawTitle);
         txtStatus = findViewById(R.id.txtStatus);
         txtTicketDate = findViewById(R.id.txtTicketDate);
         txtCreatorName = findViewById(R.id.txtCreatorName);
@@ -138,6 +145,24 @@ extends BaseObservableViewMvc<InboxTicketDetailViewMVC.Listener>
         inboxTaskTicketCategoryRecycleAdapter = new InboxTaskTicketCategoryRecycleAdapter(viewMVCFactory);
         lstTicketCategories.setAdapter(inboxTaskTicketCategoryRecycleAdapter);
 
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for(Listener listener:getListeners()){
+                    listener.onBackClicked();
+                }
+            }
+        });
+
+        btnCloseTicket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for(Listener listener:getListeners()){
+                    listener.onCloseTicketClicked();
+                }
+            }
+        });
+
         btnAssignTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,6 +199,106 @@ extends BaseObservableViewMvc<InboxTicketDetailViewMVC.Listener>
             }
         });
 
+        ratingStar1.setOnClickListener(v -> {
+            if (ratingStar1.getTag().toString().contains("white")) {
+                ratingStar1.setImageResource((R.drawable.star_yellow_icon));
+                ratingStar1.setTag("yellow");
+                rating = 1;
+            } else {
+                ratingStar1.setImageResource((R.drawable.star_white_icon));
+                ratingStar1.setTag("white");
+                rating = 0;
+            }
+            ratingStar2.setImageResource((R.drawable.star_white_icon));
+            ratingStar2.setTag("white");
+            ratingStar3.setImageResource((R.drawable.star_white_icon));
+            ratingStar3.setTag("white");
+            ratingStar4.setImageResource((R.drawable.star_white_icon));
+            ratingStar4.setTag("white");
+            ratingStar5.setImageResource((R.drawable.star_white_icon));
+            ratingStar5.setTag("white");
+        });
+
+        ratingStar2.setOnClickListener(v -> {
+            if (ratingStar2.getTag().toString().contains("white")) {
+                ratingStar2.setImageResource((R.drawable.star_yellow_icon));
+                ratingStar2.setTag("yellow");
+                ratingStar1.setImageResource((R.drawable.star_yellow_icon));
+                ratingStar1.setTag("yellow");
+                rating = 2;
+            } else {
+                ratingStar2.setImageResource((R.drawable.star_white_icon));
+                ratingStar2.setTag("white");
+                rating = 1;
+            }
+            ratingStar3.setImageResource((R.drawable.star_white_icon));
+            ratingStar3.setTag("white");
+            ratingStar4.setImageResource((R.drawable.star_white_icon));
+            ratingStar4.setTag("white");
+            ratingStar5.setImageResource((R.drawable.star_white_icon));
+            ratingStar5.setTag("white");
+        });
+
+        ratingStar3.setOnClickListener(v -> {
+            if (ratingStar3.getTag().toString().contains("white")) {
+                ratingStar3.setImageResource((R.drawable.star_yellow_icon));
+                ratingStar3.setTag("yellow");
+                ratingStar2.setImageResource((R.drawable.star_yellow_icon));
+                ratingStar2.setTag("yellow");
+                ratingStar1.setImageResource((R.drawable.star_yellow_icon));
+                ratingStar1.setTag("yellow");
+                rating = 3;
+            } else {
+                ratingStar3.setImageResource((R.drawable.star_white_icon));
+                ratingStar3.setTag("white");
+                rating = 2;
+            }
+            ratingStar4.setImageResource((R.drawable.star_white_icon));
+            ratingStar4.setTag("white");
+            ratingStar5.setImageResource((R.drawable.star_white_icon));
+            ratingStar5.setTag("white");
+        });
+
+        ratingStar4.setOnClickListener(v -> {
+            if (ratingStar4.getTag().toString().contains("white")) {
+                ratingStar4.setImageResource((R.drawable.star_yellow_icon));
+                ratingStar4.setTag("yellow");
+                ratingStar3.setImageResource((R.drawable.star_yellow_icon));
+                ratingStar3.setTag("yellow");
+                ratingStar2.setImageResource((R.drawable.star_yellow_icon));
+                ratingStar2.setTag("yellow");
+                ratingStar1.setImageResource((R.drawable.star_yellow_icon));
+                ratingStar1.setTag("yellow");
+                rating = 4;
+            } else {
+                ratingStar4.setImageResource((R.drawable.star_white_icon));
+                ratingStar4.setTag("white");
+                rating = 3;
+            }
+            ratingStar5.setImageResource((R.drawable.star_white_icon));
+            ratingStar5.setTag("white");
+        });
+
+        ratingStar5.setOnClickListener(v -> {
+            if (ratingStar4.getTag().toString().contains("white")) {
+                ratingStar5.setImageResource((R.drawable.star_yellow_icon));
+                ratingStar5.setTag("yellow");
+                ratingStar4.setImageResource((R.drawable.star_yellow_icon));
+                ratingStar4.setTag("yellow");
+                ratingStar3.setImageResource((R.drawable.star_yellow_icon));
+                ratingStar3.setTag("yellow");
+                ratingStar2.setImageResource((R.drawable.star_yellow_icon));
+                ratingStar2.setTag("yellow");
+                ratingStar1.setImageResource((R.drawable.star_yellow_icon));
+                ratingStar1.setTag("yellow");
+                rating = 5;
+            } else {
+                ratingStar5.setImageResource((R.drawable.star_white_icon));
+                ratingStar5.setTag("white");
+                rating = 4;
+            }
+        });
+
         layoutTicketDetails.setVisibility(View.GONE);
         layoutAssignTicketDetails.setVisibility(View.GONE);
         layoutAssignedGroupDetails.setVisibility(View.GONE);
@@ -181,7 +306,7 @@ extends BaseObservableViewMvc<InboxTicketDetailViewMVC.Listener>
         layoutAssignedAgentDetails.setVisibility(View.GONE);
         layoutCloseTicketDetails.setVisibility(View.GONE);
         layoutCustomerFeedback.setVisibility(View.GONE);
-        layoutCommentList.setVisibility(View.GONE);
+        //layoutCommentList.setVisibility(View.GONE);
     }
 
     @Override
@@ -230,7 +355,7 @@ extends BaseObservableViewMvc<InboxTicketDetailViewMVC.Listener>
         txtTicketNumber.setText("Ticket #  " + ticket.getTicketNo());
         txtCreatorName.setText(ticket.getRequesterName());
         txtGuestPod.setText(ticket.getRequesterInventoryTitle());
-        if(inboxType == 1){
+        if(inboxType == 1 && ticket.getTicketStatus() != 5){
             if(ticket.getTaskForceGroupId() == null || ticket.getTaskForceGroupId().equals("")) {
                 layoutAssignTicketDetails.setVisibility(View.VISIBLE);
             }else{
@@ -238,8 +363,10 @@ extends BaseObservableViewMvc<InboxTicketDetailViewMVC.Listener>
             }
             if(ticket.getTaskRunnerId() == null || ticket.getTaskRunnerId().equals("")) {
                 layoutAssignTicketDetailsToAgent.setVisibility(View.VISIBLE);
+                layoutCloseTicketDetails.setVisibility(View.GONE);
             }else {
                 layoutAssignTicketDetailsToAgent.setVisibility(View.GONE);
+                layoutCloseTicketDetails.setVisibility(View.VISIBLE);
             }
         }else{
             layoutAssignTicketDetails.setVisibility(View.GONE);
@@ -278,6 +405,10 @@ extends BaseObservableViewMvc<InboxTicketDetailViewMVC.Listener>
                     ) + " days ago by " + taskAssigneeResponse.getCreatedBy().getFullName()
             );
             layoutAssignedGroupDetails.setVisibility(View.VISIBLE);
+            if(ticket.getTicketStatus() == 5){
+                btnWithdrawFromGroup.setVisibility(View.GONE);
+                txtWithdrawTitle.setVisibility(View.GONE);
+            }
         }
 
         if(taskAssigneeResponse.getUserDTO() != null){
@@ -293,6 +424,10 @@ extends BaseObservableViewMvc<InboxTicketDetailViewMVC.Listener>
                     ) + " days ago by " + taskAssigneeResponse.getCreatedBy().getFullName()
             );
             layoutAssignedAgentDetails.setVisibility(View.VISIBLE);
+            if(ticket.getTicketStatus() == 5){
+                txtToAgentWithdrawTitle.setVisibility(View.GONE);
+                btnWithdrawFromAgent.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -319,5 +454,48 @@ extends BaseObservableViewMvc<InboxTicketDetailViewMVC.Listener>
     @Override
     public void showTicketWithdrawFromGroupFailed() {
         Toast.makeText(getContext(), "There was an error withdrawing ticket.", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void bindTaskNotes(List<TaskNote> taskNoteList) {
+        inboxTicketCommentsRecyclerAdapter.bindTaskNotes(taskNoteList);
+    }
+
+    @Override
+    public void bindTicketFeedback(TicketFeedBackResponse ticketFeedBackResponse) {
+        if (ticketFeedBackResponse.isSuccess()) {
+            if (ticketFeedBackResponse.getTicketFeedBack() != null) {
+                layoutCustomerFeedback.setVisibility(View.VISIBLE);
+                TicketFeedBack ticketFeedBack = ticketFeedBackResponse.getTicketFeedBack();
+                txtCustomerFeedback.setText(ticketFeedBack.getFeedback());
+                switch (ticketFeedBack.getRating()) {
+                    case 1: {
+                        ratingStar1.setTag("white");
+                        ratingStar1.callOnClick();
+                    }
+                    break;
+                    case 2: {
+                        ratingStar2.setTag("white");
+                        ratingStar2.callOnClick();
+                    }
+                    break;
+                    case 3: {
+                        ratingStar3.setTag("white");
+                        ratingStar3.callOnClick();
+                    }
+                    break;
+                    case 4: {
+                        ratingStar4.setTag("white");
+                        ratingStar4.callOnClick();
+                    }
+                    break;
+                    case 5: {
+                        ratingStar5.setTag("white");
+                        ratingStar5.callOnClick();
+                    }
+                    break;
+                }
+            }
+        }
     }
 }

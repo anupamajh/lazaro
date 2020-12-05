@@ -36,7 +36,11 @@ public interface TaskRunnerService {
 
     TaskRunnerResponse findAllByTaskForceGroupIdAndTaskStatus(String userId, int taskStatus) throws Exception;
 
-    TaskRunnerResponse findAllByTaskForceGroupIdAndTaskStatusIsNot(String userId,  int taskStatus) throws Exception;
+    TaskRunnerResponse findAllByTaskForceGroupIdAndTaskStatusIsNot(String userId, int taskStatus) throws Exception;
 
     TaskRunnerResponse findAllByTaskForceGroupIdAndUserId(String groupId, String userId) throws Exception;
+
+    TaskRunnerResponse withdrawTicketFromGroup(TaskAssigneeDTO taskAssigneeDTO) throws Exception;
+
+    TaskRunnerResponse withdrawTicketFromAgent(TaskAssigneeDTO taskAssigneeDTO) throws Exception;
 }

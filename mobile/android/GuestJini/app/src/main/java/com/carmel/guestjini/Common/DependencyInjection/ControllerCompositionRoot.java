@@ -790,6 +790,8 @@ public class ControllerCompositionRoot {
                 getFetchTicketAssigneeDetailsUseCase(),
                 getWithdrawTicketFromAgentUseCase(),
                 getWithdrawTicketFromGroupUseCase(),
+                getFetchTicketTaskNoteListUseCase(),
+                getGetTicketFeedBackUseCase(),
                 getScreensNavigator(),
                 getDialogsManager(),
                 getDialogsEventBus()
