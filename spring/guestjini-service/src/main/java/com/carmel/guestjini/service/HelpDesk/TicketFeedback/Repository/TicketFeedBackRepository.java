@@ -14,4 +14,6 @@ public interface TicketFeedBackRepository extends JpaRepository<TicketFeedBack, 
     List<TicketFeedBack> findAllByClientIdAndIsDeleted(String clientId, int isDeleted);
 
     Page<TicketFeedBack> findAllByClientIdAndIsDeleted(String clientId, int isDeleted, Pageable pageable);
+
+    Optional<TicketFeedBack> findByTicketId(String ticketId);
 }

@@ -174,7 +174,7 @@ public class TicketFeedBackServiceImpl implements TicketFeedBackService {
         try {
             logger.trace("Data:{}", objectMapper.writeValueAsString(formData));
             Optional<TicketFeedBack> optionalTicketFeedBack =
-                    ticketFeedBackRepository.findByUserIdAndTicketId(userInfo.getId(), formData.get("ticketId"));
+                    ticketFeedBackRepository.findByTicketId(formData.get("ticketId"));
             if (optionalTicketFeedBack.isPresent()) {
                 TicketFeedBack ticketFeedBack = optionalTicketFeedBack.get();
                 ticketFeedBackResponse.setSuccess(true);

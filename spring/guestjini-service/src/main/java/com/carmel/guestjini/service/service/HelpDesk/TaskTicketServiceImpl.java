@@ -144,7 +144,7 @@ public class TaskTicketServiceImpl implements TaskTicketService {
         InboxCount inboxCount = new InboxCount();
         try {
             TaskForceResponse taskForceResponse = taskForceService.findByUserId(userId);
-            inboxCount.setGroupAdmin(taskForceResponse.getTaskForce().getIsGroupAdmin() == 1);
+            inboxCount.setIsGroupAdmin(taskForceResponse.getTaskForce().getIsGroupAdmin());
             String groupId = taskForceResponse.getTaskForce().getGroupId();
             List<TaskTicket> taskTicketList = taskTicketRepository
                     .findAllByIsDeletedAndTicketStatus(0, TicketStatus.NOT_STARTED);
